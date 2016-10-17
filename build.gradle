@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '24.0.3'
+
+    defaultConfig {
+        applicationId 'net.anei.cadpage'
+        versionName project.versionName
+        versionCode project.versionCode
+        minSdkVersion 9
+        targetSdkVersion 23
+    }
+
+    dexOptions {
+        jumboMode = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+}
+
+dependencies {
+    compile project(":cadpage-parsers")
+    compile 'com.android.support:support-v4:+'
+    compile 'com.google.android.gms:play-services-gcm:+'
+}

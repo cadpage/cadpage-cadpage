@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+  <string name="release_date">10132016</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+v1.9.10.24\n
+New Locations:\n
+Sumter County, FL\n
+\n
+Location Fixes:\n
+Chaves County, NM\n
+\n
+v1.9.10.23\n
+New Locations:\n
+Rooks County, KS\n
+Monroe County, KY\n
+Oakland County, MI (alt)\n
+Mower County, MN\n
+Cherokee County, NC\n
+Lampasas County, TX\n
+Grand Isle County, VT\n
+Wythe County, VA\n
+Klickitat County, WA\n
+\n
+Location Fixes:\n
+LaRue County, KY\n
+Clark County, OH\n
+Henry County, VA\n
+\n
+v1.9.10.22\n
+Location Fixes:\n
+Clark County, OH\n
+LaRue County, KY\n
+Henry County, VA\n
+\n
+v1.9.10.21\n
+Location Fixes:\n
+Monterey County, CA\n
+Scott County, MN\n
+Clark County, NV\n
+Hamilton County, OH\n
+King George County, VA\n
+\n
+v1.9.10.20\n
+New Locations:\n
+New London County, CT (alt)\n
+Kent County, DE (alt)\n
+Cook County, IL (alt)\n
+Clay County, IN\n
+Wabash County, IN\n
+Arenac County, MI\n
+Allen County, KY\n
+Daviess County, KY\n
+Ionia County, MI\n
+Centrailia, MO\n
+Martin County, NC (alt)\n
+Mahoning County, OH (alt)\n
+Portage County, OH (alt)\n
+Dyer County, TN\n
+Navarro County, TX\n
+Douglas County, WI\n
+Peppin County, WI\n
+\n
+Location Fixes:\n
+Dauphin County, PA\n
+Hays County, TX\n
+\n
+General Fixes:\n
+Fixed problem with audio alerts not overridding mute setting
+  </string>
+</resources>
+  
