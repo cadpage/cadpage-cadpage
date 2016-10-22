@@ -71,7 +71,7 @@ public class ManagePreferences {
 
     // While we have a context, create the file that will be used to check for
     // the autoreload status
-    checkFile = new File(new ContextCompat().getNoBackupFilesDir(context), CHECK_FILENAME);
+    checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
 
     Object oldMergeOption = prefs.getPreference(R.string.pref_resp_merge_key);
     if (oldMergeOption instanceof Boolean) {
