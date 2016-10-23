@@ -687,6 +687,7 @@ class Active911Vendor extends Vendor {
       "US/MI/MeceolaDispatch",            "MIMecostaCounty",
       "US/MI/MidlandCounty",              "MIMidlandCounty",
       "US/MI/MontcalmCounty",             "MIMontcalmCounty",
+      "US/MI/MontcalmCountyFire",         "MIMontcalmCounty",
       "US/MI/OaklandCounty",              "MIOaklandCountyC",
       "US/MI/OttawaCounty",               "MIOttawaCounty",
       "US/MI/RoscommonCounty",            "MIRoscommonCounty",
