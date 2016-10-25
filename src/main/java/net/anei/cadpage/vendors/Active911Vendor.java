@@ -1202,6 +1202,7 @@ class Active911Vendor extends Vendor {
       "US/PA/SnyderCounty",               "PASnyderCounty",
       "US/PA/SomersetCounty",             "PASomersetCounty",
       "US/PA/Springfield",                "PADelawareCountyG",
+      "US/PA/Swift911",                   "PANorthumberlandCounty",
       "US/PA/TiogaCounty",                "PATiogaCounty",
       "US/PA/TrappeIAR",                  "PAChesterCountyL",
       "US/PA/VenangoCounty",              "PAVenangoCountyB",
