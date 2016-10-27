@@ -632,6 +632,7 @@ class Active911Vendor extends Vendor {
       "US/MD/CharlesCountyCCMedic",       "MDCharlesCountyC",
       "US/MD/ChiefAlert",                 "MDCarolineCounty",
       "US/MD/CityofBaltimore",            "MDBaltimore",
+      "US/MD/CrumptonVFD",                "MDQueenAnnesCounty",
       "US/MD/DorchesterCounty",           "MDDorchesterCounty",
       "US/MD/Fastalert",                  "MDCarrollCountyB",
       "US/MD/Fireblitz",                  "MDPrinceGeorgesCountyFireBiz",
