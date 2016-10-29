@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10182016</string>
+  <string name="release_date">10292016</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+v1.9.10.29\n
+Location Fixes:\n
+Shelby County, AL\n
+Gooding County, ID\n
+Twin Falls County, ID\n
+Cook County, IL\n
+Queen Annes County, MD\n
+Carteret County, NC\n
+Morrow County, OH\n
+Shelby County, OH\n
+Stark County, OH\n
+Berks County, PA\n
+Northumberland County, PA\n
+Davis County, UT\n
+\n
 v1.9.10.28\n
 Location Fixes:\n
 New York, NY\n
@@ -20,14 +35,7 @@ Wilson County, NC\n
 \n
 v1.9.10.25\n
 New Locations:\n
-Fairfax County, VA (alt)\n
-\n
-v1.9.10.24\n
-New Locations:\n
-Sumter County, FL\n
-\n
-Location Fixes:\n
-Chaves County, NM
+Fairfax County, VA (alt)
   </string>
 </resources>
   
