@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10312016</string>
+  <string name="release_date">11022016</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+v1.9.10.31\n
+Location Fixes:\n
+Mesa County, CO\n
+Carteret County, NC\n
+\n
 v1.9.10.30\n
 New Locations:\n
 Autauga County, AL\n
@@ -33,12 +38,7 @@ Elk County, PA\n
 \n
 v1.9.10.27\n
 Location Fixes:\n
-Montcalm County, MI\n
-\n
-v1.9.10.26\n
-Location Fixes:\n
-Montcalm County, MI\n
-Wilson County, NC
+Montcalm County, MI
   </string>
 </resources>
   
