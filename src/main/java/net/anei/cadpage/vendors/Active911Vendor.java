@@ -1193,6 +1193,7 @@ class Active911Vendor extends Vendor {
       "US/PA/MercerCounty",               "PAMercerCounty",
       "US/PA/Messenger911",               "PADelawareCountyH",
       "US/PA/MessiahEMS",                 "PAGrantham",
+      "US/PA/MifflinCounty",              "PAMifflinCounty",
       "US/PA/MonroeCounty",               "PAMonroeCounty",
       "US/PA/Monroeville",                "PAMonroeville",
       "US/PA/MontgomeryCounty",           "PAMontgomeryCountyC",
