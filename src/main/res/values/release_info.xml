@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+v1.9.10.32\n
+Location Fixes:\n
+Pennington County, SD\n
+Fairfax County, VA\n
+\n
 v1.9.10.31\n
 Location Fixes:\n
 Mesa County, CO\n
@@ -34,11 +39,7 @@ Davis County, UT\n
 v1.9.10.28\n
 Location Fixes:\n
 New York, NY\n
-Elk County, PA\n
-\n
-v1.9.10.27\n
-Location Fixes:\n
-Montcalm County, MI
+Elk County, PA
   </string>
 </resources>
   
