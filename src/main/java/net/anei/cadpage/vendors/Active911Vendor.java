@@ -1184,7 +1184,7 @@ class Active911Vendor extends Vendor {
       "US/PA/LackawannaCounty",           "PALackawannaCounty",
       "US/PA/LancasterCounty",            "PALancasterCounty",
       "US/PA/LawrenceCounty",             "PALawrenceCounty",
-      "US/PA/LehighCounty",               "PALehighCounty",
+      "US/PA/LehighCounty",               "PALehighCountyA",
       "US/PA/Lionville",                  "PAChesterCountyM",
       "US/PA/LowerAlsaceFC",              "PABerksCounty",
       "US/PA/LuzerneCounty",              "PALuzerneCounty",
