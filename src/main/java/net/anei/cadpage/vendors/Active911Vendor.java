@@ -1172,6 +1172,7 @@ class Active911Vendor extends Vendor {
       "US/PA/DelcoTextRelay",             "PADelawareCountyB",
       "US/PA/Ecm",                        "PAAlleghenyCountyB",
       "US/PA/ElkCounty",                  "PAElkCounty",
+      "US/PA/FayetteCounty",              "PAFayetteCounty",
       "US/PA/FDCMS",                      "PAChesterCountyF,PAChesterCountyO",
       "US/PA/Firepaging",                 "PAChesterCountyD4",
       "US/PA/FlourtownFire",              "PAMontgomeryCountyD",
