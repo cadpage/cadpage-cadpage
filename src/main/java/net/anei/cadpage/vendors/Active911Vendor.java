@@ -857,7 +857,6 @@ class Active911Vendor extends Vendor {
       "US/NC/DunnPD",                     "NCHarnettCountyC",
       "US/NC/DurhamCounty",               "NCDurhamCounty",
       "US/NC/EdgecombeCounty",            "NCEdgecombeCounty",
-      "US/NC/EmeraldIsleEMS",             "NCCarteretCounty",
       "US/NC/FayettevilleCumberland",     "NCCumberlandCounty",
       "US/NC/ForsythCounty",              "NCForsythCounty",
       "US/NC/FranklinCounty",             "NCFranklinCounty",
