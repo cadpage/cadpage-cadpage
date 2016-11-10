@@ -361,6 +361,7 @@ class Active911Vendor extends Vendor {
       "US/CT/EastHavenPolice",            "CTNewHavenCountyB",
       "US/CT/EastLyme",                   "CTEastLyme",
       "US/CT/Groton",                     "CTGroton",
+      "US/CT/HartfordCounty",             "CTHartfordCountyFarmington",
       "US/CT/LitchfieldCounty",           "CTLitchfieldCountyA",
       "US/CT/NorthwestPublicSafety",      "CTNorthwestPublicSafety",
       "US/CT/OldSaybrook",                "CTOldSaybrook",
