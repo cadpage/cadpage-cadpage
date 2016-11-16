@@ -1388,6 +1388,7 @@ class Active911Vendor extends Vendor {
       "US/VA/CityofWaynesboro",           "VAWaynesboroB",
       "US/VA/CulpeperCounty",             "VACulpeperCounty",
       "US/VA/DickensonCounty",            "VADickensonCounty",
+      "US/VA/DinwiddieCounty",            "VADinwiddieCounty",
       "US/VA/Esva911",                    "VANorthamptonCounty",
       "US/VA/FluvannaSheriff",            "VAFluvannaCountyB",
       "US/VA/Franklin",                   "VAFranklinB",
