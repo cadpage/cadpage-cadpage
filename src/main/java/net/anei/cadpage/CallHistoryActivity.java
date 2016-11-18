@@ -18,6 +18,9 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -236,7 +239,7 @@ public class CallHistoryActivity extends ListActivity {
     int col = 0;
     while (col < release.length()) {
       char chr = release.charAt(col);
-      if (chr == '.') {
+      if (chr == '.' || chr == '-') {
         if (++dotCnt >= 3) break;
       }
       else if (chr >= 'A' && chr <= 'Z') break;
@@ -254,10 +257,16 @@ public class CallHistoryActivity extends ListActivity {
 
       case RELEASE_DIALOG:
         int releaseId = (DonationManager.instance().isFreeVersion() ? R.string.free_release_text : R.string.release_text);
+        final SpannableString s = new SpannableString(getText(releaseId));
+        Linkify.addLinks(s, Linkify.WEB_URLS);
+        final TextView view = new TextView(this);
+        view.setText(s);
+        view.setMovementMethod(LinkMovementMethod.getInstance());
+
         return new AlertDialog.Builder(this)
         .setIcon(R.drawable.ic_launcher)
         .setTitle(R.string.release_title)
-        .setMessage(releaseId)
+        .setView(view)
         .setPositiveButton(android.R.string.ok, null)
         .create();
         
