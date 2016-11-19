@@ -955,6 +955,7 @@ class Active911Vendor extends Vendor {
       "US/NJ/VernonPolice",               "NJSussexCountyC",
       "US/NJ/WarrenCounty",               "NJWarrenCounty",
       "US/NJ/WayneTownship",              "NJWayneTownship",
+      "US/NJ/WestCaldwellPD",             "NJEssexCounty",
       "US/NM/LasCruces",                  "NMLasCruces",
       "US/NM/MesillaValleyRegionalDispatchAuthorityHtml", "NMDonaAnaCountyB",
       "US/NV/CityofElko",                 "NVElkoCountyA",
