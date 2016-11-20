@@ -4,6 +4,13 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-02\n
+    New Locations:\n
+    Cayuga County, NY (alt)\n
+    \n
+    Location Fixes:\n
+    Marion County, SC\n
+    \n
     v1.9.11-01\n
     Reminder that we do have a Cadpage Paging Service that can be used to send dispatch alerts
     to your device without relying on text messaging.  If you have paid for a Cadpage subscription
@@ -39,14 +46,7 @@
     v1.9.10-31\n
     Location Fixes:\n
     Mesa County, CO\n
-    Carteret County, NC\n
-    \n
-    v1.9.10-30\n
-    New Locations:\n
-    Autauga County, AL\n
-    \n
-    Location Fixes:\n
-    Northampton County, AL
+    Carteret County, NC
   </string>
 </resources>
   
