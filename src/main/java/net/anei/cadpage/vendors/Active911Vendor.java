@@ -971,7 +971,7 @@ class Active911Vendor extends Vendor {
       "US/NY/Bridgehampton",              "NYSuffolkCountyC",
       "US/NY/BroomeCounty",               "NYBroomeCounty",
       "US/NY/BuffaloRuralMetro",          "NYErieCountyF",
-      "US/NY/CayugaCounty",               "NYCayugaCounty",
+      "US/NY/CayugaCounty",               "NYCayugaCountyA",
       "US/NY/CentralIslip",               "NYSuffolkCountyK",
       "US/NY/ChenangoCounty",             "NYChenangoCounty",
       "US/NY/ChiliFD",                    "NYMonroeCounty",
