@@ -20,6 +20,8 @@ public class DialogPreference extends android.preference.DialogPreference {
 
   @Override
   protected View onCreateDialogView() {
+    CharSequence msg = getDialogMessage();
+    if (msg == null) return super.onCreateDialogView();
     final SpannableString s = new SpannableString(getDialogMessage());
     Linkify.addLinks(s, Linkify.WEB_URLS);
     final TextView view = new TextView(getContext());

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11172016</string>
+  <string name="release_date">11212016</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-03\n
+    New Location:\n
+    Madison County, NE\n
+    \n
+    General Fixes:\n
+    Force close opening "About Cadpage" dialog.\n
+    \n
     v1.9.11-02\n
     New Locations:\n
     Cayuga County, NY (alt)\n
@@ -41,12 +48,7 @@
     v1.9.10-32\n
     Location Fixes:\n
     Pennington County, SD\n
-    Fairfax County, VA\n
-    \n
-    v1.9.10-31\n
-    Location Fixes:\n
-    Mesa County, CO\n
-    Carteret County, NC
+    Fairfax County, VA
   </string>
 </resources>
   
