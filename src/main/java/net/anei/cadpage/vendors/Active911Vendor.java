@@ -977,7 +977,7 @@ class Active911Vendor extends Vendor {
       "US/NY/ChiliFD",                    "NYMonroeCounty",
       "US/NY/CityofBethlehem",            "NYBethlehem",
       "US/NY/CityofColden",               "NYErieCountyRedAlert",
-      "US/NY/CityofMarion",               "NYWayneCounty",
+      "US/NY/CityofMarion",               "NYWayneCountyA",
       "US/NY/CityofRochesterTwp",         "NYLivingstonCountyB",
       "US/NY/CityofSouthampton",          "NYSuffolkCountyJ",
       "US/NY/CortlandCounty",             "NYCortlandCountyC",
