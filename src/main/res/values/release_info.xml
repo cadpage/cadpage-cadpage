@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11252016</string>
+  <string name="release_date">11302016</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-06\n
+    Location Fixes:\n
+    Tazewell County, IL\n
+    Granville County, NC\n
+    \n
     v1.9.11-05\n
     Location Fixes:\n
     Clarion County, WA\n
@@ -28,26 +33,7 @@
     Cayuga County, NY (alt)\n
     \n
     Location Fixes:\n
-    Marion County, SC\n
-    \n
-    v1.9.11-01\n
-    Reminder that we do have a Cadpage Paging Service that can be used to send dispatch alerts
-    to your device without relying on text messaging.  If you have paid for a Cadpage subscription
-    and are tired of having to clean all those dispatch alerts out of your message inbox you should
-    check it out.  For more information see\n
-    http://www.cadpage.org/paging-service.\n
-    \n
-    Location Fixes:\n
-    Montecito, CA\n
-    Hartford County, CT\n
-    Cape Gerardeau County, MO\n
-    Ocean County, NJ\n
-    Davie County, NC\n
-    Collin County, TX\n
-    Galveston County, TX\n
-    Dinwiddie County, VA\n
-    Orange County, VA\n
-    Chatham-Kent, ON Canada
+    Marion County, SC
   </string>
 </resources>
   
