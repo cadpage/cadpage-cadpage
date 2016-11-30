@@ -1453,6 +1453,7 @@ class Active911Vendor extends Vendor {
       "US/WA/SNOCOM",                     "WASnohomishCountyD",
       "US/WA/SnohomishCounty",            "WASnohomishCountyA",
       "US/WA/SnohomishCountyNW",          "WASnohomishCountyB",
+      "US/WA/SouthSound911",              "WAPIerceCountyE",
       "US/WA/SpokaneCounty",              "WASpokaneCounty",
       "US/WA/StevensCounty",              "WAStevensCounty",
       "US/WA/StevensCountyNoNotes",       "WAStevensCounty",
