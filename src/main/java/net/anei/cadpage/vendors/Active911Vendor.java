@@ -1272,7 +1272,7 @@ class Active911Vendor extends Vendor {
       "US/TN/Traumasoft",                 "TNCockeCounty",
       "US/TN/WarrenCounty",               "TNWarrenCounty",
       "US/TN/WeakleyCounty",              "TNWeakleyCounty",
-      "US/TN/WilliamsonCounty",           "TNWilliamsonCountyB",
+      "US/TN/WilliamsonCounty",           "TNWilliamsonCounty",
       "US/TX/Acadian",                    "TXAcadianAmbulance",
       "US/TX/AngletonPD",                 "TXAngleton",
       "US/TX/AransasCounty",              "TXAransasCounty",
