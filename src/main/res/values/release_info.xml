@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11302016</string>
+  <string name="release_date">12052016</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-07\n
+    Location Fixes:\n
+    St Jospeh County, IN\n
+    Wyadotte County, KS\n
+    Chester County, PA\n
+    Wayne County, PA\n
+    Buncombe County, NC\n
+    Williamson County, TN\n
+    Pierce County, WA\n
+    Red Deer County, AB Canada\n
+    \n
     v1.9.11-06\n
     Location Fixes:\n
     Tazewell County, IL\n
@@ -26,14 +37,7 @@
     Madison County, NE\n
     \n
     General Fixes:\n
-    Force close opening "About Cadpage" dialog.\n
-    \n
-    v1.9.11-02\n
-    New Locations:\n
-    Cayuga County, NY (alt)\n
-    \n
-    Location Fixes:\n
-    Marion County, SC
+    Force close opening "About Cadpage" dialog.
   </string>
 </resources>
   
