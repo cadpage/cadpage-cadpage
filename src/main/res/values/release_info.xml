@@ -4,6 +4,17 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-08\n
+    Location Fixes:\n
+    Weld County, CO\n
+    New Castle County, DE\n
+    Pike County, MO\n
+    Stillwater County, MT\n
+    Westchester County, NY\n
+    Granville County, NC\n
+    Pender County, NC\n
+    Fairfax County, VA\n
+    \n
     v1.9.11-07\n
     Location Fixes:\n
     St Jospeh County, IN\n
@@ -30,14 +41,7 @@
     Blount County, AL\n
     Muskegon County, MI\n
     Wayne County, NY\n
-    Pierce County, WA\n
-    \n
-    v1.9.11-03\n
-    New Location:\n
-    Madison County, NE\n
-    \n
-    General Fixes:\n
-    Force close opening "About Cadpage" dialog.
+    Pierce County, WA
   </string>
 </resources>
   
