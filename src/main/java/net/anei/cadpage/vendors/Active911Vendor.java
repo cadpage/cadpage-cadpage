@@ -308,7 +308,7 @@ class Active911Vendor extends Vendor {
       "US/CA/SonomaCounty",               "CASonomaCounty",
       "US/CA/SouthBay",                   "CALosAngelesCountyB",
       "US/CA/StanislausCounty",           "CAStanislausCountyA",
-      "US/CA/StanislausCountyTiburon",    "CAStanislausCountyA"
+      "US/CA/StanislausCountyTiburon",    "CAStanislausCountyA",
       "US/CA/StanislausCountyVRECC",      "CAStanislausCountyB",
       "US/CA/Stockton",                   "CAStockton",
       "US/CA/Suisun",                     "CASuisunCityA",

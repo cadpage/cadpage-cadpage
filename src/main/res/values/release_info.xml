@@ -4,6 +4,13 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-09\n
+    Location Fixes:\n
+    Robeson County, NC\n
+    Pitt County, NC\n
+    Clarion County, WA\n
+    Pierce County, WA\n
+    \n
     v1.9.11-08\n
     Location Fixes:\n
     Weld County, CO\n
@@ -34,14 +41,7 @@
     v1.9.11-05\n
     Location Fixes:\n
     Clarion County, WA\n
-    Spokane County, WA\n
-    \n
-    v1.9.11-04\n
-    Location Fixes:\n
-    Blount County, AL\n
-    Muskegon County, MI\n
-    Wayne County, NY\n
-    Pierce County, WA
+    Spokane County, WA
   </string>
 </resources>
   
