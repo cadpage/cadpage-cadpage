@@ -1106,6 +1106,7 @@ class Active911Vendor extends Vendor {
       "US/OH/WarrenCountyLogis",          "OHWarrenCountyA",
       "US/OH/WashingtonCountySheriff",    "OHWashingtonCountyA",
       "US/OH/WoosterCity",                "OHWayneCountyD",
+      "US/OH/WrightPatt",                 "OHMontgomeryCountyA",
       "US/OK/CarterCounty",               "OKCarterCountyA",
       "US/OK/CherokeeCounty",             "OKCherokeeCounty",
       "US/OK/CityofNorman",               "OKClevelandCountyB",
