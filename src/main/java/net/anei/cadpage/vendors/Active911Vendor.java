@@ -997,6 +997,7 @@ class Active911Vendor extends Vendor {
       "US/NY/MonroeCounty",               "NYMonroeCountyWebster",
       "US/NY/NassauCountyElmont",         "NYNassauCountyElmont",
       "US/NY/NassauCountyFiretracker",    "NYNassauCountyFiretracker3",
+      "US/NY/NassauCountyMimo",           "NYNassauCountyF,NYNassauCountyN",
       "US/NY/NiagaraCounty",              "NYNiagaraCountyB",
       "US/NY/OneidaIAR",                  "NYOneidaCounty",
       "US/NY/OnondagaCounty",             "NYOnondagaCountyA",
