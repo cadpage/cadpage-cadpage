@@ -218,6 +218,7 @@ class Active911Vendor extends Vendor {
       "US/AL/EmergencyCallWorx",          "ALBaldwinCounty",
       "US/AL/Gardendale",                 "ALJeffersonCountyH",
       "US/AL/Hoover",                     "ALHoover",
+      "US/AL/Irondale",                   "ALJeffersonCountyG",
       "US/AL/JacksonCounty",              "ALJacksonCounty",
       "US/AL/JeffersonCounty",            "ALJeffersonCountyC,ALJeffersonCountyE",
       "US/AL/LeeCounty",                  "ALLeeCounty",
