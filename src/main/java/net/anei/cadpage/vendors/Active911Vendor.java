@@ -635,6 +635,7 @@ class Active911Vendor extends Vendor {
       "US/MD/AlleganyCounty",             "MDAlleganyCounty",
       "US/MD/BaltimoreCountyCmsg",        "MDBaltimoreCountyB",
       "US/MD/CalvertCounty",              "MDCalvertCounty",
+      "US/MD/CarrollAlert",               "MDCarrollCounty",
       "US/MD/CarrollCounty",              "MDCarrollCounty",
       "US/MD/CecilCounty",                "MDCecilCountyE",
       "US/MD/CharlesCounty",              "MDCharlesCountyA",
