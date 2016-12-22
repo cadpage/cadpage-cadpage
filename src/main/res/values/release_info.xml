@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12192016</string>
+  <string name="release_date">12222016</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-11\n
+    New Locations:\n
+    Limestone County, AL (alt)\n
+    \n
+    Location Fixes:\n
+    Manatee County, FL\n
+    Carroll County, MD\n
+    Montgomery County, NC\n
+    Cass County, ND\n
+    \n
     v1.9.11-10\n
     Location Fixes:\n
     Jefferson County, AL\n
@@ -41,12 +51,7 @@
     Buncombe County, NC\n
     Williamson County, TN\n
     Pierce County, WA\n
-    Red Deer County, AB Canada\n
-    \n
-    v1.9.11-06\n
-    Location Fixes:\n
-    Tazewell County, IL\n
-    Granville County, NC
+    Red Deer County, AB Canada
   </string>
 </resources>
   
