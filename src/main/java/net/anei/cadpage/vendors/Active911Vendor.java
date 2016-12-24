@@ -769,6 +769,7 @@ class Active911Vendor extends Vendor {
       "US/MO/BarryCounty",                "MOBarryCountyC",
       "US/MO/BentonCounty",               "MOBentonCounty",
       "US/MO/BuchananCounty",             "MOBuchananCountyB",
+      "US/MO/CaldwellCounty",             "MOCaldwellCounty",
       "US/MO/CallawayCounty",             "MOCallawayCounty",
       "US/MO/CamdenCounty",               "MOCamdenCounty",
       "US/MO/CarrollCounty",              "MOCarrollCounty",
