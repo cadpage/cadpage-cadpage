@@ -797,6 +797,7 @@ class Active911Vendor extends Vendor {
       "US/MO/LouisianaPD",                "MOPikeCountyA",
       "US/MO/MaconCounty",                "MOMaconCounty",
       "US/MO/MadisonCounty",              "MOMadisonCounty",
+      "US/MO/MariesCounty",               "MOMariesCounty",
       "US/MO/MarshfieldFire",             "MOWebsterCounty",
       "US/MO/MaryvilleDeptofPublicSafety","MONodawayCounty",
       "US/MO/McDonaldCounty",             "MOMcDonaldCountyB",
