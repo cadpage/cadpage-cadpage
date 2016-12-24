@@ -614,6 +614,7 @@ class Active911Vendor extends Vendor {
       "US/KY/TriggCounty",                "KYTriggCounty",
       "US/KY/Wittensville",               "KYJohnsonCounty",
       "US/KY/WoodfordCounty",             "KYWoodfordCounty",
+      "US/LA/AllenCounty",                "LAAllenParish",
       "US/LA/AscensionParish",            "LAAscensionParish",
       "US/LA/AvoyellesCounty",            "LAAvoyellesParish",
       "US/LA/BeauregardParish",           "LABeauregardParish",
