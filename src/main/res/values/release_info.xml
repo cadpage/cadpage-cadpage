@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12222016</string>
+  <string name="release_date">01012017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-12\n
+    Location Fixes:\n
+    Pitkin County, CO\n
+    Henry County, GA\n
+    Dodge County, MN\n
+    Caldwell County, NC\n
+    Granville County, NC\n
+    Preble County, OH\n
+    Lane County, OR\n
+    Shebogan County, WI\n
+    \n
     v1.9.11-11\n
     New Locations:\n
     Limestone County, AL (alt)\n
@@ -40,18 +51,7 @@
     Westchester County, NY\n
     Granville County, NC\n
     Pender County, NC\n
-    Fairfax County, VA\n
-    \n
-    v1.9.11-07\n
-    Location Fixes:\n
-    St Jospeh County, IN\n
-    Wyadotte County, KS\n
-    Chester County, PA\n
-    Wayne County, PA\n
-    Buncombe County, NC\n
-    Williamson County, TN\n
-    Pierce County, WA\n
-    Red Deer County, AB Canada
+    Fairfax County, VA
   </string>
 </resources>
   
