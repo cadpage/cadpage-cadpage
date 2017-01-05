@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01012017</string>
+  <string name="release_date">01052017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-13\n
+    Location Fixes:\n
+    Hamilton County, IN\n
+    Hunterdon County, NJ\n
+    Orangeburg County, SC\n
+    Trenton, OH\n
+    \n
     v1.9.11-12\n
     Location Fixes:\n
     Pitkin County, CO\n
@@ -40,18 +47,7 @@
     Robeson County, NC\n
     Pitt County, NC\n
     Clarion County, WA\n
-    Pierce County, WA\n
-    \n
-    v1.9.11-08\n
-    Location Fixes:\n
-    Weld County, CO\n
-    New Castle County, DE\n
-    Pike County, MO\n
-    Stillwater County, MT\n
-    Westchester County, NY\n
-    Granville County, NC\n
-    Pender County, NC\n
-    Fairfax County, VA
+    Pierce County, WA
   </string>
 </resources>
   
