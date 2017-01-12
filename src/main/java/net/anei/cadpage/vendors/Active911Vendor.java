@@ -1335,6 +1335,7 @@ class Active911Vendor extends Vendor {
       "US/TX/DallasCounty",               "TXDallasCountyC",
       "US/TX/DentonCounty",               "TXDentonCounty",
       "US/TX/Eforcesoftware",             "TXWharton",
+      "US/TX/EforcesoftawreEllisCounty",  "TXEllisCounty",
       "US/TX/Farmersville",               "TXCollinCounty",
       "US/TX/FlightVector",               "TXFlightVector",
       "US/TX/FortBendCounty",             "TXFortBendCountyA",
