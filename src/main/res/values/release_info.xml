@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01052017</string>
+  <string name="release_date">01132017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-14\n
+    Location Fixes:\n
+    Morgan County, CO\n
+    Poplar Bluff, MO\n
+    Centre County, PA\n
+    Mansfield, TX\n
+    Augusta County, VA\n
+    \n
     v1.9.11-13\n
     Location Fixes:\n
     Hamilton County, IN\n
@@ -40,14 +48,7 @@
     Hillsdale County, MI\n
     Rutherford County, NC\n
     Cass County, ND\n
-    Botetourt County, VA\n
-    \n
-    v1.9.11-09\n
-    Location Fixes:\n
-    Robeson County, NC\n
-    Pitt County, NC\n
-    Clarion County, WA\n
-    Pierce County, WA
+    Botetourt County, VA
   </string>
 </resources>
   
