@@ -1284,6 +1284,7 @@ class Active911Vendor extends Vendor {
       "US/SD/LincolnCounty",              "SDLincolnCounty",
       "US/SD/MinnehahaCounty",            "SDMinnehahaCounty",
       "US/TN/BedfordCounty",              "TNBedfordCounty",
+      "US/TN/Blount911",                  "TNBlountCountyB",
       "US/TN/BlountCounty",               "TNBlountCountyB",
       "US/TN/CampbellCounty",             "TNCampbellCounty",
       "US/TN/CarterCounty",               "TNCarterCounty",
