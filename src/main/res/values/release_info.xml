@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01132017</string>
+  <string name="release_date">01212017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-15\n
+    Location Fixes:\n
+    Mendicino County, CA\n
+    Montcalm County, MI\n
+    Sussex County, NJ\n
+    Monroe County, NY\n
+    Suffolk County, NY\n
+    Cabarrus County, NC\n
+    Ashland County, OH\n
+    Arlington County, VA\n
+    \n
     v1.9.11-14\n
     Location Fixes:\n
     Morgan County, CO\n
@@ -38,17 +49,7 @@
     Manatee County, FL\n
     Carroll County, MD\n
     Montgomery County, NC\n
-    Cass County, ND\n
-    \n
-    v1.9.11-10\n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    Sedgewick County, KS\n
-    Prince Georges County, MD\n
-    Hillsdale County, MI\n
-    Rutherford County, NC\n
-    Cass County, ND\n
-    Botetourt County, VA
+    Cass County, ND
   </string>
 </resources>
   
