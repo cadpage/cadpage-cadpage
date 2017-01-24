@@ -861,7 +861,7 @@ class Active911Vendor extends Vendor {
       "US/NC/BladenCounty",               "NCBladenCounty",
       "US/NC/BrunswickCounty",            "NCBrunswickCounty",
       "US/NC/BuncombeCounty",             "NCBuncombeCounty",
-      "US/NC/CabarrusCounty",             "NCCabarrusCounty",
+      "US/NC/CabarrusCounty",             "NCCabarrusCountyA",
       "US/NC/CaldwellCounty",             "NCCaldwellCounty",
       "US/NC/CarteretCounty",             "NCCarteretCounty",
       "US/NC/CaswellCounty",              "NCCaswellCounty",
