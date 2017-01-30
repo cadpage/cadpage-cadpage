@@ -1255,6 +1255,7 @@ class Active911Vendor extends Vendor {
       "US/PA/WestmorelandCounty",         "PAWestmorelandCounty",
       "US/PA/WyomingCounty",              "PAWyomingCounty",
       "US/PA/YorkCounty",                 "PAYorkCountyD",
+      "US/RI/CentralFalls",               "RIProvidenceCounty",
       "US/RI/CityofWestWarwick",          "RIWestWarwick",
       "US/RI/Woonsocket",                 "RIProvidenceCounty",
       "US/SC/AndersonSheriff",            "SCAndersonCounty",
