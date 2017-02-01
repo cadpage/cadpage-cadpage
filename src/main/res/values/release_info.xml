@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01262017</string>
+  <string name="release_date">01312017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-18\n
+    Location Fixes:\n
+    St Charles County, MO\n
+    Pitt County, NC\n
+    Cuyahoga County, OH\n
+    Williamson County, TN\n
+    Parker County, TX\n
+    Albemarle County, VA\n
+    \n
     v1.9.11-17\n
     Location Fixes:\n
     Centre County, PA\n
@@ -34,14 +43,7 @@
     Poplar Bluff, MO\n
     Centre County, PA\n
     Mansfield, TX\n
-    Augusta County, VA\n
-    \n
-    v1.9.11-13\n
-    Location Fixes:\n
-    Hamilton County, IN\n
-    Hunterdon County, NJ\n
-    Orangeburg County, SC\n
-    Trenton, OH
+    Augusta County, VA
   </string>
 </resources>
   
