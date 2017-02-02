@@ -884,6 +884,7 @@ class Active911Vendor extends Vendor {
       "US/NC/DavidsonCounty",             "NCDavidsonCountyA",
       "US/NC/DavieCounty",                "NCDavieCounty",
       "US/NC/DunnPD",                     "NCHarnettCountyC",
+      "US/NC/DuplinCounty",               "NCDuplinCounty",
       "US/NC/DurhamCounty",               "NCDurhamCounty",
       "US/NC/EdgecombeCounty",            "NCEdgecombeCounty",
       "US/NC/FayettevilleCumberland",     "NCCumberlandCounty",
