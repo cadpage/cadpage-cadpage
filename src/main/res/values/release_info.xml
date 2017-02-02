@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01312017</string>
+  <string name="release_date">02022017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-19\n
+    Parser Fixes:\n
+    Winnebago County, IA\n
+    Dolphin County, OH\n
+    Union County, OH\n
+    Yakima County, WA\n
+    \n
     v1.9.11-18\n
     Location Fixes:\n
     St Charles County, MO\n
@@ -35,15 +42,7 @@
     Suffolk County, NY\n
     Cabarrus County, NC\n
     Ashland County, OH\n
-    Arlington County, VA\n
-    \n
-    v1.9.11-14\n
-    Location Fixes:\n
-    Morgan County, CO\n
-    Poplar Bluff, MO\n
-    Centre County, PA\n
-    Mansfield, TX\n
-    Augusta County, VA
+    Arlington County, VA
   </string>
 </resources>
   
