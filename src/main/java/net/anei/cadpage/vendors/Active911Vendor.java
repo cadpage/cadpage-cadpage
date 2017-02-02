@@ -1124,6 +1124,7 @@ class Active911Vendor extends Vendor {
       "US/OH/SundanceSys",                "OHCuyahogaCountyC,OHCuyahogaCountyF",
       "US/OH/TheBeachWaterpark",          "OHWarrenCountyD",
       "US/OH/TrumbullCounty",             "OHTrumbullCounty",
+      "US/OH/UnionCounty",                "OHUnionCounty",
       "US/OH/Vzwpix",                     "OHCuyahogaCountyD",
       "US/OH/WaltonHills",                "OHCuyahogaCountyA",
       "US/OH/WarCOG",                     "OHAshlandCountyB",
