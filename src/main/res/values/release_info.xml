@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02022017</string>
+  <string name="release_date">02052017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-20\n
+    Parser Fixes:\n
+    Marion County, IN\n
+    Terrebone Parish, LA\n
+    Centre County, PA\n
+    \n
     v1.9.11-19\n
     Parser Fixes:\n
     Winnebago County, IA\n
@@ -31,18 +37,7 @@
     Location Fixes:\n
     Orangeburg County, SC\n
     Cabell County, WV\n
-    New South Wales, AU\n
-    \n
-    v1.9.11-15\n
-    Location Fixes:\n
-    Mendicino County, CA\n
-    Montcalm County, MI\n
-    Sussex County, NJ\n
-    Monroe County, NY\n
-    Suffolk County, NY\n
-    Cabarrus County, NC\n
-    Ashland County, OH\n
-    Arlington County, VA
+    New South Wales, AU
   </string>
 </resources>
   
