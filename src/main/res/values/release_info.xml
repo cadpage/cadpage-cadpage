@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02052017</string>
+  <string name="release_date">02062017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-21\n
+    Location Fixes:
+    Kern County, CA\n
+    Woodbury County, IA\n
+    Clinton County, OH\n
+    McDowell County, NC\n
+    Auglaize County, OH\n
+    Montgomery County, OH\n
+    Linn County, OR\n
+    \n
     v1.9.11-20\n
     Parser Fixes:\n
     Marion County, IN\n
@@ -11,7 +21,7 @@
     Centre County, PA\n
     \n
     v1.9.11-19\n
-    Parser Fixes:\n
+    Location Fixes:\n
     Winnebago County, IA\n
     Dolphin County, OH\n
     Union County, OH\n
@@ -28,16 +38,7 @@
     \n
     v1.9.11-17\n
     Location Fixes:\n
-    Centre County, PA\n
-    \n
-    v1.9.11-16\n
-    New Locations:\n
-    Whyalla, AU\n
-    \n
-    Location Fixes:\n
-    Orangeburg County, SC\n
-    Cabell County, WV\n
-    New South Wales, AU
+    Centre County, PA
   </string>
 </resources>
   
