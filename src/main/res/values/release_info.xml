@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02062017</string>
+  <string name="release_date">02072017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-22\n
+    Location Fixes:\n
+    Colbert County, AL\n
+    Peoria County, IL\n
+    Ashland County, OH\n
+    Nuces County, TX\n
+    \n
     v1.9.11-21\n
     Location Fixes:
     Kern County, CA\n
@@ -34,11 +41,7 @@
     Cuyahoga County, OH\n
     Williamson County, TN\n
     Parker County, TX\n
-    Albemarle County, VA\n
-    \n
-    v1.9.11-17\n
-    Location Fixes:\n
-    Centre County, PA
+    Albemarle County, VA
   </string>
 </resources>
   
