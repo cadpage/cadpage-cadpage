@@ -1385,6 +1385,7 @@ class Active911Vendor extends Vendor {
       "US/TX/RuskCounty",                 "TXRuskCountyA",
       "US/TX/RuskPD",                     "TXRuskCountyB",
       "US/TX/SanMarcosCounty",            "TXSanMarcosCounty",
+      "US/TX/Seagoville",                 "TXDallasCountyB",
       "US/TX/Seguin",                     "TXKeller",
       "US/TX/Seguin",                     "TXSeguin",
       "US/TX/Smhcems",                    "TXHaysCounty",
