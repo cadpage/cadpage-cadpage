@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-24\n
+    Location Fixes:\n
+    Moris County, NJ\n
+    Lancaster County, PA\n
+    Williamson County, TN\n
+    \n
     v1.9.11-23\n
     Location Fixes:\n
     Tipton County, IN\n
@@ -32,14 +38,7 @@
     Parser Fixes:\n
     Marion County, IN\n
     Terrebone Parish, LA\n
-    Centre County, PA\n
-    \n
-    v1.9.11-19\n
-    Location Fixes:\n
-    Winnebago County, IA\n
-    Dolphin County, OH\n
-    Union County, OH\n
-    Yakima County, WA
+    Centre County, PA
   </string>
 </resources>
   
