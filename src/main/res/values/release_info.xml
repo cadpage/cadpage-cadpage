@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-25\n
+    Location Fixes:\n
+    Dade County, GA\n
+    Calcasieu Parish, LA\n
+    Cuyahoga County, OH\n
+    \n
     v1.9.11-24\n
     Location Fixes:\n
     Moris County, NJ\n
@@ -32,13 +38,7 @@
     McDowell County, NC\n
     Auglaize County, OH\n
     Montgomery County, OH\n
-    Linn County, OR\n
-    \n
-    v1.9.11-20\n
-    Parser Fixes:\n
-    Marion County, IN\n
-    Terrebone Parish, LA\n
-    Centre County, PA
+    Linn County, OR
   </string>
 </resources>
   
