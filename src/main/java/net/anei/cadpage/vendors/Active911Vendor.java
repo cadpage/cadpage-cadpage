@@ -1183,7 +1183,7 @@ class Active911Vendor extends Vendor {
       "US/OR/WarmSprings",                "ORJeffersonCounty",
       "US/OR/WashingtonCounty",           "ORWashingtonCounty",
       "US/OR/WheelerCounty",              "ORWheelerCounty",
-      "US/OR/Woodburn",                   "ORMarionCounty",
+      "US/OR/Woodburn",                   "ORMarionCountyA",
       "US/OR/Yamhill",                    "ORYamhillCountyB",
       "US/PA/AdamsCounty",                "PAAdamsCountyA",
       "US/PA/AlleghenyCounty",            "PAAlleghenyCountyA",
