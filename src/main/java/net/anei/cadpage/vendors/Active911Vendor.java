@@ -479,6 +479,7 @@ class Active911Vendor extends Vendor {
       "US/IL/ClintonCounty",              "ILClintonCounty",
       "US/IL/CookCounty",                 "ILCookCountyC",
       "US/IL/DownersGrove",               "ILDuPageCountyB",
+      "US/IL/DuCommExtra",                "ILDuPageCountyA,ILDuPageCountyB",
       "US/IL/DupageCounty",               "ILDuPageCountyA",
       "US/IL/FairviewHeights",            "ILStClairCountyB",
       "US/IL/GlenCarbon",                 "ILMadisonCounty",
