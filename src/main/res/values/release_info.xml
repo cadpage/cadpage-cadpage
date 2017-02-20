@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02082017</string>
+  <string name="release_date">02192017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-26\n
+    Parser Fixes:\n
+    Johnson County, MO\n
+    Marion County, OR\n
+    Lackawanna County, PA\n
+    Grays Harbor, WA\n
+    Lewis County, WA\n
+    Waukesha County, WI\n
+    \n
     v1.9.11-25\n
     Location Fixes:\n
     Dade County, GA\n
@@ -28,17 +37,7 @@
     Colbert County, AL\n
     Peoria County, IL\n
     Ashland County, OH\n
-    Nuces County, TX\n
-    \n
-    v1.9.11-21\n
-    Location Fixes:
-    Kern County, CA\n
-    Woodbury County, IA\n
-    Clinton County, OH\n
-    McDowell County, NC\n
-    Auglaize County, OH\n
-    Montgomery County, OH\n
-    Linn County, OR
+    Nuces County, TX
   </string>
 </resources>
   
