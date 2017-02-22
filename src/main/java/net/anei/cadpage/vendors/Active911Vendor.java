@@ -981,6 +981,7 @@ class Active911Vendor extends Vendor {
       "US/NJ/OceanCounty",                "NJOceanCounty",
       "US/NJ/OCPD",                       "NJOceanCity",
       "US/NJ/SaddleRiverPD",              "NJBergenCountyC",
+      "US/NJ/SalemCounty",                "NJSalemCountyC",
       "US/NJ/SomersetCounty",             "NJSomersetCountyA",
       "US/NJ/SouthbrunswickPD",           "NJMiddlesexCountyB",
       "US/NJ/SpartaPD",                   "NJSussexCountyA",
