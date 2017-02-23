@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02192017</string>
+  <string name="release_date">02232017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-27\n
+    Location Fixes:\n
+    Jefferson County, AL\n
+    New London County, CT\n
+    Manatee County, FL\n
+    Woodbury County, IA\n
+    Pulaski County, MO\n
+    Salem County, NJ\n
+    Duplin County, NC\n
+    \n
     v1.9.11-26\n
     Location Fixes:\n
     Johnson County, MO\n
@@ -30,14 +40,7 @@
     Tipton County, IN\n
     Prince Georges County, MD\n
     Cumberland County, NJ\n
-    Allegheny County, PA\n
-    \n
-    v1.9.11-22\n
-    Location Fixes:\n
-    Colbert County, AL\n
-    Peoria County, IL\n
-    Ashland County, OH\n
-    Nuces County, TX
+    Allegheny County, PA
   </string>
 </resources>
   

@@ -27,5 +27,5 @@ android {
 dependencies {
     compile project(":cadpage-parsers")
     compile 'com.android.support:support-v4:+'
-    compile 'com.google.android.gms:play-services-gcm:+'
+    compile 'com.google.android.gms:play-services-gcm:10.0.1'
 }
