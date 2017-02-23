@@ -408,7 +408,7 @@ class Active911Vendor extends Vendor {
       "US/FL/HernandoSheriff",            "FLHernandoCounty",
       "US/FL/LakeCounty",                 "FLLakeCounty",
       "US/FL/LevyCounty",                 "FLLevyCounty",
-      "US/FL/LongboatKey",                "FLManateeCounty",
+      "US/FL/LongboatKey",                "FLLongboatKey",
       "US/FL/ManateeCounty",              "FLManateeCounty",
       "US/FL/OkaloosaCounty",             "FLOkaloosaCounty",
       "US/FL/PalmBeachCounty",            "FLPalmBeachCounty",
