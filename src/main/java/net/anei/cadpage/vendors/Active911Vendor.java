@@ -222,7 +222,7 @@ class Active911Vendor extends Vendor {
       "US/AL/Hoover",                     "ALHoover",
       "US/AL/Irondale",                   "ALJeffersonCountyH",
       "US/AL/JacksonCounty",              "ALJacksonCounty",
-      "US/AL/JeffersonCounty",            "ALJeffersonCountyC,ALJeffersonCountyE",
+      "US/AL/JeffersonCounty",            "ALJeffersonCountyC,ALJeffersonCountyE,ALJeffersonCountyI",
       "US/AL/LeeCounty",                  "ALLeeCounty",
       "US/AL/LimestoneCounty",            "ALLimestoneCounty",
       "US/AL/LimestoneCounty",            "ALLimestoneCountyA",
