@@ -1544,6 +1544,7 @@ class Active911Vendor extends Vendor {
       "US/WV/Metro911",                   "WVKanawhaCounty",
       "US/WV/MineralCounty",              "WVMineralCounty",
       "US/WV/MorganCounty",               "WVMorganCounty",
+      "US/WV/PocahontasCounty",           "WVPocahontasCounty",
       "US/WV/RaleighCounty",              "WVRaleighCounty",
       "US/WV/RoaneCounty",                "WVRoaneCounty",
       "US/WV/WoodCounty",                 "WVWoodCounty",
