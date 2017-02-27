@@ -236,12 +236,10 @@ public class DeveloperToolsManager {
       case 19:    // Build a specific C2DM page message
         Intent intent = new Intent(context, C2DMService.class);
         intent.setAction("com.google.android.c2dm.intent.RECEIVE");
-        intent.putExtra("vendor", "Active911");
+        intent.putExtra("vendor", "CodeMessaging");
         
-        intent.putExtra("originally_from", "kencx@peak.org");
-        intent.putExtra("subject", "CAD Page");
-        intent.putExtra("content", "Body:CPR Refresher Reminder\n1035 Main Street Philomath\nCPR Refresher tonight 1900-2200 hrs. Station 201.\nSource: Web Console: Rich Saalsaa(125226)");
-        intent.putExtra("format", "Active911Summary");
+        intent.putExtra("content", "CALL: SICK PERSON \r\nBOX: 1-1 \r\nADDR: 601 FAIR HAVEN CT\r\nUNIT: A12 A108 CCPM11 \r\nCITY: Federalsburg        \nDST: MD");
+        intent.putExtra("C2DM_Loc", "Cadpage2");
         
         context.startService(intent);
         break;
