@@ -239,7 +239,7 @@ public class DeveloperToolsManager {
         intent.putExtra("vendor", "CodeMessaging");
         
         intent.putExtra("content", "CALL: SICK PERSON \r\nBOX: 1-1 \r\nADDR: 601 FAIR HAVEN CT\r\nUNIT: A12 A108 CCPM11 \r\nCITY: Federalsburg        \nDST: MD");
-        intent.putExtra("C2DM_Loc", "Cadpage2");
+        intent.putExtra("format", "Cadpage2");
         
         context.startService(intent);
         break;
