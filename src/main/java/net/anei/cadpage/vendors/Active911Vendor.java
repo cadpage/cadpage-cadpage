@@ -1262,6 +1262,7 @@ class Active911Vendor extends Vendor {
       "US/PA/TiogaCounty",                "PATiogaCounty",
       "US/PA/TrappeIAR",                  "PAChesterCountyL",
       "US/PA/UnionCounty",                "PAUnionCounty",
+      "US/PA/ValleyAmbAut",               "PAAlleghenyCountyC",
       "US/PA/VenangoCounty",              "PAVenangoCountyB",
       "US/PA/WarrenCounty",               "PAWarrenCounty",
       "US/PA/WashingtonCounty",           "PAWashingtonCounty",
