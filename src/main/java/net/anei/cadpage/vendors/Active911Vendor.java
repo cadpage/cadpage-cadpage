@@ -1065,6 +1065,7 @@ class Active911Vendor extends Vendor {
       "US/OH/AshtabulaCounty",            "OHAshtabulaCounty",
       "US/OH/AthensCounty",               "OHAthensCounty",
       "US/OH/AuglaizeCounty",             "OHAuglaizeCounty",
+      "US/OH/Beachwood",                  "OHCuyahogaCountyA",
       "US/OH/BelmontCounty",              "OHBelmontCounty",
       "US/OH/Brunswick",                  "OHMedinaCountyC",
       "US/OH/ButlerCountySheriff",        "OHButlerCountyA",
