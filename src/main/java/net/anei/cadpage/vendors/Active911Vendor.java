@@ -627,6 +627,7 @@ class Active911Vendor extends Vendor {
       "US/KY/PulaskiCounty",              "KYPulaskiCounty",
       "US/KY/RockCastleCounty",           "KYRockCastleCounty",
       "US/KY/ScottCounty",                "KYScottCountyB",
+      "US/KY/TaylorCounty",               "KYTaylorCounty",
       "US/KY/ToddCounty",                 "KYToddCounty",
       "US/KY/TriggCounty",                "KYTriggCounty",
       "US/KY/Wittensville",               "KYJohnsonCounty",
