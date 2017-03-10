@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03012017</string>
+  <string name="release_date">03092017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-31\n
+    Location Fixes:\n
+    Jefferson County, AL\n
+    Sacramento County, CA\n
+    Cook County, IL\n
+    Kankakee County, IL\n
+    Hamilton County, IN\n
+    Midland County, MI\n
+    Pitt County, NC\n
+    Cuyahoga County, OH\n
+    Richland County, OH\n
+    Jefferson County, OH\n
+    Nueces County, TX\n
+    Grays Harbor County, WA\n
+    \n
     v1.9.11-30\n
     New Locations:\n
     Allegheny County, PA (alt)\n
@@ -33,16 +48,7 @@
     Woodbury County, IA\n
     Pulaski County, MO\n
     Salem County, NJ\n
-    Duplin County, NC\n
-    \n
-    v1.9.11-26\n
-    Location Fixes:\n
-    Johnson County, MO\n
-    Marion County, OR\n
-    Lackawanna County, PA\n
-    Grays Harbor, WA\n
-    Lewis County, WA\n
-    Waukesha County, WI
+    Duplin County, NC
   </string>
 </resources>
   
