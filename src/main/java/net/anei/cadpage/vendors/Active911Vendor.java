@@ -470,6 +470,7 @@ class Active911Vendor extends Vendor {
       "US/ID/TetonCounty",                "IDTetonCounty",
       "US/ID/TwinFallsCounty",            "IDTwinFallsCountyB",
       "US/IL/AdamsCounty",                "ILAdamsCounty",
+      "US/IL/AddisonConsolidatedDispatch","ILDuPageCountyA",
       "US/IL/BooneCounty",                "ILBooneCounty",
       "US/IL/ChicagoHeights",             "ILCookCountyH",
       "US/IL/ChristianCounty",            "ILChristianCounty",
