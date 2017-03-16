@@ -1384,6 +1384,7 @@ class Active911Vendor extends Vendor {
       "US/TX/Helotes",                    "TXHelotes",
       "US/TX/HumblePolice",               "TXHumbleB",
       "US/TX/HuntCounty",                 "TXHuntCounty",
+      "US/TX/HurstTX",                    "TXTarrentCountyD",
       "US/TX/JohnsonCounty",              "TXJohnsonCountyB",
       "US/TX/Katy",                       "TXCyCreekCommCenter",
       "US/TX/KaufmanCounty",              "TXKaufmanCountyA",
