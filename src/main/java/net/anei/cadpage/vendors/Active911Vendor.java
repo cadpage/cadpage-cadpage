@@ -1493,6 +1493,7 @@ class Active911Vendor extends Vendor {
       "US/VT/GrandIsleCounty",            "VTGrandIsleCounty",
       "US/VT/Hartford",                   "VTHartford",
       "US/VT/MremsDispatch911",           "VTAddisonCountyB",
+      "US/VT/UVM",                        "VTChittendenCountyC",
       "US/VT/ValcourNotification",        "VTLamoilleCounty",
       "US/VT/WindhamCounty",              "VTWindhamCounty",
       "US/VT/WindsorCounty",              "VTWindsorCounty",
