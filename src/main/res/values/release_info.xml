@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03092017</string>
+  <string name="release_date">03192017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-32\n
+    Location Fixes:\n
+    New Haven County, CT\n
+    Boone County, KY\n
+    Midland County, MI\n
+    Fulton County, NY\n
+    Rhea County, TN\n
+    Acadian Ambulance, TX\n
+    \n
     v1.9.11-31\n
     Location Fixes:\n
     Jefferson County, AL\n
@@ -38,17 +47,7 @@
     \n
     Location Fixes:\n
     Johnson County, MO\n
-    Pocahontas County, WV\n
-    \n
-    v1.9.11-27\n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    New London County, CT\n
-    Manatee County, FL\n
-    Woodbury County, IA\n
-    Pulaski County, MO\n
-    Salem County, NJ\n
-    Duplin County, NC
+    Pocahontas County, WV
   </string>
 </resources>
   
