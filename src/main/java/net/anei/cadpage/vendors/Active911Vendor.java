@@ -1164,6 +1164,7 @@ class Active911Vendor extends Vendor {
       "US/OK/LoveCounty",                 "OKLoveCounty",
       "US/OK/MayesCounty",                "OKMayesCounty",
       "US/OH/MayfieldVillage",            "OHCuyahogaCountyA",
+      "US/OH/RichlandCounty",             "OHRichlandCounty",
       "US/OK/SandSprings",                "OKSandSprings",
       "US/OR/Benton",                     "ORBentonCounty",
       "US/OR/CityofSalem",                "ORMarionCountyB",
