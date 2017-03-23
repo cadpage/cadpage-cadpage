@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03192017</string>
+  <string name="release_date">03222017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-33\n
+    New Locations:\n
+    Caledonia County, VT\n
+    \n
+    Location Fixes:\n
+    Pulaski County, AR\n
+    Litchfield County, CT\n
+    Montcalm County, MI\n
+    Wright County, MO\n
+    Franklin County, NC\n
+    Greene County, OH\n
+    Delaware County, PA\n
+    \n
     v1.9.11-32\n
     Location Fixes:\n
     New Haven County, CT\n
@@ -39,15 +52,7 @@
     v1.9.11-29\n
     Location Fixes:\n
     Washtenaw County, MI\n
-    McKean County, PA\n
-    \n
-    v1.9.11-28\n
-    New Locations:\n
-    McKean County, PA\n
-    \n
-    Location Fixes:\n
-    Johnson County, MO\n
-    Pocahontas County, WV
+    McKean County, PA
   </string>
 </resources>
   
