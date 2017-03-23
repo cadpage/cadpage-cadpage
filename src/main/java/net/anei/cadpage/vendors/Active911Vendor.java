@@ -1431,6 +1431,7 @@ class Active911Vendor extends Vendor {
       "US/TX/WylieFireDispatch",          "TXWylie",
       "US/USAF/Tinker",                   "OKTinkerAFB",
       "US/UT/BoxElderCounty",             "UTBoxElderCounty",
+      "US/UT/CarbonCounty",               "UTCarbonCounty",
       "US/UT/DavisCounty",                "UTDavisCountyE",
       "US/UT/DavisCountyEforceSoftware",  "UTDavisCountyD",
       "US/UT/KaysvilleFD",                "UTDavisCountyE",
