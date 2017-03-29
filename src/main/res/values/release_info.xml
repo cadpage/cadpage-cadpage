@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03262017</string>
+  <string name="release_date">03292017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-35\n
+    Location Fixes:\n
+    St Lawrence County, NY\n
+    \n
     v1.9.11-34\n
     Location Fixes:\n
     Tolland County, CT\n
@@ -45,15 +49,7 @@
     Richland County, OH\n
     Jefferson County, OH\n
     Nueces County, TX\n
-    Grays Harbor County, WA\n
-    \n
-    v1.9.11-30\n
-    New Locations:\n
-    Allegheny County, PA (alt)\n
-    \n
-    Location Fixes:\n
-    Frederick County, MD\n
-    Chaves County, NM
+    Grays Harbor County, WA
   </string>
 </resources>
   
