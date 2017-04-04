@@ -239,7 +239,7 @@ public class ManagePreferences {
   
   /**
    * Convert any old obsolete location codes to new equivalent
-   * @param current context
+   * @param context current context
    * @param location location to be checked
    * @return the new location that should be used
    */
@@ -415,7 +415,12 @@ public class ManagePreferences {
     public int splitMinMsg() {
       return prefs.getIntValue(R.string.pref_split_min_msg_key);
     }
-    
+
+    @Override
+    public boolean splitBreakIns() {
+      return false;
+    }
+
     @Override
     public boolean splitBlankIns() {
       return prefs.getBoolean(R.string.pref_split_blank_ins_key);
@@ -1852,7 +1857,7 @@ public class ManagePreferences {
     
     /**
      * Abstract method to retrieve screen preference value
-     * @param preferece Screen preference
+     * @param preference Screen preference
      * @return current value of screen preference
      */
     protected abstract V getPreference(P preference);

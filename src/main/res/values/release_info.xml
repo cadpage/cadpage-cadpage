@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03292017</string>
+  <string name="release_date">04032017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-36\n
+    Location Fixes:\n
+    Talladega County, AL\n
+    Montgomery County, MD\n
+    Greene County, OH\n
+    Bucks County, PA\n
+    Charleston County, SC\n
+    Lincoln County, SD\n
+    Red Deer County, AB, Canada\n
+    \n
     v1.9.11-35\n
     Location Fixes:\n
     St Lawrence County, NY\n
@@ -34,22 +44,7 @@
     Midland County, MI\n
     Fulton County, NY\n
     Rhea County, TN\n
-    Acadian Ambulance, TX\n
-    \n
-    v1.9.11-31\n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    Sacramento County, CA\n
-    Cook County, IL\n
-    Kankakee County, IL\n
-    Hamilton County, IN\n
-    Midland County, MI\n
-    Pitt County, NC\n
-    Cuyahoga County, OH\n
-    Richland County, OH\n
-    Jefferson County, OH\n
-    Nueces County, TX\n
-    Grays Harbor County, WA
+    Acadian Ambulance, TX
   </string>
 </resources>
   
