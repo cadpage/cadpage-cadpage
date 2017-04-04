@@ -1377,6 +1377,7 @@ class Active911Vendor extends Vendor {
       "US/TX/EforcesoftawreEllisCounty",  "TXEllisCounty",
       "US/TX/EforcesoftwareHendersonCounty","TXHendersonCounty",
       "US/TX/Farmersville",               "TXCollinCounty",
+      "US/TX/FireComm",                   "TXHidalgoCounty",
       "US/TX/FlightVector",               "TXFlightVector",
       "US/TX/FortBendCounty",             "TXFortBendCountyA",
       "US/TX/FreeportDispatch",           "TXBrazoriaCountyB",
