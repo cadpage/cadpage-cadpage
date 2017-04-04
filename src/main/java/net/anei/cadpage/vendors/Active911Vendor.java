@@ -999,6 +999,7 @@ class Active911Vendor extends Vendor {
       "US/NJ/SussexCountySheriff",        "NJSussexCountyB",
       "US/NJ/TomsRiverPolice",            "NJOceanCountyB",
       "US/NJ/VernonPolice",               "NJSussexCountyC",
+      "US/NJ/VinelandCity",               "NJCumberlandCountyB",
       "US/NJ/WarrenCounty",               "NJWarrenCounty",
       "US/NJ/WayneTownship",              "NJWayneTownship",
       "US/NJ/WestCaldwellPD",             "NJEssexCounty",
