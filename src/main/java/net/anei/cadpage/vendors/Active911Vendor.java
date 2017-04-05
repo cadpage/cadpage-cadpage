@@ -1184,6 +1184,7 @@ class Active911Vendor extends Vendor {
       "US/OR/JeffersonCounty",            "ORJeffersonCounty",
       "US/OR/JunctionCity",               "ORLaneCountyB",
       "US/OR/Klamath",                    "ORKlamathCounty",
+      "US/OR/LakeCounty",                 "ORLakeCounty",
       "US/OR/LaneCounty",                 "ORLaneCountyA",
       "US/OR/Lincoln",                    "ORLincolnCounty",
       "US/OR/Linn",                       "ORLinnCounty",
