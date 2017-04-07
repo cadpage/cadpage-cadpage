@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-37\n
+    Location Fixes:\n
+    Lancaster County, PA\n
+    \n
     v1.9.11-36\n
     Location Fixes:\n
     Talladega County, AL\n
@@ -35,16 +39,7 @@
     Wright County, MO\n
     Franklin County, NC\n
     Greene County, OH\n
-    Delaware County, PA\n
-    \n
-    v1.9.11-32\n
-    Location Fixes:\n
-    New Haven County, CT\n
-    Boone County, KY\n
-    Midland County, MI\n
-    Fulton County, NY\n
-    Rhea County, TN\n
-    Acadian Ambulance, TX
+    Delaware County, PA
   </string>
 </resources>
   
