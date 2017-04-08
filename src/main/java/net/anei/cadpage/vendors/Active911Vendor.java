@@ -972,6 +972,7 @@ class Active911Vendor extends Vendor {
       "US/NJ/BurlingtonCounty",           "NJBurlingtonCountyC",
       "US/NJ/CamdenCounty",               "NJCamdenCounty",
       "US/NJ/CumberlandCounty",           "NJCumberlandCounty",
+      "US/NJ/DelranEmergency",            "NJBurlingtonCountyC",
       "US/NJ/EggHarborTownship",          "NJAtlanticCountyA",
       "US/NJ/FranklinLakes",              "NJBergenCountyF",
       "US/NJ/GallowayTownship",           "NJAtlanticCountyC",
