@@ -13,147 +13,8 @@
       android:summaryOff="@string/pref_enabled_summaryoff"
       android:defaultValue="true" />
       
-    <!-- Notifications screen -->  
-    <PreferenceScreen
-      android:key="pref_notif_key"
-      android:title="@string/pref_notif_title"
-      android:summary="@string/pref_notif_summary"
-      android:dependency="@string/pref_enabled_key">
-      <PreferenceCategory
-        android:title="@string/pref_notif_default_title">
-        <CheckBoxPreference
-          android:key="@string/pref_notif_enabled_key"
-          android:title="@string/pref_notif_enabled_title"
-          android:summaryOn="@string/pref_notif_enabled_summaryon"
-          android:summaryOff="@string/pref_notif_enabled_summaryoff"
-          android:defaultValue="true" />
-        <net.anei.cadpage.preferences.ExtendedCheckBoxPreference
-          android:key="@string/pref_notif_override_key"
-          android:title="@string/pref_notif_override_title"
-          android:summaryOn="@string/pref_notif_override_summaryon"
-          android:summaryOff="@string/pref_notif_override_summaryoff"
-          android:defaultValue="false"
-          android:dependency="@string/pref_notif_enabled_key" />
-        <CheckBoxPreference
-          android:key="@string/pref_notif_override_volume_key"
-          android:title="@string/pref_notif_override_volume_title"
-          android:summaryOn="@string/pref_notif_override_volume_summaryon"
-          android:summaryOff="@string/pref_notif_override_volume_summaryoff"
-          android:defaultValue="false"
-          android:dependency="@string/pref_notif_override_key" />
-        <CheckBoxPreference
-          android:key="@string/pref_notif_override_sound_key"
-          android:title="@string/pref_notif_override_sound_title"
-          android:summaryOn="@string/pref_notif_override_sound_summaryon"
-          android:summaryOff="@string/pref_notif_override_sound_summaryoff"
-          android:defaultValue="true"
-          android:dependency="@string/pref_notif_override_key" />
-        <CheckBoxPreference
-          android:key="@string/pref_notif_override_loop_key"
-          android:title="@string/pref_notif_override_loop_title"
-          android:summaryOn="@string/pref_notif_override_loop_summaryon"
-          android:summaryOff="@string/pref_notif_override_loop_summaryoff"
-          android:defaultValue="true"
-          android:dependency="@string/pref_notif_override_key" />
-        <RingtonePreference
-          android:key="@string/pref_notif_sound_key"
-          android:title="@string/pref_notif_sound_title"
-          android:summary="@string/pref_notif_sound_summary"
-          android:ringtoneType="all"
-          android:showDefault="true"
-          android:showSilent="true"
-          android:dependency="@string/pref_notif_enabled_key"
-          android:defaultValue="content://settings/system/notification_sound" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_notif_timeout_key"
-          android:title="@string/pref_notif_timeout_title"
-          android:summary="@string/pref_notif_timeout_summary"
-          android:entries="@array/pref_notif_timeout_entries"
-          android:entryValues="@array/pref_notif_timeout_values"
-          android:defaultValue="@string/pref_notif_timeout_default"
-          android:dependency="@string/pref_notif_enabled_key" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_notif_repeat_interval_key"
-          android:title="@string/pref_notif_repeat_interval_title"
-          android:summary="@string/pref_notif_repeat_interval_summary"
-          android:entries="@array/pref_notif_repeat_interval_entries"
-          android:entryValues="@array/pref_notif_repeat_interval_values"
-          android:dialogTitle="@string/pref_notif_repeat_interval_dialogTitle"
-          android:defaultValue="@string/pref_notif_repeat_interval_default"
-          android:dependency="@string/pref_notif_enabled_key" />
-        <net.anei.cadpage.preferences.TestNotificationDialogPreference
-          android:key="@string/pref_notif_test_key"
-          android:dialogIcon="@drawable/android:ic_dialog_alert"
-          android:title="@string/pref_notif_test_title"
-          android:dialogTitle="@string/pref_notif_test_title"
-          android:dialogMessage="@string/pref_notif_test_message"
-          android:summary="@string/pref_notif_test_summary"
-          android:dependency="@string/pref_notif_enabled_key"
-          android:negativeButtonText="@null" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_notif_delay_key"
-          android:title="@string/pref_notif_delay_title"
-          android:summary="@string/pref_notif_delay_summary"
-          android:entries="@array/pref_notif_delay_entries"
-          android:entryValues="@array/pref_notif_delay_values"
-          android:dialogTitle="@string/pref_notif_delay_dialogTitle"
-          android:defaultValue="@string/pref_notif_delay_default"
-          android:dependency="@string/pref_notif_enabled_key" />
-        <CheckBoxPreference
-          android:key="@string/pref_notif_req_ack_key"
-          android:title="@string/pref_notif_req_ack_title"
-          android:summaryOn="@string/pref_notif_req_ack_summaryon"
-          android:summaryOff="@string/pref_notif_req_ack_summaryoff"
-          android:defaultValue="false"
-          android:dependency="@string/pref_notif_enabled_key" />
-        
-      </PreferenceCategory>
-      <PreferenceCategory
-        android:title="@string/pref_vibrate_category_title">
-        <CheckBoxPreference
-          android:key="@string/pref_vibrate_key"
-          android:title="@string/pref_vibrate_title"
-          android:summaryOn="@string/pref_vibrate_summaryon"
-          android:summaryOff="@string/pref_vibrate_summaryoff"
-          android:defaultValue="@string/pref_vibrate_default"
-          android:dependency="@string/pref_notif_enabled_key" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_vibrate_pattern_key"
-          android:title="@string/pref_vibrate_pattern_title"
-          android:summary="@string/pref_vibrate_pattern_summary"
-          android:entries="@array/pref_vibrate_pattern_entries"
-          android:entryValues="@array/pref_vibrate_pattern_values"
-          android:defaultValue="@string/pref_vibrate_pattern_default"
-          android:dependency="@string/pref_vibrate_key" />
-      </PreferenceCategory>
-      <PreferenceCategory
-        android:title="@string/pref_flashled_category_title">
-        <CheckBoxPreference
-          android:key="@string/pref_flashled_key"
-          android:title="@string/pref_flashled_title"
-          android:summaryOn="@string/pref_flashled_summaryon"
-          android:summaryOff="@string/pref_flashled_summaryoff"
-          android:defaultValue="@string/pref_flashled_default"
-          android:dependency="@string/pref_notif_enabled_key" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_flashled_color_key"
-          android:title="@string/pref_flashled_color_title"
-          android:summary="@string/pref_flashled_color_summary"
-          android:entries="@array/pref_led_color_entries"
-          android:entryValues="@array/pref_led_color_values"
-          android:defaultValue="@string/pref_flashled_color_default"
-          android:dependency="@string/pref_flashled_key" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_flashled_pattern_key"
-          android:title="@string/pref_flashled_pattern_title"
-          android:summary="@string/pref_flashled_pattern_summary"
-          android:entries="@array/pref_led_pattern_entries"
-          android:entryValues="@array/pref_led_pattern_values"
-          android:defaultValue="@string/pref_flashled_pattern_default"
-          android:dependency="@string/pref_flashled_key" />
-      </PreferenceCategory>
-    </PreferenceScreen>
-    
+    <!-- Notifications screen -->
+
     <!-- Additional Settings Screen -->
     <PreferenceScreen
       android:title="@string/pref_additional_title"
@@ -524,6 +385,145 @@
           </PreferenceScreen>
         </PreferenceScreen>
       </PreferenceCategory>
+      <PreferenceScreen
+        android:dependency="@string/pref_enabled_key"
+        android:key="pref_notif_key"
+        android:summary="@string/pref_notif_summary"
+        android:title="@string/pref_notif_title">
+        <PreferenceCategory
+          android:title="@string/pref_notif_default_title">
+          <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_notif_enabled_key"
+            android:summaryOff="@string/pref_notif_enabled_summaryoff"
+            android:summaryOn="@string/pref_notif_enabled_summaryon"
+            android:title="@string/pref_notif_enabled_title"/>
+          <net.anei.cadpage.preferences.ExtendedCheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:key="@string/pref_notif_override_key"
+            android:summaryOff="@string/pref_notif_override_summaryoff"
+            android:summaryOn="@string/pref_notif_override_summaryon"
+            android:title="@string/pref_notif_override_title"/>
+          <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_notif_override_key"
+            android:key="@string/pref_notif_override_volume_key"
+            android:summaryOff="@string/pref_notif_override_volume_summaryoff"
+            android:summaryOn="@string/pref_notif_override_volume_summaryon"
+            android:title="@string/pref_notif_override_volume_title"/>
+          <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="@string/pref_notif_override_key"
+            android:key="@string/pref_notif_override_sound_key"
+            android:summaryOff="@string/pref_notif_override_sound_summaryoff"
+            android:summaryOn="@string/pref_notif_override_sound_summaryon"
+            android:title="@string/pref_notif_override_sound_title"/>
+          <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="@string/pref_notif_override_key"
+            android:key="@string/pref_notif_override_loop_key"
+            android:summaryOff="@string/pref_notif_override_loop_summaryoff"
+            android:summaryOn="@string/pref_notif_override_loop_summaryon"
+            android:title="@string/pref_notif_override_loop_title"/>
+          <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:key="@string/pref_notif_sound_key"
+            android:ringtoneType="all"
+            android:showDefault="true"
+            android:showSilent="true"
+            android:summary="@string/pref_notif_sound_summary"
+            android:title="@string/pref_notif_sound_title"/>
+          <net.anei.cadpage.preferences.ListPreference
+            android:defaultValue="@string/pref_notif_timeout_default"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:entries="@array/pref_notif_timeout_entries"
+            android:entryValues="@array/pref_notif_timeout_values"
+            android:key="@string/pref_notif_timeout_key"
+            android:summary="@string/pref_notif_timeout_summary"
+            android:title="@string/pref_notif_timeout_title"/>
+          <net.anei.cadpage.preferences.ListPreference
+            android:defaultValue="@string/pref_notif_repeat_interval_default"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:dialogTitle="@string/pref_notif_repeat_interval_dialogTitle"
+            android:entries="@array/pref_notif_repeat_interval_entries"
+            android:entryValues="@array/pref_notif_repeat_interval_values"
+            android:key="@string/pref_notif_repeat_interval_key"
+            android:summary="@string/pref_notif_repeat_interval_summary"
+            android:title="@string/pref_notif_repeat_interval_title"/>
+          <net.anei.cadpage.preferences.TestNotificationDialogPreference
+            android:dependency="@string/pref_notif_enabled_key"
+            android:dialogIcon="@drawable/android:ic_dialog_alert"
+            android:dialogMessage="@string/pref_notif_test_message"
+            android:dialogTitle="@string/pref_notif_test_title"
+            android:key="@string/pref_notif_test_key"
+            android:negativeButtonText="@null"
+            android:summary="@string/pref_notif_test_summary"
+            android:title="@string/pref_notif_test_title"/>
+          <net.anei.cadpage.preferences.ListPreference
+            android:defaultValue="@string/pref_notif_delay_default"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:dialogTitle="@string/pref_notif_delay_dialogTitle"
+            android:entries="@array/pref_notif_delay_entries"
+            android:entryValues="@array/pref_notif_delay_values"
+            android:key="@string/pref_notif_delay_key"
+            android:summary="@string/pref_notif_delay_summary"
+            android:title="@string/pref_notif_delay_title"/>
+          <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:key="@string/pref_notif_req_ack_key"
+            android:summaryOff="@string/pref_notif_req_ack_summaryoff"
+            android:summaryOn="@string/pref_notif_req_ack_summaryon"
+            android:title="@string/pref_notif_req_ack_title"/>
+
+        </PreferenceCategory>
+        <PreferenceCategory
+          android:title="@string/pref_vibrate_category_title">
+          <CheckBoxPreference
+            android:defaultValue="@string/pref_vibrate_default"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:key="@string/pref_vibrate_key"
+            android:summaryOff="@string/pref_vibrate_summaryoff"
+            android:summaryOn="@string/pref_vibrate_summaryon"
+            android:title="@string/pref_vibrate_title"/>
+          <net.anei.cadpage.preferences.ListPreference
+            android:defaultValue="@string/pref_vibrate_pattern_default"
+            android:dependency="@string/pref_vibrate_key"
+            android:entries="@array/pref_vibrate_pattern_entries"
+            android:entryValues="@array/pref_vibrate_pattern_values"
+            android:key="@string/pref_vibrate_pattern_key"
+            android:summary="@string/pref_vibrate_pattern_summary"
+            android:title="@string/pref_vibrate_pattern_title"/>
+        </PreferenceCategory>
+        <PreferenceCategory
+          android:title="@string/pref_flashled_category_title">
+          <CheckBoxPreference
+            android:defaultValue="@string/pref_flashled_default"
+            android:dependency="@string/pref_notif_enabled_key"
+            android:key="@string/pref_flashled_key"
+            android:summaryOff="@string/pref_flashled_summaryoff"
+            android:summaryOn="@string/pref_flashled_summaryon"
+            android:title="@string/pref_flashled_title"/>
+          <net.anei.cadpage.preferences.ListPreference
+            android:defaultValue="@string/pref_flashled_color_default"
+            android:dependency="@string/pref_flashled_key"
+            android:entries="@array/pref_led_color_entries"
+            android:entryValues="@array/pref_led_color_values"
+            android:key="@string/pref_flashled_color_key"
+            android:summary="@string/pref_flashled_color_summary"
+            android:title="@string/pref_flashled_color_title"/>
+          <net.anei.cadpage.preferences.ListPreference
+            android:defaultValue="@string/pref_flashled_pattern_default"
+            android:dependency="@string/pref_flashled_key"
+            android:entries="@array/pref_led_pattern_entries"
+            android:entryValues="@array/pref_led_pattern_values"
+            android:key="@string/pref_flashled_pattern_key"
+            android:summary="@string/pref_flashled_pattern_summary"
+            android:title="@string/pref_flashled_pattern_title"/>
+        </PreferenceCategory>
+      </PreferenceScreen>
     </PreferenceScreen>
    
     <!-- Filter settings screen -->  

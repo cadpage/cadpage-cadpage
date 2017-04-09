@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04032017</string>
+  <string name="release_date">04092017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-38\n
+    New Locations:\n
+    Yeba County, CA\n
+    \n
+    Location Fixes:\n
+    Gordon County, GA\n
+    Davie County, NC\n
+    Greene County, OH\n
+    Linn County, OR\n
+    Adams County, PA\n
+    Luzerne County, PA\n
+    Clarendon County, SC\n
+    \n
     v1.9.11-37\n
     Location Fixes:\n
     Lancaster County, PA\n
@@ -26,20 +39,7 @@
     Location Fixes:\n
     Tolland County, CT\n
     Greene County, MO\n
-    Greene County, OH\n
-    \n
-    v1.9.11-33\n
-    New Locations:\n
-    Caledonia County, VT\n
-    \n
-    Location Fixes:\n
-    Pulaski County, AR\n
-    Litchfield County, CT\n
-    Montcalm County, MI\n
-    Wright County, MO\n
-    Franklin County, NC\n
-    Greene County, OH\n
-    Delaware County, PA
+    Greene County, OH
   </string>
 </resources>
   
