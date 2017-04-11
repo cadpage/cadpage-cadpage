@@ -1443,7 +1443,7 @@ class Active911Vendor extends Vendor {
       "US/UT/DavisCounty",                "UTDavisCountyE",
       "US/UT/DavisCountyEforceSoftware",  "UTDavisCountyD",
       "US/UT/KaysvilleFD",                "UTDavisCountyE",
-      "US/UT/SaltLakeCounty",             "UTSaltLakeCounty",
+      "US/UT/SaltLakeCounty",             "UTSaltLakeCountyA",
       "US/UT/TooeleCounty",               "UTTooeleCounty",
       "US/UT/WeberCounty",                "UTWeberCounty",
       "US/VA/AlbermarleCounty",           "VAAlbemarleCounty",
