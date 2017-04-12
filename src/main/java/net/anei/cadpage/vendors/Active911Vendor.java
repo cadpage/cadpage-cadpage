@@ -1089,6 +1089,7 @@ class Active911Vendor extends Vendor {
       "US/OH/CityofCanfield",             "OHMahoningCounty",
       "US/OH/CityofCanton",               "OHStarkCountyRedcenter2",
       "US/OH/CityofCenterville",          "OHCenterville",
+      "US/OH/CityofFairborn",             "OHGreeneCountyB",
       "US/OH/CityofFairfield",            "OHFairfield",
       "US/OH/CityofFairlawn",             "OHSummitCountyE",
       "US/OH/CityofGreen",                "OHSummitCountyF",
