@@ -577,6 +577,7 @@ class Active911Vendor extends Vendor {
       "US/KS/PottawatomieSheriff",        "KSPottawatomieCounty",
       "US/KS/Renolec",                    "KSRenoCounty",
       "US/KS/RiceCounty",                 "KSRiceCounty",
+      "US/KS/RileyCountyEMS",             "KSRileyCounty",
       "US/KS/RooksCounty",                "KSRooksCounty",
       "US/KS/SedgwickCounty",             "KSSedgwickCounty",
       "US/KS/SumnerCounty",               "KSSumnerCounty",
