@@ -1563,6 +1563,7 @@ class Active911Vendor extends Vendor {
       "US/WI/WaukeshaCounty",             "WIWaukeshaCountyA",
       "US/WV/BerkeleyCounty",             "WVBerkeleyCounty",
       "US/WV/BooneCounty",                "WVBooneCounty",
+      "US/WV/CabellCounty",               "WVCabellCounty",
       "US/WV/Centrale911",                "WVHarrisonCountyB",
       "US/WV/Centrale911RitchieCounty",   "WVRichieCounty",
       "US/WV/GrantCounty",                "WVGrantCounty",
