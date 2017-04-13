@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04122017</string>
+  <string name="release_date">04132017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-40\n
+    Location Fixes:\n
+    Franklin County, PA\n
+    \n
+    General Fixes:\n
+    Restored notification settings menu\n
+    \n
     v1.9.11-39\n
     New Location:\n
     Salt Lake County, UT (alt)\n
@@ -28,21 +35,7 @@
     \n
     v1.9.11-37\n
     Location Fixes:\n
-    Lancaster County, PA\n
-    \n
-    v1.9.11-36\n
-    Location Fixes:\n
-    Talladega County, AL\n
-    Montgomery County, MD\n
-    Greene County, OH\n
-    Bucks County, PA\n
-    Charleston County, SC\n
-    Lincoln County, SD\n
-    Red Deer County, AB, Canada\n
-    \n
-    v1.9.11-35\n
-    Location Fixes:\n
-    St Lawrence County, NY
+    Lancaster County, PA
   </string>
 </resources>
   
