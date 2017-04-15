@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04132017</string>
+  <string name="release_date">04152017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-41\n
+    Location Fixes:\n
+    O\'Fallon, IL\n
+    Montgomery County, MD\n
+    Linn County, OR\n
+    Berkeley County, SC\n
+    \n
     v1.9.11-40\n
     Location Fixes:\n
     Franklin County, PA\n
@@ -31,11 +38,7 @@
     Linn County, OR\n
     Adams County, PA\n
     Luzerne County, PA\n
-    Clarendon County, SC\n
-    \n
-    v1.9.11-37\n
-    Location Fixes:\n
-    Lancaster County, PA
+    Clarendon County, SC
   </string>
 </resources>
   
