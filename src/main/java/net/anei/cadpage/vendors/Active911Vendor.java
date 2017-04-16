@@ -1184,7 +1184,6 @@ class Active911Vendor extends Vendor {
       "US/OR/DeschutesCounty",            "ORDeschutesCounty",
       "US/OR/DouglasCounty",              "ORDouglasCounty",
       "US/OR/GilliamCounty",              "ORGilliamCounty",
-      "US/OR/GreshamSAR",                 "ORMultnomahCountyC",
       "US/OR/GreshamStandardA",           "Cadpage2",
       "US/OR/HoodRiverCounty",            "ORHoodRiverCounty",
       "US/OR/Jackson",                    "ORJacksonCounty",
