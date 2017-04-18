@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04152017</string>
+  <string name="release_date">04182017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-42\n
+    Location Fixes:\n
+    Fresno County, CA\
+    Jeferson County, IN\n
+    Murray County, KY\n
+    Person County, NC\n
+    Rutherford County, NC\n
+    Lancaster County, PA\n
+    \n
     v1.9.11-41\n
     Location Fixes:\n
     O\'Fallon, IL\n
@@ -29,16 +38,7 @@
     \n
     v1.9.11-38\n
     New Locations:\n
-    Yeba County, CA\n
-    \n
-    Location Fixes:\n
-    Gordon County, GA\n
-    Davie County, NC\n
-    Greene County, OH\n
-    Linn County, OR\n
-    Adams County, PA\n
-    Luzerne County, PA\n
-    Clarendon County, SC
+    Yeba County, CA
   </string>
 </resources>
   
