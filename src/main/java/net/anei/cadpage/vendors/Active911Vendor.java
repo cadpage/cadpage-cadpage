@@ -358,6 +358,7 @@ class Active911Vendor extends Vendor {
       "US/CO/MontezumaCounty",            "COMontezumaCounty",
       "US/CO/MorganCounty",               "COMorganCounty",
       "US/CO/NorthglennAmbulance",        "CONorthglennEMS",
+      "US/CO/NorthMetroFire",             "COBroomfield",
       "US/CO/NWSAlert",                   "StandardNationalWeatherService",
       "US/CO/OlatheFire",                 "COMontroseCounty",
       "US/CO/PitkinCounty",               "COPitkinCounty",
