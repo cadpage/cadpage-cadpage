@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04182017</string>
+  <string name="release_date">04212017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-43\n
+    Location Fixes:\n
+    Monterey County, CA\n
+    Adams County, CO\n
+    Franklin County, PA\n
+    \n
     v1.9.11-42\n
     Location Fixes:\n
     Fresno County, CA\n
@@ -34,11 +40,7 @@
     Location Fixes:\n
     Morris County, NJ\n
     Suffolk County, NY\n
-    King County, WA\n
-    \n
-    v1.9.11-38\n
-    New Locations:\n
-    Yeba County, CA
+    King County, WA
   </string>
 </resources>
   
