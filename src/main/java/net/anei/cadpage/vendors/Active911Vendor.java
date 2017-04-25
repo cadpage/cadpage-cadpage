@@ -231,6 +231,7 @@ class Active911Vendor extends Vendor {
       "US/AL/LimestoneCounty",            "ALLimestoneCounty",
       "US/AL/LimestoneCounty",            "ALLimestoneCountyA",
       "US/AL/MadCo911",                   "ALMadisonCounty",
+      "US/AL/MadisonCounty",              "ALMadisonCounty",
       "US/AL/MarionCounty",               "ALMarionCounty",
       "US/AL/MarshallCounty",             "ALMarshallCounty",
       "US/AL/MobileCounty",               "ALMobileCounty",
