@@ -522,6 +522,7 @@ class Active911Vendor extends Vendor {
       "US/IN/DeKalbCounty",               "INDeKalbCounty",
       "US/IN/DelawareCounty",             "INDelawareCounty",
       "US/IN/EMGSVCS",                    "INHenryCounty",
+      "US/IN/FishersFD",                  "INHamiltonCounty",
       "US/IN/FloydCounty",                "INFloydCounty",
       "US/IN/GibsonCounty",               "INGibsonCounty",
       "US/IN/GrantCounty",                "INGrantCounty",
