@@ -1910,13 +1910,13 @@ public class ManagePreferences {
   public static boolean checkPermAccountInfo(PermissionAction action, int explainId) {
     return accountInfoChecker.check(action, explainId, true);
   }
-  
+
   private static final AccountInfoChecker accountInfoChecker = new AccountInfoChecker();
   
   private static class AccountInfoChecker extends ActionPermissionChecker {
 
     private int explainId;
-    
+
     public AccountInfoChecker() {
       super(PERM_REQ_ACCT_INFO);
     }

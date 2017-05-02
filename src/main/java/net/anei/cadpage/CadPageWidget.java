@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -79,6 +80,7 @@ public class CadPageWidget extends AppWidgetProvider {
     
     SmsMessageQueue instance = SmsMessageQueue.getInstance();
     int newCallCount = (instance == null ? 0 : instance.getNewCallCount());
+    views.setTextColor(R.id.widget_text_newcalls, Color.WHITE);
     views.setTextViewText(R.id.widget_text_newcalls, Integer.toString(newCallCount));
     
     appWidgetManager.updateAppWidget(appWidgetIds, views);

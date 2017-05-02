@@ -181,7 +181,6 @@ public class VendorActivity extends Safe40Activity {
     }
   }
 
-
   @Override
   protected void onDestroy() {
     
