@@ -883,6 +883,4 @@ abstract class Vendor {
       showNotice(context, R.string.vendor_no_web_viewer_error, null);
     }
   }
-
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {}
 }
