@@ -9,7 +9,6 @@ import android.net.Uri;
 import net.anei.cadpage.C2DMService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.ManagePreferences;
-import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
 import net.anei.cadpage.HttpService.HttpRequest;
 import net.anei.cadpage.donation.DonationManager;
@@ -49,11 +48,6 @@ class CadpageVendor extends Vendor {
 
   @Override
   void sendRegisterReq(Context context, String registrationId) {
-
-    // Do not allow this to proceed without phone access permission
-    if (!PermissionManager.isGranted(context, PermissionManager.READ_PHONE_STATE)) {
-      return;
-    }
     
     // Check that user really does have a paid subscription
     if (!DonationManager.instance().isPaidSubscriber()) {
