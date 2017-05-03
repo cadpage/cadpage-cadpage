@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05022017</string>
+  <string name="release_date">05032017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-46\n
+    Location Fixes:\n
+    Nassau County, NY\n
+    \n
     v1.9.11-45\n
     Location Fixes:\n
     El Dorado County, CA\n
@@ -32,14 +36,7 @@
     Murray County, KY\n
     Person County, NC\n
     Rutherford County, NC\n
-    Lancaster County, PA\n
-    \n
-    v1.9.11-41\n
-    Location Fixes:\n
-    O\'Fallon, IL\n
-    Montgomery County, MD\n
-    Linn County, OR\n
-    Berkeley County, SC
+    Lancaster County, PA
   </string>
 </resources>
   
