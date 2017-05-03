@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04262017</string>
+  <string name="release_date">05022017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-45\n
+    Location Fixes:\n
+    El Dorado County, CA\n
+    Suffolk County, NY\n
+    Willamson County, TN\n
+    New Zealand\n
+    \n
     v1.9.11-44\n
     Location Fixes:\n
     Madison County, AL\n
@@ -32,14 +39,7 @@
     O\'Fallon, IL\n
     Montgomery County, MD\n
     Linn County, OR\n
-    Berkeley County, SC\n
-    \n
-    v1.9.11-40\n
-    Location Fixes:\n
-    Franklin County, PA\n
-    \n
-    General Fixes:\n
-    Restored notification settings menu
+    Berkeley County, SC
   </string>
 </resources>
   
