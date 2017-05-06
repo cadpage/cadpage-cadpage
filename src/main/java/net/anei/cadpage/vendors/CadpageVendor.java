@@ -36,6 +36,11 @@ class CadpageVendor extends Vendor {
   }
 
   @Override
+  public boolean isAcctInfoRequired() {
+    return true;
+  }
+
+  @Override
   void profileReq(Activity activity) {
     PagingProfileEvent.instance().open(activity);
   }
@@ -69,8 +74,7 @@ class CadpageVendor extends Vendor {
     uri = builder.build();
     HttpService.addHttpRequest(context, new HttpRequest(uri){});
   }
-  
-  
+
   /**
    * Update Cadpage services status.
    * Called when either the activation status or expiration date has changed

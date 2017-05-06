@@ -42,11 +42,16 @@
    with you.
    </string>
    
-   <string name="perm_acct_info_for_register_direct">
+   <string name="perm_acct_info_for_register_direct_opt">
    The vendor you are trying to register with may need information about who you are to
    help identify your account on their system.
    </string>
-   
+
+  <string name="perm_acct_info_for_register_direct_req">
+   The vendor you are trying to register with requires information about who you are to
+   help identify your account on their system.
+   </string>
+
    <string name="perm_acct_info_for_donate_status">
    We need to know who you are before we can check your subscription status.
    </string>

@@ -1,6 +1,7 @@
 package net.anei.cadpage.vendors;
 
 import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
 import net.anei.cadpage.Safe40Activity;
 import net.anei.cadpage.SmsPopupUtils;
@@ -18,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class VendorActivity extends Safe40Activity {
-  
+
+  private PermissionManager permMgr = new PermissionManager(this);
+
   private static final String EXTRAS_VENDOR_CODE = "net.anei.cadpage.VendorActivity.VENDOR_CODE";
   
   private static final int CONFIRM_UNREGISTER_DLG = 1;
@@ -34,6 +37,9 @@ public class VendorActivity extends Safe40Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    ManagePreferences.setPermissionManager(permMgr);
+
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.vendor_popup);
     
@@ -61,12 +67,17 @@ public class VendorActivity extends Safe40Activity {
     registerButton.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
-        ManagePreferences.checkPermAccountInfo(new ManagePreferences.PermissionAction(){
+        final boolean required = vendor.isAcctInfoRequired();
+        int expId = required ? R.string.perm_acct_info_for_register_direct_req :  R.string.perm_acct_info_for_register_direct_opt;
+
+            ManagePreferences.checkPermAccountInfo(new ManagePreferences.PermissionAction(){
           @Override
           public void run(boolean ok, String[] permissions, int[] granted) {
-            vendor.registerReq(VendorActivity.this);
+            if (ok || !required) {
+              vendor.registerReq(VendorActivity.this);
+            }
           }
-        }, R.string.perm_acct_info_for_register_direct);
+        }, expId);
       }
     });
     
@@ -182,10 +193,17 @@ public class VendorActivity extends Safe40Activity {
   }
 
   @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
+    ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
+  }
+
+  @Override
   protected void onDestroy() {
     
     // When activity is being destroyed, disconnect it from the vendor object
     vendor.registerActivity(null);
+
+    ManagePreferences.releasePermissionManager(permMgr);
     super.onDestroy();
     
   }

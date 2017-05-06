@@ -1118,7 +1118,7 @@ public class ManagePreferences {
   /**
    * Request GCM Registration request lock
    * @param type register request type
-   * @param timeout register lock timeout in msecs
+   * @param lockTimeout register lock timeout in msecs
    * @return true if request has been granted
    */
   public static boolean registerReqLock(int type, long lockTimeout) {
@@ -1993,8 +1993,9 @@ public class ManagePreferences {
     
     /**
      * Called when final permission status has been determined
-     * @param permMgr currently active permission manager
-     * @param granted true if all required permissions have been granted 
+     * @param ok true if all requested permissions have been granted
+     * @param permissions list of requested permissions
+     * @param granted list of requested permission statuses
      */
     public void run(boolean ok, String[] permissions, int[] granted);
   }

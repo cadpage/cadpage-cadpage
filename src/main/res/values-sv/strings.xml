@@ -37,11 +37,16 @@
    Vi berhöver veta vem du är så vi kan hitta prenumerationsinformation som vi har kopplat till dig.
    </string>
    
-   <string name="perm_acct_info_for_register_direct">
+   <string name="perm_acct_info_for_register_direct_opt">
    Den tjänst du försöker registrera dig med kan behöva information om vem du är för att identifera dig i deras system.
    </string>
-   
-   <string name="perm_acct_info_for_donate_status">
+
+  <string name="perm_acct_info_for_register_direct_req">     <!-- Translate -->
+   The vendor you are trying to register with requires information about who you are to
+   help identify your account on their system.
+   </string>
+
+  <string name="perm_acct_info_for_donate_status">
    Vi behöver information om vem du är innan vi kan kolla ditt prenumerationsstatus.
    </string>
    

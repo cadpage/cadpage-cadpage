@@ -350,6 +350,13 @@ abstract class Vendor {
   }
 
   /**
+   * @return true if vendor requires account information to register
+   */
+  public boolean isAcctInfoRequired() {
+    return false;
+  }
+
+  /**
    * @return Name of sponsoring agency if an active vendor is sponsoring Cadpage
    */
   String getSponsor() {
