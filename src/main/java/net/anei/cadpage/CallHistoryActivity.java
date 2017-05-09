@@ -3,9 +3,14 @@ package net.anei.cadpage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import net.anei.cadpage.donation.Active911WarnEvent;
 import net.anei.cadpage.donation.DonateActivity;
+import net.anei.cadpage.donation.DonateEvent;
+import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.VendorEvent;
+import net.anei.cadpage.vendors.VendorManager;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -171,22 +176,29 @@ public class CallHistoryActivity extends ListActivity {
       
       // First clear any pending notification
       ClearAllReceiver.clearAll(this);
-      
-      // Second, launch the release info dialog if it hasn't already been displayed
-      String oldRelease = ManagePreferences.release();
-      String release = CadPageApplication.getVersion();
-      if (!release.equals(oldRelease)) { 
-        ManagePreferences.setRelease(release);
-        if (! trimRelease(release).equals(trimRelease(oldRelease))) {
-          showDialog(RELEASE_DIALOG);
-        }
-      }
-      
-      // If not, see if we have discovered a direct page vendor sending us text pages
-      else {
-        VendorEvent event = VendorEvent.instance(1);
-        if (event.isEnabled()) DonateActivity.launchActivity(this, event, null);
 
+      // If a new Active911 client may be higjacking alerts, warn user
+      DonateScreenEvent event = Active911WarnEvent.instance();
+      if (event.isEnabled()) {
+        DonateActivity.launchActivity(this, event, null);
+      }
+
+      // Otherwise, launch the release info dialog if it hasn't already been displayed
+      else {
+        String oldRelease = ManagePreferences.release();
+        String release = CadPageApplication.getVersion();
+        if (!release.equals(oldRelease)) {
+          ManagePreferences.setRelease(release);
+          if (!trimRelease(release).equals(trimRelease(oldRelease))) {
+            showDialog(RELEASE_DIALOG);
+          }
+        }
+
+        // If not, see if we have discovered a direct page vendor sending us text pages
+        else {
+          event = VendorEvent.instance(1);
+          if (event.isEnabled()) DonateActivity.launchActivity(this, event, null);
+        }
       }
     }
     

@@ -136,7 +136,35 @@
   <string name="donate_active911_parse_warn_text">
     Informationen i det här larmet kommer inte från Cadpage. Det här larmet kommer från Active911 och dess lokalanpassningssystem eftersom de jobbar på att resätta Cadpages system. Vi jobbar tillsammans med dem för att få det att fungera.  
   </string>
-  
+
+  <string name="active911_warn_title">Active911 upgrade warning</string>  <!-- Translate -->
+  <string name="active911_warn_text">  <!-- Translate -->
+    You have installed a version of the Active911 app that will switch delivery of Active911 alerts
+    away from Cadpage to itself the first time it is run.  If you wish to continue processing these
+    alerts with Cadpage, some corrective action is required.
+  </string>
+
+  <string name="active911_warn_2_title">What do I do?</string>  <!-- Translate -->
+  <string name="active911_warn_2_text">  <!-- Translate -->
+    The first step is to run the Active911 app to make sure that it has performed that switchover.\n
+    \n
+    Select the Launch Active911 button, then use the back button to return to this screen and
+    proceed to the next step.
+  </string>
+
+  <string name="active911_warn_A911_title">Launch Active911 app</string>  <!-- Translate -->
+
+  <string name="active911_warn_3_title">Next</string>  <!-- Translate -->
+  <string name="active911_warn_3_text">  <!-- Translate -->
+    Next you need to reregister Cadpage with the Active911 service, which you can do by pressing
+    the button below.  You will need to enter your Active911 device registration code which is\n
+    %s\n
+    It would be a good idea to write it down so you do not have to jump back to this screen
+    to retrieve it.
+  </string>
+
+  <string name="active911_warn_reregister_title">Reregister with Active911</string>  <!-- Translate -->
+
   <string name="vendor_title">Registrera med %s</string>
   <string name="vendor_text">
     Du verkar få textmeddelanden från %s. Du kan regista dig på deras meddelandetjänst så får du dina larm från dem. På så sätt slipper du en del problem förknippade med textmeddelanden.  

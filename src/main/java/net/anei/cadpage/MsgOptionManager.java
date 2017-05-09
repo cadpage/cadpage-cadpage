@@ -53,7 +53,6 @@ public class MsgOptionManager {
 
   /**
    * Create option or context menu for message
-   * @param context current context
    * @param menu menu to be constructed
    * @param display true if called from popup menu display
    */
@@ -77,7 +76,6 @@ public class MsgOptionManager {
   
   /**
    * Make any final changes to menu before actually displaying it
-   * @param context current context
    * @param menu Message menu needed to be adjusted
    */
   public void prepareMenu(Menu menu) {
@@ -582,7 +580,7 @@ public class MsgOptionManager {
       
     case R.id.active911_item:
       String vendor = message.getVendorCode();
-      boolean enabled = vendor != null && vendor.equals("Active911") && launchActive911(activity, false, message);
+      boolean enabled = vendor != null && vendor.equals("Active911") && launchActive911(activity, false);
       item.setEnabled(enabled);
       return enabled;
     }
@@ -678,7 +676,7 @@ public class MsgOptionManager {
       return true;
       
     case R.id.active911_item:
-      launchActive911(activity, true, message);
+      launchActive911(activity, true);
       return true;
       
     case R.id.ack_item:
@@ -941,18 +939,14 @@ public class MsgOptionManager {
    * @param launch true to really launch the app. false to just test to see if it is installed 
    * @return true if Active911 app is installed, false otherwise
    */
-  private static boolean launchActive911(Context context, boolean launch, SmsMmsMessage msg) {
+  public static boolean launchActive911(Context context, boolean launch) {
     Intent intent = new Intent(Intent.ACTION_MAIN);
     intent.addCategory(Intent.CATEGORY_LAUNCHER);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                     Intent.FLAG_ACTIVITY_SINGLE_TOP |
                     Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intent.setClassName("com.active911.app", "com.active911.app.MainActivity");
-    
-    // See if we can extract the message ID from the ack URL
-//    String code = msg.getActive911MsgCode();
-//    if (code != null) intent.putExtra("q", code);
-    
+
     PackageManager pm = context.getPackageManager();
     List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
     if (list == null || list.size() == 0) return false;

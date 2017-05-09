@@ -23,6 +23,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import net.anei.cadpage.BroadcastBindings;
 
@@ -47,7 +49,7 @@ abstract class Vendor {
   
   private String title = null;
   
-  private Uri discoverUri = null;;
+  private Uri discoverUri = null;
   
   private SharedPreferences prefs;
   
@@ -81,7 +83,9 @@ abstract class Vendor {
   
   // Client version code
   private String clientVersion = null;
-  
+
+  // Flag indicating we need to warn users about Active911 connection
+  private boolean warnActive911 = false;
   
   Vendor(int titleId, int summaryId, int textId, int iconId, int logoId,
          String urlString, String triggerCode, String supportEmail) {
@@ -146,7 +150,7 @@ abstract class Vendor {
   }
   
   /**
-   * @param request type of request this will be used for
+   * @param req type of request this will be used for
    * @return base vendor URI that we use to communicate with this vendor
    */
   Uri getBaseURI(String req) {
@@ -166,7 +170,14 @@ abstract class Vendor {
   String getTrigerCode() {
     return triggerCode;
   }
-  
+
+  /**
+   * @return activation code
+   */
+  public String getCode() {
+    return account + '-' + token;
+  }
+
   /**
    * Determine if the sender address of a messages indicates that it originated with this vendor
    * @param address  message sender addres
@@ -335,11 +346,49 @@ abstract class Vendor {
           }
         }
       }
+
+      // Some Active911 client versions forcibly wrest alert delivery away from Cadpage
+      // Get package name of problem app and see if it is installed
+      String badPackageName = getBadPackageName();
+      if (badPackageName != null) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo pinfo = null;
+        try {
+          pinfo = pm.getPackageInfo(badPackageName, 0);
+        } catch (PackageManager.NameNotFoundException ex) {}
+        if (pinfo != null) {
+
+          // OK, app is installed, now check to see if it is a version known to cause problems
+          if (isBadPackageVersion(pinfo.versionCode)) {
+
+            // If user has registered Cadpage since the bad app was updated, assume
+            // that problem has been resolved
+            long tmp = prefs.getLong("lastRegisterTime", 0);
+            if (tmp < Math.max(pinfo.firstInstallTime, pinfo.lastUpdateTime)) {
+
+              // Otherwise, we have a problem
+              warnActive911 = true;
+            }
+          }
+        }
+      }
     }
     
     publishAccountInfo(context);
   }
-  
+
+  protected String getBadPackageName() {
+    return null;
+  }
+
+  protected boolean isBadPackageVersion(int version) {
+    return false;
+  }
+
+  public boolean isWarnActive911() {
+    return warnActive911;
+  }
+
   /**
    * @param account account information
    * @param token token information
@@ -415,6 +464,7 @@ abstract class Vendor {
     editor.putLong("lastRegisterTime", new Date().getTime());
     editor.putLong("lastContactTime", 0L);
     editor.commit();
+    warnActive911 = false;
   }
   
   /**
@@ -532,6 +582,20 @@ abstract class Vendor {
     if (!SmsPopupUtils.haveNet(context)) return;
     Uri uri = buildRequestUri("profile", ManagePreferences.registrationId());
     viewPage(context, uri);
+  }
+
+  /**
+   * Force new registration request, even if service is already enabled
+   * @param context current context
+   */
+  void forceRegister(Context context) {
+
+    // Make sure we have network connectivity
+    if (!SmsPopupUtils.haveNet(context)) return;
+
+    // Turn off enabled flag and make a normal registration request
+    enabled = false;
+    registerReq(context);
   }
 
   /**
@@ -716,7 +780,6 @@ abstract class Vendor {
         // That is all we have to do.  The GCM protocol, it has it's own way of 
         // getting the new registration ID to our servers.  So we don't have to do anything 
         // drastic if the reregister request fails
-        return;
       }});
   }
 
@@ -735,6 +798,7 @@ abstract class Vendor {
     boolean changeEmail = (emailAddress != null && !emailAddress.equals(this.emailAddress));
     this.enabled = register;
     if (register) this.inactive = false;
+    else this.warnActive911 = false;
     this.account = account;
     this.token = token;
     this.emailAddress = emailAddress;

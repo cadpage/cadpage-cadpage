@@ -431,7 +431,7 @@ public class VendorManager {
   
   /**
    * Return top level host name associated with URL
-   * @param urlStr URL string
+   * @param uri URL string
    * @return top level host name extracted from URL
    */
   private static String extractHostName(Uri uri) {
@@ -498,7 +498,6 @@ public class VendorManager {
   /**
    * Process user request to ignore direct direct page vendor found by 
    * findTextPageVendor()
-   * @param context current context
    */
   public void  ignoreTextPageVendor() {
     lastTextPageVendor.setDisableTextPageCheck(true);
@@ -578,7 +577,22 @@ public class VendorManager {
     Vendor vendor = findVendor(vendorCode);
     if (vendor != null) vendor.updateLastContactTime(msg);
   }
-  
+
+  public boolean isWarnActive911() {
+    Vendor vendor = findVendor("Active911");
+    return  vendor.isWarnActive911();
+  }
+
+  public String getActive911Code() {
+    Vendor vendor = findVendor("Active911");
+    return  vendor.getCode();
+  }
+
+  public void forceActive911Registration(Context context) {
+    Vendor vendor = findVendor("Active911");
+    vendor.forceRegister(context);
+  }
+
   /**
    * Find vendor with matching vendor code
    * @param vendorCode vendor code

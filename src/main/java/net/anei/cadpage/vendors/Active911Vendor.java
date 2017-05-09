@@ -6,6 +6,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import android.net.Uri;
+
+import net.anei.cadpage.Log;
 import net.anei.cadpage.R;
 import net.anei.cadpage.parsers.MsgParser;
 
@@ -97,6 +99,16 @@ class Active911Vendor extends Vendor {
   @Override
   protected boolean isTestMsg(String msg) {
     return msg.equals("This is a test message from Active911");
+  }
+
+  @Override
+  protected String getBadPackageName() {
+    return "com.active911.app";
+  }
+
+  @Override
+  protected boolean isBadPackageVersion(int version) {
+    return version == 97;
   }
 
   @Override
