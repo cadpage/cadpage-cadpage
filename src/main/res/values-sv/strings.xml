@@ -41,9 +41,8 @@
    Den tjänst du försöker registrera dig med kan behöva information om vem du är för att identifera dig i deras system.
    </string>
 
-  <string name="perm_acct_info_for_register_direct_req">     <!-- Translate -->
-   The vendor you are trying to register with requires information about who you are to
-   help identify your account on their system.
+  <string name="perm_acct_info_for_register_direct_req">
+   Den service som du försöker registrera hos kräver ytterligare information för att identiviera ditt konto i deras system.
    </string>
 
   <string name="perm_acct_info_for_donate_status">
@@ -254,13 +253,13 @@
   <string name="pref_navigate_map_summaryon">Kartknapp öppnar ruttning</string>     
   <string name="pref_navigate_map_summaryoff">Kartknapp visar karta </string>
 
-  <string name="pref_auto_open_map_title">Automatic Map Option</string>  <!-- Translate -->
-  <string name="pref_auto_open_map_summaryon">Map automatically opens under call detail window</string>  <!-- Translate -->
-  <string name="pref_auto_open_map_summaryoff">Map is not automatically opened</string>  <!-- Translate -->
+  <string name="pref_auto_open_map_title">Automatiskt kartval</string>
+  <string name="pref_auto_open_map_summaryon">Karta öppnas automatiskt under larmdetaljsfönstret</string>
+  <string name="pref_auto_open_map_summaryoff">Karta öppnas inte automatiskt</string>
 
-  <string name="pref_auto_open_map_page_title">Automatic Map Page Option</string>  <!-- Translate -->
-  <string name="pref_auto_open_map_page_summaryon">Map page automatically opens under map</string>  <!-- Translate -->
-  <string name="pref_auto_open_map_page_summaryoff">Map page is not automatically opened</string>  <!-- Translate -->
+  <string name="pref_auto_open_map_page_title">Alternativ för Automatiskt kartval</string>
+  <string name="pref_auto_open_map_page_summaryon">Kartsida öppnas automatiskt under karta</string>
+  <string name="pref_auto_open_map_page_summaryoff">Kartsida öppnas inte automatiskt under karta</string>
 
   <string name="pref_delete_unopen_title">Ta bort oöppnade larm</string>
   <string name="pref_delete_unopen_summaryon">Tillåt att oöppnade larm tas bort</string>

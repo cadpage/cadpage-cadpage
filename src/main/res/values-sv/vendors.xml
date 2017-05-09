@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="cadpage_title">Cadpage Paging</string>    <!-- Translate -->
-  <string name="cadpage_summary">    <!-- Translate -->
-    Low cost, bare bones, paging service.
+  <string name="cadpage_title">Cadpage meddelandeservice</string>
+  <string name="cadpage_summary">
+    Billig,enkel meddelandeservice.
   </string>
-  <string name="cadpage_text">    <!-- Translate -->
-    Forwards dispatch alerts sent to dispatch email address to your phone or tablet.\n
+  <string name="cadpage_text">
+    Vidareförmedlar larmmeddelanden från larmcentral som epostats till dom till din telefon eller surfplatta. Kräver ett betalt Cadpageabonnemang.\n
     Requires a paid Cadpage subscription.
   </string>
 
