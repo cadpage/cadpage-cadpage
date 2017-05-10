@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05032017</string>
+  <string name="release_date">05092017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-47\n
+    Location Fixes:\n
+    Geneva County, AL\n
+    Johnson County, KS\n
+    Mobile Medical Response, MI\n
+    Nassau County, NY\n
+    Washington County, VA\n
+    \n
+    General Fixes:\n
+    Added user guide to help recover from problems associated with upgrading Active911 app.\n
+    Fixed potential problem registering with Cadpage Paging Service.\n
+    \n
     v1.9.11-46\n
     Location Fixes:\n
     Nassau County, NY\n
@@ -27,16 +39,7 @@
     Location Fixes:\n
     Monterey County, CA\n
     Adams County, CO\n
-    Franklin County, PA\n
-    \n
-    v1.9.11-42\n
-    Location Fixes:\n
-    Fresno County, CA\n
-    Jeferson County, IN\n
-    Murray County, KY\n
-    Person County, NC\n
-    Rutherford County, NC\n
-    Lancaster County, PA
+    Franklin County, PA
   </string>
 </resources>
   
