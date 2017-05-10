@@ -930,6 +930,7 @@ class Active911Vendor extends Vendor {
       "US/NC/GranvilleCounty",            "NCGranvilleCounty",
       "US/NC/GreeneCounty",               "NCGreeneCounty",
       "US/NC/GuilfordCounty",             "NCGuilfordCounty",
+      "US/NC/HalifaxCounty",              "NCHalifaxCounty",
       "US/NC/HarnettCounty",              "NCHarnettCountyC",
       "US/NC/Havelock",                   "NCHavelock",
       "US/NC/HendersonCounty",            "NCHendersonCounty",
