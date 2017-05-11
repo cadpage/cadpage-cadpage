@@ -368,6 +368,7 @@ class Active911Vendor extends Vendor {
       "US/CO/FremontCountySheriffsOffice","COFremontCounty",
       "US/CO/GarfieldCounty",             "COGarfieldCounty",
       "US/CO/GrandCounty",                "COGrandCounty",
+      "US/CO/LarimerCounty",              "COLarimerCountyD",
       "US/CO/Metcom911",                  "COArapahoeCounty",
       "US/CO/MontezumaCounty",            "COMontezumaCounty",
       "US/CO/MorganCounty",               "COMorganCounty",
