@@ -1352,6 +1352,7 @@ class Active911Vendor extends Vendor {
       "US/TN/CumberlandCounty",           "TNCumberlandCounty",
       "US/TN/DyerCounty",                 "TNDyerCounty",
       "US/TN/HamiltonCounty",             "TNHamiltonCountyC",
+      "US/TN/JeffersonCounty",            "TNJeffersonCounty",
       "US/TN/KnoxCounty",                 "TNKnoxCounty",
       "US/TN/MorganCounty",               "TNMorganCounty",
       "US/TN/Overton",                    "TNOvertonCounty",
