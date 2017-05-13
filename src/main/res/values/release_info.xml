@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05092017</string>
+  <string name="release_date">05132017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-48\n
+    Location Fixes:\n
+    Broward County, FL\n
+    Montcalm County, MI\n
+    Anoka County, MN\n
+    Grafton County, NH\n
+    Fayete County, PA\n
+    Franklin County, PA\n
+    Jefferson County, TN\n
+    Kendall County, TX\n
+    Kenosha County, WI\n
+    Racine County, WI\n
+    \n
     v1.9.11-47\n
     Location Fixes:\n
     Geneva County, AL\n
@@ -33,13 +46,7 @@
     New Castle County, DE\n
     New York City, NY\n
     Linn County, OR\n
-    Clarion County, PA\n
-    \n
-    v1.9.11-43\n
-    Location Fixes:\n
-    Monterey County, CA\n
-    Adams County, CO\n
-    Franklin County, PA
+    Clarion County, PA
   </string>
 </resources>
   
