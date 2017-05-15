@@ -269,6 +269,7 @@ class Active911Vendor extends Vendor {
       "US/AR/PopeCounty",                 "ARPopeCounty",
       "US/AR/PulaskiCounty",              "ARPulaskiCounty",
       "US/AR/PulaskiCountyPageReceived",  "ARPulaskiCountyB",
+      "US/AR/FSEMS",                      "ARSebastianCounty",
       "US/AZ/CityofCottonwood",           "AZYavapaiCountyC",
       "US/AZ/CityofShowLow",              "AZNavajoCountyB",
       "US/AZ/NavajoCounty",               "AZNavajoCountyA",
