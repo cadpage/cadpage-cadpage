@@ -1174,6 +1174,7 @@ class Active911Vendor extends Vendor {
       "US/OH/TheBeachWaterpark",          "OHWarrenCountyD",
       "US/OH/TrumbullCounty",             "OHTrumbullCounty",
       "US/OH/UnionCounty",                "OHUnionCounty",
+      "US/OH/UnionTWP",                   "OHClermontCountyB",
       "US/OH/Vzwpix",                     "OHCuyahogaCountyD",
       "US/OH/WaltonHills",                "OHCuyahogaCountyA",
       "US/OH/WarCOG",                     "OHAshlandCountyB",
