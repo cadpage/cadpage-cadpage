@@ -1579,7 +1579,7 @@ class Active911Vendor extends Vendor {
       "US/WI/ElmGrove",                   "WIWaukeshaCountyC",
       "US/WI/FondDuLacCounty",            "WIFondDuLacCounty",
       "US/WI/KCCJS",                      "WIRacineCountyB,WIRacineCountyC",
-      "US/WI/KenoshaCounty",              "WIKenoshaCountyA,WIKenoshaCountyC,WIKenoshaCountyD",
+      "US/WI/KenoshaCounty",              "WIKenoshaCounty",
       "US/WI/MukwonagoFire",              "WIWaukeshaCountyB",
       "US/WI/PepinCounty",                "WIPeppinCounty",
       "US/WI/RacineCounty",               "WIRacineCounty",
