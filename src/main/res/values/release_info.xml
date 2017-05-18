@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05152017</string>
+  <string name="release_date">05182017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.11-50\n
+    Location Fixes:\n
+    Robeson County, NC\n
+    Centre County, PA\n
+    Sevier County, TN\n
+    Kenosha County, WI\n
+    Chatham Kent, ON\n
+    \n
     v1.9.11-49\n
     Location Fixes:\n
     Madison County, AL\n
@@ -33,18 +41,8 @@
     \n
     General Fixes:\n
     Added user guide to help recover from problems associated with upgrading Active911 app.\n
-    Fixed potential problem registering with Cadpage Paging Service.\n
-    \n
-    v1.9.11-46\n
-    Location Fixes:\n
-    Nassau County, NY\n
-    \n
-    v1.9.11-45\n
-    Location Fixes:\n
-    El Dorado County, CA\n
-    Suffolk County, NY\n
-    Willamson County, TN\n
-    New Zealand
+    Fixed potential problem registering with Cadpage Paging Service.
   </string>
 </resources>
+
   
