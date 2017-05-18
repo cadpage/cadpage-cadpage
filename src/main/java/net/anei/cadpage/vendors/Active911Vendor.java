@@ -12,6 +12,9 @@ import net.anei.cadpage.R;
 import net.anei.cadpage.parsers.MsgParser;
 
 class Active911Vendor extends Vendor {
+
+  private static final Uri WEB_URI = Uri.parse("https://www.active911.com/cadpage_registration");
+  private static final Uri ACCESS_URI = Uri.parse("https://access.active911.com/interface/cadpage_api.php");
   
   Active911Vendor() {
     super(R.string.active911_title,
@@ -47,11 +50,10 @@ class Active911Vendor extends Vendor {
 
   @Override
   Uri getBaseURI(String req) {
-    Uri uri = super.getBaseURI();
     if (req.equals("register") || req.equals("info") || req.equals("profile")) {
-      return uri.buildUpon().appendPath("cadpage_registration").build();
+      return WEB_URI;
     } else {
-      return uri.buildUpon().appendPath("interface").appendPath("cadpage_api.php").build();
+      return ACCESS_URI;
     }
   }
 
