@@ -267,6 +267,7 @@ class Active911Vendor extends Vendor {
       "US/AR/CityofRogers",               "ARBentonCountyB",
       "US/AR/GrantCounty",                "ARGrantCounty",
       "US/AR/HotSpringCounty",            "ARHotSpringCounty",
+      "US/AR/HotSpringsVillage",          "ARGarlandCountyC",
       "US/AR/LifeNetEms",                 "ARGarlandCounty",
       "US/AR/PopeCounty",                 "ARPopeCounty",
       "US/AR/PulaskiCounty",              "ARPulaskiCounty",
