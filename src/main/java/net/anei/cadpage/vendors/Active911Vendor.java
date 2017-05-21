@@ -519,6 +519,7 @@ class Active911Vendor extends Vendor {
       "US/IL/Mcsd911",                    "ILRandolphCountyB",
       "US/IL/Medstar",                    "ILMedstar",
       "US/IL/MelrosePark",                "ILCookCountyF",
+      "US/IL/METCAD911",                  "ILChampaignCounty",
       "US/IL/NWCDS",                      "ILCookCountyD",
       "US/IL/OFallon",                    "ILOFallon",
       "US/IL/OrlandFire",                 "ILCookCountyG",
