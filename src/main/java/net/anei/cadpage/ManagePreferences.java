@@ -40,7 +40,7 @@ public class ManagePreferences {
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 45;
+  private static final int PREFERENCE_VERSION = 46;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -675,7 +675,12 @@ public class ManagePreferences {
   public static String appMapOption() {
     return prefs.getString(R.string.pref_app_map_option_key);
   }
-  
+
+  public static boolean showHistoryAddress() {
+    return prefs.getBoolean(R.string.pref_show_history_address_key);
+  }
+
+
   public static boolean navigateMap() {
     return prefs.getBoolean(R.string.pref_navigate_map_key);
   }
@@ -2215,6 +2220,13 @@ public class ManagePreferences {
         CadPageWidget.update(context);
       }
     });
+
+    registerListener(R.string.pref_show_history_address_key, new PreferenceChangeListener(){
+      @Override
+      public void preferenceChanged(String key, Object newVal) {
+        SmsMessageQueue.getInstance().notifyDataChange();
+      }
+    });
   }
   
   private void registerListener(int resId, PreferenceChangeListener listener) {
@@ -2389,6 +2401,7 @@ public class ManagePreferences {
       R.string.pref_map_network_chk_key,
       R.string.pref_gps_map_option_key,
       R.string.pref_lock_google_map_key,
+      R.string.pref_show_history_address_key,
       R.string.pref_navigate_map_key,
       R.string.pref_report_position_key,
       

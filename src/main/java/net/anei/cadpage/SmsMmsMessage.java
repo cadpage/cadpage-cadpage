@@ -25,10 +25,14 @@ import net.anei.cadpage.vendors.VendorManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.telephony.SmsMessage;
 import android.telephony.SmsMessage.MessageClass;
 import android.text.format.DateUtils;
+import android.view.View;
+import android.widget.TextView;
+
 import static net.anei.cadpage.BroadcastBindings.*;
 
 
@@ -1208,6 +1212,64 @@ public class SmsMmsMessage implements Serializable {
     if (value != null && value.length() > 0) intent.putExtra(key, value);
   }
 
+  /**
+   * Display message information in call history display
+   * @param context Current context
+   * @param view View to be updated.  Must be a msg_list_item
+   */
+  public void showHistory(Context context, View view) {
+
+    float fTextSize = Integer.parseInt(ManagePreferences.textSize());
+    int color = (isRead() ? Color.WHITE : Color.YELLOW);
+
+    long time = getIncidentDate().getTime();
+    String text = android.text.format.DateFormat.getLongDateFormat(context).format(time) + " " +
+        android.text.format.DateFormat.getTimeFormat(context).format(time) +
+        (isLocked() ? " (Locked)" : "");
+    showHistory(view, R.id.HistoryDateTime, text, color, fTextSize);
+
+    showHistory(view, R.id.HistoryCallDesc, getTitle(), color, fTextSize);
+
+    text = null;
+    if (ManagePreferences.showHistoryAddress()) {
+      MsgInfo info = getInfo();
+      if (info != null) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(info.getAddress());
+        String apt = info.getApt();
+        if (apt.length() > 0) {
+          if (sb.length() > 0) sb.append(' ');
+          sb.append(context.getString(R.string.apt_label));
+          sb.append(apt);
+        }
+        String city = info.getCity();
+        if (city.length() > 0) {
+          if (sb.length() > 0) sb.append(", ");
+          sb.append(city);
+        }
+        String st = info.getState();
+        if (st.length() > 0) {
+          if (sb.length() > 0) sb.append(", ");
+          sb.append(st);
+        }
+        text = sb.toString();
+      }
+    }
+    showHistory(view, R.id.HistoryAddress, text, color, fTextSize);
+  }
+
+  private void showHistory(View view, int resId, String text, int color, float fTextSize) {
+    TextView tview = (TextView)view.findViewById(resId);
+    if (text == null) {
+      tview.setVisibility(View.GONE);
+    } else {
+      tview.setVisibility(View.VISIBLE);
+      tview.setTextSize(fTextSize);
+      tview.setText(text);
+      tview.setTextColor(color);
+    }
+  }
+
 
   /**
    * Append message information to support message under construction
@@ -1323,7 +1385,7 @@ public class SmsMmsMessage implements Serializable {
     if (parseInfo == null) return false;
     return parseInfo.expectMore(getSplitMsgOptions());
   }
-  
+
   /**
    * Class to interpret numeric subparameter from acknowledgment request string
    * Number parameters must follow a single letter parameter that keys them.  Multiple

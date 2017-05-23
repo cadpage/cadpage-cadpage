@@ -237,7 +237,7 @@ public class SmsPopupActivity extends Safe40Activity {
   }
 
   /*
-   * Handle results of Dontation status menu
+   * Handle results of Donation status menu
    */
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {

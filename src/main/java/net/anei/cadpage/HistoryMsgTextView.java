@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class HistoryMsgTextView extends TextView {
-  public static final String CADPAGE_REFRESH = "update";
+
   private SmsMmsMessage msg;
   public HistoryMsgTextView(Context context) {
     super(context);
@@ -26,7 +26,7 @@ public class HistoryMsgTextView extends TextView {
   }
   
   private void setup() {
-    setLines(2);
+    setLines(3);
     this.setOnClickListener(new OnClickListener(){
 
       @Override

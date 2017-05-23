@@ -1,6 +1,23 @@
-<net.anei.cadpage.HistoryMsgTextView
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:padding="5dp"
+  android:orientation="vertical"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
-  android:textAppearance="?android:attr/textAppearanceSmall" />
+  android:padding="5dp" >
+  <TextView
+    android:id="@+id/HistoryDateTime"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="1" />
+  <TextView
+  android:id="@+id/HistoryCallDesc"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:maxLines="1" />
+  <TextView
+  android:id="@+id/HistoryAddress"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:maxLines="1" />
+</LinearLayout>
