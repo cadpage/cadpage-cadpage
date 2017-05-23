@@ -267,7 +267,7 @@ public class SmsMessageQueue implements Serializable {
         context.registerForContextMenu(view);
       }
       try {
-        queue.get(position).showHistory(context, view);
+        ((HistoryMsgTextView)view).setMessage(queue.get(position));
       } catch (RuntimeException ex) {
         SmsMsgLogBuffer.getInstance().addCrashMsg(queue.get(position));
         throw ex;

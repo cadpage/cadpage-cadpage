@@ -235,8 +235,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // titles
     freeSubType = context.getString(R.string.free_subtype);
     paidSubType = context.getString(R.string.paid_subtype);
+
+    // We run into problems if the change listeners are called durring this setup process
+    // so we don't arm them until now
+    prefs.armListeners();
   }
-  
+
   /**
    * Convert any old obsolete location codes to new equivalent
    * @param context current context
@@ -2188,8 +2192,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private ManagePreferences(Context _context) {
     this.context = _context;
     mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+  }
+
+  private void armListeners() {
     mPrefs.registerOnSharedPreferenceChangeListener(this);
-    
+
     registerListener(R.string.pref_enabled_key, new PreferenceChangeListener(){
       @Override
       public void preferenceChanged(String key, Object newVal) {
@@ -2199,7 +2206,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         CadPageWidget.update(context);
       }
     });
-    
+
     registerListener(R.string.pref_enable_msg_type_key, new PreferenceChangeListener(){
       @Override
       public void preferenceChanged(String key, Object newVal) {
@@ -2207,7 +2214,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         if (enabled()) SmsPopupUtils.enableSMSPopup(context, enableMsgType);
       }
     });
-    
+
     registerListener(R.string.pref_notif_enabled_key, new PreferenceChangeListener(){
       @Override
       public void preferenceChanged(String key, Object newVal) {

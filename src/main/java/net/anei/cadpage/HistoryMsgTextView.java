@@ -5,9 +5,9 @@ import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-public class HistoryMsgTextView extends TextView {
+public class HistoryMsgTextView extends LinearLayout {
 
   private SmsMmsMessage msg;
   public HistoryMsgTextView(Context context) {
@@ -19,14 +19,8 @@ public class HistoryMsgTextView extends TextView {
     super(context, attrs);
     setup();
   }
-  
-  public HistoryMsgTextView(Context context, AttributeSet attrs, int defStyle) {
-    super(context, attrs, defStyle);
-    setup();
-  }
-  
+
   private void setup() {
-    setLines(3);
     this.setOnClickListener(new OnClickListener(){
 
       @Override
@@ -45,17 +39,7 @@ public class HistoryMsgTextView extends TextView {
   
   public void setMessage(SmsMmsMessage message) {
     this.msg = message;
-    Context context = getContext();
-
-    long time = msg.getIncidentDate().getTime();
-    String text = DateFormat.getLongDateFormat(context).format(time) + " " +
-                  DateFormat.getTimeFormat(context).format(time) +
-                  (msg.isLocked() ? " (Locked)" : "") +
-                  "\n" + msg.getTitle();
-    float ftextSize = Integer.parseInt(ManagePreferences.textSize());
-    this.setTextSize(ftextSize);
-    setText(text);
-    setTextColor(msg.isRead() ? Color.WHITE : Color.YELLOW);
+    message.showHistory(getContext(), this);
   }
 
   public SmsMmsMessage getMessage() {
