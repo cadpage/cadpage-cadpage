@@ -32,7 +32,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 
-public class ManagePreferences {
+public class ManagePreferences implements SharedPreferences.OnSharedPreferenceChangeListener {
   
   // Preference version.  This needs to be incremented every time a new
   // configuration setting is added to force it to initialize properly
@@ -2188,6 +2188,7 @@ public class ManagePreferences {
   private ManagePreferences(Context _context) {
     this.context = _context;
     mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+    mPrefs.registerOnSharedPreferenceChangeListener(this);
     
     registerListener(R.string.pref_enabled_key, new PreferenceChangeListener(){
       @Override
@@ -2228,7 +2229,19 @@ public class ManagePreferences {
       }
     });
   }
-  
+
+  @Override
+  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    notifyListeners(key);
+  }
+
+  private void notifyListeners(String key) {
+    PreferenceChangeListener listener = listenerMap.get(key);
+    if (listener != null) {
+      listener.preferenceChanged(key, mPrefs.getAll().get(key));
+    }
+  }
+
   private void registerListener(int resId, PreferenceChangeListener listener) {
     listenerMap.put(context.getString(resId), listener);
   }
@@ -2300,7 +2313,6 @@ public class ManagePreferences {
     String key = context.getString(resPrefId);
     settings.putBoolean(key, newVal);
     settings.commit();
-    notifyListeners(key);
   }
 
   protected void putString(int resPrefId, String newVal) {
@@ -2308,7 +2320,6 @@ public class ManagePreferences {
     String key = context.getString(resPrefId);
     settings.putString(key, newVal);
     settings.commit();
-    notifyListeners(key);
   }
 
   protected void putInt(int resPrefId, int newVal) {
@@ -2316,7 +2327,6 @@ public class ManagePreferences {
     String key = context.getString(resPrefId);
     settings.putInt(key, newVal);
     settings.commit();
-    notifyListeners(key);
   }
 
   protected void putLong(int resPrefId, long newVal) {
@@ -2324,7 +2334,6 @@ public class ManagePreferences {
     String key = context.getString(resPrefId);
     settings.putLong(key, newVal);
     settings.commit();
-    notifyListeners(key);
   }
   
   protected void putFloat(int resPrefId, float newVal) {
@@ -2332,14 +2341,6 @@ public class ManagePreferences {
     String key = context.getString(resPrefId);
     settings.putFloat(key, newVal);
     settings.commit();
-    notifyListeners(key);
-  }
-
-  private void notifyListeners(String key) {
-    PreferenceChangeListener listener = listenerMap.get(key);
-    if (listener != null) {
-      listener.preferenceChanged(key, mPrefs.getAll().get(key));
-    }
   }
 
   // Array of preference keys to include in email

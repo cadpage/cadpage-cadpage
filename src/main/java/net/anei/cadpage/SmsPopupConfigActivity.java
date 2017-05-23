@@ -76,46 +76,12 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
 
     // Set preferences initialized flag
     ManagePreferences.setInitialized(true);
-    
-    // Set up the two enable components preferences
-    Preference pref = findPreference(getString(R.string.pref_enabled_key));
+
+    Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
     pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override
       public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean enabled = (Boolean)newValue;
-        String enableStr = (enabled ? ManagePreferences.enableMsgType() : "");
-        SmsPopupUtils.enableSMSPopup(SmsPopupConfigActivity.this, enableStr);
-        CadPageWidget.update(SmsPopupConfigActivity.this);
-        return true;
-      }
-    });
-    pref = findPreference(getString(R.string.pref_enable_msg_type_key));
-    pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        
-        if (!ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue)) return false;
-        
-        SmsPopupUtils.enableSMSPopup(SmsPopupConfigActivity.this, (String)newValue);
-        return true;
-      }
-    });
-    
-    // Two other preferences should update the widget display
-    pref = findPreference(getString(R.string.pref_notif_enabled_key));
-    pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        CadPageWidget.update(SmsPopupConfigActivity.this);
-        return true;
-      }
-    });
-    pref = findPreference(getString(R.string.pref_popup_enabled_key));
-    pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        CadPageWidget.update(SmsPopupConfigActivity.this);
-        return true;
+        return ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue);
       }
     });
 

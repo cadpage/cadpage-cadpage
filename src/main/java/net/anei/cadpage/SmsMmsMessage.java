@@ -1253,6 +1253,7 @@ public class SmsMmsMessage implements Serializable {
           sb.append(st);
         }
         text = sb.toString();
+        if (text.length() == 0 && !info.noCall()) text = info.getSupp();
       }
     }
     showHistory(view, R.id.HistoryAddress, text, color, fTextSize);
