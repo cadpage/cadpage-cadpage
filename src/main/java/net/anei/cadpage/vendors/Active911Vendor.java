@@ -218,6 +218,7 @@ class Active911Vendor extends Vendor {
       "US/AK/MatanuskaSusitna",           "AKMatanuskaSusitnaBorough",
       "US/AL/AlexanderCity",              "ALTallapoosaCounty",
       "US/AL/AthensLimestoneCounty",      "ALLimestoneCountyA",
+      "US/AL/BaldwinCounty",              "ALBaldwinCounty",
       "US/AL/BibbCounty",                 "ALBibbCounty",
       "US/AL/BlountCounty",               "ALBlountCounty",
       "US/AL/CalhounCounty",              "ALCalhounCounty",
