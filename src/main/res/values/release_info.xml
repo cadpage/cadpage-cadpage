@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05182017</string>
+  <string name="release_date">05262017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-01\n
+    Cadpage now displays a 3 line call summary including the call address in the call history screen.
+    There is a new setting in Additional Settings for users who perfer the old 2 line format.\n
+    \n
+    Location Fixes:\n
+    Tulare County, CA\n
+    Trenton, OH\n
+    Linn County, OR\n
+    Dauphin County, PA\n
+    Pierce County, WA\n
+    Kenosha County, WI\n
+    \n
     v1.9.11-51\n
     Location Fixes:\n
     Minneapolis/St Paul,  MN\n
@@ -36,19 +48,7 @@
     Jefferson County, TN\n
     Kendall County, TX\n
     Kenosha County, WI\n
-    Racine County, WI\n
-    \n
-    v1.9.11-47\n
-    Location Fixes:\n
-    Geneva County, AL\n
-    Johnson County, KS\n
-    Mobile Medical Response, MI\n
-    Nassau County, NY\n
-    Washington County, VA\n
-    \n
-    General Fixes:\n
-    Added user guide to help recover from problems associated with upgrading Active911 app.\n
-    Fixed potential problem registering with Cadpage Paging Service.
+    Racine County, WI
   </string>
 </resources>
 
