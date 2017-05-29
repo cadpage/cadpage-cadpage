@@ -292,7 +292,7 @@ public class C2DMService extends IntentService {
       if (!isPage) return;
       
       // Process the message on the main thread
-      SmsReceiver.processCadPage(message);
+      SmsService.processCadPage(message);
     }
   }
   

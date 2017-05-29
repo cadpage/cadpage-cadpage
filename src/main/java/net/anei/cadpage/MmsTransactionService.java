@@ -371,7 +371,7 @@ public class MmsTransactionService extends Service {
         CadPageApplication.runOnMainThread(new Runnable(){
           @Override
           public void run() {
-            SmsReceiver.processCadPage(message);
+            SmsService.processCadPage(message);
           }});
       }
     }

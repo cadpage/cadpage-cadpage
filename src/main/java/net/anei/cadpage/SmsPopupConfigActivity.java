@@ -28,6 +28,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -101,6 +102,14 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     setupLocationMenu(R.string.pref_location_tree_key, false, locMgr);
     setupLocationMenu(R.string.pref_location_mtree_key, true, locMgr);
     locMgr.updateDisplay();
+
+    // Disable the pass through option which is unusable starting in Kit Kat
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      pref = findPreference(getString(R.string.pref_passthrusms_key));
+      ((CheckBoxPreference)pref).setChecked(true);
+      pref.setEnabled(false);
+    }
+
     
     // The location, filter override checkbox, and filter edit box have a complex
     // relationship.  The override checkbox is enabled only when the location parser

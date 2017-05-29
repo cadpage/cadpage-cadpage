@@ -107,7 +107,7 @@ public class SmsMsgAccumulator {
   }
   
   protected void  processCadPage(SmsMmsMessage newMsg) {
-    SmsReceiver.processCadPage(newMsg);
+    SmsService.processCadPage(newMsg);
   }
 
   protected void registerKeepAlive(Context context) {

@@ -136,6 +136,7 @@
     <receiver android:name=".ClearAllReceiver" />
     <receiver android:name=".ReminderReceiver" />
     <receiver android:name=".C2DMRetryReceiver" />
+    <service android:name=".SmsService" />
     <service android:name=".MmsTransactionService"/>
     <service android:name=".KeepAliveService"/>
     <service android:name=".HttpService"/>

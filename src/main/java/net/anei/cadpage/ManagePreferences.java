@@ -641,6 +641,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   public static boolean smspassthru() {
+    // This feature just doesn't work since Android 4.4
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) return true;
+
     // If donation status is disabled, we never block messages from falling
     // through to regular processor.
     if (!DonationManager.instance().isEnabled()) return true;

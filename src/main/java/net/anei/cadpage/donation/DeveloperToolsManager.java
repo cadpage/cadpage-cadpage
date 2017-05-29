@@ -23,6 +23,7 @@ import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsMsgLogBuffer;
 import net.anei.cadpage.SmsReceiver;
 import net.anei.cadpage.ManageUsb;
+import net.anei.cadpage.SmsService;
 import net.anei.cadpage.billing.BillingManager;
 import android.app.Activity;
 import android.content.Intent;
@@ -204,7 +205,7 @@ public class DeveloperToolsManager {
         if (!isPage) return;
         
         // Process the message
-        SmsReceiver.processCadPage(message);
+        SmsService.processCadPage(message);
         break;
         
       case 15:    // Situation specific status test
