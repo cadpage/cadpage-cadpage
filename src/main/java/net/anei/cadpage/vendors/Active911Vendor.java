@@ -713,7 +713,6 @@ class Active911Vendor extends Vendor {
       "US/MD/Webhostinghub",              "MDPrinceGeorgesCountyF",
       "US/MD/WicomicoCounty",             "MDWicomicoCountyA",
       "US/MD/WorcesterCounty",            "MDWorcesterCountyA,MDOceanCity",
-      "US/ME/YorkCounty",                 "MEYorkCounty",
       "US/MI/AlconaCounty",               "MIAlconaCounty",
       "US/MI/AlleganCounty",              "MIAlleganCounty",
       "US/MI/AlpenaCounty",               "MIAlpenaCounty",
