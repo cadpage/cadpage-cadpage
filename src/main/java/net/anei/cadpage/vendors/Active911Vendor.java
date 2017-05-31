@@ -1088,6 +1088,7 @@ class Active911Vendor extends Vendor {
       "US/NY/SCFRESprinting",             "N/A",
       "US/NY/SteubenCounty",              "NYSteubenCounty",
       "US/NY/StLawrenceCounty",           "NYStLawrenceCounty",
+      "US/NY/SuffolkCounty",              "NYSuffolkCountyA,NYSuffolkCountyC",
       "US/NY/SyrUnivAmb",                 "NYOnondagaCountyE",
       "US/NY/UlsterCounty",               "NYUlsterCounty",
       "US/NY/WashingtonCounty",           "NYWashingtonCounty",
