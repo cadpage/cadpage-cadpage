@@ -982,6 +982,7 @@ class Active911Vendor extends Vendor {
       "US/NC/WakeCounty",                 "NCWakeCounty",
       "US/NC/WarrenCounty",               "NCWarrenCounty",
       "US/NC/WashingtonCounty",           "NCWashingtonCounty",
+      "US/NC/WataugaCounty",              "NCWataugaCounty",
       "US/NC/WayneCounty",                "NCWayneCountyB,NCWayneCountyC",
       "US/NC/WilkesCounty",               "NCWilkesCounty",
       "US/NC/WilsonCounty",               "NCWilsonCounty",
