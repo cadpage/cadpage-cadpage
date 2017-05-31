@@ -4,6 +4,20 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-02\n
+    Performance enhancements\n
+    \n
+    New Locations:\n
+    Lincoln County, KY\n
+    Tangipahoa Parish, LA (alt)\n
+    Addison County, VT (alt)\n
+    \n
+    Location Fixes:\n
+    Christian County, MO\n
+    Greene County, MO\n
+    Mercer County, NJ\n
+    Franklin County, PA\n
+    \n
     v1.9.12-01\n
     Cadpage now displays a 3 line call summary including the call address in the call history screen.
     There is a new setting in Additional Settings for users who perfer the old 2 line format.\n
@@ -35,20 +49,7 @@
     Location Fixes:\n
     Madison County, AL\n
     Gallatin County, MO\n
-    Lancaster County, PA\n
-    \n
-    v1.9.11-48\n
-    Location Fixes:\n
-    Broward County, FL\n
-    Montcalm County, MI\n
-    Anoka County, MN\n
-    Grafton County, NH\n
-    Fayete County, PA\n
-    Franklin County, PA\n
-    Jefferson County, TN\n
-    Kendall County, TX\n
-    Kenosha County, WI\n
-    Racine County, WI
+    Lancaster County, PA
   </string>
 </resources>
 
