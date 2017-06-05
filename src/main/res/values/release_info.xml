@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06022017</string>
+  <string name="release_date">06052017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-04\n
+    Location Fixes:\n
+    Teller County, CO\n
+    Preble County, OH\n
+    Rhea County, TN\n
+    \n
     v1.9.12-03\n
     Location Fixes:\n
     Charleston County, SC\n
@@ -39,15 +45,7 @@
     Minneapolis/St Paul,  MN\n
     Clinton County, OH\n
     Mercer County, OH\n
-    Lackawanna County, PA\n
-    \n
-    v1.9.11-50\n
-    Location Fixes:\n
-    Robeson County, NC\n
-    Centre County, PA\n
-    Sevier County, TN\n
-    Kenosha County, WI\n
-    Chatham Kent, ON
+    Lackawanna County, PA
   </string>
 </resources>
 
