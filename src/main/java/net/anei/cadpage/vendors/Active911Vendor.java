@@ -889,6 +889,7 @@ class Active911Vendor extends Vendor {
       "US/MT/GallatinCounty",             "MTGallatinCounty",
       "US/MT/GreatFalls",                 "MTCascadeCountyB",
       "US/MT/HavrePolice",                "MTHillCounty",
+      "US/MT/LewisandClarkCounty",        "MTLewisandClarkCountyA",
       "US/MT/MissoulaCounty",             "MTMissoulaCounty",
       "US/MT/ParkCounty",                 "MTParkCounty",
       "US/MT/RavalliCounty",              "MTRavalliCounty",
