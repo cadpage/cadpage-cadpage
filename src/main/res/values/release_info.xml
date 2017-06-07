@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-06\n
+    Location Fixes:\n
+    Medina County, OH\n
+    \n
     v1.9.12-05\n
     Location Fixes:
     Cayuga County, NY\n
@@ -30,19 +34,7 @@
     Christian County, MO\n
     Greene County, MO\n
     Mercer County, NJ\n
-    Franklin County, PA\n
-    \n
-    v1.9.12-01\n
-    Cadpage now displays a 3 line call summary including the call address in the call history screen.
-    There is a new setting in Additional Settings for users who perfer the old 2 line format.\n
-    \n
-    Location Fixes:\n
-    Tulare County, CA\n
-    Trenton, OH\n
-    Linn County, OR\n
-    Dauphin County, PA\n
-    Pierce County, WA\n
-    Kenosha County, WI
+    Franklin County, PA
   </string>
 </resources>
 
