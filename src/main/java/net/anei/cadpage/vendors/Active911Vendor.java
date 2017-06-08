@@ -1148,6 +1148,7 @@ class Active911Vendor extends Vendor {
       "US/OH/FultonCounty",               "OHFultonCounty",
       "US/OH/GalliaCounty",               "OHGalliaCounty",
       "US/OH/GeaugaCounty",               "OHGeaugaCounty",
+      "US/OH/GrangerFD",                  "OHMedinaCountyB",
       "US/OH/HamiltonCounty",             "OHHamiltonCountyA",
       "US/OH/HamiltonFD",                 "OHButlerCountyA",
       "US/OH/Harveysburg",                "OHWarrenCountyC",
