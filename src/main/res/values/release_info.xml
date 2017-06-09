@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06062017</string>
+  <string name="release_date">06092017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-07\n
+    Location Fixes:\n
+    Whitfield County, GA\n
+    Morris County, NJ\n
+    Mahoning County, OH\n
+    Lacomb County, AB\n
+    Lamont County, AB\n
+    Red Deer County, AB\n
+    Strathcona County, AB\n
+    \n
     v1.9.12-06\n
     Location Fixes:\n
     Medina County, OH\n
@@ -20,21 +30,7 @@
     \n
     v1.9.12-03\n
     Location Fixes:\n
-    Charleston County, SC\n
-    \n
-    v1.9.12-02\n
-    Performance enhancements\n
-    \n
-    New Locations:\n
-    Lincoln County, KY\n
-    Tangipahoa Parish, LA (alt)\n
-    Addison County, VT (alt)\n
-    \n
-    Location Fixes:\n
-    Christian County, MO\n
-    Greene County, MO\n
-    Mercer County, NJ\n
-    Franklin County, PA
+    Charleston County, SC
   </string>
 </resources>
 
