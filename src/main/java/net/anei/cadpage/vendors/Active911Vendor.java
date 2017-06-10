@@ -1123,6 +1123,7 @@ class Active911Vendor extends Vendor {
       "US/OH/CityofFairfield",            "OHFairfield",
       "US/OH/CityofFairlawn",             "OHSummitCountyE",
       "US/OH/CityofGreen",                "OHSummitCountyF",
+      "US/OH/CityofHuberHeights",         "OHMontgomeryCountyA",
       "US/OH/CityofKent",                 "OHPortageCountyD",
       "US/OH/CityofKettering",            "OHMontgomeryCountyD",
       "US/OH/CityofLima",                 "OHLima",
