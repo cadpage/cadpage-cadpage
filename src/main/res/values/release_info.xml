@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06092017</string>
+  <string name="release_date">06132017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-08\n
+    New Locations:\n
+    Pitkin County, CO\n
+    Gibson County, IN\n
+    Noble County, IN\n
+    Redwood County, MN\n
+    Roaseau County, MN\n
+    Caldwell County, MO\n
+    Camden County, MO\n
+    Maries County,  MO\n
+    Wright County, MO\n
+    Grant Counth, WV\n
+    \n
+    Location Fixes:\n
+    Marshall County, KY\n
+    Clermont County, OH\n
+    Mongtomery County, OH\n
+    Ellis County, TX\n
+    \n
     v1.9.12-07\n
     Location Fixes:\n
     Whitfield County, GA\n
@@ -26,11 +45,7 @@
     Location Fixes:\n
     Teller County, CO\n
     Preble County, OH\n
-    Rhea County, TN\n
-    \n
-    v1.9.12-03\n
-    Location Fixes:\n
-    Charleston County, SC
+    Rhea County, TN
   </string>
 </resources>
 
