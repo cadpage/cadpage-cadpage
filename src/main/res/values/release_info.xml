@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06132017</string>
+  <string name="release_date">06192017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-09\n
+    Location Fixes:\n
+    Tazwell County, IN\n
+    Garrett County, MD\n
+    Oakland County, MI\n
+    Galax County, VA\n
+    Annapolis County, NS Canada\n
+    \n
     v1.9.12-08\n
     New Locations:\n
     Pitkin County, CO\n
@@ -39,14 +47,9 @@
     \n
     v1.9.12-05\n
     Location Fixes:
-    Cayuga County, NY\n
-    \n
-    v1.9.12-04\n
-    Location Fixes:\n
-    Teller County, CO\n
-    Preble County, OH\n
-    Rhea County, TN
+    Cayuga County, NY
   </string>
 </resources>
+
 
   
