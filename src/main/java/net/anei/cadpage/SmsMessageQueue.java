@@ -155,7 +155,7 @@ public class SmsMessageQueue implements Serializable {
       // (read and not locked)
       int availCnt = 0;
       for (SmsMmsMessage m : queue) {
-        if (m.isRead() && !m.isLocked()) availCnt++;
+        if (m.canDelete()) availCnt++;
       }
       
       // How many of these need to be kept to get us to the right limit
@@ -164,7 +164,7 @@ public class SmsMessageQueue implements Serializable {
       // Make another pass through the list deleting anything over the keep limit
       for (Iterator<SmsMmsMessage> itr = queue.iterator(); itr.hasNext(); ) {
         SmsMmsMessage m = itr.next();
-        if (m.isRead() && !m.isLocked()) {
+        if (m.canDelete()) {
           if (keepCnt <= 0) itr.remove();
           else keepCnt--;
         }
