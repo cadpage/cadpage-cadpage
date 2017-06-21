@@ -343,6 +343,7 @@ class Active911Vendor extends Vendor {
       "US/CA/Stockton",                   "CAStockton",
       "US/CA/Suisun",                     "CASuisunCityA",
       "US/CA/TulareCounty",               "CATulareCounty",
+      "US/CA/TuolumneCounty",            "CATuolumneCounty",
       "US/CA/Vallejo",                    "CASolanoCountyA",
       "US/CA/VRECC",                      "CASanJoaquinCounty",
       "US/CA/VRECCEMS",                   "CASanJoaquinCounty",
