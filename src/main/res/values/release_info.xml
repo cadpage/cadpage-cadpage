@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06192017</string>
+  <string name="release_date">06262017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-10\n
+    Location Fixes:\n
+    Dothan, AL\n
+    Benton County, AR\n
+    Calaveras County, CA\n
+    Tuolumne County, CA\n
+    Cerro Gordo County, IA\n
+    Muhlenberg County, KY\n
+    Boone County, MO\n
+    Suffolk County, NY\n
+    Campbell County, TN\n
+    Williamson County, TX\n
+    Franklin County, VA\n
+    \n
+    General Fixes:\n
+    Fixed option to automatically delete unread messages\n
+    \n
     v1.9.12-09\n
     Location Fixes:\n
     Tazwell County, IN\n
@@ -44,12 +61,5 @@
     v1.9.12-06\n
     Location Fixes:\n
     Medina County, OH\n
-    \n
-    v1.9.12-05\n
-    Location Fixes:
-    Cayuga County, NY
   </string>
 </resources>
-
-
-  
