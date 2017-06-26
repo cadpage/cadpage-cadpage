@@ -651,6 +651,7 @@ class Active911Vendor extends Vendor {
       "US/KY/McLeanCounty",               "KYMcLeanCounty",
       "US/KY/MonroeCounty",               "KYMonroeCounty",
       "US/KY/MorganCounty",               "KYMorganCounty",
+      "US/KY/MuhlenbergCounty",           "KYMuhlenbergCounty",
       "US/KY/MurrayCounty",               "KYMurrayCounty",
       "US/KY/Nexigen",                    "Cadpage2",
       "US/KY/OldhamCounty",               "KYOldhamCountyA",
