@@ -4,6 +4,17 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-11\n
+    New Locations:\n
+    Morris County, NJ (alt)\n
+    \n
+    Location Fixes:\n
+    Dothan, AL\n
+    Pulaski County, KY\n
+    Davidson County, NC\n
+    Washington County, OH\n
+    Cy Creek Comm Center, TX\n
+    \n
     v1.9.12-10\n
     Location Fixes:\n
     Dothan, AL\n
@@ -56,10 +67,6 @@
     Lacomb County, AB\n
     Lamont County, AB\n
     Red Deer County, AB\n
-    Strathcona County, AB\n
-    \n
-    v1.9.12-06\n
-    Location Fixes:\n
-    Medina County, OH\n
+    Strathcona County, AB
   </string>
 </resources>
