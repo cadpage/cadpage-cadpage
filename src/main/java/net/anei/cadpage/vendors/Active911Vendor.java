@@ -1385,6 +1385,7 @@ class Active911Vendor extends Vendor {
       "US/TX/BellCounty",                 "TXBellCounty",
       "US/TX/BexarCounty",                "TXBexarCounty",
       "US/TX/BloomingGrove",              "TXNavarroCounty",
+      "US/TX/Burleson",                   "TXJohnsonCountyA",
       "US/TX/Carrollton",                 "TXCarrollton",
       "US/TX/CityofBryan",                "TXBrazosCounty",
       "US/TX/CityofCommerce",             "TXHuntCounty",
