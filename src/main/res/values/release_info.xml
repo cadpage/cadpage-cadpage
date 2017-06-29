@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-12\n
+    Location Fixes:\n
+    Talbot County, MD\n
+    \n
     v1.9.12-11\n
     New Locations:\n
     Morris County, NJ (alt)\n
@@ -57,16 +61,6 @@
     Marshall County, KY\n
     Clermont County, OH\n
     Mongtomery County, OH\n
-    Ellis County, TX\n
-    \n
-    v1.9.12-07\n
-    Location Fixes:\n
-    Whitfield County, GA\n
-    Morris County, NJ\n
-    Mahoning County, OH\n
-    Lacomb County, AB\n
-    Lamont County, AB\n
-    Red Deer County, AB\n
-    Strathcona County, AB
+    Ellis County, TX
   </string>
 </resources>
