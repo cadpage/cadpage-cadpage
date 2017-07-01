@@ -4,6 +4,14 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-13\n
+    New Locations:\n
+    Fairfield County, CT (alt)\n
+    \n
+    Location Fixes:\n
+    Talbot County, MD\n
+    Hays County, TX\n
+    \n
     v1.9.12-12\n
     Location Fixes:\n
     Talbot County, MD\n
@@ -42,25 +50,6 @@
     Garrett County, MD\n
     Oakland County, MI\n
     Galax County, VA\n
-    Annapolis County, NS Canada\n
-    \n
-    v1.9.12-08\n
-    New Locations:\n
-    Pitkin County, CO\n
-    Gibson County, IN\n
-    Noble County, IN\n
-    Redwood County, MN\n
-    Roaseau County, MN\n
-    Caldwell County, MO\n
-    Camden County, MO\n
-    Maries County,  MO\n
-    Wright County, MO\n
-    Grant Counth, WV\n
-    \n
-    Location Fixes:\n
-    Marshall County, KY\n
-    Clermont County, OH\n
-    Mongtomery County, OH\n
-    Ellis County, TX
+    Annapolis County, NS Canada
   </string>
 </resources>
