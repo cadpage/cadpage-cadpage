@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-14\n
+    Location Fixes:\n
+    Hocking County, OH\n
+    Kenosha County, WI\n
+    \n
     v1.9.12-13\n
     New Locations:\n
     Fairfield County, CT (alt)\n
@@ -42,14 +47,6 @@
     Franklin County, VA\n
     \n
     General Fixes:\n
-    Fixed option to automatically delete unread messages\n
-    \n
-    v1.9.12-09\n
-    Location Fixes:\n
-    Tazwell County, IN\n
-    Garrett County, MD\n
-    Oakland County, MI\n
-    Galax County, VA\n
-    Annapolis County, NS Canada
+    Fixed option to automatically delete unread messages
   </string>
 </resources>
