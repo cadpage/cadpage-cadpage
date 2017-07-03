@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06262017</string>
+  <string name="release_date">07032017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.12-15\n
+    Location Fixes:\n
+    Cherokee County, AL\n
+    Allegan County, MI\n
+    St Francois County, MO\n
+    Ste Genevieve County, MO\n
+    Clay County, NC\n
+    Pasquotank County, NC\n
+    Licking County, OH\n
+    \n
     v1.9.12-14\n
     Location Fixes:\n
     Hocking County, OH\n
@@ -30,23 +40,6 @@
     Pulaski County, KY\n
     Davidson County, NC\n
     Washington County, OH\n
-    Cy Creek Comm Center, TX\n
-    \n
-    v1.9.12-10\n
-    Location Fixes:\n
-    Dothan, AL\n
-    Benton County, AR\n
-    Calaveras County, CA\n
-    Tuolumne County, CA\n
-    Cerro Gordo County, IA\n
-    Muhlenberg County, KY\n
-    Boone County, MO\n
-    Suffolk County, NY\n
-    Campbell County, TN\n
-    Williamson County, TX\n
-    Franklin County, VA\n
-    \n
-    General Fixes:\n
-    Fixed option to automatically delete unread messages
+    Cy Creek Comm Center, TX
   </string>
 </resources>
