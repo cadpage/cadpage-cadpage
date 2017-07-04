@@ -15,6 +15,8 @@ import java.util.List;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
+
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -31,8 +33,8 @@ import android.widget.TextView;
  * Class handles the dialog popup requesting information be sent to developers
  */
 public class EmailDeveloperActivity extends Safe40Activity {
-  
-  public static enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER, MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR };
+
+  public static enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER, MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR, ACTIVE911_SUPPORT };
   
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
@@ -198,15 +200,19 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // Build the message text
     StringBuilder body = new StringBuilder();
     
-    
-    
     // If this is a crash report, include a recorded stack trace
     if (type == EmailType.CRASH || type == EmailType.INIT_FAILURE) {
       TopExceptionHandler.addCrashReport(context, body);
     }
+
+    // For Active911 support, build message text
+    String vendorEmail = null;
+    if (type == EmailType.ACTIVE911_SUPPORT) {
+      vendorEmail = "support@active911.com";
+      body.append(context.getString(R.string.active911_support_text));
+    }
     
     // If message info requested, add that
-    String vendorEmail = null;
     if (includeMsg) {
       SmsMmsMessage message;
       if (type == EmailType.MESSAGE) {
@@ -229,7 +235,6 @@ public class EmailDeveloperActivity extends Safe40Activity {
       
       // See if there is any snapshot information to append
       getSnapshotInfo(context, body);
-      
     }
     
     final String message = body.toString();
@@ -420,6 +425,13 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // This one sends a request directly to the email client, without
     // bring up a request screen first.
     sendEmailRequest(context, EmailType.INACTIVE_SPONSOR, false, 0, true);
+  }
+
+  public static void sendActive911SupportEmail(Context context) {
+
+    // Also sends a request directly to the email client, without
+    // bring up a request screen first.
+    sendEmailRequest(context, EmailType.ACTIVE911_SUPPORT, false, 0, false);
   }
 
   /**

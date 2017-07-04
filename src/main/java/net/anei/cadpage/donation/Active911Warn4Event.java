@@ -12,12 +12,12 @@ import net.anei.cadpage.vendors.VendorManager;
  proceed to the next step.
 
  */
-public class Active911Warn3Event extends DonateScreenEvent {
+public class Active911Warn4Event extends DonateScreenEvent {
 
-  public Active911Warn3Event() {
-    super(null, R.string.active911_warn_3_title, R.string.active911_warn_3_text,
-          Active911WarnReregisterEvent.instance(),
-          Active911Warn4Event.instance());
+  public Active911Warn4Event() {
+    super(null, R.string.active911_warn_4_title, R.string.active911_warn_4_text,
+          Active911WarnEmailActive911SupportEvent.instance(),
+          Active911WarnAllDoneEvent.instance());
   }
   
   @Override
@@ -35,9 +35,9 @@ public class Active911Warn3Event extends DonateScreenEvent {
     return new String[]{VendorManager.instance().getActive911Code()};
   }
 
-  private static final Active911Warn3Event instance = new Active911Warn3Event();
+  private static final Active911Warn4Event instance = new Active911Warn4Event();
   
-  public static Active911Warn3Event instance() {
+  public static Active911Warn4Event instance() {
     return instance;
   }
 }

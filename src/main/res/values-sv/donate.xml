@@ -160,6 +160,19 @@
 
   <string name="active911_warn_reregister_title">Återregistrera med Active911</string>
 
+  <string name="active911_warn_4_title">Nästa</string>
+  <string name="active911_warn_4_text"> <!-- Translate -->
+    OK, that should take care of things for now.  But this is probably going to happen again
+    every time Active911 releases a new version of their Android app unless we can convince them
+    to fix it.  If you like, you can press the \"Email Active911 Support\" button below to generate a polite
+    email to Active911 support asking them to fix this problem.  If not, click \"All Done\" to exit
+    back to Cadpage.
+  </string>
+
+  <string name="active911_warn_email_active911_support_title">Contact Active911 Support</string>
+
+  <string name="active911_warn_all_done_title">All Done</string>
+
   <string name="vendor_title">Registrera med %s</string>
   <string name="vendor_text">
     Du verkar få textmeddelanden från %s. Du kan regista dig på deras meddelandetjänst så får du dina larm från dem. På så sätt slipper du en del problem förknippade med textmeddelanden.  

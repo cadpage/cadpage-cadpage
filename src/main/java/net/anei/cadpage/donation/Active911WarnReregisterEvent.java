@@ -18,8 +18,6 @@ public class Active911WarnReregisterEvent extends DonateEvent {
   @Override
   protected void doEvent(Activity activity) {
     VendorManager.instance().forceActive911Registration(activity);
-    activity.setResult(Activity.RESULT_OK);
-    activity.finish();
   }
   
   private static final Active911WarnReregisterEvent instance = new Active911WarnReregisterEvent();

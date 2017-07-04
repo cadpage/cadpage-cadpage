@@ -52,6 +52,7 @@
     <item>market problem</item>
     <item>Gratis abonnemang</item>
     <item>Understöd gammalt system</item>
+    <item>Active911 Android release is blocking Cadpage alerts</item>   <!-- Translate -->
   </string-array>
   <string-array name="email_devel_text">
     <item>Vill du skicka ett email till utvecklarna av CadPage gällande generella fel eller kommentarer?</item>
