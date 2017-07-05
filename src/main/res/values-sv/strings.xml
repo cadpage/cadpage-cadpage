@@ -249,9 +249,9 @@
   <string name="pref_report_position_title">Rapportera position vid kvittens</string>
   <string name="pref_report_position_summary">Rapportera din aktuella position när du kvitterar larm: %%s</string>
 
-  <string name="pref_show_history_address_title">Include address in call history</string> <!-- Translate -->
-  <string name="pref_show_history_address_summaryon">Address will be included in call history</string> <!-- Translate -->
-  <string name="pref_show_history_address_summaryoff">Address will not be included in call history</string> <!-- Translate -->
+  <string name="pref_show_history_address_title">Inkludera adress i larmhistoriken</string>
+  <string name="pref_show_history_address_summaryon">Adressen kommer att inkluderas i larmhistoriken</string>
+  <string name="pref_show_history_address_summaryoff">Addressen kommer inte att inkluderas i larmhistoriken</string>
 
   <string name="pref_navigate_map_title">Kartnavigeringsalternativ</string>                            
   <string name="pref_navigate_map_summaryon">Kartknapp öppnar ruttning</string>     
@@ -494,10 +494,8 @@
   <!-- Permission explanations -->
   <string name="need_permission_title">Cadpage Behöver följande tillåtelse för att utföra detta.</string>
 
-  <string name="active911_support_text"> <!-- Translate -->
-    Active911 stoped sending dispatch alerts to Cadpage when I upgraded to the latest version of the Active911 Android app.
-    This is a known problem, identified in support ticket #2017050710000311.  Could you please
-    fix things so that this does not happen in future releases of the Active911 Android app.
+  <string name="active911_support_text">
+    Active911 slutade sända larm från larmcentralen när jag uppgraderade till den senaste versionen av Active911s Android App. Det är ett känt problem, identifierat i ärendenummer #2017050710000311. Skulle ni kunna vara så vänliga att se till att det inte händer i kommande releaser av Active911s Android-app.
   </string>
 
 </resources>
