@@ -899,6 +899,7 @@ class Active911Vendor extends Vendor {
       "US/MS/PicayunePolice",             "MSPearlRiverCounty",
       "US/MS/Southaven",                  "MSDeSotoCountyB",
       "US/MT/CityofBlackEagle",           "MTCascadeCounty",
+      "US/MT/FlatheadCounty",             "MTFlatheadCounty",
       "US/MT/GallatinCounty",             "MTGallatinCounty",
       "US/MT/GreatFalls",                 "MTCascadeCountyB",
       "US/MT/HavrePolice",                "MTHillCounty",
