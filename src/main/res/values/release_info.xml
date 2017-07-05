@@ -4,6 +4,16 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-02\n
+    Updated Swedish translation\n
+    \n
+    New Location:\n
+    Bennington County, VT\n
+    \n
+    Location Fixes:\n
+    Flathead County, MT\n
+    Boone County, WV\n
+    \n
     v1.9.13-01\n
     Enhanced the support guidance offered to joint Active911/Cadpage users that need to recover
     from problems installing the latest Active911 update.\n
@@ -29,10 +39,6 @@
     \n
     Location Fixes:\n
     Talbot County, MD\n
-    Hays County, TX\n
-    \n
-    v1.9.12-12\n
-    Location Fixes:\n
-    Talbot County, MD
+    Hays County, TX
   </string>
 </resources>
