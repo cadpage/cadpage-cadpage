@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-03\n
+    New Location:\n
+    Harrison County, MS\n
+    \n
     v1.9.13-02\n
     Updated Swedish translation\n
     \n
@@ -31,14 +35,6 @@
     v1.9.12-14\n
     Location Fixes:\n
     Hocking County, OH\n
-    Kenosha County, WI\n
-    \n
-    v1.9.12-13\n
-    New Locations:\n
-    Fairfield County, CT (alt)\n
-    \n
-    Location Fixes:\n
-    Talbot County, MD\n
-    Hays County, TX
+    Kenosha County, WI
   </string>
 </resources>
