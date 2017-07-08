@@ -321,7 +321,7 @@ public class SmsMmsMessage implements Serializable {
    * Set the message body for an MMS type message when it is finally retrieved
    * @param messageBody new message body text
    */
-  public void setMessageBody(String messageBody) {
+  public synchronized void setMessageBody(String messageBody) {
     this.messageBody = messageBody;
     
     // Calculate the from address and body to be used for parsing purposes
@@ -501,9 +501,10 @@ public class SmsMmsMessage implements Serializable {
     
     // Retrieve vendor Code from old Sponsor code
     if (vendorCode == null) vendorCode = sponsor;
-    
-    // Rebuild parsed message information
-    buildParseInfo();
+
+    // To reduce startup overhead we do not parse message information now.
+    // Instead messages will be parsed in a background thread
+    // buildParseInfo();
   }
   
   /**
@@ -516,10 +517,12 @@ public class SmsMmsMessage implements Serializable {
    * 3 - merge message option change
    * @return true if message parse information may have changed
    */
-  public boolean splitOptionChange(int changeCode) {
+  public synchronized boolean splitOptionChange(int changeCode) {
+
+    // If message parsing has been deferred, return false
+    if (parseInfo == null) return false;
     
     // If nothing changed, nothing needs to be done
-    
     if (changeCode == 0) return false;
     
     // if this is a merged alert, we need to reparse it
@@ -584,7 +587,7 @@ public class SmsMmsMessage implements Serializable {
    * @return true if this has been identified and parsed as either a CAD page
    * or a general alert
    */
-  public boolean isPageMsg(int flags) {
+  public synchronized boolean isPageMsg(int flags) {
     
     boolean force = (flags & PARSE_FLG_FORCE) != 0;
     
@@ -650,7 +653,7 @@ public class SmsMmsMessage implements Serializable {
    * isPageMsg should be called in those cases.
    * @return the parsed information object
    */
-  public MsgInfo getInfo() {
+  public synchronized MsgInfo getInfo() {
     
     // If we didn't build a parse message info object when this was constructed
     // we never will have and parsed message information
@@ -694,7 +697,7 @@ public class SmsMmsMessage implements Serializable {
    * Call to repare general location messages when the parse location setting has changed
    * @return true if a general location message was succesfully reparsed
    */
-  public boolean reparseGeneral() {
+  public synchronized boolean reparseGeneral() {
     
     // We only are interested in calls parsed by one of the general location parsers
     if (location == null || ! location.startsWith("General")) return false;
@@ -727,15 +730,16 @@ public class SmsMmsMessage implements Serializable {
     return sentTime;
   }
   
-  public Date getIncidentDate() {
+  public synchronized Date getIncidentDate() {
     
     // Return cached incident date if we have it
     if (incidentDate != null) return incidentDate;
     
     // Try to calculate date from parsed dispatch date/time
-    incidentDate = calcDispatchDate();
-    if (incidentDate != null) return incidentDate;
-    
+    if (parseInfo != null) {
+      incidentDate = calcDispatchDate();
+      if (incidentDate != null) return incidentDate;
+    }
     // No go, try to calculate incident date from server time
     incidentDate = calcServerDate();
     if (incidentDate != null) return incidentDate;
@@ -884,11 +888,11 @@ public class SmsMmsMessage implements Serializable {
     return DateUtils.formatDateTime(context, time, DateUtils.FORMAT_SHOW_TIME);
   }
   
-  public String getSubject() {
+  public synchronized String getSubject() {
     return (parseInfo == null ? subject : parseInfo.getSubject());
   }
 
-  public String getMessageBody() {
+  public synchronized String getMessageBody() {
     if (parseInfo == null) {
       if (messageBody == null) return "";
       return messageBody;
@@ -900,7 +904,7 @@ public class SmsMmsMessage implements Serializable {
     return messageType;
   }
   
-  public String getFromAddress() {
+  public synchronized String getFromAddress() {
     if (parseInfo != null) return parseInfo.getFromAddress();
     return fromAddress;
   }
@@ -917,11 +921,11 @@ public class SmsMmsMessage implements Serializable {
     return mmsMsgId;
   }
   
-  public int getMsgIndex() {
+  public synchronized int getMsgIndex() {
     return (parseInfo == null ? -1 : parseInfo.getMsgIndex());
   }
   
-  public int getMsgCount() {
+  public synchronized int getMsgCount() {
     return (parseInfo == null ? -1 : parseInfo.getMsgCount());
   }
   
@@ -1131,7 +1135,7 @@ public class SmsMmsMessage implements Serializable {
    * @param useGPS true to use GPS location in preference to regular address
    * @return map search string or null if not available
    */
-  private String getMapAddress(boolean defUseGPS, boolean useGPS) {
+  private synchronized String getMapAddress(boolean defUseGPS, boolean useGPS) {
     
     if (parseInfo == null) return null;
     MsgInfo info = parseInfo.getInfo();
@@ -1377,12 +1381,25 @@ public class SmsMmsMessage implements Serializable {
     if (s1 == null || s2 == null) return false;
     return s1.equals(s2);
   }
-  
-  Message getParseInfo() {
+
+  /**
+   * Make sure that message information has been parsed
+   * @return true if message information was parsed by this call, false if it had already been done.
+   */
+  public synchronized boolean updateParseInfo() {
+
+    // Message parsing is deferred at startup.  If there should be some parsed
+    // information, but is not, then we will need to parse it now.
+    if (parseInfo != null || messageBody == null) return false;
+    buildParseInfo();
+    return true;
+  }
+
+  public synchronized Message getParseInfo() {
     return parseInfo;
   }
 
-  public boolean expectMore() {
+  public synchronized boolean expectMore() {
     if (parseInfo == null) return false;
     return parseInfo.expectMore(getSplitMsgOptions());
   }

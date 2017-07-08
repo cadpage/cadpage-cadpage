@@ -32,7 +32,8 @@ public class HistoryMsgTextView extends LinearLayout {
         if (msg == null) return;
         
         // display message popup
-        if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + msg.getMsgId()); 
+        if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + msg.getMsgId());
+        if (msg.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
         SmsPopupActivity.launchActivity(getContext(), msg);
       }});
   }

@@ -64,6 +64,9 @@ public class SmsMessageQueue implements Serializable {
     
     // Update new call count
     calcNewCallCount();
+
+    // Start parsing messages in background service
+    ParserService.startup(context);
   }
 
   /**
@@ -93,11 +96,7 @@ public class SmsMessageQueue implements Serializable {
    * 3 - merge message option change
    */
   public void splitOptionChange(int changeCode) {
-    boolean change = false;
-    for (SmsMmsMessage msg : queue) {
-      if (msg.splitOptionChange(changeCode)) change = true;
-    }
-    if (change) notifyDataChange();
+    ParserService.reparseSplitMsg(context, changeCode);
   }
   
   /**
@@ -105,22 +104,26 @@ public class SmsMessageQueue implements Serializable {
    * after the location parser setting has been changed
    */
   public void reparseGeneral() {
-    boolean change = false;
-    for (SmsMmsMessage msg : queue) {
-      if (msg.reparseGeneral()) change = true;
-    }
-    if (change) notifyDataChange();
+    ParserService.reparseGeneral(context);
   }
 
+  /**
+   * Notify call history list that something has changed and view needs to
+   * be refreshed
+   */
+  public void notifyDataChange() {
+    notifyDataChange(false);
+  }
   
   /**
    * Notify call history list that something has changed and view needs to 
    * be refreshed
+   * @param displayOnly true if only transient information has been changed
    */
-  public void notifyDataChange() {
+  public void notifyDataChange(boolean displayOnly) {
 	  if (Log.DEBUG) Log.v("SmsMessageQueue: notifyDataChange");  
     if (adapter != null) adapter.notifyDataSetChanged();
-    save();
+    if (!displayOnly) save();
   }
   
   /**
@@ -179,7 +182,7 @@ public class SmsMessageQueue implements Serializable {
    * @param msgId requested message ID
    * @return requested message if found, null otherwise
    */
-  public SmsMmsMessage getMessage(int msgId) {
+  public synchronized SmsMmsMessage getMessage(int msgId) {
 	  if (Log.DEBUG) Log.v("SmsMessageQueue: getMessage");
     for (SmsMmsMessage msg : queue) {
       if (msgId == msg.getMsgId()) return msg;
@@ -200,7 +203,7 @@ public class SmsMessageQueue implements Serializable {
    * Delete message from message queue (if preset, read and not locked)
    * @param msg message to be deleted
    */
-  public void deleteMessage(SmsMmsMessage msg) {
+  public synchronized void deleteMessage(SmsMmsMessage msg) {
 	  if (Log.DEBUG) Log.v("SmsMessageQueue: deleteMessage");
     // Don't delete unread or locked messages
     if (!msg.canDelete()) return;
@@ -211,7 +214,7 @@ public class SmsMessageQueue implements Serializable {
   /**
    * Mark all messages as opened
    */
-  public void markAllRead() {
+  public synchronized void markAllRead() {
     if (Log.DEBUG) Log.v("SmsMessageQueue: markAllOpened");
     for (Iterator<SmsMmsMessage> itr = queue.iterator(); itr.hasNext(); ) {
       itr.next().setRead(true);
@@ -222,7 +225,7 @@ public class SmsMessageQueue implements Serializable {
   /**
    * Remove all expendable (read and not locked) messages
    */
-  public void clearAll() {
+  public synchronized void clearAll() {
 	  if (Log.DEBUG) Log.v("SmsMessageQueue: clearAll");
     // Delete everything this has been read and isn't locked
     for (Iterator<SmsMmsMessage> itr = queue.iterator(); itr.hasNext(); ) {
@@ -233,6 +236,15 @@ public class SmsMessageQueue implements Serializable {
     if (queue.isEmpty()) nextMsgId = 1;
     
     notifyDataChange();
+  }
+
+  /**
+   * Retrieve list of messages in the queue at this moment.  Returned as an array that can be
+   * safely worked on a worker thread free of concerns about changes made to the original queue.
+   * @return list of message currently in message queue
+   */
+  public synchronized SmsMmsMessage[] getMessageList() {
+    return queue.toArray(new SmsMmsMessage[queue.size()]);
   }
   
   /**

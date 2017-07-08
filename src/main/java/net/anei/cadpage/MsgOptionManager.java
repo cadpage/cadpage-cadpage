@@ -79,6 +79,7 @@ public class MsgOptionManager {
    * @param menu Message menu needed to be adjusted
    */
   public void prepareMenu(Menu menu) {
+    if (message.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
     for (int ndx = 0; ndx < menu.size(); ndx++) {
       final MenuItem item = menu.getItem(ndx);
       prepareItem(new ItemObject() {

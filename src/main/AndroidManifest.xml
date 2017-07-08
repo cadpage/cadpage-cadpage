@@ -143,6 +143,7 @@
     <service android:name=".TrackingService"/>
     <service android:name=".C2DMService"/>
     <service android:name=".SmsMsgAccumulatorService"/>
+    <service android:name=".ParserService"/>
     
     <receiver android:name=".vendors.VendorReceiver">
       <intent-filter>
