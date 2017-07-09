@@ -639,6 +639,7 @@ class Active911Vendor extends Vendor {
       "US/KY/HancockCounty",              "KYHancockCounty",
       "US/KY/HardinCounty",               "KYHardinCounty",
       "US/KY/HarrisonCounty",             "KYHarrisonCountyB",
+      "US/KY/HendersonCounty",            "KYHendersonCounty",
       "US/KY/KentonCounty",               "KYKentonCounty",
       "US/KY/KSPP1",                      "KYStatePolice",
       "US/KY/KSPP12",                     "KYStatePolice",
