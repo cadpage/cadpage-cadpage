@@ -408,6 +408,7 @@ class Active911Vendor extends Vendor {
       "US/CT/OldSaybrook",                "CTOldSaybrook",
       "US/CT/QuinnebaugValleyEmergencyCommunications", "CTNewLondonCountyB",
       "US/CT/TollandCounty",              "CTTollandCountyA",
+      "US/CT/TownofStratford",            "CTFairfieldCountyC",
       "US/CT/Uconn",                      "CTTollandCountyB",
       "US/CT/Valleyshore911",             "CTMiddlesexCounty",
       "US/CT/WaterfordFD",                "CTWaterfordTown",
