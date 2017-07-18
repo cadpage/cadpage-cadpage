@@ -111,9 +111,8 @@ class Active911Vendor extends Vendor {
   @Override
   protected boolean isBadPackageVersion(int version) {
 
-    // The implemented a server side fix, which means there no longer any bad versions
-    // Except now there are :(
-    return version == 101;
+    Log.v("Active911 version:" + version);
+    return version >= 97 /* && version <= 102 */ ;
   }
 
   @Override

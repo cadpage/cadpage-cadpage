@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07142017</string>
+  <string name="release_date">07172017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-06\n
+    Location Fixes:\n
+    Colbert County, AL\n
+    Dade County, GA\n
+    Jackson County, OR\n
+    \n
     v1.9.13-05\n
     Re-implemented Active911/Cadpage user recovery process for latest Active911 app update.\n
     \n
@@ -28,10 +34,6 @@
     \n
     Location Fixes:\n
     Flathead County, MT\n
-    Boone County, WV\n
-    \n
-    v1.9.13-01\n
-    Enhanced the support guidance offered to joint Active911/Cadpage users that need to recover
-    from problems installing the latest Active911 update.
+    Boone County, WV
   </string>
 </resources>
