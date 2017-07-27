@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07212017</string>
+  <string name="release_date">07262017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-08\n
+    Location Fixes:\n
+    Hancock County, IL\n
+    Jefferson Parish, LA\n
+    Fulton County, NY\n
+    Alexander County, NC\n
+    Columbus County, NC\n
+    Cherokee County, NC\n
+    Adams County, PA\n
+    \n
     v1.9.13-07\n
     Location Fixes:\n
     Escambia County, FL\n
@@ -27,10 +37,6 @@
     Fairfield County, CT\n
     Hartford County, CT\n
     New Haven County, CT\n
-    Tolland County, CT\n
-    \n
-    v1.9.13-03\n
-    New Location:\n
-    Harrison County, MS
+    Tolland County, CT
   </string>
 </resources>
