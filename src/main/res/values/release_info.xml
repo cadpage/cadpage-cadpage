@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07262017</string>
+  <string name="release_date">07292017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-09\n
+    Location Fixes:\n
+    Frederick County, MD\n
+    Sumner County, TN\n
+    \n
     v1.9.13-08\n
     Location Fixes:\n
     Hancock County, IL\n
@@ -28,15 +33,6 @@
     Jackson County, OR\n
     \n
     v1.9.13-05\n
-    Re-implemented Active911/Cadpage user recovery process for latest Active911 app update.\n
-    \n
-    v1.9.13-04\n
-    Location Fixes:\n
-    Calveras County, CA\n
-    Tuolumne County, CA\n
-    Fairfield County, CT\n
-    Hartford County, CT\n
-    New Haven County, CT\n
-    Tolland County, CT
+    Re-implemented Active911/Cadpage user recovery process for latest Active911 app update.
   </string>
 </resources>
