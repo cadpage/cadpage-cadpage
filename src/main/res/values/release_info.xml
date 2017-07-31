@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07292017</string>
+  <string name="release_date">07312017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-10\n
+    Location Fixes:\n
+    Lake County, CA\n
+    Monterey County, CA\n
+    Mesa County, CO\n
+    Suffolk County, NY\n
+    Roanoke County, VA\n
+    \n
     v1.9.13-09\n
     Location Fixes:\n
     Frederick County, MD\n
@@ -30,9 +38,6 @@
     Location Fixes:\n
     Colbert County, AL\n
     Dade County, GA\n
-    Jackson County, OR\n
-    \n
-    v1.9.13-05\n
-    Re-implemented Active911/Cadpage user recovery process for latest Active911 app update.
+    Jackson County, OR
   </string>
 </resources>
