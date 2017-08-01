@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07312017</string>
+  <string name="release_date">08012017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-11\n
+    Location Fixes:\n
+    Citrus County, FL\n
+    East Feliciana Parish, LA\n
+    \n
     v1.9.13-10\n
     Location Fixes:\n
     Lake County, CA\n
@@ -32,12 +37,6 @@
     Escambia County, FL\n
     DuPage County, IL\n
     Talbot County, MD\n
-    Elk County, PA\n
-    \n
-    v1.9.13-06\n
-    Location Fixes:\n
-    Colbert County, AL\n
-    Dade County, GA\n
-    Jackson County, OR
+    Elk County, PA
   </string>
 </resources>
