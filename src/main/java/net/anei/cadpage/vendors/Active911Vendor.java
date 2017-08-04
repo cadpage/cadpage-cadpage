@@ -991,6 +991,7 @@ class Active911Vendor extends Vendor {
       "US/NC/RDUAirport",                 "NCWakeCountyC",
       "US/NC/RobesonCounty",              "NCRobesonCounty",
       "US/NC/RockinghamCounty",           "NCRockinghamCounty",
+      "US/NC/RoCoAnEn",                   "NCRowanCounty",
       "US/NC/RowanCounty",                "NCRowanCounty",
       "US/NC/RutherfordCounty",           "NCRutherfordCounty",
       "US/NC/SampsonCounty",              "NCSampsonCounty",
