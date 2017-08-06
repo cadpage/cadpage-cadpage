@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08052017</string>
+  <string name="release_date">08062017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-14\n
+    Location Fixes:\n
+    St Joseph County, IN\n
+    Union County, NC\n
+    McCormick County, SC\n
+    Williamson County, TN\n
+    \n
     v1.9.13-13\n
     Location Fixes:\n
     San Diego County, CA\n
@@ -31,11 +38,6 @@
     Monterey County, CA\n
     Mesa County, CO\n
     Suffolk County, NY\n
-    Roanoke County, VA\n
-    \n
-    v1.9.13-09\n
-    Location Fixes:\n
-    Frederick County, MD\n
-    Sumner County, TN
+    Roanoke County, VA
   </string>
 </resources>
