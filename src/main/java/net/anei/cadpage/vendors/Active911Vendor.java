@@ -461,6 +461,7 @@ class Active911Vendor extends Vendor {
       "US/GA/DoolyCounty",                "GADoolyCounty",
       "US/GA/EffinghamCounty",            "GAEffinghamCounty",
       "US/GA/EffinghamSheriffs",          "GAEffinghamCountyB",
+      "US/GA/EmanuelCounty",              "GAEmanuelCounty",
       "US/GA/FanninCounty",               "GAFanninCounty",
       "US/GA/ForsythCounty",              "GAForsythCounty",
       "US/GA/GordonCounty",               "GAGordonCounty",
