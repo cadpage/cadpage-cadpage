@@ -318,6 +318,7 @@ class Active911Vendor extends Vendor {
       "US/CA/LakeCounty",                 "CALakeCounty",
       "US/CA/LifecommCellPaging",         "CASanJoaquinCounty",
       "US/CA/LincolnPD",                  "CAPlacerCountyB",
+      "US/CA/LosAngelesCounty",           "CALosAnglesCountyC",
       "US/CA/MarinCountySheriff",         "CAMarinCounty",
       "US/CA/MendocinoCounty",            "CAMendocinoCounty",
       "US/CA/Meucad",                     "CAMendocinoCounty",
