@@ -502,6 +502,7 @@ class Active911Vendor extends Vendor {
       "US/ID/BonnerCounty",               "IDBonnerCounty",
       "US/ID/KootenaiCounty",             "IDKootenaiCounty",
       "US/ID/MadisonCounty",              "IDMadisonCounty",
+      "US/ID/ShoshoneCounty",             "IDShoshoneCountyB",
       "US/ID/TetonCounty",                "IDTetonCounty",
       "US/ID/TwinFallsCounty",            "IDTwinFallsCountyB",
       "US/IL/AdamsCounty",                "ILAdamsCounty",
