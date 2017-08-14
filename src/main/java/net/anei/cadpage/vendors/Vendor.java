@@ -312,7 +312,8 @@ abstract class Vendor {
     
     if (enabled) {
       long registerTime = prefs.getLong("lastRegisterTime", 0L);
-      long lastTime = prefs.getLong("lastContactTime", 0L);
+      long lastTime = prefs.getLong("" +
+        "", 0L);
       if (registerTime == 0 && lastTime == 0) updateLastRegisterTime();
     }
     
@@ -596,6 +597,18 @@ abstract class Vendor {
     // Turn off enabled flag and make a normal registration request
     enabled = false;
     registerReq(context);
+  }
+
+  /**
+   * Force new registration request, even if service is already enabled
+   * @param context current context
+   */
+  void forceReregister(Context context) {
+
+    // Make sure we have network connectivity
+    if (!SmsPopupUtils.haveNet(context)) return;
+
+    sendReregister(context, ManagePreferences.registrationId(), false, false);
   }
 
   /**

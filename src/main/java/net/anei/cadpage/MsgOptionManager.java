@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.parsers.MsgParser.MapPageStatus;
+import net.anei.cadpage.vendors.VendorManager;
+
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -954,12 +956,19 @@ public class MsgOptionManager {
     
     if (!launch) return true;
     Log.w("Launching Active911");
+    String active911Code = VendorManager.instance().getActive911Code();
+    if (active911Code != null) intent.putExtra("CadpageAccount", active911Code);
     ContentQuery.dumpIntent(intent);
     try {
       context.startActivity(intent);
     } catch (Exception ex) {
       Log.e(ex);
+      return true;
     }
+
+    // The active911 app sometimes switches the page type to itself.  Just in case this happens,
+    // we will trigger our own register request 10 seconds after launching Active911
+    if (active911Code != null) C2DMService.registerActive911(context, 10000L);
     return true;
   }
 }

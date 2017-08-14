@@ -263,7 +263,9 @@ public class VendorManager {
     
     // Skip everything if the ID has not changed and a reconnect was not forced
     boolean reconect = ManagePreferences.reconnect();
-    if (!change && !reconect) return;
+
+    // Suspend the register suppression logic to help us stay connected to Active911
+    // if (!change && !reconect) return;
     
     boolean transfer = ManagePreferences.transferFlag();
     
@@ -585,12 +587,18 @@ public class VendorManager {
 
   public String getActive911Code() {
     Vendor vendor = findVendor("Active911");
+    if (!vendor.isEnabled()) return null;
     return  vendor.getCode();
   }
 
   public void forceActive911Registration(Context context) {
     Vendor vendor = findVendor("Active911");
     vendor.forceRegister(context);
+  }
+
+  public void forceActive911Reregister(Context context) {
+    Vendor vendor = findVendor("Active911");
+    vendor.forceReregister(context);
   }
 
   /**

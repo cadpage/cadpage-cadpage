@@ -46,6 +46,7 @@ public class C2DMService extends IntentService {
   private static final String ACTION_C2DM_RECEIVE = "com.google.android.c2dm.intent.RECEIVE";
   private static final String ACTION_RETRY_REGISTER = "net.anei.cadpage.RETRY_REGISTER";
   private static final String ACTION_REFRESH_ID = "net.anei.cadpage.REFRESH_ID";
+  private static final String ACTION_ACTIVE911_REFRESH_ID = "net.anei.cadpage.ACTIVE911_REFRESH_ID";
   private static final String GCM_PROJECT_ID = "1027194726673";
 
   // wakelock
@@ -321,6 +322,12 @@ public class C2DMService extends IntentService {
       
       Log.w("Processing C2DM registration refresh request");
       register(context, true);
+      return;
+    }
+
+    // Ditto for an Active911 refresh request
+    if (ACTION_ACTIVE911_REFRESH_ID.equals(intent.getAction())) {
+      VendorManager.instance().forceActive911Reregister(context);
       return;
     }
 
@@ -668,6 +675,23 @@ public class C2DMService extends IntentService {
     long triggerTime = curTime + REFRESH_ID_TIMEOUT;
     myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, refreshPendingIntent);
    
+  }
+
+  public static void registerActive911(Context context, long msecs) {
+
+    long curTime = System.currentTimeMillis();
+
+    Log.v("Scheduling Active911 refresh " + msecs + " msecs");
+
+    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+    Intent refreshIntent = new Intent(context, C2DMRetryReceiver.class);
+    refreshIntent.setAction(ACTION_ACTIVE911_REFRESH_ID);
+
+    PendingIntent refreshPendingIntent =
+      PendingIntent.getBroadcast(context, 0, refreshIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+    myAM.set(AlarmManager.RTC_WAKEUP, curTime+msecs, refreshPendingIntent);
   }
 
   /**
