@@ -724,7 +724,6 @@ class Active911Vendor extends Vendor {
       "US/MD/PrintManager",               "MDAnneArundelCountyAnnapolis",
       "US/MD/QueenAnnesCounty",           "MDQueenAnnesCounty",
       "US/MD/SaintMarysCounty",           "MDSaintMarysCounty",
-      "US/MD/StMarysCounty",              "MDSaintMarysCounty",
       "US/MD/TalbotCounty",               "MDTalbotCounty",
       "US/MD/WashingtonCounty",           "MDWashingtonCounty",
       "US/MD/Webhostinghub",              "MDPrinceGeorgesCountyF",
