@@ -1545,6 +1545,7 @@ class Active911Vendor extends Vendor {
       "US/VA/HanoverPageGate",            "VAHanoverCountyB",
       "US/VA/HenryCounty",                "VAHenryCounty",
       "US/VA/Hopewell",                   "VAHopewell",
+      "US/VA/IsleOfWrightCounty",         "VAIsleofWightCounty",
       "US/VA/JamesCityCounty",            "VAJamesCityCounty",
       "US/VA/KingGeorgeCounty",           "VAKingGeorgeCounty",
       "US/VA/LoudounCounty",              "VALoudounCounty",
