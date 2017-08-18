@@ -74,8 +74,14 @@ public class C2DMService extends IntentService {
     
     if (ACTION_RETRY_REGISTER.equals(intent.getAction())) {
       retryRegisterRequest(intent);
+      return;
     }
-    
+
+    if (ACTION_ACTIVE911_REFRESH_ID.equals(intent.getAction())) {
+      VendorManager.instance().forceActive911Reregister(this);
+      return;
+    }
+
     if (isNewGCMActive(this)) {
       String type = getGCM().getMessageType(intent);
       if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(type)) {
@@ -212,8 +218,8 @@ public class C2DMService extends IntentService {
   
   /**
    * Send auto acknowledgment when message is received
-   * @param context current context
    * @param intent received intent
+   * @param vendorCode vendor code
    */
   private void sendAutoAck(Intent intent, String vendorCode) {
     String ackURL = intent.getStringExtra("ack_url");
@@ -322,12 +328,6 @@ public class C2DMService extends IntentService {
       
       Log.w("Processing C2DM registration refresh request");
       register(context, true);
-      return;
-    }
-
-    // Ditto for an Active911 refresh request
-    if (ACTION_ACTIVE911_REFRESH_ID.equals(intent.getAction())) {
-      VendorManager.instance().forceActive911Reregister(context);
       return;
     }
 
