@@ -736,7 +736,7 @@ public class SmsMmsMessage implements Serializable {
     if (incidentDate != null) return incidentDate;
     
     // Try to calculate date from parsed dispatch date/time
-    if (parseInfo != null) {
+    if (parseInfo != null && parseInfo.getInfo() != null) {
       incidentDate = calcDispatchDate();
       if (incidentDate != null) return incidentDate;
     }
