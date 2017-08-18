@@ -1082,6 +1082,7 @@ class Active911Vendor extends Vendor {
       "US/NY/CityofSouthampton",          "NYSuffolkCountyJ",
       "US/NY/CortlandCounty",             "NYCortlandCountyC",
       "US/NY/Cutchogue",                  "NYSuffolkCountyC",
+      "US/NY/EastHamptonVillage",         "NYSuffolkCountyHParser",
       "US/NY/Erie",                       "NYErieCountyF",
       "US/NY/FingerLakesAmbulance",       "NYOntarioCountyB",
       "US/NY/FireRescueSystems",          "NYSuffolkCountyB,NYSuffolkCountyF",
