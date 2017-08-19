@@ -541,6 +541,7 @@ class Active911Vendor extends Vendor {
       "US/IL/PleasantviewFPD",            "ILCookCountyI",
       "US/IL/PrairieDuPont",              "ILStClairCounty",
       "US/IL/RandolphCounty",             "ILRandolphCountyA",
+      "US/IL/SheldonDistrict",            "ILIroquoisCounty",
       "US/IL/Skokie",                     "ILCookCountyB",
       "US/IL/StClairCounty",              "ILStClairCounty",
       "US/IL/SWCD911",                    "ILCookCountyE",
