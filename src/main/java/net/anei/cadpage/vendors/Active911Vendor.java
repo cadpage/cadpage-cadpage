@@ -1365,7 +1365,7 @@ class Active911Vendor extends Vendor {
       "US/SC/JasperCounty",               "SCJasperCounty",
       "US/SC/LancasterCounty",            "SCLancasterCounty",
       "US/SC/LeeCounty",                  "SCLeeCounty",
-      "US/SC/LexingtonCounty",            "SCLexingtonCounty",
+      "US/SC/LexingtonCounty",            "SCLexingtonCounty,SCBerkeleyCounty",
       "US/SC/MarionCounty",               "SCMarionCounty",
       "US/SC/MarlboroCounty",             "SCMarlboroCounty",
       "US/SC/McCormickCounty",            "SCMcCormickCounty",
