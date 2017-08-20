@@ -133,7 +133,8 @@ class Active911Vendor extends Vendor {
       "123559",  "01152017",
       "17251",   "04072017",
       "47015",   "04122017",
-      "352505",  "08042017"
+      "352505",  "08042017",
+      "226913",  "08192017"
   });
 
 
@@ -1173,7 +1174,7 @@ class Active911Vendor extends Vendor {
       "US/OH/Fairfield",                  "OHFairfieldCounty",
       "US/OH/FultonCounty",               "OHFultonCounty",
       "US/OH/GalliaCounty",               "OHGalliaCounty",
-      "US/OH/GeaugaCounty",               "OHGeaugaCounty",
+      "US/OH/GeaugaCounty",               "OHGeaugaCountyB",
       "US/OH/GrangerFD",                  "OHMedinaCountyB",
       "US/OH/HamiltonCounty",             "OHHamiltonCountyA",
       "US/OH/HamiltonFD",                 "OHButlerCountyA",
