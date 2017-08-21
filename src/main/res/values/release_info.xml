@@ -4,6 +4,15 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-16\n
+    Location Fixes:\n
+    Suffolk County, NY\n
+    Cherokee County, NC\n
+    Geauga County, OH\n
+    Berkeley County, SC\n
+    Isle of Wight County, WA\n
+    Kitsap County, WA\n
+    \n
     v1.9.13-15\n
     New Locations:\n
     Los Angeles County, CA (alt)\n
@@ -41,11 +50,6 @@
     Gooding County, ID\n
     Jerome County, ID\n
     Lincoln County, ID\n
-    Twin Falls County, ID\n
-    \n
-    v1.9.13-11\n
-    Location Fixes:\n
-    Citrus County, FL\n
-    East Feliciana Parish, LA
+    Twin Falls County, ID
   </string>
 </resources>
