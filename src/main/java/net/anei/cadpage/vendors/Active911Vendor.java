@@ -877,6 +877,7 @@ class Active911Vendor extends Vendor {
       "US/MO/McDonaldCounty",             "MOMcDonaldCountyB",
       "US/MO/Mobilefonetotalaccess",      "MOJacksonCountyB",
       "US/MO/MoniteauCounty",             "MOMoniteauCounty",
+      "US/MO/MorganCounty",               "MOMorganCounty",
       "US/MO/NewtonCounty",               "MONewtonCounty",
       "US/MO/NodawayCounty",              "MONodawayCounty",
       "US/MO/OsageCounty",                "MOOsageCounty",
