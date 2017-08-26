@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08222017</string>
+  <string name="release_date">08252017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-18\n
+    Location Fixes:\n
+    Carroll County, MD\n
+    Clermont County, OH\n
+    Benton County, OR\n
+    Linn County, OR\n
+    Bexar County, TX\n
+    Sweden\n
+    \n
     v1.9.13-17\n
     Location Fixes:\n
     St Clair County, IL\n
@@ -32,13 +41,6 @@
     Natrona County, WY\n
     \n
     General fixes:\n
-    More work to resolve conflicts with Active911 app\n
-    \n
-    v1.9.13-14\n
-    Location Fixes:\n
-    St Joseph County, IN\n
-    Union County, NC\n
-    McCormick County, SC\n
-    Williamson County, TN
+    More work to resolve conflicts with Active911 app
   </string>
 </resources>
