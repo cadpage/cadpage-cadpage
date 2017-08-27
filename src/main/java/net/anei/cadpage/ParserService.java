@@ -31,6 +31,8 @@ public class ParserService extends IntentService {
 
     try {
 
+      if (intent == null) return;
+
       Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
       int iRequest = intent.getIntExtra(EXTRA_REQ_TYPE, -1);
