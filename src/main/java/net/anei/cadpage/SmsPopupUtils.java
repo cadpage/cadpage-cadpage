@@ -2,6 +2,7 @@ package net.anei.cadpage;
 
 import java.util.regex.Pattern;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -81,6 +82,11 @@ public class SmsPopupUtils {
   }
   
   private static void showNetworkFailure(Context context, int resId) {
+
+    // We can not, and should not, display a dialog from a background service
+    if (! (context instanceof Activity)) return;
+
+    // Otherwise display the warning dialog
     new AlertDialog.Builder(context)
     .setIcon(R.drawable.ic_launcher).setTitle(R.string.network_err_title)
     .setPositiveButton(R.string.donate_btn_OK, null)

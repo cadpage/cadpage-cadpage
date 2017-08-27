@@ -29,42 +29,50 @@ public class ParserService extends IntentService {
   @Override
   protected void onHandleIntent(Intent intent) {
 
-    Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+    try {
 
-    int iRequest = intent.getIntExtra(EXTRA_REQ_TYPE, -1);
-    if (iRequest < 0) return;
-    RequestType[] reqList = RequestType.values();
-    if (iRequest >= reqList.length) return;
-    RequestType request = reqList[iRequest];
-    int changeCode = intent.getIntExtra(EXTRA_CHANGE_CODE, -1);
+      Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
-    for (SmsMmsMessage msg : SmsMessageQueue.getInstance().getMessageList()) {
-      boolean update = false;
-      switch (request) {
-        case STARTUP:
-          update = msg.updateParseInfo();
-          break;
+      int iRequest = intent.getIntExtra(EXTRA_REQ_TYPE, -1);
+      if (iRequest < 0) return;
+      RequestType[] reqList = RequestType.values();
+      if (iRequest >= reqList.length) return;
+      RequestType request = reqList[iRequest];
+      int changeCode = intent.getIntExtra(EXTRA_CHANGE_CODE, -1);
 
-        case REPARSE_GENERAL:
-          update = msg.reparseGeneral();
-          break;
+      for (SmsMmsMessage msg : SmsMessageQueue.getInstance().getMessageList()) {
+        boolean update = false;
+        switch (request) {
+          case STARTUP:
+            update = msg.updateParseInfo();
+            break;
 
-        case REPARSE_SPLIT_MSG:
-          update = msg.splitOptionChange(changeCode);
-          break;
+          case REPARSE_GENERAL:
+            update = msg.reparseGeneral();
+            break;
+
+          case REPARSE_SPLIT_MSG:
+            update = msg.splitOptionChange(changeCode);
+            break;
+        }
+
+        if (update) {
+          CadPageApplication.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+              SmsMessageQueue.getInstance().notifyDataChange(true);
+            }
+          });
+          try {
+            Thread.sleep(20);
+          } catch (InterruptedException e) {}
+        }
       }
+    }
 
-      if (update) {
-        CadPageApplication.runOnMainThread(new Runnable() {
-          @Override
-          public void run() {
-            SmsMessageQueue.getInstance().notifyDataChange(true);
-          }
-        });
-        try {
-          Thread.sleep(20);
-        } catch (InterruptedException e) {}
-      }
+    // Any exceptions that get thrown should be rethrown on the dispatch thread
+    catch (final Exception ex) {
+      TopExceptionHandler.reportException(ex);
     }
   }
 

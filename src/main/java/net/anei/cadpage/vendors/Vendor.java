@@ -589,26 +589,28 @@ abstract class Vendor {
    * Force new registration request, even if service is already enabled
    * @param context current context
    */
-  void forceRegister(Context context) {
+  boolean forceRegister(Context context) {
 
     // Make sure we have network connectivity
-    if (!SmsPopupUtils.haveNet(context)) return;
+    if (!SmsPopupUtils.haveNet(context)) return false;
 
     // Turn off enabled flag and make a normal registration request
     enabled = false;
     registerReq(context);
+    return true;
   }
 
   /**
    * Force new registration request, even if service is already enabled
    * @param context current context
    */
-  void forceReregister(Context context) {
+  boolean forceReregister(Context context) {
 
     // Make sure we have network connectivity
-    if (!SmsPopupUtils.haveNet(context)) return;
+    if (!SmsPopupUtils.haveNet(context)) return false;
 
     sendReregister(context, ManagePreferences.registrationId(), false, false);
+    return true;
   }
 
   /**

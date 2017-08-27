@@ -11,7 +11,13 @@ public class SmsMsgAccumulatorService extends IntentService {
 
   @Override
   protected void onHandleIntent(Intent intent) {
-    
-    SmsMsgAccumulator.instance().handleIntent(this, intent);
+    try {
+      SmsMsgAccumulator.instance().handleIntent(this, intent);
+    }
+
+      // Any exceptions that get thrown should be rethrown on the dispatch thread
+    catch( final Exception ex){
+        TopExceptionHandler.reportException(ex);
+    }
   }
 }

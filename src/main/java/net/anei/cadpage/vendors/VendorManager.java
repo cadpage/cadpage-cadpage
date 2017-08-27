@@ -591,14 +591,14 @@ public class VendorManager {
     return  vendor.getCode();
   }
 
-  public void forceActive911Registration(Context context) {
+  public boolean forceActive911Registration(Context context) {
     Vendor vendor = findVendor("Active911");
-    vendor.forceRegister(context);
+    return vendor.forceRegister(context);
   }
 
-  public void forceActive911Reregister(Context context) {
+  public boolean forceActive911Reregister(Context context) {
     Vendor vendor = findVendor("Active911");
-    vendor.forceReregister(context);
+    return vendor.forceReregister(context);
   }
 
   /**

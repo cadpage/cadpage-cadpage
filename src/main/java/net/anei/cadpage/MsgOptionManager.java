@@ -968,7 +968,7 @@ public class MsgOptionManager {
 
     // The active911 app sometimes switches the page type to itself.  Just in case this happens,
     // we will trigger our own register request 10 seconds after launching Active911
-    if (active911Code != null) C2DMService.registerActive911(context, 10000L);
+    if (active911Code != null) C2DMService.registerActive911(context, 10000L, 1200000L);
     return true;
   }
 }

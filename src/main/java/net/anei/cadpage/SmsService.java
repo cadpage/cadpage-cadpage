@@ -51,9 +51,16 @@ public class SmsService extends IntentService {
   @Override
   protected void onHandleIntent(Intent intent) {
 
-    Log.v("SmsService: onHandleIntent()");
+    try {
+      Log.v("SmsService: onHandleIntent()");
 
-    processIntent(this, intent);
+      processIntent(this, intent);
+    }
+
+    // Any exceptions that get thrown should be rethrown on the dispatch thread
+    catch (final Exception ex) {
+      TopExceptionHandler.reportException(ex);
+    }
   }
 
   @Override
