@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
+import android.os.Process;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 
@@ -33,7 +34,7 @@ public class ParserService extends IntentService {
 
       if (intent == null) return;
 
-      Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+      Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
       int iRequest = intent.getIntExtra(EXTRA_REQ_TYPE, -1);
       if (iRequest < 0) return;
