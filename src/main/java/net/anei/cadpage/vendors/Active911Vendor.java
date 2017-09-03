@@ -527,7 +527,7 @@ class Active911Vendor extends Vendor {
       "US/IL/GurneeFire",                 "ILLakeCountyB",
       "US/IL/HancockCounty",              "ILHancockCounty",
       "US/IL/JacksonCounty",              "ILJacksonCounty",
-      "US/IL/KaneCounty",                 "ILKaneCounty",
+      "US/IL/KaneCounty",                 "ILKaneCountyC",
       "US/IL/KankakeeCounty",             "ILKankakeeCounty",
       "US/IL/LakeCounty",                 "ILLakeCounty",
       "US/IL/MadisonCounty",              "ILMadisonCounty",
