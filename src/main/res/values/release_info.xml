@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08312017</string>
+  <string name="release_date">089042017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-21\n
+    Location Fixes:\n
+    Kane County, IL\n
+    Butler County, OH\n
+    Orange County, NY\n
+    Chester County, PA\n
+    Augusta County, VA\n
+    \n
     v1.9.13-20\n
     Location Fixes:\n
     Augusta County, GA\n
@@ -29,15 +37,6 @@
     v1.9.13-17\n
     Location Fixes:\n
     St Clair County, IL\n
-    Sweden\n
-    \n
-    v1.9.13-16\n
-    Location Fixes:\n
-    Suffolk County, NY\n
-    Cherokee County, NC\n
-    Geauga County, OH\n
-    Berkeley County, SC\n
-    Isle of Wight County, WA\n
-    Kitsap County, WA
+    Sweden
   </string>
 </resources>
