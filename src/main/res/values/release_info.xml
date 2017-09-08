@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-22\n
+    Location Fixes:\n
+    Monterey County, CA\n
+    JCMC EMS Jersey City,  NJ\n
+    \n
     v1.9.13-21\n
     Location Fixes:\n
     Kane County, IL\n
@@ -32,11 +37,6 @@
     Benton County, OR\n
     Linn County, OR\n
     Bexar County, TX\n
-    Sweden\n
-    \n
-    v1.9.13-17\n
-    Location Fixes:\n
-    St Clair County, IL\n
     Sweden
   </string>
 </resources>
