@@ -1200,7 +1200,7 @@ class Active911Vendor extends Vendor {
       "US/OH/MedinaCounty",               "OHMedinaCountyB",
       "US/OH/MeigsCounty",                "OHMeigsCounty",
       "US/OH/MercerCounty",               "OHMercerCounty",
-      "US/OH/MorrowCounty",               "OHMorrowCountyB",
+      "US/OH/MorrowCounty",               "OHMorrowCountyA",
       "US/OH/MuskingumCounty",            "OHMuskingumCounty",
       "US/OH/PerryCounty",                "OHPerryCounty",
       "US/OH/PerryTwp",                   "OHStarkCountyCencomm",
