@@ -686,6 +686,25 @@ public class C2DMService extends IntentService {
    
   }
 
+  /**
+   * Called at startup to see if a scheduled refresh ID timer event is overdue.  In theory, this
+   * should never happen.  But it has at least once, possibly because Cadpage was being updated
+   * just when the timer event should have triggered.
+   * @param context current context
+   */
+  public static void checkOverdueRefresh(Context context) {
+
+    // This only happens if at least one direct paging vendor is enabled
+    if (!VendorManager.instance().isRegistered()) return;
+
+    // If we have gone past the time the last refresh event was scheduled, do it now
+    long eventTime = ManagePreferences.lastGcmEventTime() + REFRESH_ID_TIMEOUT;
+    if (System.currentTimeMillis() > eventTime) {
+      Log.v("Perform overdue GCM refresh");
+      register(context, true);
+    }
+  }
+
   public static void registerActive911(Context context, long initDelay, long maxDelay) {
 
     long curTime = System.currentTimeMillis();

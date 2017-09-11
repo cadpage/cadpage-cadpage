@@ -58,6 +58,11 @@ public class CadPageApplication extends Application {
         // there regular GCM library does.  So that is what we are going to do
         C2DMService.register(this, true);
       }
+
+      // If a C2DM registration was not forced normally, see if one is overdue
+      else {
+        C2DMService.checkOverdueRefresh(this);
+      }
       
     } catch (Exception ex) {
       TopExceptionHandler.initializationFailure(this, ex);
