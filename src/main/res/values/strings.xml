@@ -580,4 +580,7 @@
     This is a known problem, identified in support ticket #2017050710000311.  Could you please
     fix things so that this does not happen in future releases of the Active911 Android app.
   </string>
+
+  <string name="reconnect_google">Reconnect with Google servers</string>
+  <string name="reconnect">Reconnect with %s</string>
 </resources>

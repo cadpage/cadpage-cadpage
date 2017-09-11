@@ -18,6 +18,7 @@ import android.net.Uri.Builder;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.widget.Toast;
 
 /**
  * This class manages all of the Vendor classes
@@ -239,6 +240,7 @@ public class VendorManager {
    * @param context current context
    */
   void reconnect(Context context) {
+    Toast.makeText(context, R.string.reconnect_google, Toast.LENGTH_SHORT).show();
     ManagePreferences.setDirectPageActive(true);
     ManagePreferences.setReconnect(true);
     C2DMService.register(context, true);

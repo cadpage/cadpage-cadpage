@@ -26,6 +26,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.widget.Toast;
+
 import net.anei.cadpage.BroadcastBindings;
 
 abstract class Vendor {
@@ -716,6 +718,10 @@ abstract class Vendor {
     // Otherwise, if we are registered with this server, pass the new registration
     // ID to them
     else if (enabled) {
+      if (userReq) {
+        String text = String.format(context.getString(R.string.reconnect), context.getString(titleId));
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+      }
       sendReregister(context, registrationId, userReq, transfer);
       return true;
     }
