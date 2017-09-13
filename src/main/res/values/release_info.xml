@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09102017</string>
+  <string name="release_date">09132017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-24\n
+    Location Fixes:\n
+    Monterey County, CA\n
+    Bergen County, NJ\n
+    Cape May County, NJ\n
+    Essex County, NJ\n
+    Middlesex County, NJ\n
+    Sussex County, NJ\n
+    Cambria County, PA\n
+    \n
+    General Fixes:\n
+    Direct paging reliability enhancements\n
+    \n
     v1.9.13-23\n
     Location Fixes:\n
     Navajo County, AZ\n
@@ -27,14 +40,6 @@
     v1.9.13-20\n
     Location Fixes:\n
     Augusta County, GA\n
-    Nassau County, NY\n
-    \n
-    v1.9.13-19\n
-    Location Fixes:\n
-    St Marys County, MD\n
-    Kitsap County, WA\n
-    \n
-    General Fixes:\n
-    Fixed crash after launching Active911 app in Airplane mode
+    Nassau County, NY
   </string>
 </resources>
