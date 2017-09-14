@@ -531,6 +531,7 @@ class Active911Vendor extends Vendor {
       "US/IL/KaneCounty",                 "ILKaneCountyC",
       "US/IL/KankakeeCounty",             "ILKankakeeCounty",
       "US/IL/LakeCounty",                 "ILLakeCounty",
+      "US/IL/MacoupinCounty",             "ILMacoupinCounty",
       "US/IL/MadisonCounty",              "ILMadisonCounty",
       "US/IL/McHenryCounty",              "ILMcHenryCounty",
       "US/IL/Mcsd911",                    "ILRandolphCountyB",
