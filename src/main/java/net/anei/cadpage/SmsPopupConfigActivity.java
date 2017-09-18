@@ -34,6 +34,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -106,8 +107,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     // Disable the pass through option which is unusable starting in Kit Kat
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       pref = findPreference(getString(R.string.pref_passthrusms_key));
-      ((CheckBoxPreference)pref).setChecked(true);
-      pref.setEnabled(false);
+      deletePreference(pref);
     }
 
     
@@ -656,6 +656,32 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     int pt = name.indexOf(',');
     if (pt >= 0) name = name.substring(0,pt);
     return name;
+  }
+
+  /**
+   * Remove preference from preference tree
+   * @param pref Preference to be removed
+   */
+  private void deletePreference(Preference pref) {
+    PreferenceGroup parent = findParent(getPreferenceScreen(), pref);
+    if (parent != null) parent.removePreference(pref);
+  }
+
+  /**
+   * Find parent of preference in preference tree
+   * @param root - root of preference tree
+   * @param pref - Preference
+   */
+  private PreferenceGroup findParent(PreferenceGroup root, Preference pref) {
+    for (int ndx = 0; ndx < root.getPreferenceCount(); ndx++) {
+      Preference child = root.getPreference(ndx);
+      if (child == pref) return root;
+      if (child instanceof PreferenceGroup) {
+        PreferenceGroup parent = findParent((PreferenceGroup)child, pref);
+        if (parent != null) return parent;
+      }
+    }
+    return null;
   }
 
   // This is all supposed to work around a bug causing crashes for

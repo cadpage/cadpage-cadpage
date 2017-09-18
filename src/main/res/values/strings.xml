@@ -505,7 +505,11 @@
   <string name="pref_privacy_policy_title">Privacy Policy</string>
   <string name="pref_privacy_policy_summary">View Cadpage privacy policy.</string>
   <string name="pref_privacy_policy_url">http://www.cadpage.org/privacy-policy</string>
-  
+
+  <string name="pref_grant_account_access_title">Allow access to Email accounts</string>
+  <string name="pref_grant_account_access_summaryon">Email account access permitted</string>
+  <string name="pref_grant_account_access_summaryoff">Email account access denied</string>
+
   <!-- Location settings -->
   <string name="pref_location_screen_title">Location Settings</string>
   <string name="pref_location_screen_summary">CAD Page Processing Details</string>

@@ -799,6 +799,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static FilterOptions runReportOptions() {
     return new FilterOptions(prefs.getString(R.string.pref_run_report_option_key));
   }
+
+  public static boolean grantAccountAccess() {
+    return prefs.getBoolean(R.string.pref_grant_account_access_key);
+  }
   
   public static Date installDate() {
     String dateStr = prefs.getString(R.string.pref_install_date_key);
@@ -2238,6 +2242,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         SmsMessageQueue.getInstance().notifyDataChange();
       }
     });
+
+    registerListener(R.string.pref_grant_account_access_key, new PreferenceChangeListener() {
+      @Override
+      public void preferenceChanged(String key, Object newVal) {
+        UserAcctManager.instance().updateEmailList();
+      }
+    });
   }
 
   @Override
@@ -2456,6 +2467,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       R.string.pref_gen_alert_option_key,
       R.string.pref_run_report_option_key,
+
+      R.string.pref_grant_account_access_key,
 
       R.string.pref_paid_year_key,
       R.string.pref_install_date_key,

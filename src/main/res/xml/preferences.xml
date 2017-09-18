@@ -234,7 +234,11 @@
           android:defaultValue="@string/pref_noShowInCall_default" 
           android:dependency="@string/pref_popup_enabled_key"/>
         <CheckBoxPreference
-            android:summaryOff="@string/pref_passthrusms_summaryoff" android:summaryOn="@string/pref_passthrusms_summaryon" android:defaultValue="@string/pref_passthrusms_default" android:title="@string/pref_passthrusms_title" android:key="@string/pref_passthrusms_key"/>
+          android:key="@string/pref_passthrusms_key"
+          android:title="@string/pref_passthrusms_title"
+          android:summaryOff="@string/pref_passthrusms_summaryoff"
+          android:summaryOn="@string/pref_passthrusms_summaryon"
+          android:defaultValue="@string/pref_passthrusms_default" />
       </PreferenceCategory>
       <PreferenceCategory
         android:title="@string/pref_screen_category">
@@ -780,6 +784,14 @@
       <intent
         android:action="android.intent.action.VIEW" android:data="@string/pref_privacy_policy_url"/>
     </PreferenceScreen>
+            
+    <CheckBoxPreference
+        android:key="@string/pref_grant_account_access_key"
+        android:title="@string/pref_grant_account_access_title"
+        android:summaryOn="@string/pref_grant_account_access_summaryon"
+        android:summaryOff="@string/pref_grant_account_access_summaryoff"
+        android:defaultValue="false" />
+
     <PreferenceScreen
       android:key="@string/pref_faq_key"
       android:title="@string/pref_faq_title"

@@ -23,13 +23,13 @@ public class SobStoryDonateEvent extends DonateScreenEvent {
     return UserAcctManager.instance().isAcctSupport() && 
            UserAcctManager.instance().getUser() != null;
   }
-  
+
   @Override
   protected Object[] getTextParms(int type) {
     switch (type) {
     case PARM_TEXT:
       return new Object[]{UserAcctManager.instance().getUser()};
-      
+
     default:
       return null;
     }

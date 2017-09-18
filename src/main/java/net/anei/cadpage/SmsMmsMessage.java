@@ -1335,7 +1335,7 @@ public class SmsMmsMessage implements Serializable {
     
     sb.append("\nackReq:");
     sb.append(ackReq);
-    sb.append("\nackURL");
+    sb.append("\nackURL:");
     sb.append(ackURL);
     sb.append("\nresponseMenu:");
     sb.append(responseMenu);

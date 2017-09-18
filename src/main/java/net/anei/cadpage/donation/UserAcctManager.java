@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.HttpService.HttpRequest;
 import net.anei.cadpage.Log;
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
 import net.anei.cadpage.donation.UserAcctManager;
@@ -69,13 +70,9 @@ public class UserAcctManager {
     }
     meid = readPhoneStatePerm ? tMgr.getDeviceId() : null;
     if (meid == null) meid = getSerialID();
-    
-    List<String> emailList = new ArrayList<String>();
-    for (Account acct :  AccountManager.get(context).getAccountsByType("com.google")) {
-      emailList.add(acct.name);
-    }
-    userEmails = emailList.toArray(new String[emailList.size()]);
-    
+
+    updateEmailList();
+
     // If we are running in an emulator, assume developer status
     if (SDK_PTN.matcher(Build.PRODUCT).matches()) {
       developer = true;
@@ -83,7 +80,7 @@ public class UserAcctManager {
     
     // Otherwise, see if first email is on our developer list
     else {
-      if (userEmails.length > 0) {
+      if (userEmails != null && userEmails.length > 0) {
         String[] developers = context.getResources().getStringArray(R.array.donate_devel_list);
         if (developers != null) {
           developer = Arrays.asList(developers).contains(userEmails[0]);
@@ -93,6 +90,18 @@ public class UserAcctManager {
 
     // See if it is time to perform an automatic payment status recalculation
     DonationManager.instance().checkPaymentStatus(context);
+  }
+
+  public void updateEmailList() {
+    if (ManagePreferences.grantAccountAccess()) {
+      List<String> emailList = new ArrayList<String>();
+      for (Account acct : AccountManager.get(context).getAccountsByType("com.google")) {
+        emailList.add(acct.name);
+      }
+      userEmails = emailList.toArray(new String[emailList.size()]);
+    } else {
+      userEmails = null;
+    }
   }
 
   /**
@@ -113,9 +122,11 @@ public class UserAcctManager {
     
     // Build query with all of the possible account and phone ID's
     Uri.Builder builder = Uri.parse(context.getString(R.string.donate_server_url)).buildUpon();
-    Account[] accounts = AccountManager.get(context).getAccountsByType("com.google");
-    for (Account acct : accounts) {
-      builder.appendQueryParameter("id", cleanName(acct.name));
+    if (ManagePreferences.grantAccountAccess()) {
+      Account[] accounts = AccountManager.get(context).getAccountsByType("com.google");
+      for (Account acct : accounts) {
+        builder.appendQueryParameter("id", cleanName(acct.name));
+      }
     }
     builder.appendQueryParameter("id", phoneNumber);
     

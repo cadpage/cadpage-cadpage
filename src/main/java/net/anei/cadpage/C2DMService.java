@@ -600,11 +600,8 @@ public class C2DMService extends IntentService {
     // Google is having problems with some systems returning AUTHENTICATION_FAILED status for unknown
     // reasons, so we will try to generate a bug report to help them out
     if (!error.equals("SERVICE_NOT_AVAILABLE")) {
-      if (!error.equals("PHONE_REGISTRATION_ERROR")) {
-        if (error.equals("AUTHENTICATION_FAILED")) BugReportGenerator.generate();
-        return error;
-      }
-      if (UserAcctManager.instance().getUser() == null) return "AUTHENTICATION_FAILED";
+      if (error.equals("AUTHENTICATION_FAILED")) BugReportGenerator.generate();
+      return error;
     }
     
     // See if request should be rescheduled
