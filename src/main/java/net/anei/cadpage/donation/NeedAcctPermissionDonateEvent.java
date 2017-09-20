@@ -5,17 +5,16 @@ import net.anei.cadpage.R;
 /*
 Hey, I've already contributed
  
-Our sincere apologies.  Cadpage tracks you by your Google Market account
-and you are running Android 1.6 which does not gives us the ability to 
-determine your Google Market account.  The good news is that you get a free
-ride as long as you are running Android 1.6.
+You have not given Cadpage permission to access your account and phone information.
+Without this permission, Cadpage can not confirm if you have purchased a Cadpage
+subscription.
 
  */
 public class NeedAcctPermissionDonateEvent extends DonateScreenEvent {
 
   protected NeedAcctPermissionDonateEvent() {
     super(AlertStatus.YELLOW, R.string.donate_need_acct_permission_title, R.string.donate_need_acct_permission_text,
-           AllowAcctPermissionDonateEvent.instance());
+          AllowAcctPermissionDonateEvent.instance());
   }
 
   @Override

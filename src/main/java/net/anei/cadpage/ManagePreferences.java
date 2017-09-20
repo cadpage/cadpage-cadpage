@@ -1375,7 +1375,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int PERM_REQ_ACCT_INFO = 12;
   private static final int PERM_REQ_LOCATION_TRACKING = 13;
   private static final int PERM_REQ_USER_ALERT_SOUND = 14;
-  private static final int PERM_REQ_LIMIT = 14;
+  private static final int PERM_REQ_GRANT_ACCT_ACCESS = 15;
+  private static final int PERM_REQ_LIMIT = 15;
   
   private static PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
@@ -1664,7 +1665,37 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       return true;
     }
   }
- 
+
+  /********************************************************************
+   * Permission checking the user selectable sound override setting
+   ********************************************************************/
+  public static boolean checkGrantAccountAccess(CheckBoxPreference pref, Boolean value) {
+    return grantAccountAccessChecker.check(pref, value);
+  }
+
+  public static boolean checkGrantAccountAccess(CheckBoxPreference pref) {
+    return grantAccountAccessChecker.check(pref);
+  }
+
+  private static GrantAccountAccessChecker grantAccountAccessChecker = new GrantAccountAccessChecker();
+
+  private static class GrantAccountAccessChecker extends CheckBoxPermissionChecker {
+
+    public GrantAccountAccessChecker() {
+      super(PERM_REQ_GRANT_ACCT_ACCESS, R.string.pref_grant_account_access_key);
+    }
+
+    @Override
+    protected Boolean checkPermission(Boolean value) {
+
+      // True value requires GET_ACCOUNTS permision
+      // because it may need to read audio alert files on external storage
+      if (!value) return null;
+      if (checkRequestPermission(PermissionManager.GET_ACCOUNTS, R.string.perm_grant_acct_access)) return null;
+      return true;
+    }
+  }
+
   /********************************************************************************
    * Generic permission checker used to handle ListPreference preference values
    *********************************************************************************/

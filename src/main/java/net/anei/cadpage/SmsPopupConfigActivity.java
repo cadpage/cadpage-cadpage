@@ -307,6 +307,14 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
       }
     });
 
+    pref = findPreference(getString(R.string.pref_grant_account_access_key));
+    pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+      @Override
+      public boolean onPreferenceChange(Preference preference, Object newValue) {
+        return ManagePreferences.checkGrantAccountAccess((CheckBoxPreference)preference, (Boolean)newValue);
+      }
+    });
+
     // Email developer response
     Preference emailPref = findPreference(getString(R.string.pref_email_key));
     emailPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
