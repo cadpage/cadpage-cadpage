@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09132017</string>
+  <string name="release_date">09222017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-25\n
+    Location Fixes:\n
+    Boulder County, CO\n
+    Citrus County, FL\n
+    Macoupin County, IL\n
+    Washtenaw County, MI\n
+    Sullivan County, NY\n
+    Montgomery County, TX\n
+    \n
     v1.9.13-24\n
     Location Fixes:\n
     Monterey County, CA\n
@@ -35,11 +44,6 @@
     Butler County, OH\n
     Orange County, NY\n
     Chester County, PA\n
-    Augusta County, VA\n
-    \n
-    v1.9.13-20\n
-    Location Fixes:\n
-    Augusta County, GA\n
-    Nassau County, NY
+    Augusta County, VA
   </string>
 </resources>
