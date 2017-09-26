@@ -139,8 +139,14 @@ public class ContentQuery {
   }
   
   private static void dumpBundle(String prefix, Bundle bundle) {
-    for (String key : bundle.keySet()) {
-      dumpKeyValue(prefix, key, bundle.get(key));
+
+    // One user is having this throw exceptions down deep, so we catch them and carry on
+    try {
+      for (String key : bundle.keySet()) {
+        dumpKeyValue(prefix, key, bundle.get(key));
+      }
+    } catch (RuntimeException ex) {
+      Log.e(ex);
     }
   }
   
