@@ -18,7 +18,7 @@ public class EmailSobStoryEvent extends DonateEvent {
     EmailDeveloperActivity.sendSobStoryEmail(activity);
     closeEvents(activity);
   }
-  
+
   private static final EmailSobStoryEvent instance = new EmailSobStoryEvent();
   
   public static EmailSobStoryEvent instance() {

@@ -117,7 +117,7 @@ public class DonationManager {
         // Request authorization information from authorization server
         // The android market authorization is now reloaded every time the
         // app starts up, so it would be pointless to do it again.
-        ManagePreferences.checkPermAccountInfo(new ManagePreferences.PermissionAction(){
+        ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
           @Override
           public void run(boolean ok, String[] permissions, int[] granted) {
             UserAcctManager.instance().reloadStatus(context);
@@ -140,7 +140,7 @@ public class DonationManager {
     
     // Request authorization information from authorization server
     // this will also call our processSubscription() method
-    ManagePreferences.checkPermAccountInfo(new ManagePreferences.PermissionAction(){
+    ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
       @Override
       public void run(boolean ok, String[] permissions, int[] granted) {
         UserAcctManager.instance().reloadStatus(context);

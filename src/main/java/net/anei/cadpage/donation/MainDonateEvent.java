@@ -3,6 +3,7 @@ package net.anei.cadpage.donation;
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
 import android.content.Context;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.widget.Button;
 
@@ -13,9 +14,10 @@ import android.widget.Button;
 public class MainDonateEvent extends DonateScreenEvent {
   
   private Activity activity;
-  private Preference pref;
+  private Preference mainPref;
   private Button button;
   private SmsMmsMessage msg;
+  private CheckBoxPreference grantAccountPref;
   
   public MainDonateEvent() {
     super(null, 0, 0,
@@ -55,7 +57,7 @@ public class MainDonateEvent extends DonateScreenEvent {
    */
   public void refreshStatus() {
     if (activity != null && !activity.isFinishing()) {
-      setPreference(activity, pref);
+      setPreference(activity, mainPref);
       setButton(activity, button, msg);
     }
   }
@@ -63,7 +65,7 @@ public class MainDonateEvent extends DonateScreenEvent {
   @Override
   public boolean setPreference(Activity activity, Preference pref) {
     this.activity = activity;
-    this.pref = pref;
+    this.mainPref = pref;
     if (pref != null) {
       DonateEvent event = findEvent(false, null);
       if (event != null) {
@@ -85,6 +87,14 @@ public class MainDonateEvent extends DonateScreenEvent {
     }
     button.setVisibility(Button.GONE);
     return false;
+  }
+
+  public CheckBoxPreference getGrantAccountPref() {
+    return grantAccountPref;
+  }
+
+  public void setGrantAccountPref(CheckBoxPreference grantAccountPref) {
+    this.grantAccountPref = grantAccountPref;
   }
 
   @Override
@@ -126,5 +136,4 @@ public class MainDonateEvent extends DonateScreenEvent {
   public static MainDonateEvent instance() {
     return instance;
   }
-
 }

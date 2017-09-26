@@ -1,6 +1,8 @@
 package net.anei.cadpage.donation;
 
 import net.anei.cadpage.ManageBluetooth;
+import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.SmsMessageQueue;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.billing.BillingActivity;
@@ -15,10 +17,13 @@ public class DonateActivity extends BillingActivity {
   private static final String EXTRA_SCREEN_NAME = "net.anei.cadpage.DonateActivty.SCREEN_NAME";
   private static final String EXTRA_MSG_ID =      "net.anei.cadpage.DonateActivity.MSG_ID";
 
+  private PermissionManager permMgr = new PermissionManager(this);
+
   private DonateScreenBaseEvent event;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    ManagePreferences.setPermissionManager(permMgr);
     super.onCreate(savedInstanceState);
     String classname = getIntent().getStringExtra(EXTRA_SCREEN_NAME);
     event = DonateScreenEvent.getScreenEvent(classname);
@@ -26,7 +31,6 @@ public class DonateActivity extends BillingActivity {
     SmsMmsMessage msg = msgId<0 ? null : SmsMessageQueue.getInstance().getMessage(msgId);
     event.create(this, msg);
   }
-
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -42,13 +46,22 @@ public class DonateActivity extends BillingActivity {
     }
   }
 
-
   @Override
   protected Dialog onCreateDialog(int id) {
     if (isFinishing()) return null;
     return event.createDialog(this, id);
   }
 
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
+    ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
+  }
+
+  @Override
+  protected void onDestroy() {
+    ManagePreferences.releasePermissionManager(permMgr);
+    super.onDestroy();
+  }
 
   /**
    * Create intent that can be used to launch this activity
@@ -57,6 +70,12 @@ public class DonateActivity extends BillingActivity {
    * @param msg message associated with this event
    */
   public static void launchActivity(Context context, DonateScreenBaseEvent event, SmsMmsMessage msg) {
+
+    // See if event should short circuit screen activity
+    if (context instanceof Activity) {
+      if (!event.launchActivity((Activity)context)) return;
+    }
+
     Intent popup = new Intent(context, DonateActivity.class);
     popup.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     popup.putExtra(EXTRA_SCREEN_NAME, event.getClass().getName());

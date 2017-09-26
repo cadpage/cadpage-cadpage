@@ -308,6 +308,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     });
 
     pref = findPreference(getString(R.string.pref_grant_account_access_key));
+    MainDonateEvent.instance().setGrantAccountPref((CheckBoxPreference)pref);
     pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override
       public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -393,6 +394,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   @Override
   protected void onDestroy() {
     MainDonateEvent.instance().setPreference(null, null);
+    MainDonateEvent.instance().setGrantAccountPref(null);
     ManagePreferences.releasePermissionManager(permMgr);
     super.onDestroy();
   }

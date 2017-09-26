@@ -70,7 +70,7 @@ public class VendorActivity extends Safe40Activity {
         final boolean required = vendor.isAcctInfoRequired();
         int expId = required ? R.string.perm_acct_info_for_register_direct_req :  R.string.perm_acct_info_for_register_direct_opt;
 
-            ManagePreferences.checkPermAccountInfo(new ManagePreferences.PermissionAction(){
+            ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
           @Override
           public void run(boolean ok, String[] permissions, int[] granted) {
             if (ok || !required) {

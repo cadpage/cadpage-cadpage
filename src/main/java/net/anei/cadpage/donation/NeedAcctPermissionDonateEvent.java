@@ -1,11 +1,12 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
 /*
-Hey, I've already contributed
+We do not know who you are
  
-You have not given Cadpage permission to access your account and phone information.
+You have not given Cadpage permission to access your account information.
 Without this permission, Cadpage can not confirm if you have purchased a Cadpage
 subscription.
 
@@ -19,7 +20,7 @@ public class NeedAcctPermissionDonateEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return !UserAcctManager.instance().isAcctSupport();
+    return !ManagePreferences.grantAccountAccess();
   }
   
   private static final NeedAcctPermissionDonateEvent instance = new NeedAcctPermissionDonateEvent();

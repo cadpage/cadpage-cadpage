@@ -124,23 +124,34 @@
   <string name="donate_demo_expire_text">
     You have been using Cadpage for %1$d days.  Your cadpage demo expired %2$d days ago.  
   </string>
-  
+
   <string name="donate_need_acct_permission_title">"We do not know who you are"</string>
   <string name="donate_need_acct_permission_text">
-    You have not given Cadpage permission to access your account and phone information.
+    You have not given Cadpage permission to access your account information.
     Without this permission, Cadpage can not confirm if you have purchased a Cadpage
-    subscription. 
+    subscription.
   </string>
-  
+
   <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>
-  
-  <string name="donate_no_user_title">"Hey, I've already paid for this"</string>
-  <string name="donate_no_user_text">
-    Our sincere apologies.  Cadpage tracks you by your Google Play Store account
-    "and you don't seem to have one.  Try logging into the Google Play Store with"
-    your Paypal account and see if that helps.
+
+  <string name="donate_email_acct_permission_text">
+    You have requested an operation that we cannot perform without accessing your configured
+    email account information.  This is considered private user information which we are not
+    allowed to access without your explicit permission.\n\n
+
+    The email account information may be included in support emails sent to the Cadpage support
+    desk and used to update your payment status on our Cadpage authorization server.  And it will
+    be sent in queries to that authorization server to determine your proper payment status.
   </string>
-  
+
+  <string name="donate_email_acct_permission_granted_text">
+    Yes you may access my email account information
+  </string>
+
+  <string name="donate_email_acct_permission_denied_text">
+    No you may not access my email account information
+  </string>
+
   <string name="donate_wrong_user_title">"Hey, I've already paid for this"</string>
   <string name="donate_wrong_user_text">
     Our sincere apologies.  Please click the button below to generate an email.  

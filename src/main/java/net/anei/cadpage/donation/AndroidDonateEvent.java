@@ -19,9 +19,7 @@ public class AndroidDonateEvent extends DonateEvent {
 
   @Override
   public boolean isEnabled() {
-    if (CadPageApplication.isBetaRelease()) return false;
-    if (!BillingManager.instance().isPurchaseAvail()) return false;
-    return true;
+    return BillingManager.instance().isSupported();
   }
 
   @Override

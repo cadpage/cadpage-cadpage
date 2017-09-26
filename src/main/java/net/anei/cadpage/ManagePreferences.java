@@ -803,6 +803,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static boolean grantAccountAccess() {
     return prefs.getBoolean(R.string.pref_grant_account_access_key);
   }
+
+  public static void setGrantAccountAccess(boolean newVal) {
+    prefs.putBoolean(R.string.pref_grant_account_access_key, newVal);
+  }
   
   public static Date installDate() {
     String dateStr = prefs.getString(R.string.pref_install_date_key);
@@ -1372,7 +1376,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 //  private static final int PERM_REQ_RESP_TYPE_BTN5 = 9;
 //  private static final int PERM_REQ_RESP_TYPE_BTN6 = 10;
   private static final int PERM_REQ_NO_SHOW_IN_CALL = 11;
-  private static final int PERM_REQ_ACCT_INFO = 12;
+  private static final int PERM_REQ_PHONE_INFO = 12;
   private static final int PERM_REQ_LOCATION_TRACKING = 13;
   private static final int PERM_REQ_USER_ALERT_SOUND = 14;
   private static final int PERM_REQ_GRANT_ACCT_ACCESS = 15;
@@ -1455,9 +1459,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         
         // OK, we are also interested in the account permissions, but only if
         // we are ready to launch an automatic payment recalculation
-        else if (checker instanceof AccountInfoChecker) {
+        else if (checker instanceof PhoneInfoChecker) {
           if (DonationManager.instance().checkPaymentStatus()) {
-            AccountInfoChecker aChecker = (AccountInfoChecker)checker;
+            PhoneInfoChecker aChecker = (PhoneInfoChecker)checker;
             if (!aChecker.check(new PermissionAction(){
               @Override
               public void run(boolean ok, String[] permissions, int[] granted) {
@@ -1667,14 +1671,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   /********************************************************************
-   * Permission checking the user selectable sound override setting
+   * Permission checking the allow access to email account option
    ********************************************************************/
   public static boolean checkGrantAccountAccess(CheckBoxPreference pref, Boolean value) {
     return grantAccountAccessChecker.check(pref, value);
   }
 
-  public static boolean checkGrantAccountAccess(CheckBoxPreference pref) {
-    return grantAccountAccessChecker.check(pref);
+  public static boolean setGrantAccountAccess(CheckBoxPreference pref, Boolean value, Runnable run) {
+    return grantAccountAccessChecker.setValue(pref, value, run);
   }
 
   private static GrantAccountAccessChecker grantAccountAccessChecker = new GrantAccountAccessChecker();
@@ -1689,10 +1693,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     protected Boolean checkPermission(Boolean value) {
 
       // True value requires GET_ACCOUNTS permision
-      // because it may need to read audio alert files on external storage
       if (!value) return null;
       if (checkRequestPermission(PermissionManager.GET_ACCOUNTS, R.string.perm_grant_acct_access)) return null;
-      return true;
+      return false;
     }
   }
 
@@ -1790,6 +1793,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     private P preference;
     private V value;
     private V newValue;
+    private Runnable run;
     
     /**
      * Constructor
@@ -1812,6 +1816,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // but get and save the current preference value
       this.preference = null;
       this.value = getPrefValue(resPrefId);
+      this.run = null;
       
       // Make the primary permission check without displaying a user request
       // screen.  If there is a missing preference, set the setting to the
@@ -1822,7 +1827,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       }
       return true;
     }
-    
+
     /**
      * Called when the user attempts to change a value from the
      * configuration settings screen
@@ -1832,15 +1837,47 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * should be rejected
      */
     public boolean check(P preference, V value) {
-      
+
       // Save the preference and requested values and
       // call the main check permission method, requesting
       // a user permission screen
       this.preference = preference;
       this.value = value;
+      this.run = null;
       return super.check(true);
     }
-    
+
+    /**
+     * Attempt to set preference value
+     * @param pref preference controlling this value, or null if none
+     * @param value requested new preference value
+     * @return if value could be set immediately
+     */
+    public boolean setValue(P pref, V value) {
+      return setValue(pref, value, null);
+    }
+
+    /**
+     * Attempt to set preference value
+     * @param pref preference controlling this value, or null if none
+     * @param value requested new preference value
+     * @param run runnable to be executed if value is set correctly
+     * @return if value could be set immediately
+     */
+    public boolean setValue(P pref, V value, Runnable run) {
+      this.preference = null;
+      this.value = value;
+      this.run = run;
+
+      if (super.check(true)) {
+        savePrefValue(resPrefId, value);
+        if (pref != null) setPreference(pref, value);
+        if (run != null) run.run();
+        return true;
+      }
+      return false;
+    }
+
     /**
      * Called when user changes some other preference value which may affect
      * the validity of this preference setting
@@ -1883,9 +1920,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       // Change the setting value, and change the value displayed in the preference screen
       savePrefValue(resPrefId, newValue);
-      if (preference != null) {
-        setPreference(preference, newValue);
-      }
+      if (preference != null) setPreference(preference, newValue);
+      if (run != null) run.run();
     }
     
     /**
@@ -1952,20 +1988,20 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   /*************************************************************************
-   * Permission checking for all actions that require user account information
+   * Permission checking for all actions that require phone information
    ************************************************************************/
-  public static boolean checkPermAccountInfo(PermissionAction action, int explainId) {
+  public static boolean checkPermPhoneInfo(PermissionAction action, int explainId) {
     return accountInfoChecker.check(action, explainId, true);
   }
 
-  private static final AccountInfoChecker accountInfoChecker = new AccountInfoChecker();
+  private static final PhoneInfoChecker accountInfoChecker = new PhoneInfoChecker();
   
-  private static class AccountInfoChecker extends ActionPermissionChecker {
+  private static class PhoneInfoChecker extends ActionPermissionChecker {
 
     private int explainId;
 
-    public AccountInfoChecker() {
-      super(PERM_REQ_ACCT_INFO);
+    public PhoneInfoChecker() {
+      super(PERM_REQ_PHONE_INFO);
     }
     
     public boolean check(PermissionAction action, int explainId, boolean request) {
@@ -1975,7 +2011,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     @Override
     protected void checkPermission() {
-      checkRequestPermission(PermissionManager.GET_ACCOUNTS, explainId);
       checkRequestPermission(PermissionManager.READ_SMS, explainId);
       checkRequestPermission(PermissionManager.READ_PHONE_STATE, explainId);
     }

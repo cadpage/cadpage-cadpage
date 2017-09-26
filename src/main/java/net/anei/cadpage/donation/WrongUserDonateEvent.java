@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
 /*
@@ -19,10 +20,9 @@ public class WrongUserDonateEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return UserAcctManager.instance().isAcctSupport() && 
-           UserAcctManager.instance().getUser() != null;
+    return ManagePreferences.grantAccountAccess();
   }
-  
+
   @Override
   protected Object[] getTextParms(int type) {
     switch (type) {

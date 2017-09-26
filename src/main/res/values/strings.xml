@@ -25,8 +25,8 @@
    emergency response calls.  Malicious applications could use this to 
    access personal information connected with these calls</string>
    
-   <string name="perm_acct_info_for_email">
-   If we know more about who you are, we can better identify subscription problems
+   <string name="perm_phone_info_for_email">
+   If we know your phone number, we can better identify subscription problems
    or problems with direct paging vendors.  Granting this permission is not required.
    If you do not do it, we will do the best we can without this information.    
    </string>
@@ -52,20 +52,16 @@
    help identify your account on their system.
    </string>
 
-   <string name="perm_acct_info_for_donate_status">
-   We need to know who you are before we can check your subscription status.
-   </string>
-   
    <string name="perm_user_sound_override">
    You are asking Cadpage to use a user selectable ringtone, which may be located on your
    external SD card.
    </string>
 
   <string name="perm_grant_acct_access">
-    Your are requesting access your email account information.  To do
+    You are requesting Cadpage access to your email account information.  To do
     this, we will need identify your configured Google accounts.
   </string>
-   
+
 <!-- Menu Strings -->
 
    <string name="settings">Settings</string>   

@@ -18,11 +18,6 @@ public class AndroidDonateProblemEvent extends DonateScreenEvent {
            PaypalDonateEvent.instance());
   }
 
-  @Override
-  public boolean isEnabled() {
-    return ! CadPageApplication.isBetaRelease();
-  }
-  
   private static final AndroidDonateProblemEvent instance = new AndroidDonateProblemEvent();
   
   public static AndroidDonateProblemEvent instance() {

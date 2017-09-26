@@ -23,7 +23,7 @@
    Tillåt att applikationen tar emot information från nödsamtal. Illasinnad programvara skulle kunna använda denna information för att komma åt personlig information från dessa samtal.
   </string>
    
-   <string name="perm_acct_info_for_email">
+   <string name="perm_phone_info_for_email">
    Om vi vet vem du är så kan vi lättare identifiera abonnemangsprobleom eller problem med meddelandeservice. Att ge oss tillåtelse till det är inte nödvändigt.
    Om du inte gör det så kommer vi att göra vårt bästa för att lösa det utan den här informationen.    
    </string>
@@ -45,10 +45,6 @@
    Den service som du försöker registrera hos kräver ytterligare information för att identiviera ditt konto i deras system.
    </string>
 
-  <string name="perm_acct_info_for_donate_status">
-   Vi behöver information om vem du är innan vi kan kolla ditt prenumerationsstatus.
-   </string>
-   
    <string name="perm_user_sound_override">  
    Du vill att Cadpage ska använda en rington som kan vara sparat på ditt externa SD-kort.
    </string>

@@ -7,18 +7,17 @@ import net.anei.cadpage.R;
 /**
  * Generate an email to the developers
  */
-public class EmailMarketProblemEvent extends DonateEvent {
+public class EmailMarketProblemEvent extends AccountScreenEvent {
   
   public EmailMarketProblemEvent() {
     super(null, R.string.donate_email_title);
   }
 
   @Override
-  protected void doEvent(Activity activity) {
+  void doAccountPermissionApproved(Activity activity) {
     EmailDeveloperActivity.sendMarketProblemEmail(activity);
-    closeEvents(activity);
   }
-  
+
   private static final EmailMarketProblemEvent instance = new EmailMarketProblemEvent();
   
   public static EmailMarketProblemEvent instance() {

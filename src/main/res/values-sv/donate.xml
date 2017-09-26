@@ -61,17 +61,16 @@
   <string name="donate_demo_expire_title">Demotiden för Cadpage har gått ut.</string>
   <string name="donate_demo_expire_text">Du har använt Cadpage demo i %1$d dagar. Din Cadpage demo gick ut för %2$d dagar sen.  
   </string>
-  
-  <string name="donate_need_acct_permission_title">"Vi vet inte vem du är"</string>
-  <string name="donate_need_acct_permission_text">
-    Du har inte givit Cadpage access till ditt konto och din telefoninformation.
-    Utan denna tillåtelse kan inte Cadpage verifiera att du har ett köpt Cadpageabonnemang. 
+
+  <string name="donate_need_acct_permission_title">"We do not know who you are"</string> <!-- Translate -->
+  <string name="donate_need_acct_permission_text">  <!-- Translate -->
+    You have not given Cadpage permission to access your account information.
+    Without this permission, Cadpage can not confirm if you have purchased a Cadpage
+    subscription.
   </string>
-  
-  <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>
-  <string name="donate_no_user_title">"Hörru, jag har redan betalt för det här"</string>
-  <string name="donate_no_user_text">
-  Ber hemskt mycket om ursäkt. Cadpage finner dig med hjälp av ditt Google Market konto "och du verkar inte ha något sådant. Försök att logga in med" ditt Paypal konto och kolla om det hjälper.</string>
+
+  <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>  <!-- Translate -->
+
   <string name="donate_wrong_user_title">"Hörru, jag har redan betalt för det här"</string>
   <string name="donate_wrong_user_text">
     Ber hemskt mycket om ursäkt.  Tryck på knappen nedan för att generera ett mail.  

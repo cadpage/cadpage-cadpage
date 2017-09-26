@@ -17,6 +17,10 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
     super(alertStatus, titleId, textId, R.layout.popup_donate_screen);
     this.events = events;
   }
+
+  protected void setEvents(DonateEvent ... events) {
+    this.events = events;
+  }
   
   /**
    * @return list of donation events associated with this screen

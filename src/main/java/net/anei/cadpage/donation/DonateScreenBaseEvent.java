@@ -136,4 +136,12 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     return event;
   }
 
+  /**
+   * Determine if activity launch request should proceed
+   * @param activity current activity
+   * @return true to proceed with launch, false to abort
+   */
+  public boolean launchActivity(Activity activity) {
+    return true;
+  }
 }

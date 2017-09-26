@@ -11,7 +11,7 @@ import net.anei.cadpage.SmsPopupUtils;
 /**
 Donate through PayPal
  */
-public class PaypalDonateEvent extends DonateEvent {
+public class PaypalDonateEvent extends AccountScreenEvent {
   
   private static final String TARGET_URL = "http://www.cadpage.org/financial-support/paypal-payments";
   
@@ -20,21 +20,19 @@ public class PaypalDonateEvent extends DonateEvent {
   }
 
   @Override
-  protected void doEvent(Activity activity) {
+  void doAccountPermissionApproved(Activity activity) {
     if (!SmsPopupUtils.haveNet(activity)) return;
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(TARGET_URL)); 
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(TARGET_URL));
     try {
       activity.startActivity(intent);
     } catch (ActivityNotFoundException ex) {
       Log.e(ex);
     }
-    closeEvents(activity);
   }
-  
+
   private static final PaypalDonateEvent instance = new PaypalDonateEvent();
   
   public static PaypalDonateEvent instance() {
     return instance;
   }
-
 }

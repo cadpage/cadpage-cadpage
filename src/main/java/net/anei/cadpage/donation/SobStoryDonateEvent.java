@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
 /*
@@ -15,13 +16,12 @@ public class SobStoryDonateEvent extends DonateScreenEvent {
 
   protected SobStoryDonateEvent() {
     super(AlertStatus.YELLOW, R.string.donate_sob_story_title, R.string.donate_sob_story_text,
-           EmailSobStoryEvent.instance());
+          EmailSobStoryEvent.instance());
   }
 
   @Override
   public boolean isEnabled() {
-    return UserAcctManager.instance().isAcctSupport() && 
-           UserAcctManager.instance().getUser() != null;
+    return ManagePreferences.grantAccountAccess();
   }
 
   @Override

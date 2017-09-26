@@ -16,7 +16,6 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -182,12 +181,12 @@ public class EmailDeveloperActivity extends Safe40Activity {
                                       final boolean includeMsg, final int msgId,
                                       final boolean includeCfg) {
     if (includeCfg) {
-      ManagePreferences.checkPermAccountInfo(new ManagePreferences.PermissionAction(){
+      ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
         @Override
         public void run(boolean ok, String[] permissions, int[] granted) {
           sendEmailRequest2(context, type, includeMsg, msgId, includeCfg);
         }
-      }, R.string.perm_acct_info_for_email);
+      }, R.string.perm_phone_info_for_email);
     } else {
       sendEmailRequest2(context, type, includeMsg, msgId, includeCfg);
     }

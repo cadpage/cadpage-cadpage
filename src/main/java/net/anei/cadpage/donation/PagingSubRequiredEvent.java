@@ -18,11 +18,9 @@ public class PagingSubRequiredEvent extends DonateScreenEvent {
     super(null, R.string.paging_sub_required_title, R.string.paging_sub_required_text,
           AndroidDonateEvent.instance(), 
           DonateAndroidUnsuportedEvent.instance(), 
-          AndroidDonateBetaEvent.instance(),
           AndroidDonateProblemEvent.instance(),
           DonateResetMarketEvent.instance(),
           NeedAcctPermissionDonateEvent.instance(),
-          NoUserDonateEvent.instance(), 
           WrongUserDonateEvent.instance());
   }
   

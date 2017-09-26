@@ -13,8 +13,9 @@ public class DemoDonateEvent extends DonateScreenEvent {
 
   protected DemoDonateEvent() {
     super(AlertStatus.YELLOW, R.string.donate_demo_title, R.string.donate_demo_text,
-           ReqMoneyGroup.instance(), MagicWordEvent.instance(),
-           DonateWhatsUpEvent.instance());
+          ReqMoneyGroup.instance(),
+          MagicWordEvent.instance(),
+          DonateWhatsUpEvent.instance());
   }
 
   @Override
