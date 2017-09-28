@@ -8,6 +8,7 @@ import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
 import net.anei.cadpage.donation.VendorEvent;
 import net.anei.cadpage.vendors.VendorManager;
 
@@ -177,9 +178,15 @@ public class CallHistoryActivity extends ListActivity {
       // First clear any pending notification
       ClearAllReceiver.clearAll(this);
 
+      // If user upgraded to the release that implements imporoved email account security, and
+      // we suspect that really need to give us that email account access, let them know now.
+      DonateScreenEvent event;
+      if ((event = NeedAcctPermissionUpgradeEvent.instance()).isEnabled()) {
+        DonateActivity.launchActivity(this, event, null);
+      }
+
       // If a new Active911 client may be higjacking alerts, warn user
-      DonateScreenEvent event = Active911WarnEvent.instance();
-      if (event.isEnabled()) {
+      else if ((event = Active911WarnEvent.instance()).isEnabled()) {
         DonateActivity.launchActivity(this, event, null);
       }
 

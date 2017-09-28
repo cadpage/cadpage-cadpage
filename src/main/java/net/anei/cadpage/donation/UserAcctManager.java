@@ -167,16 +167,6 @@ public class UserAcctManager {
   }
   private static final Pattern STATUS_PTN = Pattern.compile("LIFE|\\d{4}", Pattern.CASE_INSENSITIVE);
   private static final DateFormat DATE_FMT = new SimpleDateFormat("MM/dd/yyyy");
-  
-  
-  /**
-   * @return true if user has allowed the app permission needed to support account management
-   */
-  public boolean isAcctSupport() {
-    return PermissionManager.isGranted(context, PermissionManager.GET_ACCOUNTS) &&
-           PermissionManager.isGranted(context, PermissionManager.READ_SMS) &&
-           PermissionManager.isGranted(context, PermissionManager.READ_PHONE_STATE);
-  }
 
   /**
    * @return identified user account name
@@ -218,6 +208,8 @@ public class UserAcctManager {
       sb.append("\nOverpaid:");
       sb.append(overpaidDays);
     }
+    sb.append("\nReqAuthServer:");
+    sb.append(DonationManager.instance().reqAuthServer());
   }
   
   /**

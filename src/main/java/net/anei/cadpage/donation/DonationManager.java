@@ -33,7 +33,7 @@ public class DonationManager {
   
   // How long a release exemption lasts
   public static final int REL_EXEMPT_DAYS = 10;
-  
+
   private enum Status {GOOD, WARN, BLOCK}
   public enum DonationStatus {FREE(Status.GOOD), LIFE(Status.GOOD), AUTH_DEPT(Status.GOOD), NEW(Status.GOOD), 
                               PAID(Status.GOOD), PAID_WARN(Status.WARN), PAID_EXPIRE(Status.BLOCK), PAID_LIMBO(Status.WARN), 
@@ -75,6 +75,9 @@ public class DonationManager {
   
   // Cached paid subscriber status
   private boolean paidSubscriber;
+
+  // flag indicating purchase date was used in status calculations
+  private boolean usedPurchaseDate;
 
   /**
    * @return true if it is time to do an automatic payment status recalculation
@@ -237,6 +240,7 @@ public class DonationManager {
     // Calculate subscription expiration date
     // (one year past the purchase date anniversary in the last paid year)
     // ((Use install date if there is no purchase date))
+    usedPurchaseDate = false;
     overpaidDays = 0;
     int daysTillSubExpire = -99999;
     int paidYear = ManagePreferences.paidYear();
@@ -256,10 +260,13 @@ public class DonationManager {
         overpaidDays = regJDate.diffDays(tJDate); 
       }
       
-      // They only get the coverted paid subscriber status if this is a real
+      // They only get the coveted paid subscriber status if this is a real
       // paid subscription and this expiration date has not passed
       if (!ManagePreferences.freeSub()) {
-        if (curJDate.diffDays(tJDate) >= 0) paidSubscriber = true;
+        if (curJDate.diffDays(tJDate) >= 0) {
+          paidSubscriber = true;
+          usedPurchaseDate = true;
+        }
       }
       
       // If we have both a subscription and sponsor expiration date, choose the
@@ -267,6 +274,7 @@ public class DonationManager {
       if (expireDate == null || tDate.after(expireDate)) {
         sponsor = ManagePreferences.sponsor();
         expireDate = tDate;
+        usedPurchaseDate = true;
       }
     }
     
@@ -481,7 +489,37 @@ public class DonationManager {
     calculate();
     return paidSubscriber;
   }
-  
+
+  /**
+   * @return if the payment status required confirmation from our authorization server
+   */
+  public boolean reqAuthServer() {
+
+    // First confirm that we have a date sensitive payment status
+    switch (status) {
+      case PAID:
+      case PAID_WARN:
+      case PAID_LIMBO:
+      case SPONSOR:
+      case SPONSOR_WARN:
+      case SPONSOR_LIMBO:
+        break;
+
+      default:
+        return false;
+    }
+
+    // And that we really used a server supplied purchase date to calculate it
+    if (!usedPurchaseDate) return false;
+
+    // And finally, that we got that purchase date from our authorization server and not from
+    // a real play store subscription
+    String date1 = ManagePreferences.purchaseDateString();
+    String date2 = ManagePreferences.purchaseDateString(2);
+    if (date1 == null || date2 == null) return false;
+    return date1.equals(date2);
+  }
+
   // Singleton instance
   private static DonationManager instance = new DonationManager();
   

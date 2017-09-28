@@ -7,15 +7,22 @@ import net.anei.cadpage.R;
 
 class AccountPermApprovedEvent extends DonateEvent {
 
-  private Runnable action;
+  private AllowAcctPermissionDonateEvent.AllowAcctPermisionAction action;
 
-  public AccountPermApprovedEvent(Runnable action) {
+  public AccountPermApprovedEvent(AllowAcctPermissionDonateEvent.AllowAcctPermisionAction  action) {
     super(null, R.string.donate_email_acct_permission_granted_text);
     this.action = action;
   }
 
   @Override
-  protected void doEvent(Activity activity) {
-    ManagePreferences.setGrantAccountAccess(MainDonateEvent.instance().getGrantAccountPref(), true, action);
+  protected void doEvent(final Activity activity) {
+    ManagePreferences.setGrantAccountAccess(MainDonateEvent.instance().getGrantAccountPref(), true,
+      new Runnable(){
+        @Override
+        public void run() {
+          if (action != null) action.doEvent(activity);
+          closeEvents(activity);
+        }
+      });
   }
 }

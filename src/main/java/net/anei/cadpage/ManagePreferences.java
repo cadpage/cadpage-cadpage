@@ -40,7 +40,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 46;
+  private static final int PREFERENCE_VERSION = 47;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -52,6 +52,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static String freeSubType;
   private static String paidSubType;
   private static File checkFile;
+  private static int oldVersion;
   
   public static void resetPreferenceVersion() {
     prefs.putInt(R.string.pref_version_key,  PREFERENCE_VERSION-1);
@@ -80,7 +81,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     // Before we do anything else, see what the old preference version number was
-    int oldVersion = prefs.getInt(R.string.pref_version_key, 0);
+    oldVersion = prefs.getInt(R.string.pref_version_key, 0);
 
     // If the old version doesn't match the current version, we need to reload
     // the preference defaults and update the preference version
@@ -239,6 +240,15 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // We run into problems if the change listeners are called durring this setup process
     // so we don't arm them until now
     prefs.armListeners();
+  }
+
+  /**
+   * Determine if we are in the process of upgrading from and older version of Cadpage that did
+   * not support the new Account Security features
+   * @return true of we are
+   */
+  public static boolean isAccountSecurityUpgrade() {
+    return oldVersion > 0 && oldVersion < 47;
   }
 
   /**
@@ -1396,6 +1406,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setPermissionManager(PermissionManager permMgr) {
     ManagePreferences.permMgr = permMgr;
     permMgrStack.push(permMgr);
+  }
+
+  /**
+   * @return current permission manager
+   */
+  public static PermissionManager getPermissionManager() {
+    return permMgr;
   }
   
   /**

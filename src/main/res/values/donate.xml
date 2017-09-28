@@ -132,9 +132,18 @@
     subscription.
   </string>
 
-  <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>
+  <string name="donate_need_acct_permission_upgrade_title">"We may need to access your email account information"</string>
+  <string name="donate_need_acct_permission_upgrade_text">
+    You have upgraded to a version of Cadpage that treats your email accounts as private user
+    information, which we will not access without your explicit permission.  And you have a
+    payment status which we may not be able to confirm without that email account information.\n\n
 
-  <string name="donate_email_acct_permission_text">
+    You are strongly advised to allow Cadpage to access your account information now.  If you do
+    not, we may loose track of your payment subscription status somewhere down the road.
+  </string>
+
+  <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>
+  <string name="donate_allow_acct_permission_text">
     You have requested an operation that we cannot perform without accessing your configured
     email account information.  This is considered private user information which we are not
     allowed to access without your explicit permission.\n\n
