@@ -98,6 +98,10 @@ public class SmsService extends IntentService {
 
   public static boolean processIntent(Context context, Intent intent) {
 
+    // Not sure how a null intent gets in here, but it happened to one user
+    // so now we check for it
+    if (intent == null) return false;
+
     // Otherwise convert Intent into an SMS/MSS message
     SmsMmsMessage message = null;
     if (ACTION_SMS_RECEIVED.equals(intent.getAction())) {
