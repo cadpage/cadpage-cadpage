@@ -14,12 +14,11 @@ Without this permission, Cadpage can not confirm if you have purchased a Cadpage
 subscription.
 
  */
-public class NeedAcctPermissionDonateEvent extends DonateScreenEvent {
+public class NeedAcctPermissionDonateEvent extends AccountScreenEvent {
 
   protected NeedAcctPermissionDonateEvent() {
-    super(AlertStatus.YELLOW, R.string.donate_need_acct_permission_title, R.string.donate_need_acct_permission_text);
-          setEvents(
-            new AllowAcctPermissionDonateEvent(new AllowAcctPermissionDonateEvent.AllowAcctPermisionAction() {
+    super(AlertStatus.YELLOW, R.string.donate_need_acct_permission_title,
+          new AllowAcctPermissionAction() {
               @Override
               public void doEvent(Activity activity) {
 
@@ -28,12 +27,9 @@ public class NeedAcctPermissionDonateEvent extends DonateScreenEvent {
 
                 // Request complete status reload
                 DonationManager.instance().refreshStatus(activity);
-
-                // Close donation screens
-                NeedAcctPermissionDonateEvent.this.closeEvents(activity);
               }
             }
-          ));
+          );
   }
 
   @Override

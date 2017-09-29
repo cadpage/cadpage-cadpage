@@ -7,6 +7,7 @@ import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.Permissions;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsPopupUtils;
 
 /*
@@ -40,6 +41,12 @@ public class NeedAcctPermissionUpgradeEvent extends DonateScreenEvent {
 
     // And their payment status indicates they require authorization from  our authorization server
     return DonationManager.instance().reqAuthServer();
+  }
+
+  @Override
+  public void create(Activity activity, SmsMmsMessage msg) {
+    super.create(activity, msg);
+    ManagePreferences.clearAccountSecurityUpgrade();
   }
 
   private static final NeedAcctPermissionUpgradeEvent instance = new NeedAcctPermissionUpgradeEvent();

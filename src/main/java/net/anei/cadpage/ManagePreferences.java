@@ -52,8 +52,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static String freeSubType;
   private static String paidSubType;
   private static File checkFile;
-  private static int oldVersion;
-  
+  private static boolean accountSecurityUpgrade = false;
+
   public static void resetPreferenceVersion() {
     prefs.putInt(R.string.pref_version_key,  PREFERENCE_VERSION-1);
   }
@@ -81,7 +81,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     // Before we do anything else, see what the old preference version number was
-    oldVersion = prefs.getInt(R.string.pref_version_key, 0);
+    int oldVersion = prefs.getInt(R.string.pref_version_key, 0);
 
     // If the old version doesn't match the current version, we need to reload
     // the preference defaults and update the preference version
@@ -94,6 +94,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // user upgrades from an earlier version of Cadpage.  None of these have
     // to be done if there was no previous version of Cadpage.
     if (oldVersion > 0) {
+
+      // If old version < 47 use is upgrading to a version that requires explict permission to
+      // use their email account information
+      if (oldVersion < 47) accountSecurityUpgrade = true;
       
       // If old version < 45 convert old lock_google option to new app_map_option option
       if (oldVersion < 45) {
@@ -248,7 +252,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * @return true of we are
    */
   public static boolean isAccountSecurityUpgrade() {
-    return oldVersion > 0 && oldVersion < 47;
+    return accountSecurityUpgrade;
+  }
+
+  public static void clearAccountSecurityUpgrade() {
+    accountSecurityUpgrade = false;
   }
 
   /**
@@ -1882,7 +1890,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * @return if value could be set immediately
      */
     public boolean setValue(P pref, V value, Runnable run) {
-      this.preference = null;
+      this.preference = pref;
       this.value = value;
       this.run = run;
 

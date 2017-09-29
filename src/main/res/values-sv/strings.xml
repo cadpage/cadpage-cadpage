@@ -23,9 +23,10 @@
    Tillåt att applikationen tar emot information från nödsamtal. Illasinnad programvara skulle kunna använda denna information för att komma åt personlig information från dessa samtal.
   </string>
    
-   <string name="perm_phone_info_for_email">
-   Om vi vet vem du är så kan vi lättare identifiera abonnemangsprobleom eller problem med meddelandeservice. Att ge oss tillåtelse till det är inte nödvändigt.
-   Om du inte gör det så kommer vi att göra vårt bästa för att lösa det utan den här informationen.    
+   <string name="perm_phone_info_for_email"> <!-- Translate -->
+   If we know your phone number, we can better identify subscription problems
+   or problems with direct paging vendors.  Granting this permission is not required.
+   If you do not do it, we will do the best we can without this information.
    </string>
    
    <string name="perm_acct_info_for_auto_recalc">
@@ -48,7 +49,12 @@
    <string name="perm_user_sound_override">  
    Du vill att Cadpage ska använda en rington som kan vara sparat på ditt externa SD-kort.
    </string>
-   
+
+  <string name="perm_grant_acct_access"> <!-- Translate -->
+    You are requesting Cadpage access to your email account information.  To do
+    this, we will need identify your configured Google accounts.
+  </string>
+
   <!-- Menu Strings -->
   <string name="settings">Inställningar</string>
   <!-- Network error strings -->

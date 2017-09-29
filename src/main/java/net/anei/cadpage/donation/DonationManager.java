@@ -496,7 +496,12 @@ public class DonationManager {
   public boolean reqAuthServer() {
 
     // First confirm that we have a date sensitive payment status
-    switch (status) {
+    switch (status()) {
+
+      // A lifetime subscription status always requires the authorization server
+      case LIFE:
+        return true;
+
       case PAID:
       case PAID_WARN:
       case PAID_LIMBO:

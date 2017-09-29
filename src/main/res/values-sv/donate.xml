@@ -90,6 +90,14 @@
     be sent in queries to that authorization server to determine your proper payment status.
   </string>
 
+  <string name="donate_email_acct_permission_granted_text"> <!-- Translate -->
+    Yes you may access my email account information
+  </string>
+
+  <string name="donate_email_acct_permission_denied_text">  <!-- Translate -->
+    No you may not access my email account information
+  </string>
+
   <string name="donate_wrong_user_title">"Hörru, jag har redan betalt för det här"</string>
   <string name="donate_wrong_user_text">
     Ber hemskt mycket om ursäkt.  Tryck på knappen nedan för att generera ett mail.  

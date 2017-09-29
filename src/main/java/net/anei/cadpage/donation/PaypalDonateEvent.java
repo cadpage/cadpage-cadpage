@@ -16,18 +16,18 @@ public class PaypalDonateEvent extends AccountScreenEvent {
   private static final String TARGET_URL = "http://www.cadpage.org/financial-support/paypal-payments";
   
   public PaypalDonateEvent() {
-    super(AlertStatus.GREEN, R.string.donate_paypal_title);
-  }
-
-  @Override
-  void doAccountPermissionApproved(Activity activity) {
-    if (!SmsPopupUtils.haveNet(activity)) return;
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(TARGET_URL));
-    try {
-      activity.startActivity(intent);
-    } catch (ActivityNotFoundException ex) {
-      Log.e(ex);
-    }
+    super(AlertStatus.GREEN, R.string.donate_paypal_title, new AllowAcctPermissionAction() {
+      @Override
+      public void doEvent(Activity activity) {
+        if (!SmsPopupUtils.haveNet(activity)) return;
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(TARGET_URL));
+        try {
+          activity.startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+          Log.e(ex);
+        }
+      }
+    });
   }
 
   private static final PaypalDonateEvent instance = new PaypalDonateEvent();

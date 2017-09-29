@@ -11,19 +11,18 @@ import net.anei.cadpage.SmsMmsMessage;
 abstract class AccountScreenEvent  extends DonateScreenEvent {
 
 
-  private Activity curActivity;
+  public interface AllowAcctPermissionAction extends AccountPermApprovedEvent.AllowAcctPermissionAction{};
 
-  protected AccountScreenEvent(AlertStatus alertStatus, int titleId) {
-    super(alertStatus, titleId, R.string.donate_email_acct_permission_text);
-    setEvents(new AccountPermApprovedEvent(new Runnable(){
-                @Override
-                public void run() {
-                  doAccountPermissionApproved(curActivity);
-                  closeEvents(curActivity);
-                }
-              }),
+
+  private Activity curActivity;
+  private   AllowAcctPermissionAction action;
+
+  protected AccountScreenEvent(AlertStatus alertStatus, int titleId, final AllowAcctPermissionAction action) {
+    super(alertStatus, titleId, R.string.donate_allow_acct_permission_text);
+    setEvents(new AccountPermApprovedEvent(action),
               AccountPermDeniedEvent.instance()
     );
+    this.action = action;
   }
 
   @Override
@@ -39,14 +38,7 @@ abstract class AccountScreenEvent  extends DonateScreenEvent {
 
     if (! ManagePreferences.grantAccountAccess()) return true;
 
-    // If access has already been approved, perform the requested function.
-    doAccountPermissionApproved(activity);
+    if (action != null) action.doEvent(activity);
     return false;
   }
-
-  /**
-   * Action to be performed in access to account information is granted
-   * @param activity current activity
-   */
-  abstract void doAccountPermissionApproved(Activity activity);
 }

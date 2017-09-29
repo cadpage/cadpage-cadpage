@@ -61,6 +61,8 @@ public class DeveloperToolsManager {
     "Stat: Demo expired",
     "Stat: Toggle free subscription",
     "Stat: Toggle sponsor",
+    "Stat: Google Play Server",
+    "Stat: Cadpage Auth Server",
     "Reset release info",
     "Content Query",
     "Recent Tasks",
@@ -77,7 +79,7 @@ public class DeveloperToolsManager {
   
   private static final String[] valueList = new String[]{
     "100", "101", "102",
-    "31", "32", "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
+    "31", "32", "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
   };
   
   private class DeveloperListPreference extends ListPreference {
@@ -116,7 +118,6 @@ public class DeveloperToolsManager {
         setPaidYear(0);
         setPurchaseDate(-200, -1);
         ManagePreferences.setInstallDate(ManagePreferences.purchaseDate());
-        ManagePreferences.setAuthLastCheckTime(0L);
         ManagePreferences.setFreeSub(false);
         break;
         
@@ -169,6 +170,22 @@ public class DeveloperToolsManager {
         String sponsor = ManagePreferences.sponsor();
         sponsor = (sponsor == null ? "Philomath Fire & Rescue" : null);
         ManagePreferences.setSponsor(sponsor);
+        break;
+
+      case 91:  // Stat: Google Play Server
+        ManagePreferences.setPurchaseDateString(1, ManagePreferences.purchaseDateString());
+        ManagePreferences.setPaidYear(1, ManagePreferences.paidYear());
+        ManagePreferences.setPurchaseDateString(2, null);
+        ManagePreferences.setPaidYear(2, 0);
+        ManagePreferences.resetPreferenceVersion();
+        break;
+
+      case 92:  // State Cadpage authorization serve
+        ManagePreferences.setPurchaseDateString(2, ManagePreferences.purchaseDateString());
+        ManagePreferences.setPaidYear(2, ManagePreferences.paidYear());
+        ManagePreferences.setPurchaseDateString(1, null);
+        ManagePreferences.setPaidYear(1, 0);
+        ManagePreferences.resetPreferenceVersion();
         break;
         
       case 10:     // Reset preference info

@@ -10,12 +10,12 @@ import net.anei.cadpage.R;
 public class EmailMarketProblemEvent extends AccountScreenEvent {
   
   public EmailMarketProblemEvent() {
-    super(null, R.string.donate_email_title);
-  }
-
-  @Override
-  void doAccountPermissionApproved(Activity activity) {
-    EmailDeveloperActivity.sendMarketProblemEmail(activity);
+    super(null, R.string.donate_email_title, new AllowAcctPermissionAction() {
+      @Override
+      public void doEvent(Activity activity) {
+        EmailDeveloperActivity.sendMarketProblemEmail(activity);
+      }
+    });
   }
 
   private static final EmailMarketProblemEvent instance = new EmailMarketProblemEvent();

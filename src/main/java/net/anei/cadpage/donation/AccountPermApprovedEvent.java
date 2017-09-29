@@ -7,9 +7,14 @@ import net.anei.cadpage.R;
 
 class AccountPermApprovedEvent extends DonateEvent {
 
-  private AllowAcctPermissionDonateEvent.AllowAcctPermisionAction action;
 
-  public AccountPermApprovedEvent(AllowAcctPermissionDonateEvent.AllowAcctPermisionAction  action) {
+  public interface AllowAcctPermissionAction {
+    public void doEvent(Activity activity);
+  }
+
+  private AllowAcctPermissionAction action;
+
+  public AccountPermApprovedEvent(AllowAcctPermissionAction  action) {
     super(null, R.string.donate_email_acct_permission_granted_text);
     this.action = action;
   }
