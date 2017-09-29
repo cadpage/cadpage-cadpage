@@ -4,6 +4,13 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.14-01\n
+    In compliance with the latest Google privacy standards, Cadpage will no longer access your
+    email account information without your explicit permission.  Cadpage only needs this account
+    information to resolve occasional subscription issues.  If Cadpage believes it needs email account
+    information to maintain your existing payment status, you will have already been asked
+    for your consent to retrieve this information.\n
+    \n
     v1.9.13-26\n
     Location Fixes:\n
     Johnson County, KS\n
@@ -39,10 +46,5 @@
     Sarasota County, FL\n
     Jefferson County, MO\n
     Kenosha County, WI\n
-    \n
-    v1.9.13-22\n
-    Location Fixes:\n
-    Monterey County, CA\n
-    JCMC EMS Jersey City,  NJ
   </string>
 </resources>

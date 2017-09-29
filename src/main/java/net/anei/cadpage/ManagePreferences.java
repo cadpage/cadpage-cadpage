@@ -52,7 +52,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static String freeSubType;
   private static String paidSubType;
   private static File checkFile;
-  private static boolean accountSecurityUpgrade = false;
 
   public static void resetPreferenceVersion() {
     prefs.putInt(R.string.pref_version_key,  PREFERENCE_VERSION-1);
@@ -97,7 +96,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
       // If old version < 47 use is upgrading to a version that requires explict permission to
       // use their email account information
-      if (oldVersion < 47) accountSecurityUpgrade = true;
+      if (oldVersion < 47) prefs.putBoolean(R.string.pref_account_security_upgrade, true);
       
       // If old version < 45 convert old lock_google option to new app_map_option option
       if (oldVersion < 45) {
@@ -252,11 +251,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * @return true of we are
    */
   public static boolean isAccountSecurityUpgrade() {
-    return accountSecurityUpgrade;
+    return prefs.getBoolean(R.string.pref_account_security_upgrade);
   }
 
   public static void clearAccountSecurityUpgrade() {
-    accountSecurityUpgrade = false;
+    prefs.putBoolean(R.string.pref_account_security_upgrade, false);
   }
 
   /**
