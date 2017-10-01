@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="donate_btn_cancel">Avbryt</string>
   <string name="donate_btn_done">Klar</string>
@@ -56,46 +56,44 @@
   </string>
   <string name="donate_demo_title">Demo av Cadpage upphör om %d dagar</string>
   <string name="donate_demo_text">
-    Du har använt Cadpage i %1$d dagar, du har %2$d innan demo-perioden upphör.
+    Du har använt Cadpage i %1$d dagar.  Du har %2$d innan demo-perioden upphör.
   </string>
   <string name="donate_demo_expire_title">Demotiden för Cadpage har gått ut.</string>
   <string name="donate_demo_expire_text">Du har använt Cadpage demo i %1$d dagar. Din Cadpage demo gick ut för %2$d dagar sen.  
   </string>
 
-  <string name="donate_need_acct_permission_title">"We do not know who you are"</string> <!-- Translate -->
-  <string name="donate_need_acct_permission_text">  <!-- Translate -->
-    You have not given Cadpage permission to access your account information.
-    Without this permission, Cadpage can not confirm if you have purchased a Cadpage
-    subscription.
+  <string name="donate_need_acct_permission_title">"Vi vet inte vem du är"</string>
+  <string name="donate_need_acct_permission_text">
+    Du har inte givit Cadpage tillåtelse att komma åt din kontoinformation. Utan denna tillåtelse kan inte Cadpage verifiera att du har köpt ett Cadpage-abonnemang.
   </string>
 
-  <string name="donate_need_acct_permission_upgrade_title">"We may need to access your email account information"</string> <!-- Translate -->
+  <string name="donate_need_acct_permission_upgrade_title">"Vi kan behöva få tillgång till information om ditt email-konto"</string>
   <string name="donate_need_acct_permission_upgrade_text"> <!-- Translate -->
     You have upgraded to a version of Cadpage that treats your email accounts as private user
-    information, which we will not access without your explicit permission.  And you have a
+    information, which we will not access without your explicit permission.  You have a
     payment status which we may not be able to confirm without that email account information.\n\n
 
     You are strongly advised to allow Cadpage to access your account information now.  If you do
-    not, we may loose track of your payment subscription status somewhere down the road.
+    not, we may lose track of your payment subscription status later.
   </string>
 
-  <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>  <!-- Translate -->
-  <string name="donate_allow_acct_permission_text">   <!-- Translate -->
-    You have requested an operation that we cannot perform without accessing your configured
+  <string name="donate_allow_acct_permission_title">Ge Cadpage tillåtelse till mitt kontos information</string>
+  <string name="donate_allow_acct_permission_text"> <!-- Translate -->
+    You have requested an operation that we cannot perform without accessing your
     email account information.  This is considered private user information which we are not
-    allowed to access without your explicit permission.\n\n
+    permitted to access without your explicit permission.\n\n
 
-    The email account information may be included in support emails sent to the Cadpage support
-    desk and used to update your payment status on our Cadpage authorization server.  And it will
-    be sent in queries to that authorization server to determine your proper payment status.
+    The email account information may be included in emails sent to Cadpage support
+    and used to update your payment status.  It will also be used to query your payment
+    status on our servers.
   </string>
 
-  <string name="donate_email_acct_permission_granted_text"> <!-- Translate -->
-    Yes you may access my email account information
+  <string name="donate_email_acct_permission_granted_text">
+    Ja du får tillgång till min epostinformation
   </string>
 
-  <string name="donate_email_acct_permission_denied_text">  <!-- Translate -->
-    No you may not access my email account information
+  <string name="donate_email_acct_permission_denied_text">
+    Nej du får inte tillgång till min epostinformation
   </string>
 
   <string name="donate_wrong_user_title">"Hörru, jag har redan betalt för det här"</string>
@@ -129,9 +127,9 @@
   <string name="donate_android_problem_title">Jag kan inte göra betalningar på android market</string>
   <string name="donate_android_problem_text">Jäklar,vi ska se vad vi kan göra åt det</string>
   <string name="donate_reset_market_title">Räkna om betalningsstatus</string>
-  <string name="donate_sob_story_title">"Jag har inte råd med 10$ i år"</string>
+  <string name="donate_sob_story_title">"Jag har inte råd med 9.99$ i år"</string>
   <string name="donate_sob_story_text">
-    "Berätta varför du inte har råd att betala $10.  Vi är lätta  att övertala.\n\n"
+    "Berätta varför du inte har råd att betala $9.99.  Vi är lätta  att övertala.\n\n"
     Vet du något sätt som gör Cadpage lättare att använda?  Har du något förslag på bättre sätt att finansiera de avsevärda kostnaderna att underhålla Cadpage?
    
   </string>

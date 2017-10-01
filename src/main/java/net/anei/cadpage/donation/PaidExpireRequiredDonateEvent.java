@@ -23,7 +23,6 @@ public class PaidExpireRequiredDonateEvent extends DonateScreenEvent {
         DonateAndroidUnsuportedEvent.instance(), 
         AndroidDonateProblemEvent.instance(),
         DonateResetMarketEvent.instance(),
-        NeedAcctPermissionDonateEvent.instance(),
         WrongUserDonateEvent.instance(),
         CadpageServiceEvent.instance());
   }

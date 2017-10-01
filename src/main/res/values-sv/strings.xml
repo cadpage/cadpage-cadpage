@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- App Strings -->
   <string name="cadpage_alert">Cadpage larm!</string>
@@ -23,10 +23,8 @@
    Tillåt att applikationen tar emot information från nödsamtal. Illasinnad programvara skulle kunna använda denna information för att komma åt personlig information från dessa samtal.
   </string>
    
-   <string name="perm_phone_info_for_email"> <!-- Translate -->
-   If we know your phone number, we can better identify subscription problems
-   or problems with direct paging vendors.  Granting this permission is not required.
-   If you do not do it, we will do the best we can without this information.
+   <string name="perm_phone_info_for_email">
+   Om vi känner till ditt telefonnummer så kan vi enklare hitta problem med abonnemang eller meddelandeservice. Det är inte avgörande att vi får detta. Om vi inte får det så gör vi så gott vi kan utan den informationen.
    </string>
    
    <string name="perm_acct_info_for_auto_recalc">
@@ -50,9 +48,8 @@
    Du vill att Cadpage ska använda en rington som kan vara sparat på ditt externa SD-kort.
    </string>
 
-  <string name="perm_grant_acct_access"> <!-- Translate -->
-    You are requesting Cadpage access to your email account information.  To do
-    this, we will need identify your configured Google accounts.
+  <string name="perm_grant_acct_access">
+    Du ber Cadpage komma åt din information om ditt epost-konto. För att göra det så behöver vi identifiera ditt Google-konto.
   </string>
 
   <!-- Menu Strings -->
@@ -438,9 +435,9 @@
   <string name="pref_privacy_policy_summary">Titta på Cadpages privacy policy.</string>     
   <string name="pref_privacy_policy_url">http://http://www.cadpage.org/privacy-policy</string>
 
-  <string name="pref_grant_account_access_title">Allow access to Email accounts</string>   <!-- Translate -->
-  <string name="pref_grant_account_access_summaryon">Email account access permitted</string>   <!-- Translate -->
-  <string name="pref_grant_account_access_summaryoff">Email account access denied</string>   <!-- Translate -->
+  <string name="pref_grant_account_access_title">Tillåt åtkomst till epost-konton</string>
+  <string name="pref_grant_account_access_summaryon">Epost-kontoinfo tillåten</string>
+  <string name="pref_grant_account_access_summaryoff">Epost-kontoinfo av tillåts ej</string>
 
   <!-- Location settings -->
   <string name="pref_location_screen_title">Lokala anpassningar</string>
@@ -504,6 +501,6 @@
     Active911 slutade sända larm från larmcentralen när jag uppgraderade till den senaste versionen av Active911s Android App. Det är ett känt problem, identifierat i ärendenummer #2017050710000311. Skulle ni kunna vara så vänliga att se till att det inte händer i kommande releaser av Active911s Android-app.
   </string>
 
-  <string name="reconnect_google">Reconnect with Google servers</string>  <!-- Translate -->
-  <string name="reconnect">Reconnect with %s</string>  <!-- Translate -->
+  <string name="reconnect_google">Återanslut till Googles servers</string>
+  <string name="reconnect">Återanslut till %s</string>
 </resources>

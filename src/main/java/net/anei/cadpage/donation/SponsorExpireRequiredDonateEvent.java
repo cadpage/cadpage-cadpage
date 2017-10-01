@@ -21,7 +21,6 @@ public class SponsorExpireRequiredDonateEvent extends DonateScreenEvent {
         DonateAndroidUnsuportedEvent.instance(), 
         AndroidDonateProblemEvent.instance(),
         DonateResetMarketEvent.instance(),
-        NeedAcctPermissionDonateEvent.instance(),
         WrongUserDonateEvent.instance(),
         CadpageServiceEvent.instance());
   }

@@ -19,11 +19,6 @@ public class WrongUserDonateEvent extends DonateScreenEvent {
   }
 
   @Override
-  public boolean isEnabled() {
-    return ManagePreferences.grantAccountAccess();
-  }
-
-  @Override
   protected Object[] getTextParms(int type) {
     switch (type) {
     case PARM_TEXT:

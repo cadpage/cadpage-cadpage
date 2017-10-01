@@ -24,7 +24,6 @@ public class PaidWarnRequiredDonateEvent extends DonateScreenEvent {
         DonateAndroidUnsuportedEvent.instance(), 
         AndroidDonateProblemEvent.instance(),
         DonateResetMarketEvent.instance(),
-        NeedAcctPermissionDonateEvent.instance(),
         WrongUserDonateEvent.instance());
   }
 

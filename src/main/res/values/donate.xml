@@ -22,7 +22,7 @@
     If you are willing to pay to Cadpage developers to continue supporting 
     Cadpage development, you should use the standard version.\n
     \n
-    If you cannot afford to pay the $10/year standard payment, you should use the standard
+    If you cannot afford to pay the $9.99 per year standard payment, you should use the standard
     version and ask for a free subscription.\n
     \n
     If you are adamantly opposed to paying anything on general principle, you
@@ -63,7 +63,7 @@
   
   <string name="donate_sponsor_title">Sponsored by %s</string>
   <string name="donate_sponsor_text">
-    You are using a service sponsored by\n%1$s until %2$s\n 
+    You are using a service sponsored by\n%1$s until %2$s.\n
     Support for Cadpage development and maintenance is provided by this
     sponsor.  No further payment is expected from you as long as you
     are using services provided by this sponsor.
@@ -98,7 +98,7 @@
   
   <string name="donate_sponsor_limbo_title">%s sponsorship has expired</string>
   <string name="donate_sponsor_limbo_text">
-    Your using a service sponsored by %1$s that expired on %2$s.  You can continue to 
+    You are using a service sponsored by %1$s that expired on %2$s.  You can continue to
     use Cadpage as long as you do not install a release published after that date.  Please
     contact %1$s about renewing their Cadpage sponsorship.
   </string>
@@ -116,41 +116,34 @@
   
   <string name="donate_demo_title">Cadpage demo expires in %d days</string>
   <string name="donate_demo_text">
-    You have been using Cadpage for %1$d days, you have %2$d days left before the
+    You have been using Cadpage for %1$d days.  You have %2$d days left before the
     demo expires.
   </string>
   
   <string name="donate_demo_expire_title">Your Cadpage demo has expired</string>
   <string name="donate_demo_expire_text">
-    You have been using Cadpage for %1$d days.  Your cadpage demo expired %2$d days ago.  
-  </string>
-
-  <string name="donate_need_acct_permission_title">"We do not know who you are"</string>
-  <string name="donate_need_acct_permission_text">
-    You have not given Cadpage permission to access your account information.
-    Without this permission, Cadpage can not confirm if you have purchased a Cadpage
-    subscription.
+    You have been using Cadpage for %1$d days.  Your Cadpage demo expired %2$d days ago.
   </string>
 
   <string name="donate_need_acct_permission_upgrade_title">"We may need to access your email account information"</string>
   <string name="donate_need_acct_permission_upgrade_text">
     You have upgraded to a version of Cadpage that treats your email accounts as private user
-    information, which we will not access without your explicit permission.  And you have a
+    information, which we will not access without your explicit permission.  You have a
     payment status which we may not be able to confirm without that email account information.\n\n
 
     You are strongly advised to allow Cadpage to access your account information now.  If you do
-    not, we may loose track of your payment subscription status somewhere down the road.
+    not, we may lose track of your payment subscription status later.
   </string>
 
   <string name="donate_allow_acct_permission_title">Allow Cadpage to access my account information</string>
   <string name="donate_allow_acct_permission_text">
-    You have requested an operation that we cannot perform without accessing your configured
+    You have requested an operation that we cannot perform without accessing your
     email account information.  This is considered private user information which we are not
-    allowed to access without your explicit permission.\n\n
+    permitted to access without your explicit permission.\n\n
 
-    The email account information may be included in support emails sent to the Cadpage support
-    desk and used to update your payment status on our Cadpage authorization server.  And it will
-    be sent in queries to that authorization server to determine your proper payment status.
+    The email account information may be included in emails sent to Cadpage support
+    and used to update your payment status.  It will also be used to query your payment
+    status on our servers.
   </string>
 
   <string name="donate_email_acct_permission_granted_text">
@@ -203,16 +196,16 @@
       and follow the directions
   </string>
   
-  <string name="donate_android_problem_title">I can\'t make Google Play payments</string>
+  <string name="donate_android_problem_title">I cannot make Google Play payments</string>
   <string name="donate_android_problem_text">
     Bummer, let\'s see what we can do about that.
   </string>
   
   <string name="donate_reset_market_title">Recalculate Payment Status</string>
   
-  <string name="donate_sob_story_title">"I can't afford $10 this year"</string>
+  <string name="donate_sob_story_title">"I cannot afford $9.99 this year"</string>
   <string name="donate_sob_story_text">
-    "Tell us why you cannot afford a $10/year payment.  We are really easy on these."
+    "Tell us briefly why you cannot afford a $9.99 per year payment."
   </string>
   
   <string name="clear_data_title">Reinstall Cadpage</string>
@@ -278,7 +271,7 @@
     Cadpage will not do anything with your current default settings.  You need to go
     into the Location Settings and either select a location corresponding to your 
     area or set the From: (filter) to the email address or phone number that sends
-    you your text pages
+    you your text pages.
   </string>
   
   <string name="donate_active911_parse_warn_title">Active911 parser alert</string>

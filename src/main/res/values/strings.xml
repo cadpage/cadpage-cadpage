@@ -59,7 +59,7 @@
 
   <string name="perm_grant_acct_access">
     You are requesting Cadpage access to your email account information.  To do
-    this, we will need identify your configured Google accounts.
+    this, we will need to identify your Google email accounts.
   </string>
 
 <!-- Menu Strings -->
