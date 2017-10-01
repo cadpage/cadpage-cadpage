@@ -68,24 +68,17 @@
   </string>
 
   <string name="donate_need_acct_permission_upgrade_title">"Vi kan behöva få tillgång till information om ditt email-konto"</string>
-  <string name="donate_need_acct_permission_upgrade_text"> <!-- Translate -->
-    You have upgraded to a version of Cadpage that treats your email accounts as private user
-    information, which we will not access without your explicit permission.  You have a
-    payment status which we may not be able to confirm without that email account information.\n\n
+  <string name="donate_need_acct_permission_upgrade_text">
+    Du har en uppgraderad version av Cadpage som behandlar ditt epostkonto privat information som vi inte kan använda utan ditt tillstånd. Du har ett betalningsstatus som vi tyvärr inte kan konfirmera utan din epostinformation.\n\n
 
-    You are strongly advised to allow Cadpage to access your account information now.  If you do
-    not, we may lose track of your payment subscription status later.
+    Vänligen tillåt att Cadpage kommer åt din kontoinformation, annars finns det risk att vi förlorar din abonnemangsinformation senare.
   </string>
 
   <string name="donate_allow_acct_permission_title">Ge Cadpage tillåtelse till mitt kontos information</string>
-  <string name="donate_allow_acct_permission_text"> <!-- Translate -->
-    You have requested an operation that we cannot perform without accessing your
-    email account information.  This is considered private user information which we are not
-    permitted to access without your explicit permission.\n\n
+  <string name="donate_allow_acct_permission_text">
+    Du har valt ett alternativ som vi inte kan utföra utan att få information om ditt epost-konto. Det här anses var privat information som vi inte får hämta utan ditt tillstånd.\n\n
 
-    The email account information may be included in emails sent to Cadpage support
-    and used to update your payment status.  It will also be used to query your payment
-    status on our servers.
+    Epostinformationen kan komma att inkluderas i epost som skickas till Cadpages supportavdelning och används för att uppdatera din betalningsstatus. Det kommer också att användas för att fråga efter din betalningsstatus i våra servrar.
   </string>
 
   <string name="donate_email_acct_permission_granted_text">
