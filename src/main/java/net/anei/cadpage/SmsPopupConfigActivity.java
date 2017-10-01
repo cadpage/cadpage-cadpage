@@ -1,7 +1,10 @@
 package net.anei.cadpage;
 
+import net.anei.cadpage.donation.AllowAcctPermissionDonateEvent;
 import net.anei.cadpage.donation.DeveloperToolsManager;
+import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.EnableEmailAccessEvent;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.ManageParsers;
 import net.anei.cadpage.parsers.MsgParser;
@@ -312,7 +315,9 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override
       public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return ManagePreferences.checkGrantAccountAccess((CheckBoxPreference)preference, (Boolean)newValue);
+        if (!(Boolean)newValue) return true;
+        DonateActivity.launchActivity(SmsPopupConfigActivity.this, EnableEmailAccessEvent.instance(), null);
+        return false;
       }
     });
 

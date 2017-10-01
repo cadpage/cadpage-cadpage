@@ -14,7 +14,6 @@ abstract class AccountScreenEvent  extends DonateScreenEvent {
   public interface AllowAcctPermissionAction extends AccountPermApprovedEvent.AllowAcctPermissionAction{};
 
 
-  private Activity curActivity;
   private   AllowAcctPermissionAction action;
 
   protected AccountScreenEvent(AlertStatus alertStatus, int titleId, final AllowAcctPermissionAction action) {
@@ -23,12 +22,6 @@ abstract class AccountScreenEvent  extends DonateScreenEvent {
               AccountPermDeniedEvent.instance()
     );
     this.action = action;
-  }
-
-  @Override
-  public void create(Activity activity, SmsMmsMessage msg) {
-    this.curActivity = activity;
-    super.create(activity, msg);
   }
 
   @Override

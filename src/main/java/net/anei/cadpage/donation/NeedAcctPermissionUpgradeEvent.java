@@ -28,6 +28,11 @@ public class NeedAcctPermissionUpgradeEvent extends DonateScreenEvent {
   }
 
   @Override
+  protected boolean overrideWindowTitle() {
+    return true;
+  }
+
+  @Override
   public boolean isEnabled() {
 
     // Only enabled if user recently upgraded to account security upgrade

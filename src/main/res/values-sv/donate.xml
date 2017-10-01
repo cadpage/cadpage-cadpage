@@ -81,6 +81,17 @@
     Epostinformationen kan komma att inkluderas i epost som skickas till Cadpages supportavdelning och används för att uppdatera din betalningsstatus. Det kommer också att användas för att fråga efter din betalningsstatus i våra servrar.
   </string>
 
+  <string name="donate_enable_email_access_title">Allow Cadpage to access my account information</string> <!-- Translate -->
+  <string name="donate_enable_email_access_text">
+    You are granting Cadpage permission to retrieve and share your email accounts.  This is
+    considered private user information which we are not permitted to access without your explicit
+    permission.\n\n
+
+    The email account information may be included in emails sent to Cadpage support
+    and used to update your payment status.  It will also be used to query your payment
+    status on our servers.
+  </string>
+
   <string name="donate_email_acct_permission_granted_text">
     Ja du får tillgång till min epostinformation
   </string>
