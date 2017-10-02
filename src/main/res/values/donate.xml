@@ -125,7 +125,7 @@
     You have been using Cadpage for %1$d days.  Your Cadpage demo expired %2$d days ago.
   </string>
 
-  <string name="donate_need_acct_permission_upgrade_title">"We may need to access your email account information"</string>
+  <string name="donate_need_acct_permission_upgrade_title">"Email account access needed"</string>
   <string name="donate_need_acct_permission_upgrade_text">
     You have upgraded to a version of Cadpage that treats your email accounts as private user
     information, which we will not access without your explicit permission.  You have a
@@ -146,7 +146,7 @@
     status on our servers.
   </string>
 
-  <string name="donate_enable_email_access_title">Allow Cadpage to access my account information</string>
+  <string name="donate_enable_email_access_title">Access email accounts</string>
   <string name="donate_enable_email_access_text">
     You are granting Cadpage permission to retrieve and share your email accounts.  This is
     considered private user information which we are not permitted to access without your explicit
