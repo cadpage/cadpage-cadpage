@@ -62,7 +62,7 @@
   <string name="donate_demo_expire_text">Du har använt Cadpage demo i %1$d dagar. Din Cadpage demo gick ut för %2$d dagar sen.  
   </string>
 
-  <string name="donate_need_acct_permission_upgrade_title">"Email account access needed"</string>  <!-- Translate -->
+  <string name="donate_need_acct_permission_upgrade_title">"Access till epostkonto behövs"</string>
   <string name="donate_need_acct_permission_upgrade_text">
     Du har en uppgraderad version av Cadpage som behandlar ditt epostkonto privat information som vi inte kan använda utan ditt tillstånd. Du har ett betalningsstatus som vi tyvärr inte kan konfirmera utan din epostinformation.\n\n
 
@@ -76,7 +76,7 @@
     Epostinformationen kan komma att inkluderas i epost som skickas till Cadpages supportavdelning och används för att uppdatera din betalningsstatus. Det kommer också att användas för att fråga efter din betalningsstatus i våra servrar.
   </string>
 
-  <string name="donate_enable_email_access_title">Access email accounts</string> <!-- Translate -->
+  <string name="donate_enable_email_access_title">Ge access till epostkonto</string>
   <string name="donate_enable_email_access_text">
     You are granting Cadpage permission to retrieve and share your email accounts.  This is
     considered private user information which we are not permitted to access without your explicit
