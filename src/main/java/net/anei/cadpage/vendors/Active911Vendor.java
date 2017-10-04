@@ -780,6 +780,7 @@ class Active911Vendor extends Vendor {
       "US/MI/RoscommonCounty",            "MIRoscommonCounty",
       "US/MI/SaginawChippewa",            "MIIsabellaCountyB",
       "US/MI/ShiawasseeCounty",           "MIShiawasseeCounty",
+      "US/MI/SpartaFD",                   "MIKentCounty",
       "US/MI/StClairCounty",              "MIStClairCounty",
       "US/MI/VanBurenCounty",             "MIVanBurenCounty",
       "US/MI/WashtenawCounty",            "MIWashtenawCounty",
