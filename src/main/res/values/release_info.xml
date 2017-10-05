@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10032017</string>
+  <string name="release_date">10052017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.14-02\n
+    Location Fixes:\n
+    Hudson, OH\n
+    Kanawha County, WV\n
+    \n
+    General Fixes:\n
+    Recalculate Payment Status was not requesting email account access\n
+    \n
     v1.9.14-01\n
     In compliance with the latest Google privacy standards, Cadpage will no longer access your
     email account information without your explicit permission.  Cadpage only needs this account
@@ -46,12 +54,5 @@
     \n
     General Fixes:\n
     Direct paging reliability enhancements\n
-    \n
-    v1.9.13-23\n
-    Location Fixes:\n
-    Navajo County, AZ\n
-    Sarasota County, FL\n
-    Jefferson County, MO\n
-    Kenosha County, WI\n
   </string>
 </resources>
