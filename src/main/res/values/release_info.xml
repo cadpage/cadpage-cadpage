@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.13-04\n
+    Location Fixes:\n
+    Herkimer County, NY\n
+    King County, WA\n
+    Snohomish County, WA\n
+    \n
     v1.9.14-03\n
     Location Fixes:\n
     Boulder County, CO\n
@@ -44,15 +50,6 @@
     Johnson County, KS\n
     Eden Prairie, MN\n
     Jefferson County, MO\n
-    Butler County, OH\n
-    \n
-    v1.9.13-25\n
-    Location Fixes:\n
-    Boulder County, CO\n
-    Citrus County, FL\n
-    Macoupin County, IL\n
-    Washtenaw County, MI\n
-    Sullivan County, NY\n
-    Montgomery County, TX
+    Butler County, OH
   </string>
 </resources>
