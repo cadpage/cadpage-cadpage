@@ -1608,7 +1608,7 @@ class Active911Vendor extends Vendor {
       "US/WA/IslandCounty",               "WAIslandCounty",
       "US/WA/JeffersonCounty",            "WAJeffersonCounty",
       "US/WA/KentRegional",               "WAKingCounty",
-      "US/WA/KingCounty",                 "WAKingCountyA",
+      "US/WA/KingCounty",                 "WAKingCountyA,WAKingCountyD,WASnohomishCountyE",
       "US/WA/KitsapCounty",               "WAKitsapCounty",
       "US/WA/KlickitatCounty",            "WAKlickitatCounty",
       "US/WA/LewisCounty",                "WALewisCounty",
