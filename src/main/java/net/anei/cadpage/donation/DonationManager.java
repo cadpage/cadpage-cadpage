@@ -104,6 +104,9 @@ public class DonationManager {
    * @param context current context
    */
   public void checkPaymentStatus(final Context context) {
+
+    // No go if user has not allowed us to use email account information
+    if (! ManagePreferences.grantAccountAccess()) return;
         
     // We do not want to try this if the permission system has not been
     // initialized because that prevents us from asking user to enable
