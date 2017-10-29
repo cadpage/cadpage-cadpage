@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10262017</string>
+  <string name="release_date">10282017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.14-08\n
+    Location Fixes:\n
+    Houston County, GA\n
+    Lackawanna County, PA\n
+    \n
     v1.9.14-07\n
     Location Fixes:\n
     Thornton, CO\n
@@ -37,18 +42,5 @@
     Herkimer County, NY\n
     King County, WA\n
     Snohomish County, WA\n
-    \n
-    v1.9.14-03\n
-    Location Fixes:\n
-    Boulder County, CO\n
-    Fannin County, GA\n
-    Camden County, MO\n
-    St Charles County, MO\n
-    Iredell County, NC\n
-    Surry County, NC\n
-    Klamath County, OR\n
-    Bucks County, PA\n
-    York County, SC\n
-    Minnehaha County, SD
   </string>
 </resources>
