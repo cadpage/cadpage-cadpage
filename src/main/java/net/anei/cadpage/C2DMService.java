@@ -261,8 +261,7 @@ public class C2DMService extends IntentService {
       String action = "net.anei.cadpage.RECEIVE." + vendorCode;
       Intent sendIntent = new Intent(action);
       Log.w("Broadcasting direct page alert");
-      ContentQuery.dumpIntent(sendIntent);
-      this.sendBroadcast(sendIntent);
+      SmsPopupUtils.sendImplicitBroadcast(this, sendIntent);
     }
     
     // Get the acknowledge URL and request code

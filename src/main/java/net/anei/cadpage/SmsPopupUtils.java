@@ -1,13 +1,16 @@
 package net.anei.cadpage;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
@@ -92,5 +95,33 @@ public class SmsPopupUtils {
     .setPositiveButton(R.string.donate_btn_OK, null)
     .setMessage(resId)
     .create().show();
+  }
+
+  public static void sendImplicitBroadcast(Context context, Intent intent) {
+    sendImplicitBroadcast(context, intent, null);
+  }
+
+  public static void sendImplicitBroadcast(Context context, Intent intent, String permission) {
+
+    if (intent.getComponent() == null) {
+      ContentQuery.dumpIntent(intent);
+      context.sendBroadcast(intent, permission);
+    } else {
+      PackageManager pm = context.getPackageManager();
+      List<ResolveInfo> matches = pm.queryBroadcastReceivers(intent, 0);
+
+      if (matches != null) {
+        for (ResolveInfo resolveInfo : matches) {
+          ComponentName cn =
+              new ComponentName(resolveInfo.activityInfo.applicationInfo.packageName,
+                  resolveInfo.activityInfo.name);
+
+          intent.setComponent(cn);
+          ContentQuery.dumpIntent(intent);
+          context.sendBroadcast(intent, permission);
+        }
+        intent.setComponent(null);
+      }
+    }
   }
 }

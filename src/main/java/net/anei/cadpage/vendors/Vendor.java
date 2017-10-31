@@ -852,8 +852,7 @@ abstract class Vendor {
     intent.putExtra("account", account);
     intent.putExtra("token", token);
     Log.w("Publish Account Info");
-    ContentQuery.dumpIntent(intent);
-    context.sendBroadcast(intent, BroadcastBindings.PERMISSION);
+    SmsPopupUtils.sendImplicitBroadcast(context, intent, BroadcastBindings.PERMISSION);
   }
 
   /**

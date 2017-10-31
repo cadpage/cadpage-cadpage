@@ -673,8 +673,8 @@ public class MsgOptionManager {
       if (scanIntent != null) {
         Log.v("Launching Scanner");
         scanIntent.putExtra("caller", "cadpage");
-        ContentQuery.dumpIntent(scanIntent);
-        activity.sendBroadcast(scanIntent);
+        scanIntent.putExtra("duration", 2);
+        SmsPopupUtils.sendImplicitBroadcast(activity, scanIntent);
       }
       return true;
       

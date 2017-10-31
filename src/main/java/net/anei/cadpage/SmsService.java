@@ -242,8 +242,7 @@ public class SmsService extends IntentService {
     if (scanIntent == null) return;
     Log.v("Launching Scanner");
     scanIntent.putExtra("caller", "cadpage");
-    ContentQuery.dumpIntent(scanIntent);
-    context.sendBroadcast(scanIntent);
+    SmsPopupUtils.sendImplicitBroadcast(context, scanIntent);
   }
 
   /**

@@ -1208,8 +1208,7 @@ public class SmsMmsMessage implements Serializable {
     }
     
     Log.v("Broadcasting intent");
-    ContentQuery.dumpIntent(intent);
-    context.sendBroadcast(intent, PERMISSION);
+    SmsPopupUtils.sendImplicitBroadcast(context, intent, PERMISSION);
   }
   
   private static void putExtraString(Intent intent, String key, String value) {

@@ -21,6 +21,7 @@ import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsMsgLogBuffer;
+import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.SmsReceiver;
 import net.anei.cadpage.ManageUsb;
 import net.anei.cadpage.SmsService;
@@ -244,7 +245,7 @@ public class DeveloperToolsManager {
         break;
         
       case 17:
-        context.sendBroadcast(new Intent("net.anei.cadpage.REQ_ACCOUNT_INFO.Active911"));
+        SmsPopupUtils.sendImplicitBroadcast(context, new Intent("net.anei.cadpage.REQ_ACCOUNT_INFO.Active911"));
         break;
         
       case 18:    // Consume all products
