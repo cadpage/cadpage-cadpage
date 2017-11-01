@@ -1818,6 +1818,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     private V value;
     private V newValue;
     private Runnable run;
+    private boolean recurseCheck = false;
     
     /**
      * Constructor
@@ -1835,13 +1836,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * @return true everything is good to go, false if a permission needs to be granted
      */
     public boolean check() {
-      
+
       // There is no Preference during startup
       // but get and save the current preference value
       this.preference = null;
       this.value = getPrefValue(resPrefId);
       this.run = null;
-      
+
       // Make the primary permission check without displaying a user request
       // screen.  If there is a missing preference, set the setting to the
       // value that is permitted under current permissions
@@ -1862,13 +1863,23 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      */
     public boolean check(P preference, V value) {
 
+      // If we are being called recursively, always return true
+      // This may happen when a permission failure requires that we set a permission to some
+      // default value, which turns around and call the check() method recursively
+      if (recurseCheck) return true;
+      recurseCheck = true;
+
       // Save the preference and requested values and
       // call the main check permission method, requesting
       // a user permission screen
-      this.preference = preference;
-      this.value = value;
-      this.run = null;
-      return super.check(true);
+      try {
+        this.preference = preference;
+        this.value = value;
+        this.run = null;
+        return super.check(true);
+      } finally {
+        recurseCheck = false;
+      }
     }
 
     /**
