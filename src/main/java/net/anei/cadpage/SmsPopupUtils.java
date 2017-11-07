@@ -103,7 +103,7 @@ public class SmsPopupUtils {
 
   public static void sendImplicitBroadcast(Context context, Intent intent, String permission) {
 
-    if (intent.getComponent() == null) {
+    if (intent.getComponent() != null) {
       ContentQuery.dumpIntent(intent);
       context.sendBroadcast(intent, permission);
     } else {
