@@ -4,6 +4,17 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.14-11\n
+    Location Fixes:\n
+    Baldwin County, AL\n
+    Chatham County, GA\n
+    Lincoln County, OR\n
+    Marion County, OR\n
+    Rockwall County, TX\n
+    \n
+    General Fixes:\n
+    Problem launching Scanner Radio in Android 8.0 (again)\n
+    \n
     v1.9.14-10\n
     Location Fixes:\n
     Monroe County, KY\n
@@ -33,18 +44,6 @@
     Location Fixes:\n
     Thornton, CO\n
     Cayuga County, NY\n
-    Caroline County, VA\n
-    \n
-    v1.9.14-06\n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    Butte County, CA\n
-    Fannin County, GA\n
-    Saginaw County, MI\n
-    Pulaski County, MO\n
-    Cayuga County, NY\n
-    Stark County, OH\n
-    Montgomery County, TX\n
-    Kanawha County, WV
+    Caroline County, VA
   </string>
 </resources>
