@@ -50,6 +50,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   private static final int REQ_SCANNER_CHANNEL = 1;
   
   private static final String EXTRA_INITIALIZE = "PreferenceActivity.INITIALIZE";
+  private static final String EXTRA_PREFERENCE = "PreferenceActivity.PREFERENCE";
   
   private PermissionManager permMgr = new PermissionManager(this);
   
@@ -78,9 +79,6 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     
     // Build preference tree
     addPreferencesFromResource(R.xml.preferences);
-
-    // Set preferences initialized flag
-    ManagePreferences.setInitialized(true);
 
     Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
     pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
@@ -345,8 +343,20 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     }
     // Add developer dialog preference if appropriate
     DeveloperToolsManager.instance().addPreference(this, getPreferenceScreen());
+
+    //  OK, everything should be set up
+    // If we were supposed to launch a specific preference screen,
+    // find it and substitute it for the top level preference screen
+    Intent intent = getIntent();
+    if (intent != null) {
+      int id = intent.getIntExtra(EXTRA_PREFERENCE, -1);
+      if (id >= 0) {
+        Preference preference = findPreference(getString(id));
+        setPreferenceScreen((PreferenceScreen)preference);
+      }
+    }
   }
-  
+
   /**
    * Setup correlations between the different response button preferences
    * @param screenResId ID of response button screen preference
@@ -492,17 +502,16 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   protected void onResume() {
     super.onResume();
 
-    SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
     /*
      * This is quite hacky - in case the app was enabled or disabled externally (by
      * ExternalEventReceiver) this will refresh the checkbox that is visible to the user
      */
-    CheckBoxPreference mEnabledPreference =
-      (CheckBoxPreference) findPreference(getString(R.string.pref_enabled_key));
-
-    boolean enabled = myPrefs.getBoolean(getString(R.string.pref_enabled_key), true);
-    mEnabledPreference.setChecked(enabled);
+    CheckBoxPreference mEnabledPreference = (CheckBoxPreference) findPreference(getString(R.string.pref_enabled_key));
+    if (mEnabledPreference != null) {
+      SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+      boolean enabled = myPrefs.getBoolean(getString(R.string.pref_enabled_key), true);
+      mEnabledPreference.setChecked(enabled);
+    }
     
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     activityActive = true; 
@@ -523,7 +532,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   
   @Override
   protected void onStart() {
-    
+
     // Save the setting that might be important if they change
     oldLocation = ManagePreferences.location();
     oldTextSize = ManagePreferences.textSize();
@@ -533,18 +542,19 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     oldSplitKeepLeadBreak = options.splitKeepLeadBreak();
     oldRevMsgOrder = options.revMsgOrder();
     oldMixedMsgOrder = options.mixedMsgOrder();
-    
+
+    super.onStart();
+
     // If this was an initialization call to initialize settings
     // finish it before it become visible
     
     Intent intent = getIntent();
     if (intent.getBooleanExtra(EXTRA_INITIALIZE, false)) finish();
-    
-    super.onStart();
   }
-  
+
   @Override
   protected void onStop() {
+    Log.v("SmsPopupConfigActivity.onStop()");
     super.onStop();
 
     // If any of the split message options have changed, reparse any possibly affected calls
@@ -699,12 +709,35 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     return null;
   }
 
+  /**
+   * Find and launch a specific preference
+   * @param prefKey requested preference ID
+   * @return true if preference was found and launched
+   */
+  private boolean launchPreference(PreferenceGroup root, String prefKey) {
+    for (int ndx = 0; ndx < root.getPreferenceCount(); ndx++) {
+      Preference child = root.getPreference(ndx);
+      String curKey = child.getKey();
+      if (curKey != null && curKey.equals(prefKey)) {
+        ((PreferenceScreen)root).onItemClick(null, null, ndx, 0);
+        return true;
+      }
+      if (child instanceof PreferenceGroup) {
+        if (launchPreference((PreferenceGroup)child, prefKey)) return true;
+      }
+    }
+
+    return false;
+  }
+
+
   // This is all supposed to work around a bug causing crashes for
   // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
   
   private boolean activityActive = false;
   
-  protected void onPause() { 
+  protected void onPause() {
+    Log.v("SmsPoopupConfigActivity.onPause()");
      super.onPause(); 
      activityActive = false; 
   } 
@@ -718,14 +751,18 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
      if (!activityActive) return false;
      return super.onKeyDown(keyCode, event);
   }
- 
-  
-  
+
   @Override
   protected void onSaveInstanceState(Bundle outState) {
 
     outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
     super.onSaveInstanceState(outState);
+  }
+
+  @Override
+  public void finish() {
+    Log.v("SmsPopuConfigActivity.finish()");
+    super.finish();
   }
   
   /**
@@ -737,5 +774,15 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     Intent intent = new Intent(activity, SmsPopupConfigActivity.class);
     intent.putExtra(EXTRA_INITIALIZE, true);
     activity.startActivity(intent);
+  }
+
+  /**
+   * Launch the Select Single Location setting
+   * @param activity current activity
+   */
+  public static void selectLocation(Activity activity) {
+    Intent intent = new Intent(activity, SmsPopupConfigActivity.class);
+    intent.putExtra(EXTRA_PREFERENCE, R.string.pref_location_tree_key);
+    activity.startActivityForResult(intent, 0);
   }
 }

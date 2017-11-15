@@ -326,9 +326,7 @@ public class DonationManager {
       }
       else status = (sponsor != null ? DonationStatus.SPONSOR_EXPIRE : DonationStatus.PAID_EXPIRE);
     } 
-    else if ((location == null || location.startsWith("General")) &&
-              ManagePreferences.filter().trim().length()<=1 &&
-              !VendorManager.instance().isRegistered()) {
+    else if (!ManagePreferences.isFunctional()) {
       status = DonationStatus.NEW;
     } else if (sponsor != null) status = DonationStatus.SPONSOR;
     else {

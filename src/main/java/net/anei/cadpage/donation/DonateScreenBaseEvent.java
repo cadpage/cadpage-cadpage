@@ -15,20 +15,31 @@ import android.widget.TextView;
 public abstract class DonateScreenBaseEvent extends DonateEvent {
   
   private int titleId;
+  private int winTitleId;
   private int textId;
   private int layout;
 
   protected DonateScreenBaseEvent(AlertStatus alertStatus, int titleId, int textId,
-                                   int layout) {
+                                  int layout) {
+    this(alertStatus, titleId, -1, textId, layout);
+  }
+
+  protected DonateScreenBaseEvent(int titleId, int winTitleId, int textId, int layout) {
+    this(null, titleId, winTitleId, textId, layout);
+  }
+
+  private DonateScreenBaseEvent(AlertStatus alertStatus, int titleId, int winTitleId, int textId,
+                                int layout) {
     super(alertStatus, titleId);
     registerScreenEvent(this);
     this.titleId = titleId;
+    this.winTitleId = winTitleId;
     this.textId = textId;
     this.layout = layout;
   }
   
   protected boolean overrideWindowTitle() {
-    return false;
+    return winTitleId >= 0;
   }
 
   /**
@@ -54,12 +65,12 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     // There is one and only one status event that is not really a payment status.
     // Very sloppy, but we will check for that and overwrite the normal title text
     TextView view = (TextView)activity.findViewById(R.id.DonateStatusView);
-    if (overrideWindowTitle()) view.setText(activity.getString(titleId));
+    if (overrideWindowTitle()) view.setText(activity.getString(winTitleId >= 0 ? winTitleId : titleId));
     setTextColor(view);
     
     // Set up main box text and color
     view = (TextView)activity.findViewById(R.id.DonateTextView);
-    view.setText(activity.getString(textId, getTextParms(PARM_TEXT)));
+    view.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
     setTextColor(view);
   }
 
@@ -119,6 +130,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     MainDonateEvent.instance();
     PagingProfileEvent.instance();
     PagingSubRequiredEvent.instance();
+    HelpWelcomeEvent.instance();
     
     // Except for Vendor1Event which isn't in the main menu.   So we will invoke it
     // as well
@@ -144,4 +156,11 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
   public boolean launchActivity(Activity activity) {
     return true;
   }
+
+  /**
+   * Called to perform any followup processing after a DonateScreenBase event
+   * invoked by this DonateScreenBase event returns
+   * @param activity current activity
+   */
+  public void followup(Activity activity) {}
 }

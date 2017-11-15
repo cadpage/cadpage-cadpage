@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import net.anei.cadpage.C2DMService;
+import net.anei.cadpage.CallHistoryActivity;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
@@ -123,9 +124,8 @@ class CadpageVendor extends Vendor {
   boolean checkVendorStatus(Context context) {
     
     // Ditto if we are just starting an uninitialized app
-    if (! ManagePreferences.initialized()) return true;
-    
-    
+    if (CallHistoryActivity.isInitializing()) return true;
+
     // If service is not enabled, we have two recovery options
     if (!isEnabled()) {
       

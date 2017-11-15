@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.Log;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
@@ -20,7 +21,7 @@ public class DonateActivity extends BillingActivity {
   private PermissionManager permMgr = new PermissionManager(this);
 
   private DonateScreenBaseEvent event;
-  
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     ManagePreferences.setPermissionManager(permMgr);
@@ -34,16 +35,22 @@ public class DonateActivity extends BillingActivity {
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    Log.v("DonateActivity.onActivityResult req:" + requestCode + " res:" + resultCode);
     
     if (resultCode >= ManageBluetooth.BLUETOOTH_REQ) {
       if (ManageBluetooth.instance().onActivityResult(this, requestCode, resultCode)) return;
     }
     
     super.onActivityResult(requestCode, resultCode, data);
+    setVisible(true);
     if (resultCode == RESULT_OK) {
       setResult(RESULT_OK);
       finish();
     }
+
+    event.followup(this);
+    Log.v("DonateActivity.onActivityResult finished");
   }
 
   @Override
@@ -82,6 +89,9 @@ public class DonateActivity extends BillingActivity {
     if (msg != null) popup.putExtra(EXTRA_MSG_ID, msg.getMsgId());
     if (context instanceof Activity) {
       ((Activity)context).startActivityForResult(popup, 0);
+      if (context instanceof DonateActivity) {
+        ((DonateActivity)context).setVisible(false);
+      }
     }
     else {
       popup.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

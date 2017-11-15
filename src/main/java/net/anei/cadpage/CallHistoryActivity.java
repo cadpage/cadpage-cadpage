@@ -8,6 +8,7 @@ import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.HelpWelcomeEvent;
 import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
 import net.anei.cadpage.donation.VendorEvent;
 import net.anei.cadpage.vendors.VendorManager;
@@ -55,6 +56,8 @@ public class CallHistoryActivity extends ListActivity {
   private HistoryMsgTextView msgTextView = null;
   
   private static CallHistoryActivity mainActivity = null;
+
+  private static boolean initializing = false;
   
   private static int lockMsgId = -1;
 
@@ -76,6 +79,8 @@ public class CallHistoryActivity extends ListActivity {
     
     ManagePreferences.setPermissionManager(permMgr);
     ManagePreferences.checkInitialPermissions();
+
+    initializing = !ManagePreferences.initialized();
     
     // Apparently only an activity can calculate the total screen size.
     // So do it now and save it in preferences so it will be included in
@@ -103,7 +108,7 @@ public class CallHistoryActivity extends ListActivity {
     // preference retrieval logic throws an exception if any requested preference
     // hasn't been initialized.  (We get a way with calling useOldGcm() above
     // because it returns a boolean result)
-    if (! ManagePreferences.initialized()) {
+    if (initializing) {
       SmsPopupConfigActivity.initializePreferences(this);
     }
     
@@ -185,7 +190,12 @@ public class CallHistoryActivity extends ListActivity {
         DonateActivity.launchActivity(this, event, null);
       }
 
-      // If a new Active911 client may be higjacking alerts, warn user
+      // If Cadpage is not functional with current settings, start up the new user sequence
+      else if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
+        DonateActivity.launchActivity(this, event, null);
+      }
+
+      // If a new Active911 client may be highjacking alerts, warn user
       else if ((event = Active911WarnEvent.instance()).isEnabled()) {
         DonateActivity.launchActivity(this, event, null);
       }
@@ -246,6 +256,8 @@ public class CallHistoryActivity extends ListActivity {
         }
       }
     }
+
+    initializing = false;
   }
 
   /**
@@ -493,5 +505,9 @@ public class CallHistoryActivity extends ListActivity {
    */
   public static CallHistoryActivity getMainActivity() {
     return mainActivity;
+  }
+
+  public static boolean isInitializing() {
+    return initializing;
   }
 }

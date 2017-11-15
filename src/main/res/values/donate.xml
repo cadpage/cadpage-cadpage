@@ -439,5 +439,37 @@
 
   <string name="paid_subtype">paid</string>
   <string name="free_subtype">free</string>
-  
+
+  <string name="help_welcome_title">
+    Welcome to Cadpage!
+  </string>
+  <string name="help_welcome_1_text">
+    Cadpage assists emergency first responders in getting dispatched to an emergency scene.
+  </string>
+  <string name="help_welcome_2_text">
+    Cadpage will not do anything with your current settings.
+  </string>
+  <string name="help_welcome_text">
+    %s\n\n
+    Cadpage only works if you belong to a fire department or other emergency response organization
+    that is sending alerts to this device when a call is dispatched.  Alerts can be sent as text
+    messages, or if your department uses CodeMessaging or Active911 as a message service, as direct pages.
+  </string>
+
+  <string name="help_text_dispatch_title">
+    My department sends me text alerts
+  </string>
+  <string name="help_text_dispatch_wintitle">
+      Text dispatch alerts
+  </string>
+  <string name="help_text_dispatch_text">
+    You need to tell Cadpage something about where you are so that it knows how to interpret the alerts
+    you are receiving.  Usually, this is just a matter of selecting the location where your dispatch
+    center is located.
+  </string>
+
+  <string name="help_select_location_title">
+    Select the appropriate location
+  </string>
+
 </resources>

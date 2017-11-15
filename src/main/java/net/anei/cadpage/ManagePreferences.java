@@ -309,13 +309,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   public static boolean initialized() {
-    return prefs.getBoolean(R.string.pref_initialized_key);
+    if (prefs.getBoolean(R.string.pref_initialized_key)) return true;
+    prefs.putBoolean(R.string.pref_initialized_key, true);
+    return false;
   }
-  
-  public static void setInitialized(boolean newVal) {
-    prefs.putBoolean(R.string.pref_initialized_key, newVal);
-  }
-  
+
   public static boolean initBilling() {
     return prefs.getBoolean(R.string.pref_init_billing_key);
   }
@@ -486,6 +484,33 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     public boolean subjectColonField() {
       return false;
     }
+  }
+
+  /**
+   * @return true if Cadpage will accomplish anything with current settings
+   */
+  public static boolean isFunctional() {
+
+    // The text alert checks only count if text processing is enabled
+    if (! enableMsgType().equals("C")) {
+
+      // Specifing a location other than General is good
+      String location = location();
+      if (location != null) {
+        for (String part : location.split(",")) {
+          if (!part.startsWith("General")) return true;
+        }
+      }
+
+      // Or any functional sender filter is good
+      if (ManagePreferences.filter().trim().length() > 1) return true;
+    }
+
+    // Registered with any direct paging service is good
+    if (VendorManager.instance().isRegistered()) return true;
+
+    // Otherwise report nonfunctional status
+    return false;
   }
   
   public static boolean suppressDupMsg() {

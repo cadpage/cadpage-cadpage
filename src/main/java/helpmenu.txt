@@ -1,0 +1,95 @@
+Welcome to Cadpage!
+
+Cadpage assists emergency first responders in getting dispatched to an emergency scene.
+
+Cadpage only works if you belong to a fire department or other emergency response organization
+that is sending alerts to this device when a call is dispatched.  Alerts can be sent as text
+messages, or if your department uses CodeMessaging or Active911 as a message service, as direct pages.
+
+* My Department sends me text alerts
+* My department uses CodeMessaging
+* My department uses Active911
+* I am not receiving department dispatch alerts
+
+-------------------------------------------------------------------------------------
+
+Welcome to Cadpage!
+
+Cadpage will not do anything with your current settings.
+
+Cadpage only works if you belong to a fire department or other emergency response organization
+that is sending alerts to this device when a call is dispatched.  Alerts can be sent as text
+messages, or if your department uses CodeMessaging or Active911 as a message service, as direct pages.
+
+* My department sends me text alerts
+* My department uses CodeMessaging
+* My department uses Active911
+* I am not receiving department dispatch alerts
+
+-------------------------------------------------------------------------------------
+
+Text dispatch alerts
+
+Cadpage text processing is currently disabled.
+
+* Enable Cadpage text processing
+
+--------------------------------------------------------------------------------------
+
+Text dispatch alerts
+
+You need to tell Cadpage something about where you are so that it knows how to interpret the alerts
+you are receiving.  Usually, this is just a matter of selecting the location where your dispatch
+center is located.
+
+* Select the appropriate location
+* My current location is not supported
+* Location is selected, but Cadpage is still not working
+
+----------------------------------------------------------------------------------------
+
+Text dispatch alerts
+
+OK, we are going to have to ask our developer for help with this, and he is going to need to
+see some examples of what your text alerts look like.  Choosing to email the developer immediately
+after Cadpage fails to pick up an alert is the best way to get this information to him.
+
+* Email the developer
+
+----------------------------------------------------------------------------------------
+
+Active911 alerts
+
+You need to register Cadpage with the Active911 service.  To do this, you need your Active911 device
+activation code which you can get from your departments IT people.
+
+* Register with Active911
+
+-----------------------------------------------------------------------------------------
+
+CodeMessaging alerts
+
+You need to register Cadpage with the CodeMessaging service.  The process is pretty much self-explanatory.
+The only tricky part is that you have to answer "YES" when you are asked if you
+are receiving CodeMessaging alerts.
+
+* Register with CodeMessaging
+
+------------------------------------------------------------------------------------------
+Cadpage is good to go!
+
+Hopefully, Cadpage will start working properly.  If you still have problems, use the
+"Email the Developer" setting to contact the developer for assistance.
+
+------------------------------------------------------------------------------------------
+
+No dispatch alerts
+
+Cadpage will not do anything for you if you are not receiving dispatch alerts.
+If you are part of an emergency response organization, talk to your department's IT people and
+see if they can send you the department's dispatch alerts.
+
+If you are not part of an emergency response organization, Cadpage will not be useful to you.
+
+If you have any questions or suggestions as to how Cadpage might be more useful, feel free to use
+the "Email the Developer" setting to contact us.

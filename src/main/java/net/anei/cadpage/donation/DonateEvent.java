@@ -56,6 +56,10 @@ public abstract class DonateEvent {
   protected Object[] getTextParms(int type) {
     return null;
   }
+
+  protected Object[] getTextParms(Activity activity, int type) {
+    return getTextParms(type);
+  }
   
   /**
    * Called when an event needs to be performed
@@ -101,7 +105,7 @@ public abstract class DonateEvent {
     String title = pref.getTitle().toString();
     pref.setTitle(setAlertColor(title));
     
-    title = activity.getString(titleId, getTextParms(PARM_TITLE));
+    title = activity.getString(titleId, getTextParms(activity, PARM_TITLE));
     pref.setSummary(setAlertColor(title));
 
     // Set up a preference clicked listener
