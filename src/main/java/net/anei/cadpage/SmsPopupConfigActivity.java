@@ -554,7 +554,6 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
 
   @Override
   protected void onStop() {
-    Log.v("SmsPopupConfigActivity.onStop()");
     super.onStop();
 
     // If any of the split message options have changed, reparse any possibly affected calls
@@ -737,8 +736,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   private boolean activityActive = false;
   
   protected void onPause() {
-    Log.v("SmsPoopupConfigActivity.onPause()");
-     super.onPause(); 
+     super.onPause();
      activityActive = false; 
   } 
   
@@ -759,12 +757,6 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     super.onSaveInstanceState(outState);
   }
 
-  @Override
-  public void finish() {
-    Log.v("SmsPopuConfigActivity.finish()");
-    super.finish();
-  }
-  
   /**
    * Create and destroy a settings screen, which has the effect of initializing 
    * all settings to their default values 

@@ -13,7 +13,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 public abstract class DonateScreenBaseEvent extends DonateEvent {
-  
+
   private int titleId;
   private int winTitleId;
   private int textId;
@@ -162,5 +162,5 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * invoked by this DonateScreenBase event returns
    * @param activity current activity
    */
-  public void followup(Activity activity) {}
+  public void followup(Activity activity, int req, int result) {}
 }

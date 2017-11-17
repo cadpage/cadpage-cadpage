@@ -223,7 +223,7 @@ public class VendorManager {
     Vendor vendor = findVendor(vendorCode);
     if (vendor != null) vendor.resetEmailReq(context);
   }
-  
+
   /**
    * Update Cadpage services status.
    * Called when either the activation status or expiration date has changed
@@ -318,6 +318,19 @@ public class VendorManager {
     String errMsg = context.getString(resId, error);
     NoticeActivity.showVendorNotice(context, errMsg);
     
+  }
+
+  /**
+   * Process user request to register with service
+   * @param context current context
+   * @param vendorCode vendor code
+   */
+  public void userRegisterReq(Context context, String vendorCode) {
+
+    // Identify the correct vendor and pass request to them
+    Vendor vendor = findVendor(vendorCode);
+    if (vendor == null) return;
+    vendor.userRegisterReq(context);
   }
   
   /**

@@ -16,6 +16,7 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -33,7 +34,7 @@ import android.widget.TextView;
  */
 public class EmailDeveloperActivity extends Safe40Activity {
 
-  public static enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER, MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR, ACTIVE911_SUPPORT };
+  public static enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER, MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR, ACTIVE911_SUPPORT, NEED_HELP };
   
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
@@ -281,7 +282,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
   }
 
   private static void sendEmailRequest(Context context, EmailType type,
-                                         String vendorEmail, String message) {
+                                       String vendorEmail, String message) {
     
     // If user is a developer, log the message contents.  This helps get
     // the info on emulators where no email clients are available
@@ -431,6 +432,13 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // Also sends a request directly to the email client, without
     // bring up a request screen first.
     sendEmailRequest(context, EmailType.ACTIVE911_SUPPORT, false, 0, false);
+  }
+
+  public static void sendNeedHelpEmail(Context context) {
+
+    // Also sends a request directly to the email client, without
+    // bring up a request screen first.
+    sendEmailRequest(context, EmailType.NEED_HELP, true, 0, true);
   }
 
   /**

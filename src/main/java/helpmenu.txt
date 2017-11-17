@@ -55,12 +55,13 @@ see some examples of what your text alerts look like.  Choosing to email the dev
 after Cadpage fails to pick up an alert is the best way to get this information to him.
 
 * Email the developer
+* Done
 
 ----------------------------------------------------------------------------------------
 
 Active911 alerts
 
-You need to register Cadpage with the Active911 service.  To do this, you need your Active911 device
+You need to register Cadpage with the Active911 service.  To do this, you will need your Active911 device
 activation code which you can get from your departments IT people.
 
 * Register with Active911
@@ -81,6 +82,9 @@ Cadpage is good to go!
 Hopefully, Cadpage will start working properly.  If you still have problems, use the
 "Email the Developer" setting to contact the developer for assistance.
 
+* Email the developer
+* Done
+
 ------------------------------------------------------------------------------------------
 
 No dispatch alerts
@@ -93,3 +97,6 @@ If you are not part of an emergency response organization, Cadpage will not be u
 
 If you have any questions or suggestions as to how Cadpage might be more useful, feel free to use
 the "Email the Developer" setting to contact us.
+
+* Email the developer
+* Done

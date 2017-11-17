@@ -22,6 +22,9 @@ public abstract class DonateEvent {
   
   // Different alert status codes
   public enum  AlertStatus {GREEN, YELLOW, RED};
+
+  // Custom result codes
+  public static final int RESULT_READY = Activity.RESULT_FIRST_USER;
   
   private AlertStatus alertStatus;
   private int titleId;
@@ -158,6 +161,9 @@ public abstract class DonateEvent {
         doEvent(act, msg);
       }
     });
+
+    // Stop Android from upshifting the button text!
+    button.setTransformationMethod(null);
     
     // Add button to parent view and we are finished
     parent.addView(button);
@@ -205,5 +211,14 @@ public abstract class DonateEvent {
     activity.setResult(Activity.RESULT_OK);
     activity.finish();
     
+  }
+
+  /**
+   * Close this event and pass result code up to parent
+   * @param activity activity that launched this event
+   */
+  protected void closeEvent(Activity activity, int resultCode) {
+    activity.setResult(resultCode);
+    activity.finish();
   }
 }

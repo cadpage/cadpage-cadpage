@@ -67,17 +67,7 @@ public class VendorActivity extends Safe40Activity {
     registerButton.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
-        final boolean required = vendor.isAcctInfoRequired();
-        int expId = required ? R.string.perm_acct_info_for_register_direct_req :  R.string.perm_acct_info_for_register_direct_opt;
-
-            ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
-          @Override
-          public void run(boolean ok, String[] permissions, int[] granted) {
-            if (ok || !required) {
-              vendor.registerReq(VendorActivity.this);
-            }
-          }
-        }, expId);
+        vendor.userRegisterReq(VendorActivity.this);
       }
     });
     
@@ -211,8 +201,7 @@ public class VendorActivity extends Safe40Activity {
   /**
    * Launch call display popup activity
    * @param context context
-   * @param msgId message ID of message to be displayed
-   * @return
+   * @param vendor Vendor object
    */
   public static void launchActivity(Context context, Vendor vendor) {
     Intent intent = new Intent(context, VendorActivity.class);

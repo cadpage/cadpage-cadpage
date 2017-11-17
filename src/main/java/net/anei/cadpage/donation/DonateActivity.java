@@ -36,21 +36,18 @@ public class DonateActivity extends BillingActivity {
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-    Log.v("DonateActivity.onActivityResult req:" + requestCode + " res:" + resultCode);
-    
     if (resultCode >= ManageBluetooth.BLUETOOTH_REQ) {
       if (ManageBluetooth.instance().onActivityResult(this, requestCode, resultCode)) return;
     }
     
     super.onActivityResult(requestCode, resultCode, data);
-    setVisible(true);
     if (resultCode == RESULT_OK) {
       setResult(RESULT_OK);
       finish();
     }
-
-    event.followup(this);
-    Log.v("DonateActivity.onActivityResult finished");
+    else {
+      event.followup(this, requestCode, resultCode);
+    }
   }
 
   @Override
@@ -89,9 +86,6 @@ public class DonateActivity extends BillingActivity {
     if (msg != null) popup.putExtra(EXTRA_MSG_ID, msg.getMsgId());
     if (context instanceof Activity) {
       ((Activity)context).startActivityForResult(popup, 0);
-      if (context instanceof DonateActivity) {
-        ((DonateActivity)context).setVisible(false);
-      }
     }
     else {
       popup.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

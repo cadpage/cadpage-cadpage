@@ -616,6 +616,24 @@ abstract class Vendor {
   }
 
   /**
+   * Process user request to register for service
+   * @param context current context
+   */
+  void userRegisterReq(final Context context) {
+    final boolean required = isAcctInfoRequired();
+    int expId = required ? R.string.perm_acct_info_for_register_direct_req :  R.string.perm_acct_info_for_register_direct_opt;
+
+    ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
+      @Override
+      public void run(boolean ok, String[] permissions, int[] granted) {
+        if (ok || !required) {
+          registerReq(context);
+        }
+      }
+    }, expId);
+  }
+
+  /**
    * Process user request to register with vendor
    * @param context Current context
    */
