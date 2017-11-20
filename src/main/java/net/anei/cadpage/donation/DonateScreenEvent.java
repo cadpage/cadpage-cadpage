@@ -61,7 +61,6 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
     if (!includeDone) {
       Button btn = new Button(activity);
       btn.setText(R.string.donate_btn_cancel);
-      btn.setTransformationMethod(null);
       btn.setOnClickListener(new OnClickListener() {
         @Override
         public void onClick(View v) {

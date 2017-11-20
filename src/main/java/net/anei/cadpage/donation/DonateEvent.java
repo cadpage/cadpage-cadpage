@@ -162,9 +162,6 @@ public abstract class DonateEvent {
       }
     });
 
-    // Stop Android from upshifting the button text!
-    button.setTransformationMethod(null);
-    
     // Add button to parent view and we are finished
     parent.addView(button);
     return true;
