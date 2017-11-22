@@ -345,11 +345,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static String enableMsgType() {
     return prefs.getString(R.string.pref_enable_msg_type_key);
   }
-  
-  public static void setEnableMsgType(String value) {
-    prefs.putString(R.string.pref_enable_msg_type_key, value);
-  }
-  
+
   public static int mmsTimeout() {
     return prefs.getIntValue(R.string.pref_mms_timeout_key);
   }
@@ -1474,22 +1470,39 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   /********************************************************************
    * Initial permission checking (checks all of the other preference permissions)
    ********************************************************************/
-  
-  public static void checkInitialPermissions() {
-    initialPermissionChecker.check(true);
+
+  private static boolean initialPermissionsChecked = false;
+  public static void checkInitialPermissions(Runnable run) {
+
+    // This can not be called multiple times when Cadpage is launched seccessively.  Since it is not
+    // possible for permissions be be revoked while the app is running (it is killed if they are)
+    // we only need to make this rather complicated check one time.
+    if (initialPermissionsChecked) {
+      if (run != null) run.run();
+    } else {
+      initialPermissionsChecked = true;
+      initialPermissionChecker.check(true, run);
+    }
   }
   
   private static final InitialPermissionChecker initialPermissionChecker = new InitialPermissionChecker();
   
   public static class InitialPermissionChecker extends PermissionChecker {
-    
+
+    Runnable run;
+
     // List of checkers that reported permission failures
     List<PermissionChecker> failedCheckers = null;
     
     public InitialPermissionChecker() {
       super(PERM_REQ_INITIAL);
     }
-    
+
+    public void check(boolean b, Runnable run) {
+      this.run = run;
+      super.check(b);
+    }
+
     @Override
     public void checkPermission() {
 
@@ -1509,12 +1522,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         // OK, we are also interested in the account permissions, but only if
         // we are ready to launch an automatic payment recalculation
         else if (checker instanceof PhoneInfoChecker) {
-          if (DonationManager.instance().checkPaymentStatus()) {
+          final Context context = CadPageApplication.getContext();
+          if (DonationManager.instance().checkPaymentStatus(context)) {
             PhoneInfoChecker aChecker = (PhoneInfoChecker)checker;
             if (!aChecker.check(new PermissionAction(){
               @Override
               public void run(boolean ok, String[] permissions, int[] granted) {
-                DonationManager.instance().checkPaymentStatus(CadPageApplication.getContext());
+                UserAcctManager.instance().reloadStatus(context);
+                ManagePreferences.setAuthLastCheckTime();
               }
             }, R.string.perm_acct_info_for_auto_recalc, false)) {
               failedCheckers.add(aChecker);
@@ -1526,6 +1541,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // No failures, life is good
       if (failedCheckers.isEmpty()) {
         failedCheckers = null;
+        if (run != null) run.run();
         return;
       }
 
@@ -1550,6 +1566,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // the granted status for the permissions they requested
       for (PermissionChecker checker : failedCheckers) {
         List<String> permList = checker.getReqPermissions();
+
+        // There is absolutely no possible way that permList can be null.
+        // Yet I have seen it happen twice in developer testing but still cannot
+        // reproduce it  Arrgh!!!!!!!!!!!
+        if (permList == null) {
+          Log.e(checker.toString() + "returned null permision list");
+          continue;
+        }
         String[] perms = permList.toArray(new String[permList.size()]);
         int[] stats = new int[perms.length];
         for (int ndx = 0; ndx<perms.length; ndx++) {
@@ -1565,6 +1589,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       }
       
       failedCheckers = null;
+      if (run != null) run.run();
     }
   }
   
@@ -1573,6 +1598,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    ********************************************************************/
   public static boolean checkPermEnableMsgType(ListPreference pref, String value) {
     return enableMsgTypeChecker.check(pref, value);
+  }
+  public static boolean setEnableMsgType(String value, Runnable run) {
+    return enableMsgTypeChecker.setValue(null, value, run);
   }
   private static final EnableMsgTypeChecker enableMsgTypeChecker = new EnableMsgTypeChecker();
   

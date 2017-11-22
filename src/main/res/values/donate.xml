@@ -529,6 +529,15 @@
     \"Email the Developer\" setting to contact the developer for assistance.
   </string>
 
+  <string name="help_enable_sms_text">
+    Cadpage text message processing is currently disabled.  You may have to grant Cadpage
+    permission to access text messages before enabling this.
+  </string>
+
+  <string name="help_do_enable_sms_title">
+    Enable Cadpage text message processing
+  </string>
+
   <string name="help_select_location_title">
     Select the appropriate location
   </string>

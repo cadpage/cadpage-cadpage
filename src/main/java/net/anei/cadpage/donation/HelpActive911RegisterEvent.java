@@ -15,7 +15,6 @@ class HelpActive911RegisterEvent extends DonateEvent {
   @Override
   protected void doEvent(Activity activity) {
     VendorManager.instance().userRegisterReq(activity, "Active911");
-    closeEvents(activity);
   }
 
   private static final HelpActive911RegisterEvent instance = new HelpActive911RegisterEvent();

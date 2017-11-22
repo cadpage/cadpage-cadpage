@@ -192,10 +192,10 @@ public class EmailDeveloperActivity extends Safe40Activity {
       sendEmailRequest2(context, type, includeMsg, msgId, includeCfg);
     }
   }
-  
-  private static void sendEmailRequest2(final Context context, final EmailType type, 
-                                       boolean includeMsg, int msgId,
-                                       boolean includeCfg) {
+
+  private static void sendEmailRequest2(final Context context, final EmailType type,
+                                        boolean includeMsg, int msgId,
+                                        boolean includeCfg) {
     
     // Build the message text
     StringBuilder body = new StringBuilder();
@@ -437,8 +437,10 @@ public class EmailDeveloperActivity extends Safe40Activity {
   public static void sendNeedHelpEmail(Context context) {
 
     // Also sends a request directly to the email client, without
-    // bring up a request screen first.
-    sendEmailRequest(context, EmailType.NEED_HELP, true, 0, true);
+    // bring up a request screen first.  We also skip prompting the user
+    // to grant the permissions to read the number because this does not work
+    // because the Activity we are basing this on is no longer alive
+    sendEmailRequest2(context, EmailType.NEED_HELP, true, 0, true);
   }
 
   /**

@@ -12,6 +12,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 
 public class DonateActivity extends BillingActivity {
   
@@ -26,10 +27,17 @@ public class DonateActivity extends BillingActivity {
   protected void onCreate(Bundle savedInstanceState) {
     ManagePreferences.setPermissionManager(permMgr);
     super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+
     String classname = getIntent().getStringExtra(EXTRA_SCREEN_NAME);
     event = DonateScreenEvent.getScreenEvent(classname);
     int msgId = getIntent().getIntExtra(EXTRA_MSG_ID, -1);
     SmsMmsMessage msg = msgId<0 ? null : SmsMessageQueue.getInstance().getMessage(msgId);
+    event.create(this, msg);
+  }
+
+  public void switchEvent(DonateScreenBaseEvent event, SmsMmsMessage msg) {
+    this.event = event;
     event.create(this, msg);
   }
 
@@ -41,6 +49,7 @@ public class DonateActivity extends BillingActivity {
     }
     
     super.onActivityResult(requestCode, resultCode, data);
+
     if (resultCode == RESULT_OK) {
       setResult(RESULT_OK);
       finish();

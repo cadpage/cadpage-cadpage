@@ -13,7 +13,8 @@ public class HelpActive911Event extends DonateScreenEvent {
 
   protected HelpActive911Event() {
     super(R.string.help_active911_title, R.string.help_active911_title, R.string.help_active911_text,
-          HelpActive911RegisterEvent.instance());
+          HelpActive911RegisterEvent.instance(),
+          DoneDonateEvent.instance());
   }
 
   private static final HelpActive911Event instance = new HelpActive911Event();

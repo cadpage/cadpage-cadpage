@@ -30,9 +30,11 @@ messages, or if your department uses CodeMessaging or Active911 as a message ser
 
 Text dispatch alerts
 
-Cadpage text processing is currently disabled.
+    Cadpage text message processing is currently disabled.  You may have to grant Cadpage
+    permission to access text messages before enabling this.
 
-* Enable Cadpage text processing
+
+* Enable Cadpage text message processing
 
 --------------------------------------------------------------------------------------
 

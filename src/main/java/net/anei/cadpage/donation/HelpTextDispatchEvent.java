@@ -6,6 +6,7 @@ import net.anei.cadpage.CallHistoryActivity;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsMmsMessage;
 
 /*
 
@@ -25,9 +26,23 @@ public class HelpTextDispatchEvent extends DonateScreenEvent {
   }
 
   @Override
+  public void create(Activity activity, SmsMmsMessage msg) {
+
+    // If Cadpage is functional, switch to the Cadpage ready menu.  This can only happen
+    // if the Enable SMS processing screen came up first and switched to us after enabling
+    // SMS processing
+    // Otherwise process normally
+    if (ManagePreferences.isFunctional()) {
+      ((DonateActivity)activity).switchEvent(HelpCadpageReadyEvent.instance(), msg);
+    } else {
+      super.create(activity, msg);
+    }
+  }
+
+  @Override
   public void followup(Activity activity, int req, int result) {
     if (ManagePreferences.isFunctional()) {
-      DonateActivity.launchActivity(activity, HelpCadpageReadyEvent.instance(), null);
+      ((DonateActivity)activity).switchEvent(HelpCadpageReadyEvent.instance(), null);
     }
   }
 

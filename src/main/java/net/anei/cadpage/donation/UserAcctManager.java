@@ -87,9 +87,6 @@ public class UserAcctManager {
         }
       }
     }
-
-    // See if it is time to perform an automatic payment status recalculation
-    DonationManager.instance().checkPaymentStatus(context);
   }
 
   public void updateEmailList() {

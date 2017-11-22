@@ -20,24 +20,28 @@ messages, or if your department uses CodeMessaging or Active911 as a message ser
  */
 public class HelpWelcomeEvent extends DonateScreenEvent {
 
+  boolean initializing = false;
+
   protected HelpWelcomeEvent() {
     super(R.string.help_welcome_title, R.string.help_welcome_title, R.string.help_welcome_text,
-          HelpTextDispatchEvent.instance(),
+          HelpEnableSmsEvent.instance(),
           HelpCodeMessagingEvent.instance(),
           HelpActive911Event.instance(),
           HelpNoDispatchAlertsEvent.instance());
   }
 
+  public void setIntializing(boolean initializing) {
+    this.initializing = initializing;
+  }
+
   @Override
   public boolean isEnabled() {
-
-    // Only enabled if Cadpage is not functional
     return !ManagePreferences.isFunctional();
   }
 
   @Override
   protected Object[] getTextParms(Activity activity, int type) {
-    String text = activity.getString(CallHistoryActivity.isInitializing() ? R.string.help_welcome_1_text : R.string.help_welcome_2_text);
+    String text = activity.getString(initializing ? R.string.help_welcome_1_text : R.string.help_welcome_2_text);
     return new Object[]{ text };
   }
 

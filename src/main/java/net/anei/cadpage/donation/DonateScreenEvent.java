@@ -47,28 +47,22 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
     LinearLayout btnList = (LinearLayout)activity.findViewById(R.id.DonateButtonList);
     if (btnList == null) return;
 
-    boolean includeDone = false;
     if (events != null){
       for (DonateEvent event : events) {
         event.addButton(activity, btnList, msg);
-        if (event instanceof DoneDonateEvent) includeDone = true;
       }
     }
     
     // Add a cancel button at bottom of list
-    // unless the menu includes a Done event, in which case a
-    // cancel button is unnecessary
-    if (!includeDone) {
-      Button btn = new Button(activity);
-      btn.setText(R.string.donate_btn_cancel);
-      btn.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          activity.finish();
-        }
-      });
-      btnList.addView(btn);
-    }
+    Button btn = new Button(activity);
+    btn.setText(R.string.donate_btn_cancel);
+    btn.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        activity.finish();
+      }
+    });
+    btnList.addView(btn);
   }
 
   @Override

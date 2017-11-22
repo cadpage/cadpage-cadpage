@@ -15,7 +15,8 @@ public class HelpCodeMessagingEvent extends DonateScreenEvent {
 
   protected HelpCodeMessagingEvent() {
     super(R.string.help_codemessaging_title, R.string.help_codemessaging_title, R.string.help_codemessaging_text,
-          HelpCodeMessagingRegisterEvent.instance());
+          HelpCodeMessagingRegisterEvent.instance(),
+          DoneDonateEvent.instance());
   }
 
   private static final HelpCodeMessagingEvent instance = new HelpCodeMessagingEvent();

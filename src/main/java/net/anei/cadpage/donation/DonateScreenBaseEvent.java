@@ -58,7 +58,6 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
       return;
     }
 
-    activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
     activity.setContentView(layout);
     
     // Set heading color if appropriate

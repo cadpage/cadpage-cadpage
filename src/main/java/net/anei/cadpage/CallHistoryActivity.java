@@ -5,13 +5,11 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import net.anei.cadpage.donation.Active911WarnEvent;
 import net.anei.cadpage.donation.DonateActivity;
-import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.HelpWelcomeEvent;
 import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
 import net.anei.cadpage.donation.VendorEvent;
-import net.anei.cadpage.vendors.VendorManager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -78,7 +76,6 @@ public class CallHistoryActivity extends ListActivity {
     }
     
     ManagePreferences.setPermissionManager(permMgr);
-    ManagePreferences.checkInitialPermissions();
 
     initializing = !ManagePreferences.initialized();
     
@@ -176,6 +173,7 @@ public class CallHistoryActivity extends ListActivity {
 
     // We do some special processing if the intent was launched by the user
     // instead of through some internal trigger.
+    Runnable run = null;
     if (Intent.ACTION_MAIN.equals(intent.getAction()) && 
         intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
         (intent.getFlags() & Intent.FLAG_FROM_BACKGROUND) == 0) {
@@ -183,44 +181,59 @@ public class CallHistoryActivity extends ListActivity {
       // First clear any pending notification
       ClearAllReceiver.clearAll(this);
 
-      // If user upgraded to the release that implements imporoved email account security, and
-      // we suspect that really need to give us that email account access, let them know now.
-      DonateScreenEvent event;
-      if ((event = NeedAcctPermissionUpgradeEvent.instance()).isEnabled()) {
-        DonateActivity.launchActivity(this, event, null);
-      }
+      // The rest of this involves possible interractions with the user, which might conflict
+      // with the initial permission checking logic.  So rather than do it immediately, we stuff
+      // it in a Runnable object to be executed when the initial permission checking is complete
+      final boolean init = initializing;
+      ManagePreferences.checkInitialPermissions(new Runnable(){
+        @Override
+        public void run() {
 
-      // If Cadpage is not functional with current settings, start up the new user sequence
-      else if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
-        DonateActivity.launchActivity(this, event, null);
-      }
+          // If user upgraded to the release that implements improved email account security, and
+          // we suspect that really need to give us that email account access, let them know now.
+          DonateScreenEvent event;
+          if ((event = NeedAcctPermissionUpgradeEvent.instance()).isEnabled()) {
+            DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+          }
 
-      // If a new Active911 client may be highjacking alerts, warn user
-      else if ((event = Active911WarnEvent.instance()).isEnabled()) {
-        DonateActivity.launchActivity(this, event, null);
-      }
+          // If Cadpage is not functional with current settings, start up the new user sequence
+          else if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
+            ((HelpWelcomeEvent)event).setIntializing(init);
+            DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+          }
 
-      // Otherwise, launch the release info dialog if it hasn't already been displayed
-      else {
-        String oldRelease = ManagePreferences.release();
-        String release = CadPageApplication.getVersion();
-        if (!release.equals(oldRelease)) {
-          ManagePreferences.setRelease(release);
-          if (!trimRelease(release).equals(trimRelease(oldRelease))) {
-            showDialog(RELEASE_DIALOG);
+          // If a new Active911 client may be highjacking alerts, warn user
+          else if ((event = Active911WarnEvent.instance()).isEnabled()) {
+            DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+          }
+
+          // Otherwise, launch the release info dialog if it hasn't already been displayed
+          else {
+            String oldRelease = ManagePreferences.release();
+            String release = CadPageApplication.getVersion();
+            if (!release.equals(oldRelease)) {
+              ManagePreferences.setRelease(release);
+              if (!trimRelease(release).equals(trimRelease(oldRelease))) {
+                showDialog(RELEASE_DIALOG);
+              }
+            }
+
+            // If not, see if we have discovered a direct page vendor sending us text pages
+            else {
+              event = VendorEvent.instance(1);
+              if (event.isEnabled()) DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+            }
           }
         }
-
-        // If not, see if we have discovered a direct page vendor sending us text pages
-        else {
-          event = VendorEvent.instance(1);
-          if (event.isEnabled()) DonateActivity.launchActivity(this, event, null);
-        }
-      }
+      });
     }
     
     // Otherwise, if we should automatically display a call, do it now
     else {
+
+      // But first to the initial permision check
+      ManagePreferences.checkInitialPermissions(null);
+
       SmsMmsMessage msg = null;
       if (msgId >= 0) {
         msg = SmsMessageQueue.getInstance().getMessage(msgId);

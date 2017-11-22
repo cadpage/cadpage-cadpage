@@ -14,7 +14,6 @@ class HelpCodeMessagingRegisterEvent extends DonateEvent {
   @Override
   protected void doEvent(Activity activity) {
     VendorManager.instance().userRegisterReq(activity, "CodeMessaging");
-    closeEvents(activity);
   }
 
   private static final HelpCodeMessagingRegisterEvent instance = new HelpCodeMessagingRegisterEvent();

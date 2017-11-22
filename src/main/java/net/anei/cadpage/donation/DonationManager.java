@@ -80,14 +80,24 @@ public class DonationManager {
   private boolean usedPurchaseDate;
 
   /**
+   * @context current context
    * @return true if it is time to do an automatic payment status recalculation
    */
-  public boolean checkPaymentStatus() {
+  public boolean checkPaymentStatus(Context context) {
     
     // See if it is time to perform an automatic reload
     // If this is a lifetime user, don't bother
     if (ManagePreferences.freeRider()) return false;
-    
+
+    // No go if user has not allowed us to use email account information
+    if (! ManagePreferences.grantAccountAccess()) return false;
+
+    // OK, don't try this if we have no network connectivity!!
+    ConnectivityManager mgr = ((ConnectivityManager)
+        context.getSystemService(Context.CONNECTIVITY_SERVICE));
+    NetworkInfo info = mgr.getActiveNetworkInfo();
+    if (info == null  || !info.isConnected()) return false;
+
     // if not, get the current time and last authorization check time
     long lastTime = ManagePreferences.authLastCheckTime();
     long curTime = System.currentTimeMillis();
@@ -98,42 +108,6 @@ public class DonationManager {
     return (curTime - lastTime > AUTH_CHECK_INTERVAL);
   }
 
-  /**
-   * See if it is time to do an automatic payment recalculation, and if it
-   * is, do it
-   * @param context current context
-   */
-  public void checkPaymentStatus(final Context context) {
-
-    // No go if user has not allowed us to use email account information
-    if (! ManagePreferences.grantAccountAccess()) return;
-        
-    // We do not want to try this if the permission system has not been
-    // initialized because that prevents us from asking user to enable
-    // account permissions.  Instead, this will be done when the permission
-    // system is initialized
-    if (ManagePreferences.isPermissionsInitialized() && checkPaymentStatus()) {
-    
-      // OK, don't try this if we have no network connectivity!!
-      ConnectivityManager mgr = ((ConnectivityManager) 
-          context.getSystemService(Context.CONNECTIVITY_SERVICE));
-      NetworkInfo info = mgr.getActiveNetworkInfo();
-      if (info != null  && info.isConnected()) {
-        
-        // Request authorization information from authorization server
-        // The android market authorization is now reloaded every time the
-        // app starts up, so it would be pointless to do it again.
-        ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
-          @Override
-          public void run(boolean ok, String[] permissions, int[] granted) {
-            UserAcctManager.instance().reloadStatus(context);
-            ManagePreferences.setAuthLastCheckTime();
-          }
-        }, R.string.perm_acct_info_for_auto_recalc);
-      }
-    }
-  }
- 
   /**
    * Refresh payment status with latest information from market and from authorization server
    * @param context
