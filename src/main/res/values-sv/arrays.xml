@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string-array name="pref_enable_msg_type_entries">
     <item>Endast SMS meddelanden</item>
@@ -53,7 +53,7 @@
     <item>Gratis abonnemang</item>
     <item>Understöd gammalt system</item>
     <item>Active911s Android-release blockerar larm till Cadpage</item>
-    <item>Help needed</item>  <!-- Translate -->
+    <item>Jag behöver hjälp</item>
   </string-array>
   <string-array name="email_devel_text">
     <item>Vill du skicka ett email till utvecklarna av CadPage gällande generella fel eller kommentarer?</item>

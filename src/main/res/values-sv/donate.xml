@@ -273,120 +273,115 @@
   <string name="paid_subtype">betald</string>
   <string name="free_subtype">gratis</string>
 
-  <!-- Translate everything from here to end -->
-
   <string name="help_welcome_title">
-    Welcome to Cadpage!
+    Välkommen till Cadpage!
   </string>
   <string name="help_welcome_1_text">
-    Cadpage assists emergency first responders in getting dispatched to an emergency scene.
+    Cadpage hjälper insatspersonal att hitta till rätt position på olycksplats.
   </string>
   <string name="help_welcome_2_text">
-    Cadpage will not do anything with your current settings.
+    Cadpage kommer inte att göra någonting med dina nuvarande inställningar.
   </string>
   <string name="help_welcome_text">
     %s\n\n
-    Cadpage only works if you belong to a fire department or other emergency response organization
-    that is sending alerts to this device when a call is dispatched.  Alerts can be sent as text
-    messages, or if your department uses CodeMessaging or Active911 as a message service, as direct pages.
+    Cadpage fungerar bara om du är ansluten till en Räddningstjänst eller någon annan räddningsorganisation
+    som skickar larm till denna enhet. Larm kan skickas som SMS eller kan komma från en meddelandeservice som till exempel CodeMessaging Eller Active911
+    
   </string>
 
   <string name="help_text_dispatch_title">
-    My department sends me text alerts
+    Min räddningstjänst skickar mig SMS
   </string>
   <string name="help_text_dispatch_wintitle">
-      Text dispatch alerts
+      Larm med SMS
   </string>
   <string name="help_text_dispatch_text">
-    You need to tell Cadpage something about where you are so that it knows how to interpret the alerts
-    you are receiving.  Usually, this is just a matter of selecting the location where your dispatch
-    center is located.
+    Du behöver berätta för Cadpage för var du är så att programmet kan tolka larmen
+    som du får. Vanligtvis så räcker det med att berätta var din larmcentral är belägen.
+    
   </string>
 
   <string name="help_loc_not_supported_title">
-    My current location is not supported
+    Min nuvarande position är inte supportad
   </string>
   <string name="help_loc_not_supported_text">
-    OK, we are going to have to ask our developer for help with this, and he is going to need to
-    see some examples of what your text alerts look like.  Choosing to email the developer immediately
-    after Cadpage fails to pick up an alert is the best way to get this information to him.
-  </string>
+    OK, vi behöver be vår utvecklare om lite hjälp med det här och han kommer att behöva några exempel på hur dina textmeddelanden ser ut. Välj att eposta programutvecklaren direkt efter att Cadpage misslyckas med att tolka larmmeddelandet är bästa sättet att vidarebefordra det till utvecklaren.
+    </string>
 
   <string name="help_not_working_title">
-    Location is selected, but Cadpage is still not working
+    Positionen är vald, men Cadpage fungerar fortfarande inte
   </string>
 
   <string name="help_active911_title">
-    My department uses Active911
+    Min förvaltning använder Active911
   </string>
   <string name="help_active911_wintitle">
-    Active911 alerts
+    Active911 larm
   </string>
   <string name="help_active911_text">
-    You need to register Cadpage with the Active911 service.  To do this, you will need your Active911 device
-    activation code which you can get from your department.
+    Du behöver registrera Cadpage hos Active911. För att göra det behöver du din kod från Active911 vilken du får av administratören på din förvaltning.
+    
   </string>
 
   <string name="help_codemessaging_title">
-    My department uses CodeMessaging
+    Min förvaltning använder CodeMessaging
   </string>
   <string name="help_codemessaging_wintitle">
-    CodeMessaging alerts
+    CodeMessaging larm
   </string>
   <string name="help_codemessaging_text">
-    You need to register Cadpage with the CodeMessaging service.  The process is pretty much self-explanatory.
-    The only tricky part is that you have to answer "YES" when you are asked if you
-    are receiving CodeMessaging alerts.
+    Du behöver registrera Cadpage hos CodeMEssaging.  Processen är rätt självskriven.
+    Den enda luriga delen är att du måste trycka på "Ja" på frågan om du tar emot larm från CodeMessaging.
+    
   </string>
 
   <string name="help_no_dispatch_alerts_title">
-    No dispatch alerts
+    Inga larm från larmcentral
   </string>
   <string name="help_no_dispatch_alerts_wintitle">
-    No dispatch alerts
+    Inga larm från larmcentral
   </string>
   <string name="help_no_dispatch_alerts_text">
-  Cadpage will not do anything for you if you are not receiving dispatch alerts.
-  If you are part of an emergency response organization, talk to your department and
-  see if they can send you the department\'s dispatch alerts.\n\n
+  Cadpage kommer inte att göra något för dig om du inte får larm från din larmcentral. Om du är del av en utryckningsorganisation, prata med din förvaltning
+  och kolla om dom kan skicka din förvaltnings larmmeddelanden.\n\n
 
-  If you are not part of an emergency response organization, Cadpage will not be useful to you.\n\n
+  Om du inte är del av en utryckningsorganisation så kommer inte Cadpage att kunna vara till hjälp för dig.\n\n
 
-  If you have any questions or suggestions as to how Cadpage might be more useful, feel free to use
-  the "Email the Developer" setting to contact us.
+  Om du har några ytterligare frågor eller förslag på hur Cadpage kan vara till hjälp för dig, kontakta gärna programutvecklaren med knappen "Eposta programutvecklaren".
+  
   </string>
 
   <string name="help_cadpage_ready_title">
-    Cadpage is good to go!
+    Cadpage är klart att använda!
   </string>
   <string name="help_cadpage_ready_text">
-    Hopefully, Cadpage will start working properly.  If you still have problems, use the
-    \"Email the Developer\" setting to contact the developer for assistance.
+    Förhoppningsvis så kommer Cadpage att börja fungera korrekt. Om du fortfarande har problem, använd knappen för att 
+    \"Eposta programutvecklaren\" för att få ytterligare hjälp.
   </string>
 
   <string name="help_enable_sms_text">
-    Cadpage text message processing is currently disabled.  You may have to grant Cadpage
-    permission to access text messages before enabling this.
+    Cadpages textmeddelandeprocess är för närvarande avaktiverad. Du kan behöva ge Cadpage tillstånd att få tillgång till textmeddelanden innan du aktiverar det här.
+    
   </string>
 
   <string name="help_do_enable_sms_title">
-    Enable Cadpage text message processing
+    Aktivera Cadpages textmeddelandeprocess
   </string>
 
   <string name="help_select_location_title">
-    Select the appropriate location
+    Välj rätt position
   </string>
 
   <string name="help_email_title">
-    Email the developer
+    Eposta programutvecklaren
   </string>
 
   <string name="help_active911_register_title">
-    Register with Active911
+    Registrera hos Active911
   </string>
 
   <string name="help_codemessaging_register_title">
-    Register with CodeMessaging
+    Registrera hos CodeMessaging
   </string>
 
 </resources>
