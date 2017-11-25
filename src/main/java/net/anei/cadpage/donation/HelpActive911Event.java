@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
 /*
@@ -15,6 +16,13 @@ public class HelpActive911Event extends DonateScreenEvent {
     super(R.string.help_active911_title, R.string.help_active911_title, R.string.help_active911_text,
           HelpActive911RegisterEvent.instance(),
           DoneDonateEvent.instance());
+  }
+
+  @Override
+  public void onStart(DonateActivity activity) {
+
+    // If Cadpage is now functional, switch to the Cadpage Ready menu node
+    if (ManagePreferences.isFunctional()) activity.switchEvent(HelpCadpageReadyEvent.instance(), null);
   }
 
   private static final HelpActive911Event instance = new HelpActive911Event();

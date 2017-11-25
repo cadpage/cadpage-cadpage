@@ -42,6 +42,12 @@ public class DonateActivity extends BillingActivity {
   }
 
   @Override
+  protected void onStart() {
+    super.onStart();
+    event.onStart(this);
+  }
+
+  @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     if (resultCode >= ManageBluetooth.BLUETOOTH_REQ) {

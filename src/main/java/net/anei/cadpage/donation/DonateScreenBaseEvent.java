@@ -162,4 +162,10 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * @param activity current activity
    */
   public void followup(Activity activity, int req, int result) {}
+
+  /**
+   * Called to perform and status changes that resulted while this activity was suspended
+   * @param activity current activity
+   */
+  public void onStart(DonateActivity activity) {}
 }
