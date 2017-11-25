@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11182017</string>
+  <string name="release_date">11242017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.14-14\n
+    New Locations:\n
+    Howell County, MO\n
+    \n
+    Location Fixes:\n
+    San Bernardino County, CA\n
+    Carroll County, MD\n
+    Pitt County, NC\n
+    Marion County, OR\n
+    Linn County, OR\n
+    \n
     v1.9.14-13\n
     Location Fixes:\n
     Calaveras County, CA\n
@@ -44,13 +55,6 @@
     Marion County, OR\n
     Minehaha County, SD\n
     Fort Bend County, TX\n
-    Galveston County, TX\n
-    \n
-    v1.9.14-09\n
-    Location Fixes:\n
-    Cuyahoga County, OH\n
-    \n
-    General Fixes:\n
-    Problem launching Scanner Radio in Android 8.0
+    Galveston County, TX
   </string>
 </resources>
