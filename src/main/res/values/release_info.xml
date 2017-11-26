@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11242017</string>
+  <string name="release_date">11262017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-01\n
+    New welcome sequence to help new users get Cadpage configured correctly.\n
+    \n
+    New option to limit how long Scanner Radio will play when started from Cadpage.\n
+    \n
+    Location Fixes:\n
+    Douglas County, MN\n
+    Steuben County, NY\n
+    Darlington County, SC\n
+    \n
     v1.9.14-14\n
     New Locations:\n
     Howell County, MO\n
@@ -42,19 +52,6 @@
     Rockwall County, TX\n
     \n
     General Fixes:\n
-    Problem launching Scanner Radio in Android 8.0 (again)\n
-    \n
-    v1.9.14-10\n
-    Location Fixes:\n
-    Monroe County, KY\n
-    Carroll County, MD\n
-    Otter Tail County, MN\n
-    Cayuga County, NY\n
-    Buncombe County, NC\n
-    Licking County, OH\n
-    Marion County, OR\n
-    Minehaha County, SD\n
-    Fort Bend County, TX\n
-    Galveston County, TX
+    Problem launching Scanner Radio in Android 8.0 (again)
   </string>
 </resources>

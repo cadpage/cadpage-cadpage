@@ -20,7 +20,6 @@ import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.preferences.OnDataChangeListener;
 import net.anei.cadpage.preferences.OnDialogClosedListener;
-import net.anei.cadpage.preferences.ValueTranslator;
 import net.anei.cadpage.vendors.VendorManager;
 import android.app.Activity;
 import android.app.AlertDialog;
