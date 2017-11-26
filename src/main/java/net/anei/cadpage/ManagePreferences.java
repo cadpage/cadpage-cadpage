@@ -40,7 +40,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 47;
+  private static final int PREFERENCE_VERSION = 48;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -530,6 +530,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setScannerChannel(String newVal) {
     prefs.putString(R.string.pref_scanner_channel_key, newVal);
   }
+
+  public static int scannerTimeout() {
+    return prefs.getIntValue(R.string.pref_scanner_timeout_key);
+  }
   
   public static Intent scannerIntent() {
     String value = prefs.getString(R.string.pref_scanner_channel_app_node_key, null);
@@ -543,6 +547,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     bundle.putString(SCAN_ACTION_KEY, fields[1]);
     bundle.putString(SCAN_DESCRIPTION_KEY, fields[2]);
     bundle.putString(SCAN_LOCALE_KEY, fields[3]);
+    int timeout = scannerTimeout();
+    if (timeout > 0) {
+      bundle.putLong("duration", timeout*60L);
+    }
     intent.putExtra(SCAN_BUNDLE_KEY, bundle);
     return intent;
   }
@@ -2549,6 +2557,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_activate_scanner_key,
       R.string.pref_scanner_channel_key,
       R.string.pref_scanner_channel_app_node_key,
+      R.string.pref_scanner_timeout_key,
       R.string.pref_publish_pages_key,
       
       R.string.pref_notif_enabled_key,

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:custom="http://schemas.android.com/apk/res/net.anei.cadpage">
   <PreferenceCategory
     android:title="@string/pref_config_title">
     <Preference 
@@ -744,11 +745,20 @@
           android:summaryOn="@string/pref_activate_scanner_summaryon"
           android:summaryOff="@string/pref_activate_scanner_summaryoff"
           android:defaultValue="@string/pref_activate_scanner_default" />
-          
+
       <Preference
           android:key="@string/pref_scanner_channel_key"
           android:title="@string/pref_scanner_channel_title" />
-      
+
+      <net.anei.cadpage.preferences.ScannerTimeoutPreference
+          android:dialogTitle="@string/pref_scanner_timeout_title"
+          android:dialogMessage="@string/pref_scanner_timeout_dialog"
+          android:key="@string/pref_scanner_timeout_key"
+          android:title="@string/pref_scanner_timeout_title"
+          android:summary="@string/pref_scanner_timeout_summary"
+          android:inputType="number"
+          android:defaultValue="@string/pref_scanner_timeout_default"/>
+
       <CheckBoxPreference
           android:key="@string/pref_publish_pages_key"
           android:title="@string/pref_publish_pages_title"

@@ -48,7 +48,11 @@ public class EditTextPreference extends android.preference.EditTextPreference {
   public void refreshSummary(String newValue) {
     if (origSummary == null) origSummary = getSummary().toString().replace("%%", "%");
     if (origSummary != null) {
-      setSummary(String.format(origSummary, newValue));
+      setSummary(String.format(origSummary, translateValue(newValue)));
     }
+  }
+
+  protected String translateValue(String value) {
+    return value;
   }
 }

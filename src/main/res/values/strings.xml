@@ -448,7 +448,13 @@
   <string name="pref_activate_scanner_summaryoff">Scanner channel will not be auto opened</string>
 
   <string name="pref_scanner_channel_title">Scanner Channel</string>
-  
+
+  <string name="pref_scanner_timeout_title">Scanner channel timeout</string>
+  <string name="pref_scanner_timeout_summary">Scanner channel timeout\nCur value: %%s</string>
+  <string name="pref_scanner_timeout_dialog">Scanner channel timeout in minutes (0 to disable)</string>
+  <string name="pref_scanner_timeout_value_zero">None</string>
+  <string name="pref_scanner_timeout_value_other">%s min</string>
+
   <string name="pref_publish_pages_title">Publish CAD pages</string>
   <string name="pref_publish_pages_summaryon">Cad pages will be published for 3rd party
     applications</string>

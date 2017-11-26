@@ -387,6 +387,13 @@
   <string name="pref_mix_msg_order_summaryoff">Delade CAD page meddelanden kommer alltid att komma i kronologisk ordning</string>
   
   <string name="pref_scanner_channel_title">Scannerkanal</string>
+
+  <string name="pref_scanner_timeout_title">Scanner channel timeout</string>   <!-- Translate -->
+  <string name="pref_scanner_timeout_summary">Scanner channel timeout\nCur value: %%s</string>   <!-- Translate -->
+  <string name="pref_scanner_timeout_dialog">Scanner channel timeout in minutes (0 to disable)</string>   <!-- Translate -->
+  <string name="pref_scanner_timeout_value_zero">None</string>   <!-- Translate -->
+  <string name="pref_scanner_timeout_value_other">%s min</string>   <!-- Translate (min is abbreviation for minutes) -->
+
   <string name="pref_publish_pages_title">Publicera larmärenden</string>
   <string name="pref_publish_pages_summaryon">Larmärenden kommer att publiceras för 3:e partsapplikation</string>
   <string name="pref_publish_pages_summaryoff">Larmärenden kommer inte publiceras för 3:e partsapplikation</string>
@@ -399,7 +406,7 @@
   <string name="pref_passthrusms_summaryoff">Släpp inte igenom larm till SMS-klienten</string>
   <string name="pref_passthrusms_summaryon">Släpper igenom larm till SMS-klienten</string>
   <string name="pref_history_limit_title">Gräns för larmhistorik</string>
-  <string name="pref_history_limit_summary">Maximalt antal larm som sparas i historik.
+  <string name="pref_history_limit_summary">Maximalt antal larm som sparas i historik.\n
     Aktuellt värde: %%s</string>
   <!-- Message menu items -->
   <string name="open_item_text">Öppna</string>
