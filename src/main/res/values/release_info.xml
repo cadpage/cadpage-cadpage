@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-02\n
+    Location Fixes:\n
+    Howell County, MO\n
+    \n
     v1.9.15-01\n
     New welcome sequence to help new users get Cadpage configured correctly.\n
     \n
@@ -41,17 +45,6 @@
     Carroll County, MD\n
     Suffolk County, NY\n
     Spartanburg County, SC\n
-    Brunswick County, VA\n
-    \n
-    v1.9.14-11\n
-    Location Fixes:\n
-    Baldwin County, AL\n
-    Chatham County, GA\n
-    Lincoln County, OR\n
-    Marion County, OR\n
-    Rockwall County, TX\n
-    \n
-    General Fixes:\n
-    Problem launching Scanner Radio in Android 8.0 (again)
+    Brunswick County, VA
   </string>
 </resources>
