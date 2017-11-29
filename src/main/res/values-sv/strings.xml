@@ -388,11 +388,11 @@
   
   <string name="pref_scanner_channel_title">Scannerkanal</string>
 
-  <string name="pref_scanner_timeout_title">Scanner channel timeout</string>   <!-- Translate -->
-  <string name="pref_scanner_timeout_summary">Scanner channel timeout\nCur value: %%s</string>   <!-- Translate -->
-  <string name="pref_scanner_timeout_dialog">Scanner channel timeout in minutes (0 to disable)</string>   <!-- Translate -->
-  <string name="pref_scanner_timeout_value_zero">None</string>   <!-- Translate -->
-  <string name="pref_scanner_timeout_value_other">%s min</string>   <!-- Translate (min is abbreviation for minutes) -->
+  <string name="pref_scanner_timeout_title">Timeout Scannerkanal</string>
+  <string name="pref_scanner_timeout_summary">Timeout Scannerkanal\nCur value: %%s</string>
+  <string name="pref_scanner_timeout_dialog">Timeout scannerkanal i minuter (0 till avstängd)</string>
+  <string name="pref_scanner_timeout_value_zero">Ingen</string>
+  <string name="pref_scanner_timeout_value_other">%s min</string>
 
   <string name="pref_publish_pages_title">Publicera larmärenden</string>
   <string name="pref_publish_pages_summaryon">Larmärenden kommer att publiceras för 3:e partsapplikation</string>
