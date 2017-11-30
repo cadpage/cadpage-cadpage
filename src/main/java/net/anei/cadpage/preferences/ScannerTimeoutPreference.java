@@ -16,7 +16,7 @@ public class ScannerTimeoutPreference extends EditTextPreference {
 
   @Override
   public String translateValue(String value) {
-    if (Integer.parseInt(value) == 0) {
+    if (value.length() == 0 || Integer.parseInt(value) == 0) {
       return getContext().getString(R.string.pref_scanner_timeout_value_zero);
     } else {
       return getContext().getString(R.string.pref_scanner_timeout_value_other, value);
