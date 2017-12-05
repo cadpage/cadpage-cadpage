@@ -738,8 +738,45 @@ public class MsgOptionManager {
     boolean gps = GPS_LOC_PTN.matcher(searchStr).matches();
     if (!gps) searchStr = searchStr.replaceAll(" *& *", " AT ");
     searchStr = Uri.encode(searchStr);
+
+    // ArcGIS Navigator has different request protocols
+    if (mapOption.equals("ArcGIS Navigator")) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("arcgis-navigator://?");
+      sb.append("stop=");
+      sb.append(searchStr);
+
+      // Add real address as title
+      if (!ManagePreferences.noMapGpsLabel()) {
+        String addr = message.getAddress();
+        if (addr.length() > 0) {
+          sb.append('&');
+          sb.append("stopname=");
+          sb.append(Uri.encode(addr));
+        }
+      }
+
+      if (navigateMap) sb.append("&navigate=true");
+
+      // Build and launch map request
+      Uri uri = Uri.parse(sb.toString());
+      Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+      Log.w("Map Request:");
+      ContentQuery.dumpIntent(intent);
+
+      try {
+        context.startActivity(intent);
+        return;
+      } catch (ActivityNotFoundException ex) {
+        // ArcGIS not installed, drop back to Google mapping
+        Log.w("Map request failed");
+        mapOption = "Google";
+      }
+
+    }
     
-    // Waze has completely different request protocols
+    // As does Waze
     if (mapOption.equals("Waze")) {
       StringBuilder sb = new StringBuilder();
       sb.append("waze://?");

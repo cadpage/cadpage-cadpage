@@ -45,6 +45,9 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SmsPopupConfigActivity extends PreferenceActivity {
   
   private static final int REQ_SCANNER_CHANNEL = 1;
@@ -59,7 +62,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   private String parserDefState = "";
   private CheckBoxPreference overrideFilterPref;
   private net.anei.cadpage.preferences.EditTextPreference filterPref;
-  
+
   private CheckBoxPreference overrideDefaultPref;
   private EditTextPreference defCityPref;
   private EditTextPreference defStatePref;
@@ -258,22 +261,33 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
       }
     });
     
-    // mapping app preference only includes Waze if Waze is installed
-    boolean wazeInstalled = false;
-    PackageManager pkgMgr = getPackageManager();
-    String pkgName = "com.waze";
-    try {
-      pkgMgr.getPackageInfo(pkgName, 0);
-      wazeInstalled = true;
-    } catch (PackageManager.NameNotFoundException ex2) {}
-
+    // mapping app preference only includes entries for ArcGIS Navigator and Waze that we want to remove
+    // if the corresponding app is not installed on this device.  If the current value is set to
+    // a value that is removed from the list, default it back to "Google"
     ListPreference appMapPref = (ListPreference)findPreference(getString(R.string.pref_app_map_option_key));
     String oldVal = appMapPref.getValue();
-    appMapPref.setEntryValues(wazeInstalled ? R.array.pref_waze_app_map_option_values : R.array.pref_app_map_option_values);
-    appMapPref.setEntries(wazeInstalled ? R.array.pref_waze_app_map_option_entries : R.array.pref_app_map_option_entries);
-    if (!wazeInstalled && oldVal.equals("Waze")) oldVal = "Google";
-    appMapPref.setValue(oldVal);
-    
+    CharSequence[] appMapEntries = appMapPref.getEntries();
+    CharSequence[] appMapValues = appMapPref.getEntryValues();
+    List<String> appMapEntryList = new ArrayList<String>();
+    List<String> appMapValueList = new ArrayList<String>();
+    for (int ndx = 0; ndx < appMapValues.length; ndx++) {
+      String value = appMapValues[ndx].toString();
+      String pkgName = (value.equals("ArcGIS Navigator") ? "com.esri.navigator" :
+                        value.equals("Waze") ? "com.waze" : null);
+      if (pkgName != null) {
+        try {
+          getPackageManager().getPackageInfo(pkgName, 0);
+        } catch (PackageManager.NameNotFoundException ex2) {
+          if (value.equals(oldVal)) appMapPref.setValue("Google");
+          continue;
+        }
+      }
+      appMapValueList.add(value);
+      appMapEntryList.add(appMapEntries[ndx].toString());
+    }
+    appMapPref.setEntries(appMapEntryList.toArray(new String[appMapEntryList.size()]));
+    appMapPref.setEntryValues(appMapValueList.toArray(new String[appMapValueList.size()]));
+
     // Set up the response button preferences
     PreferenceScreen parent = (PreferenceScreen)findPreference(getString(R.string.pref_resp_button_config_key));
     setupResponseButtonConfig(parent, 1, R.string.pref_callback1_screen_key, R.string.pref_callback1_type_key, R.string.pref_callback1_title_key, R.string.pref_callback1_key);
