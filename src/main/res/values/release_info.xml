@@ -4,6 +4,15 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-05\n
+    Added mapping support for ArcGIS Navigator\n
+    \n
+    Location Fixes:\n
+    Kent County, MD\n
+    Jackson County, MO\n
+    Nassau County, NY\n
+    Montgomery County, OH\n
+    \n
     v1.9.15-04\n
     Location Fixes:\n
     Litchfield County, CT\n
@@ -25,16 +34,5 @@
     Douglas County, MN\n
     Steuben County, NY\n
     Darlington County, SC\n
-    \n
-    v1.9.14-14\n
-    New Locations:\n
-    Howell County, MO\n
-    \n
-    Location Fixes:\n
-    San Bernardino County, CA\n
-    Carroll County, MD\n
-    Pitt County, NC\n
-    Marion County, OR\n
-    Linn County, OR
   </string>
 </resources>
