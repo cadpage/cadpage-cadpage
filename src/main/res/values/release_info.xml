@@ -4,6 +4,16 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-08\n
+    New Locations:\n
+    Ellis County, TX\n
+
+    Location Fixes:\n
+    DuPage County, IL\n
+    St Mary\'s County, MD\n
+    Clarion County, PA\n
+    Page County, VA\n
+    \n
     v1.9.15-07\n
     Location Fixes:\n
     Butler County, KS\n
@@ -36,9 +46,6 @@
     v1.9.15-04\n
     Location Fixes:\n
     Litchfield County, CT\n
-    Kent County, MD\n
-    \n
-    v1.9.15-03\n
-    Fixed crash in new Scanner timeout logic\n
+    Kent County, MD
   </string>
 </resources>
