@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12232017</string>
+  <string name="release_date">12312017</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-09\n
+    Location Fixes:\n
+    Suffolk County, NY\n
+    Yukon, OR\n
+    Danville, VA\n
+    Pittsylvania County, VA\n
+    \n
     v1.9.15-08\n
     New Locations:\n
     Ellis County, TX\n
@@ -41,11 +48,6 @@
     Kent County, MD\n
     Jackson County, MO\n
     Nassau County, NY\n
-    Montgomery County, OH\n
-    \n
-    v1.9.15-04\n
-    Location Fixes:\n
-    Litchfield County, CT\n
-    Kent County, MD
+    Montgomery County, OH
   </string>
 </resources>
