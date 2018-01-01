@@ -553,6 +553,9 @@ public class SmsMmsMessage implements Serializable {
       MsgInfo info = parseInfo.getInfo();
       if (info != null) location = info.getParserCode();
     }
+
+    // Force reparse if new message
+    getInfo();
   }
   
   private Message bldParseInfo() {
@@ -1391,7 +1394,6 @@ public class SmsMmsMessage implements Serializable {
     // information, but is not, then we will need to parse it now.
     if (parseInfo != null || messageBody == null) return false;
     buildParseInfo();
-    parseInfo.getInfo();
     return true;
   }
 
