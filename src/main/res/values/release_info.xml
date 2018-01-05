@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01022018</string>
+  <string name="release_date">01052018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-11\n
+    Location Fixes:\n
+    Chester County, PA\n
+    Ventura, CA\n
+    \n
     v1.9.15-10\n
     Location Fixes:\n
     Chester County, PA\n
@@ -34,15 +39,6 @@
     Halifax County, NC\n
     Cass County, ND\n
     Orangeburg County, SC\n
-    Brunswick County, VA\n
-    \n
-    v1.9.15-06\n
-    Location Fixes:\n
-    Cascasde County, MT\n
-    Genesee County,  NY\n
-    Hyde County, NC\n
-    Cass County, ND\n
-    Tulsa, OK\n
-    Prince Edward County, VA
+    Brunswick County, VA
   </string>
 </resources>
