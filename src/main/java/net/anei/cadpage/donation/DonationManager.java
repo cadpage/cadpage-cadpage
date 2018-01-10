@@ -407,7 +407,7 @@ public class DonationManager {
    * @return true if this is the free (unsupported) version of Cadpage
    */
   public boolean isFreeVersion() {
-    return status() == DonationStatus.FREE;
+    return this.getClass().getName().contains(".cadpagefree");
   }
 
 

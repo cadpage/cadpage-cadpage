@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-12\n
+    Location Fixes:\n
+    Chambers County, AL\n
+    Garrett County, MD\n
+    Hudson, OH\n
+    \n
     v1.9.15-11\n
     Location Fixes:\n
     Chester County, PA\n
@@ -28,17 +34,6 @@
     DuPage County, IL\n
     St Mary\'s County, MD\n
     Clarion County, PA\n
-    Page County, VA\n
-    \n
-    v1.9.15-07\n
-    Location Fixes:\n
-    Butler County, KS\n
-    Carroll County, MD\n
-    Prairie Eden, MN\n
-    Cumberland County, NC\n
-    Halifax County, NC\n
-    Cass County, ND\n
-    Orangeburg County, SC\n
-    Brunswick County, VA
+    Page County, VA
   </string>
 </resources>
