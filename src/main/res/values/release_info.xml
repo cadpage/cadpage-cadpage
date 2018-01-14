@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01052018</string>
+  <string name="release_date">01142018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-13\n
+    New Locations:\n
+    Denver, CO\n
+    Carroll County, MD (alt)\n
+    Monroe County, MS\n
+    \n
+    Location Fixes:\n
+    El Paso County, CO\n
+    Clinton County, IL\n
+    Hancock, IL\n
+    Macon County, NC\n
+    Licking County, OH\n
+    Snyder County, PA\n
+    Washington County, PA\n
+    Chester County, SC\n
+    Franklin County, VA\n
+    Henrico County, VA\n
+    \n
     v1.9.15-12\n
     Location Fixes:\n
     Chambers County, AL\n
@@ -24,16 +42,6 @@
     Suffolk County, NY\n
     Yukon, OR\n
     Danville, VA\n
-    Pittsylvania County, VA\n
-    \n
-    v1.9.15-08\n
-    New Locations:\n
-    Ellis County, TX\n
-    \n
-    Location Fixes:\n
-    DuPage County, IL\n
-    St Mary\'s County, MD\n
-    Clarion County, PA\n
-    Page County, VA
+    Pittsylvania County, VA
   </string>
 </resources>
