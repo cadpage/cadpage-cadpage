@@ -68,9 +68,13 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     setTextColor(view);
     
     // Set up main box text and color
-    view = (TextView)activity.findViewById(R.id.DonateTextView);
-    view.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
-    setTextColor(view);
+    try {
+      view = (TextView) activity.findViewById(R.id.DonateTextView);
+      view.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
+      setTextColor(view);
+    } catch (RuntimeException ex) {
+      throw new RuntimeException(this.getClass().getName(), ex);
+    }
   }
 
   @Override
