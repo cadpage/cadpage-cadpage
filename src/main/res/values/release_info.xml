@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01252018</string>
+  <string name="release_date">01282018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-17\n
+    New Locations:\n
+    Winston County, AL\n
+    \n
+    Location Fixes:\n
+    Teller County, CO\n
+    Walker County, GA\n
+    Kankakee County, IL\n
+    Cascade County, MT\n
+    Nash County, NC\n
+    \n
     v1.9.15-16\n
     New Locations:\n
     Tehama County, CA\n
@@ -49,12 +60,6 @@
     Washington County, PA\n
     Chester County, SC\n
     Franklin County, VA\n
-    Henrico County, VA\n
-    \n
-    v1.9.15-12\n
-    Location Fixes:\n
-    Chambers County, AL\n
-    Garrett County, MD\n
-    Hudson, OH
+    Henrico County, VA
   </string>
 </resources>
