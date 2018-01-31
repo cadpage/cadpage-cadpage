@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01282018</string>
+  <string name="release_date">01312018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-18\n
+    Location Fixes:\n
+    Humboldt County, CA\n
+    Kane County, IL\n
+    Boone County, MO\n
+    Butler County, PA\n
+    \n
     v1.9.15-17\n
     New Locations:\n
     Winston County, AL\n
@@ -42,24 +49,7 @@
     Boulder County, CO\n
     Carroll County, MD\n
     Saginaw County, MI\n
-    Madison County, NY\n
-    \n
-    v1.9.15-13\n
-    New Locations:\n
-    Denver, CO\n
-    Carroll County, MD (alt)\n
-    Monroe County, MS\n
-    \n
-    Location Fixes:\n
-    El Paso County, CO\n
-    Clinton County, IL\n
-    Hancock, IL\n
-    Macon County, NC\n
-    Licking County, OH\n
-    Snyder County, PA\n
-    Washington County, PA\n
-    Chester County, SC\n
-    Franklin County, VA\n
-    Henrico County, VA
+    Madison County, NY
+    Madison County, NY
   </string>
 </resources>
