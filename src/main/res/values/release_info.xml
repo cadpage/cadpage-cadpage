@@ -4,6 +4,15 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-19\n
+    New Location:\n
+    Miami-Dade County, FL (alt)\n
+    \n
+    Location Fixes:\n
+    Clark County, OH\n
+    Fayette County, PA\n
+    Flathead County, MT\n
+    \n
     v1.9.15-18\n
     Location Fixes:\n
     Humboldt County, CA\n
@@ -42,14 +51,6 @@
     Location Fixes:\n
     Ashland County, OH\n
     Pitt County, NC\n
-    Columbia County, PA\n
-    \n
-    v1.9.15-14\n
-    Location Fixes:\n
-    Boulder County, CO\n
-    Carroll County, MD\n
-    Saginaw County, MI\n
-    Madison County, NY
-    Madison County, NY
+    Columbia County, PA
   </string>
 </resources>
