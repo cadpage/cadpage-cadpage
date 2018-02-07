@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01312018</string>
+  <string name="release_date">02072018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-20\n
+    Location Fixes:\n
+    Jackson County, MO\n
+    Flathead County, MT\n
+    Somerset County, PA\n
+    \n
     v1.9.15-19\n
     New Location:\n
     Miami-Dade County, FL (alt)\n
@@ -38,19 +44,6 @@
     \n
     Location Fixes:\n
     Butler County, KS\n
-    Macon County, NC\n
-    \n
-    v1.9.15-15\n
-    New Locations:\n
-    Jackson County, FL\n
-    Holmes County, FL\n
-    Hart County, GA\n
-    Ford County, KS\n
-    Travis County, TX (alt)\n
-    \n
-    Location Fixes:\n
-    Ashland County, OH\n
-    Pitt County, NC\n
-    Columbia County, PA
+    Macon County, NC
   </string>
 </resources>
