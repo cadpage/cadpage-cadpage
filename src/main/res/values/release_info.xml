@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02142018</string>
+  <string name="release_date">02172018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-23\n
+    Location Fixes:\n
+    Colquitt County, GA\n
+    Worth County, IA\n
+    Bay County, MI\n
+    Saginaw County, MI\n
+    Gloucester County, NJ\n
+    Brunswick County, NC\n
+    Tulsa, OK\n
+    Clarion County, PA\n
+    Halifax County, VA\n
+    \n
     v1.9.15-22\n
     Location Fixes:\n
     Blount County, AL\n
@@ -33,13 +45,6 @@
     Location Fixes:\n
     Clark County, OH\n
     Fayette County, PA\n
-    Flathead County, MT\n
-    \n
-    v1.9.15-18\n
-    Location Fixes:\n
-    Humboldt County, CA\n
-    Kane County, IL\n
-    Boone County, MO\n
-    Butler County, PA
+    Flathead County, MT
   </string>
 </resources>
