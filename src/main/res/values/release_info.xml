@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02172018</string>
+  <string name="release_date">02222018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-24\n
+    New Locations:\n
+    Etowah County, AL (alt)\n
+    San Miguel County, CO\n
+    Stephens County, GA\n
+    Allen County, KS\n
+    Butler County, KS (alt)\n
+    Wayne County, MO\n
+    Carroll County, NH\n
+    Nobel County, OH\n
+    Burnet County, TX\n
+    Dallas County, TX (alt)\n
+    Gillespie County, TX\n
+    Orleans County, VT\n
+    Floyd County, VA\n
+    Greenbrier County, WV\n
+    Taber, AB, Canada\n
+    \n
+    Location Fixes:\n
+    Anne Arundel County, MD\n
+    Chester County, PA\n
+    Dane County, WI\n
+    \n
     v1.9.15-23\n
     Location Fixes:\n
     Colquitt County, GA\n
@@ -36,15 +59,6 @@
     Location Fixes:\n
     Jackson County, MO\n
     Flathead County, MT\n
-    Somerset County, PA\n
-    \n
-    v1.9.15-19\n
-    New Location:\n
-    Miami-Dade County, FL (alt)\n
-    \n
-    Location Fixes:\n
-    Clark County, OH\n
-    Fayette County, PA\n
-    Flathead County, MT
+    Somerset County, PA
   </string>
 </resources>
