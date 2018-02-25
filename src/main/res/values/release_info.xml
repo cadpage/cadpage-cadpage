@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-25\n
+    Location Fixes:\n
+    Terrebonne Parish, LA\n
+    Greenville County, SC\n
+    \n
     v1.9.15-24\n
     New Locations:\n
     Etowah County, AL (alt)\n
@@ -53,12 +58,6 @@
     Tangipahoa Parish, LA\n
     Morris County, NJ\n
     Cass County, ND\n
-    Perry County, OH\n
-    \n
-    v1.9.15-20\n
-    Location Fixes:\n
-    Jackson County, MO\n
-    Flathead County, MT\n
-    Somerset County, PA
+    Perry County, OH
   </string>
 </resources>
