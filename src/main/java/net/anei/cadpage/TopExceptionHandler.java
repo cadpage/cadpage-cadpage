@@ -166,6 +166,10 @@ public class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
    * Report outside thread exception
    */
   public static void reportException(final Exception ex) {
+    if (mainHandler == null) {
+      RuntimeException ex2 = (ex instanceof RuntimeException ? (RuntimeException)ex : new RuntimeException(ex));
+      throw ex2;
+    }
     mainHandler.post(new Runnable(){
       @Override
       public void run() {
