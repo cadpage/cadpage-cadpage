@@ -96,28 +96,28 @@
     <receiver android:name=".UsbReceiver">
       <intent-filter>
         <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
-        <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
-                   android:resource="@xml/accessory_filter" />
       </intent-filter>
+      <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+                 android:resource="@xml/accessory_filter" />
       <intent-filter>
         <action android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED" />
-        <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED"
-                   android:resource="@xml/accessory_filter" />
       </intent-filter>
+      <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED"
+                 android:resource="@xml/accessory_filter" />
       <intent-filter>
         <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-        <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-                   android:resource="@xml/device_filter" />
       </intent-filter>
+      <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                 android:resource="@xml/device_filter" />
       <intent-filter>
         <action android:name="android.hardware.usb.action.USB_DEVICE_DETACHED" />
-        <meta-data android:name="android.hardware.usb.action.USB_DEVICE_DETACHED"
-                   android:resource="@xml/device_filter" />
       </intent-filter>
+      <meta-data android:name="android.hardware.usb.action.USB_DEVICE_DETACHED"
+                 android:resource="@xml/device_filter" />
       <intent-filter>
         <action android:name="net.anei.cadpage.ManageUsb.USB_PERMISSION" />
       </intent-filter>
-      </receiver>
+    </receiver>
     
     <receiver android:name=".ExternalEventReceiver">
       <intent-filter>
