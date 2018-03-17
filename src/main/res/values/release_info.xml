@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03122018</string>
+  <string name="release_date">03162018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-31\n
+    Location Fixes:\n
+    Adams County, CO\n
+    Benton County, OR\n
+    Clackamas County, OR\n
+    Crawford County, PA\n
+    Allegheny County, PA\n
+    \n
     v1.9.15-30\n
     New Locations:\n
     Huntingdon County, PA\n
@@ -55,13 +63,6 @@
     Litchfield County, CT\n
     Buffalo, NY\n
     Fayette County, PA\n
-    Charleston County, SC\n
-    \n
-    v1.9.15-26\n
-    Location Fixes:\n
-    Starke County, IN\n
-    Terrebonne Parish, LA\n
-    Erie County, NY\n
-    Greenville County, SC
+    Charleston County, SC
   </string>
 </resources>

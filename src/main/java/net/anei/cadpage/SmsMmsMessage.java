@@ -717,7 +717,7 @@ public class SmsMmsMessage implements Serializable {
     // Might be a bad location code from direct vendor, so don't abort if we do not find a parser
     boolean good;
     try {
-      good = (ManageParsers.getInstance().getParser(tmpLocCode).isPageMsg(parseInfo, MsgParser.PARSE_FLG_SKIP_FILTER | MsgParser.PARSE_FLG_REPARSE));
+      good = (ManageParsers.getInstance().getParser(tmpLocCode).isPageMsg(parseInfo, MsgParser.PARSE_FLG_SKIP_FILTER | MsgParser.PARSE_FLG_POSITIVE_ID | MsgParser.PARSE_FLG_REPARSE));
     } catch (RuntimeException ex) {
       return false;
     }
