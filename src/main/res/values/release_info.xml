@@ -4,6 +4,17 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-33\n
+    New Locations:\n
+    Grant County, WI\n
+    \n
+    Location Fixes:\n
+    Jefferson County, CO\n
+    Cerro Gordo County, IA\n
+    Macon County, MO\n
+    Columbia County, OR\n
+    Acadian Ambulance, TX\n
+    \n
     v1.9.15-32\n
     Location Fixes:\n
     Jefferson County, CO\n
@@ -41,26 +52,6 @@
     San Luis Obispo County, CA\n
     Litchfield County, CT\n
     Alamance County, NC\n
-    Juniata County, PA\n
-    \n
-    v1.9.15-28\n
-    New Locations:\n
-    Simcoe County, ON\n
-    \n
-    Location Fixes:\n
-    San Luis Obispo County, CA\n
-    Chatham County, GA\n
-    Lake County, IN\n
-    Bollwing Green, KY\n
-    Baltimore County, MD\n
-    Atlantic County, NJ\n
-    Jefferson County, NY\n
-    Madison County, NY\n
-    Nassau County, NY\n
-    Ontario County, NY\n
-    Clarion County, PA\n
-    Lackawanna County, PA\n
-    York County, PA\n
-    Mississauga, ON
+    Juniata County, PA
   </string>
 </resources>
