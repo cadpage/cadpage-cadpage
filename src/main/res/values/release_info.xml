@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-34\n
+    Location Fixes:\n
+    Acadian Ambulance, LA\n
+    Cleveland County, OK\n
+    Chester County, PA\n
+    \n
     v1.9.15-33\n
     New Locations:\n
     Grant County, WI\n
@@ -45,13 +51,6 @@
     Love County, OK\n
     Columbia County, OR\n
     Centre County, PA\n
-    Canmore, AB\n
-    \n
-    v1.9.15-29\n
-    Location Fixes:\n
-    San Luis Obispo County, CA\n
-    Litchfield County, CT\n
-    Alamance County, NC\n
-    Juniata County, PA
+    Canmore, AB
   </string>
 </resources>
