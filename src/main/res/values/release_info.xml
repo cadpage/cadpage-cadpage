@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03212018</string>
+  <string name="release_date">04052018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-35\n
+    Location Fixes:\n
+    Hoover, AL\n
+    Citrus County, FL\n
+    Polk County, IA\n
+    Boone County, MO\n
+    Madison County, NY\n
+    Licking County, OH\n
+    Summit County, OH\n
+    Deschutes County, OR\n
+    Clarion County, PA\n
+    Minnehaha County, SD\n
+    \n
     v1.9.15-34\n
     Location Fixes:\n
     Acadian Ambulance, LA\n
@@ -38,19 +51,6 @@
     Clackamas County, OR\n
     Crawford County, PA\n
     Allegheny County, PA\n
-    Roanoke County, VA\n
-    \n
-    v1.9.15-30\n
-    New Locations:\n
-    Huntingdon County, PA\n
-    \n
-    Location Fixes:\n
-    Mendocino County, CA\n
-    Oakland County, MI\n
-    Atlantic County, NJ\n
-    Love County, OK\n
-    Columbia County, OR\n
-    Centre County, PA\n
-    Canmore, AB
+    Roanoke County, VA
   </string>
 </resources>
