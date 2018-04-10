@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04052018</string>
+  <string name="release_date">04102018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-36\n
+    New Locations:\n
+    Umatilla County, OR (alt)\n
+    St Louis County, MO (alt)\n
+    \n
+    Location Fixes:\n
+    Santa Cruz County, CA\n
+    Yolo County, CA\n
+    Northwest Public Safety, CT\n
+    Jefferson City, MO\n
+    \n
     v1.9.15-35\n
     Location Fixes:\n
     Hoover, AL\n
@@ -42,15 +53,6 @@
     Iredell County, NC\n
     Chester County, PA\n
     Minnehaha County, SD\n
-    Roanoke County, VA\n
-    \n
-    v1.9.15-31\n
-    Location Fixes:\n
-    Adams County, CO\n
-    Benton County, OR\n
-    Clackamas County, OR\n
-    Crawford County, PA\n
-    Allegheny County, PA\n
     Roanoke County, VA
   </string>
 </resources>
