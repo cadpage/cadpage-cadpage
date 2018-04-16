@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04122018</string>
+  <string name="release_date">04162018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-38\n
+    Location Fixes:\n
+    Solano County, CA\n
+    Madison County, IN\n
+    McLennan County, TX\n
+    Royse City, TX\n
+    Pierce County, WA\n
+    Milwauikee County, WI\n
+    \n
     v1.9.15-37\n
     Location Fixes:\n
     Jefferson County, CO\n
@@ -40,17 +49,6 @@
     Location Fixes:\n
     Acadian Ambulance, LA\n
     Cleveland County, OK\n
-    Chester County, PA\n
-    \n
-    v1.9.15-33\n
-    New Locations:\n
-    Grant County, WI\n
-    \n
-    Location Fixes:\n
-    Jefferson County, CO\n
-    Cerro Gordo County, IA\n
-    Macon County, MO\n
-    Columbia County, OR\n
-    Acadian Ambulance, TX
+    Chester County, PA
   </string>
 </resources>
