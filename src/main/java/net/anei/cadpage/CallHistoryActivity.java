@@ -78,7 +78,12 @@ public class CallHistoryActivity extends ListActivity {
     ManagePreferences.setPermissionManager(permMgr);
 
     initializing = !ManagePreferences.initialized();
-    
+
+    // Reload existing message queue
+    // We used to do this in CadPageApplication, but new SDK 26 rules do not allow us to start
+    // a background service until we have started a foreground activity
+    SmsMessageQueue.setupInstance(this);
+
     // Apparently only an activity can calculate the total screen size.
     // So do it now and save it in preferences so it will be included in
     // generated emails
@@ -173,8 +178,7 @@ public class CallHistoryActivity extends ListActivity {
 
     // We do some special processing if the intent was launched by the user
     // instead of through some internal trigger.
-    Runnable run = null;
-    if (Intent.ACTION_MAIN.equals(intent.getAction()) && 
+    if (Intent.ACTION_MAIN.equals(intent.getAction()) &&
         intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
         (intent.getFlags() & Intent.FLAG_FROM_BACKGROUND) == 0) {
       
@@ -234,7 +238,7 @@ public class CallHistoryActivity extends ListActivity {
       // But first to the initial permision check
       ManagePreferences.checkInitialPermissions(null);
 
-      SmsMmsMessage msg = null;
+      SmsMmsMessage msg;
       if (msgId >= 0) {
         msg = SmsMessageQueue.getInstance().getMessage(msgId);
       } else {
@@ -511,13 +515,6 @@ public class CallHistoryActivity extends ListActivity {
     Intent intent = new Intent(context, CallHistoryActivity.class);
     intent.putExtra(EXTRA_SHUTDOWN, true);
     context.startActivity(intent);
-  }
-  
-  /**
-   * @returns main call history activity
-   */
-  public static CallHistoryActivity getMainActivity() {
-    return mainActivity;
   }
 
   public static boolean isInitializing() {

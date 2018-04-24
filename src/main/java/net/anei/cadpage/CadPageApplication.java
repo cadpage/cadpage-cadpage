@@ -41,10 +41,7 @@ public class CadPageApplication extends Application {
       
       // Reload log buffer queue
       SmsMsgLogBuffer.setup(this);
-      
-      // Reload existing message queue
-      SmsMessageQueue.setupInstance(this);
-      
+
       // See if a new version of Cadpage has been installed
       if (ManagePreferences.newVersion(versionCode)) {
         

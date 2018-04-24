@@ -26,7 +26,6 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.CALL_PHONE" />
-  <uses-permission android:name="android.permission.READ_LOGS" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -41,6 +40,7 @@
   <supports-screens android:xlargeScreens="true" />
   
   <application android:label="@string/app_name" android:name=".CadPageApplication" android:icon="@drawable/ic_launcher"
+               android:theme="@style/Theme.AppCompat"
                android:allowBackup="true">
     
     <meta-data android:name="com.google.android.gms.version"

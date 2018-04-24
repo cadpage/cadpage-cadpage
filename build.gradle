@@ -9,15 +9,14 @@ allprojects {
     }
 }
 android {
-    compileSdkVersion 23
-//    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
-        versionCode project.versionCode
-        minSdkVersion 9
-        targetSdkVersion 23
+        versionCode /* 100000000 + */ project.versionCode
+        compileSdkVersion 27
+        targetSdkVersion 27
+        minSdkVersion 14
     }
 
     dexOptions {
@@ -29,11 +28,36 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
+
+        flavorDimensions "api"
+
+        /***
+        productFlavors {
+
+            current {
+                dimension "api"
+                versionCode 100000000  + android.defaultConfig.versionCode
+                compileSdkVersion 27
+                targetSdkVersion 27
+                minSdkVersion 14
+            }
+
+            legacy {
+                dimension "api"
+                versionNameSuffix "(a)"
+                compileSdkVersion 23
+                targetSdkVersion 23
+                maxSdkVersion 23
+                minSdkVersion 9
+            }
+
+        }
+         ***/
     }
 }
 
 dependencies {
-    compile project(":cadpage-parsers")
-    compile 'com.android.support:support-v4:23.0.1'
-    compile 'com.google.android.gms:play-services-gcm:10.0.1'
+    api project(":cadpage-parsers")
+    api 'com.android.support:support-v4:27.1.1'
+    api 'com.google.android.gms:play-services-gcm:15.0.0'
 }
