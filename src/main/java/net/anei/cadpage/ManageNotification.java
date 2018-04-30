@@ -206,7 +206,7 @@ public class ManageNotification {
     nbuild.setWhen(message.getIncidentDate().getTime());
 
     // The default intent when the notification is clicked (Inbox)
-    Intent smsIntent = CallHistoryActivity.getLaunchIntent(context, true);
+    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true);
     PendingIntent notifIntent = PendingIntent.getActivity(context, 0, smsIntent, 0);
     nbuild.setContentIntent(notifIntent);
     
@@ -341,23 +341,8 @@ public class ManageNotification {
     }
 
     try {
-      
-      // Things work differently before the Honeycomb release
-      
-      // Under earlier systems, we can just set the media source by path
-      // If that fails, set it by Uri
-      if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
-        try {
-          setMediaPlayerDataSourcePreHoneyComb(context, mp, fileInfo);
-        } catch (Exception ex) {
-          setMediaPlayerDataSourcePostHoneyComb(context, mp, fileInfo);
-        }
-      } 
-
       // Starting with Honeycomb, we only try setting the source by URI
-      else {
-        setMediaPlayerDataSourcePostHoneyComb(context, mp, fileInfo);
-      }
+     setMediaPlayerDataSourcePostHoneyComb(context, mp, fileInfo);
     }
 
     // If that failed, try setting the media source using a file descriptor
@@ -384,26 +369,6 @@ public class ManageNotification {
   }
 
   /**
-   * Set Media source under pre honeycomb system
-   * @param context current context
-   * @param mp media player
-   * @param fileInfo file path name
-   * @throws IOException if anything goes wrong
-   */
-  private static void setMediaPlayerDataSourcePreHoneyComb(Context context, MediaPlayer mp, 
-                                                           String fileInfo) throws IOException {
-    Log.v("PreH Media Player Setup");
-    mp.reset();
-    try {
-      mp.setDataSource(fileInfo);
-    } catch (IOException ex) {
-      Log.e("Media Player Failure:" + fileInfo);
-      Log.e(ex);
-      throw ex;
-    }
-  }
-
-  /**
    * Set Media source under post honeycomb system
    * @param context current context
    * @param mp media player
@@ -426,7 +391,6 @@ public class ManageNotification {
 
   /**
    * Set Media source using a file description
-   * @param context curren
    * @param mp media player
    * @param fileInfo file path name
    * @throws IOException if anything goes wrong
@@ -485,7 +449,7 @@ public class ManageNotification {
    * @param contentUri content URI
    * @return equivalent file path if successful, null otherwise
    */
-  public static String getRingtonePathFromContentUri(Context context, Uri contentUri) {
+  private static String getRingtonePathFromContentUri(Context context, Uri contentUri) {
     
     if (!PermissionManager.isGranted(context, PermissionManager.READ_EXTERNAL_STORAGE)) return null;
 
@@ -657,8 +621,8 @@ public class ManageNotification {
   /**
    * Parse LED pattern string into int[]
    * 
-   * @param stringPattern
-   * @return
+   * @param stringPattern LED Light pattern
+   * @return integer version of pattern
    */
   public static int[] parseLEDPattern(String stringPattern) {
     int[] arrayPattern = new int[2];

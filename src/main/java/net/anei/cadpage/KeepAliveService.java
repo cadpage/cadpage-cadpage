@@ -48,7 +48,7 @@ public class KeepAliveService extends Service {
   /**
    * unregister shutdown listener
    * @param context current context
-   * @param listener shutdown listener
+   * @param id shutdown listener
    */
   public static void unregister(Context context, Object id) {
     synchronized (listenerEntryQueue) {
@@ -81,7 +81,7 @@ public class KeepAliveService extends Service {
       // it.  That should be sufficient to keep Cadpage alive until we are finished
       // doing whatever we are doing
       else {
-        PendingIntent pint = PendingIntent.getActivity(this, 0, CallHistoryActivity.getLaunchIntent(this), 0);
+        PendingIntent pint = PendingIntent.getActivity(this, 0, CadPageActivity.getLaunchIntent(this), 0);
         Notification nf = new NotificationCompat.Builder(this)
                           .setSmallIcon(intent.getIntExtra("ICON", 0))
                           .setWhen(System.currentTimeMillis())

@@ -1,28 +1,25 @@
 package net.anei.cadpage;
 
 import java.io.UnsupportedEncodingException;
-import android.annotation.TargetApi;
 import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
-import android.os.Build;
 
 /**
  * This handles communications with a USB device
  */
-@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 public class CommDevice {
   
   private UsbManager mgr;
   private UsbDevice device;
-  boolean open = false;
-  UsbInterface itf;
-  UsbEndpoint inEndPoint;
-  UsbEndpoint outEndPoint;
-  UsbDeviceConnection connect;
+  private boolean open = false;
+  private UsbInterface itf;
+  private UsbEndpoint inEndPoint;
+  private UsbEndpoint outEndPoint;
+  private UsbDeviceConnection connect;
       
   
   public CommDevice(UsbManager mgr, UsbDevice device) {
@@ -113,7 +110,6 @@ public class CommDevice {
       }.start();
     } catch (UnsupportedEncodingException ex) {
       ex.printStackTrace();
-      return;
     }
   }
   

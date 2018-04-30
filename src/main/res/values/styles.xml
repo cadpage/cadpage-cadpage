@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
            xmlns:tools="http://schemas.android.com/tools" >
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@android:color/background_dark</item>
+    <item name="colorPrimaryDark">@android:color/background_dark</item>
+    <item name="colorAccent">@android:color/holo_blue_bright</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
   <style name="Cadpage_Dialog" parent="@android:style/Theme.Dialog"
          tools:targetApi="11">
     <item name="android:windowCloseOnTouchOutside">false</item>

@@ -97,8 +97,7 @@ public class LocationManager {
   /**
    * Called when the location is set with a item in the normal location tree
    * @param location location code
-   * @param name readable location name
-   */
+s   */
   public void setNewLocation(String location) {
     locationList.clear();
     locationList.add(location);
@@ -113,7 +112,6 @@ public class LocationManager {
    * in the multiple location code tree
    * @param checked true if item has been checked, false if unchecked
    * @param location location code 
-   * @param name readable location name
    */
   public void adjustLocation(boolean checked, String location) {
     
@@ -150,7 +148,6 @@ public class LocationManager {
   /**
    * Determine if location checkbox should be checked
    * @param location requested location
-   * @param name readable location name
    * @return if this location is active
    */
   public boolean isSet(String location) {

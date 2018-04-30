@@ -5,7 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import net.anei.cadpage.CallHistoryActivity;
+import net.anei.cadpage.CadPageActivity;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
@@ -30,7 +30,7 @@ public class ClearDataEvent extends DonateEvent {
     
     // Set up an intent to relaunch Cadpage in 1 second
     AlarmManager myAM = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
-    Intent intent = CallHistoryActivity.getLaunchIntent(activity);
+    Intent intent = CadPageActivity.getLaunchIntent(activity);
     PendingIntent pendIntent =
       PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 

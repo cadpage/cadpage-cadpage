@@ -9,25 +9,34 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.TextView;
+
+import net.anei.cadpage.contextmenu.ContextMenuHandler;
+import net.anei.cadpage.contextmenu.ViewWithContextMenu;
 
 public class SmsMessageQueue implements Serializable {
   
   private static final long serialVersionUID = 1L;
 
-  private static String QUEUE_FILENAME = "message.queue";
+  private static final String QUEUE_FILENAME = "message.queue";
   
-  private List<SmsMmsMessage> queue = new ArrayList<SmsMmsMessage>();
+  private List<SmsMmsMessage> queue = new ArrayList<>();
   private int nextMsgId = 1;
-  private Context context;
+  private final Context context;
   private Adapter adapter = null;
   private int newCallCount = 0;
+
+  private boolean reparse = true;
   
   @SuppressWarnings("unchecked")
   private SmsMessageQueue(Context context) {
@@ -36,24 +45,27 @@ public class SmsMessageQueue implements Serializable {
     ObjectInputStream is = null;
     try {
       is = new ObjectInputStream(
-        context.openFileInput(QUEUE_FILENAME));
-      queue = (ArrayList<SmsMmsMessage>)is.readObject();
+          context.openFileInput(QUEUE_FILENAME));
+      queue = (ArrayList<SmsMmsMessage>) is.readObject();
     } catch (FileNotFoundException ex) {
     } catch (Exception ex) {
       Log.e(ex);
     } finally {
-      if (is != null) try {is.close();} catch (IOException ex) {}
+      if (is != null) try {
+        is.close();
+      } catch (IOException ex) {
+      }
     }
-    
+
     // Set the next message ID to one more than the highest message ID
     // in the queue, and fix any obsolete location codes
     boolean assign = false;
     for (SmsMmsMessage msg : queue) {
       int msgId = msg.getMsgId();
       if (msgId == 0) assign = true;
-      if (msgId >= nextMsgId) nextMsgId = msgId+1;
+      if (msgId >= nextMsgId) nextMsgId = msgId + 1;
     }
-    
+
     // First time this release is loaded, the saved messages won't have any
     // message ID's, so they will have to be assigned now.
     if (assign) {
@@ -61,12 +73,18 @@ public class SmsMessageQueue implements Serializable {
         if (msg.getMsgId() == 0) msg.setMsgId(nextMsgId++);
       }
     }
-    
+
     // Update new call count
     calcNewCallCount();
+  }
+
+  private void checkReparse() {
 
     // Start parsing messages in background service
-    ParserService.startup(context);
+    if (reparse) {
+      reparse = false;
+      ParserService.startup(context);
+    }
   }
 
   /**
@@ -216,9 +234,7 @@ public class SmsMessageQueue implements Serializable {
    */
   public synchronized void markAllRead() {
     if (Log.DEBUG) Log.v("SmsMessageQueue: markAllOpened");
-    for (Iterator<SmsMmsMessage> itr = queue.iterator(); itr.hasNext(); ) {
-      itr.next().setRead(true);
-    }
+    for (SmsMmsMessage msg : queue) msg.setRead(true);
     notifyDataChange();
   }
   
@@ -248,43 +264,92 @@ public class SmsMessageQueue implements Serializable {
   }
   
   /**
-   * @return ListAdapter that can be bound to ListView to display call history
+   * @return RecyclerView.Adapter that can be bound to RecyclerView
    */
-  public ListAdapter listAdapter(Activity context) {
-    adapter = new Adapter(context);
+  public RecyclerView.Adapter<Adapter.ViewHolder> listAdapter(Activity activity) {
+    if (adapter == null) adapter = new Adapter(activity);
     return adapter;
   }
   
   /**
    * Private ListAdapter class
    */
-  private class Adapter extends ArrayAdapter<SmsMmsMessage> {
-    
-    Activity context;
+  private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    public Adapter(Activity context) {
-      super(context, 0, queue);
-      this.context = context;
+    private final Activity activity;
+
+    Adapter(Activity activity) {
+      this.activity = activity;
     }
 
-    /* (non-Javadoc)
-     * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
-     */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-      View view = convertView;
-      if (view == null) {
-        LayoutInflater li = LayoutInflater.from(context);
-        view = li.inflate(R.layout.msg_list_item, parent, false);
-        context.registerForContextMenu(view);
+    public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      View view = LayoutInflater.from(context)
+          .inflate(R.layout.msg_list_item, parent, false);
+      return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(final Adapter.ViewHolder holder, int position) {
+      holder.setMessage(queue.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+      return queue.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements ContextMenuHandler {
+      private final TextView mDateTimeView;
+      private final TextView mCallDescView;
+      private final TextView mAddrView;
+      private SmsMmsMessage mMessage = null;
+
+      ViewHolder(View view) {
+        super(view);
+        mDateTimeView = view.findViewById(R.id.HistoryDateTime);
+        mCallDescView = view.findViewById(R.id.HistoryCallDesc);
+        mAddrView = view.findViewById(R.id.HistoryAddress);
+
+        activity.registerForContextMenu(view);
+
+        ((ViewWithContextMenu)view).setContextMenuHandler(this);
+
+        view.setOnClickListener(new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+
+            // Clear any active notification and wake locks
+            ClearAllReceiver.clearAll(context);
+
+            if (mMessage == null) return;
+
+            // display message popup
+            if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + mMessage.getMsgId());
+            if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
+            SmsPopupActivity.launchActivity(context, mMessage);
+          }});
       }
-      try {
-        ((HistoryMsgTextView)view).setMessage(queue.get(position));
-      } catch (RuntimeException ex) {
-        SmsMsgLogBuffer.getInstance().addCrashMsg(queue.get(position));
-        throw ex;
+
+      void setMessage(SmsMmsMessage msg) {
+        mMessage = msg;
+        msg.showHistory(context, mDateTimeView, mCallDescView, mAddrView);
       }
-      return view;
+
+      @Override
+      public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (mMessage == null) return;
+        MsgOptionManager optMgr = new MsgOptionManager(activity, mMessage);
+        optMgr.createMenu(menu, false);
+      }
+
+      @Override
+      public boolean onContextItemSelected(MenuItem item) {
+
+        if (mMessage == null) return false;
+        MsgOptionManager optMgr = new MsgOptionManager(activity, mMessage);
+        return optMgr.menuItemSelected(item.getItemId(), false);
+      }
     }
   }
   
@@ -325,6 +390,7 @@ public class SmsMessageQueue implements Serializable {
     return msg;
   }
   
+  @SuppressLint("StaticFieldLeak")
   private static SmsMessageQueue msgQueue = null;
   
   /**
@@ -342,6 +408,7 @@ public class SmsMessageQueue implements Serializable {
    * @return singleton message queue object
    */
   public static SmsMessageQueue getInstance() {
+    msgQueue.checkReparse();
     return msgQueue;
   }
 }

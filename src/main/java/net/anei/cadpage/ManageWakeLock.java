@@ -30,10 +30,9 @@ public class ManageWakeLock {
         flags = PowerManager.SCREEN_BRIGHT_WAKE_LOCK;
       }
   
-      // Check if screen should turn on, if so, set flags and unlock keyguard
+      // Check if screen should turn on, if so, set flags
       if (ManagePreferences.screenOn()) {
         flags |= PowerManager.ACQUIRE_CAUSES_WAKEUP;
-        ManageKeyguard.disableKeyguard(mContext);
       }
   
       mWakeLock = mPm.newWakeLock(flags, Log.LOGTAG+".full");
@@ -50,7 +49,6 @@ public class ManageWakeLock {
       if (Log.DEBUG) Log.v("**Wakelock released");
       mWakeLock.release();
       mWakeLock = null;
-      ManageKeyguard.reenableKeyguard();
     }
   }
 }

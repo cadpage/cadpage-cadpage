@@ -1,13 +1,7 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 
-import net.anei.cadpage.CallHistoryActivity;
-import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.MsgOptionManager;
 import net.anei.cadpage.R;
 

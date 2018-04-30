@@ -151,6 +151,7 @@ public class PduHeaders {
     public static final int MMS_VERSION_1_3                 = ((1 << 4) | 3);
     public static final int MMS_VERSION_1_2                 = ((1 << 4) | 2);
     public static final int MMS_VERSION_1_1                 = ((1 << 4) | 1);
+    @SuppressWarnings("PointlessBitwiseExpression")
     public static final int MMS_VERSION_1_0                 = ((1 << 4) | 0);
 
     // Current version is 1.2.

@@ -20,7 +20,7 @@ public class Permissions {
   
   static final Worker worker;
   static {
-    if (Build.VERSION.SDK_INT < 23) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       worker = new Regular();
     } else {
       try {

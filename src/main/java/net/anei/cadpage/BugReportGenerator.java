@@ -10,15 +10,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import android.annotation.TargetApi;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Environment;
 
 /**
  * This class generates and Android bug report to be collected latter
  */
-@TargetApi(Build.VERSION_CODES.FROYO)
 public class BugReportGenerator {
   
   private static final String BUG_REPORT_FILENAME = "bugreport.cadpage.gz";
@@ -72,9 +69,10 @@ public class BugReportGenerator {
       }
       
       finally {
-        if (osFile != null) try { osFile.close(); } catch (IOException ex) {};
-        if (isGzip != null) try { isGzip.close(); } catch (IOException ex) {};
-        if (osGzip != null) try { osGzip.close(); } catch (IOException ex) {};
+        if (osFile != null) //noinspection EmptyCatchBlock
+          try { osFile.close(); } catch (IOException ex) {}
+        if (isGzip != null) try { isGzip.close(); } catch (IOException ex) {}
+        if (osGzip != null) try { osGzip.close(); } catch (IOException ex) {}
       }
 
       return null;
@@ -97,7 +95,6 @@ public class BugReportGenerator {
      * Run external command piping output to output stream
      * @param cmd command to run
      * @param os output stream
-     * @param log output log file builder
      * @throws IOException if there is an IO error of some kind
      */
     private void runCommand(String cmd, OutputStream os) throws IOException {
@@ -120,8 +117,8 @@ public class BugReportGenerator {
         try { pipeThread.join(); } catch (InterruptedException ex) {}
       }
       finally {
-        if (is != null) try {is.close(); } catch (IOException ex) {};
-        if (reader != null) try { reader.close(); } catch (IOException ex) {};
+        if (is != null) try {is.close(); } catch (IOException ex) {}
+        if (reader != null) try { reader.close(); } catch (IOException ex) {}
       }
     }
     
@@ -130,10 +127,10 @@ public class BugReportGenerator {
      */
     private static class PipeThread extends Thread {
       
-      private InputStream is;
-      private OutputStream os;
+      private final InputStream is;
+      private final OutputStream os;
       
-      public PipeThread(String name, InputStream is, OutputStream os) {
+      private PipeThread(String name, InputStream is, OutputStream os) {
         super(name);
         this.is = is;
         this.os = os;

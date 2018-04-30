@@ -2,11 +2,8 @@ package net.anei.cadpage.donation;
 
 import android.app.Activity;
 
-import net.anei.cadpage.CallHistoryActivity;
 import net.anei.cadpage.ManagePreferences;
-import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
-import net.anei.cadpage.SmsMmsMessage;
 
 /*
 Welcome to Cadpage!

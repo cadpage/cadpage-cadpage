@@ -157,15 +157,12 @@ public class SmsPopupActivity extends Safe40Activity {
     if (mProgressDialog != null) {
       mProgressDialog.dismiss();
     }
-
-    if (wasVisible) ManageKeyguard.reenableKeyguard();
   }
 
   @Override
   protected void onStop() {
     super.onStop();
     if (Log.DEBUG) Log.v("SMSPopupActivity: onStop()");
-    if (wasVisible) ManageKeyguard.reenableKeyguard();
   }
 
   @Override

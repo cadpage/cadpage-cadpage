@@ -653,7 +653,7 @@ public class MsgOptionManager {
       
     case R.id.close_app_item:
       activity.finish();
-      CallHistoryActivity.shutdown(activity);
+      CadPageActivity.shutdown(activity);
       return true;
       
     case R.id.email_item:

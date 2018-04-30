@@ -1221,9 +1221,11 @@ public class SmsMmsMessage implements Serializable {
   /**
    * Display message information in call history display
    * @param context Current context
-   * @param view View to be updated.  Must be a msg_list_item
+   * @param dateTimeView Date/Time view
+   * @param callView call description view
+   * @param addressView address text view
    */
-  public void showHistory(Context context, View view) {
+  public void showHistory(Context context, TextView dateTimeView, TextView callView, TextView addressView) {
 
     float fTextSize = Integer.parseInt(ManagePreferences.textSize());
     int color = (isRead() ? Color.WHITE : Color.YELLOW);
@@ -1232,9 +1234,9 @@ public class SmsMmsMessage implements Serializable {
     String text = android.text.format.DateFormat.getLongDateFormat(context).format(time) + " " +
         android.text.format.DateFormat.getTimeFormat(context).format(time) +
         (isLocked() ? " (Locked)" : "");
-    showHistory(view, R.id.HistoryDateTime, text, color, fTextSize);
+    showHistory(dateTimeView, text, color, fTextSize);
 
-    showHistory(view, R.id.HistoryCallDesc, getTitle(), color, fTextSize);
+    showHistory(callView, getTitle(), color, fTextSize);
 
     text = null;
     if (ManagePreferences.showHistoryAddress()) {
@@ -1262,11 +1264,10 @@ public class SmsMmsMessage implements Serializable {
         if (text.length() == 0 && !info.noCall()) text = info.getSupp();
       }
     }
-    showHistory(view, R.id.HistoryAddress, text, color, fTextSize);
+    showHistory(addressView, text, color, fTextSize);
   }
 
-  private void showHistory(View view, int resId, String text, int color, float fTextSize) {
-    TextView tview = (TextView)view.findViewById(resId);
+  private void showHistory(TextView tview, String text, int color, float fTextSize) {
     if (text == null) {
       tview.setVisibility(View.GONE);
     } else {

@@ -18,7 +18,8 @@ public class DonationUtil {
   
   /**
    * Return a hash authorization code from a date
-   * @param date date to be hashed
+   * @param type authorization type code
+   * @param jdate julian date to be hashed
    * @return return hashed authorization string
    */
   public static String calcAuthCode(int type, JulianDate jdate) {

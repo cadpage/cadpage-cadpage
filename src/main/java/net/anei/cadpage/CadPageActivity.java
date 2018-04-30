@@ -14,7 +14,6 @@ import net.anei.cadpage.donation.VendorEvent;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -22,38 +21,30 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.DisplayMetrics;
-import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class CallHistoryActivity extends ListActivity {
+public class CadPageActivity extends AppCompatActivity {
   
-  private static String EXTRA_NOTIFY = "net.anei.cadpage.CallHistoryActivity.NOTIFY";
-  private static String EXTRA_SHUTDOWN = "net.anei.cadpage.CallHistoryActivity.SHUTDOWN";
-  private static String EXTRA_POPUP = "net.anei.cadpage.CallHistoryActivity.POPUP";
-  private static String EXTRA_MSG_ID = "net.anei.cadpage.CallHistoryActivity.MSG_ID";
+  private static final String EXTRA_NOTIFY = "net.anei.cadpage.CallHistoryActivity.NOTIFY";
+  private static final String EXTRA_SHUTDOWN = "net.anei.cadpage.CallHistoryActivity.SHUTDOWN";
+  private static final String EXTRA_POPUP = "net.anei.cadpage.CallHistoryActivity.POPUP";
+  private static final String EXTRA_MSG_ID = "net.anei.cadpage.CallHistoryActivity.MSG_ID";
   
   private static final int RELEASE_DIALOG = 1;
   private static final int CONFIRM_DELETE_ALL_DIALOG = 2;
   private static final int PLAY_SERVICES_REQUEST_DIALOG = 3;
   
-  private PermissionManager permMgr = new PermissionManager(this);
-
-  // keep track of which message text view has opened a context menu
-  private HistoryMsgTextView msgTextView = null;
-  
-  private static CallHistoryActivity mainActivity = null;
+  private final PermissionManager permMgr = new PermissionManager(this);
 
   private static boolean initializing = false;
   
@@ -66,9 +57,7 @@ public class CallHistoryActivity extends ListActivity {
   protected void onCreate(Bundle savedInstanceState) {
     if (Log.DEBUG) Log.v("CallHistoryActivity: onCreate()");
     super.onCreate(savedInstanceState);
-    
-    mainActivity = this;
-    
+
     // If initialization failure in progress, shut down without doing anything
     if (TopExceptionHandler.isInitFailure()) {
       finish();
@@ -79,10 +68,10 @@ public class CallHistoryActivity extends ListActivity {
 
     initializing = !ManagePreferences.initialized();
 
-    // Reload existing message queue
-    // We used to do this in CadPageApplication, but new SDK 26 rules do not allow us to start
-    // a background service until we have started a foreground activity
-    SmsMessageQueue.setupInstance(this);
+    // We set up the message queue in CadPageApplication.  But new SDK rules do not allow us to
+    // start a background thread to reparse the queue messages until an activity has been launched.
+    // So we make a dummy getInstance call here to force the reparssing thread
+    SmsMessageQueue.getInstance();
 
     // Apparently only an activity can calculate the total screen size.
     // So do it now and save it in preferences so it will be included in
@@ -123,15 +112,9 @@ public class CallHistoryActivity extends ListActivity {
       getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | 
                            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
     }
-    
-    // Set up list heading
-    TextView tv = new TextView(this);
-    tv.setText(R.string.call_history);
-    getListView().addHeaderView(tv);
-    
-    // Set up message queue list adapter
-    setListAdapter(SmsMessageQueue.getInstance().listAdapter(this));
-    
+
+    setContentView(R.layout.cadpage);
+
     startup();
   }
 
@@ -197,18 +180,18 @@ public class CallHistoryActivity extends ListActivity {
           // we suspect that really need to give us that email account access, let them know now.
           DonateScreenEvent event;
           if ((event = NeedAcctPermissionUpgradeEvent.instance()).isEnabled()) {
-            DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+            DonateActivity.launchActivity(CadPageActivity.this, event, null);
           }
 
           // If Cadpage is not functional with current settings, start up the new user sequence
           else if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
             ((HelpWelcomeEvent)event).setIntializing(init);
-            DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+            DonateActivity.launchActivity(CadPageActivity.this, event, null);
           }
 
           // If a new Active911 client may be highjacking alerts, warn user
           else if ((event = Active911WarnEvent.instance()).isEnabled()) {
-            DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+            DonateActivity.launchActivity(CadPageActivity.this, event, null);
           }
 
           // Otherwise, launch the release info dialog if it hasn't already been displayed
@@ -225,7 +208,7 @@ public class CallHistoryActivity extends ListActivity {
             // If not, see if we have discovered a direct page vendor sending us text pages
             else {
               event = VendorEvent.instance(1);
-              if (event.isEnabled()) DonateActivity.launchActivity(CallHistoryActivity.this, event, null);
+              if (event.isEnabled()) DonateActivity.launchActivity(CadPageActivity.this, event, null);
             }
           }
         }
@@ -261,12 +244,6 @@ public class CallHistoryActivity extends ListActivity {
         // Delay by 100 msecs in attempt to avoid a nasty badtokenException.
         final Activity context = this;
         msgId = msg.getMsgId();
-        new Handler().postDelayed(new Runnable(){
-          @Override
-          public void run() {
-            // TODO Auto-generated method stub
-            
-          }}, 100);
         if (!context.isFinishing()) {
           if (Log.DEBUG) Log.v("CallHistoryActivity Auto launch SmsPopup for " + msgId); 
           SmsPopupActivity.launchActivity(context, msgId);
@@ -381,34 +358,6 @@ public class CallHistoryActivity extends ListActivity {
     }
   }
 
-  /* (non-Javadoc)
-   * @see android.app.Activity#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu.ContextMenuInfo)
-   */
-  @Override
-  public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
-    super.onCreateContextMenu(menu, view, menuInfo);
-
-    msgTextView = (HistoryMsgTextView)view;
-    MsgOptionManager optMgr = new MsgOptionManager(this, msgTextView.getMessage());
-    optMgr.createMenu(menu, false);
-  }
-
-
-  /* (non-Javadoc)
-   * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
-   */
-  @Override
-  public boolean onContextItemSelected(MenuItem item) {
-    
-    if (msgTextView != null) {
-      SmsMmsMessage msg = msgTextView.getMessage();
-      if (msg != null) {
-        if (new MsgOptionManager(this, msg).menuItemSelected(item.getItemId(), false)) return true;
-      }
-    }
-    return super.onContextItemSelected(item);
-  }
-  
   private boolean activityActive = false;
 
   @Override
@@ -437,12 +386,13 @@ public class CallHistoryActivity extends ListActivity {
     activityActive = false; 
   } 
   
-  public boolean onKeyUp(int keyCode, KeyEvent event)  { 
+  public boolean onKeyUp(int keyCode, KeyEvent event)  {
+    //noinspection SimplifiableIfStatement
     if (!activityActive) return false;
     return super.onKeyUp(keyCode, event);
   } 
   
-  public boolean onKeyDown(int keyCode, KeyEvent event) { 
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
     if (!activityActive) return false;
     return super.onKeyDown(keyCode, event);
   }
@@ -461,7 +411,6 @@ public class CallHistoryActivity extends ListActivity {
   
   @Override
   protected void onDestroy() {
-    mainActivity = null;
     ManagePreferences.releasePermissionManager(permMgr);
     super.onDestroy();
   }
@@ -497,7 +446,7 @@ public class CallHistoryActivity extends ListActivity {
    * @return Intent that will launch Cadpage
    */
   public static Intent getLaunchIntent(Context context, boolean force) {
-    Intent intent = new Intent(context, CallHistoryActivity.class);
+    Intent intent = new Intent(context, CadPageActivity.class);
     int flags =
       Intent.FLAG_ACTIVITY_NEW_TASK |
       Intent.FLAG_ACTIVITY_SINGLE_TOP |
@@ -512,7 +461,7 @@ public class CallHistoryActivity extends ListActivity {
    * @param context current context
    */
   public static void shutdown(Context context) {
-    Intent intent = new Intent(context, CallHistoryActivity.class);
+    Intent intent = new Intent(context, CadPageActivity.class);
     intent.putExtra(EXTRA_SHUTDOWN, true);
     context.startActivity(intent);
   }

@@ -3,6 +3,8 @@ package net.anei.cadpage;
 import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
+
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -16,6 +18,7 @@ import android.os.Handler;
  */
 public class CadPageApplication extends Application {
   
+  @SuppressLint("StaticFieldLeak")
   private static Context context = null;
   private static Thread mainThread = null;
   private static Handler mainHandler = null;
@@ -29,7 +32,7 @@ public class CadPageApplication extends Application {
     context = this;
     mainThread = Thread.currentThread();
     mainHandler = new Handler();
-    Log.v("Intialization startup");
+    Log.v("Initialization startup");
     getVersionInfo(this);
     try {
 
@@ -41,6 +44,9 @@ public class CadPageApplication extends Application {
       
       // Reload log buffer queue
       SmsMsgLogBuffer.setup(this);
+
+      // Reload existing message queue
+      SmsMessageQueue.setupInstance(this);
 
       // See if a new version of Cadpage has been installed
       if (ManagePreferences.newVersion(versionCode)) {

@@ -1,34 +1,12 @@
 package net.anei.cadpage;
 
-import android.app.AlarmManager;
 import android.app.IntentService;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
-import net.anei.cadpage.HttpService.HttpRequest;
-import net.anei.cadpage.donation.DonationManager;
-import net.anei.cadpage.donation.DonationManager.DonationStatus;
-import net.anei.cadpage.donation.UserAcctManager;
-import net.anei.cadpage.vendors.VendorManager;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
 
 public class SmsService extends IntentService {
 
@@ -147,14 +125,13 @@ public class SmsService extends IntentService {
   }
 
   /**
-   * Read the PDUs out of an {@link #SMS_RECEIVED_ACTION} or a
-   * {@link #DATA_SMS_RECEIVED_ACTION} intent.
+   * Read the PDUs out of an SMS_RECEIVED_ACTION or a DATA_SMS_RECEIVED_ACTION intent.
    *
    * @param intent
    *           the intent to read from
    * @return an array of SmsMessages for the PDUs
    */
-  public static final SmsMessage[] getMessagesFromIntent(Intent intent) {
+  public static SmsMessage[] getMessagesFromIntent(Intent intent) {
     Object[] messages = (Object[]) intent.getSerializableExtra("pdus");
     if (messages == null) {
       return null;
@@ -225,7 +202,7 @@ public class SmsService extends IntentService {
 
     // And finally, launch the main application screen
     if (process) {
-      CallHistoryActivity.launchActivity(context, notify, message);
+      CadPageActivity.launchActivity(context, notify, message);
     }
 
     // If we did not launch the application screen, do the notification stuff
@@ -248,7 +225,7 @@ public class SmsService extends IntentService {
   /**
    * Determine if application should be launched when CAD page is received
    * @param context current context
-   * @return
+   * @return true if application should be launched
    */
   private static boolean startApp(Context context, FilterOptions options) {
 

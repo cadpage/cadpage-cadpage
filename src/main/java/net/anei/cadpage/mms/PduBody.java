@@ -162,7 +162,7 @@ public class PduBody {
      * Get pdu part by Content-Location. Content-Location of part is
      * the same as filename and name(param of content-type).
      *
-     * @param fileName the value of filename.
+     * @param contentLocation the value of filename.
      * @return the pdu part.
      */
     public PduPart getPartByContentLocation(String contentLocation) {
@@ -172,7 +172,7 @@ public class PduBody {
     /**
      * Get pdu part by name.
      *
-     * @param fileName the value of filename.
+     * @param name the value of filename.
      * @return the pdu part.
      */
     public PduPart getPartByName(String name) {
@@ -182,7 +182,7 @@ public class PduBody {
     /**
      * Get pdu part by filename.
      *
-     * @param fileName the value of filename.
+     * @param filename the value of filename.
      * @return the pdu part.
      */
     public PduPart getPartByFileName(String filename) {

@@ -38,7 +38,7 @@ public class SmsMsgAccumulator {
    * Add new text message to message accumulator
    * @param context current context
    * @param newMsg message to be added
-   * @force true to force processing of msg (like for GCM messages)
+   * @param force true to force processing of msg (like for GCM messages)
    * @return true if message was accepted, which means receiver should abort
    * the message broadcast unless configured to not do so.
    */
@@ -138,7 +138,9 @@ public class SmsMsgAccumulator {
   /**
    * Set up an alarm to timeout and process a reconstructed message if the
    * expected other parts of the page never show up
-   * @param msgTimeout timeout interval in seconds
+   * @param context current context
+   * @param id ID code
+   * @param cancel true to cancel alarm
    */
   protected void setReminder(Context context, long id, boolean cancel) {
 
