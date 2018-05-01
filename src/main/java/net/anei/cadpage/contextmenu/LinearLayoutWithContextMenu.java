@@ -17,9 +17,9 @@ public class LinearLayoutWithContextMenu extends LinearLayout implements ViewWit
   private ContextMenuHandler handler;
 
   @Override
-  public void setContextMenuHandler(ContextMenuHandler handler) {
+  public void setContextMenuHandler(FragmentWithContextMenu fragment, ContextMenuHandler handler) {
     this.handler = handler;
-    setOnCreateContextMenuListener(handler);
+    setOnCreateContextMenuListener(fragment);
   }
 
   @Override

@@ -10,12 +10,12 @@ public class FragmentWithContextMenu extends Fragment {
   ContextMenuHandler handler = null;
 
   @Override
-  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-    super.onCreateContextMenu(menu, v, menuInfo);
+  public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, view, menuInfo);
     handler = null;
-    if (v instanceof ViewWithContextMenu) {
-      handler = ((ViewWithContextMenu)v).getContextMenuHandler();
-      if (handler != null) handler.onCreateContextMenu(menu, v, menuInfo);
+    if (view instanceof ViewWithContextMenu) {
+      handler = ((ViewWithContextMenu)view).getContextMenuHandler();
+      if (handler != null) handler.onCreateContextMenu(menu, view, menuInfo);
     }
   }
 

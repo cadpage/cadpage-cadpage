@@ -9,6 +9,7 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.parsers.MsgParser.MapPageStatus;
 import net.anei.cadpage.vendors.VendorManager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -34,16 +35,16 @@ import android.widget.Button;
  */
 public class MsgOptionManager {
   
-  private Activity activity;
-  private SmsMmsMessage message;
+  private final Activity activity;
+  private final SmsMmsMessage message;
   
   // View group and list of button handlers associated with response menu buttons
   private ViewGroup respButtonGroup = null;
-  private List<ButtonHandler> respButtonList = new ArrayList<ButtonHandler>();
+  private final List<ButtonHandler> respButtonList = new ArrayList<>();
   
   // View group and list of button handlers associated with main menu buttons
   private ViewGroup mainButtonGroup = null;
-  private List<ButtonHandler> mainButtonList = new ArrayList<ButtonHandler>();
+  private final List<ButtonHandler> mainButtonList = new ArrayList<>();
   
   // Broadcast receiver logging results of text send messages
   private SendSMSReceiver receiver = null;
@@ -228,19 +229,19 @@ public class MsgOptionManager {
   /**
    * Create a specialized map button handler and add it to button handler list and view group
    * @param type map button type 1 - Map, 2 - Map Addr, 3 - Map GPS, 4 - Map Page
-   * @param buttonList
-   * @param buttonGroup
+   * @param buttonList List of button handlers
+   * @param buttonGroup Button ViewGroup
    */
   private void addMapButton(int type, List<ButtonHandler> buttonList, ViewGroup buttonGroup) {
     buttonList.add(new ButtonHandler(MAP_ITEM_ID_LIST[type-1], MAP_ITEM_TEXT_LIST[type-1], buttonGroup));
   }
-  static final int[] MAP_ITEM_ID_LIST = new int[]{
+  private static final int[] MAP_ITEM_ID_LIST = new int[]{
     R.id.map_item,
     R.id.map_addr_item,
     R.id.map_gps_item,
     R.id.map_page_item
   }; 
-  static final int[] MAP_ITEM_TEXT_LIST = new int[]{
+  private static final int[] MAP_ITEM_TEXT_LIST = new int[]{
     R.string.map_item_text,
     R.string.map_addr_item_text,
     R.string.map_gps_item_text,
@@ -249,7 +250,7 @@ public class MsgOptionManager {
   
   /**
    * Setup up the response button menu.  This is called when we finally have
-   * both a message and response button viewgroup
+   * both a message and response button ViewGroup
    */
   private void setupResponseButtons() {
     
@@ -287,7 +288,7 @@ public class MsgOptionManager {
    * Set up response menu with buttons defined by C2DM direct paging vendors
    * @return true if we set up any buttons, false otherwise
    */
-  public boolean setupDirectPageButtons() {
+  private boolean setupDirectPageButtons() {
     boolean result = false;
     
     // First see if normal responding and non-responding buttons were requested
@@ -406,16 +407,12 @@ public class MsgOptionManager {
       prepareButtons(mainButtonList);
     }
   }
-  
-  public boolean isResponseMenuVisible() {
-    return respButtonGroup.getVisibility() == View.VISIBLE;
-  }
 
   /**
    * Prepare all buttons in a button menu
    * @param buttonList list of buttons to be prepared
    */
-  public void prepareButtons(List<ButtonHandler> buttonList) {
+  private void prepareButtons(List<ButtonHandler> buttonList) {
     boolean suppressMoreInfo = false;
     for (ButtonHandler btnHandler : buttonList) {
       if (btnHandler.prepareButton(suppressMoreInfo)) suppressMoreInfo = true;
@@ -436,7 +433,7 @@ public class MsgOptionManager {
      * @param resId button title resource ID
      * @param parent parent ViewGroup
      */
-    public ButtonHandler(int itemId, int resId, ViewGroup parent) {
+    ButtonHandler(int itemId, int resId, ViewGroup parent) {
       this(itemId, resId, null, null, parent);
     }
     
@@ -447,7 +444,7 @@ public class MsgOptionManager {
      * @param respCode button response code
      * @param parent parent ViewGroup
      */
-    public ButtonHandler(int itemId, String title, String respCode, ViewGroup parent) {
+    ButtonHandler(int itemId, String title, String respCode, ViewGroup parent) {
       this(itemId, 0, title, respCode, parent);
     }
     
@@ -458,7 +455,7 @@ public class MsgOptionManager {
      * @param respCode button response code
      * @param parent parent ViewGroup
      */
-    public ButtonHandler(int itemId, int resId, String respCode, ViewGroup parent) {
+    ButtonHandler(int itemId, int resId, String respCode, ViewGroup parent) {
       this(itemId, resId, null, respCode, parent);
     }
     
@@ -481,7 +478,7 @@ public class MsgOptionManager {
       this.respCode = respCode;
     }
     
-    public boolean prepareButton(boolean suppressMoreInfo) {
+    boolean prepareButton(boolean suppressMoreInfo) {
       return prepareItem(new ItemObject(){
         
         @Override
@@ -517,10 +514,10 @@ public class MsgOptionManager {
   }
   
   private interface ItemObject {
-    public int getId();
-    public void setTitle(int resId);
-    public void setEnabled(boolean enabled);
-    public void setVisible(boolean visible);
+    int getId();
+    void setTitle(int resId);
+    void setEnabled(boolean enabled);
+    void setVisible(boolean visible);
   }
   
   private boolean prepareItem(ItemObject item, boolean suppressMoreInfo) {
@@ -602,7 +599,8 @@ public class MsgOptionManager {
   
   private static final Pattern PHONE_TEXT_PTN = Pattern.compile("(\\d+)/ *(.*)");
   
-  public boolean menuItemSelected(int itemId, boolean display, String respCode) {
+  @SuppressLint("MissingPermission")
+  private boolean menuItemSelected(int itemId, boolean display, String respCode) {
     
     // If parent activity is no longer valid, disregard
     if (activity.isFinishing()) return false;
@@ -899,12 +897,12 @@ public class MsgOptionManager {
    * @param message message to be sent
    */
   private void sendSMS(String target, String message){ 
-    Log.v("Sending text reponse to " + target + " : " + message);
+    Log.v("Sending text response to " + target + " : " + message);
     
     if (receiver == null) {
       receiver = new SendSMSReceiver();
       activity.registerReceiver(receiver, new IntentFilter(SMS_SENT));
-      activity.registerReceiver(receiver, new IntentFilter(SMS_DELIVERED));;
+      activity.registerReceiver(receiver, new IntentFilter(SMS_DELIVERED));
     }
     
     Intent sendIntent = new Intent(SMS_SENT);
@@ -914,11 +912,9 @@ public class MsgOptionManager {
     deliverIntent.setFlags(Intent.FLAG_DEBUG_LOG_RESOLUTION);
     PendingIntent deliveredPI = PendingIntent.getBroadcast(activity, 0, deliverIntent, 0);   
 
-    /**
-     * The send logic apparently isn't as bulletproof as we like.  It sometimes
-     * throws a null pointer exception on the other side of an RPC.  We can't
-     * do much about it.
-     */
+     // The send logic apparently isn't as bulletproof as we like.  It sometimes
+     // throws a null pointer exception on the other side of an RPC.  We can't
+     // do much about it.
     SmsManager sms = SmsManager.getDefault();
     try {
       sms.sendTextMessage(target, null, message, sentPI, deliveredPI);
@@ -934,8 +930,10 @@ public class MsgOptionManager {
     public void onReceive(Context context, Intent intent) {
       if (intent == null) return;
       String action = intent.getAction();
-      int pt = action.lastIndexOf('.');
-      if (pt >= 0) action = action.substring(pt+1);
+      if (action != null) {
+        int pt = action.lastIndexOf('.');
+        if (pt >= 0) action = action.substring(pt + 1);
+      }
       String status;
       switch (getResultCode()) {
       

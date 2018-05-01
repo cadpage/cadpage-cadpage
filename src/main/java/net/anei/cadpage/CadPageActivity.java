@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -70,7 +71,7 @@ public class CadPageActivity extends AppCompatActivity {
 
     // We set up the message queue in CadPageApplication.  But new SDK rules do not allow us to
     // start a background thread to reparse the queue messages until an activity has been launched.
-    // So we make a dummy getInstance call here to force the reparssing thread
+    // So we make a dummy getInstance call here to force the reparsing thread
     SmsMessageQueue.getInstance();
 
     // Apparently only an activity can calculate the total screen size.
@@ -106,7 +107,7 @@ public class CadPageActivity extends AppCompatActivity {
     // If the screen is locked, we  would like both the call history and call detail
     // screens to override the lock screen.  This works fine up until Android 5.0
     // at which point it seems that only one window is allowed to override the
-    // lock screen at any time.  So at that level we supress locking the main
+    // lock screen at any time.  So at that level we suppress locking the main
     // screen so the detail screen will be visible.
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
       getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | 
@@ -168,7 +169,7 @@ public class CadPageActivity extends AppCompatActivity {
       // First clear any pending notification
       ClearAllReceiver.clearAll(this);
 
-      // The rest of this involves possible interractions with the user, which might conflict
+      // The rest of this involves possible interactions with the user, which might conflict
       // with the initial permission checking logic.  So rather than do it immediately, we stuff
       // it in a Runnable object to be executed when the initial permission checking is complete
       final boolean init = initializing;
@@ -218,7 +219,7 @@ public class CadPageActivity extends AppCompatActivity {
     // Otherwise, if we should automatically display a call, do it now
     else {
 
-      // But first to the initial permision check
+      // But first to the initial permission check
       ManagePreferences.checkInitialPermissions(null);
 
       SmsMmsMessage msg;
@@ -393,6 +394,7 @@ public class CadPageActivity extends AppCompatActivity {
   } 
   
   public boolean onKeyDown(int keyCode, KeyEvent event) {
+    //noinspection SimplifiableIfStatement
     if (!activityActive) return false;
     return super.onKeyDown(keyCode, event);
   }
@@ -405,7 +407,7 @@ public class CadPageActivity extends AppCompatActivity {
   }
   
   @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
   

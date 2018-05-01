@@ -31,7 +31,7 @@ public class CallHistoryFragment extends FragmentWithContextMenu {
     // Set the adapter
     Context context = view.getContext();
     view.setLayoutManager(new LinearLayoutManager(context));
-    view.setAdapter(SmsMessageQueue.getInstance().listAdapter(getActivity()));
+    view.setAdapter(SmsMessageQueue.getInstance().listAdapter(this));
     return view;
   }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.anei.cadpage.contextmenu.ContextMenuHandler;
+import net.anei.cadpage.contextmenu.FragmentWithContextMenu;
 import net.anei.cadpage.contextmenu.ViewWithContextMenu;
 
 public class SmsMessageQueue implements Serializable {
@@ -266,8 +268,8 @@ public class SmsMessageQueue implements Serializable {
   /**
    * @return RecyclerView.Adapter that can be bound to RecyclerView
    */
-  public RecyclerView.Adapter<Adapter.ViewHolder> listAdapter(Activity activity) {
-    if (adapter == null) adapter = new Adapter(activity);
+  public RecyclerView.Adapter<Adapter.ViewHolder> listAdapter(FragmentWithContextMenu fragment) {
+    if (adapter == null) adapter = new Adapter(fragment);
     return adapter;
   }
   
@@ -276,10 +278,10 @@ public class SmsMessageQueue implements Serializable {
    */
   private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    private final Activity activity;
+    private final FragmentWithContextMenu fragment;
 
-    Adapter(Activity activity) {
-      this.activity = activity;
+    Adapter(FragmentWithContextMenu fragment) {
+      this.fragment = fragment;
     }
 
     @Override
@@ -311,9 +313,7 @@ public class SmsMessageQueue implements Serializable {
         mCallDescView = view.findViewById(R.id.HistoryCallDesc);
         mAddrView = view.findViewById(R.id.HistoryAddress);
 
-        activity.registerForContextMenu(view);
-
-        ((ViewWithContextMenu)view).setContextMenuHandler(this);
+        ((ViewWithContextMenu)view).setContextMenuHandler(fragment, this);
 
         view.setOnClickListener(new OnClickListener() {
           @Override
@@ -339,7 +339,7 @@ public class SmsMessageQueue implements Serializable {
       @Override
       public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         if (mMessage == null) return;
-        MsgOptionManager optMgr = new MsgOptionManager(activity, mMessage);
+        MsgOptionManager optMgr = new MsgOptionManager(fragment.getActivity(), mMessage);
         optMgr.createMenu(menu, false);
       }
 
@@ -347,7 +347,7 @@ public class SmsMessageQueue implements Serializable {
       public boolean onContextItemSelected(MenuItem item) {
 
         if (mMessage == null) return false;
-        MsgOptionManager optMgr = new MsgOptionManager(activity, mMessage);
+        MsgOptionManager optMgr = new MsgOptionManager(fragment.getActivity(), mMessage);
         return optMgr.menuItemSelected(item.getItemId(), false);
       }
     }
