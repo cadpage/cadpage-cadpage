@@ -10,9 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -49,13 +48,13 @@ public class SmsMessageQueue implements Serializable {
       is = new ObjectInputStream(
           context.openFileInput(QUEUE_FILENAME));
       queue = (ArrayList<SmsMmsMessage>) is.readObject();
-    } catch (FileNotFoundException ex) {
+    } catch (FileNotFoundException ignored) {
     } catch (Exception ex) {
       Log.e(ex);
     } finally {
       if (is != null) try {
         is.close();
-      } catch (IOException ex) {
+      } catch (IOException ignored) {
       }
     }
 
@@ -102,7 +101,7 @@ public class SmsMessageQueue implements Serializable {
     } catch (IOException ex) {
       Log.e(ex);
     } finally {
-      if (os != null) try {os.close();} catch (IOException ex) {}
+      if (os != null) try {os.close();} catch (IOException ignored) {}
     }
   }
   
@@ -159,7 +158,7 @@ public class SmsMessageQueue implements Serializable {
     
     // Log new message ID while we are trying to track a mysterious problem
     // where Cadpage occasionally brings up a wrong or inappropriate message
-    Log.w("New Mesage " + nextMsgId + ": " + msg.getMessageBody());
+    Log.w("New Message " + nextMsgId + ": " + msg.getMessageBody());
     
     // Assign next msg ID
     msg.setMsgId(nextMsgId++);
@@ -276,29 +275,36 @@ public class SmsMessageQueue implements Serializable {
   /**
    * Private ListAdapter class
    */
-  private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+   private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private final FragmentWithContextMenu fragment;
 
     Adapter(FragmentWithContextMenu fragment) {
       this.fragment = fragment;
+      setHasStableIds(true);
     }
 
+    @NonNull
     @Override
-    public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
       View view = LayoutInflater.from(context)
           .inflate(R.layout.msg_list_item, parent, false);
       return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final Adapter.ViewHolder holder, int position) {
       holder.setMessage(queue.get(position));
     }
 
     @Override
     public int getItemCount() {
       return queue.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+      return queue.get(position).getMsgId();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements ContextMenuHandler {
@@ -352,7 +358,7 @@ public class SmsMessageQueue implements Serializable {
       }
     }
   }
-  
+
   /**
    * Recalculate unopened call count
    */
@@ -379,7 +385,7 @@ public class SmsMessageQueue implements Serializable {
    */
   public SmsMmsMessage getDisplayMessage(boolean force) {
     
-    // We don't display a message if there are no queued messge, or if the
+    // We don't display a message if there are no queued message, or if the
     // automatic popup is not enabled
     if (queue.size() == 0) return null;
     if (!force && !ManagePreferences.popupEnabled()) return null;
