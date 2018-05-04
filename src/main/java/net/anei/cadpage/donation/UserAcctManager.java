@@ -1,6 +1,5 @@
 package net.anei.cadpage.donation;
 
-import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,42 +13,44 @@ import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
-import net.anei.cadpage.donation.UserAcctManager;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
 public class UserAcctManager {
-  
-  Context context;
+
+  private final Context context;
   private String[] userEmails = null;
   private String phoneNumber = null;
   private String meid = null;
   private boolean developer = false;
-  
+
   private static final Pattern SDK_PTN = Pattern.compile(".*(?:^|[_\\W])sdk(?:$|[_\\W]).*");
-  
+
   private UserAcctManager(Context context) {
     this.context = context;
     if (SDK_PTN.matcher(Build.PRODUCT).matches()) developer = true;
   }
-  
+
+  @SuppressWarnings("ConstantConditions")
+  @SuppressLint({"MissingPermission", "HardwareIds"})
   public void reset() {
-    
+
     boolean readPhoneStatePerm = PermissionManager.isGranted(context, PermissionManager.READ_PHONE_STATE);
-    
+
     TelephonyManager tMgr =(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-    
+
     // Which permission is required to call getLine1Number() is inconsistent.  Nexus systems require READ_SMS
     // permission, Sprint phones require READ_PHONE_STATE.  Rather than try to figure out which one is
     // require, we will just call it can catch any thrown exceptions.
     phoneNumber = null;
     try {
       phoneNumber = tMgr.getLine1Number();
-    } catch (Exception ex) {}
+    } catch (Exception ignored) {}
     
     if (phoneNumber == null && readPhoneStatePerm) {
       
@@ -68,8 +69,14 @@ public class UserAcctManager {
       if (phoneNumber.startsWith("+")) phoneNumber = phoneNumber.substring(1);
       if (phoneNumber.startsWith("1")) phoneNumber = phoneNumber.substring(1);
     }
-    meid = readPhoneStatePerm ? tMgr.getDeviceId() : null;
-    if (meid == null) meid = getSerialID();
+    meid = null;
+    if (readPhoneStatePerm) {
+      meid = tMgr.getDeviceId();
+      if (meid == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        meid = Build.getSerial();
+      }
+    }
+    if (meid == null) meid = Build.SERIAL;
 
     updateEmailList();
 
@@ -82,16 +89,14 @@ public class UserAcctManager {
     else {
       if (userEmails != null && userEmails.length > 0) {
         String[] developers = context.getResources().getStringArray(R.array.donate_devel_list);
-        if (developers != null) {
-          developer = Arrays.asList(developers).contains(userEmails[0]);
-        }
+        developer = Arrays.asList(developers).contains(userEmails[0]);
       }
     }
   }
 
   public void updateEmailList() {
     if (ManagePreferences.grantAccountAccess()) {
-      List<String> emailList = new ArrayList<String>();
+      List<String> emailList = new ArrayList<>();
       for (Account acct : AccountManager.get(context).getAccountsByType("com.google")) {
         emailList.add(acct.name);
       }
@@ -103,8 +108,8 @@ public class UserAcctManager {
 
   /**
    * Clean extraneous stuff from user name / phone #
-   * @param name
-   * @return
+   * @param name user name/phone #
+   * @return cleaned up user name/phone #
    */
   private String cleanName(String name) {
     int pt = name.indexOf('<');
@@ -211,46 +216,16 @@ public class UserAcctManager {
   
   /**
    * @return true if current user is a developer
-   * @Param context current context
    */
   public boolean isDeveloper() {
     return developer;
   }
 
-  /**
-   * Convert user account name to MD5 has
-   * @param input user account name
-   * @return MD5 hash
-   */
-  public static String calcHash(String input) {
-    try {
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      md.update(input.toLowerCase().getBytes("UTF8"));
-      byte[] digest = md.digest();
-      StringBuilder sb = new StringBuilder();
-      for (byte b : digest) {
-        sb.append(hexDigit(b>>4));
-        sb.append(hexDigit(b));
-      }
-      return sb.toString();
-    } catch (Exception ex) {
-      throw new RuntimeException(ex.getMessage(), ex);
-    }
-  }
-  
-  private static char hexDigit(int i) {
-    i &= 0xF;
-    return (char)(i < 10 ? '0'+i : 'a'+(i-10));
-  }
-  
-  private String getSerialID() {
-    return android.os.Build.SERIAL;
-  }
-  
+  @SuppressLint("StaticFieldLeak")
   private static UserAcctManager instance = null;
   
   public static void setup(Context context) {
-    instance = new UserAcctManager(context);
+    instance = new UserAcctManager(context.getApplicationContext());
   }
   
   public static UserAcctManager instance() {

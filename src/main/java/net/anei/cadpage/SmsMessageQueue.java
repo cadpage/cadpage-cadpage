@@ -79,7 +79,7 @@ public class SmsMessageQueue implements Serializable {
     calcNewCallCount();
   }
 
-  private void checkReparse() {
+  public void startReparse() {
 
     // Start parsing messages in background service
     if (reparse) {
@@ -414,7 +414,6 @@ public class SmsMessageQueue implements Serializable {
    * @return singleton message queue object
    */
   public static SmsMessageQueue getInstance() {
-    msgQueue.checkReparse();
     return msgQueue;
   }
 }

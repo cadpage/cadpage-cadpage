@@ -161,12 +161,5 @@
       <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget"/>
     </receiver>
 
-    
-    <!-- receiver android:name="DummyReceiver">
-      <intent-filter>
-        <action android:name="android.intent.action.CONTENT_CHANGED"/>
-      </intent-filter>
-    </receiver -->
-
   </application>
 </manifest>
