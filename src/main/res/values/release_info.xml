@@ -4,6 +4,15 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-42\n
+    New Locations:\n
+    Rio Blanco County, CO\n
+    Colquitt County, GA\n
+    Knox County, KY\n
+    \n
+    Location Fixes:\n
+    Roanoke County, VA\n
+    \n
     v1.9.15-41\n
     New Locations:\n
     Laporte County, IN\n
@@ -52,14 +61,6 @@
     McLennan County, TX\n
     Royse City, TX\n
     Pierce County, WA\n
-    Milwauikee County, WI\n
-    \n
-    v1.9.15-37\n
-    Location Fixes:\n
-    Jefferson County, CO\n
-    Bradley County, TN\n
-    Loudon County, TN\n
-    Royse City, TX\n
-    Botetourt County, VA
+    Milwauikee County, WI
   </string>
 </resources>
