@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04302018</string>
+  <string name="release_date">05052018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-43\n
+    New Locations:\n
+    Wapello County, IA\n
+    Winnabago County, IA\n
+    Sumner County, KS\n
+    Morgan County, KY\n
+    Hill County, MT\n
+    Marlboro County, SC\n
+        \n
+    Location Fixes:\n
+    Marion County, KS\n
+    Mecosta County, MI\n
+    Allegheny County, PA\n
+    Monroe County, PA\n
+    \n
     v1.9.15-42\n
     New Locations:\n
     Rio Blanco County, CO\n
@@ -52,15 +67,6 @@
     Greenbrier County, WV\n
     \n
     General Fixes:\n
-    Crash processing particular alert message\n
-    \n
-    v1.9.15-38\n
-    Location Fixes:\n
-    Solano County, CA\n
-    Madison County, IN\n
-    McLennan County, TX\n
-    Royse City, TX\n
-    Pierce County, WA\n
-    Milwauikee County, WI
+    Crash processing particular alert message
   </string>
 </resources>
