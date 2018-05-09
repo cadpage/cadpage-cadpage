@@ -24,6 +24,7 @@ import android.support.v4.app.NotificationCompat;
 /*
  * This class handles the Notifications (sounds/vibrate/LED)
  */
+@SuppressWarnings("TryFinallyCanBeTryWithResources")
 public class ManageNotification {
   
   private static final int MAX_PLAYER_RETRIES = 4;
@@ -32,7 +33,7 @@ public class ManageNotification {
   
   private static MediaPlayer mMediaPlayer = null;
   
-  private static AudioFocusChangeListener afm = new AudioFocusChangeListener();
+  private static final AudioFocusChangeListener afm = new AudioFocusChangeListener();
   
   private static boolean phoneMuted = false;
   
@@ -74,12 +75,14 @@ public class ManageNotification {
     
     // Save phone muted status while we have a context to work with
     AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+    assert am != null;
     phoneMuted =  (am.getRingerMode() != AudioManager.RINGER_MODE_NORMAL);
 
     // Build and launch the notification
     Notification n = buildNotification(context, message);
     
     NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert myNM != null;
 
     // Seems this is needed for the number value to take effect on the Notification
     activeNotice = true;
@@ -125,7 +128,7 @@ public class ManageNotification {
       /*
        * Set up LED blinking pattern
        */
-      int[] led_pattern = null;
+      int[] led_pattern;
 
       String flashLedPattern = ManagePreferences.flashLEDPattern();
       if (context.getString(R.string.pref_custom_val).equals(flashLedPattern)) {
@@ -138,6 +141,7 @@ public class ManageNotification {
       // Set to default if there was a problem
       if (led_pattern == null) {
         led_pattern = parseLEDPattern(context.getString(R.string.pref_flashled_pattern_default));
+        assert led_pattern != null;
       }
       
       /*
@@ -169,6 +173,7 @@ public class ManageNotification {
      */
     // If vibrate is ON, or if phone is set to vibrate
     AudioManager AM = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    assert AM != null;
     if ((ManagePreferences.vibrate() || AudioManager.RINGER_MODE_VIBRATE == AM.getRingerMode())) {
       String vibrate_pattern_raw = ManagePreferences.vibratePattern();
       if (context.getString(R.string.pref_custom_val).equals(vibrate_pattern_raw)) {
@@ -232,6 +237,7 @@ public class ManageNotification {
     // Grab audio focus
     Log.v("Grab Audio Focus");
     AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    assert am != null;
     am.requestAudioFocus(afm, AudioManager.STREAM_NOTIFICATION, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
     
     // If a restore volume is already set, assume that we have already
@@ -306,7 +312,7 @@ public class ManageNotification {
       } else {
         mMediaPlayer.start();
       }
-      Log.v("Playback start sucessful");
+      Log.v("Playback start successful");
     } catch (IOException ex) {
       
       // Failures are fairly common and usually indicate something wrong
@@ -314,7 +320,7 @@ public class ManageNotification {
       // logged the error when it happened, so just close things up
       try {
         mMediaPlayer.stop();
-      } catch (Exception ex2) {}
+      } catch (Exception ignored) {}
       mMediaPlayer.release();
       mMediaPlayer = null;
       Log.v("Playback start failed");
@@ -487,7 +493,8 @@ public class ManageNotification {
   private static void restoreVolumeControl(Context context) {
 
     AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-    
+    assert am != null;
+
     // If a restore volume level has been set, restore the volume to that level
     //  and delete the restore volume level
     int vol = ManagePreferences.restoreVol();
@@ -509,13 +516,13 @@ public class ManageNotification {
 
   }
   
-  // Media oncomplete listener
+  // Media onComplete listener
   // Restore normal volume when alert playback completes
   private static class MediaOnCompletionListener implements OnCompletionListener {
     
-    private Context context;
+    private final Context context;
     
-    public MediaOnCompletionListener(Context context) {
+    MediaOnCompletionListener(Context context) {
       this.context = context;
     }
 
@@ -531,16 +538,16 @@ public class ManageNotification {
   // unknown reason.  
   private static class MediaErrorListener implements OnErrorListener {
     
-    private Context context;
-    private int startCnt;
+    private final Context context;
+    private final int startCnt;
     private boolean armed = false;
     
-    public MediaErrorListener(Context context, int startCnt) {
+    MediaErrorListener(Context context, int startCnt) {
       this.context = context;
       this.startCnt = startCnt;
     }
     
-    public void arm() {
+    void arm() {
       armed = true;
     }
 
@@ -568,6 +575,7 @@ public class ManageNotification {
 
     NotificationManager myNM =
       (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert myNM != null;
     myNM.cancel(NOTIFICATION_ALERT);
     
     stopMediaPlayer(context);
@@ -585,7 +593,7 @@ public class ManageNotification {
    * 
    */
   public static long[] parseVibratePattern(String stringPattern) {
-    ArrayList<Long> arrayListPattern = new ArrayList<Long>();
+    ArrayList<Long> arrayListPattern = new ArrayList<>();
     Long l;
 
     if (stringPattern == null) return null;
@@ -594,9 +602,9 @@ public class ManageNotification {
     int VIBRATE_PATTERN_MAX_SECONDS = 60000;
     int VIBRATE_PATTERN_MAX_PATTERN = 100;
 
-    for (int i = 0; i < splitPattern.length; i++) {
+    for (String part : splitPattern) {
       try {
-        l = Long.parseLong(splitPattern[i].trim());
+        l = Long.parseLong(part.trim());
       } catch (NumberFormatException e) {
         return null;
       }
@@ -681,14 +689,14 @@ public class ManageNotification {
       if (ManagePreferences.notifyRepeatInterval() > 0) return true;
     }
     
-    // Otherwise, we really do not know, so follow user recomendation
+    // Otherwise, we really do not know, so follow user recommendation
     return ManagePreferences.notifyReqAck();
   }
 
   /**
    * Audio focus change listener
    */
-  public static class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener {
+  static class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener {
 
     @Override
     public void onAudioFocusChange(int focusChange) {
