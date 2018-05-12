@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05052018</string>
+  <string name="release_date">05122018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-44\n
+    Location Fixes:\n
+    Henry County, IN\n
+    DeSoto County, MS\n
+    Loudoun County, TN\n
+    \n
     v1.9.15-43\n
     New Locations:\n
     Wapello County, IA\n
@@ -46,27 +52,6 @@
     v1.9.15-40\n
     Location Fixes:\n
     Santa Cruz County, CA\n
-    Jefferson County, CO\n
-    \n
-    v1.9.15-39\n
-    New Locations:\n
-    Sebastian County, AR\n
-    Billings County, ND\n
-    Kidder County, ND\n
-    Baker County, OR\n
-    \n
-    Location Fixes:\n
-    Carter County, KY\n
-    Terrebonne Parish, LA\n
-    Clinton County, MO\n
-    Livingston County, NY\n
-    Niagara County, NY\n
-    New Brunswick County, NC\n
-    Wake County, NC\n
-    Cumberland County, TN\n
-    Greenbrier County, WV\n
-    \n
-    General Fixes:\n
-    Crash processing particular alert message
+    Jefferson County, CO
   </string>
 </resources>
