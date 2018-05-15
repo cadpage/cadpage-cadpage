@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05122018</string>
+  <string name="release_date">05152018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-45\n
+    Location Fixes:\n
+    Jefferson County, AL\n
+    Humboldt County, CA\n
+    Ray County, MO\n
+    Buffalo, NY\n
+    Armstrong County, PA\n
+    Northumberland County, PA\n
+    Rock County, WI\n
+    \n
     v1.9.15-44\n
     Location Fixes:\n
     Henry County, IN\n
@@ -18,7 +28,7 @@
     Morgan County, KY\n
     Hill County, MT\n
     Marlboro County, SC\n
-        \n
+    \n
     Location Fixes:\n
     Marion County, KS\n
     Mecosta County, MI\n
@@ -47,11 +57,6 @@
     Boyd County, KY\n
     Cascade County, MT\n
     Monroe County, PA\n
-    Loudoun County, TN\n
-    \n
-    v1.9.15-40\n
-    Location Fixes:\n
-    Santa Cruz County, CA\n
-    Jefferson County, CO
+    Loudoun County, TN
   </string>
 </resources>
