@@ -14,7 +14,6 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName + "(new)"
         versionCode /* 100000000 + */ project.versionCode
-        compileSdkVersion 27
         targetSdkVersion 27
         minSdkVersion 14
     }
@@ -43,10 +42,17 @@ android {
          maxSdkVersion 23
          minSdkVersion 9}}***/
     }
+
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
-    implementation project(":cadpage-parsers")
+    implementation project(':cadpage-parsers')
     implementation 'com.android.support:appcompat-v7:27.1.1'
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-v4:27.1.1'

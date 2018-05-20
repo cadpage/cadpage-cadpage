@@ -39,6 +39,7 @@ public class CadPageApplication extends Application {
       UserAcctManager.setup(this);
       BillingManager.instance().initialize(this);
       ManagePreferences.setupPreferences(this);
+      ManageNotification.setup(this);
       VendorManager.instance().setup(this);
       UserAcctManager.instance().reset();
       

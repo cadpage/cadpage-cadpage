@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="regular_alert_title">Regular Dispatch Alerts</string>
+  <string name="regular_alert_text">Regular dispatch alert</string>
+  <string name="gen_alert_title">General Alerts</string>
+  <string name="gen_alert_text">General Alert</string>
+  <string name="run_report_title">Run Reports</string>
+  <string name="run_report_text">Run Report</string>
+
+  <string name="tracking_notif_title">Cadpage Position Tracking</string>
+  <string name="tracking_notif_text">Cadpage is reporting your current location</string>
+
+  <string name="misc_notif_title">Background activity</string>
+</resources>

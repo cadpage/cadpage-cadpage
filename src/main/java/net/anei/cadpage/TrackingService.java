@@ -22,13 +22,7 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 
 public class TrackingService extends Service implements LocationListener {
-  
-  // Age limits for location reports.  Report older than these limits are discarded
-  // A longer initial limit is allowed on the assumption that people have not been 
-  // moving all that much until the call came in.
-  private static final long MAX_INITIAL_RPT_AGE = 300000;  // 5 minutes
-  private static final long MAX_REPEAT_RPT_AGE = 30000;    // 30 seconds
-  
+
   // Expected accuracy degradation in m/msec
   private static final double LOC_ACC_ADJUSTMENT = .002;  // About 2 m/sec
 
@@ -38,34 +32,34 @@ public class TrackingService extends Service implements LocationListener {
   private static final String EXTRA_END_TIME = "EXTRA_END_TIME";
   private static final String EXTRA_MIN_TIME = "EXTRA_MIN_TIME";
   private static final String EXTRA_MIN_DIST = "EXTRA_MIN_DIST";
-  
+
   private static final int TRACKING_NOTIFICATION = 298;
 
   // Wake lock and synchronize lock
   static private PowerManager.WakeLock sWakeLock = null;
-  
+
   /**
    * Internal class defining a location report request
    */
   private class LocationRequest {
-    String URL;
+    final String URL;
     long endTime;
-    
+
     // Runnable that we will post to run at the time we want this request to go away
-    Runnable terminator = new Runnable(){
+    final Runnable terminator = new Runnable(){
       @Override
       public void run() {
         requestQueue.remove(LocationRequest.this);
         if (requestQueue.size() == 0) stopSelf();
       }
     };
-    
+
     LocationRequest(String URL, long endTime) {
       this.URL = URL;
       this.endTime = endTime;
       mHandler.postAtTime(terminator, endTime);
     }
-    
+
     boolean mergeRequest(String URL, long endTime) {
       if (!URL.equals(this.URL)) return false;
       if (endTime > this.endTime) {
@@ -75,7 +69,7 @@ public class TrackingService extends Service implements LocationListener {
       }
       return true;
     }
-    
+
     void report(Context context, Location loc) {
       Uri.Builder bld = Uri.parse(URL).buildUpon().appendQueryParameter("type", "LOCATION");
       bld.appendQueryParameter("lat", Double.toString(loc.getLatitude()));
@@ -85,16 +79,16 @@ public class TrackingService extends Service implements LocationListener {
       if (loc.hasBearing()) bld.appendQueryParameter("bearing", Float.toString(loc.getBearing()));
       if (loc.hasSpeed()) bld.appendQueryParameter("speed", Float.toString(loc.getSpeed()));
       bld.appendQueryParameter("time", Long.toString(loc.getTime()));
-      
+
       HttpService.addHttpRequest(context, new HttpService.HttpRequest(bld.build()));
     }
   }
-  
+
   private Handler mHandler = null;
-  
+
   // Queue of outstanding location requests
-  private List<LocationRequest> requestQueue = new LinkedList<LocationRequest>();
-  
+  private final List<LocationRequest> requestQueue = new LinkedList<>();
+
   // Best location service
   private String bestProvider = null;
 
@@ -102,14 +96,14 @@ public class TrackingService extends Service implements LocationListener {
   @Override
   public void onCreate() {
     Log.v("LocationService starting up");
-    
+
     // Set up a handler to manage location tracking termination
     mHandler = new Handler();
-    
+
     // Put ourselves in foreground mode, also notifying user that tracking has been activated
     Intent intent = new Intent(ACTION_SHUTDOWN, null, this, TrackingService.class);
     PendingIntent pint = PendingIntent.getService(this, 0, intent, 0);
-    Notification nf = new NotificationCompat.Builder(this)
+    Notification nf = new NotificationCompat.Builder(this, ManageNotification.TRACKING_CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_stat_notify)
         .setWhen(System.currentTimeMillis())
         .setContentTitle(getString(R.string.tracking_title))
@@ -119,19 +113,27 @@ public class TrackingService extends Service implements LocationListener {
     startForeground(TRACKING_NOTIFICATION, nf);
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    
+
     if (ACTION_SHUTDOWN.equals(intent.getAction())) {
       stopSelf();
-      return 0;
+      return START_NOT_STICKY;
     }
-    
+
+    // We shouldn't get here without location permission enabled.
+    // But make one last check just in case
+    if (!PermissionManager.isGranted(this, PermissionManager.ACCESS_FINE_LOCATION)) {
+      stopSelf();
+      return START_NOT_STICKY;
+    }
+
     String url = intent.getStringExtra(EXTRA_URL);
     long endTime = intent.getLongExtra(EXTRA_END_TIME, 0L);
     int minDist = intent.getIntExtra(EXTRA_MIN_DIST, 10);
     int minTime = intent.getIntExtra(EXTRA_MIN_TIME, 10);
-    if (url == null) return 0;
+    if (url == null) return START_NOT_STICKY;
 
     if (flags != 0) holdPowerLock(this);
 
@@ -143,12 +145,13 @@ public class TrackingService extends Service implements LocationListener {
         break;
       }
     }
-    
+
     // If not, create a new entry and add it to the queue
     if (!found) requestQueue.add(new LocationRequest(url, endTime));
-    
+
     // If we don't have an active best provider, set one up and
     LocationManager locMgr = (LocationManager)this.getSystemService(LOCATION_SERVICE);
+    assert locMgr != null;
     if (bestProvider == null) {
       Criteria criteria = new Criteria();
       criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -173,7 +176,7 @@ public class TrackingService extends Service implements LocationListener {
     }
     
     // Use the that best last known position to prime things
-    onLocationChanged(bestLoc, MAX_INITIAL_RPT_AGE);
+    onLocationChanged(bestLoc);
 
     return Service.START_REDELIVER_INTENT;
   }
@@ -185,11 +188,7 @@ public class TrackingService extends Service implements LocationListener {
 
   @Override
   public void onLocationChanged(Location location) {
-    onLocationChanged(location, MAX_REPEAT_RPT_AGE);
-  }
-  
-  private void onLocationChanged(Location location, long maxAge) {
-    
+
     // If no location, skip it
     if (location == null) return;
     
@@ -209,7 +208,7 @@ public class TrackingService extends Service implements LocationListener {
     ManagePreferences.setLastLocTime(locTime);
     ManagePreferences.setLastLocAcc(locAcc);
     
-    // REport location to all requesters
+    // Report location to all requesters
     for (LocationRequest req : requestQueue) req.report(this, location);
   }
   
@@ -217,6 +216,7 @@ public class TrackingService extends Service implements LocationListener {
   public void onDestroy() {
     Log.v("Shutting down LocationService");
     LocationManager locMgr = (LocationManager)this.getSystemService(LOCATION_SERVICE);
+    assert locMgr != null;
     locMgr.removeUpdates(this);
     bestProvider = null;
     if (sWakeLock != null) sWakeLock.release();
@@ -264,10 +264,11 @@ public class TrackingService extends Service implements LocationListener {
     synchronized (TrackingService.class) {
       if (sWakeLock == null) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        assert pm != null;
         sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".TrackingService");
         sWakeLock.setReferenceCounted(false);
       }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
+      if(!sWakeLock.isHeld()) sWakeLock.acquire(30*60*1000L /*30 minutes*/);
     }
   }
 }

@@ -60,7 +60,7 @@ public class KeepAliveService extends Service {
     }
   }
   
-  private static List<Object> listenerEntryQueue = new ArrayList<Object>();
+  private static final List<Object> listenerEntryQueue = new ArrayList<>();
 
   @Override
   public IBinder onBind(Intent intent) {
@@ -82,7 +82,7 @@ public class KeepAliveService extends Service {
       // doing whatever we are doing
       else {
         PendingIntent pint = PendingIntent.getActivity(this, 0, CadPageActivity.getLaunchIntent(this), 0);
-        Notification nf = new NotificationCompat.Builder(this)
+        Notification nf = new NotificationCompat.Builder(this, ManageNotification.MISC_CHANNEL_ID)
                           .setSmallIcon(intent.getIntExtra("ICON", 0))
                           .setWhen(System.currentTimeMillis())
                           .setContentTitle(getString(intent.getIntExtra("TITLE", 0)))

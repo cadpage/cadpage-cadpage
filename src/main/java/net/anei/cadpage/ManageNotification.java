@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,11 +14,13 @@ import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.app.NotificationCompat;
 
@@ -26,6 +29,12 @@ import android.support.v4.app.NotificationCompat;
  */
 @SuppressWarnings("TryFinallyCanBeTryWithResources")
 public class ManageNotification {
+
+  private static final String ALERT_CHANNEL_ID = "net.anei.cadpage.ALERT_CHANNEL_ID";
+
+  public static final String TRACKING_CHANNEL_ID = "net.anei.cadpage.TRACKING_CHANNEL_ID";
+
+  public static final String MISC_CHANNEL_ID = "net.anei.cadpage.MISC_CHANNEL_ID";
   
   private static final int MAX_PLAYER_RETRIES = 4;
 
@@ -44,6 +53,56 @@ public class ManageNotification {
     MediaFailureException(String desc) {
       super(desc);
     }
+  }
+
+  /**
+   * Setup initial notification channels
+   * @param context current context
+   */
+  public static void setup(Context context) {
+
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
+     NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+     assert nm != null;
+     NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+     if (channel == null) {
+       channel = new NotificationChannel(ALERT_CHANNEL_ID, context.getString(R.string.regular_alert_title), NotificationManager.IMPORTANCE_HIGH);
+       channel.setDescription(context.getString(R.string.regular_alert_text));
+       channel.setBypassDnd(true);
+       channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+
+       channel.enableLights(ManagePreferences.flashLED());
+       channel.setLightColor(getLEDColor(context));
+       // There does not seem to be a way to set the LED blink rate :(
+
+       channel.enableVibration(ManagePreferences.vibrate());
+       long[] vibratePattern = getVibratePattern(context);
+       if (vibratePattern != null) channel.setVibrationPattern(vibratePattern);
+
+       Uri uri = Uri.parse(ManagePreferences.notifySound());
+       AudioAttributes aa = new AudioAttributes.Builder()
+           .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+           .build();
+       channel.setSound(uri, aa);
+
+       nm.createNotificationChannel(channel);
+     }
+     Log.v("Current Notification Channel info:" + channel.toString());
+
+     channel = nm.getNotificationChannel(TRACKING_CHANNEL_ID);
+     if (channel == null) {
+       channel = new NotificationChannel(TRACKING_CHANNEL_ID, context.getString(R.string.tracking_notif_title), NotificationManager.IMPORTANCE_LOW);
+       channel.setDescription(context.getString(R.string.tracking_notif_text));
+       channel.setBypassDnd(false);
+       nm.createNotificationChannel(channel);
+     }
+
+     channel = nm.getNotificationChannel(MISC_CHANNEL_ID);
+     if (channel == null) {
+       channel = new NotificationChannel(MISC_CHANNEL_ID, context.getString(R.string.misc_notif_title), NotificationManager.IMPORTANCE_NONE);
+       channel.setBypassDnd(false);
+       nm.createNotificationChannel(channel);
+     }
   }
   
   /**
@@ -106,85 +165,49 @@ public class ManageNotification {
     /*
      * Ok, let's create our Notification object and set up all its parameters.
      */
-    NotificationCompat.Builder nbuild = new NotificationCompat.Builder(context);
+    NotificationCompat.Builder nbuild = new NotificationCompat.Builder(context, ALERT_CHANNEL_ID);
 
     // Set auto-cancel flag
     nbuild.setAutoCancel(true);
-    
-    // Maximum priority
-    nbuild.setPriority(NotificationCompat.PRIORITY_MAX);
-    
-    // Message category
-    nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
-    
-    // Set public visibility
-    nbuild.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-    
+
     // Set display icon
     nbuild.setSmallIcon(R.drawable.ic_stat_notify);
 
-    // Set up LED pattern and color
-    if (ManagePreferences.flashLED()) {
+    // From Oreo on, these are set at the notification channel level
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+
+      // Maximum priority
+      nbuild.setPriority(NotificationCompat.PRIORITY_MAX);
+
+      // Message category
+      nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
+
+      // Set public visibility
+      nbuild.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+
+      // Set up LED pattern and color
+      if (ManagePreferences.flashLED()) {
+        /*
+         * Set up LED blinking pattern
+         */
+        int col = getLEDColor(context);
+        int[] led_pattern = getLEDPattern(context);
+        nbuild.setLights(col, led_pattern[0], led_pattern[1]);
+      }
+
       /*
-       * Set up LED blinking pattern
+       * Set up vibrate pattern
        */
-      int[] led_pattern;
-
-      String flashLedPattern = ManagePreferences.flashLEDPattern();
-      if (context.getString(R.string.pref_custom_val).equals(flashLedPattern)) {
-        led_pattern = parseLEDPattern(ManagePreferences.flashLEDPatternCustom());
-      } else {
-        led_pattern = parseLEDPattern(flashLedPattern);
-      }
-
-
-      // Set to default if there was a problem
-      if (led_pattern == null) {
-        led_pattern = parseLEDPattern(context.getString(R.string.pref_flashled_pattern_default));
-        assert led_pattern != null;
-      }
-      
-      /*
-       * Set up LED color
-       */
-      // Check if a custom color is set
-      String flashLedCol = ManagePreferences.flashLEDColor();
-      if (context.getString(R.string.pref_custom_val).equals(flashLedCol)) {
-        flashLedCol = ManagePreferences.flashLEDColorCustom();
-      }
-
-      // Default in case the parse fails
-      int col = Color.parseColor(context.getString(R.string.pref_flashled_color_default));
-
-      // Try and parse the color
-      if (flashLedCol != null) {
-        try {
-          col = Color.parseColor(flashLedCol);
-        } catch (IllegalArgumentException e) {
-          // No need to do anything here
+      // If vibrate is ON, or if phone is set to vibrate
+      AudioManager AM = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+      assert AM != null;
+      if ((ManagePreferences.vibrate() || AudioManager.RINGER_MODE_VIBRATE == AM.getRingerMode())) {
+        long[] vibrate_pattern = getVibratePattern(context);
+        if (vibrate_pattern != null) {
+          nbuild.setVibrate(vibrate_pattern);
+        } else {
+          nbuild.setDefaults(Notification.DEFAULT_VIBRATE);
         }
-      }
-
-      nbuild.setLights(col, led_pattern[0], led_pattern[1]);
-    }
-
-    /*
-     * Set up vibrate pattern
-     */
-    // If vibrate is ON, or if phone is set to vibrate
-    AudioManager AM = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-    assert AM != null;
-    if ((ManagePreferences.vibrate() || AudioManager.RINGER_MODE_VIBRATE == AM.getRingerMode())) {
-      String vibrate_pattern_raw = ManagePreferences.vibratePattern();
-      if (context.getString(R.string.pref_custom_val).equals(vibrate_pattern_raw)) {
-        vibrate_pattern_raw = ManagePreferences.vibratePatternCustom();
-      }
-      long[] vibrate_pattern = parseVibratePattern(vibrate_pattern_raw);
-
-     if (vibrate_pattern != null) {
-       nbuild.setVibrate(vibrate_pattern);
-      } else {
-        nbuild.setDefaults(Notification.DEFAULT_VIBRATE);
       }
     }
 
@@ -626,6 +649,47 @@ public class ManageNotification {
     return null;
   }
 
+  private static int getLEDColor(Context context) {
+
+    // Check if a custom color is set
+    String flashLedCol = ManagePreferences.flashLEDColor();
+    if (context.getString(R.string.pref_custom_val).equals(flashLedCol)) {
+      flashLedCol = ManagePreferences.flashLEDColorCustom();
+    }
+
+    // Default in case the parse fails
+    int col = Color.parseColor(context.getString(R.string.pref_flashled_color_default));
+
+    // Try and parse the color
+    if (flashLedCol != null) {
+      try {
+        col = Color.parseColor(flashLedCol);
+      } catch (IllegalArgumentException ignore) {}
+    }
+    return col;
+  }
+
+  private static int[] getLEDPattern(Context context) {
+
+    int[] ledPattern;
+
+    String flashLedPattern = ManagePreferences.flashLEDPattern();
+    if (context.getString(R.string.pref_custom_val).equals(flashLedPattern)) {
+      ledPattern = parseLEDPattern(ManagePreferences.flashLEDPatternCustom());
+    } else {
+      ledPattern = parseLEDPattern(flashLedPattern);
+    }
+
+
+    // Set to default if there was a problem
+    if (ledPattern == null) {
+      ledPattern = parseLEDPattern(context.getString(R.string.pref_flashled_pattern_default));
+      assert ledPattern != null;
+    }
+
+    return ledPattern;
+
+  }
   /**
    * Parse LED pattern string into int[]
    * 
@@ -667,6 +731,13 @@ public class ManageNotification {
     return null;
   }
 
+  private static long[] getVibratePattern(Context context) {
+    String vibrate_pattern_raw = ManagePreferences.vibratePattern();
+    if (context.getString(R.string.pref_custom_val).equals(vibrate_pattern_raw)) {
+      vibrate_pattern_raw = ManagePreferences.vibratePatternCustom();
+    }
+    return parseVibratePattern(vibrate_pattern_raw);
+  }
 
   /**
    * Called to determine if an acknowledge function is needed to clear a
