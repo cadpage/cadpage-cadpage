@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-48\n
+    Location Fixes:\n
+    Buffalo, NY\n
+    \n
     v1.9.15-47\n
     New Locations:\n
     Pike County, AL\n
@@ -34,21 +38,6 @@
     Location Fixes:\n
     Henry County, IN\n
     DeSoto County, MS\n
-    Loudoun County, TN\n
-    \n
-    v1.9.15-43\n
-    New Locations:\n
-    Wapello County, IA\n
-    Winnabago County, IA\n
-    Sumner County, KS\n
-    Morgan County, KY\n
-    Hill County, MT\n
-    Marlboro County, SC\n
-    \n
-    Location Fixes:\n
-    Marion County, KS\n
-    Mecosta County, MI\n
-    Allegheny County, PA\n
-    Monroe County, PA
+    Loudoun County, TN
   </string>
 </resources>
