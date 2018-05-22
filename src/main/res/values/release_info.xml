@@ -1,72 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05052018</string>
+  <string name="release_date">05212018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v1.9.15-43\n
+    v1.9.15-48\n
+    Location Fixes:\n
+    Buffalo, NY\n
+    \n
+    v1.9.15-47\n
     New Locations:\n
-    Wapello County, IA\n
-    Winnabago County, IA\n
-    Sumner County, KS\n
-    Morgan County, KY\n
-    Hill County, MT\n
-    Marlboro County, SC\n
-        \n
-    Location Fixes:\n
-    Marion County, KS\n
-    Mecosta County, MI\n
-    Allegheny County, PA\n
-    Monroe County, PA\n
-    \n
-    v1.9.15-42\n
-    New Locations:\n
-    Rio Blanco County, CO\n
-    Colquitt County, GA\n
-    Knox County, KY\n
+    Pike County, AL\n
     \n
     Location Fixes:\n
-    Roanoke County, VA\n
+    Macon County, NC\n
+    Benton County, OR\n
+    Salt Lake City County, UT\n
     \n
-    v1.9.15-41\n
-    New Locations:\n
-    Laporte County, IN\n
-    Allen Parish, LA\n
-    Sand Springs, OK\n
-    Berkeley County, SC\n
-    \n
+    v1.9.15-46\n
     Location Fixes:\n
-    Santa Cruz County, CA\n
-    Jefferson County, CO\n
-    Boyd County, KY\n
-    Cascade County, MT\n
-    Monroe County, PA\n
-    Loudoun County, TN\n
+    San Joaquin County, CA\n
+    Tolland County, CT\n
+    Montgomery County, IL\n
+    Salt Lake City County, UT\n
     \n
-    v1.9.15-40\n
+    v1.9.15-45\n
     Location Fixes:\n
-    Santa Cruz County, CA\n
-    Jefferson County, CO\n
+    Jefferson County, AL\n
+    Humboldt County, CA\n
+    Ray County, MO\n
+    Buffalo, NY\n
+    Armstrong County, PA\n
+    Northumberland County, PA\n
+    Rock County, WI\n
     \n
-    v1.9.15-39\n
-    New Locations:\n
-    Sebastian County, AR\n
-    Billings County, ND\n
-    Kidder County, ND\n
-    Baker County, OR\n
-    \n
+    v1.9.15-44\n
     Location Fixes:\n
-    Carter County, KY\n
-    Terrebonne Parish, LA\n
-    Clinton County, MO\n
-    Livingston County, NY\n
-    Niagara County, NY\n
-    New Brunswick County, NC\n
-    Wake County, NC\n
-    Cumberland County, TN\n
-    Greenbrier County, WV\n
-    \n
-    General Fixes:\n
-    Crash processing particular alert message
+    Henry County, IN\n
+    DeSoto County, MS\n
+    Loudoun County, TN
   </string>
 </resources>
