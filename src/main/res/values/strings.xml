@@ -153,6 +153,9 @@
    <string name="pref_vibrate_category_title">Vibrate Configuration</string>
    <string name="pref_flashled_category_title">LED Configuration</string>
 
+  <string name="pref_notif_config_title">Configure Cadpage Notifications</string>
+  <string name="pref_notif_config_summary">Configure Cadpage notification details</string>
+
    <string name="pref_notif_enabled_title">Enable Notifications</string>
    <string name="pref_notif_enabled_summaryon">Notifications are enabled</string>
    <string name="pref_notif_enabled_summaryoff">Notifications are disabled</string>

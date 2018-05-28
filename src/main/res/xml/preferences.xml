@@ -23,6 +23,10 @@
       android:dependency="@string/pref_enabled_key">
       <PreferenceCategory
         android:title="@string/pref_notif_default_title">
+        <Preference
+          android:key="@string/pref_notif_config_key"
+          android:title="@string/pref_notif_config_title"
+          android:summary="@string/pref_notif_config_summary" />
         <CheckBoxPreference
           android:key="@string/pref_notif_enabled_key"
           android:title="@string/pref_notif_enabled_title"

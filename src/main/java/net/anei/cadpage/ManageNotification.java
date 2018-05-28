@@ -30,7 +30,7 @@ import android.support.v4.app.NotificationCompat;
 @SuppressWarnings("TryFinallyCanBeTryWithResources")
 public class ManageNotification {
 
-  private static final String ALERT_CHANNEL_ID = "net.anei.cadpage.ALERT_CHANNEL_ID";
+  public static final String ALERT_CHANNEL_ID = "net.anei.cadpage.ALERT_CHANNEL_ID";
 
   public static final String TRACKING_CHANNEL_ID = "net.anei.cadpage.TRACKING_CHANNEL_ID";
 
@@ -103,6 +103,10 @@ public class ManageNotification {
        channel.setBypassDnd(false);
        nm.createNotificationChannel(channel);
      }
+  }
+
+  public static Notification getMiscNotification(Context context) {
+      return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
   }
   
   /**

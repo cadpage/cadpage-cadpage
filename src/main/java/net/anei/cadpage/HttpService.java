@@ -22,10 +22,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Process;
@@ -249,7 +251,13 @@ public class HttpService extends Service {
 
   @Override
   public void onCreate() {
-    
+
+    super.onCreate();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      startForeground(1, ManageNotification.getMiscNotification(this));
+    }
+
+
     // Launch the HttpServiceThread that is going to do all of the work
     new HttpServiceThread();
   }
@@ -318,7 +326,12 @@ public class HttpService extends Service {
       // Add new request to request queue and launch the HttpService
       // We don't need to pass anything, just make sure it got started
       reqQueue.add(request);
-      context.startService(new Intent(context, HttpService.class));
+      Intent intent = new Intent(context, HttpService.class);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        context.startForegroundService(intent);
+      } else {
+        context.startService(intent);
+      }
     }
   }
 

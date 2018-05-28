@@ -42,6 +42,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.widget.BaseAdapter;
 
@@ -303,6 +304,18 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
       @Override
       public boolean onPreferenceChange(Preference preference, Object newValue) {
         return ManagePreferences.checkNoShowInCall((CheckBoxPreference)preference, (Boolean)newValue);
+      }
+    });
+
+    pref = findPreference(getString(R.string.pref_notif_config_key));
+    pref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override
+      public boolean onPreferenceClick(Preference preference) {
+        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, ManageNotification.ALERT_CHANNEL_ID);
+        startActivity(intent);
+        return true;
       }
     });
     

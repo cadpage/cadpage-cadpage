@@ -315,9 +315,9 @@ public class SmsMessageQueue implements Serializable {
 
       ViewHolder(View view) {
         super(view);
-        mDateTimeView = view.findViewById(R.id.HistoryDateTime);
-        mCallDescView = view.findViewById(R.id.HistoryCallDesc);
-        mAddrView = view.findViewById(R.id.HistoryAddress);
+        mDateTimeView = (TextView)view.findViewById(R.id.HistoryDateTime);
+        mCallDescView = (TextView)view.findViewById(R.id.HistoryCallDesc);
+        mAddrView = (TextView)view.findViewById(R.id.HistoryAddress);
 
         ((ViewWithContextMenu)view).setContextMenuHandler(fragment, this);
 

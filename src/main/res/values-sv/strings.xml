@@ -122,6 +122,10 @@
   <!-- Category headings -->
   <string name="pref_vibrate_category_title">Konfigurera vibration</string>
   <string name="pref_flashled_category_title">LED konfiguration</string>
+
+  <string name="pref_notif_config_title">Configure Cadpage Notifications</string>   <!-- Translate -->
+  <string name="pref_notif_config_summary">Configure Cadpage notification details</string>   <!-- Translate -->
+
   <string name="pref_notif_enabled_title">Aktivera notifikation</string>
   <string name="pref_notif_enabled_summaryon">Notifikation är aktiverad</string>
   <string name="pref_notif_enabled_summaryoff">Notifikation är avaktiverad</string>
