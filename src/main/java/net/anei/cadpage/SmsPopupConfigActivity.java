@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import net.anei.cadpage.donation.AllowAcctPermissionDonateEvent;
 import net.anei.cadpage.donation.DeveloperToolsManager;
 import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonationManager;
@@ -21,6 +20,8 @@ import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.preferences.OnDataChangeListener;
 import net.anei.cadpage.preferences.OnDialogClosedListener;
 import net.anei.cadpage.vendors.VendorManager;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -57,8 +58,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   private static final String EXTRA_PREFERENCE = "PreferenceActivity.PREFERENCE";
   
   private PermissionManager permMgr = new PermissionManager(this);
-  
-  private String parserFilter = "";
+
   private String parserDefCity = "";
   private String parserDefState = "";
   private CheckBoxPreference overrideFilterPref;
@@ -309,6 +309,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
 
     pref = findPreference(getString(R.string.pref_notif_config_key));
     pref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @TargetApi(Build.VERSION_CODES.O)
       @Override
       public boolean onPreferenceClick(Preference preference) {
         Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
@@ -486,7 +487,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     // Get the parser and see if it has a default filter
     // Save it in parserFilter so other preferences know what it is
     MsgParser parser = ManageParsers.getInstance().getParser(location);
-    parserFilter = parser.getFilter();
+    String parserFilter = parser.getFilter();
     parserDefCity = parser.getDefaultCity();
     parserDefState = parser.getDefaultState();
     
