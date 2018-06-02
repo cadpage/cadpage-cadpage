@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-52\n
+    Location Fixes:\n
+    Macon County, NC\n
+    \n
     v1.9.15-51\n
     Location Fixes:\n
     Decatur County, GA\n
@@ -39,15 +43,6 @@
     \n
     v1.9.15-48\n
     Location Fixes:\n
-    Buffalo, NY\n
-    \n
-    v1.9.15-47\n
-    New Locations:\n
-    Pike County, AL\n
-    \n
-    Location Fixes:\n
-    Macon County, NC\n
-    Benton County, OR\n
-    Salt Lake City County, UT
+    Buffalo, NY
   </string>
 </resources>
