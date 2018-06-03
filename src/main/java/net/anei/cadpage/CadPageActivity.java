@@ -94,16 +94,7 @@ public class CadPageActivity extends AppCompatActivity {
         }
       }
     }
-    
-    // If preferences have never been initialized, bring up the preference
-    // screen to initialize them now.  This is necessary because the new
-    // preference retrieval logic throws an exception if any requested preference
-    // hasn't been initialized.  (We get a way with calling useOldGcm() above
-    // because it returns a boolean result)
-    if (initializing) {
-      SmsPopupConfigActivity.initializePreferences(this);
-    }
-    
+
     // If the screen is locked, we  would like both the call history and call detail
     // screens to override the lock screen.  This works fine up until Android 5.0
     // at which point it seems that only one window is allowed to override the

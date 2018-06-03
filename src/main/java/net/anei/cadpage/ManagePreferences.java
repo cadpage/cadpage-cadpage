@@ -26,7 +26,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+import android.preference.TwoStatePreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -62,10 +62,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * @param context
    */
   public static void setupPreferences(Context context) {
-    
-    // if this is our first invocation, initialize all preference defaults
-    PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
-    
+
     // Initialize the preference object
     prefs = new ManagePreferences(context);
 
@@ -85,14 +82,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // If the old version doesn't match the current version, we need to reload
     // the preference defaults and update the preference version
     if (oldVersion != PREFERENCE_VERSION) {
-      PreferenceManager.setDefaultValues(context, R.xml.preferences, true);
+      SmsPopupConfigActivity.initializePreferences(context);
       prefs.putInt(R.string.pref_version_key, PREFERENCE_VERSION);
     }
     
     // There are a lot of specialized preference fixes we have to make when
     // user upgrades from an earlier version of Cadpage.  None of these have
     // to be done if there was no previous version of Cadpage.
-    if (oldVersion > 0) {
+    if (oldVersion > 0 && oldVersion < PREFERENCE_VERSION) {
 
       // If old version < 47 use is upgrading to a version that requires explict permission to
       // use their email account information
@@ -1700,7 +1697,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   /********************************************************************
    * Permission checking the no show in call preference
    ********************************************************************/
-  public static boolean checkNoShowInCall(CheckBoxPreference pref, boolean value) {
+  public static boolean checkNoShowInCall(TwoStatePreference pref, boolean value) {
     return noShowInCallChecker.check(pref, value);
   }
   
@@ -1725,11 +1722,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   /********************************************************************
    * Permission checking the user selectable sound override setting
    ********************************************************************/
-  public static boolean checkOverrideNotifySound(CheckBoxPreference pref, Boolean value) {
+  public static boolean checkOverrideNotifySound(TwoStatePreference pref, Boolean value) {
     return overrideNotifySoundChecker.check(pref, value);
   }
   
-  public static boolean checkOverrideNotifySound(CheckBoxPreference pref) {
+  public static boolean checkOverrideNotifySound(TwoStatePreference pref) {
     return overrideNotifySoundChecker.check(pref);
   }
   
@@ -1758,11 +1755,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   /********************************************************************
    * Permission checking the allow access to email account option
    ********************************************************************/
-  public static boolean checkGrantAccountAccess(CheckBoxPreference pref, Boolean value) {
+  public static boolean checkGrantAccountAccess(TwoStatePreference pref, Boolean value) {
     return grantAccountAccessChecker.check(pref, value);
   }
 
-  public static boolean setGrantAccountAccess(CheckBoxPreference pref, Boolean value, Runnable run) {
+  public static boolean setGrantAccountAccess(TwoStatePreference pref, Boolean value, Runnable run) {
     return grantAccountAccessChecker.setValue(pref, value, run);
   }
 
@@ -1806,22 +1803,22 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   /********************************************************************************
-   * Generic permission checker used to handle CheckboxPreference preference values
+   * Generic permission checker used to handle TwoStatePreference preference values
    *********************************************************************************/
   
-  private abstract static class CheckBoxPermissionChecker extends BooleanPermissionChecker<CheckBoxPreference> {
+  private abstract static class CheckBoxPermissionChecker extends BooleanPermissionChecker<TwoStatePreference> {
     
     protected CheckBoxPermissionChecker(int permReq, int resPrefId) {
       super(permReq, resPrefId);
     }
 
     @Override
-    protected Boolean getPreference(CheckBoxPreference preference) {
+    protected Boolean getPreference(TwoStatePreference preference) {
       return preference.isChecked();
     }
 
     @Override
-    protected void setPreference(CheckBoxPreference preference, Boolean value) {
+    protected void setPreference(TwoStatePreference preference, Boolean value) {
       preference.setChecked(value);
     }
   }

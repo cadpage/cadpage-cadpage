@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+  <string name="pref_category_button_title">Buttons</string>
+  <string name="pref_category_button_summary">Configure call detail button menus</string>
+
+  <string name="pref_main_button_config_title">Main Button Menu </string>
+  <string name="pref_main_button_config_summary">Configure main button menu</string>
+
+  <string name="pref_resp_button_config_title">Response Button Menu </string>
+  <string name="pref_resp_button_config_summary">Configure response button menu</string>
+  <string name="pref_xtra_resp_button_config_title">Regular Buttons </string>
+
+  <string name="pref_resp_type_title">Response Type</string>
+  <string name="pref_resp_type_summary">Button response: %%s</string>
+  <string name="pref_resp_merge_title">Direct paging message menu</string>
+  <string name="pref_resp_merge_summary">Direct page vendor message menus will\n%%s</string>
+
+  <string name="pref_button_summary">Current Setting: %%s</string>
+  <string name="pref_button1_title">Button 1 Configuration</string>
+  <string name="pref_button2_title">Button 2 Configuration</string>
+  <string name="pref_button3_title">Button 3 Configuration</string>
+  <string name="pref_button4_title">Button 4 Configuration</string>
+  <string name="pref_button5_title">Button 5 Configuration</string>
+  <string name="pref_button6_title">Button 6 Configuration</string>
+
+  <string name="pref_resp_button1_title">Response Button 1</string>
+  <string name="pref_resp_button2_title">Response Button 2</string>
+  <string name="pref_resp_button3_title">Response Button 3</string>
+  <string name="pref_resp_button4_title">Response Button 4</string>
+  <string name="pref_resp_button5_title">Response Button 5</string>
+  <string name="pref_resp_button6_title">Response Button 6</string>
+
+  <string name="pref_type_callback_title">Button Response Type</string>
+  <string name="pref_desc_callback_title">Button Description</string>
+  <string name="pref_code_callback_title">Button Phone/Code</string>
+  <string name="pref_code_callback_msg">You can specify a phone number and code separated by a slash</string>
+
+  <string name="pref_alt_map_button_title">Include Alternate Map Button</string>
+  <string name="pref_alt_map_button_summaryon">Alternate map button will be included</string>
+  <string name="pref_alt_map_button_summaryoff">Alternate map button will not be included</string>
+
+  <string name="pref_map_page_button_title">Include Map Page Button</string>
+  <string name="pref_map_page_button_summaryon">Map page button will be included</string>
+  <string name="pref_map_page_button_summaryoff">Map page button will not be included</string>
+
+  <string-array name="pref_button_values" tools:ignore="MissingTranslation">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>8</item>
+    <item>6</item>
+    <item>7</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+  </string-array>
+  <string-array name="pref_button_text">
+    <item>@string/button_disabled</item>
+    <item>@string/resp_menu_item_text</item>
+    <item>@string/map_item_text</item>
+    <item>@string/lock_item_text</item>
+    <item>@string/delete_item_text</item>
+    <item>@string/close_item_text</item>
+    <item>@string/close_app_item_text</item>
+    <item>@string/email_item_text</item>
+    <item>@string/publish_item_text</item>
+    <item>@string/more_info_item_text</item>
+    <item>@string/start_radio_item_text</item>
+    <item>@string/active911_item_text</item>
+  </string-array>
+  <string name="button_disabled">Disabled</string>
+  <string name="resp_menu_item_text">Resp Menu</string>
+  <string name="open_item_text">Open</string>
+  <string name="ack_item_text">Ack</string>
+  <string name="map_item_text">Map</string>
+  <string name="map_addr_item_text">Map Addr</string>
+  <string name="map_gps_item_text">Map GPS</string>
+  <string name="map_page_item_text">Map Page</string>
+  <string name="lock_item_text">Lock</string>
+  <string name="unlock_item_text">Unlock</string>
+  <string name="delete_item_text">Delete</string>
+  <string name="close_item_text">Close</string>
+  <string name="close_app_item_text">Close App</string>
+  <string name="email_item_text">Report Problem</string>
+  <string name="publish_item_text">Publish Page</string>
+  <string name="more_info_item_text">More Info</string>
+  <string name="start_radio_item_text">Start Radio</string>
+  <string name="active911_item_text">Active911</string>
+
+
+  <string-array name="pref_resp_type_values" tools:ignore="MissingTranslation">
+    <item/>
+    <item>P</item>
+    <item>T</item>
+  </string-array>
+  <string-array name="pref_resp_type_text">
+    <item>Nothing</item>
+    <item>Phone call</item>
+    <item>Text reply</item>
+  </string-array>
+
+  <string-array name="pref_resp_merge_values" tools:ignore="MissingTranslation">
+    <item>R</item>
+    <item>A</item>
+    <item>I</item>
+  </string-array>
+  <string-array name="pref_resp_merge_text">
+    <item>Replace user menu</item>
+    <item>Add to user menu</item>
+    <item>Ignore</item>
+  </string-array>
+
+</resources>

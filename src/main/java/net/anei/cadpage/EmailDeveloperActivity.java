@@ -319,7 +319,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
     intent.putExtra(Intent.EXTRA_TEXT, message);
     intent.setType("message/rfc822");
     context.startActivity(Intent.createChooser(
-        intent, context.getString(R.string.pref_sendemail_title)));
+        intent, context.getString(R.string.pref_email_title)));
   }
   
   

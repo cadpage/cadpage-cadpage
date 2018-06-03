@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="pref_category_other_info_title">Other Information</string> <!-- Translate -->
+  <string name="pref_category_other_info_summary">Help and other useful information</string> <!-- Translate -->
+
+  <string name="pref_disclaimer_title">Friskrivning</string>
+  <string name="pref_disclaimer_summary">Läs friskrivningsavtal</string>
+  <string name="pref_disclaimer_url">http://www.cadpage.org/disclaimer</string>
+
+  <string name="pref_privacy_policy_title">Privacy Policy</string>
+  <string name="pref_privacy_policy_summary">Titta på Cadpages privacy policy.</string>
+  <string name="pref_privacy_policy_url">http://http://www.cadpage.org/privacy-policy</string>
+
+  <string name="pref_faq_title">Vanliga frågor</string>
+  <string name="pref_faq_summary">Vanliga frågor</string>
+  <string name="pref_faq_url">http://www.Cadpage.org/faq</string>
+
+  <string name="pref_about_title">Om</string>
+  <string name="pref_about_summary">Om Cadpage</string>
+  <string name="pref_about_text">
+      Skapad av Derrick Bennett och Ken Corbin med stöd av Jean Goul, baserad på kod av : Adam K (SMS Popup Application)\n
+      Svensk översättning av Roger Ehrstedt\n
+  </string>
+
+  <string name="pref_releasenotes_title">Nyheter?</string>
+  <string name="pref_releasenotes_summary">Nyheter i denna version</string>
+  <string name="pref_releasenotes_diagtitle">Nyheter i denna version</string>
+
+  <string name="pref_cadpage_active911_title">Cadpage och Active911 appar</string>
+  <string name="pref_cadpage_active911_summary">Hur du kör Cadpage och Active911 på samma enhet</string>
+
+  <string name="pref_review_title">Skriv en recension om Cadpage</string>
+  <string name="pref_review_summary">Tryck \"Recensera\"</string>
+  <string name="pref_review_url">market://details?id=net.anei.cadpage</string>
+
+  <string name="pref_email_title">E-posta programutvecklaren</string>
+  <string name="pref_email_summary">E-posta kommentarer eller buggar till utvecklaren.</string>
+
+</resources>

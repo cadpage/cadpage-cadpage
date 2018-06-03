@@ -1,44 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string-array name="pref_enable_msg_type_entries">
-    <item>Endast SMS meddelanden</item>
-    <item>Endast MMS meddelanden</item>
-    <item>SMS och MMS meddelanden</item>
-    <item>Endast Meddelandeservice</item>
-  </string-array>
-  <string-array name="pref_gps_map_option_entries">
-    <item>När rekommenderad</item>
-    <item>Aldrig</item>
-    <item>När tillgänglig</item>
-  </string-array>
-  
-  <string-array name="pref_app_map_option_entries">
-    <item>Google</item>
-    <item>ArcGIS Navigator</item>
-    <item>Waze</item>
-    <item>Annan</item>
-  </string-array>
-
-  <string-array name="pref_resp_type_text">
-    <item>Ingenting</item>
-    <item>Telefonsamtal</item>
-    <item>Textat svar</item>
-  </string-array>
-  <string-array name="pref_resp_merge_text">
-    <item>Byt ut användarmeny</item>
-    <item>Lägg till användarmeny</item>
-    <item>Ignorera</item>
-  </string-array>
-  <string-array name="pref_map_network_chk_entries">
-    <item>Ansluten</item>
-    <item>Roaming</item>
-    <item>Frånkopplad</item>
-  </string-array>
-  <string-array name="pref_report_position_entries">
-    <item>Alltid</item>
-    <item>Aldrig</item>
-    <item>Fråga?</item>
-  </string-array>
   <string-array name="email_devel_subject">
     <item>Allmän kommentar</item>
     <item>Meddelandeproblem</item>
@@ -48,6 +9,7 @@
     <item>market problem</item>
     <item>Gratis abonnemang</item>
     <item>Understöd gammalt system</item>
+    <item>inactive sponsor acct</item> <!-- Translate -->
     <item>Active911s Android-release blockerar larm till Cadpage</item>
     <item>Jag behöver hjälp</item>
   </string-array>

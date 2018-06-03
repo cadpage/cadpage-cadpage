@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="pref_category_other_info_title">Other Information</string>
+  <string name="pref_category_other_info_summary">Help and other useful information</string>
+
+  <string name="pref_disclaimer_title">Disclaimer</string>
+  <string name="pref_disclaimer_summary">View Disclaimer regarding Cadpage use.</string>
+  <string name="pref_disclaimer_url">http://www.cadpage.org/disclaimer</string>
+
+  <string name="pref_privacy_policy_title">Privacy Policy</string>
+  <string name="pref_privacy_policy_summary">View Cadpage privacy policy.</string>
+  <string name="pref_privacy_policy_url">http://www.cadpage.org/privacy-policy</string>
+
+  <string name="pref_faq_title">FAQ</string>
+  <string name="pref_faq_summary">Frequently Asked Questions</string>
+  <string name="pref_faq_url">http://www.Cadpage.org/faq</string>
+
+  <string name="pref_about_title">About</string>
+  <string name="pref_about_summary">About Cadpage</string>
+  <string name="pref_about_text">
+       By Derrick Bennett and Ken Corbin supported by Jean Goul, based on Code by : Adam K (SMS Popup Application)\n
+       Swedish translation by Roger Ehrstedt
+   </string>
+
+  <string name="pref_releasenotes_title">What\'s New?</string>
+  <string name="pref_releasenotes_summary">See what\'s new in this version</string>
+  <string name="pref_releasenotes_diagtitle">New in this version</string>
+
+  <string name="pref_cadpage_active911_title">Cadpage and Active911 apps</string>
+  <string name="pref_cadpage_active911_summary">How to run Cadpage and Active911 on the same device</string>
+  <string name="pref_cadpage_active911_url" tools:ignore="MissingTranslation">http://www.cadpage.org/faq/cadpage-and-active911</string>
+  <string name="pref_active911_parsers_url" tools:ignore="MissingTranslation">http://www.cadpage.org/faq/cadpage-and-active911-issue</string>
+
+  <string name="pref_review_title">Write a Cadpage Review</string>
+  <string name="pref_review_summary">Press \"Your Review\"</string>
+  <string name="pref_review_url">market://details?id=net.anei.cadpage</string>
+
+  <string name="pref_email_title">E-mail the Developer</string>
+  <string name="pref_email_summary">E-mail comments or bugs to the developer</string>
+
+</resources>

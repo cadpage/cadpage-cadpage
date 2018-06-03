@@ -79,11 +79,13 @@ public class ManageNotification {
        long[] vibratePattern = getVibratePattern(context);
        if (vibratePattern != null) channel.setVibrationPattern(vibratePattern);
 
-       Uri uri = Uri.parse(ManagePreferences.notifySound());
-       AudioAttributes aa = new AudioAttributes.Builder()
-           .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
-           .build();
-       channel.setSound(uri, aa);
+       if (!ManagePreferences.notifyOverride()) {
+         Uri uri = Uri.parse(ManagePreferences.notifySound());
+         AudioAttributes aa = new AudioAttributes.Builder()
+             .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+             .build();
+         channel.setSound(uri, aa);
+       }
 
        nm.createNotificationChannel(channel);
      }
@@ -225,7 +227,7 @@ public class ManageNotification {
         
         // Start Media Player
         startMediaPlayer(context, 0);
-      } else {	 
+      } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
         Uri alarmSoundURI = Uri.parse(ManagePreferences.notifySound());
         nbuild.setSound(alarmSoundURI);
       }

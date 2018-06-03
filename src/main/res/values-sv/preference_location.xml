@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="pref_category_location_title">Lokala anpassningar</string>
+  <string name="pref_category_location_summary">Larmbehandlingsdetaljer</string>
+
+  <string name="pref_loc_desc_title">Aktuell position</string>
+
+  <string name="pref_location_title">Välj en position</string>
+  <string name="pref_location_summary">Välj en enda position</string>
+
+  <string name="pref_multi_location_title">Välj flera positioner</string>
+  <string name="pref_multi_location_summary">Välj flera positioner</string>
+
+  <string name="pref_override_filter_title">Skriv över positionsfilter</string>
+  <string name="pref_override_filter_summaryon">Positionsfilter kommer att skrivas över</string>
+  <string name="pref_override_filter_summaryoff">Positionsfilter %s är aktivt</string>
+
+  <string name="pref_filter_title">Från: (Filter)</string>
+  <string name="pref_filter_summary">
+    Endast meddelanden från denna adress kommer att beaktas. Aktuellt värde: %%s
+  </string>
+  <string name="pref_filter_dialog">
+    Skriv i e-postadress för att filtrera meddelanden. Ingen adress kommer att scanna alla. Använd ett , för att separera multipla adresser.
+  </string>
+
+  <string name="pref_show_source_title">Visa källan till larm</string>
+  <string name="pref_show_source_summaryon">Kommer att visa källan till larm</string>
+  <string name="pref_show_source_summaryoff">Kommer inte att visa källan till larm</string>
+
+  <string name="pref_override_default_title">Skriv över förvald stat/stad</string>
+  <string name="pref_override_default_summaryon">Använd användardefinierad stat/stad</string>
+  <string name="pref_override_default_summaryoff">Använd förvald stat/stad</string>
+
+  <string name="pref_defcity_title">Förvald stat/stad </string>
+  <string name="pref_defcity_summary">Aktuellt värde: %%s</string>
+  <string name="pref_defcity_dialog">Välj stat/stad</string>
+
+  <string name="pref_defstate_title">Förvald stat/stad</string>
+  <string name="pref_defstate_summary">Aktuellt värde: %%s</string>
+  <string name="pref_defstate_dialog">Välj ort i förvald stat</string>
+
+  <string name="pref_enable_msg_type_title">Meddelandetyp behandlad</string>
+  <string name="pref_enable_msg_type_summary">Cadpage kommer att behandla\n%%s</string>
+  <string-array name="pref_enable_msg_type_entries">
+    <item>Endast SMS meddelanden</item>
+    <item>Endast MMS meddelanden</item>
+    <item>SMS och MMS meddelanden</item>
+    <item>Endast Meddelandeservice</item>
+  </string-array>
+
+  <string name="pref_mms_timeout_title">Tidsgräns för MMS-nedladdning</string>
+  <string name="pref_mms_timeout_summary">Max nedladdningstid för MMS\nAktuellt värde:%%s min</string>
+
+  <string name="pref_loglimit_title">Gräns för meddelanderapport</string>
+  <string name="pref_loglimit_summary">Antal meddelanden som inkluderas i felrapport\nAktuellt värde : %%s</string>
+
+  <string name="pref_split_msg_merge_title">Alternativ för delade larm-meddelanden</string>
+  <string name="pref_split_msg_merge_summary">
+      Alternativ för att kontrollera hur uppdelade larmmeddelanden klistras ihop till ett enda larmmeddelande
+  </string>
+
+  <string name="pref_override_active911_split_title">Ignorera inställningar i Active911 om delade larm-meddelanden</string>
+  <string name="pref_override_active911_split_summaryon">Rekommenderad inställningar i Active911 kommer att köras över</string>
+  <string name="pref_override_active911_split_summaryoff">Rekommenderade inställningar i Active911 kommer att användas</string>
+
+  <string name="pref_split_direct_page_title">Kolla efter delade larmmeddelanden från meddelandeservice</string>
+  <string name="pref_split_direct_page_summaryon">Larmmeddelanden från meddelandeservice kommer att kontrolleras så att de ej är uppdelade</string>
+  <string name="pref_split_direct_page_summaryoff">Larmmedelanden från meddelandeservice kommer inte att kontrolleras om de är uppdelade</string>
+
+  <string name="pref_msgtimeout_title">Timeout för delade meddelanden</string>
+  <string name="pref_msgtimeout_summary">Timeout för multipla meddelanden\nAktuellt värde: %%s</string>
+  <string name="pref_msgtimeout_dialog">Maximal tid i sekunder för att vänta på ett multipelt meddelande i Cadpage</string>
+
+  <string name="pref_split_min_msg_title">Split message min count</string> <!-- Translate -->
+  <string name="pref_split_min_msg_summary">Minimum expected message count\nCur value: %%s</string> <!-- Translate -->
+
+  <string name="pref_rev_msg_order_title">Reversera ordning i delade meddelanden</string>
+  <string name="pref_rev_msg_order_summaryon">Delade Cadpag Delade Cadpage-meddelanden kommer att läsas i ordning sist till först</string>
+  <string name="pref_rev_msg_order_summaryoff">Delade Cadpage-meddelanden kommer att läsas i ordning först till sist</string>
+
+  <string name="pref_mix_msg_order_title">Blandad ordning på delade meddelande</string>
+  <string name="pref_mix_msg_order_summaryon">Delade CAD page meddelanden kan komma i oordning</string>
+  <string name="pref_mix_msg_order_summaryoff">Delade CAD page meddelanden kommer alltid att komma i kronologisk ordning</string>
+
+  <string name="pref_split_blank_ins_title">Sätt in blanksteg i delade meddelanden</string>
+  <string name="pref_split_blank_ins_summaryon">Blankstek kommer att sättas in mellan delade meddelanden</string>
+  <string name="pref_split_blank_ins_summaryoff">Blanksteg kommer inte att sättas in mellan delade meddelanden</string>
+
+  <string name="pref_split_chk_sender_title">Split msg check sender addr</string>
+  <string name="pref_split_chk_sender_summaryon">Avsändaradress kommer att kontrolleras när delade meddelanden sätts ihop</string>
+  <string name="pref_split_chk_sender_summaryoff">Avsändaradress kommer inte att kontrolleras när delade meddelanden sätts ihop</string>
+
+  <string name="pref_split_keep_lead_break_title">Radbrytining i delade meddelanden</string>
+  <string name="pref_split_keep_lead_break_summaryon">Inledande radbrytning i delade meddelanden kommer att bibehållas</string>
+  <string name="pref_split_keep_lead_break_summaryoff">Inledande radbrytning i delade meddelanden kommer att tas bort</string>
+
+  <string name="pref_suppress_dup_msg_title">Ignorera dubbla larm</string>
+  <string name="pref_suppress_dup_msg_summaryon">Dubbla larm kommer att ignoreras</string>
+  <string name="pref_suppress_dup_msg_summaryoff">Dubbla larm kommer att processas</string>
+
+  <string name="pref_override_vendor_loc_title">Skriv över leverantörsplats</string>
+  <string name="pref_override_vendor_loc_summaryon">Platsinställning skriver över leverantörs plats</string>
+  <string name="pref_override_vendor_loc_summaryoff">Leverantörs plats skriver över din lokalanpassning</string>
+
+  <string name="pref_activate_scanner_title">Öppna automatiskt scannerkanal</string>
+  <string name="pref_activate_scanner_summaryon">Scannerkanal kommer att öppnas automatiskt</string>
+  <string name="pref_activate_scanner_summaryoff">Scannerkanal kommer inte att öppnas automatiskt</string>
+
+  <string name="pref_scanner_channel_title">Scannerkanal</string>
+
+  <string name="pref_scanner_timeout_title">Timeout Scannerkanal</string>
+  <string name="pref_scanner_timeout_summary">Timeout Scannerkanal\nCur value: %%s</string>
+  <string name="pref_scanner_timeout_dialog">Timeout scannerkanal i minuter (0 till avstängd)</string>
+  <string name="pref_scanner_timeout_value_zero">Ingen</string>
+  <string name="pref_scanner_timeout_value_other">%s min</string>
+
+  <string name="pref_publish_pages_title">Publicera larmärenden</string>
+  <string name="pref_publish_pages_summaryon">Larmärenden kommer att publiceras för 3:e partsapplikation</string>
+  <string name="pref_publish_pages_summaryoff">Larmärenden kommer inte publiceras för 3:e partsapplikation</string>
+
+</resources>

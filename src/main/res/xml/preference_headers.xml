@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- Warning, any changes to this list must be reflected in the preference tree list
+       used by SmsPopuConfigActivity.initializePreferences() -->
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceGeneralFragment"
+  android:title="@string/pref_category_general_title"
+  android:summary="@string/pref_category_general_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceNotificationFragment"
+  android:title="@string/pref_category_notif_title"
+  android:summary="@string/pref_category_notif_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceAdditionalFragment"
+  android:title="@string/pref_category_additional_title"
+  android:summary="@string/pref_category_additional_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceButtonFragment"
+  android:title="@string/pref_category_button_title"
+  android:summary="@string/pref_category_button_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceFilterFragment"
+  android:title="@string/pref_category_filter_title"
+  android:summary="@string/pref_category_filter_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceLocationFragment"
+  android:title="@string/pref_category_location_title"
+  android:summary="@string/pref_category_location_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceDirectFragment"
+  android:title="@string/pref_category_direct_title"
+  android:summary="@string/pref_category_direct_summary" />
+
+  <header
+  android:fragment="net.anei.cadpage.PreferenceOtherInfoFragment"
+  android:title="@string/pref_category_other_info_title"
+  android:summary="@string/pref_category_other_info_summary" />
+
+</preference-headers>

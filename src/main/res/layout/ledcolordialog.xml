@@ -32,7 +32,7 @@
           android:layout_gravity="center"
           android:gravity="right"
           android:text="@string/pref_flashled_color_custom_dialog_preview"
-          android:paddingRight="15dp"></TextView>
+          android:paddingRight="15dp"/>
         <ImageView
           android:layout_height="wrap_content"
           android:layout_gravity="center"
@@ -41,41 +41,41 @@
           android:maxHeight="30dp"
           android:minHeight="30dp"
           android:maxWidth="50dp"
-          android:minWidth="50dp"></ImageView>
+          android:minWidth="50dp"/>
       </LinearLayout>
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/RedTextView"
         android:text="@string/pref_flashled_color_custom_dialog_red"
-        android:paddingTop="5dp"></TextView>
+        android:paddingTop="5dp"/>
       <SeekBar
         android:id="@+id/RedSeekBar"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:max="255"></SeekBar>
+        android:max="255"/>
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/GreenTextView"
         android:text="@string/pref_flashled_color_custom_dialog_green"
-        android:paddingTop="5dp"></TextView>
+        android:paddingTop="5dp"/>
       <SeekBar
         android:id="@+id/GreenSeekBar"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:max="255"></SeekBar>
+        android:max="255"/>
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/BlueTextView"
         android:text="@string/pref_flashled_color_custom_dialog_blue"
-        android:paddingTop="5dp"></TextView>
+        android:paddingTop="5dp"/>
       <SeekBar
         android:id="@+id/BlueSeekBar"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:max="255"></SeekBar>
+        android:max="255"/>
     </LinearLayout>
   </ScrollView>
 </LinearLayout>

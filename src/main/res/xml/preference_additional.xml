@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <SwitchPreference
+    android:key="@string/pref_delete_unopen_key"
+    android:title="@string/pref_delete_unopen_title"
+    android:summaryOn="@string/pref_delete_unopen_summaryon"
+    android:summaryOff="@string/pref_delete_unopen_summaryoff"
+    android:defaultValue="@string/pref_delete_unopen_default" />
+  <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_map_network_chk_key"
+    android:title="@string/pref_map_network_chk_title"
+    android:summary="@string/pref_map_network_chk_summary"
+    android:entries="@array/pref_map_network_chk_entries"
+    android:entryValues="@array/pref_map_network_chk_values"
+    android:dialogTitle="@string/pref_map_network_chk_title"
+    android:defaultValue="@string/pref_map_network_chk_default" />
+  <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_gps_map_option_key"
+    android:title="@string/pref_gps_map_option_title"
+    android:summary="@string/pref_gps_map_option_summary"
+    android:entries="@array/pref_gps_map_option_entries"
+    android:entryValues="@array/pref_gps_map_option_values"
+    android:dialogTitle="@string/pref_gps_map_option_title"
+    android:defaultValue="@string/pref_gps_map_option_default" />
+  <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_app_map_option_key"
+    android:title="@string/pref_app_map_option_title"
+    android:summary="@string/pref_app_map_option_summary"
+    android:entries="@array/pref_app_map_option_values"
+    android:entryValues="@array/pref_app_map_option_entries"
+    android:dialogTitle="@string/pref_app_map_option_title"
+    android:defaultValue="@string/pref_app_map_option_default" />
+  <SwitchPreference
+    android:key="@string/pref_navigate_map_key"
+    android:title="@string/pref_navigate_map_title"
+    android:summaryOn="@string/pref_navigate_map_summaryon"
+    android:summaryOff="@string/pref_navigate_map_summaryoff"
+    android:defaultValue="false" />
+  <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_report_position_key"
+    android:title="@string/pref_report_position_title"
+    android:summary="@string/pref_report_position_summary"
+    android:entries="@array/pref_report_position_entries"
+    android:entryValues="@array/pref_report_position_values"
+    android:dialogTitle="@string/pref_report_position_title"
+    android:defaultValue="@string/pref_report_position_default" />
+
+  <PreferenceCategory
+    android:title="@string/pref_popup_control">
+    <SwitchPreference
+      android:key="@string/pref_popup_enabled_key"
+      android:title="@string/pref_popup_enabled_title"
+      android:summaryOn="@string/pref_popup_enabled_summaryon"
+      android:summaryOff="@string/pref_popup_enabled_summaryoff"
+      android:defaultValue="true" />
+    <SwitchPreference
+      android:key="@string/pref_noShowInCall_key"
+      android:title="@string/pref_noShowInCall_title"
+      android:summaryOn="@string/pref_noShowInCall_summaryon"
+      android:summaryOff="@string/pref_noShowInCall_summaryoff"
+      android:defaultValue="@string/pref_noShowInCall_default"
+      android:dependency="@string/pref_popup_enabled_key"/>
+    <SwitchPreference
+      android:key="@string/pref_passthrusms_key"
+      android:title="@string/pref_passthrusms_title"
+      android:summaryOff="@string/pref_passthrusms_summaryoff"
+      android:summaryOn="@string/pref_passthrusms_summaryon"
+      android:defaultValue="@string/pref_passthrusms_default" />
+  </PreferenceCategory>
+
+  <PreferenceCategory
+    android:title="@string/pref_screen_category">
+    <SwitchPreference
+      android:key="@string/pref_screen_on_key"
+      android:title="@string/pref_screen_on_title"
+      android:summaryOn="@string/pref_screen_on_summaryon"
+      android:summaryOff="@string/pref_screen_on_summaryoff"
+      android:defaultValue="@string/pref_screen_on_default" />
+      <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_timeout_key"
+      android:title="@string/pref_timeout_title"
+      android:summary="@string/pref_timeout_summary"
+      android:entries="@array/pref_timeout_entries"
+      android:entryValues="@array/pref_timeout_values"
+      android:defaultValue="@string/pref_timeout_default"
+      android:dependency="@string/pref_screen_on_key" />
+    <net.anei.cadpage.preferences.ListPreference
+      android:key="@string/pref_textsize_key"
+      android:title="@string/pref_textsize_title"
+      android:summary="@string/pref_textsize_summary"
+      android:entries="@array/pref_textsize_entries"
+      android:entryValues="@array/pref_textsize_values"
+      android:defaultValue="@string/pref_textsize_default"
+      android:dependency="@string/pref_screen_on_key" />
+    <SwitchPreference
+      android:key="@string/pref_dimscreen_key"
+      android:title="@string/pref_dimscreen_title"
+      android:summaryOn="@string/pref_dimscreen_summaryon"
+      android:summaryOff="@string/pref_dimscreen_summaryoff"
+      android:defaultValue="@string/pref_dimscreen_default"
+      android:dependency="@string/pref_screen_on_key" />
+  </PreferenceCategory>
+
+</PreferenceScreen>

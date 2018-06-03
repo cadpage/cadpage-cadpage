@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="pref_category_additional_title">Ytterligare inställningar</string>
+  <string name="pref_category_additional_summary">Ytterligare Cadpage-konfigurering</string>
+
+  <string name="pref_delete_unopen_title">Ta bort oöppnade larm</string>
+  <string name="pref_delete_unopen_summaryon">Tillåt att oöppnade larm tas bort</string>
+  <string name="pref_delete_unopen_summaryoff">Tillåt inte att oöppnade larm tas bort</string>
+
+  <string name="pref_map_network_chk_title">Status för nätverkskartor</string>
+  <string name="pref_map_network_chk_summary">Kartförfrågan tillåten när nätverksstatus är %%s</string>
+  <string-array name="pref_map_network_chk_entries">
+    <item>Ansluten</item>
+    <item>Roaming</item>
+    <item>Frånkopplad</item>
+  </string-array>
+
+  <string name="pref_gps_map_option_title">GPS-ruttningsalternativ</string>
+  <string name="pref_gps_map_option_summary">Använd GPS-koordinater för positionering: %%s</string>
+  <string-array name="pref_gps_map_option_entries">
+    <item>När rekommenderad</item>
+    <item>Aldrig</item>
+    <item>När tillgänglig</item>
+  </string-array>
+
+  <string name="pref_app_map_option_title">Kart-apps alternativ</string>
+  <string name="pref_app_map_option_summary">Använd mappnings-app: %%s</string>
+  <string name="pref_app_map_option_other">Annan</string>
+  <string-array name="pref_app_map_option_entries">
+    <item>Google</item>
+    <item>ArcGIS Navigator</item>
+    <item>Waze</item>
+    <item>Annan</item>
+  </string-array>
+
+  <string name="pref_navigate_map_title">Kartnavigeringsalternativ</string>
+  <string name="pref_navigate_map_summaryon">Kartknapp öppnar ruttning</string>
+  <string name="pref_navigate_map_summaryoff">Kartknapp visar karta </string>
+
+  <string name="pref_report_position_title">Rapportera position vid kvittens</string>
+  <string name="pref_report_position_summary">Rapportera din aktuella position när du kvitterar larm: %%s</string>
+  <string-array name="pref_report_position_entries">
+    <item>Alltid</item>
+    <item>Aldrig</item>
+    <item>Fråga?</item>
+  </string-array>
+
+  <string name="pref_popup_control">Alarm Popup kontroll</string>
+
+  <string name="pref_popup_enabled_title">Visa Popup</string>
+  <string name="pref_popup_enabled_summaryon">Larm visar popup-fönster</string>
+  <string name="pref_popup_enabled_summaryoff">Larm visar inte popup-fönster</string>
+
+  <string name="pref_noShowInCall_title">Begränsa i Larm-popup</string>
+  <string name="pref_noShowInCall_summaryon">Larm-popup kommer inte att visas under pågående samtal.</string>
+  <string name="pref_noShowInCall_summaryoff">Larm-popup kommer att visas under pågående samtal</string>
+
+  <string name="pref_passthrusms_title">Släpp igenom larm till SMS-klienten</string>
+  <string name="pref_passthrusms_summaryoff">Släpp inte igenom larm till SMS-klienten</string>
+  <string name="pref_passthrusms_summaryon">Släpper igenom larm till SMS-klienten</string>
+
+  <string name="pref_screen_category">Skärm</string>
+
+  <string name="pref_screen_on_title">Skärm på för popup</string>
+  <string name="pref_screen_on_summaryon">Skärmen kommer att sättas på när popup visas</string>
+  <string name="pref_screen_on_summaryoff">Skärmen kommer inte att sättas på när popup visas</string>
+
+  <string name="pref_timeout_title">Skärmaktiveringstid</string>
+  <string name="pref_timeout_summary">Skärmen kommer att vara aktiverad så här länge.  Aktuellt värde: %%s</string>
+
+  <string name="pref_textsize_title">Textstorlek</string>
+  <string name="pref_textsize_summary">Välj textstorlek för larmhistorik</string>
+  <string name="pref_textsize_large">Stor</string>
+  <string name="pref_textsize_medium">Medium</string>
+  <string name="pref_textsize_small">Liten</string>
+
+  <string name="pref_dimscreen_title">Dimma ner Popup-fönster</string>
+  <string name="pref_dimscreen_summaryon">Popup-fönstret kommer att dimmas ner (sparar batteri)</string>
+  <string name="pref_dimscreen_summaryoff">Popup-fönstret kommer att vara ljust</string>
+
+</resources>

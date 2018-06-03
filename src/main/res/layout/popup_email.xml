@@ -22,7 +22,7 @@
       android:textAppearance="?android:attr/textAppearanceLarge"
       android:maxLines="2"
       android:layout_height="wrap_content"
-      android:text="@string/pref_sendemail_title"
+      android:text="@string/pref_email_title"
       android:layout_margin="8dp"
       />
   </LinearLayout>  

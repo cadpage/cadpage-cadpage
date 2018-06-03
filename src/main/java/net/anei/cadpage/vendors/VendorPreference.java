@@ -1,10 +1,10 @@
 package net.anei.cadpage.vendors;
 
 import android.content.Context;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.preference.Preference;
 
-class VendorPreference extends CheckBoxPreference {
+class VendorPreference extends SwitchPreference {
   
   private Vendor vendor;
   

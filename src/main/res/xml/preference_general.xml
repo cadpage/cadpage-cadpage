@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <Preference
+    android:key="@string/pref_payment_status_key"
+    android:title="@string/pref_payment_status_title"/>
+
+  <SwitchPreference
+    android:key="@string/pref_enabled_key"
+    android:title="@string/pref_enabled_title"
+    android:summaryOn="@string/pref_enabled_summaryon"
+    android:summaryOff="@string/pref_enabled_summaryoff"
+    android:defaultValue="true" />
+
+  <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_history_limit_key"
+    android:title="@string/pref_history_limit_title"
+    android:summary="@string/pref_history_limit_summary"
+    android:entries="@array/pref_history_limit_entries"
+    android:entryValues="@array/pref_history_limit_entries"
+    android:dialogTitle="@string/pref_history_limit_title"
+    android:defaultValue="@string/pref_history_limit_default" />
+
+  <SwitchPreference
+    android:key="@string/pref_show_history_address_key"
+    android:title="@string/pref_show_history_address_title"
+    android:summaryOn="@string/pref_show_history_address_summaryon"
+    android:summaryOff="@string/pref_show_history_address_summaryoff"
+    android:defaultValue="true" />
+
+  <SwitchPreference
+    android:key="@string/pref_show_personal_key"
+    android:title="@string/pref_show_personal_title"
+    android:summaryOn="@string/pref_show_personal_summaryon"
+    android:summaryOff="@string/pref_show_personal_summaryoff"
+    android:defaultValue="@string/pref_show_personal_default" />
+
+  <SwitchPreference
+  android:key="@string/pref_grant_account_access_key"
+  android:title="@string/pref_grant_account_access_title"
+  android:summaryOn="@string/pref_grant_account_access_summaryon"
+  android:summaryOff="@string/pref_grant_account_access_summaryoff"
+  android:defaultValue="false" />
+
+</PreferenceScreen>

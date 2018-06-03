@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="pref_category_button_title">Buttons</string> <!-- Translate -->
+  <string name="pref_category_button_summary">Configure call detail button menus</string> <!-- Translate -->
+
+  <string name="pref_main_button_config_title">Huvudknappmeny</string>
+  <string name="pref_main_button_config_summary">Konfigurera huvudknappmeny</string>
+
+  <string name="pref_resp_button_config_title">Kvittensknappmeny</string>
+  <string name="pref_resp_button_config_summary">Konfigurera Kvittensknappmeny</string>
+  <string name="pref_xtra_resp_button_config_title">Vanliga knappar</string>
+
+  <string name="pref_resp_type_title">Kvittenstyp</string>
+  <string name="pref_resp_type_summary">Knapptryckning: %%s</string>
+  <string name="pref_resp_merge_title">Meny från meddelandeservice</string>
+  <string name="pref_resp_merge_summary">Meny från meddelandeservis kommer att \n%%s</string>
+
+  <string name="pref_button_summary">Aktuell inställning: %%s</string>
+  <string name="pref_button1_title">Konfigurera Knapp 1</string>
+  <string name="pref_button2_title">Konfigurera Knapp 2 </string>
+  <string name="pref_button3_title">Konfigurera Knapp 3</string>
+  <string name="pref_button4_title">Konfigurera Knapp 4</string>
+  <string name="pref_button5_title">Konfigurera Knapp 5</string>
+  <string name="pref_button6_title">Konfigurera Knapp 6</string>
+
+  <string name="pref_resp_button1_title">Kvittensknapp 1</string>
+  <string name="pref_resp_button2_title">Kvittensknapp 2</string>
+  <string name="pref_resp_button3_title">Kvittensknapp 3</string>
+  <string name="pref_resp_button4_title">Kvittensknapp 4</string>
+  <string name="pref_resp_button5_title">Kvittensknapp 5</string>
+  <string name="pref_resp_button6_title">Kvittensknapp 6</string>
+
+  <string name="pref_type_callback_title">Knappens kvittenstyp</string>
+  <string name="pref_desc_callback_title">Knappens beskrivning</string>
+  <string name="pref_code_callback_title">Knapp för telefon/kod</string>
+  <string name="pref_code_callback_msg">Du kan specificera ett telefonnummer och kod separerade med snedstreck</string>
+
+  <string name="pref_alt_map_button_title">Inkludera alternativ kartsökningknapp</string>
+  <string name="pref_alt_map_button_summaryon">Alternativ kartsökningsknapp kommer att inkluderas</string>
+  <string name="pref_alt_map_button_summaryoff">Alternativ kartsökningsknapp kommer inte att inkluderas</string>
+
+  <string name="pref_map_page_button_title">Inkludera kartsökningsknapp</string>
+  <string name="pref_map_page_button_summaryon">Kartsökningsknapp kommer att inkluderas</string>
+  <string name="pref_map_page_button_summaryoff">Kartsökningsknapp kommer inte att inkluderas</string>
+
+  <string name="button_disabled">Frånkopplad</string>
+
+  <string name="open_item_text">Öppna</string>
+  <string name="ack_item_text">Ack</string>
+  <string name="resp_menu_item_text">Kvittensmeny</string>
+  <string name="map_item_text">Karta</string>
+  <string name="map_addr_item_text">Sök adress</string>
+  <string name="map_gps_item_text">Sök koordinat</string>
+  <string name="map_page_item_text">Sök sida </string>
+  <string name="lock_item_text">Lås</string>
+  <string name="unlock_item_text">Lås upp</string>
+  <string name="delete_item_text">Ta bort</string>
+  <string name="close_item_text">Stäng</string>
+  <string name="close_app_item_text">Stäng App</string>
+  <string name="email_item_text">Rapportera problem</string>
+  <string name="publish_item_text">Publicera larm</string>
+  <string name="more_info_item_text">Mer info</string>
+  <string name="start_radio_item_text">Starta Radio</string>
+  <string name="active911_item_text">Active911</string>
+
+  <string-array name="pref_resp_type_text">
+    <item>Ingenting</item>
+    <item>Telefonsamtal</item>
+    <item>Textat svar</item>
+  </string-array>
+
+  <string-array name="pref_resp_merge_text">
+    <item>Byt ut användarmeny</item>
+    <item>Lägg till användarmeny</item>
+    <item>Ignorera</item>
+  </string-array>
+
+</resources>

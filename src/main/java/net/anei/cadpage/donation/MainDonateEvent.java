@@ -3,7 +3,7 @@ package net.anei.cadpage.donation;
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
 import android.content.Context;
-import android.preference.CheckBoxPreference;
+import android.preference.TwoStatePreference;
 import android.preference.Preference;
 import android.widget.Button;
 
@@ -11,15 +11,16 @@ import android.widget.Button;
  * This is a dummy root node of the screen menu tree that is used to set
  * the main preference
  */
+@SuppressWarnings("RedundantIfStatement")
 public class MainDonateEvent extends DonateScreenEvent {
   
   private Activity activity;
   private Preference mainPref;
   private Button button;
   private SmsMmsMessage msg;
-  private CheckBoxPreference grantAccountPref;
+  private TwoStatePreference grantAccountPref;
   
-  public MainDonateEvent() {
+  private MainDonateEvent() {
     super(null, 0, 0,
         FreeDonateEvent.instance(),
         LifeDonateEvent.instance(),
@@ -89,11 +90,11 @@ public class MainDonateEvent extends DonateScreenEvent {
     return false;
   }
 
-  public CheckBoxPreference getGrantAccountPref() {
+  public TwoStatePreference getGrantAccountPref() {
     return grantAccountPref;
   }
 
-  public void setGrantAccountPref(CheckBoxPreference grantAccountPref) {
+  public void setGrantAccountPref(TwoStatePreference grantAccountPref) {
     this.grantAccountPref = grantAccountPref;
   }
 

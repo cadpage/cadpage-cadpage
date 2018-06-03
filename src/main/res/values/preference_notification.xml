@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="pref_category_notif_title">Notifications</string>
+  <string name="pref_category_notif_summary">Various notification settings</string>
+
+  <string name="pref_notif_default_title">Default Notifications</string>
+
+  <string name="pref_notif_config_title">Configure Cadpage Notifications</string>
+  <string name="pref_notif_config_summary">Configure Cadpage notification details</string>
+
+  <string name="pref_notif_enabled_title">Enable Notifications</string>
+  <string name="pref_notif_enabled_summaryon">Notifications are enabled</string>
+  <string name="pref_notif_enabled_summaryoff">Notifications are disabled</string>
+
+  <string name="pref_notif_override_title">Play Cadpage Audio Alert</string>
+  <string name="pref_notif_override_summaryon">Play special Cadpage alert in addition to regular audio alert</string>
+  <string name="pref_notif_override_summaryoff">Play regular configured audio alert</string>
+
+  <string name="pref_notif_override_old_title">Override Mute and Volume Control</string>
+  <string name="pref_notif_override_old_summaryon">Alert sound will always play at full volume</string>
+  <string name="pref_notif_override_old_summaryoff">Alert sound will follow normal mute and volume controls</string>
+
+  <string name="pref_notif_override_volume_title">Reassert volume control</string>
+  <string name="pref_notif_override_volume_summaryon">Alert sound will follow notification volume control</string>
+  <string name="pref_notif_override_volume_summaryoff">Alert sound will always play at full volume</string>
+
+  <string name="pref_notif_override_sound_title">Play Cadpage Alert Tones</string>
+  <string name="pref_notif_override_sound_summaryon">Cadpage alert tones will be used</string>
+  <string name="pref_notif_override_sound_summaryoff">Configured notification will be used</string>
+
+  <string name="pref_notif_override_loop_title">Loop Alert Sound</string>
+  <string name="pref_notif_override_loop_summaryon">Alert sound will loop continuously</string>
+  <string name="pref_notif_override_loop_summaryoff">Alert sound will play once</string>
+
+  <string name="pref_notif_sound_title">Notification Sound</string>
+  <string name="pref_notif_sound_summary">This sound will play when a message is received</string>
+
+  <string name="pref_notif_timeout_title">Alert Duration</string>
+  <string name="pref_notif_timeout_summary">Alert notification will stop after this time.  Cur value: %%s</string>
+  <string-array name="pref_notif_timeout_values" tools:ignore="MissingTranslation">
+    <item>10</item>
+    <item>20</item>
+    <item>30</item>
+    <item>60</item>
+    <item>120</item>
+    <item>180</item>
+    <item>240</item>
+    <item>300</item>
+    <item>420</item>
+    <item>600</item>
+  </string-array>
+  <string-array name="pref_notif_timeout_entries">
+    <item>@string/pref_10s</item>
+    <item>@string/pref_20s</item>
+    <item>@string/pref_30s</item>
+    <item>@string/pref_1m</item>
+    <item>@string/pref_2m</item>
+    <item>@string/pref_3m</item>
+    <item>@string/pref_4m</item>
+    <item>@string/pref_5m</item>
+    <item>@string/pref_7m</item>
+    <item>@string/pref_10m</item>
+  </string-array>
+
+  <string name="pref_disabled">Disabled</string>
+  <string name="pref_no_delay">No Delay</string>
+  <string name="pref_p5s">.5 seconds</string>
+  <string name="pref_1s">1 seconds</string>
+  <string name="pref_1p5s">1.5 seconds</string>
+  <string name="pref_2s">2 seconds</string>
+  <string name="pref_3s">3 seconds</string>
+  <string name="pref_10s">10 seconds</string>
+  <string name="pref_20s">20 seconds</string>
+  <string name="pref_30s">30 seconds</string>
+  <string name="pref_1m">1 minute</string>
+  <string name="pref_1p5m">1.5 minute</string>
+  <string name="pref_2m">2 minutes</string>
+  <string name="pref_3m">3 minutes</string>
+  <string name="pref_4m">4 minutes</string>
+  <string name="pref_5m">5 minutes</string>
+  <string name="pref_7m">7 minutes</string>
+  <string name="pref_10m">10 minutes</string>
+
+  <string name="pref_notif_repeat_interval_title">Repeat Alert Interval</string>
+  <string name="pref_notif_repeat_interval_summary">Alert will repeat at this interval. Cur value: %%s </string>
+  <string name="pref_notif_repeat_interval_dialogTitle">Repeat Interval</string>
+  <string-array name="pref_notif_repeat_interval_values" tools:ignore="MissingTranslation">
+    <item>0</item>
+    <item>10</item>
+    <item>20</item>
+    <item>30</item>
+    <item>60</item>
+    <item>90</item>
+    <item>120</item>
+  </string-array>
+  <string-array name="pref_notif_repeat_interval_entries">
+    <item>@string/pref_disabled</item>
+    <item>@string/pref_10s</item>
+    <item>@string/pref_20s</item>
+    <item>@string/pref_30s</item>
+    <item>@string/pref_1m</item>
+    <item>@string/pref_1p5m</item>
+    <item>@string/pref_2m</item>
+  </string-array>
+
+  <string name="pref_notif_test_title">Test Notification</string>
+  <string name="pref_notif_test_summary">Test out your notification</string>
+  <string name="pref_notif_test_message">Testing your notification now!</string>
+
+  <string name="pref_notif_delay_title">Alert Delay</string>
+  <string name="pref_notif_delay_summary">Cadpage alert will be delayed by: Cur value: %%s </string>
+  <string name="pref_notif_delay_dialogTitle">Alert delay period (seconds)</string>
+  <string-array name="pref_notif_delay_values" tools:ignore="MissingTranslation">
+    <item>0</item>
+    <item>500</item>
+    <item>1000</item>
+    <item>1500</item>
+    <item>2000</item>
+    <item>3000</item>
+  </string-array>
+  <string-array name="pref_notif_delay_entries">
+    <item>@string/pref_no_delay</item>
+    <item>@string/pref_p5s</item>
+    <item>@string/pref_1s</item>
+    <item>@string/pref_1p5s</item>
+    <item>@string/pref_2s</item>
+    <item>@string/pref_3s</item>
+  </string-array>
+
+  <string name="pref_notif_req_ack_title">Show "Ack" button if needed</string>
+  <string name="pref_notif_req_ack_summaryon">"Ack" button will be shown if it might be needed</string>
+  <string name="pref_notif_req_ack_summaryoff">"Ack" button will not appear if it might be needed</string>
+
+  <!-- Notification vibrate settings -->
+  <string name="pref_vibrate_category_title">Vibrate Configuration</string>
+
+  <string name="pref_vibrate_title">Vibrate</string>
+  <string name="pref_vibrate_summaryon">Vibrate is on</string>
+  <string name="pref_vibrate_summaryoff">Vibrate is off</string>
+
+  <string name="pref_vibrate_pattern_title">Vibrate Pattern</string>
+  <string name="pref_vibrate_pattern_summary">Set the vibration pattern.  Cur value: %%s</string>
+  <string name="pref_vibrate_pattern_ok">Custom vibrate pattern set</string>
+  <string name="pref_vibrate_pattern_bad">Custom vibrate pattern invalid</string>
+  <string name="pref_vibrate_pattern_help">Enter a custom vibrate pattern, in the format:\nmillisOff, millisOn, etc.\n\nFor example:\n0,1000\n0,500,200,500,200,500</string>
+  <string-array name="pref_vibrate_pattern_values" tools:ignore="MissingTranslation">
+    <item>0,1200</item>
+    <item>0,2500</item>
+    <item>0,300,100,300,100,300,100,300,100,300</item>
+    <item>0,800,200,800,200,800</item>
+  </string-array>
+  <string-array name="pref_vibrate_pattern_entries">
+    <item>@string/pref_vibrate_pattern_entries_normal</item>
+    <item>@string/pref_vibrate_pattern_entries_long</item>
+    <item>@string/pref_vibrate_pattern_entries_multiple_short</item>
+    <item>@string/pref_vibrate_pattern_entries_multiple_long</item>
+  </string-array>
+  <string name="pref_vibrate_pattern_entries_normal">Normal</string>
+  <string name="pref_vibrate_pattern_entries_long">Long Vibrate</string>
+  <string name="pref_vibrate_pattern_entries_multiple_short">Multiple Short</string>
+  <string name="pref_vibrate_pattern_entries_multiple_long">Multiple Long</string>
+
+  <!-- Value to set trigger custom dialogs -->
+  <string name="pref_flashled_category_title">LED Configuration</string>
+
+  <string name="pref_custom_val">custom</string>
+  <string name="pref_flashled_title">Blink LED</string>
+  <string name="pref_flashled_summaryon">Blink LED when a message is received</string>
+  <string name="pref_flashled_summaryoff">Do not blink LED when a message is received</string>
+
+  <string name="pref_flashled_color_title">LED Color</string>
+  <string name="pref_flashled_color_summary">The color of the LED.  Cur value: %%s</string>
+  <string-array name="pref_led_color_values" tools:ignore="MissingTranslation">
+    <item>Blue</item>
+    <item>Green</item>
+    <item>Red</item>
+    <item>Yellow</item>
+    <item>Magenta</item>
+    <item>Cyan</item>
+  </string-array>
+  <string-array name="pref_led_color_entries">
+    <item>@string/pref_led_color_blue</item>
+    <item>@string/pref_led_color_green</item>
+    <item>@string/pref_led_color_red</item>
+    <item>@string/pref_led_color_yellow</item>
+    <item>@string/pref_led_color_magenta</item>
+    <item>@string/pref_led_color_cyan</item>
+  </string-array>
+  <string name="pref_led_color_blue">Blue</string>
+  <string name="pref_led_color_green">Green</string>
+  <string name="pref_led_color_red">Red</string>
+  <string name="pref_led_color_yellow">Yellow</string>
+  <string name="pref_led_color_magenta">Magenta</string>
+  <string name="pref_led_color_cyan">Cyan</string>
+
+  <string name="pref_flashled_color_custom_dialog_red">Red:</string>
+  <string name="pref_flashled_color_custom_dialog_green">Green:</string>
+  <string name="pref_flashled_color_custom_dialog_blue">Blue:</string>
+  <string name="pref_flashled_color_custom_dialog_preview">Preview:</string>
+  <string name="pref_flashled_color_custom_set">Custom LED color set</string>
+
+  <string name="pref_flashled_pattern_title">LED Blink Rate</string>
+  <string name="pref_flashled_pattern_summary">Set the speed the LED blinks.  Cur value: %%s</string>
+  <string name="pref_flashled_pattern_ok">Custom LED blink rate set</string>
+  <string name="pref_flashled_pattern_bad">Custom LED blink rate is invalid</string>
+  <string name="pref_flashled_pattern_help">Enter the time in milliseconds to turn the LED on and off</string>
+  <string name="pref_flashled_pattern_help_on">Time on:</string>
+  <string name="pref_flashled_pattern_help_off">Time off:</string>
+  <string-array name="pref_led_pattern_values" tools:ignore="MissingTranslation">
+    <item>300,300</item>
+    <item>1000,1000</item>
+    <item>3000,3000</item>
+  </string-array>
+  <string-array name="pref_led_pattern_entries">
+    <item>@string/pref_led_pattern_entries_fast</item>
+    <item>@string/pref_led_pattern_entries_normal</item>
+    <item>@string/pref_led_pattern_entries_slow</item>
+  </string-array>
+  <string name="pref_led_pattern_entries_fast">Fast</string>
+  <string name="pref_led_pattern_entries_normal">Normal</string>
+  <string name="pref_led_pattern_entries_slow">Slow</string>
+
+</resources>

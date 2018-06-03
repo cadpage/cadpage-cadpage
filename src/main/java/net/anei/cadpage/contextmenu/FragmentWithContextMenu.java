@@ -11,6 +11,12 @@ public class FragmentWithContextMenu extends Fragment {
 
   @Override
   public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+
+    // I have no idea how this happens, or why we would be responsible
+    // but we did have one crash because there was no associated activity
+    // so now we check for it
+    if (getActivity() == null) return;
+
     super.onCreateContextMenu(menu, view, menuInfo);
     handler = null;
     if (view instanceof ViewWithContextMenu) {

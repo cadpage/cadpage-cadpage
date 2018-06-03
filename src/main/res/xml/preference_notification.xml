@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <Preference
+  android:key="@string/pref_notif_config_key"
+  android:title="@string/pref_notif_config_title"
+  android:summary="@string/pref_notif_config_summary" />
+  <SwitchPreference
+  android:key="@string/pref_notif_enabled_key"
+  android:title="@string/pref_notif_enabled_title"
+  android:summaryOn="@string/pref_notif_enabled_summaryon"
+  android:summaryOff="@string/pref_notif_enabled_summaryoff"
+  android:defaultValue="true" />
+  <net.anei.cadpage.preferences.ExtendedSwitchPreference
+  android:key="@string/pref_notif_override_key"
+  android:title="@string/pref_notif_override_title"
+  android:summaryOn="@string/pref_notif_override_summaryon"
+  android:summaryOff="@string/pref_notif_override_summaryoff"
+  android:defaultValue="false"
+  android:dependency="@string/pref_notif_enabled_key" />
+  <SwitchPreference
+  android:key="@string/pref_notif_override_volume_key"
+  android:title="@string/pref_notif_override_volume_title"
+  android:summaryOn="@string/pref_notif_override_volume_summaryon"
+  android:summaryOff="@string/pref_notif_override_volume_summaryoff"
+  android:defaultValue="false"
+  android:dependency="@string/pref_notif_override_key" />
+  <SwitchPreference
+  android:key="@string/pref_notif_override_sound_key"
+  android:title="@string/pref_notif_override_sound_title"
+  android:summaryOn="@string/pref_notif_override_sound_summaryon"
+  android:summaryOff="@string/pref_notif_override_sound_summaryoff"
+  android:defaultValue="true"
+  android:dependency="@string/pref_notif_override_key" />
+  <SwitchPreference
+  android:key="@string/pref_notif_override_loop_key"
+  android:title="@string/pref_notif_override_loop_title"
+  android:summaryOn="@string/pref_notif_override_loop_summaryon"
+  android:summaryOff="@string/pref_notif_override_loop_summaryoff"
+  android:defaultValue="true"
+  android:dependency="@string/pref_notif_override_key" />
+  <RingtonePreference
+  android:key="@string/pref_notif_sound_key"
+  android:title="@string/pref_notif_sound_title"
+  android:summary="@string/pref_notif_sound_summary"
+  android:ringtoneType="all"
+  android:showDefault="true"
+  android:showSilent="true"
+  android:dependency="@string/pref_notif_override_key"
+  android:defaultValue="content://settings/system/notification_sound" />
+  <net.anei.cadpage.preferences.ListPreference
+  android:key="@string/pref_notif_timeout_key"
+  android:title="@string/pref_notif_timeout_title"
+  android:summary="@string/pref_notif_timeout_summary"
+  android:entries="@array/pref_notif_timeout_entries"
+  android:entryValues="@array/pref_notif_timeout_values"
+  android:defaultValue="@string/pref_notif_timeout_default"
+  android:dependency="@string/pref_notif_enabled_key" />
+  <net.anei.cadpage.preferences.ListPreference
+  android:key="@string/pref_notif_repeat_interval_key"
+  android:title="@string/pref_notif_repeat_interval_title"
+  android:summary="@string/pref_notif_repeat_interval_summary"
+  android:entries="@array/pref_notif_repeat_interval_entries"
+  android:entryValues="@array/pref_notif_repeat_interval_values"
+  android:dialogTitle="@string/pref_notif_repeat_interval_dialogTitle"
+  android:defaultValue="@string/pref_notif_repeat_interval_default"
+  android:dependency="@string/pref_notif_enabled_key" />
+  <net.anei.cadpage.preferences.TestNotificationDialogPreference
+  android:key="@string/pref_notif_test_key"
+  android:dialogIcon="@drawable/android:ic_dialog_alert"
+  android:title="@string/pref_notif_test_title"
+  android:dialogTitle="@string/pref_notif_test_title"
+  android:dialogMessage="@string/pref_notif_test_message"
+  android:summary="@string/pref_notif_test_summary"
+  android:dependency="@string/pref_notif_enabled_key"
+  android:negativeButtonText="@null" />
+  <net.anei.cadpage.preferences.ListPreference
+  android:key="@string/pref_notif_delay_key"
+  android:title="@string/pref_notif_delay_title"
+  android:summary="@string/pref_notif_delay_summary"
+  android:entries="@array/pref_notif_delay_entries"
+  android:entryValues="@array/pref_notif_delay_values"
+  android:dialogTitle="@string/pref_notif_delay_dialogTitle"
+  android:defaultValue="@string/pref_notif_delay_default"
+  android:dependency="@string/pref_notif_enabled_key" />
+  <SwitchPreference
+  android:key="@string/pref_notif_req_ack_key"
+  android:title="@string/pref_notif_req_ack_title"
+  android:summaryOn="@string/pref_notif_req_ack_summaryon"
+  android:summaryOff="@string/pref_notif_req_ack_summaryoff"
+  android:defaultValue="false"
+  android:dependency="@string/pref_notif_enabled_key" />
+</PreferenceScreen>

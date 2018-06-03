@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pref_category_notif_title">Notifications</string> <!-- Translate -->
+  <string name="pref_category_notif_summary">Various notification settings</string> <!-- Translate -->
+
+  <string name="pref_notif_default_title">Standardnotifiering</string>
+
+  <string name="pref_notif_config_title">Configure Cadpage Notifications</string>   <!-- Translate -->
+  <string name="pref_notif_config_summary">Configure Cadpage notification details</string>   <!-- Translate -->
+
+  <string name="pref_notif_enabled_title">Aktivera notifikation</string>
+  <string name="pref_notif_enabled_summaryon">Notifikation är aktiverad</string>
+  <string name="pref_notif_enabled_summaryoff">Notifikation är avaktiverad</string>
+
+  <string name="pref_notif_override_title">Play Cadpage Audio Alert</string> <!-- Translate -->
+  <string name="pref_notif_override_summaryon">Play special Cadpage alert in addition to regular audio alert</string> <!-- Translate -->
+  <string name="pref_notif_override_summaryoff">Play regular configured audio alert</string> <!-- Translate -->
+
+  <string name="pref_notif_override_old_title">Bortse från Mute och Volymkontroll</string>
+  <string name="pref_notif_override_old_summaryon">Larmet kommer alltid att låta på full volym</string>
+  <string name="pref_notif_override_old_summaryoff">Larmet kommer att låta enligt telefonens normala mute och volymkontroller.</string>
+
+  <string name="pref_notif_override_volume_title">Återinställ volymkontroll</string>
+  <string name="pref_notif_override_volume_summaryon">Alert sound will follow notification volume control</string> <!-- Translate -->
+  <string name="pref_notif_override_volume_summaryoff">Larmet kommer alltid att spelas på full volym</string>
+
+  <string name="pref_notif_override_sound_title">Spela Cadpages larmtoner</string>
+  <string name="pref_notif_override_sound_summaryon">Cadpages larmtoner kommer att användas</string>
+  <string name="pref_notif_override_sound_summaryoff">Konfigurerad notifiering kommer att användas</string>
+
+  <string name="pref_notif_override_loop_title">Loopa larmtoner</string>
+  <string name="pref_notif_override_loop_summaryon">Larmet kommer att loopa kontinuerligt</string>
+  <string name="pref_notif_override_loop_summaryoff">Larmtonen kommer att ljuda en gång</string>
+
+  <string name="pref_notif_sound_title">Notifikationsljud</string>
+  <string name="pref_notif_sound_summary">Det här ljudet kommer att låta vid larm</string>
+
+  <string name="pref_notif_timeout_title">Larmsignalstid</string>
+  <string name="pref_notif_timeout_summary">Larmsignalen kommer att tystna efter denna tid.  Aktuellt värde: %%s</string>
+
+  <string name="pref_disabled">Avaktiverad</string>
+  <string name="pref_no_delay">Ingen fördröjning</string>
+  <string name="pref_p5s">.5 sekunder</string>
+  <string name="pref_1s">1 sekunder</string>
+  <string name="pref_1p5s">1.5 sekunder</string>
+  <string name="pref_2s">2 sekunder</string>
+  <string name="pref_3s">3 sekunder</string>
+  <string name="pref_10s">10 sekunder</string>
+  <string name="pref_20s">20 sekunder</string>
+  <string name="pref_30s">30 sekunder</string>
+  <string name="pref_1m">1 minut</string>
+  <string name="pref_1p5m">1.5 minut</string>
+  <string name="pref_2m">2 minut</string>
+  <string name="pref_3m">3 minut</string>
+  <string name="pref_4m">4 minut</string>
+  <string name="pref_5m">5 minut</string>
+  <string name="pref_7m">7 minut</string>
+  <string name="pref_10m">10 minut</string>
+
+  <string name="pref_notif_repeat_interval_title">Larmupprepningsintervall</string>
+  <string name="pref_notif_repeat_interval_summary">Larmet kommer att återupprepas efter detta intervall. Aktuellt värde: %%s </string>
+  <string name="pref_notif_repeat_interval_dialogTitle">Upprepningsintervall</string>
+
+  <string name="pref_notif_test_title">Testa notifikation</string>
+  <string name="pref_notif_test_summary">Testa din notifikation</string>
+  <string name="pref_notif_test_message">Testar din notifikation nu!</string>
+
+  <string name="pref_notif_delay_title">Larmfördröjning</string>
+  <string name="pref_notif_delay_summary">Larm från Cadpage kommer att fördröjas med: Cur value: %%s </string>
+  <string name="pref_notif_delay_dialogTitle">Larmfördröjningsperiod (sekunder)</string>
+
+  <string name="pref_notif_req_ack_title">Visa "Ack" knappen om den behövs</string>
+  <string name="pref_notif_req_ack_summaryon">"Ack" knappen kommer att visas om den kommer att behövas</string>
+  <string name="pref_notif_req_ack_summaryoff">"Ack" knappen kommer inte att visas om den kommer att behövas</string>
+
+  <!-- Notification vibrate settings -->
+  <string name="pref_vibrate_category_title">Konfigurera vibration</string>
+
+  <string name="pref_vibrate_title">Vibrera</string>
+  <string name="pref_vibrate_summaryon">Vibration är på</string>
+  <string name="pref_vibrate_summaryoff">Vibration är av</string>
+
+  <string name="pref_vibrate_pattern_title">Vibrationsmönster</string>
+  <string name="pref_vibrate_pattern_summary">Sätt vibrationsmönster.  Aktuellt värde: %%s</string>
+  <string name="pref_vibrate_pattern_ok">Personligt vibrationsmönster bestämt</string>
+  <string name="pref_vibrate_pattern_bad">Personligt vibrationsmönster ogiltigt</string>
+  <string name="pref_vibrate_pattern_help">Skriv in ett mönster för personlig vibration enligt följande: \nmillisek av, millisek på, etc. t ex \n0,1000\n0,500,200,500,200,500</string>
+  <string name="pref_vibrate_pattern_entries_normal">Normal</string>
+  <string name="pref_vibrate_pattern_entries_long">Lång vibration</string>
+  <string name="pref_vibrate_pattern_entries_multiple_short">Multipla korta</string>
+  <string name="pref_vibrate_pattern_entries_multiple_long">Multipla långa</string>
+
+  <!-- Value to set trigger custom dialogs -->
+  <string name="pref_custom_val">Personlig</string>
+  <string name="pref_flashled_title">Blinka LED</string>
+  <string name="pref_flashled_summaryon">LED blinkar när ett meddelande har mottagits</string>
+  <string name="pref_flashled_summaryoff">Blinka inte LED när ett meddelande mottagits</string>
+
+  <string name="pref_flashled_color_title">LED färg</string>
+  <string name="pref_flashled_color_summary">Färgen på LED-lampa.  Aktuellt värde: %%s</string>
+  <string name="pref_led_color_blue">Blå</string>
+  <string name="pref_led_color_green">Grön</string>
+  <string name="pref_led_color_red">Röd</string>
+  <string name="pref_led_color_yellow">Gul</string>
+  <string name="pref_led_color_magenta">Magenta</string>
+  <string name="pref_led_color_cyan">Cyan</string>
+
+  <string name="pref_flashled_color_custom_dialog_red">Röd:</string>
+  <string name="pref_flashled_color_custom_dialog_green">Grön:</string>
+  <string name="pref_flashled_color_custom_dialog_blue">Blå:</string>
+  <string name="pref_flashled_color_custom_dialog_preview">Förhandstitt:</string>
+  <string name="pref_flashled_color_custom_set">Personlig LED-färg inställd</string>
+
+  <string name="pref_flashled_pattern_title">LED blinkningstakt</string>
+  <string name="pref_flashled_pattern_summary">Sätt hastighet på hur fort LED-lampan ska blinka.  Aktuellt värde: %%s</string>
+  <string name="pref_flashled_pattern_ok">Personlig blinkningstakt på LED satt</string>
+  <string name="pref_flashled_pattern_bad">Personlig blinkningstakt för LED är ogiltig</string>
+  <string name="pref_flashled_pattern_help">Skriv in tiden i milisekunder för att sätta på och stänga av LED</string>
+  <string name="pref_flashled_pattern_help_on">Tid på:</string>
+  <string name="pref_flashled_pattern_help_off">Tid av:</string>
+  <string name="pref_led_pattern_entries_fast">Snabb</string>
+  <string name="pref_led_pattern_entries_normal">Normal</string>
+  <string name="pref_led_pattern_entries_slow">Långsam</string>
+
+</resources>

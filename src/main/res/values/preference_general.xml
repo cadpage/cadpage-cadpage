@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pref_category_general_title">General Settings</string>
+  <string name="pref_category_general_summary">Payment Status, Enabled, History Limit, Display options</string>
+
+  <string name="pref_payment_status_title">Payment Status</string>
+
+  <string name="pref_enabled_title">Enable Cadpage</string>
+  <string name="pref_enabled_summaryon">Cadpage is enabled</string>
+  <string name="pref_enabled_summaryoff">Cadpage is disabled</string>
+
+  <string name="pref_history_limit_title">Call History Limit</string>
+  <string name="pref_history_limit_summary">
+    Maximum number of calls to save in call history.
+    \nCur value: %%s
+  </string>
+
+  <string name="pref_show_history_address_title">Include address in call history</string>
+  <string name="pref_show_history_address_summaryon">Address will be included in call history</string>
+  <string name="pref_show_history_address_summaryoff">Address will not be included in call history</string>
+
+  <string name="pref_show_personal_title">Display Personal Info</string>
+  <string name="pref_show_personal_summaryon">Caller Name/Phone will be displayed</string>
+  <string name="pref_show_personal_summaryoff">Caller Name/Phone will not be displayed</string>
+
+  <string name="pref_grant_account_access_title">Allow access to Email accounts</string>
+  <string name="pref_grant_account_access_summaryon">Email account access permitted</string>
+  <string name="pref_grant_account_access_summaryoff">Email account access denied</string>
+
+</resources>

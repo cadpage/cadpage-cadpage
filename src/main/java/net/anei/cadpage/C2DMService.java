@@ -734,7 +734,7 @@ public class C2DMService extends IntentService {
     intent.putExtra(Intent.EXTRA_TEXT, "My " + type + " registration ID is " + ManagePreferences.registrationId());
     intent.setType("message/rfc822");
     try {
-      context.startActivity(Intent.createChooser(intent, context.getString(R.string.pref_sendemail_title)));
+      context.startActivity(Intent.createChooser(intent, context.getString(R.string.pref_email_title)));
     } catch (ActivityNotFoundException ex) {
       Log.e(ex);
     }

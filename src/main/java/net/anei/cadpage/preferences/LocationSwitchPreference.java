@@ -1,16 +1,16 @@
 package net.anei.cadpage.preferences;
 
 import android.content.Context;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.view.View;
 
-public class LocationCheckBoxPreference extends CheckBoxPreference {
+public class LocationSwitchPreference extends SwitchPreference {
   
   private String location;
   private LocationManager locMgr;
 
-  public LocationCheckBoxPreference(Context context, String location, String name,
-                                     LocationManager locMgr) {
+  public LocationSwitchPreference(Context context, String location, String name,
+                                  LocationManager locMgr) {
     super(context);
     this.location = location;
     this.locMgr = locMgr;

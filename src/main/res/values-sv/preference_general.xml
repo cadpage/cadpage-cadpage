@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pref_category_general_title">General Settings</string> <!-- Translate -->
+  <string name="pref_category_general_summary">Payment Status, Enabled, History Limit, Display Options</string> <!-- Translate -->
+
+  <string name="pref_payment_status_title">Betalningsstatus</string>
+
+  <string name="pref_enabled_title">Aktivera Cadpage</string>
+  <string name="pref_enabled_summaryon">Cadpage är aktiverat</string>
+  <string name="pref_enabled_summaryoff">Cadpage är avaktiverat</string>
+
+  <string name="pref_history_limit_title">Gräns för larmhistorik</string>
+  <string name="pref_history_limit_summary">
+    Maximalt antal larm som sparas i historik.\n
+    Aktuellt värde: %%s
+  </string>
+
+  <string name="pref_show_history_address_title">Inkludera adress i larmhistoriken</string>
+  <string name="pref_show_history_address_summaryon">Adressen kommer att inkluderas i larmhistoriken</string>
+  <string name="pref_show_history_address_summaryoff">Addressen kommer inte att inkluderas i larmhistoriken</string>
+
+  <string name="pref_show_personal_title">Visa personlig information</string>
+  <string name="pref_show_personal_summaryon">Inringares namn/telefon kommer att visas</string>
+  <string name="pref_show_personal_summaryoff">Inringares namn/telefon kommer inte att visas</string>
+
+  <string name="pref_grant_account_access_title">Tillåt åtkomst till epost-konton</string>
+  <string name="pref_grant_account_access_summaryon">Epost-kontoinfo tillåten</string>
+  <string name="pref_grant_account_access_summaryoff">Epost-kontoinfo av tillåts ej</string>
+
+</resources>

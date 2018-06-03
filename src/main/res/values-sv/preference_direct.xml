@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="pref_category_direct_title">Meddelandeservice</string>
+  <string name="pref_category_direct_summary">Ställ in meddelandeservice</string>
+
+  <string name="pref_reconnect_title">Återanslut direkt koppling (med. service)</string>
+  <string name="pref_reconnect_summary">Återställ anslutning till aktiverad meddelandeservice</string>
+
+</resources>

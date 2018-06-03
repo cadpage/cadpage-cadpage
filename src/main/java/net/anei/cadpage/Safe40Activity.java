@@ -17,7 +17,7 @@ import android.view.KeyEvent;
  * Also implements the Permssion manager interface for Android 6.0 and up
  */
 @SuppressLint("NewApi")
-public class Safe40Activity extends Activity {
+abstract public class Safe40Activity extends Activity {
   
   private boolean activityActive = false;
 

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidDomInspection -->
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+    android:key="@string/pref_loc_desc_key"
+    android:title="@string/pref_loc_desc_title"/>
+
+    <PreferenceScreen
+    android:key="@string/pref_location_tree_key"
+    android:title="@string/pref_location_title"
+    android:summary="@string/pref_location_summary"/>
+
+    <PreferenceScreen
+    android:key="@string/pref_location_mtree_key"
+    android:title="@string/pref_multi_location_title"
+    android:summary="@string/pref_multi_location_summary"/>
+
+    <SwitchPreference
+    android:key="@string/pref_override_filter_key"
+    android:title="@string/pref_override_filter_title"
+    android:summaryOn="@string/pref_override_filter_summaryon"
+    android:summaryOff="@string/pref_override_filter_summaryoff"
+    android:defaultValue="@string/pref_override_filter_default" />
+
+    <net.anei.cadpage.preferences.EditTextPreference
+    android:dialogTitle="@string/pref_filter_title"
+    android:dialogMessage="@string/pref_filter_dialog"
+    android:key="@string/pref_filter_key"
+    android:title="@string/pref_filter_title"
+    android:summary="@string/pref_filter_summary"
+    android:defaultValue="" />
+
+    <SwitchPreference
+    android:key="@string/pref_show_source_key"
+    android:title="@string/pref_show_source_title"
+    android:summaryOn="@string/pref_show_source_summaryon"
+    android:summaryOff="@string/pref_show_source_summaryoff"
+    android:defaultValue="@string/pref_show_source_default" />
+
+    <SwitchPreference
+    android:key="@string/pref_override_default_key"
+    android:title="@string/pref_override_default_title"
+    android:summaryOn="@string/pref_override_default_summaryon"
+    android:summaryOff="@string/pref_override_default_summaryoff"
+    android:defaultValue="@string/pref_override_default_default" />
+
+    <net.anei.cadpage.preferences.EditTextPreference
+    android:dialogTitle="@string/pref_defcity_title"
+    android:dialogMessage="@string/pref_defcity_dialog"
+    android:key="@string/pref_defcity_key"
+    android:title="@string/pref_defcity_title"
+    android:summary="@string/pref_defcity_summary"
+    android:capitalize="characters"
+    android:inputType="textVisiblePassword"
+    android:defaultValue="" />
+
+    <net.anei.cadpage.preferences.EditTextPreference
+    android:dialogTitle="@string/pref_defstate_title"
+    android:dialogMessage="@string/pref_defstate_dialog"
+    android:key="@string/pref_defstate_key"
+    android:title="@string/pref_defstate_title"
+    android:summary="@string/pref_defstate_summary"
+    android:capitalize="characters"
+    android:inputType="textVisiblePassword"
+    android:defaultValue="" />
+
+    <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_enable_msg_type_key"
+    android:title="@string/pref_enable_msg_type_title"
+    android:summary="@string/pref_enable_msg_type_summary"
+    android:entries="@array/pref_enable_msg_type_entries"
+    android:entryValues="@array/pref_enable_msg_type_values"
+    android:defaultValue="@string/pref_enable_msg_type_default" />
+
+    <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_mms_timeout_key"
+    android:title="@string/pref_mms_timeout_title"
+    android:summary="@string/pref_mms_timeout_summary"
+    android:entries="@array/pref_mms_timeout_values"
+    android:entryValues="@array/pref_mms_timeout_values"
+    android:dialogTitle="@string/pref_mms_timeout_title"
+    android:defaultValue="@string/pref_mms_timeout_default"/>
+
+    <net.anei.cadpage.preferences.ListPreference
+    android:key="@string/pref_loglimit_key"
+    android:title="@string/pref_loglimit_title"
+    android:summary="@string/pref_loglimit_summary"
+    android:entries="@array/pref_loglimit_values"
+    android:entryValues="@array/pref_loglimit_values"
+    android:dialogTitle="@string/pref_loglimit_title"
+    android:defaultValue="@string/pref_loglimit_default"/>
+
+    <PreferenceScreen
+    android:title="@string/pref_split_msg_merge_title"
+    android:summary="@string/pref_split_msg_merge_summary">
+
+      <SwitchPreference
+      android:key="@string/pref_override_active911_split_key"
+      android:title="@string/pref_override_active911_split_title"
+      android:summaryOn="@string/pref_override_active911_split_summaryon"
+      android:summaryOff="@string/pref_override_active911_split_summaryoff"
+      android:defaultValue="false"/>
+
+      <SwitchPreference
+      android:key="@string/pref_split_direct_page_key"
+      android:title="@string/pref_split_direct_page_title"
+      android:summaryOn="@string/pref_split_direct_page_summaryon"
+      android:summaryOff="@string/pref_split_direct_page_summaryoff"
+      android:defaultValue="@string/pref_split_direct_page_default"/>
+
+      <net.anei.cadpage.preferences.EditTextPreference
+      android:dialogTitle="@string/pref_msgtimeout_title"
+      android:dialogMessage="@string/pref_msgtimeout_dialog"
+      android:key="@string/pref_msgtimeout_key"
+      android:title="@string/pref_msgtimeout_title"
+      android:summary="@string/pref_msgtimeout_summary"
+      android:inputType="number"
+      android:defaultValue="@string/pref_msgtimeout_default"/>
+
+      <net.anei.cadpage.preferences.ListPreference
+      android:key="@string/pref_split_min_msg_key"
+      android:title="@string/pref_split_min_msg_title"
+      android:summary="@string/pref_split_min_msg_summary"
+      android:entries="@array/pref_split_min_msg_values"
+      android:entryValues="@array/pref_split_min_msg_values"
+      android:dialogTitle="@string/pref_split_min_msg_title"
+      android:defaultValue="@string/pref_split_min_msg_default"/>
+
+      <SwitchPreference
+      android:key="@string/pref_rev_msg_order_key"
+      android:title="@string/pref_rev_msg_order_title"
+      android:summaryOn="@string/pref_rev_msg_order_summaryon"
+      android:summaryOff="@string/pref_rev_msg_order_summaryoff"
+      android:defaultValue="@string/pref_rev_msg_order_default"/>
+
+      <SwitchPreference
+      android:key="@string/pref_mix_msg_order_key"
+      android:title="@string/pref_mix_msg_order_title"
+      android:summaryOn="@string/pref_mix_msg_order_summaryon"
+      android:summaryOff="@string/pref_mix_msg_order_summaryoff"
+      android:defaultValue="false"/>
+
+      <SwitchPreference
+      android:key="@string/pref_split_blank_ins_key"
+      android:title="@string/pref_split_blank_ins_title"
+      android:summaryOn="@string/pref_split_blank_ins_summaryon"
+      android:summaryOff="@string/pref_split_blank_ins_summaryoff"
+      android:defaultValue="@string/pref_split_blank_ins_default" />
+
+      <SwitchPreference
+      android:key="@string/pref_split_chk_sender_key"
+      android:title="@string/pref_split_chk_sender_title"
+      android:summaryOn="@string/pref_split_chk_sender_summaryon"
+      android:summaryOff="@string/pref_split_chk_sender_summaryoff"
+      android:defaultValue="@string/pref_split_chk_sender_default" />
+
+      <SwitchPreference
+      android:key="@string/pref_split_keep_lead_break_key"
+      android:title="@string/pref_split_keep_lead_break_title"
+      android:summaryOn="@string/pref_split_keep_lead_break_summaryon"
+      android:summaryOff="@string/pref_split_keep_lead_break_summaryoff"
+      android:defaultValue="@string/pref_split_keep_lead_break_default" />
+
+    </PreferenceScreen>
+
+    <SwitchPreference
+    android:key="@string/pref_suppress_dup_msg_key"
+    android:title="@string/pref_suppress_dup_msg_title"
+    android:summaryOn="@string/pref_suppress_dup_msg_summaryon"
+    android:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
+    android:defaultValue="@string/pref_suppress_dup_msg_default" />
+
+    <SwitchPreference
+    android:key="@string/pref_override_vendor_loc_key"
+    android:title="@string/pref_override_vendor_loc_title"
+    android:summaryOn="@string/pref_override_vendor_loc_summaryon"
+    android:summaryOff="@string/pref_override_vendor_loc_summaryoff"
+    android:defaultValue="@string/pref_override_vendor_loc_default" />
+
+    <SwitchPreference
+    android:key="@string/pref_activate_scanner_key"
+    android:title="@string/pref_activate_scanner_title"
+    android:summaryOn="@string/pref_activate_scanner_summaryon"
+    android:summaryOff="@string/pref_activate_scanner_summaryoff"
+    android:defaultValue="@string/pref_activate_scanner_default" />
+
+    <Preference
+    android:key="@string/pref_scanner_channel_key"
+    android:title="@string/pref_scanner_channel_title" />
+
+    <net.anei.cadpage.preferences.ScannerTimeoutPreference
+    android:dialogTitle="@string/pref_scanner_timeout_title"
+    android:dialogMessage="@string/pref_scanner_timeout_dialog"
+    android:key="@string/pref_scanner_timeout_key"
+    android:title="@string/pref_scanner_timeout_title"
+    android:summary="@string/pref_scanner_timeout_summary"
+    android:inputType="number"
+    android:defaultValue="@string/pref_scanner_timeout_default"/>
+
+    <SwitchPreference
+    android:key="@string/pref_publish_pages_key"
+    android:title="@string/pref_publish_pages_title"
+    android:summaryOn="@string/pref_publish_pages_summaryon"
+    android:summaryOff="@string/pref_publish_pages_summaryoff"
+    android:defaultValue="@string/pref_publish_pages_default" />
+
+</PreferenceScreen>

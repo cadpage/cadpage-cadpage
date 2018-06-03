@@ -18,17 +18,6 @@ public class WrongUserDonateEvent extends DonateScreenEvent {
            EmailWrongUserEvent.instance());
   }
 
-  @Override
-  protected Object[] getTextParms(int type) {
-    switch (type) {
-    case PARM_TEXT:
-      return new Object[]{UserAcctManager.instance().getUser()};
-      
-    default:
-      return null;
-    }
-  }
-
   private static final WrongUserDonateEvent instance = new WrongUserDonateEvent();
   public static WrongUserDonateEvent instance() {
     return instance;
