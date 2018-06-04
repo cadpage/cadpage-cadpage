@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CustomVibrateListPreference extends ListPreference {
-  private Context context;
+  private final Context context;
   private String vibrate_pattern_custom;
 
   public CustomVibrateListPreference(Context c) {
@@ -51,7 +51,7 @@ public class CustomVibrateListPreference extends ListPreference {
 
     View v = inflater.inflate(R.layout.vibratepatterndialog, null);
 
-    final EditText et = (EditText) v.findViewById(R.id.CustomVibrateEditText);
+    final EditText et = v.findViewById(R.id.CustomVibrateEditText);
 
     et.setText(vibrate_pattern_custom);
 

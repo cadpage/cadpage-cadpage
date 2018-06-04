@@ -148,7 +148,6 @@ public class C2DMService extends IntentService {
         regId = intent.getStringExtra("registration_id");
         if (regId != null) {
           registrationSuccess(regId);
-          return;
         }
       }
     });

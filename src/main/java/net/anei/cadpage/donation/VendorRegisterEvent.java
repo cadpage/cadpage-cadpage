@@ -10,7 +10,7 @@ This also takes two forms, depending on how it was launched
  */
 public class VendorRegisterEvent extends DonateEvent {
   
-  int status;
+  final int status;
   
   private VendorRegisterEvent(int status) {
     super(AlertStatus.GREEN, R.string.vendor_register_title);
@@ -35,7 +35,7 @@ public class VendorRegisterEvent extends DonateEvent {
     new VendorRegisterEvent(2)
   };
   
-  public static final VendorRegisterEvent instance(int status) {
+  public static VendorRegisterEvent instance(int status) {
     return instances[status-1];
   }
 }

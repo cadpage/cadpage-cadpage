@@ -14,7 +14,7 @@ abstract class AccountScreenEvent  extends DonateScreenEvent {
   public interface AllowAcctPermissionAction extends AccountPermApprovedEvent.AllowAcctPermissionAction{};
 
 
-  private   AllowAcctPermissionAction action;
+  private final AllowAcctPermissionAction action;
 
   protected AccountScreenEvent(AlertStatus alertStatus, int titleId, final AllowAcctPermissionAction action) {
     super(alertStatus, titleId, R.string.donate_allow_acct_permission_text);

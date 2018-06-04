@@ -26,8 +26,8 @@ public abstract class DonateEvent {
   // Custom result codes
   public static final int RESULT_READY = Activity.RESULT_FIRST_USER;
   
-  private AlertStatus alertStatus;
-  private int titleId;
+  private final AlertStatus alertStatus;
+  private final int titleId;
   
   // Array of colors corresponding to alert codes
   private static final int[] ALERT_COLORS = new int[]{

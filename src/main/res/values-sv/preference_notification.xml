@@ -75,6 +75,7 @@
 
   <!-- Notification vibrate settings -->
   <string name="pref_vibrate_category_title">Konfigurera vibration</string>
+  <string name="pref_flashled_category_title">LED konfiguration</string>
 
   <string name="pref_vibrate_title">Vibrera</string>
   <string name="pref_vibrate_summaryon">Vibration är på</string>

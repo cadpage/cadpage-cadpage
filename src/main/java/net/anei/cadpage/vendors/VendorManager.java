@@ -28,7 +28,7 @@ public class VendorManager {
   private Context context;
   
   // List of supported vendors
-  private Vendor[] vendorList = new Vendor[]{
+  private final Vendor[] vendorList = new Vendor[]{
     new CadpageVendor(),
     new CodeMessagingVendor(),
     new Active911Vendor()
@@ -308,13 +308,29 @@ public class VendorManager {
     
     // Display appropriate error message
     int resId;
-    if (error.equals("SERVICE_NOT_AVAILABLE")) resId = R.string.vendor_service_not_available_error;
-    else if (error.equals("ACCOUNT_MISSING")) resId = R.string.vendor_account_missing_error;
-    else if (error.equals("AUTHENTICATION_FAILED")) resId = R.string.vendor_authentication_failed_error;
-    else if (error.equals("PHONE_REGISTRATION_ERROR")) resId = R.string.vendor_phone_registration_error_error;
-    else if (error.equals("PHONE_REGISTRATION_ERROR_HARD")) resId = R.string.vendor_phone_registration_error_hard_error;
-    else if (error.equals("TOO_MANY_REGISTRATIONS")) resId = R.string.vendor_too_many_registrations_error;
-    else resId = R.string.vendor_registration_error;
+    switch (error) {
+      case "SERVICE_NOT_AVAILABLE":
+        resId = R.string.vendor_service_not_available_error;
+        break;
+      case "ACCOUNT_MISSING":
+        resId = R.string.vendor_account_missing_error;
+        break;
+      case "AUTHENTICATION_FAILED":
+        resId = R.string.vendor_authentication_failed_error;
+        break;
+      case "PHONE_REGISTRATION_ERROR":
+        resId = R.string.vendor_phone_registration_error_error;
+        break;
+      case "PHONE_REGISTRATION_ERROR_HARD":
+        resId = R.string.vendor_phone_registration_error_hard_error;
+        break;
+      case "TOO_MANY_REGISTRATIONS":
+        resId = R.string.vendor_too_many_registrations_error;
+        break;
+      default:
+        resId = R.string.vendor_registration_error;
+        break;
+    }
     String errMsg = context.getString(resId, error);
     NoticeActivity.showVendorNotice(context, errMsg);
     

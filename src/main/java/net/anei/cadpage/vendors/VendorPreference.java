@@ -6,7 +6,7 @@ import android.preference.Preference;
 
 class VendorPreference extends SwitchPreference {
   
-  private Vendor vendor;
+  private final Vendor vendor;
   
   VendorPreference(Context context, Vendor vendor, int order) {
     super(context);

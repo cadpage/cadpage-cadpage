@@ -12,7 +12,7 @@ class AccountPermApprovedEvent extends DonateEvent {
     public void doEvent(Activity activity);
   }
 
-  private AllowAcctPermissionAction action;
+  private final AllowAcctPermissionAction action;
 
   public AccountPermApprovedEvent(AllowAcctPermissionAction  action) {
     super(null, R.string.donate_email_acct_permission_granted_text);

@@ -17,7 +17,7 @@ public class SmsMsgLogBuffer {
   
   private static final String LOG_FILENAME = "log.msg.buffer";
   
-  private Context context;
+  private final Context context;
   
   private LinkedList<SmsMmsMessage> msgQueue = new LinkedList<SmsMmsMessage>();
   

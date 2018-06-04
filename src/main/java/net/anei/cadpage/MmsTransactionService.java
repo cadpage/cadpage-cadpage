@@ -50,14 +50,13 @@ public class MmsTransactionService extends Service {
   private enum EventType {TRANSACTION_REQUEST, DATA_CHANGE, TIMEOUT, TIMER_TICK, QUIT};
 
   // Column names for query searches
-  private static String[] MMS_COL_LIST = new String[]{"_ID"};
-  private static String[] PART_COL_LIST = new String[]{"text", "_data"};
+  private static final String[] MMS_COL_LIST = new String[]{"_ID"};
+  private static final String[] PART_COL_LIST = new String[]{"text", "_data"};
 
   // Timer interval, negative to disable timer
   private static final int TIMER_INTERVAL = -1;
   
   private ServiceHandler mServiceHandler;
-  private Looper mServiceLooper;
   private PowerManager.WakeLock mWakeLock;
   
   // Cached copies of different preferences we might need during off thread processing
@@ -85,7 +84,7 @@ public class MmsTransactionService extends Service {
     HandlerThread thread = new HandlerThread("MmsTransactionService");
     thread.start();
 
-    mServiceLooper = thread.getLooper();
+    Looper mServiceLooper = thread.getLooper();
     mServiceHandler = new ServiceHandler(mServiceLooper);
 
   }
@@ -134,9 +133,9 @@ public class MmsTransactionService extends Service {
   private class ServiceHandler extends Handler {
     
     // Actual queue of pending MMS transactions
-    private List<MmsMsgEntry> msgList  = new LinkedList<MmsMsgEntry>();
+    private final List<MmsMsgEntry> msgList  = new LinkedList<MmsMsgEntry>();
     
-    private ContentResolver qr;
+    private final ContentResolver qr;
 
     
     @SuppressWarnings("unused")
@@ -199,7 +198,6 @@ public class MmsTransactionService extends Service {
               stopSelf();
             }
           });
-          return;
         }
       } 
       

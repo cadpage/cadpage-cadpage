@@ -40,8 +40,8 @@ public class PermissionManager {
   private static final String MODIFY_AUDIO_SETTINGS = "android.permission.MODIFY_AUDIO_SETTINGS";
   
   
-  private Context context;
-  private Activity activity;
+  private final Context context;
+  private final Activity activity;
   
   public PermissionManager(Context context) {
     this.context = context;

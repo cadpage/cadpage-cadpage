@@ -9,12 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 public class ContentQuery {
   
-  private static String[] MMS_COL_LIST = new String[]{"_ID", "sub"};
-  private static String[] PART_COL_LIST = new String[]{"text", "_data"};
+  private static final String[] MMS_COL_LIST = new String[]{"_ID", "sub"};
+  private static final String[] PART_COL_LIST = new String[]{"text", "_data"};
   
   public static void query(Context context) {
     retrieveMsg(context);
@@ -184,7 +185,9 @@ public class ContentQuery {
     flags = addFlag(sb, flags, Intent.FLAG_GRANT_READ_URI_PERMISSION, "FLAG_GRANT_READ_URI_PERMISSION");
     flags = addFlag(sb, flags, Intent.FLAG_GRANT_WRITE_URI_PERMISSION, "FLAG_GRANT_WRITE_URI_PERMISSION");
     flags = addFlag(sb, flags, Intent.FLAG_INCLUDE_STOPPED_PACKAGES, "FLAG_INCLUDE_STOPPED_PACKAGES");
-    flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_FOREGROUND, "FLAG_RECEIVER_FOREGROUND");
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+      flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_FOREGROUND, "FLAG_RECEIVER_FOREGROUND");
+    }
     flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_REGISTERED_ONLY, "FLAG_RECEIVER_REGISTERED_ONLY");
     flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_REPLACE_PENDING, "FLAG_RECEIVER_REPLACE_PENDING");
     if (flags != 0) {

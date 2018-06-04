@@ -32,6 +32,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 
+@SuppressWarnings("RedundantIfStatement")
 public class ManagePreferences implements SharedPreferences.OnSharedPreferenceChangeListener {
   
   // Preference version.  This needs to be incremented every time a new
@@ -922,8 +923,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   public static String purchaseDateString(int type) {
-    String dateStr = prefs.getString(PURCHASE_DATE_RES_IDS[type], null);
-    return dateStr;
+    return prefs.getString(PURCHASE_DATE_RES_IDS[type], null);
   }
   
   public static String currentDateString() {
@@ -1425,11 +1425,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int PERM_REQ_GRANT_ACCT_ACCESS = 15;
   private static final int PERM_REQ_LIMIT = 15;
   
-  private static PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
+  private static final PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
   
   private static PermissionManager permMgr = null;
-  private static Stack<PermissionManager> permMgrStack = new Stack<PermissionManager>();
+  private static final Stack<PermissionManager> permMgrStack = new Stack<PermissionManager>();
 
   /**
    * Set the current permission manager, should be called by the onCreate() method of
@@ -1641,7 +1641,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return reportPositionChecker.check(pref, value);
   }
   
-  private static ReportPositionChecker reportPositionChecker = new ReportPositionChecker();
+  private static final ReportPositionChecker reportPositionChecker = new ReportPositionChecker();
   
   private static class ReportPositionChecker extends ListPermissionChecker {
     
@@ -1667,7 +1667,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   // List of preference checkers for the 6 response type buttons
-  private static ResponseTypePermissionChecker[] responseTypeCheckers = new ResponseTypePermissionChecker[]{
+  private static final ResponseTypePermissionChecker[] responseTypeCheckers = new ResponseTypePermissionChecker[]{
       new ResponseTypePermissionChecker(1),
       new ResponseTypePermissionChecker(2),
       new ResponseTypePermissionChecker(3),
@@ -1701,7 +1701,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return noShowInCallChecker.check(pref, value);
   }
   
-  private static NoShowInCallChecker noShowInCallChecker = new NoShowInCallChecker();
+  private static final NoShowInCallChecker noShowInCallChecker = new NoShowInCallChecker();
   
   private static class NoShowInCallChecker extends CheckBoxPermissionChecker {
     
@@ -1730,7 +1730,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return overrideNotifySoundChecker.check(pref);
   }
   
-  private static OverrideNotifySoundChecker overrideNotifySoundChecker = new OverrideNotifySoundChecker();
+  private static final OverrideNotifySoundChecker overrideNotifySoundChecker = new OverrideNotifySoundChecker();
   
   private static class OverrideNotifySoundChecker extends CheckBoxPermissionChecker {
     
@@ -1763,7 +1763,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return grantAccountAccessChecker.setValue(pref, value, run);
   }
 
-  private static GrantAccountAccessChecker grantAccountAccessChecker = new GrantAccountAccessChecker();
+  private static final GrantAccountAccessChecker grantAccountAccessChecker = new GrantAccountAccessChecker();
 
   private static class GrantAccountAccessChecker extends CheckBoxPermissionChecker {
 
@@ -1871,7 +1871,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    */
   
   private abstract static class PrefPermissionChecker<V, P extends Preference>  extends PermissionChecker {
-    private int resPrefId;
+    private final int resPrefId;
     private P preference;
     private V value;
     private V newValue;
@@ -2180,7 +2180,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    *************************************************************************/
   private abstract static class PermissionChecker {
     
-    int permReq;
+    final int permReq;
     
     private List<String> reqPermissions;
     private List<Integer> reqExplainIds;
@@ -2348,7 +2348,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private interface PreferenceChangeListener {
     public void preferenceChanged(String key, Object newVal);
   }
-  private Map<String, PreferenceChangeListener>listenerMap = 
+  private final Map<String, PreferenceChangeListener>listenerMap =
       new HashMap<String, PreferenceChangeListener>();
 
   // Dummy default construct used to create a test preferences object for test purposes

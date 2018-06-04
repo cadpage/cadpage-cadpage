@@ -22,7 +22,7 @@ import org.json.JSONObject;
  * Represents an in-app product's listing details.
  */
 public class SkuDetails {
-    String mItemType;
+    final String mItemType;
     String mSku;
     String mType;
     String mPrice;

@@ -9,8 +9,8 @@ import android.preference.PreferenceScreen;
 
 public class LocationListPreference extends ListPreference {
   
-  private LocationManager locMgr;
-  private PreferenceScreen parent;
+  private final LocationManager locMgr;
+  private final PreferenceScreen parent;
 
   public LocationListPreference(Context context, LocationManager locMgr,
                                  PreferenceScreen parent) {

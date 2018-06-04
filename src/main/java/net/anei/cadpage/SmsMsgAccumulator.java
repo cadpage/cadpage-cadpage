@@ -22,7 +22,7 @@ public class SmsMsgAccumulator {
   private static final String TIMEOUT_ACTION = "net.anei.cadpage.SmsMsgAccumalator.TIMEOUT_ACTION";
   private static final String EXTRA_TIMEOUT_ID = "net.anei.cadapge.SmsMsgAccumulator.TIMEOUT_ID";
 
-  private List<MessageList> msgQueue = new LinkedList<MessageList>();
+  private final List<MessageList> msgQueue = new LinkedList<MessageList>();
   
   /**
    * Add new text message to message accumulator
@@ -202,9 +202,9 @@ public class SmsMsgAccumulator {
    */
   private static class MessageList {
     
-    private int count;  // Expected message count
-    private List<SmsMmsMessage> list = new ArrayList<SmsMmsMessage>();
-    private SmsMmsMessage firstMessage;
+    private final int count;  // Expected message count
+    private final List<SmsMmsMessage> list = new ArrayList<SmsMmsMessage>();
+    private final SmsMmsMessage firstMessage;
     private SmsMmsMessage lastMessage;
     
     private transient SmsMmsMessage result = null;
@@ -341,7 +341,7 @@ public class SmsMsgAccumulator {
     }
   }
   
-  private static SmsMsgAccumulator instance = new SmsMsgAccumulator();
+  private static final SmsMsgAccumulator instance = new SmsMsgAccumulator();
   
   public static SmsMsgAccumulator instance() {
     return instance;

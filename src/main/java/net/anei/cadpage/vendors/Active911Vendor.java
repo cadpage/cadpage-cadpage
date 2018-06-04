@@ -142,7 +142,7 @@ class Active911Vendor extends Vendor {
 
 
 
-  private static final Set<String> PHONE_SET = new HashSet<String>(Arrays.asList(new String[]{
+  private static final Set<String> PHONE_SET = new HashSet<String>(Arrays.asList(
       "15123376259",
       "19145173586",
       "17272191279",
@@ -192,6 +192,5 @@ class Active911Vendor extends Vendor {
       "18019006459",
       "18022304149",
       "19134989068",
-      "19783931289"
-  }));
+      "19783931289"));
 }

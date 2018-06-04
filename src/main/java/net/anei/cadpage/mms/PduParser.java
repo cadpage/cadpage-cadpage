@@ -59,11 +59,6 @@ public class PduParser {
     private ByteArrayInputStream mPduDataStream = null;
 
     /**
-     * Store pdu headers
-     */
-    private PduHeaders mHeaders = null;
-
-    /**
      * Store pdu parts.
      */
     private PduBody mBody = null;
@@ -110,7 +105,10 @@ public class PduParser {
         }
 
         /* parse headers */
-        mHeaders = parseHeaders(mPduDataStream);
+        /*
+      Store pdu headers
+     */
+        PduHeaders mHeaders = parseHeaders(mPduDataStream);
         if (null == mHeaders) {
             // Parse headers failed.
             return null;
@@ -137,19 +135,13 @@ public class PduParser {
 
         switch (messageType) {
             case PduHeaders.MESSAGE_TYPE_SEND_REQ:
-                SendReq sendReq = new SendReq(mHeaders, mBody);
-                return sendReq;
+                return new SendReq(mHeaders, mBody);
             case PduHeaders.MESSAGE_TYPE_SEND_CONF:
-                SendConf sendConf = new SendConf(mHeaders);
-                return sendConf;
+                return new SendConf(mHeaders);
             case PduHeaders.MESSAGE_TYPE_NOTIFICATION_IND:
-                NotificationInd notificationInd =
-                    new NotificationInd(mHeaders);
-                return notificationInd;
+                return new NotificationInd(mHeaders);
             case PduHeaders.MESSAGE_TYPE_NOTIFYRESP_IND:
-                NotifyRespInd notifyRespInd =
-                    new NotifyRespInd(mHeaders);
-                return notifyRespInd;
+                return new NotifyRespInd(mHeaders);
             case PduHeaders.MESSAGE_TYPE_RETRIEVE_CONF:
                 RetrieveConf retrieveConf =
                     new RetrieveConf(mHeaders, mBody);
@@ -174,21 +166,13 @@ public class PduParser {
                 }
                 return null;
             case PduHeaders.MESSAGE_TYPE_DELIVERY_IND:
-                DeliveryInd deliveryInd =
-                    new DeliveryInd(mHeaders);
-                return deliveryInd;
+                return new DeliveryInd(mHeaders);
             case PduHeaders.MESSAGE_TYPE_ACKNOWLEDGE_IND:
-                AcknowledgeInd acknowledgeInd =
-                    new AcknowledgeInd(mHeaders);
-                return acknowledgeInd;
+                return new AcknowledgeInd(mHeaders);
             case PduHeaders.MESSAGE_TYPE_READ_ORIG_IND:
-                ReadOrigInd readOrigInd =
-                    new ReadOrigInd(mHeaders);
-                return readOrigInd;
+                return new ReadOrigInd(mHeaders);
             case PduHeaders.MESSAGE_TYPE_READ_REC_IND:
-                ReadRecInd readRecInd =
-                    new ReadRecInd(mHeaders);
-                return readRecInd;
+                return new ReadRecInd(mHeaders);
             default:
                 log("Parser doesn't support this message type in this version!");
             return null;

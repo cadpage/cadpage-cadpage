@@ -13,6 +13,7 @@ import net.anei.cadpage.billing.IabHelper;
 import net.anei.cadpage.billing.IabResult;
 
 
+@SuppressWarnings("RedundantIfStatement")
 public class BillingManager {
 
   // The helper object
@@ -307,7 +308,7 @@ public class BillingManager {
     });
   }
   
-  private static BillingManager instance = new BillingManager();
+  private static final BillingManager instance = new BillingManager();
   
   public static BillingManager instance() {
     return instance;

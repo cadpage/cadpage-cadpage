@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 public abstract class EventGroup extends DonateEvent {
 
   // List of child events
-  private DonateEvent[] events;
+  private final DonateEvent[] events;
   
   public EventGroup(DonateEvent ... events ) {
     super(null, 0);

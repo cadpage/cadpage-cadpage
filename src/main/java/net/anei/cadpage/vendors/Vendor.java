@@ -39,15 +39,15 @@ abstract class Vendor {
   private static final long LAST_CONTACT_TIMEOUT = 60*ONE_DAY_MSECS;
   private static final long LAST_REGISTER_TIMEOUT = 30*ONE_DAY_MSECS;
 
-  private String vendorCode;
-  private int titleId;
-  private int summaryId;
-  private int textId;
-  private int iconId;
-  private int logoId;
-  private Uri baseURI;
-  private String triggerCode;
-  private String supportEmail;
+  private final String vendorCode;
+  private final int titleId;
+  private final int summaryId;
+  private final int textId;
+  private final int iconId;
+  private final int logoId;
+  private final Uri baseURI;
+  private final String triggerCode;
+  private final String supportEmail;
   
   private String title = null;
   
@@ -462,7 +462,7 @@ abstract class Vendor {
     if (reactivate) reportStatusChange();
   }
   
-  void updateLastRegisterTime() {
+  private void updateLastRegisterTime() {
     SharedPreferences.Editor editor = prefs.edit();
     editor.putLong("lastRegisterTime", new Date().getTime());
     editor.putLong("lastContactTime", 0L);

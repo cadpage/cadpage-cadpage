@@ -6,8 +6,8 @@ import android.view.View;
 
 public class LocationSwitchPreference extends SwitchPreference {
   
-  private String location;
-  private LocationManager locMgr;
+  private final String location;
+  private final LocationManager locMgr;
 
   public LocationSwitchPreference(Context context, String location, String name,
                                   LocationManager locMgr) {

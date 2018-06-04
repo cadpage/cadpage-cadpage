@@ -22,7 +22,7 @@ public class VendorEvent extends DonateScreenEvent {
    * won't display it as though it would
    */
   
-  int status;
+  final int status;
   
   private VendorEvent(int status) {
     super(AlertStatus.GREEN, R.string.vendor_title, R.string.vendor_text,
@@ -43,7 +43,7 @@ public class VendorEvent extends DonateScreenEvent {
     return new Object[]{VendorManager.instance().getTextPageVendorName()};
   }
   
-  private static VendorEvent[] instances = new VendorEvent[]{
+  private static final VendorEvent[] instances = new VendorEvent[]{
     new VendorEvent(1),
     new VendorEvent(2)
   };

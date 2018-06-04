@@ -10,8 +10,8 @@ public class ReminderReceiver extends BroadcastReceiver {
 
   private static final String ACTION_REMIND = "net.anei.cadpage.ACTION_REMIND";
   
-  private static String EXTRA_MSG_ID = "net.anei.cadpage.ReminderReceiver.EXTRA_MSG_ID";
-  private static String EXTRA_START = "net.anei.cadpage.ReminderReceiver.EXTRA_START";
+  private static final String EXTRA_MSG_ID = "net.anei.cadpage.ReminderReceiver.EXTRA_MSG_ID";
+  private static final String EXTRA_START = "net.anei.cadpage.ReminderReceiver.EXTRA_START";
 
   @Override
   public void onReceive(Context context, Intent intent) {

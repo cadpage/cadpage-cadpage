@@ -47,10 +47,10 @@ public class TrackingPromptActivity extends Safe40Activity {
     minDist = intent.getIntExtra(EXTRA_MIN_DIST, 10);
     minTime = intent.getIntExtra(EXTRA_MIN_TIME, 10);
     
-    final CheckBox rememberBox = (CheckBox)findViewById(R.id.TrackingRememberBox);
+    final CheckBox rememberBox = findViewById(R.id.TrackingRememberBox);
     
     // Setup onclick listeners for both buttons
-    Button button = (Button) findViewById(R.id.TrackingYesBtn);
+    Button button = findViewById(R.id.TrackingYesBtn);
     button.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View view) {
@@ -67,7 +67,7 @@ public class TrackingPromptActivity extends Safe40Activity {
       }
     });
     
-    button = (Button) findViewById(R.id.TrackingNoBtn);
+    button = findViewById(R.id.TrackingNoBtn);
     button.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View view) {

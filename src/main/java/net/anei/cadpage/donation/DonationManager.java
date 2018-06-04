@@ -39,7 +39,7 @@ public class DonationManager {
                               PAID(Status.GOOD), PAID_WARN(Status.WARN), PAID_EXPIRE(Status.BLOCK), PAID_LIMBO(Status.WARN), 
                               SPONSOR(Status.GOOD), SPONSOR_WARN(Status.WARN), SPONSOR_EXPIRE(Status.BLOCK), SPONSOR_LIMBO(Status.WARN), 
                               DEMO(Status.WARN), DEMO_EXPIRE(Status.BLOCK), EXEMPT(Status.WARN);
-    private Status status;
+    private final Status status;
     DonationStatus(Status status) {
       this.status = status;
     }
@@ -361,9 +361,8 @@ public class DonationManager {
 
     // If neither the paid subscriber or expiration date have changed
     // nothing needs to be done
-    boolean expDateSame = (expireDate == null ? oldExpireDate == null :
-                           oldExpireDate == null ? false :
-                           expireDate.equals(oldExpireDate));
+    boolean expDateSame = (expireDate == null ? oldExpireDate == null
+                                              : oldExpireDate != null && expireDate.equals(oldExpireDate));
     if (paidSubscriber == oldPaidSubscriber && expDateSame) return;
 
     // Report whatever changed to the Cadpage service vendor
@@ -501,7 +500,7 @@ public class DonationManager {
   }
 
   // Singleton instance
-  private static DonationManager instance = new DonationManager();
+  private static final DonationManager instance = new DonationManager();
   
   /**
    * @return singleton instance of DonationManager

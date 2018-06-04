@@ -20,8 +20,8 @@ public class LocationManager {
   
   private Preference descPreference;
   
-  private List<String> locationList = new ArrayList<String>();
-  private List<String> nameList = new ArrayList<String>();
+  private final List<String> locationList = new ArrayList<String>();
+  private final List<String> nameList = new ArrayList<String>();
   
   private OnPreferenceChangeListener listener = null;
   

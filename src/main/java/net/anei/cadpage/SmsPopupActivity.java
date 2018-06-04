@@ -29,7 +29,7 @@ public class SmsPopupActivity extends Safe40Activity {
   
   private static final String EXTRAS_MSG_ID = "SmsPopupActivity.MSG_ID";
   
-  private PermissionManager permMgr = new PermissionManager(this);
+  private final PermissionManager permMgr = new PermissionManager(this);
   
   private SmsMmsMessage message;
   private MsgOptionManager optManager;
@@ -39,7 +39,7 @@ public class SmsPopupActivity extends Safe40Activity {
   private TextView messageReceivedTV;
   private TextView messageTV;
 
-  private ProgressDialog mProgressDialog = null;
+  private final ProgressDialog mProgressDialog = null;
 
   private LinearLayout mainLL = null;
   
@@ -49,26 +49,6 @@ public class SmsPopupActivity extends Safe40Activity {
 
   private static final double WIDTH = 0.9;
   private static final int MAX_WIDTH = 640;
-//  private static final int DIALOG_LOADING = Menu.FIRST;
-
-//  // TextToSpeech variables
-//  private boolean ttsInitialized = false;
-//  private static boolean androidTextToSpeechAvailable = false;
-//  private TTS eyesFreeTts = null;
-//  private TextToSpeechWrapper androidTts = null;
-	
-	private MsgInfo info;
-  
-
-//  // Establish whether the Android TextToSpeech class is available to us
-//  static {
-//    try {
-//      TextToSpeechWrapper.checkAvailable();
-//      androidTextToSpeechAvailable = true;
-//    } catch (Throwable t) {
-//      androidTextToSpeechAvailable = false;
-//    }
-//  }
 
   @Override
   protected void onCreate(Bundle bundle) {
@@ -85,19 +65,19 @@ public class SmsPopupActivity extends Safe40Activity {
     resizeLayout();
 
     // Find the main textviews
-    fromImage = (ImageView)findViewById(R.id.FromImageView);
-    fromTV = (TextView) findViewById(R.id.FromTextView);
-    messageTV = (TextView) findViewById(R.id.MessageTextView);
+    fromImage = findViewById(R.id.FromImageView);
+    fromTV = findViewById(R.id.FromTextView);
+    messageTV = findViewById(R.id.MessageTextView);
     messageTV.setAutoLinkMask(Linkify.WEB_URLS);
-    messageReceivedTV = (TextView) findViewById(R.id.HeaderTextView);
+    messageReceivedTV = findViewById(R.id.HeaderTextView);
 
     // Enable long-press context menu
-    mainLL = (LinearLayout)findViewById(R.id.MainLinearLayout);
+    mainLL = findViewById(R.id.MainLinearLayout);
     registerForContextMenu(mainLL);
     
     // We can't hook the current donations status here because it may change
     // from msg to message.
-    donateStatusBtn = (Button)findViewById(R.id.donate_status_button);
+    donateStatusBtn = findViewById(R.id.donate_status_button);
     
     // Populate display fields
     populateViews(getIntent());
@@ -258,8 +238,8 @@ public class SmsPopupActivity extends Safe40Activity {
     optManager = new MsgOptionManager(this, message);
     optManager.setupButtons((ViewGroup)findViewById(R.id.RespButtonLayout),
                             (ViewGroup)findViewById(R.id.RegButtonLayout));
-    
-    info = message.getInfo();
+
+    MsgInfo info = message.getInfo();
 
     // Hook the donate status button with the current donation status
     MainDonateEvent.instance().setButton(this, donateStatusBtn, newMessage);
@@ -554,7 +534,7 @@ public class SmsPopupActivity extends Safe40Activity {
     // size only needed because the theme of this activity is "dialog" so it looks
     // like it's floating and doesn't seem to fill_parent like a regular activity
     if (mainLL == null) {
-      mainLL = (LinearLayout) findViewById(R.id.MainLinearLayout);
+      mainLL = findViewById(R.id.MainLinearLayout);
     }
     Display d = getWindowManager().getDefaultDisplay();
 

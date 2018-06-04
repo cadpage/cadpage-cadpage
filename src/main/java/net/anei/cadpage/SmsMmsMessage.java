@@ -81,7 +81,7 @@ public class SmsMmsMessage implements Serializable {
   private String missingParsers = null;
   
   // Dead member replaced by vendor
-  private String sponsor = null;
+  private final String sponsor = null;
   
   // C2DM page information
   private String ackReq = null;

@@ -8,6 +8,7 @@ import android.os.PowerManager;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 
+@SuppressWarnings("RedundantIfStatement")
 public class SmsService extends IntentService {
 
   private static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";

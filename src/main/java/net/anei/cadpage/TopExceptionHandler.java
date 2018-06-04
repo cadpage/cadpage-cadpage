@@ -15,7 +15,7 @@ public class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
   
   // Limit in seconds on exception thrashing.  We will not try to handle a
   // exception thrown within this time limit of the previous exception.
-  private static int THRASHING_LIMIT = 60; 
+  private static final int THRASHING_LIMIT = 60;
   
   private static Thread.UncaughtExceptionHandler defaultUEH;
   
@@ -167,8 +167,7 @@ public class TopExceptionHandler implements Thread.UncaughtExceptionHandler {
    */
   public static void reportException(final Exception ex) {
     if (mainHandler == null) {
-      RuntimeException ex2 = (ex instanceof RuntimeException ? (RuntimeException)ex : new RuntimeException(ex));
-      throw ex2;
+      throw (ex instanceof RuntimeException ? (RuntimeException)ex : new RuntimeException(ex));
     }
     mainHandler.post(new Runnable(){
       @Override

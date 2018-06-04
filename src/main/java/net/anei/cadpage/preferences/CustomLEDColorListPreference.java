@@ -16,7 +16,7 @@ import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class CustomLEDColorListPreference extends ListPreference implements OnSeekBarChangeListener {
-  private Context context;
+  private final Context context;
   private String led_color;
   private String led_color_custom;
   private SeekBar redSeekBar;
@@ -74,15 +74,15 @@ public class CustomLEDColorListPreference extends ListPreference implements OnSe
 
     View v = inflater.inflate(R.layout.ledcolordialog, null);
 
-    redSeekBar = (SeekBar) v.findViewById(R.id.RedSeekBar);
-    greenSeekBar = (SeekBar) v.findViewById(R.id.GreenSeekBar);
-    blueSeekBar = (SeekBar) v.findViewById(R.id.BlueSeekBar);
+    redSeekBar = v.findViewById(R.id.RedSeekBar);
+    greenSeekBar = v.findViewById(R.id.GreenSeekBar);
+    blueSeekBar = v.findViewById(R.id.BlueSeekBar);
 
-    redTV = (TextView) v.findViewById(R.id.RedTextView);
-    greenTV = (TextView) v.findViewById(R.id.GreenTextView);
-    blueTV = (TextView) v.findViewById(R.id.BlueTextView);
+    redTV = v.findViewById(R.id.RedTextView);
+    greenTV = v.findViewById(R.id.GreenTextView);
+    blueTV = v.findViewById(R.id.BlueTextView);
 
-    previewIV = (ImageView) v.findViewById(R.id.PreviewImageView);
+    previewIV = v.findViewById(R.id.PreviewImageView);
 
     redSeekBar.setProgress(red);
     greenSeekBar.setProgress(green);

@@ -19,7 +19,7 @@ public class ManageBluetooth {
   public static final int BLUETOOTH_REQ = 10000;
   
   // Production version does not request Bluetooth permissions, so this will never work!!
-  private BluetoothAdapter adapter = null; // BluetoothAdapter.getDefaultAdapter();
+  private final BluetoothAdapter adapter = null; // BluetoothAdapter.getDefaultAdapter();
   
   public void enableDiscovery(Activity context) {
     Log.v("Starting Bluetooth Discovery");

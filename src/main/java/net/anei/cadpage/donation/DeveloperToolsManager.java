@@ -85,7 +85,7 @@ public class DeveloperToolsManager {
   
   private class DeveloperListPreference extends ListPreference {
     
-    private Activity context;
+    private final Activity context;
 
     public DeveloperListPreference(Activity context) {
       super(context);
@@ -352,7 +352,7 @@ public class DeveloperToolsManager {
   
   
   
-  private static DeveloperToolsManager instance = new DeveloperToolsManager();
+  private static final DeveloperToolsManager instance = new DeveloperToolsManager();
   
   public static DeveloperToolsManager instance() {
     return instance;

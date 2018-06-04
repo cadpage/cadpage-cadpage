@@ -5,7 +5,7 @@ package net.anei.cadpage;
  */
 public class FilterOptions {
   
-  private String options;
+  private final String options;
   
   public FilterOptions() {
     this("");

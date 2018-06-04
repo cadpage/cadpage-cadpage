@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class TestNotificationDialogPreference extends DialogPreference {
-  private Context context;
+  private final Context context;
 
   public TestNotificationDialogPreference(Context _context, AttributeSet attrs) {
     super(_context, attrs);

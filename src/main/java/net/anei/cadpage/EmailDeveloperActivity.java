@@ -68,16 +68,16 @@ public class EmailDeveloperActivity extends Safe40Activity {
     setContentView(R.layout.popup_email);
     
     // Find the main textview widget
-    textView = (TextView)findViewById(R.id.EmailTextView);
+    textView = findViewById(R.id.EmailTextView);
     
     // And the two checkboxes
-    includeMsgBox = (CheckBox)findViewById(R.id.EmailMsgBox);
-    includeConfigBox = (CheckBox)findViewById(R.id.EmailConfigBox);
+    includeMsgBox = findViewById(R.id.EmailMsgBox);
+    includeConfigBox = findViewById(R.id.EmailConfigBox);
     
     // Setup onclick listeners for both buttons
-    Button button = (Button) findViewById(R.id.EmailOKBtn);
+    Button button = findViewById(R.id.EmailOKBtn);
     button.setOnClickListener(new BtnListener(true));
-    button = (Button) findViewById(R.id.EmailCancelBtn);
+    button = findViewById(R.id.EmailCancelBtn);
     button.setOnClickListener(new BtnListener(false));
     
     // Setup everything else
@@ -126,7 +126,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
    */
   private class BtnListener implements OnClickListener {
     
-    private boolean send;
+    private final boolean send;
     
     public BtnListener(boolean send) {
       this.send = send;

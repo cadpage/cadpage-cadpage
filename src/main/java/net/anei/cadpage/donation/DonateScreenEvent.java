@@ -44,7 +44,7 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
     if (activity.isFinishing()) return;
     
     // Fill the button list with the appropriate event buttons
-    LinearLayout btnList = (LinearLayout)activity.findViewById(R.id.DonateButtonList);
+    LinearLayout btnList = activity.findViewById(R.id.DonateButtonList);
     if (btnList == null) return;
 
     if (events != null){

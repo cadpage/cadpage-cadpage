@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 public abstract class DonateScreenBaseEvent extends DonateEvent {
 
-  private int titleId;
-  private int winTitleId;
-  private int textId;
-  private int layout;
+  private final int titleId;
+  private final int winTitleId;
+  private final int textId;
+  private final int layout;
 
   protected DonateScreenBaseEvent(AlertStatus alertStatus, int titleId, int textId,
                                   int layout) {
@@ -63,13 +63,13 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     // Set heading color if appropriate
     // There is one and only one status event that is not really a payment status.
     // Very sloppy, but we will check for that and overwrite the normal title text
-    TextView view = (TextView)activity.findViewById(R.id.DonateStatusView);
+    TextView view = activity.findViewById(R.id.DonateStatusView);
     if (overrideWindowTitle()) view.setText(activity.getString(winTitleId >= 0 ? winTitleId : titleId));
     setTextColor(view);
     
     // Set up main box text and color
     try {
-      view = (TextView) activity.findViewById(R.id.DonateTextView);
+      view = activity.findViewById(R.id.DonateTextView);
       view.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
       setTextColor(view);
     } catch (RuntimeException ex) {
@@ -107,7 +107,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
   
   
   // Map use to identify Screen events by classname
-  private static Map<String, DonateScreenBaseEvent> screenEventMap = 
+  private static final Map<String, DonateScreenBaseEvent> screenEventMap =
       new HashMap<String, DonateScreenBaseEvent>();
   
   /**

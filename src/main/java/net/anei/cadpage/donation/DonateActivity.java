@@ -19,7 +19,7 @@ public class DonateActivity extends BillingActivity {
   private static final String EXTRA_SCREEN_NAME = "net.anei.cadpage.DonateActivty.SCREEN_NAME";
   private static final String EXTRA_MSG_ID =      "net.anei.cadpage.DonateActivity.MSG_ID";
 
-  private PermissionManager permMgr = new PermissionManager(this);
+  private final PermissionManager permMgr = new PermissionManager(this);
 
   private DonateScreenBaseEvent event;
 

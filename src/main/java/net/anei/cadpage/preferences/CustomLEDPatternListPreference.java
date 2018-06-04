@@ -13,9 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CustomLEDPatternListPreference extends ListPreference {
-  private Context context;
+  private final Context context;
   private String flashLedPattern;
-  private String flashLedPatternCustom;
   private int[] led_pattern;
 
   public CustomLEDPatternListPreference(Context c) {
@@ -44,7 +43,7 @@ public class CustomLEDPatternListPreference extends ListPreference {
   private void getPrefs() {
 
     flashLedPattern = ManagePreferences.ledPattern();
-    flashLedPatternCustom = ManagePreferences.ledPatternCustom();
+    String flashLedPatternCustom = ManagePreferences.ledPatternCustom();
 
     led_pattern = null;
 
@@ -65,8 +64,8 @@ public class CustomLEDPatternListPreference extends ListPreference {
 
     View v = inflater.inflate(R.layout.ledpatterndialog, null);
 
-    final EditText onEditText = (EditText) v.findViewById(R.id.LEDOnEditText);
-    final EditText offEditText = (EditText) v.findViewById(R.id.LEDOffEditText);
+    final EditText onEditText = v.findViewById(R.id.LEDOnEditText);
+    final EditText offEditText = v.findViewById(R.id.LEDOffEditText);
 
     onEditText.setText(String.valueOf(led_pattern[0]));
     offEditText.setText(String.valueOf(led_pattern[1]));

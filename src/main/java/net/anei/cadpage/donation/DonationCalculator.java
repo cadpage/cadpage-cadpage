@@ -7,7 +7,7 @@ import net.anei.cadpage.ManagePreferences;
 
 public class DonationCalculator {
   
-  int type;
+  final int type;
   int year = 0;
   String purchaseDateStr = null;
   String sponsor = null;

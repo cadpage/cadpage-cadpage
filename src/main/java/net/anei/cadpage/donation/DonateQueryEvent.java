@@ -23,16 +23,16 @@ public abstract class DonateQueryEvent extends DonateScreenBaseEvent {
   public void create(final Activity activity, SmsMmsMessage msg) {
     super.create(activity, msg);
     
-    final TextView editView = (TextView)activity.findViewById(R.id.editText);
+    final TextView editView = activity.findViewById(R.id.editText);
     
-    Button btn = (Button)activity.findViewById(R.id.btnCancel);
+    Button btn = activity.findViewById(R.id.btnCancel);
     btn.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
         activity.finish();
       }});
    
-    btn = (Button)activity.findViewById(R.id.btnDone);
+    btn = activity.findViewById(R.id.btnDone);
     btn.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {

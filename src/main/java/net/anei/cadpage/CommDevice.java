@@ -13,8 +13,8 @@ import android.hardware.usb.UsbManager;
  */
 public class CommDevice {
   
-  private UsbManager mgr;
-  private UsbDevice device;
+  private final UsbManager mgr;
+  private final UsbDevice device;
   private boolean open = false;
   private UsbInterface itf;
   private UsbEndpoint inEndPoint;

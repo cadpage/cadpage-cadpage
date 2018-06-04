@@ -79,7 +79,7 @@ public class HttpService extends Service {
     private int connectTimeout = 60000;
     private int readTimeout = 30000;
     
-    private boolean uiResult;
+    private final boolean uiResult;
     
     private int status = -1;
     private String result = null;
@@ -247,7 +247,7 @@ public class HttpService extends Service {
   private static PowerManager.WakeLock sWakeLock = null;
   
   // Master request queue
-  private static Queue<HttpRequest> reqQueue =new LinkedList<HttpRequest>();
+  private static final Queue<HttpRequest> reqQueue =new LinkedList<HttpRequest>();
 
   @Override
   public void onCreate() {

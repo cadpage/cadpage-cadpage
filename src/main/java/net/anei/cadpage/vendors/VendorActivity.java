@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class VendorActivity extends Safe40Activity {
 
-  private PermissionManager permMgr = new PermissionManager(this);
+  private final PermissionManager permMgr = new PermissionManager(this);
 
   private static final String EXTRAS_VENDOR_CODE = "net.anei.cadpage.VendorActivity.VENDOR_CODE";
   
@@ -45,7 +45,7 @@ public class VendorActivity extends Safe40Activity {
     
     // We can't do the cool stuff until we get a Vendor code
     // But can set up the button handlers here
-    moreInfoButton = (Button)findViewById(R.id.more_info_button);
+    moreInfoButton = findViewById(R.id.more_info_button);
     moreInfoButton.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
@@ -53,7 +53,7 @@ public class VendorActivity extends Safe40Activity {
       }
     });
     
-    profileButton = (Button)findViewById(R.id.profile_button);
+    profileButton = findViewById(R.id.profile_button);
     profileButton.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
@@ -61,9 +61,9 @@ public class VendorActivity extends Safe40Activity {
       }
     });
     
-    infoTextView = (TextView)findViewById(R.id.VendorInfoView);
+    infoTextView = findViewById(R.id.VendorInfoView);
     
-    registerButton = (Button)findViewById(R.id.register_button);
+    registerButton = findViewById(R.id.register_button);
     registerButton.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
@@ -71,7 +71,7 @@ public class VendorActivity extends Safe40Activity {
       }
     });
     
-    unregisterButton = (Button)findViewById(R.id.unregister_button);
+    unregisterButton = findViewById(R.id.unregister_button);
     unregisterButton.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
@@ -79,7 +79,7 @@ public class VendorActivity extends Safe40Activity {
       }
     });
     
-    Button btn = (Button)findViewById(R.id.cancel_button);
+    Button btn = findViewById(R.id.cancel_button);
     btn.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View v) {
@@ -132,7 +132,7 @@ public class VendorActivity extends Safe40Activity {
     int resId = vendor.getIconId();
     int logoId = vendor.getLogoId();
     View imgTitleView = findViewById(R.id.VendorImageTitleView);
-    ImageView logoView = (ImageView)findViewById(R.id.VendorLogoView);
+    ImageView logoView = findViewById(R.id.VendorLogoView);
     if (logoId > 0) {
       imgTitleView.setVisibility(View.GONE);
       logoView.setVisibility(View.VISIBLE);
@@ -141,19 +141,19 @@ public class VendorActivity extends Safe40Activity {
       imgTitleView.setVisibility(View.VISIBLE);
       logoView.setVisibility(View.GONE);
       if (resId > 0) {
-        ImageView imgView = (ImageView)findViewById(R.id.VendorImageView);
+        ImageView imgView = findViewById(R.id.VendorImageView);
         imgView.setImageResource(resId);
       }
       resId = vendor.getTitleId();
       if (resId > 0) {
-        TextView txtView = (TextView)findViewById(R.id.VendorTitleView);
+        TextView txtView = findViewById(R.id.VendorTitleView);
         txtView.setText(resId);
       }
     }
     
     resId = vendor.getTextId();
     if (resId > 0) {
-      TextView txtView = (TextView)findViewById(R.id.VendorDescriptionView);
+      TextView txtView = findViewById(R.id.VendorDescriptionView);
       txtView.setText(resId);
     }
     
