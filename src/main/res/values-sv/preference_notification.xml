@@ -12,8 +12,8 @@
   <string name="pref_notif_enabled_summaryon">Notifikation är aktiverad</string>
   <string name="pref_notif_enabled_summaryoff">Notifikation är avaktiverad</string>
 
-  <string name="pref_notif_override_title">Play Cadpage Audio Alert</string> <!-- Translate -->
-  <string name="pref_notif_override_summaryon">Play special Cadpage alert in addition to regular audio alert</string> <!-- Translate -->
+  <string name="pref_notif_override_title">Override Cadpage Audio Alert</string> <!-- Translate -->
+  <string name="pref_notif_override_summaryon">Override Cadpage Audio Alert</string> <!-- Translate -->
   <string name="pref_notif_override_summaryoff">Play regular configured audio alert</string> <!-- Translate -->
 
   <string name="pref_notif_override_old_title">Bortse från Mute och Volymkontroll</string>

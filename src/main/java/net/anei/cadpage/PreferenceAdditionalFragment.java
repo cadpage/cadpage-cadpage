@@ -13,12 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PreferenceAdditionalFragment extends PreferenceFragment {
+
+  private TwoStatePreference mPopupEnabledPreference;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.preference_additional);
+
+    // Save specific preferences we might need later
+    mPopupEnabledPreference = (TwoStatePreference) findPreference(getString(R.string.pref_popup_enabled_key));
 
     Preference pref = findPreference(getString(R.string.pref_report_position_key));
     pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
@@ -115,4 +121,13 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
       SmsMessageQueue.getInstance().notifyDataChange();
     }
   }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    // Check for changes to values that are accessable from the widget
+    mPopupEnabledPreference.setChecked(ManagePreferences.popupEnabled());
+  }
+
 }

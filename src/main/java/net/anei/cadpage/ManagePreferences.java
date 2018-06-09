@@ -32,7 +32,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 
-@SuppressWarnings("RedundantIfStatement")
+@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
 public class ManagePreferences implements SharedPreferences.OnSharedPreferenceChangeListener {
   
   // Preference version.  This needs to be incremented every time a new
@@ -60,7 +60,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
   /**
    * Initialize the ManagePreferences class
-   * @param context
+   * @param context current context
    */
   public static void setupPreferences(Context context) {
 
@@ -111,6 +111,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // If old version < 43 create the auto-backup check file
       if (oldVersion < 43) {
         try {
+          //noinspection ResultOfMethodCallIgnored
           checkFile.createNewFile();
         } catch (IOException ex) {
           Log.e(ex);
@@ -148,7 +149,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // VendorManager, and the above logic becomes problematic.  So now we assume
       // that everything is a text message.  But what we are really trusting is 
       // that there are very very few, if any, Cadpage upgrades to to this old version
-      if (oldVersion < 38 && oldVersion > 0) {
+      if (oldVersion < 38) {
         boolean oldGenAlert = prefs.getBoolean(R.string.pref_gen_alert_key);
         prefs.putString(R.string.pref_gen_alert_option_key, 
                         oldGenAlert ? "" : "BHNP");
@@ -183,7 +184,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       // If old version was < 34, we need to convert the reminder repeat interval
       // from minutes to seconds
-      if (oldVersion > 0 && oldVersion < 34) {
+      if (oldVersion < 34) {
         String repeatInterval = prefs.getString(R.string.pref_notif_repeat_interval_key);
         int repeat = Integer.parseInt(repeatInterval)*60;
         if (repeat > 120) repeat = 120;
@@ -210,7 +211,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       // Ditto if is a newer parser code that has been renamed,
       String location = location();
-      String newLocation = convertOldLocationCode(context, location);
+      String newLocation = convertOldLocationCode(location);
       if (! location.equals(newLocation)) {
         setLocation(newLocation);
         if (location.equals("MDCentreville")) {
@@ -238,9 +239,17 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     freeSubType = context.getString(R.string.free_subtype);
     paidSubType = context.getString(R.string.paid_subtype);
 
-    // We run into problems if the change listeners are called durring this setup process
+    // We run into problems if the change listeners are called during this setup process
     // so we don't arm them until now
     prefs.armListeners();
+  }
+
+  public static void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+    prefs.mPrefs.registerOnSharedPreferenceChangeListener(listener);
+  }
+
+  public static void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+    prefs.mPrefs.unregisterOnSharedPreferenceChangeListener(listener);
   }
 
   /**
@@ -258,11 +267,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
   /**
    * Convert any old obsolete location codes to new equivalent
-   * @param context current context
    * @param location location to be checked
    * @return the new location that should be used
    */
-  public static String convertOldLocationCode(Context context, String location) {
+  private static String convertOldLocationCode(String location) {
     
     // Scan through all of the location codes looking to see if any of thm
     // match an old code
@@ -278,7 +286,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // If not, the usual case, return the original location string
     if (!bad) return location;
     
-    ArrayList<String> locList = new ArrayList<String>();
+    ArrayList<String> locList = new ArrayList<>();
     for (String loc : locs) {
       loc = ManageParsers.convertLocationCode(loc);
       if (!locList.contains(loc)) locList.add(loc);
@@ -312,18 +320,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return false;
   }
 
-  public static boolean initBilling() {
-    return prefs.getBoolean(R.string.pref_init_billing_key);
-  }
-  
-  public static void setInitBilling() {
-    setInitBilling(true);
-  }
-  
-  public static void setInitBilling(boolean newVal) {
-    prefs.putBoolean(R.string.pref_init_billing_key, newVal);
-  }
-  
   public static boolean enabled() {
     return prefs.getBoolean(R.string.pref_enabled_key);
   }
@@ -589,6 +585,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   public static boolean notifyOverride() {
     return prefs.getBoolean(R.string.pref_notif_override_key);
+  }
+
+  public static void setNotifyOverride(boolean newVal) {
+    prefs.putBoolean(R.string.pref_notif_override_key, newVal);
   }
   
   public static boolean notifyOverrideVolume() {
@@ -1247,14 +1247,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setReconnect(boolean newVal) {
     prefs.putBoolean(R.string.pref_reconnect_key, newVal);
   }
-  
-  public static String ledColor() {
-    return prefs.getString(R.string.pref_flashled_color_key, R.string.pref_flashled_color_default);
-  }
-  
-  public static String ledColorCustom() {
-    return prefs.getString(R.string.pref_flashled_color_custom_key, R.string.pref_flashled_color_default);
-  }
 
   public static void setLedColorCustom(int color) {
     prefs.putString(R.string.pref_flashled_color_custom_key, "#" + Integer.toHexString(color));
@@ -1357,7 +1349,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
     settings.clear();
-    settings.commit();
+    settings.apply();
   }
   
   
@@ -1429,7 +1421,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
   
   private static PermissionManager permMgr = null;
-  private static final Stack<PermissionManager> permMgrStack = new Stack<PermissionManager>();
+  private static final Stack<PermissionManager> permMgrStack = new Stack<>();
 
   /**
    * Set the current permission manager, should be called by the onCreate() method of
@@ -1452,10 +1444,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * Release current permission manager
    * this should be called in the onDestroy() method of any Activity that previously
    * called setPermissionManager
-   * @param permMgr permission manager being released
+   * @param myPermMgr permission manager being released
    */
-  public static void releasePermissionManager(PermissionManager permMgr) {
-    permMgrStack.remove(permMgr);
+  public static void releasePermissionManager(PermissionManager myPermMgr) {
+    permMgrStack.remove(myPermMgr);
     if (permMgrStack.empty()) {
       permMgr = null;
     } else {
@@ -1511,7 +1503,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     public void checkPermission() {
 
-      failedCheckers = new ArrayList<PermissionChecker>();
+      failedCheckers = new ArrayList<>();
 
       // Loop through all the defined permission checkers
       for (PermissionChecker checker : checkers) {
@@ -1862,8 +1854,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       prefs.putBoolean(resPrefId, value);
     }
   }
-  
-  /******************************************************************/
+
+  /* *****************************************************************/
+
   /**
    * Generic permission checker tied to particular values of a setting
    * V - type of setting value
@@ -2172,12 +2165,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * @param permissions list of requested permissions
      * @param granted list of requested permission statuses
      */
-    public void run(boolean ok, String[] permissions, int[] granted);
+    void run(boolean ok, String[] permissions, int[] granted);
   }
   
   /*************************************************************************
    * This is the base level for all of the permission checker classes
    *************************************************************************/
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   private abstract static class PermissionChecker {
     
     final int permReq;
@@ -2207,8 +2201,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     public boolean check(boolean request) {
       
       // initialize arrays of requested permissions and explanation resource ID's
-      reqPermissions = new ArrayList<String>();
-      reqExplainIds = new ArrayList<Integer>();
+      reqPermissions = new ArrayList<>();
+      reqExplainIds = new ArrayList<>();
       
       // Call the main permission checker.  This is supposed to call one of
       // the requestPermisson() methods for any permissions that need to be requested
@@ -2245,7 +2239,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * Convenience method that checks to see if specific permission has been
      * granted, and if it has not calls requestPermission to request it
      * @param reqPerm requested permission
-     * @param explainId resource ID of text explaining why permision is needed
+     * @param explainId resource ID of text explaining why permission is needed
      * @return true if permission is granted, false if not
      */
     protected boolean checkRequestPermission(String reqPerm, int explainId) {
@@ -2263,8 +2257,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
     
     /**
-     * Called to request a currently ungranted permissioin
-     * @param reqPerm permission requestioned
+     * Called to request a currently ungranted permission
+     * @param reqPerm permission requested
      * @param explainId resource Id that defines a text explanation for
      * why this permission is needed.  Can be zero in no explanation is
      * to be provided
@@ -2309,8 +2303,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * This is called to indicate the results of the permission request.  This method
      * doesn't do much other than reset the permission request arrays.  It will be
      * overridden in subclasses that have to actually do something
-     * @param permissions
-     * @param granted
+     * @param permissions list of permissions
+     * @param granted list of permission statuses
      */
     public void onRequestPermissionResult(String [] permissions, int[] granted) {
       reqPermissions = null;
@@ -2318,7 +2312,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
   }
   
-  /**************************************************************************************************/
+  /* *************************************************************************************************/
   
   /**
    * Called to indicate the results of a permission request
@@ -2330,12 +2324,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    */
   public static boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
 
-    // Find the corresponding PermissionChecker object and call it's onRequestePermissionResult method
+    // Find the corresponding PermissionChecker object and call it's onRequestPermissionResult method
     if (requestCode < 1 || requestCode > PERM_REQ_LIMIT) return false;
     PermissionChecker checker = checkers[requestCode-1];
     if (checker == null) return false;
     
-    // If checker results have alread been cleared, do not call again
+    // If checker results have already been cleared, do not call again
     if (checker.getReqPermissions() != null) {
       checker.onRequestPermissionResult(permissions, granted);
     }
@@ -2344,19 +2338,19 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   private Context context;
   private SharedPreferences mPrefs;
-  
+
   private interface PreferenceChangeListener {
-    public void preferenceChanged(String key, Object newVal);
+    void preferenceChanged(String key, Object newVal);
   }
   private final Map<String, PreferenceChangeListener>listenerMap =
-      new HashMap<String, PreferenceChangeListener>();
+      new HashMap<>();
 
   // Dummy default construct used to create a test preferences object for test purposes
   protected ManagePreferences() {}
 
   
-  private ManagePreferences(Context _context) {
-    this.context = _context;
+  private ManagePreferences(Context context) {
+    this.context = context;
     mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
@@ -2487,40 +2481,40 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     if (result == Float.MAX_VALUE) throw new RuntimeException("No configured preference value found");
     return result;
   }
-  
+
   protected void putBoolean(int resPrefId, boolean newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putBoolean(key, newVal);
-    settings.commit();
+    settings.apply();
   }
 
   protected void putString(int resPrefId, String newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putString(key, newVal);
-    settings.commit();
+    settings.apply();
   }
 
   protected void putInt(int resPrefId, int newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putInt(key, newVal);
-    settings.commit();
+    settings.apply();
   }
 
   protected void putLong(int resPrefId, long newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putLong(key, newVal);
-    settings.commit();
+    settings.apply();
   }
   
   protected void putFloat(int resPrefId, float newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putFloat(key, newVal);
-    settings.commit();
+    settings.apply();
   }
 
   // Array of preference keys to include in email

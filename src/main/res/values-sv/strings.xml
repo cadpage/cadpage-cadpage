@@ -101,7 +101,17 @@
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="remember_text">Komma ihåg ditt val?</string>
-    
+
+  <!-- Duplicate notification audio warning dialog -->
+  <string name="notify_override_prompt_title">Double audio alert warning</string>  <!-- Translate -->
+  <string name="notify_override_prompt_text">  <!-- Translate -->
+    You have configured Cadpage to sound both the regular alert and a override alert when a
+    call is received.  This is probably not what you want to do.
+  </string>
+  <string name="notify_override_cancel_regular">Let me cancel the regular alert</string>  <!-- Translate -->
+  <string name="notify_override_cancel_override">Cancel the override alert</string>  <!-- Translate -->
+  <string name="notify_override_good">Let it ride</string>  <!-- Translate -->
+
   <!-- Missing map page reader dialog -->
   <string name="missing_map_page_reader_title">Saknar läsare för kartsidessök</string> 
   <string name="missing_map_page_reader_text"> 

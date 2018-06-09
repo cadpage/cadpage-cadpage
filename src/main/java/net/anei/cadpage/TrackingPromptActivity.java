@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import net.anei.cadpage.ManagePreferences.PermissionAction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import android.widget.CheckBox;
  */
 public class TrackingPromptActivity extends Safe40Activity {
   
-  private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
+  private final static String EXTRA_PREFIX="net.anei.cadpage.TrackingPromptActivity.";
   private final static String EXTRA_URL = EXTRA_PREFIX + "URL";
   private final static String EXTRA_DURATION = EXTRA_PREFIX + "DURATION";
   private final static String EXTRA_MIN_DIST = EXTRA_PREFIX + "MIN_DIST";
@@ -24,7 +23,6 @@ public class TrackingPromptActivity extends Safe40Activity {
   // Tracking request parameters
   private String url;
   private int duration, minDist, minTime;
-  boolean remember;
 
   /**
    * Create new email dialog activity
@@ -79,7 +77,7 @@ public class TrackingPromptActivity extends Safe40Activity {
 
   /**
    * Handle server request to start position tracking.  Method check to see what user has permitted, possibly prompting user for
-   * permission, before passing request on to TrackignService
+   * permission, before passing request on to TrackingService
    * @param context current context
    * @param url position reporting URL
    * @param duration reporting duration in minutes

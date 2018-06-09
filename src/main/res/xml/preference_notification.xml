@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
-  <Preference
-  android:key="@string/pref_notif_config_key"
-  android:title="@string/pref_notif_config_title"
-  android:summary="@string/pref_notif_config_summary" />
   <SwitchPreference
   android:key="@string/pref_notif_enabled_key"
   android:title="@string/pref_notif_enabled_title"
   android:summaryOn="@string/pref_notif_enabled_summaryon"
   android:summaryOff="@string/pref_notif_enabled_summaryoff"
   android:defaultValue="true" />
+  <Preference
+  android:key="@string/pref_notif_config_key"
+  android:title="@string/pref_notif_config_title"
+  android:summary="@string/pref_notif_config_summary"
+  android:dependency="@string/pref_notif_enabled_key"/>
   <net.anei.cadpage.preferences.ExtendedSwitchPreference
   android:key="@string/pref_notif_override_key"
   android:title="@string/pref_notif_override_title"

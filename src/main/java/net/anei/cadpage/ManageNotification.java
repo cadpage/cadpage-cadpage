@@ -107,6 +107,37 @@ public class ManageNotification {
      }
   }
 
+  /**
+   * Check for potential conflict between system and Cadpage audio notification alert
+   * @param context current context
+   * @return True if audio alerts have been configured by both the system and Cadpage notification
+   * settings
+   */
+  public static boolean checkNotificationAlertConflict(Context context) {
+
+    // This is only a problem starting with Android Oreo
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
+
+    Log.v("Checking for duplicate audio alert notification");
+
+    // Check to see if Cadpage is overriding audio alerts
+    if (!ManagePreferences.notifyEnabled()) return false;
+    if (!ManagePreferences.notifyOverride()) return false;
+    String soundURI = ManagePreferences.notifySound();
+    if (soundURI == null) return false;
+
+    // Check to see if System is generating audio alerts
+    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert nm != null;
+    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+    if (channel == null) return false;
+    if (channel.getImportance() < NotificationManager.IMPORTANCE_DEFAULT) return false;
+    Uri soundURI2 = channel.getSound();
+    if (soundURI2 == null) return false;
+
+    return true;
+  }
+
   public static Notification getMiscNotification(Context context) {
       return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
   }

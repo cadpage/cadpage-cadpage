@@ -12,8 +12,8 @@
   <string name="pref_notif_enabled_summaryon">Notifications are enabled</string>
   <string name="pref_notif_enabled_summaryoff">Notifications are disabled</string>
 
-  <string name="pref_notif_override_title">Play Cadpage Audio Alert</string>
-  <string name="pref_notif_override_summaryon">Play special Cadpage alert in addition to regular audio alert</string>
+  <string name="pref_notif_override_title">Override Cadpage Audio Alert</string>
+  <string name="pref_notif_override_summaryon">Play special override Cadpage alert</string>
   <string name="pref_notif_override_summaryoff">Play regular configured audio alert</string>
 
   <string name="pref_notif_override_old_title">Override Mute and Volume Control</string>
