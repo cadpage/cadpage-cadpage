@@ -17,7 +17,7 @@
     android:title="@string/pref_multi_location_title"
     android:summary="@string/pref_multi_location_summary"/>
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_override_filter_key"
     android:title="@string/pref_override_filter_title"
     android:summaryOn="@string/pref_override_filter_summaryon"
@@ -32,14 +32,14 @@
     android:summary="@string/pref_filter_summary"
     android:defaultValue="" />
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_show_source_key"
     android:title="@string/pref_show_source_title"
     android:summaryOn="@string/pref_show_source_summaryon"
     android:summaryOff="@string/pref_show_source_summaryoff"
     android:defaultValue="@string/pref_show_source_default" />
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_override_default_key"
     android:title="@string/pref_override_default_title"
     android:summaryOn="@string/pref_override_default_summaryon"
@@ -96,14 +96,14 @@
     android:title="@string/pref_split_msg_merge_title"
     android:summary="@string/pref_split_msg_merge_summary">
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_override_active911_split_key"
       android:title="@string/pref_override_active911_split_title"
       android:summaryOn="@string/pref_override_active911_split_summaryon"
       android:summaryOff="@string/pref_override_active911_split_summaryoff"
       android:defaultValue="false"/>
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_split_direct_page_key"
       android:title="@string/pref_split_direct_page_title"
       android:summaryOn="@string/pref_split_direct_page_summaryon"
@@ -128,35 +128,35 @@
       android:dialogTitle="@string/pref_split_min_msg_title"
       android:defaultValue="@string/pref_split_min_msg_default"/>
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_rev_msg_order_key"
       android:title="@string/pref_rev_msg_order_title"
       android:summaryOn="@string/pref_rev_msg_order_summaryon"
       android:summaryOff="@string/pref_rev_msg_order_summaryoff"
       android:defaultValue="@string/pref_rev_msg_order_default"/>
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_mix_msg_order_key"
       android:title="@string/pref_mix_msg_order_title"
       android:summaryOn="@string/pref_mix_msg_order_summaryon"
       android:summaryOff="@string/pref_mix_msg_order_summaryoff"
       android:defaultValue="false"/>
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_split_blank_ins_key"
       android:title="@string/pref_split_blank_ins_title"
       android:summaryOn="@string/pref_split_blank_ins_summaryon"
       android:summaryOff="@string/pref_split_blank_ins_summaryoff"
       android:defaultValue="@string/pref_split_blank_ins_default" />
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_split_chk_sender_key"
       android:title="@string/pref_split_chk_sender_title"
       android:summaryOn="@string/pref_split_chk_sender_summaryon"
       android:summaryOff="@string/pref_split_chk_sender_summaryoff"
       android:defaultValue="@string/pref_split_chk_sender_default" />
 
-      <SwitchPreference
+      <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_split_keep_lead_break_key"
       android:title="@string/pref_split_keep_lead_break_title"
       android:summaryOn="@string/pref_split_keep_lead_break_summaryon"
@@ -165,21 +165,21 @@
 
     </PreferenceScreen>
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_suppress_dup_msg_key"
     android:title="@string/pref_suppress_dup_msg_title"
     android:summaryOn="@string/pref_suppress_dup_msg_summaryon"
     android:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
     android:defaultValue="@string/pref_suppress_dup_msg_default" />
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_override_vendor_loc_key"
     android:title="@string/pref_override_vendor_loc_title"
     android:summaryOn="@string/pref_override_vendor_loc_summaryon"
     android:summaryOff="@string/pref_override_vendor_loc_summaryoff"
     android:defaultValue="@string/pref_override_vendor_loc_default" />
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_activate_scanner_key"
     android:title="@string/pref_activate_scanner_title"
     android:summaryOn="@string/pref_activate_scanner_summaryon"
@@ -199,7 +199,7 @@
     android:inputType="number"
     android:defaultValue="@string/pref_scanner_timeout_default"/>
 
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_publish_pages_key"
     android:title="@string/pref_publish_pages_title"
     android:summaryOn="@string/pref_publish_pages_summaryon"

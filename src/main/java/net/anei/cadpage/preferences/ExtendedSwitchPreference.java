@@ -2,7 +2,6 @@ package net.anei.cadpage.preferences;
 
 
 import android.content.Context;
-import android.preference.SwitchPreference;
 import android.util.AttributeSet;
 
 public class ExtendedSwitchPreference extends SwitchPreference {

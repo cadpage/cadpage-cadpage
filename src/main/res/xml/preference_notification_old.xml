@@ -4,7 +4,7 @@
 
   <PreferenceCategory
   android:title="@string/pref_notif_default_title">
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_notif_enabled_key"
     android:title="@string/pref_notif_enabled_title"
     android:summaryOn="@string/pref_notif_enabled_summaryon"
@@ -17,21 +17,21 @@
     android:summaryOff="@string/pref_notif_override_old_summaryoff"
     android:defaultValue="false"
     android:dependency="@string/pref_notif_enabled_key" />
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_notif_override_volume_key"
     android:title="@string/pref_notif_override_volume_title"
     android:summaryOn="@string/pref_notif_override_volume_summaryon"
     android:summaryOff="@string/pref_notif_override_volume_summaryoff"
     android:defaultValue="false"
     android:dependency="@string/pref_notif_override_key" />
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_notif_override_sound_key"
     android:title="@string/pref_notif_override_sound_title"
     android:summaryOn="@string/pref_notif_override_sound_summaryon"
     android:summaryOff="@string/pref_notif_override_sound_summaryoff"
     android:defaultValue="true"
     android:dependency="@string/pref_notif_override_key" />
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_notif_override_loop_key"
     android:title="@string/pref_notif_override_loop_title"
     android:summaryOn="@string/pref_notif_override_loop_summaryon"
@@ -82,7 +82,7 @@
     android:dialogTitle="@string/pref_notif_delay_dialogTitle"
     android:defaultValue="@string/pref_notif_delay_default"
     android:dependency="@string/pref_notif_enabled_key" />
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_notif_req_ack_key"
     android:title="@string/pref_notif_req_ack_title"
     android:summaryOn="@string/pref_notif_req_ack_summaryon"
@@ -93,7 +93,7 @@
   </PreferenceCategory>
   <PreferenceCategory
   android:title="@string/pref_vibrate_category_title">
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_vibrate_key"
     android:title="@string/pref_vibrate_title"
     android:summaryOn="@string/pref_vibrate_summaryon"
@@ -112,7 +112,7 @@
 
   <PreferenceCategory
   android:title="@string/pref_flashled_category_title">
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_flashled_key"
     android:title="@string/pref_flashled_title"
     android:summaryOn="@string/pref_flashled_summaryon"

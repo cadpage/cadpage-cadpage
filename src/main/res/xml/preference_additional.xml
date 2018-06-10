@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
-  <SwitchPreference
+  <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_delete_unopen_key"
     android:title="@string/pref_delete_unopen_title"
     android:summaryOn="@string/pref_delete_unopen_summaryon"
@@ -31,7 +31,7 @@
     android:entryValues="@array/pref_app_map_option_entries"
     android:dialogTitle="@string/pref_app_map_option_title"
     android:defaultValue="@string/pref_app_map_option_default" />
-  <SwitchPreference
+  <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_navigate_map_key"
     android:title="@string/pref_navigate_map_title"
     android:summaryOn="@string/pref_navigate_map_summaryon"
@@ -48,20 +48,20 @@
 
   <PreferenceCategory
     android:title="@string/pref_popup_control">
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_popup_enabled_key"
       android:title="@string/pref_popup_enabled_title"
       android:summaryOn="@string/pref_popup_enabled_summaryon"
       android:summaryOff="@string/pref_popup_enabled_summaryoff"
       android:defaultValue="true" />
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_noShowInCall_key"
       android:title="@string/pref_noShowInCall_title"
       android:summaryOn="@string/pref_noShowInCall_summaryon"
       android:summaryOff="@string/pref_noShowInCall_summaryoff"
       android:defaultValue="@string/pref_noShowInCall_default"
       android:dependency="@string/pref_popup_enabled_key"/>
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_passthrusms_key"
       android:title="@string/pref_passthrusms_title"
       android:summaryOff="@string/pref_passthrusms_summaryoff"
@@ -71,7 +71,7 @@
 
   <PreferenceCategory
     android:title="@string/pref_screen_category">
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_screen_on_key"
       android:title="@string/pref_screen_on_title"
       android:summaryOn="@string/pref_screen_on_summaryon"
@@ -93,7 +93,7 @@
       android:entryValues="@array/pref_textsize_values"
       android:defaultValue="@string/pref_textsize_default"
       android:dependency="@string/pref_screen_on_key" />
-    <SwitchPreference
+    <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_dimscreen_key"
       android:title="@string/pref_dimscreen_title"
       android:summaryOn="@string/pref_dimscreen_summaryon"

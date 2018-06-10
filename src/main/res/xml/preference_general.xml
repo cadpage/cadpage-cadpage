@@ -6,7 +6,7 @@
     android:key="@string/pref_payment_status_key"
     android:title="@string/pref_payment_status_title"/>
 
-  <SwitchPreference
+  <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_enabled_key"
     android:title="@string/pref_enabled_title"
     android:summaryOn="@string/pref_enabled_summaryon"
@@ -22,21 +22,21 @@
     android:dialogTitle="@string/pref_history_limit_title"
     android:defaultValue="@string/pref_history_limit_default" />
 
-  <SwitchPreference
+  <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_show_history_address_key"
     android:title="@string/pref_show_history_address_title"
     android:summaryOn="@string/pref_show_history_address_summaryon"
     android:summaryOff="@string/pref_show_history_address_summaryoff"
     android:defaultValue="true" />
 
-  <SwitchPreference
+  <net.anei.cadpage.preferences.SwitchPreference
     android:key="@string/pref_show_personal_key"
     android:title="@string/pref_show_personal_title"
     android:summaryOn="@string/pref_show_personal_summaryon"
     android:summaryOff="@string/pref_show_personal_summaryoff"
     android:defaultValue="@string/pref_show_personal_default" />
 
-  <SwitchPreference
+  <net.anei.cadpage.preferences.SwitchPreference
   android:key="@string/pref_grant_account_access_key"
   android:title="@string/pref_grant_account_access_title"
   android:summaryOn="@string/pref_grant_account_access_summaryon"
