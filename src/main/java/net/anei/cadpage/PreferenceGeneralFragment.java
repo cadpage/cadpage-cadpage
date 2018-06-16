@@ -1,5 +1,9 @@
 package net.anei.cadpage;
 
+import android.accounts.AccountManager;
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.TwoStatePreference;
 import android.preference.Preference;
@@ -11,6 +15,8 @@ import net.anei.cadpage.donation.EnableEmailAccessEvent;
 import net.anei.cadpage.donation.MainDonateEvent;
 
 public class PreferenceGeneralFragment extends PreferenceFragment {
+
+  private static final int BILLING_ACCT_REQ = 99991;
 
   private TwoStatePreference mEnabledPreference;
 
@@ -39,6 +45,38 @@ public class PreferenceGeneralFragment extends PreferenceFragment {
       }
     });
 
+    pref = findPreference(getString(R.string.pref_billing_account_key));
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        @TargetApi(Build.VERSION_CODES.O)
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+          Intent intent =
+              AccountManager.newChooseAccountIntent(
+                  null,
+                  null,
+                  new String[]{"com.google"},
+                  null,
+                  null,
+                  null,
+                  null);
+          Log.v("Requesting Billing Account");
+          ContentQuery.dumpIntent(intent);
+          startActivityForResult(intent, BILLING_ACCT_REQ);
+          return true;
+        }
+      });
+    }
+
+    // Email developer response
+    Preference emailPref = findPreference(getString(R.string.pref_email_key));
+    emailPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
+      @Override
+      public boolean onPreferenceClick(Preference preference) {
+        EmailDeveloperActivity.sendGeneralEmail(getActivity());
+        return true;
+      }});
+
     // Add developer dialog preference if appropriate
     DeveloperToolsManager.instance().addPreference(getActivity(), getPreferenceScreen());
   }
@@ -49,6 +87,16 @@ public class PreferenceGeneralFragment extends PreferenceFragment {
 
     // Check for changes to values that are accessable from the widget
     mEnabledPreference.setChecked(ManagePreferences.enabled());
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    super.onActivityResult(requestCode, resultCode, intent);
+
+    if (requestCode == BILLING_ACCT_REQ) {
+      Log.v("Select Billing Account Result:" + resultCode);
+      if (intent != null) ContentQuery.dumpIntent(intent);
+    }
   }
 
   @Override

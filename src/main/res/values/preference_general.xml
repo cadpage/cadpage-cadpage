@@ -23,6 +23,8 @@
   <string name="pref_show_personal_summaryon">Caller Name/Phone will be displayed</string>
   <string name="pref_show_personal_summaryoff">Caller Name/Phone will not be displayed</string>
 
+  <string name="pref_billing_account_title">Select Billing Account</string>
+
   <string name="pref_grant_account_access_title">Allow access to Email accounts</string>
   <string name="pref_grant_account_access_summaryon">Email account access permitted</string>
   <string name="pref_grant_account_access_summaryoff">Email account access denied</string>

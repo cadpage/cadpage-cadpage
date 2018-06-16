@@ -47,17 +47,4 @@
     android:data="@string/pref_cadpage_active911_url" />
   </PreferenceScreen>
 
-  <PreferenceScreen
-  android:title="@string/pref_review_title"
-  android:summary="@string/pref_review_summary">
-    <intent
-    android:action="android.intent.action.VIEW"
-    android:data="@string/pref_review_url" />
-  </PreferenceScreen>
-
-  <Preference
-  android:key="@string/pref_email_key"
-  android:title="@string/pref_email_title"
-  android:summary="@string/pref_email_summary" />
-
 </PreferenceScreen>
