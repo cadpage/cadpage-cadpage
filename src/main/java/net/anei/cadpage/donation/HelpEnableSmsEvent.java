@@ -1,6 +1,7 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
@@ -16,7 +17,7 @@ center is located
  */
 public class HelpEnableSmsEvent extends DonateScreenEvent {
 
-  protected HelpEnableSmsEvent() {
+  private HelpEnableSmsEvent() {
     super(R.string.help_text_dispatch_title, R.string.help_text_dispatch_wintitle, R.string.help_enable_sms_text,
           HelpDoEnableSmsEvent.instance());
   }
@@ -34,10 +35,11 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
   }
 
   @Override
-  public void followup(Activity activity, int req, int result) {
+  public boolean followup(Activity activity, int req, int result, Intent data) {
     if (ManagePreferences.isFunctional()) {
       DonateActivity.launchActivity(activity, HelpCadpageReadyEvent.instance(), null);
     }
+    return true;
   }
 
   private static final HelpEnableSmsEvent instance = new HelpEnableSmsEvent();

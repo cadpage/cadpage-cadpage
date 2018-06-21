@@ -51,7 +51,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     Log.v("SmsPopupConfigActivity:onActivityResult - Req:" + requestCode + "  Res:" + resultCode);
-    ContentQuery.dumpIntent(data);
+    if (data != null) ContentQuery.dumpIntent(data);
 
     if (resultCode >= ManageBluetooth.BLUETOOTH_REQ) {
       if (ManageBluetooth.instance().onActivityResult(this, requestCode, resultCode)) return;

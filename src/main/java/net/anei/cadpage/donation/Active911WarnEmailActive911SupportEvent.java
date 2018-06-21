@@ -18,8 +18,7 @@ public class Active911WarnEmailActive911SupportEvent extends DonateEvent {
   @Override
   protected void doEvent(Activity activity) {
     EmailDeveloperActivity.sendActive911SupportEmail(activity);
-    activity.setResult(Activity.RESULT_OK);
-    activity.finish();
+    closeEvents(activity);
   }
   
   private static final Active911WarnEmailActive911SupportEvent instance = new Active911WarnEmailActive911SupportEvent();

@@ -1,14 +1,10 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
-import android.preference.PreferenceManager;
 
 import net.anei.cadpage.ManagePreferences;
-import net.anei.cadpage.PermissionManager;
-import net.anei.cadpage.Permissions;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
-import net.anei.cadpage.SmsPopupUtils;
 
 /*
 We may need to access your email account information
@@ -22,7 +18,7 @@ not, we may loose track of your payment subscription status somewhere down the r
  */
 public class NeedAcctPermissionUpgradeEvent extends DonateScreenEvent {
 
-  protected NeedAcctPermissionUpgradeEvent() {
+  private NeedAcctPermissionUpgradeEvent() {
     super(AlertStatus.RED, R.string.donate_need_acct_permission_upgrade_title, R.string.donate_need_acct_permission_upgrade_text,
             new AllowAcctPermissionDonateEvent(null));
   }
@@ -39,10 +35,7 @@ public class NeedAcctPermissionUpgradeEvent extends DonateScreenEvent {
     if (!ManagePreferences.isAccountSecurityUpgrade()) return false;
 
     // And user has not somehow already enabled account access
-    if (ManagePreferences.grantAccountAccess()) return false;
-
-    // And Cadpage has been granted account access permission
-    if (!ManagePreferences.getPermissionManager().isGranted(PermissionManager.GET_ACCOUNTS)) return false;
+    if (ManagePreferences.billingAccount() != null) return false;
 
     // And their payment status indicates they require authorization from  our authorization server
     return DonationManager.instance().reqAuthServer();

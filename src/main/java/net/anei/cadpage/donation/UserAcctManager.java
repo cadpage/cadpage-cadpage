@@ -3,9 +3,7 @@ package net.anei.cadpage.donation;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.HttpService.HttpRequest;
@@ -13,8 +11,6 @@ import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
@@ -24,7 +20,6 @@ import android.telephony.TelephonyManager;
 public class UserAcctManager {
 
   private final Context context;
-  private String[] userEmails = null;
   private String phoneNumber = null;
   private String meid = null;
   private boolean developer = false;
@@ -78,8 +73,6 @@ public class UserAcctManager {
     }
     if (meid == null) meid = Build.SERIAL;
 
-    updateEmailList();
-
     // If we are running in an emulator, assume developer status
     if (SDK_PTN.matcher(Build.PRODUCT).matches()) {
       developer = true;
@@ -87,22 +80,11 @@ public class UserAcctManager {
     
     // Otherwise, see if first email is on our developer list
     else {
-      if (userEmails != null && userEmails.length > 0) {
+      String email = ManagePreferences.billingAccount();
+      if (email != null) {
         String[] developers = context.getResources().getStringArray(R.array.donate_devel_list);
-        developer = Arrays.asList(developers).contains(userEmails[0]);
+        developer = Arrays.asList(developers).contains(email);
       }
-    }
-  }
-
-  public void updateEmailList() {
-    if (ManagePreferences.grantAccountAccess()) {
-      List<String> emailList = new ArrayList<>();
-      for (Account acct : AccountManager.get(context).getAccountsByType("com.google")) {
-        emailList.add(acct.name);
-      }
-      userEmails = emailList.toArray(new String[emailList.size()]);
-    } else {
-      userEmails = null;
     }
   }
 
@@ -124,11 +106,9 @@ public class UserAcctManager {
     
     // Build query with all of the possible account and phone ID's
     Uri.Builder builder = Uri.parse(context.getString(R.string.donate_server_url)).buildUpon();
-    if (ManagePreferences.grantAccountAccess()) {
-      Account[] accounts = AccountManager.get(context).getAccountsByType("com.google");
-      for (Account acct : accounts) {
-        builder.appendQueryParameter("id", cleanName(acct.name));
-      }
+    String acct = ManagePreferences.billingAccount();
+    if (acct != null) {
+      builder.appendQueryParameter("id", acct);
     }
     builder.appendQueryParameter("id", phoneNumber);
     
@@ -174,8 +154,7 @@ public class UserAcctManager {
    * @return identified user account name
    */
   public String getUser() {
-    if (userEmails == null || userEmails.length == 0) return null;
-    return userEmails[0];
+    return ManagePreferences.billingAccount();
   }
 
   public String getPhoneNumber() {
@@ -192,13 +171,12 @@ public class UserAcctManager {
    */
   public void addAccountInfo(StringBuilder sb) {
     sb.append('\n');
-    if (userEmails == null || userEmails.length == 0) {
+    String email = ManagePreferences.billingAccount();
+    if (email == null) {
       sb.append("\nNo active email addresses");
     } else {
-      for (String email : userEmails) {
-        sb.append("\nUser:");
-        sb.append(email);
-      }
+      sb.append("\nUser:");
+      sb.append(email);
     }
     sb.append('\n');
     sb.append("Phone:");

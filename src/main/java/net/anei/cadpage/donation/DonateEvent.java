@@ -2,6 +2,7 @@ package net.anei.cadpage.donation;
 
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -18,13 +19,14 @@ import android.widget.TextView;
  * also be a preference selection, or a triggered donation status check
  */
 
+@SuppressWarnings("unused")
 public abstract class DonateEvent {
   
   // Different alert status codes
-  public enum  AlertStatus {GREEN, YELLOW, RED};
+  public enum  AlertStatus {GREEN, YELLOW, RED}
 
   // Custom result codes
-  public static final int RESULT_READY = Activity.RESULT_FIRST_USER;
+  public static final int RESULT_CLOSE_ALL = Activity.RESULT_FIRST_USER;
   
   private final AlertStatus alertStatus;
   private final int titleId;
@@ -198,14 +200,26 @@ public abstract class DonateEvent {
     button.setVisibility(alertStatus == null || alertStatus == AlertStatus.GREEN ? View.GONE : View.VISIBLE);
     return true;
   }
-  
+
+  /**
+   * Called to perform any followup processing of an activity result returned by this event
+   * @param activity current activity
+   * @param req activity result request code
+   * @param result activity result code
+   * @param intent activity return intent
+   * @return true if method handled this activity result
+   */
+  public boolean followup(Activity activity, int req, int result, Intent intent) {
+    return false;
+  }
+
   /**
    * Close all donation events and recalculate the donation status
    * @param activity activity that launched this event
    */
   protected void closeEvents(Activity activity) {
     MainDonateEvent.instance().refreshStatus();
-    activity.setResult(Activity.RESULT_OK);
+    activity.setResult(RESULT_CLOSE_ALL);
     activity.finish();
     
   }

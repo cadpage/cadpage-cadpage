@@ -41,7 +41,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 48;
+  private static final int PREFERENCE_VERSION = 49;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -92,9 +92,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // to be done if there was no previous version of Cadpage.
     if (oldVersion > 0 && oldVersion < PREFERENCE_VERSION) {
 
-      // If old version < 47 use is upgrading to a version that requires explict permission to
+      // If old version < 49 use is upgrading to a version that requires explict permission to
       // use their email account information
-      if (oldVersion < 47) prefs.putBoolean(R.string.pref_account_security_upgrade, true);
+      //noinspection ConstantConditions
+      if (oldVersion < 49) prefs.putBoolean(R.string.pref_account_security_upgrade, true);
       
       // If old version < 45 convert old lock_google option to new app_map_option option
       if (oldVersion < 45) {
@@ -525,7 +526,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putString(R.string.pref_scanner_channel_key, newVal);
   }
 
-  public static int scannerTimeout() {
+  private static int scannerTimeout() {
     return prefs.getIntValue(R.string.pref_scanner_timeout_key);
   }
   
@@ -785,7 +786,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return prefs.getString(CALLBACK_TYPE_IDS[button-1]);
   }
   
-  public static void setCallbackButtonType(int button, String value) {
+  private static void setCallbackButtonType(int button, String value) {
     prefs.putString(CALLBACK_TYPE_IDS[button-1], value);
   }
   
@@ -844,14 +845,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return new FilterOptions(prefs.getString(R.string.pref_run_report_option_key));
   }
 
-  public static boolean grantAccountAccess() {
-    return prefs.getBoolean(R.string.pref_grant_account_access_key);
-  }
-
-  public static void setGrantAccountAccess(boolean newVal) {
-    prefs.putBoolean(R.string.pref_grant_account_access_key, newVal);
-  }
-  
   public static Date installDate() {
     String dateStr = prefs.getString(R.string.pref_install_date_key);
     try {
@@ -861,7 +854,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
   }
   
-  public static void setInstallDate() {
+  private static void setInstallDate() {
     if (prefs.getString(R.string.pref_install_date_key, null) != null) return;
     setInstallDate(new Date());
   }
@@ -899,7 +892,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return purchaseDate(0);
   }
   
-  public static Date purchaseDate(int type) {
+  private static Date purchaseDate(int type) {
     String dateStr = prefs.getString(PURCHASE_DATE_RES_IDS[type], null);
     if (dateStr == null) return null;
     try {
@@ -1059,7 +1052,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
   }
   
-  public static void setExemptDate(String newVal) {
+  private static void setExemptDate(String newVal) {
     prefs.putString(R.string.pref_auth_exempt_date_key, newVal);
   }
   
@@ -1104,7 +1097,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putLong(R.string.pref_auth_last_check_time_key, newVal);
   }
   
-  public static void setAuthLastCheckTime() {
+  private static void setAuthLastCheckTime() {
     setAuthLastCheckTime(System.currentTimeMillis());
   }
   
@@ -1235,7 +1228,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     setRegisterDate(curDate);
   }
   
-  public static void setRegisterDate(Date date) {
+  private static void setRegisterDate(Date date) {
     String dateStr = DATE_FORMAT.format(date);
     prefs.putString(R.string.pref_register_date_key, dateStr);
   }
@@ -1345,6 +1338,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setNoMapGpsLabel(boolean newVal) {
     prefs.putBoolean(R.string.pref_no_map_gps_label, newVal);
   }
+
+  public static String billingAccount() {
+    return prefs.getString(R.string.pref_billing_account_key, null);
+  }
+
+  public static void setBillingAccount(String newVal) {
+    prefs.putString(R.string.pref_billing_account_key, newVal);
+  }
   
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
@@ -1414,8 +1415,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int PERM_REQ_PHONE_INFO = 12;
   private static final int PERM_REQ_LOCATION_TRACKING = 13;
   private static final int PERM_REQ_USER_ALERT_SOUND = 14;
-  private static final int PERM_REQ_GRANT_ACCT_ACCESS = 15;
-  private static final int PERM_REQ_LIMIT = 15;
+  private static final int PERM_REQ_LIMIT = 14;
   
   private static final PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
@@ -1460,7 +1460,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * can be invoked.  The only time this may not be true is during app
    * initialization before the Call history activity is initialized.
    */
-  public static boolean isPermissionsInitialized() {
+  private static boolean isPermissionsInitialized() {
     return permMgr != null;
   }
   
@@ -1484,6 +1484,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   private static final InitialPermissionChecker initialPermissionChecker = new InitialPermissionChecker();
   
+  @SuppressWarnings("WeakerAccess")
   public static class InitialPermissionChecker extends PermissionChecker {
 
     Runnable run;
@@ -1741,35 +1742,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       if (value) return null;
       if (checkRequestPermission(PermissionManager.READ_EXTERNAL_STORAGE, R.string.perm_user_sound_override)) return null;
       return true;
-    }
-  }
-
-  /********************************************************************
-   * Permission checking the allow access to email account option
-   ********************************************************************/
-  public static boolean checkGrantAccountAccess(TwoStatePreference pref, Boolean value) {
-    return grantAccountAccessChecker.check(pref, value);
-  }
-
-  public static boolean setGrantAccountAccess(TwoStatePreference pref, Boolean value, Runnable run) {
-    return grantAccountAccessChecker.setValue(pref, value, run);
-  }
-
-  private static final GrantAccountAccessChecker grantAccountAccessChecker = new GrantAccountAccessChecker();
-
-  private static class GrantAccountAccessChecker extends CheckBoxPermissionChecker {
-
-    public GrantAccountAccessChecker() {
-      super(PERM_REQ_GRANT_ACCT_ACCESS, R.string.pref_grant_account_access_key);
-    }
-
-    @Override
-    protected Boolean checkPermission(Boolean value) {
-
-      // True value requires GET_ACCOUNTS permision
-      if (!value) return null;
-      if (checkRequestPermission(PermissionManager.GET_ACCOUNTS, R.string.perm_grant_acct_access)) return null;
-      return false;
     }
   }
 
@@ -2395,13 +2367,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         SmsMessageQueue.getInstance().notifyDataChange();
       }
     });
-
-    registerListener(R.string.pref_grant_account_access_key, new PreferenceChangeListener() {
-      @Override
-      public void preferenceChanged(String key, Object newVal) {
-        UserAcctManager.instance().updateEmailList();
-      }
-    });
   }
 
   @Override
@@ -2420,39 +2385,39 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     listenerMap.put(context.getString(resId), listener);
   }
   
-  protected Object getPreference(int resPrefId) {
+  private Object getPreference(int resPrefId) {
     return mPrefs.getAll().get(context.getString(resPrefId));
   }
   
-  protected boolean getBoolean(int resPrefId) {
+  private boolean getBoolean(int resPrefId) {
     return mPrefs.getBoolean(context.getString(resPrefId), false);
   }
   
-  protected String getString(int resPrefId) {
+  private String getString(int resPrefId) {
     String result = mPrefs.getString(context.getString(resPrefId), null);
     if (result == null) throw new RuntimeException("No configured preference value found");
     return result;
   }
 
-  protected String getString(int resPrefId, int resDefaultId) {
+  private String getString(int resPrefId, int resDefaultId) {
     return mPrefs.getString(context.getString(resPrefId), context.getString(resDefaultId));
   }
 
-  protected String getString(int resPrefId, String defaultVal) {
+  private String getString(int resPrefId, String defaultVal) {
     return mPrefs.getString(context.getString(resPrefId), defaultVal);
   }
   
-  protected int getIntValue(int resPrefId) {
+  private int getIntValue(int resPrefId) {
     return getIntValue(resPrefId, 0);
   }
   
-  protected int getIntValue(int resPrefId, int defValue) {
+  private int getIntValue(int resPrefId, int defValue) {
     String val = getString(resPrefId, "");
     if (val.length() == 0) return defValue;
     return Integer.parseInt(val);
   }
   
-  protected int getInt(int resPrefId, int defValue) {
+  private int getInt(int resPrefId, int defValue) {
     return mPrefs.getInt(context.getString(resPrefId), defValue);
   }
   
@@ -2462,7 +2427,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return result;
   }
   
-  protected long getLong(int resPrefId, long defValue) {
+  private long getLong(int resPrefId, long defValue) {
     return mPrefs.getLong(context.getString(resPrefId), defValue);
   }
   
@@ -2472,7 +2437,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return result;
   }
   
-  protected float getFloat(int resPrefId, float defValue) {
+  private float getFloat(int resPrefId, float defValue) {
     return mPrefs.getFloat(context.getString(resPrefId), defValue);
   }
   
@@ -2482,35 +2447,35 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return result;
   }
 
-  protected void putBoolean(int resPrefId, boolean newVal) {
+  private void putBoolean(int resPrefId, boolean newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putBoolean(key, newVal);
     settings.apply();
   }
 
-  protected void putString(int resPrefId, String newVal) {
+  private void putString(int resPrefId, String newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putString(key, newVal);
     settings.apply();
   }
 
-  protected void putInt(int resPrefId, int newVal) {
+  private void putInt(int resPrefId, int newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putInt(key, newVal);
     settings.apply();
   }
 
-  protected void putLong(int resPrefId, long newVal) {
+  private void putLong(int resPrefId, long newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putLong(key, newVal);
     settings.apply();
   }
   
-  protected void putFloat(int resPrefId, float newVal) {
+  private void putFloat(int resPrefId, float newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putFloat(key, newVal);
@@ -2622,8 +2587,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_gen_alert_option_key,
       R.string.pref_run_report_option_key,
 
-      R.string.pref_grant_account_access_key,
-
       R.string.pref_paid_year_key,
       R.string.pref_install_date_key,
       R.string.pref_purchase_date_key,
@@ -2667,6 +2630,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_prev_meid_key,
       R.string.pref_transfer_flag_key,
       
-      R.string.pref_no_map_gps_label
+      R.string.pref_no_map_gps_label,
+
+      R.string.pref_billing_account_key
   };
 }

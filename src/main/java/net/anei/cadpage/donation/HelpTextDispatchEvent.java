@@ -1,6 +1,7 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
@@ -16,7 +17,7 @@ center is located
  */
 public class HelpTextDispatchEvent extends DonateScreenEvent {
 
-  protected HelpTextDispatchEvent() {
+  private HelpTextDispatchEvent() {
     super(R.string.help_text_dispatch_title, R.string.help_text_dispatch_wintitle, R.string.help_text_dispatch_text,
           HelpSelectLocationEvent.instance(),
           HelpLocNotSupportedEvent.instance(),
@@ -38,10 +39,11 @@ public class HelpTextDispatchEvent extends DonateScreenEvent {
   }
 
   @Override
-  public void followup(Activity activity, int req, int result) {
+  public boolean followup(Activity activity, int req, int result, Intent data) {
     if (ManagePreferences.isFunctional()) {
       ((DonateActivity)activity).switchEvent(HelpCadpageReadyEvent.instance(), null);
     }
+    return true;
   }
 
   private static final HelpTextDispatchEvent instance = new HelpTextDispatchEvent();

@@ -15,6 +15,7 @@ class AccountPermDeniedEvent extends DonateEvent {
 
   @Override
   protected void doEvent(Activity activity) {
+    ManagePreferences.setBillingAccount(null);
     closeEvents(activity);
   }
 

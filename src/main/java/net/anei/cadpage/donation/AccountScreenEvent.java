@@ -1,17 +1,15 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
-import android.content.Context;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
-import net.anei.cadpage.SmsMmsMessage;
 
 
 abstract class AccountScreenEvent  extends DonateScreenEvent {
 
 
-  public interface AllowAcctPermissionAction extends AccountPermApprovedEvent.AllowAcctPermissionAction{};
+  public interface AllowAcctPermissionAction extends AccountPermApprovedEvent.AllowAcctPermissionAction{}
 
 
   private final AllowAcctPermissionAction action;
@@ -29,7 +27,7 @@ abstract class AccountScreenEvent  extends DonateScreenEvent {
 
     // If user has not approved access to email account info, proceed with normal launch
 
-    if (! ManagePreferences.grantAccountAccess()) return true;
+    if (ManagePreferences.billingAccount() == null) return true;
 
     if (action != null) action.doEvent(activity);
     return false;

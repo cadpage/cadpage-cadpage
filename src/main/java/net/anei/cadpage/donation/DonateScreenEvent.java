@@ -3,6 +3,7 @@ package net.anei.cadpage.donation;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -63,6 +64,14 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
       }
     });
     btnList.addView(btn);
+  }
+
+  @Override
+  public boolean followup(Activity activity, int req, int result, Intent intent) {
+    for (DonateEvent event : events) {
+      if (event.followup(activity, req, result, intent)) return true;
+    }
+    return false;
   }
 
   @Override

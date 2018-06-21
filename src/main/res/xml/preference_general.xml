@@ -36,16 +36,10 @@
     android:summaryOff="@string/pref_show_personal_summaryoff"
     android:defaultValue="@string/pref_show_personal_default" />
 
-  <Preference
+  <net.anei.cadpage.preferences.BillingAccountPreference
     android:key="@string/pref_billing_account_key"
-    android:title="@string/pref_billing_account_title"/>
-
-  <net.anei.cadpage.preferences.SwitchPreference
-  android:key="@string/pref_grant_account_access_key"
-  android:title="@string/pref_grant_account_access_title"
-  android:summaryOn="@string/pref_grant_account_access_summaryon"
-  android:summaryOff="@string/pref_grant_account_access_summaryoff"
-  android:defaultValue="false" />
+    android:title="@string/pref_billing_account_title"
+    android:summary="@string/pref_billing_account_summary"/>
 
   <PreferenceScreen
   android:title="@string/pref_review_title"

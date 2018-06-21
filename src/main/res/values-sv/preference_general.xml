@@ -23,8 +23,7 @@
   <string name="pref_show_personal_summaryon">Inringares namn/telefon kommer att visas</string>
   <string name="pref_show_personal_summaryoff">Inringares namn/telefon kommer inte att visas</string>
 
-  <string name="pref_grant_account_access_title">Tillåt åtkomst till epost-konton</string>
-  <string name="pref_grant_account_access_summaryon">Epost-kontoinfo tillåten</string>
-  <string name="pref_grant_account_access_summaryoff">Epost-kontoinfo av tillåts ej</string>
+  <string name="pref_billing_account_title">Select Billing Account</string> <!-- Translate -->
+  <string name="pref_billing_account_summary">%%s</string>
 
 </resources>

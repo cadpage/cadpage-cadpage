@@ -1,6 +1,5 @@
 package net.anei.cadpage.donation;
 
-import net.anei.cadpage.Log;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
@@ -12,11 +11,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.Window;
 
 public class DonateActivity extends BillingActivity {
   
-  private static final String EXTRA_SCREEN_NAME = "net.anei.cadpage.DonateActivty.SCREEN_NAME";
+  private static final String EXTRA_SCREEN_NAME = "net.anei.cadpage.DonateActivity.SCREEN_NAME";
   private static final String EXTRA_MSG_ID =      "net.anei.cadpage.DonateActivity.MSG_ID";
 
   private final PermissionManager permMgr = new PermissionManager(this);
@@ -56,12 +56,12 @@ public class DonateActivity extends BillingActivity {
     
     super.onActivityResult(requestCode, resultCode, data);
 
-    if (resultCode == RESULT_OK) {
-      setResult(RESULT_OK);
+    if (resultCode == DonateEvent.RESULT_CLOSE_ALL) {
+      setResult(DonateEvent.RESULT_CLOSE_ALL);
       finish();
     }
     else {
-      event.followup(this, requestCode, resultCode);
+      event.followup(this, requestCode, resultCode, data);
     }
   }
 
@@ -72,7 +72,7 @@ public class DonateActivity extends BillingActivity {
   }
 
   @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 

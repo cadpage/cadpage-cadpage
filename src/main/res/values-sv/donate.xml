@@ -76,23 +76,27 @@
     Epostinformationen kan komma att inkluderas i epost som skickas till Cadpages supportavdelning och används för att uppdatera din betalningsstatus. Det kommer också att användas för att fråga efter din betalningsstatus i våra servrar.
   </string>
 
-  <string name="donate_enable_email_access_title">Ge access till epostkonto</string>
-  <string name="donate_enable_email_access_text">
-    You are granting Cadpage permission to retrieve and share your email accounts.  This is
-    considered private user information which we are not permitted to access without your explicit
-    permission.\n\n
+  <string name="donate_billing_account_title">Billing Account</string> <!-- Translate -->
+  <string name="donate_billing_account_text"> <!-- Translate -->
+    Your current billing account is %s.\n\n
 
-    The email account information may be included in emails sent to Cadpage support
+    This account information is considered private user information use without your explicit
+    permission.  For the most part, Cadpage will work just fine without it.  It is only required
+    if you are requesting a free Cadpage subscription, or using a check or Paypal to purchase a
+    Cadpage subscription, or reporting some kind of billing problem.\n\n
+
+    The account information may be included in emails sent to Cadpage support
     and used to update your payment status.  It will also be used to query your payment
     status on our servers.
   </string>
+  <string name="billing_acct_not_specified">not specified</string> <!-- Translate -->
 
-  <string name="donate_email_acct_permission_granted_text">
-    Ja du får tillgång till min epostinformation
+  <string name="donate_email_acct_permission_granted_text"> <!-- Translate -->
+    Select my billing account
   </string>
 
-  <string name="donate_email_acct_permission_denied_text">
-    Nej du får inte tillgång till min epostinformation
+  <string name="donate_email_acct_permission_denied_text"> <!-- Translate -->
+    Do not access billing account information
   </string>
 
   <string name="donate_wrong_user_title">"Hörru, jag har redan betalt för det här"</string>

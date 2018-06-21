@@ -18,8 +18,7 @@ public class MainDonateEvent extends DonateScreenEvent {
   private Preference mainPref;
   private Button button;
   private SmsMmsMessage msg;
-  private TwoStatePreference grantAccountPref;
-  
+
   private MainDonateEvent() {
     super(null, 0, 0,
         FreeDonateEvent.instance(),
@@ -88,14 +87,6 @@ public class MainDonateEvent extends DonateScreenEvent {
     }
     button.setVisibility(Button.GONE);
     return false;
-  }
-
-  public TwoStatePreference getGrantAccountPref() {
-    return grantAccountPref;
-  }
-
-  public void setGrantAccountPref(TwoStatePreference grantAccountPref) {
-    this.grantAccountPref = grantAccountPref;
   }
 
   @Override

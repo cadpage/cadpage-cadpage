@@ -90,7 +90,7 @@ public class DonationManager {
     if (ManagePreferences.freeRider()) return false;
 
     // No go if user has not allowed us to use email account information
-    if (! ManagePreferences.grantAccountAccess()) return false;
+    if (ManagePreferences.billingAccount() == null) return false;
 
     // OK, don't try this if we have no network connectivity!!
     ConnectivityManager mgr = ((ConnectivityManager)

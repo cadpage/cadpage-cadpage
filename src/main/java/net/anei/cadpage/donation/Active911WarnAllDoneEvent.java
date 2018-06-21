@@ -16,8 +16,7 @@ public class Active911WarnAllDoneEvent extends DonateEvent {
 
   @Override
   protected void doEvent(Activity activity) {
-    activity.setResult(Activity.RESULT_OK);
-    activity.finish();
+    closeEvents(activity);
   }
   
   private static final Active911WarnAllDoneEvent instance = new Active911WarnAllDoneEvent();

@@ -4,11 +4,10 @@ import android.app.Activity;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
-import net.anei.cadpage.SmsPopupConfigActivity;
 
 class HelpDoEnableSmsEvent extends DonateEvent {
 
-  protected HelpDoEnableSmsEvent() {
+  private HelpDoEnableSmsEvent() {
     super(null, R.string.help_do_enable_sms_title);
   }
 
