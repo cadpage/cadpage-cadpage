@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06152018</string>
+  <string name="release_date">06222018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-56\n
+    Location Fixes:\n
+    Marion County, OR\n
+    \n
     v1.9.15-55\n
     New Locations:\n
     Lac Qui Parle County, MN\n
@@ -38,13 +42,6 @@
     \n
     v1.9.15-52\n
     Location Fixes:\n
-    Macon County, NC\n
-    \n
-    v1.9.15-51\n
-    Location Fixes:\n
-    Decatur County, GA\n
-    Buffalo, NY\n
-    Lee County, NC\n
-    Simcoe County, ON
+    Macon County, NC
   </string>
 </resources>
