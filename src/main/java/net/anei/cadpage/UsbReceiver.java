@@ -34,6 +34,8 @@ public class UsbReceiver extends BroadcastReceiver {
     // If initialization failure in progress, shut down without doing anything
     if (TopExceptionHandler.isInitFailure()) return;
 
+    CadPageApplication.initialize(context);
+
     // Everything else gets handed off to the service intent
     ManageUsb.instance().onReceive(context, intent);
     

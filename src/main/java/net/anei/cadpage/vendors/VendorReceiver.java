@@ -17,6 +17,7 @@
 
 package net.anei.cadpage.vendors;
 
+import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.Log;
 import android.content.BroadcastReceiver;
@@ -31,6 +32,8 @@ public class VendorReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.w("VendorReciver: onReceive()");
+    CadPageApplication.initialize(context);
+
     ContentQuery.dumpIntent(intent);
     
     String action = intent.getAction();

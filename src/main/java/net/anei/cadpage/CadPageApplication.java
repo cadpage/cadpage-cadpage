@@ -17,11 +17,6 @@ import android.os.Handler;
  * which is where we need to do our one time initialization
  */
 public class CadPageApplication extends Application {
-  
-  @SuppressLint("StaticFieldLeak")
-  private static Context context = null;
-  private static Thread mainThread = null;
-  private static Handler mainHandler = null;
 
   /* (non-Javadoc)
    * @see android.app.Application#onCreate()
@@ -29,54 +24,67 @@ public class CadPageApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    context = this;
+    initialize(this);
+  }
+
+  @SuppressLint("StaticFieldLeak")
+  private static Context context = null;
+  private static Thread mainThread = null;
+  private static Handler mainHandler = null;
+
+  public static synchronized void initialize(Context callingContext) {
+
+    if (context != null) return;
+
+    Log.v("Initialization startup");
+
+    context = callingContext.getApplicationContext();
     mainThread = Thread.currentThread();
     mainHandler = new Handler();
-    Log.v("Initialization startup");
-    getVersionInfo(this);
+    getVersionInfo(context);
     try {
 
-      UserAcctManager.setup(this);
-      BillingManager.instance().initialize(this);
-      ManagePreferences.setupPreferences(this);
-      ManageNotification.setup(this);
-      VendorManager.instance().setup(this);
+      UserAcctManager.setup(context);
+      BillingManager.instance().initialize(context);
+      ManagePreferences.setupPreferences(context);
+      ManageNotification.setup(context);
+      VendorManager.instance().setup(context);
       UserAcctManager.instance().reset();
       
       // Reload log buffer queue
-      SmsMsgLogBuffer.setup(this);
+      SmsMsgLogBuffer.setup(context);
 
       // Reload existing message queue
-      SmsMessageQueue.setupInstance(this);
+      SmsMessageQueue.setupInstance(context);
 
       // See if a new version of Cadpage has been installed
       if (ManagePreferences.newVersion(versionCode)) {
         
         // Reset vendor status
-        VendorManager.instance().newReleaseReset(this);
+        VendorManager.instance().newReleaseReset(context);
         
         // The rules keep changing here
         // Currently we always ask for a registration ID at every new release load
         // regardless of whether or not the user is actually using direct paging.  It
         // is going to mean a big increase for Google serer workload.  But it is what
         // there regular GCM library does.  So that is what we are going to do
-        C2DMService.register(this, true);
+        C2DMService.register(context, true);
       }
 
       // If a C2DM registration was not forced normally, see if one is overdue
       else {
-        C2DMService.checkOverdueRefresh(this);
+        C2DMService.checkOverdueRefresh(context);
       }
       
     } catch (Exception ex) {
-      TopExceptionHandler.initializationFailure(this, ex);
+      TopExceptionHandler.initializationFailure(context, ex);
     }
     
     // Reinitialize any Widget triggers.  This shouldn't be necessary, but it
     // seems to help avoid sporadic problems with unresponsive Widgets.
-    CadPageWidget.reinit(this);
+    CadPageWidget.reinit(context);
   
-    TopExceptionHandler.enable(this);
+    TopExceptionHandler.enable(context);
     Log.v("Initialization complete");
     
   }
@@ -85,7 +93,7 @@ public class CadPageApplication extends Application {
   private static String nameVersion = null;
   private static int versionCode = -1;
   
-  private void getVersionInfo(Context context) {
+  private static void getVersionInfo(Context context) {
 
     if (nameVersion == null) {
       //Try and find app version name and code

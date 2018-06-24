@@ -57,6 +57,7 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     if (Log.DEBUG) Log.v("CallHistoryActivity: onCreate()");
+    CadPageApplication.initialize(this);
     super.onCreate(savedInstanceState);
 
     // If initialization failure in progress, shut down without doing anything

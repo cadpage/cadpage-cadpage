@@ -31,10 +31,12 @@ public class C2DMReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.v("C2DMReceiver: onReceive()");
-    
+
     // If initialization failure in progress, shut down without doing anything
     if (TopExceptionHandler.isInitFailure()) return;
-    
+
+    CadPageApplication.initialize(context);
+
     // Free version doesn't do C2DM stuff
     if (DonationManager.instance().isFreeVersion()) return;
     

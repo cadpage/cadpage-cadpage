@@ -3,9 +3,6 @@ package net.anei.cadpage;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.telephony.SmsMessage;
-import android.telephony.TelephonyManager;
-import android.telephony.SmsMessage.MessageClass;
 
 public class SmsReceiver extends BroadcastReceiver {
   
@@ -14,6 +11,7 @@ public class SmsReceiver extends BroadcastReceiver {
   @Override
   public synchronized void onReceive(Context context, Intent intent) {
     Log.v("SMSReceiver: onReceive()");
+    CadPageApplication.initialize(context);
     ContentQuery.dumpIntent(intent);
     
     // If initialization failure in progress, shut down without doing anything
@@ -22,7 +20,7 @@ public class SmsReceiver extends BroadcastReceiver {
     // Anything except an SMS received request should be ignored
     if (!ACTION_SMS_RECEIVED.equals(intent.getAction())) return;
 
-    // We have a lot of CPU cycles to crunch through these alerts.  Ideally, we whant to pass
+    // We have a lot of CPU cycles to crunch through these alerts.  Ideally, we want to pass
     // everything to the SmsService where it can be run off of the the main thread.  But if are
     // running on an old version of Android that still supports blocking alerts from getting
     // to the default message app, and the user has not suppressed that behavior, then we have

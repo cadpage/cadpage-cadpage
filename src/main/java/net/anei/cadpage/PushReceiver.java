@@ -33,6 +33,7 @@ public class PushReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.v("PushReceiver: onReceive()");
+    CadPageApplication.initialize(context);
     ContentQuery.dumpIntent(intent);
     
     // If initialization failure in progress, shut down without doing anything
@@ -41,6 +42,7 @@ public class PushReceiver extends BroadcastReceiver {
     // Hold a wake lock for 5 seconds, enough to give any
     // services we start time to take their own wake locks.
     PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+    assert pm != null;
     PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MMS PushReceiver");
     wl.acquire(5000);
     
