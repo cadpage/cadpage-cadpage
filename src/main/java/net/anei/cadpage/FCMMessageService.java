@@ -1,0 +1,310 @@
+package net.anei.cadpage;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+
+import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.UserAcctManager;
+import net.anei.cadpage.vendors.VendorManager;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+public class FCMMessageService extends FirebaseMessagingService {
+
+  private static final int REFRESH_ID_TIMEOUT = 24*60*60*1000; // 1 day
+  private static final String ACTION_REFRESH_ID = "net.anei.cadpage.REFRESH_ID";
+
+  @Override
+  public void onCreate() {
+    Log.v("FCMMessageService.onCreate()");
+
+    // If initialization failure in progress, shut down without doing anything
+    if (TopExceptionHandler.isInitFailure()) return;
+
+    // Make sure everything is initialized
+    CadPageApplication.initialize(this);
+
+    super.onCreate();
+  }
+
+  @Override
+  public void onMessageReceived(RemoteMessage remoteMessage) {
+
+    Log.v("FCMMessageService:onMessageReceived()");
+    Log.v("From: " + remoteMessage.getFrom());
+    Log.v("To:" + remoteMessage.getTo());
+
+    // If Cadpage is disabled, ignore incomming messages
+    if (!ManagePreferences.enabled()) return;
+
+
+    final Map<String, String> data = remoteMessage.getData();
+    if (data == null) return;
+
+    Log.v("Message data payload:" + data);
+
+    // Likewise if Cadpage is disabled
+    if (!ManagePreferences.enabled()) return;
+
+    // Get the vendor code
+    String vendorCode = data.get("vendor");
+    if (vendorCode == null) vendorCode = data.get("sponsor");
+
+    // See what kind of message this is
+    String type = data.get("type");
+    if (type == null) type = "PAGE";
+
+    // Get acknowledgment URL
+    String ackURL = data.get("ack_url");
+
+
+    // Ping just needs to be acknowledged
+    if (type.equals("PING")) {
+      sendAutoAck(ackURL, vendorCode);
+      VendorManager.instance().checkVendorStatus(this, vendorCode);
+      resetRefreshIDTimer(this, "PING");
+      return;
+    }
+
+    // Register and unregister requests are handled by VendorManager
+    // which must be done on the main UI thread
+    if (type.equals("REGISTER") || type.equals("UNREGISTER")) {
+      final String type2 = type;
+      final String vendorCode2 = vendorCode;
+      final String account = data.get("account");
+      final String token = data.get("token");
+      final String dispatchEmail = data.get("dispatchEmail");
+      CadPageApplication.runOnMainThread(new Runnable(){
+        @Override
+        public void run() {
+          VendorManager.instance().vendorRequest(FCMMessageService.this, type2, vendorCode2, account, token, dispatchEmail);
+        }
+      });
+      sendAutoAck(ackURL, vendorCode);
+      resetRefreshIDTimer(this, "VENDOR_" + type);
+      return;
+    }
+
+    // Check vendor enabled status
+    if (!VendorManager.instance().checkVendorStatus(this, vendorCode)) return;
+
+    // Save timestamp
+    final long timestamp = System.currentTimeMillis();
+
+    // Retrieve message content from intent for from URL
+    String content = data.get("content");
+    if (content != null) {
+      processContent(data, content, timestamp);
+      sendAutoAck(ackURL, vendorCode);
+      return;
+    }
+
+    String contentURL = data.get("content_url");
+    if (contentURL != null) {
+      HttpService.addHttpRequest(this, new HttpService.HttpRequest(Uri.parse(contentURL)){
+        @Override
+        public void processBody(String body) {
+          FCMMessageService.this.processContent(data, body, timestamp);
+        }
+      });
+      return;
+    }
+    Log.w("FCM message has no content");
+  }
+
+  private void processContent(Map<String, String> data, String content, long timestamp) {
+
+    resetRefreshIDTimer(this, "PAGE");
+
+    // Reconstruct message from data from intent fields
+    String from = data.get("sender");
+    if (from == null) from = data.get("from");
+    if (from == null) from = data.get("originally_from");
+    if (from == null) from = "GCM";
+    String subject = data.get("subject");
+    if (subject == null) subject = "";
+    String location = data.get("format");
+    if (location != null && location.equals("unknown")) location = null;
+
+    // Get vendor code
+    String vendorCode = data.get("vendor");
+    if (vendorCode == null) vendorCode = data.get("sponsor");
+
+    // Whatever it is, update vendor contact time
+    VendorManager.instance().updateLastContactTime(vendorCode, content);
+
+    // Send receive notice to vendor app running on this device
+    if (vendorCode != null) {
+      String action = "net.anei.cadpage.RECEIVE." + vendorCode;
+      Intent sendIntent = new Intent(action);
+      Log.w("Broadcasting direct page alert");
+      SmsPopupUtils.sendImplicitBroadcast(this, sendIntent);
+    }
+
+    // Get the acknowledge URL and request code
+    String ackURL = data.get("ack_url");
+    String ackReq = data.get("ack_req");
+    if (vendorCode == null && ackURL != null) {
+      vendorCode = VendorManager.instance().findVendorCodeFromUrl(ackURL);
+    }
+    if (ackURL == null) ackReq = null;
+    if (ackReq == null) ackReq = "";
+
+    String callId = data.get("call_id");
+    if (callId == null) callId = data.get("id");
+    String serverTime = data.get("unix_time");
+    if (serverTime ==  null) serverTime = data.get("unix_timestamp");
+    if (serverTime == null) serverTime = data.get("date");
+    // agency code = data.get("agency_code");
+    String infoUrl = data.get("info_url");
+
+    final SmsMmsMessage message =
+        new SmsMmsMessage(from, subject, content, timestamp,
+                          location, vendorCode, ackReq, ackURL,
+                          callId, serverTime, infoUrl);
+
+    // Add to log buffer
+    if (!SmsMsgLogBuffer.getInstance().add(message)) return;
+
+    // If we are checking for split direct pages, pass this to the message accumulator
+    // It will be responsible for calling SmsReceiver.processCadPage()
+    if (message.getSplitMsgOptions().splitDirectPage()) {
+      SmsMsgAccumulator.instance().addMsg(this, message, true);
+    }
+
+    // See if the current parser will accept this as a CAD page
+    else {
+      boolean isPage = message.isPageMsg(SmsMmsMessage.PARSE_FLG_FORCE);
+
+      // This should never happen, 
+      if (!isPage) return;
+
+      // Process the message on the main thread
+      SmsService.processCadPage(message);
+    }
+  }
+
+  /**
+   * Send auto acknowledgment when message is received
+   * @param ackURL acknowledgment URL
+   * @param vendorCode vendor code
+   */
+  private void sendAutoAck(String ackURL, String vendorCode) {
+    sendResponseMsg(this, "", ackURL, "AUTO", vendorCode);
+  }
+
+  /**
+   * send response messages
+   * @param context current context
+   * @param ackReq acknowledge request code
+   * @param ackURL acknowledge URL
+   * @param type request type to be sent
+   */
+  public static void sendResponseMsg(Context context, String ackReq, String ackURL, String type,
+                                     String vendorCode) {
+    if (ackURL == null) return;
+    if (ackReq == null) ackReq = "";
+    Uri.Builder bld = Uri.parse(ackURL).buildUpon().appendQueryParameter("type", type);
+
+    // Add paid status if requested
+    if (ackReq.contains("P")) {
+      DonationManager.DonationStatus status = DonationManager.instance().status();
+      String paid;
+      String expireDate = null;
+      if (status == DonationManager.DonationStatus.LIFE) {
+        paid = "YES";
+        expireDate = "LIFE";
+      } else if (ManagePreferences.freeSub()) {
+        paid = "NO";
+      } else if (status == DonationManager.DonationStatus.PAID || status == DonationManager.DonationStatus.PAID_WARN) {
+        paid = "YES";
+        Date expDate = DonationManager.instance().expireDate();
+        if (expDate != null) expireDate = DATE_FORMAT.format(expDate);
+      } else {
+        paid = "NO";
+      }
+      bld.appendQueryParameter("paid_status", paid);
+      if (expireDate != null) bld.appendQueryParameter("paid_expire_date", expireDate);
+
+      // also add phone number.  CodeMessaging wants this to identify users who
+      // are getting text and direct pages
+      String phone = UserAcctManager.instance().getPhoneNumber();
+      if (phone != null) bld.appendQueryParameter("phone", phone);
+    }
+
+    // If a vendor code was specified, return status and version code associated with vendor
+    VendorManager vm = VendorManager.instance();
+    if (vendorCode != null) {
+      if (!vm.isVendorDefined(vendorCode)) {
+        bld.appendQueryParameter("vendor_status", "undefined");
+      } else {
+        bld.appendQueryParameter("vendor_status", vm.isRegistered(vendorCode) ? "registered" : "not_registered");
+      }
+    }
+
+    // Add version code
+    bld.appendQueryParameter("version", vm.getClientVersion(vendorCode));
+
+
+    // Send the request
+    HttpService.addHttpRequest(context, new HttpService.HttpRequest(bld.build()));
+  }
+  private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
+
+
+  /**
+   * Reset the refresh registration ID timer, rescheduling the next refresh event
+   * until REFRESH_ID_TIMEOUT msecs in the future
+   * @param context current context
+   * @param eventType Event type responsible for reset request
+   */
+  private static void resetRefreshIDTimer(Context context, String eventType) {
+
+    long curTime = System.currentTimeMillis();
+    ManagePreferences.setLastGcmEventType(eventType);
+    ManagePreferences.setLastGcmEventTime(curTime);
+
+    Log.v("Scheduling refresh event in " + REFRESH_ID_TIMEOUT + " msecs");
+
+    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    assert myAM != null;
+
+    Intent refreshIntent = new Intent(context, C2DMRetryReceiver.class);
+    refreshIntent.setAction(ACTION_REFRESH_ID);
+
+    PendingIntent refreshPendingIntent =
+        PendingIntent.getBroadcast(context, 0, refreshIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+    long triggerTime = curTime + REFRESH_ID_TIMEOUT;
+    myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, refreshPendingIntent);
+
+  }
+
+  /**
+   * Called at startup to see if a scheduled refresh ID timer event is overdue.  In theory, this
+   * should never happen.  But it has at least once, possibly because Cadpage was being updated
+   * just when the timer event should have triggered.
+   * @param context current context
+   */
+  public static void checkOverdueRefresh(Context context) {
+
+    // This only happens if at least one direct paging vendor is enabled
+    if (!VendorManager.instance().isRegistered()) return;
+
+    // If we have gone past the time the last refresh event was scheduled, do it now
+    long eventTime = ManagePreferences.lastGcmEventTime() + REFRESH_ID_TIMEOUT;
+    if (System.currentTimeMillis() > eventTime) {
+      Log.v("Perform overdue GCM refresh");
+//      register(context, true);
+    }
+  }
+
+}

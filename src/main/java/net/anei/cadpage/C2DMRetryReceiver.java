@@ -37,7 +37,7 @@ public class C2DMRetryReceiver extends BroadcastReceiver {
     if (TopExceptionHandler.isInitFailure()) return;
 
     // Everything else gets handed off to the service intent
-    C2DMService.runIntentInService(context, intent);
+//    C2DMService.runIntentInService(context, intent);
     
     setResultCode(Activity.RESULT_OK);
   }

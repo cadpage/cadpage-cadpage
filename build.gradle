@@ -56,6 +56,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.google.android.gms:play-services-gcm:15.0.0'
+//    implementation 'com.google.android.gms:play-services-gcm:15.0.0'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.google.firebase:firebase-messaging:17.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

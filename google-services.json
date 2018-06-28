@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "64504091449",
+    "firebase_url": "https://api-project-64504091449.firebaseio.com",
+    "project_id": "api-project-64504091449",
+    "storage_bucket": "api-project-64504091449.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64504091449:android:9b96cbf05e76cba8",
+        "android_client_info": {
+          "package_name": "net.anei.cadpage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64504091449-fj9j8bd6pjm2vb5bd0sam6jf8gb8t16c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.anei.cadpage",
+            "certificate_hash": "5cee6c1fdda949a8e6ac737fd01438b63be9912c"
+          }
+        },
+        {
+          "client_id": "64504091449-95c2gcfacbeloq0qh1peba0ctn9anrdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2-3DNaksP4-r1oBlWb4wWa_ZLgCTk518"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
