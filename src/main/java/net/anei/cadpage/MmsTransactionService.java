@@ -228,27 +228,32 @@ public class MmsTransactionService extends Service {
       } catch (Exception ex) {
         Log.e(ex);
         EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-      }
+          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
+    }
       if (null == pdu) {
         Log.e("Invalid PUSH data");
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Invalid PUSH data");
         return;
       }
-      
+
       SmsMmsMessage message = pdu.getMessage();
-      if (message == null) return;
-  
+      if (message == null) {
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Empty MMS message");
+        return;
+      }
+
+      // Ignore if we have already processed a notification for this message
+      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) return;
+
+      // Save message for future test or error reporting use
+      // Duplicate message check is ignored for now because we do not yet have a message body
+      SmsMsgLogBuffer.getInstance().add(message);
+
       // See if message passes override from filter
       // Without a message body, isPageMsg doesn't do anything more than
       // check the sender filter
       if (! message.isPageMsg()) return;
-      
-      // Ignore if we have already processed a notification for this message
-      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) return;
-      
-      // Save message for future test or error reporting use
-      // Duplicate message check is ignored for now because we do not yet have a message body
-      SmsMsgLogBuffer.getInstance().add(message);
-      
+
       // Otherwise, add to the list of messages that we are waiting for content from.
       MmsMsgEntry entry = new MmsMsgEntry();
       entry.message = message;
