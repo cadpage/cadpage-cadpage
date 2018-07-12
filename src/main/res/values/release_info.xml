@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07042018</string>
+  <string name="release_date">07122018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-59\n
+    Location Fixes:\n
+    Pickens County, SC\n
+
+    Addison County, VT\n
+    Chittenden County, VT\n
+    Grand isle County, VT\n
+    Windham County, VT\n
+    Windsor County, VT\n
+    \n
+    General Fixes:\n
+    Additional logging to help track down MMS processing problems.\n
+    \n
     v1.9.15-58\n
     New Locations:\n
     Mecklenburg County, NC (alt)\n
@@ -40,17 +53,6 @@
     Accomack County, VA\n
     Greenbrier County, WV\n
     Rock County, WI\n,
-    Canmore, AB\n
-    \n
-    v1.9.15-54\n
-    New Locations:\n
-    Chugiak, AK\n
-    Owen County, IN\n
-    Sussex County, MA\n
-    Ocean County, NJ (alt)\n
-    \n
-    Location Fixes:\n
-    Kosciusko County, IN\n
-    Sumner County, TN
+    Canmore, AB
   </string>
 </resources>
