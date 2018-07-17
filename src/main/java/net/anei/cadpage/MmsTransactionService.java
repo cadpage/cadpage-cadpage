@@ -47,7 +47,7 @@ import net.anei.cadpage.mms.PduParser;
 public class MmsTransactionService extends Service {
   
   private static final Uri MMS_URI = Uri.parse("content://mms");
-  private enum EventType {TRANSACTION_REQUEST, DATA_CHANGE, TIMEOUT, TIMER_TICK, QUIT};
+  private enum EventType {TRANSACTION_REQUEST, DATA_CHANGE, TIMEOUT, TIMER_TICK, QUIT}
 
   // Column names for query searches
   private static final String[] MMS_COL_LIST = new String[]{"_ID"};
@@ -74,9 +74,10 @@ public class MmsTransactionService extends Service {
     
     // Acquire simple power lock while we are running
     PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+    assert pm != null;
     mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MMS Connectivity");
     mWakeLock.setReferenceCounted(false);
-    mWakeLock.acquire();
+    mWakeLock.acquire(10*60*1000L /*10 minutes*/);
 
     // Start up the thread running the service.  Note that we create a
     // separate thread because the service normally runs in the process's
@@ -133,7 +134,7 @@ public class MmsTransactionService extends Service {
   private class ServiceHandler extends Handler {
     
     // Actual queue of pending MMS transactions
-    private final List<MmsMsgEntry> msgList  = new LinkedList<MmsMsgEntry>();
+    private final List<MmsMsgEntry> msgList  = new LinkedList<>();
     
     private final ContentResolver qr;
 
@@ -226,27 +227,32 @@ public class MmsTransactionService extends Service {
       } catch (Exception ex) {
         Log.e(ex);
         EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-      }
+          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
+    }
       if (null == pdu) {
         Log.e("Invalid PUSH data");
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Invalid PUSH data");
         return;
       }
-      
+
       SmsMmsMessage message = pdu.getMessage();
-      if (message == null) return;
-  
+      if (message == null) {
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Empty MMS message");
+        return;
+      }
+
+      // Ignore if we have already processed a notification for this message
+      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) return;
+
+      // Save message for future test or error reporting use
+      // Duplicate message check is ignored for now because we do not yet have a message body
+      SmsMsgLogBuffer.getInstance().add(message);
+
       // See if message passes override from filter
       // Without a message body, isPageMsg doesn't do anything more than
       // check the sender filter
       if (! message.isPageMsg()) return;
-      
-      // Ignore if we have already processed a notification for this message
-      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) return;
-      
-      // Save message for future test or error reporting use
-      // Duplicate message check is ignored for now because we do not yet have a message body
-      SmsMsgLogBuffer.getInstance().add(message);
-      
+
       // Otherwise, add to the list of messages that we are waiting for content from.
       MmsMsgEntry entry = new MmsMsgEntry();
       entry.message = message;
@@ -282,73 +288,83 @@ public class MmsTransactionService extends Service {
           continue;
         }
         if (cur == null) continue;
-        if (!cur.moveToFirst()) continue;
-        int recNo = cur.getInt(0);
-        
+        int recNo;
+        try {
+          if (!cur.moveToFirst()) continue;
+          recNo = cur.getInt(0);
+        } finally {
+          cur.close();
+        }
+
         // OK, we have the desired record number
         // Now see if we can recover the content
-        
+
         Uri mmsUri = ContentUris.withAppendedId(MMS_URI, recNo);
         Uri partUri = Uri.withAppendedPath(mmsUri, "part");
         cur = qr.query(partUri, PART_COL_LIST, null, null, null);
-        
-        if (cur == null || !cur.moveToFirst()) {
-          
-          // The message contents do not yet exist.  Fire off a service request
-          // to the messaging app to get these loaded if we haven't already
-          if (entry.loading) continue; 
-          if (Log.DEBUG) Log.v("Request MMS content for " + entry.message.getContentLoc()); 
-          final Intent intent = new Intent();
-          intent.setClassName("com.android.mms", "com.android.mms.transaction.TransactionService");
-          intent.putExtra("type", 1);
-          intent.putExtra("uri", ContentUris.withAppendedId(MMS_URI, recNo).toString());
-          CadPageApplication.runOnMainThread(new Runnable(){
-            @Override
-            public void run() {
-              try {
-                if (startService(intent) == null) {
-                  Log.e("Tranaction.RETRIEVE_TRANSACTION service not found");
+
+        try {
+          if (cur == null || !cur.moveToFirst()) {
+
+            // The message contents do not yet exist.  Fire off a service request
+            // to the messaging app to get these loaded if we haven't already
+            if (entry.loading) continue;
+            if (Log.DEBUG) Log.v("Request MMS content for " + entry.message.getContentLoc());
+            final Intent intent = new Intent();
+            intent.setClassName("com.android.mms", "com.android.mms.transaction.TransactionService");
+            intent.putExtra("type", 1);
+            intent.putExtra("uri", ContentUris.withAppendedId(MMS_URI, recNo).toString());
+            CadPageApplication.runOnMainThread(new Runnable() {
+              @Override
+              public void run() {
+                try {
+                  if (startService(intent) == null) {
+                    Log.e("Transaction.RETRIEVE_TRANSACTION service not found");
+                  }
+                } catch (Exception ex) {
+                  Log.e(ex);
+                  EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
                 }
-              } catch (Exception ex) {
-                Log.e(ex);
-                EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
+
               }
-              
-            }});
-          entry.loading = true;
-          continue;
-        }
-        
-        // Almost there, we have a return value, try to retrieve a text component from it
-        String text;
-        do {
-          text = cur.getString(0);
-          if (text == null) {
-            byte[] ba = cur.getBlob(1);
-            if (ba != null) text = new String(ba);
+            });
+            entry.loading = true;
+            continue;
           }
-          if (text != null) {
-            text = text.trim();
-            if (!text.startsWith("<smil>")) break;
-            text = null;
+
+          // Almost there, we have a return value, try to retrieve a text component from it
+          String text;
+          do {
+            text = cur.getString(0);
+            if (text == null) {
+              byte[] ba = cur.getBlob(1);
+              if (ba != null) text = new String(ba);
+            }
+            if (text != null) {
+              text = text.trim();
+              if (!text.startsWith("<smil>")) break;
+              text = null;
+            }
+          } while (cur.moveToNext());
+
+          // for better or worse, we are done with this message, so let's
+          // remove it from the processing list
+          iter.remove();
+
+          // If we didn't retrieve any text info, give it up
+          // Otherwise add the text body to our message
+          // And update the message saved in the log buffer
+          if (text == null) continue;
+          message.setMessageBody(text);
+          SmsMsgLogBuffer.getInstance().update(message);
+
+          // OK, we have a real message.  First see if it is a vendor discovery query
+          // If it is, delete the message from the message inbox
+          if (message.isDiscoveryQuery(MmsTransactionService.this)) {
+            qr.delete(mmsUri, null, null);
           }
-        } while (cur.moveToNext());
-        
-        // for better or worse, we are done with this message, so let's
-        // remove it from the processing list
-        iter.remove();
-        
-        // If we didn't retrieve any text info, give it up
-        // Otherwise add the text body to our message
-        // And update the message saved in the log buffer
-        if (text == null) continue;
-        message.setMessageBody(text);
-        SmsMsgLogBuffer.getInstance().update(message);
-        
-        // OK, we have a real message.  First see if it is a vendor discovery query
-        // If it is, delete the message from the message inbox
-        if (message.isDiscoveryQuery(MmsTransactionService.this)) {
-          qr.delete(mmsUri, null, null);
+        } finally {
+          if (cur != null) cur.close();
         }
         
         // Now that we have the full message, we can try to parse it as a CAD page
