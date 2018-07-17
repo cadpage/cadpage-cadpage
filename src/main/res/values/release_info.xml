@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06227018</string>
+  <string name="release_date">07162018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-60\n
+    Location Fixes:\n
+    East Feliciana Parish, LA\n
+    Gratiot County, MI\n
+    \n
+    v1.9.15-59\n
+    Location Fixes:\n
+    Pickens County, SC\n
+
+    Addison County, VT\n
+    Chittenden County, VT\n
+    Grand isle County, VT\n
+    Windham County, VT\n
+    Windsor County, VT\n
+    \n
+    General Fixes:\n
+    Additional logging to help track down MMS processing problems.\n
+    \n
+    v1.9.15-58\n
+    New Locations:\n
+    Mecklenburg County, NC (alt)\n
+    Bosque County, TX\n
+    \n
+    Location Fixes:\n
+    Clackamas County, OR\n
+    Washington County, OR\n
+    Pickens County, SC\n
+    \n
     v1.9.15-57\n
     New Locations:\n
     Pease River Regional District, BC\n
@@ -16,38 +44,6 @@
     \n
     v1.9.15-56\n
     Location Fixes:\n
-    Marion County, OR\n
-    \n
-    v1.9.15-55\n
-    New Locations:\n
-    Lac Qui Parle County, MN\n
-    \n
-    Location Fixes:\n
-    Calcasieu Parish, LA\n
-    St James Parish, LA\n
-    Hennepin County, MN\n
-    Noble County, OH\n
-    Accomack County, VA\n
-    Greenbrier County, WV\n
-    Rock County, WI\n,
-    Canmore, AB\n
-    \n
-    v1.9.15-54\n
-    New Locations:\n
-    Chugiak, AK\n
-    Owen County, IN\n
-    Sussex County, MA\n
-    Ocean County, NJ (alt)\n
-    \n
-    Location Fixes:\n
-    Kosciusko County, IN\n
-    Sumner County, TN\n
-    \n
-    v1.9.15-53\n
-    New Locations:\n
-    Oconee County, SC (alt)\n
-    \n
-    Location Fixes:\n
-    Acadian Ambulance, TX
+    Marion County, OR
   </string>
 </resources>
