@@ -15,14 +15,13 @@ import java.util.GregorianCalendar;
 
 //import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.BugReportGenerator;
-import net.anei.cadpage.C2DMService;
 import net.anei.cadpage.ContentQuery;
+import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsMsgLogBuffer;
 import net.anei.cadpage.SmsPopupUtils;
-import net.anei.cadpage.SmsReceiver;
 import net.anei.cadpage.ManageUsb;
 import net.anei.cadpage.SmsService;
 import net.anei.cadpage.billing.BillingManager;
@@ -50,9 +49,7 @@ public class DeveloperToolsManager {
     "Probe USB",
     "Discover Bluetooth",
     "Probe Bluetooth",
-    "C2DM: Register",
-    "C2DM: Unregister",
-    "C2DM: Report",
+    "FCM: Report",
     "Stat: Lifetime",
     "Stat: Donate paid",
     "Stat: Donate warn",
@@ -71,16 +68,15 @@ public class DeveloperToolsManager {
     "Build Test Message",
     "Status test",
     "Generate Bug Report",
-    "Active911 Account Req",
     "Consume all purchases",
-    "Test C2DM MSG",
+    "Test FCM MSG",
     "Crash!!!"
     
   };
   
   private static final String[] valueList = new String[]{
     "100", "101", "102",
-    "31", "32", "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
+    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "10", "11", "12", "13", "14", "15", "16", "18", "19", "20"
   };
   
   private class DeveloperListPreference extends ListPreference {
@@ -243,17 +239,13 @@ public class DeveloperToolsManager {
       case 16:    // generate bug report
         BugReportGenerator.generate();
         break;
-        
-      case 17:
-        SmsPopupUtils.sendImplicitBroadcast(context, new Intent("net.anei.cadpage.REQ_ACCOUNT_INFO.Active911"));
-        break;
-        
+
       case 18:    // Consume all products
         BillingManager.instance().clearPurchaseInventory();
         break;
         
-      case 19:    // Build a specific C2DM page message
-        Intent intent = new Intent(context, C2DMService.class);
+      case 19:    // Build a specific FCM page message
+        Intent intent = new Intent(context, FCMMessageService.class);
         intent.setAction("com.google.android.c2dm.intent.RECEIVE");
         intent.putExtra("vendor", "CodeMessaging");
         
@@ -265,17 +257,9 @@ public class DeveloperToolsManager {
         
       case 20:    // Throw exception to test crash reporting
         throw new RuntimeException("Test Exception Handling");
-        
-      case 31:    // C2DM Register
-        C2DMService.register(context);
-        break;
-        
-      case 32:    // C2DM Unregister
-        C2DMService.unregister(context);
-        break;
-        
-      case 33:    // C2DM: Report
-        C2DMService.emailRegistrationId(context);
+
+      case 33:    // FCM: Report
+        FCMMessageService.emailRegistrationId(context);
         break;
         
       case 100: // USB Probe

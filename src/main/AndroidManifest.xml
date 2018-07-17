@@ -152,14 +152,12 @@
     </receiver>
     <receiver android:name=".ClearAllReceiver"/>
     <receiver android:name=".ReminderReceiver"/>
-    <receiver android:name=".C2DMRetryReceiver"/>
 
     <service android:name=".SmsService"/>
     <service android:name=".MmsTransactionService"/>
     <service android:name=".KeepAliveService"/>
     <service android:name=".HttpService"/>
     <service android:name=".TrackingService"/>
-    <service android:name=".C2DMService"/>
     <service android:name=".SmsMsgAccumulatorService"/>
     <service android:name=".ParserService"/>
 
@@ -175,14 +173,6 @@
       </intent-filter>
     </service>
 
-    <receiver android:name=".vendors.VendorReceiver">
-      <intent-filter>
-        <action android:name="net.anei.cadpage.REQ_ACCOUNT_INFO.Active911"/>
-      </intent-filter>
-      <intent-filter>
-        <action android:name="net.anei.cadpage.REQ_ACCOUNT_INFO.CodeMessaging"/>
-      </intent-filter>
-    </receiver>
     <receiver
     android:name=".CadPageWidget"
     android:label="@string/widget_config_name">

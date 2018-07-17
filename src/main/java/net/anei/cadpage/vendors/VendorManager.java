@@ -5,10 +5,9 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.C2DMService;
+import net.anei.cadpage.FCMInstanceIdService;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
-import net.anei.cadpage.NoticeActivity;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.donation.UserAcctManager;
@@ -18,15 +17,13 @@ import android.net.Uri.Builder;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
-import android.widget.Toast;
 
 /**
  * This class manages all of the Vendor classes
  */
+@SuppressWarnings("SimplifiableIfStatement")
 public class VendorManager {
-  
-  private Context context;
-  
+
   // List of supported vendors
   private final Vendor[] vendorList = new Vendor[]{
     new CadpageVendor(),
@@ -39,7 +36,6 @@ public class VendorManager {
    * @param context current context
    */
   public void setup(Context context) {
-    this.context = context;
     for (Vendor vendor : vendorList) {
       vendor.setup(context);
     }
@@ -57,7 +53,7 @@ public class VendorManager {
 
       @Override
       public boolean onPreferenceClick(Preference preference) {
-        if (SmsPopupUtils.haveNet(context)) reconnect(context);
+        if (SmsPopupUtils.haveNet(context)) reconnect(context, true);
         return true;
       }});
     
@@ -236,17 +232,6 @@ public class VendorManager {
   }
 
   /**
-   * Reconnect all enabled vendors
-   * @param context current context
-   */
-  void reconnect(Context context) {
-    Toast.makeText(context, R.string.reconnect_google, Toast.LENGTH_SHORT).show();
-    ManagePreferences.setDirectPageActive(true);
-    ManagePreferences.setReconnect(true);
-    C2DMService.register(context, true);
-  }
-  
-  /**
    * Display the Cadpage service registration window
    * @param context current context
    */
@@ -254,86 +239,31 @@ public class VendorManager {
     Vendor vendor = findVendor("Cadpage");
     if (vendor != null) VendorActivity.launchActivity(context, vendor);
   }
-  
+
   /**
-   * Called by CD2MReceiver when a new registration ID is defined
+   * Reconnect all enabled vendors
    * @param context current context
-   * @param change true if new registration ID differs from previous ID
+   * @param userReq User requested reconnect
+   */
+  public void reconnect(Context context, boolean userReq) {
+    String registrationID = FCMInstanceIdService.getInstanceId();
+    reconnect(context, userReq, registrationID);
+  }
+
+  /**
+   * reconnect with all active vendors
+   * @param context current context
+   * @param userReq User requested reconnect
    * @param registrationId new registration ID
    */
-  public void registerC2DMId(Context context, boolean change, String registrationId) {
-    
-    // Skip everything if the ID has not changed and a reconnect was not forced
-    boolean reconect = ManagePreferences.reconnect();
+  public void reconnect(Context context, boolean userReq, String registrationId) {
 
-    // Suspend the register suppression logic to help us stay connected to Active911
-    // if (!change && !reconect) return;
-    
     boolean transfer = ManagePreferences.transferFlag();
     
     // Pass new reg ID to all vendors and see if any of the respond
     for (Vendor vendor : vendorList) {
-      vendor.registerC2DMId(context, registrationId, reconect, transfer);
+      vendor.reconnect(context, registrationId, userReq, transfer);
     }
-    
-    // Reset the connect flag
-    if (reconect) ManagePreferences.setReconnect(false);
-  }
-  
-  /**
-   * Called by CD2MReceiver when phone is unregistered from C2DM services
-   * @param context current context
-   */
-  public void unregisterC2DMId(Context context) {
-    
-    // New rules, we always have to have a valid registration ID
-    // so we always request a new one
-    C2DMService.register(context, true);
-    
-    // But if there are no more registered vendors, we will disable
-    // registration error reporting
-    if (!isRegistered()) ManagePreferences.setDirectPageActive(false);
-  }
-  
-  /**
-   * Call by C2DMReceiver when a registration failure is reported
-   * @param context current context
-   * @param error error message
-   */
-  public void failureC2DMId(Context context, String error) {
-    
-    // We don't report any of the internal issues with registration unless
-    // user has done something to enable direct paging
-    if (!ManagePreferences.directPageActive()) return;
-    
-    // Display appropriate error message
-    int resId;
-    switch (error) {
-      case "SERVICE_NOT_AVAILABLE":
-        resId = R.string.vendor_service_not_available_error;
-        break;
-      case "ACCOUNT_MISSING":
-        resId = R.string.vendor_account_missing_error;
-        break;
-      case "AUTHENTICATION_FAILED":
-        resId = R.string.vendor_authentication_failed_error;
-        break;
-      case "PHONE_REGISTRATION_ERROR":
-        resId = R.string.vendor_phone_registration_error_error;
-        break;
-      case "PHONE_REGISTRATION_ERROR_HARD":
-        resId = R.string.vendor_phone_registration_error_hard_error;
-        break;
-      case "TOO_MANY_REGISTRATIONS":
-        resId = R.string.vendor_too_many_registrations_error;
-        break;
-      default:
-        resId = R.string.vendor_registration_error;
-        break;
-    }
-    String errMsg = context.getString(resId, error);
-    NoticeActivity.showVendorNotice(context, errMsg);
-    
   }
 
   /**
@@ -479,7 +409,7 @@ public class VendorManager {
   /**
    * Do new release reset processing
    */
-  public void newReleaseReset(Context context) {
+  public void newReleaseReset() {
     
     // Reset all disable text page checks when a new release is installed
     for (Vendor vendor : vendorList) {
@@ -515,7 +445,7 @@ public class VendorManager {
    * @return valid text title if found, -1 otherwise
    */
   public String getTextPageVendorName() {
-    return context.getString(lastTextPageVendor.getTitleId());
+    return CadPageApplication.getContext().getString(lastTextPageVendor.getTitleId());
   }
   
   /**
@@ -556,17 +486,6 @@ public class VendorManager {
     if (vendor == null) return true;
     return vendor.checkVendorStatus(context);
   }
-  
-  /**
-   * Process vendor account information request
-   * @param context current context
-   * @param vendorCode vendor code
-   */
-  public void requestAccountInfo(Context context, String vendorCode) {
-    Vendor vendor = findVendor(vendorCode);
-    if (vendor == null) return;
-    vendor.publishAccountInfo(context);
-  }
 
   /**
    * Perform and vendor specific location code conversions
@@ -588,7 +507,7 @@ public class VendorManager {
    * @param bld URI builder
    * @return updated URI builder
    */
-  public Builder addAccountInfo(String vendorCode, Builder bld) {
+  private Builder addAccountInfo(String vendorCode, Builder bld) {
     Vendor vendor = findVendor(vendorCode);
     if (vendor != null) bld = vendor.addAccountInfo(bld);
     return bld;
@@ -597,7 +516,7 @@ public class VendorManager {
   
   public String addAccountInfo(String vendorCode, String location) {
     if  (location == null) return null;
-    Uri.Builder bld = Uri.parse(location).buildUpon();;
+    Uri.Builder bld = Uri.parse(location).buildUpon();
     bld = addAccountInfo(vendorCode, bld);
     return bld.build().toString();
   }
@@ -627,9 +546,9 @@ public class VendorManager {
     return vendor.forceRegister(context);
   }
 
-  public boolean forceActive911Reregister(Context context) {
+  public void forceActive911Reregister(Context context) {
     Vendor vendor = findVendor("Active911");
-    return vendor.forceReregister(context);
+    vendor.forceReregister(context);
   }
 
   /**

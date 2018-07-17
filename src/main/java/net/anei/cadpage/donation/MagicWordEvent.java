@@ -1,6 +1,6 @@
 package net.anei.cadpage.donation;
 
-import net.anei.cadpage.C2DMService;
+import net.anei.cadpage.FCMInstanceIdService;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.ManageUsb;
@@ -26,7 +26,7 @@ public class MagicWordEvent extends DonateQueryEvent {
     
     // Special word that nobody knows about that will reset the C2DM registration code
     if (input.equalsIgnoreCase("ZAPIT")) {
-      C2DMService.unregister(activity);
+      FCMInstanceIdService.resetInstanceId();
       return true;
     }
 

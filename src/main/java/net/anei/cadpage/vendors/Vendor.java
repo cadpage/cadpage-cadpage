@@ -3,10 +3,10 @@ package net.anei.cadpage.vendors;
 import java.text.DateFormat;
 import java.util.Date;
 
-import net.anei.cadpage.C2DMService;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.EmailDeveloperActivity;
+import net.anei.cadpage.FCMInstanceIdService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.NoticeActivity;
@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import net.anei.cadpage.BroadcastBindings;
 
+@SuppressWarnings({"WeakerAccess", "SameReturnValue"})
 abstract class Vendor {
 
   // Vendor accounts go inactive if no alerts are received
@@ -265,7 +266,7 @@ abstract class Vendor {
    * @param context current context
    */
   void resetEmailReq(Context context) {
-    Uri uri = buildRequestUri("reset", ManagePreferences.registrationId());
+    Uri uri = buildRequestUri("reset", FCMInstanceIdService.getInstanceId());
     HttpService.addHttpRequest(context, new HttpRequest(uri){
 
       @Override
@@ -358,7 +359,7 @@ abstract class Vendor {
         PackageInfo pinfo = null;
         try {
           pinfo = pm.getPackageInfo(badPackageName, 0);
-        } catch (PackageManager.NameNotFoundException ex) {}
+        } catch (PackageManager.NameNotFoundException ignored) {}
         if (pinfo != null) {
 
           // OK, app is installed, now check to see if it is a version known to cause problems
@@ -376,8 +377,6 @@ abstract class Vendor {
         }
       }
     }
-    
-    publishAccountInfo(context);
   }
 
   protected String getBadPackageName() {
@@ -434,7 +433,7 @@ abstract class Vendor {
     editor.putString("token", token);
     editor.putString("dispatchEmail", emailAddress);
     editor.putBoolean("inactive", inactive);
-    editor.commit();
+    editor.apply();
   }
   
   /**
@@ -455,9 +454,9 @@ abstract class Vendor {
     boolean reactivate = inactive;
     if (reactivate) {
       inactive = false;
-      editor.putBoolean("inactive", inactive);
+      editor.putBoolean("inactive", false);
     }
-    editor.commit();
+    editor.apply();
     
     if (reactivate) reportStatusChange();
   }
@@ -466,7 +465,7 @@ abstract class Vendor {
     SharedPreferences.Editor editor = prefs.edit();
     editor.putLong("lastRegisterTime", new Date().getTime());
     editor.putLong("lastContactTime", 0L);
-    editor.commit();
+    editor.apply();
     warnActive911 = false;
   }
   
@@ -480,7 +479,7 @@ abstract class Vendor {
     this.textPage = textPage;
     SharedPreferences.Editor editor = prefs.edit();
     editor.putBoolean("textPage", textPage);
-    editor.commit();
+    editor.apply();
   }
   
   /**
@@ -496,13 +495,14 @@ abstract class Vendor {
       editor.putBoolean("textPage", textPage);
     }
     editor.putBoolean("disableTextPageCheck", disableTextPageCheck);
-    editor.commit();
+    editor.apply();
   }
   
   /**
    * Append vendor status info to logging buffer 
    * @param sb String buffer accumulated log information
    */
+  @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
   void addStatusInfo(StringBuilder sb) {
     sb.append("\n\nVendor:" + vendorCode);
     sb.append("\nenabled:" + enabled);
@@ -583,7 +583,7 @@ abstract class Vendor {
    */
   void profileReq(Activity context) {
     if (!SmsPopupUtils.haveNet(context)) return;
-    Uri uri = buildRequestUri("profile", ManagePreferences.registrationId());
+    Uri uri = buildRequestUri("profile", FCMInstanceIdService.getInstanceId());
     viewPage(context, uri);
   }
 
@@ -606,13 +606,8 @@ abstract class Vendor {
    * Force new registration request, even if service is already enabled
    * @param context current context
    */
-  boolean forceReregister(Context context) {
-
-    // Make sure we have network connectivity
-    if (!SmsPopupUtils.haveNet(context)) return false;
-
-    sendReregister(context, ManagePreferences.registrationId(), false, false);
-    return true;
+  void forceReregister(Context context) {
+    sendReregister(context, FCMInstanceIdService.getInstanceId(), false, false);
   }
 
   /**
@@ -650,15 +645,12 @@ abstract class Vendor {
     
     // If already enabled, we don't have to do anything
     if (enabled) {
-      sendReregister(context, ManagePreferences.registrationId(), true, false);
+      sendReregister(context, FCMInstanceIdService.getInstanceId(), true, false);
       return;
     }
 
     // Make sure we have network connectivity
     if (!SmsPopupUtils.haveNet(context)) return;
-    
-    // Turn on direct paging error reporting
-    ManagePreferences.setDirectPageActive(true);
 
     // Set registration in progress flag
     // and save the discovery URI
@@ -667,18 +659,9 @@ abstract class Vendor {
     
     // See if we already have a registration ID, if we do, use it to send
     // registration request to vendor server
-    // But we also will refresh the registration ID, just in case it has
-    // gotten stale from long periods of unuse.
-    String regId = ManagePreferences.registrationId();
+    String regId = FCMInstanceIdService.getInstanceId();
     if (regId != null) {
-      registerC2DMId(context, regId, true, false);
-      C2DMService.register(context, true);
-    }
-    
-    // If we don't request one and and send the request to the server when
-    // it comes back in
-    else {
-      if (!C2DMService.register(context, uri != null)) showNotice(context, R.string.vendor_reg_failure_msg, null);
+      reconnect(context, regId, true, false);
     }
   }
 
@@ -699,12 +682,12 @@ abstract class Vendor {
     
     // Send an unregister request to the vendor server
     // we really don't care how it responds
-    Uri uri = buildRequestUri("unregister", ManagePreferences.registrationId(), true);
+    Uri uri = buildRequestUri("unregister", FCMInstanceIdService.getInstanceId(), true);
     HttpService.addHttpRequest(context, new HttpRequest(uri){});
     
     // Finally unregister from Google C2DM service.  If there are other vendor
     // services that are still active, they will request a new registration ID
-    C2DMService.unregister(context);
+    FCMInstanceIdService.resetInstanceId();
 
     // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
     if (isSponsored()) {
@@ -722,7 +705,7 @@ abstract class Vendor {
    * @param transfer cadpage configuration has been transfered from another device
    * @return true if we actually did anything
    */
-  boolean registerC2DMId(final Context context, String registrationId, boolean userReq, boolean transfer) {
+  boolean reconnect(final Context context, String registrationId, boolean userReq, boolean transfer) {
     
     // If we are in process of registering with server, send the web registration request
     if (inProgress) {
@@ -807,7 +790,7 @@ abstract class Vendor {
         
         // A 299 response indicates that the server has been having trouble with our registration ID
         // and we should request another one.
-        if (status == 299) C2DMService.register(context, true);
+        if (status == 299) FCMInstanceIdService.resetInstanceId();
         
         // A 400 request indicates that the device we have tried to register is no longer valid
         if (status == 400) {
@@ -842,8 +825,7 @@ abstract class Vendor {
     this.token = token;
     this.emailAddress = emailAddress;
     saveStatus();
-    if (enabled) publishAccountInfo(context);
-    
+
     boolean showProfile = (enabled && changeEmail); 
     if (showProfile) PagingProfileEvent.instance().open(context);
     if (change) {
@@ -854,7 +836,7 @@ abstract class Vendor {
         updateLastRegisterTime();
       }
       else {
-        C2DMService.unregister(context);
+        FCMInstanceIdService.resetInstanceId();
         ManagePreferences.setAuthRunDays(0);
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
@@ -862,15 +844,6 @@ abstract class Vendor {
       
       if (!register) EmailDeveloperActivity.logSnapshot(context, "Vendor initiated disconnect");
     }
-  }
-  
-  void publishAccountInfo(Context context) {
-    if (!enabled) return;
-    Intent intent = new Intent("net.anei.cadpage.ACCOUNT_INFO." + vendorCode);
-    intent.putExtra("account", account);
-    intent.putExtra("token", token);
-    Log.w("Publish Account Info");
-    SmsPopupUtils.sendImplicitBroadcast(context, intent, BroadcastBindings.PERMISSION);
   }
 
   /**

@@ -151,6 +151,5 @@
     fix things so that this does not happen in future releases of the Active911 Android app.
   </string>
 
-  <string name="reconnect_google">Reconnect with Google servers</string>
   <string name="reconnect">Reconnect with %s</string>
 </resources>

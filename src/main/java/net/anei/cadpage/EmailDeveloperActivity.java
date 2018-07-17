@@ -232,11 +232,15 @@ public class EmailDeveloperActivity extends Safe40Activity {
       ManagePreferences.addConfigInfo(context, body);
       UserAcctManager acctMgr = UserAcctManager.instance();
       if (acctMgr != null) acctMgr.addAccountInfo(body);
-      
-      // See if there is any snapshot information to append
-      getSnapshotInfo(context, body);
     }
-    
+
+    // Add FCM registration ID
+    body.append("\n\nRegistration ID:");
+    body.append(FCMInstanceIdService.getInstanceId());
+
+    // See if there is any snapshot information to append
+    getSnapshotInfo(context, body);
+
     final String message = body.toString();
     
     // If config info was requested, include any Cadpage log information

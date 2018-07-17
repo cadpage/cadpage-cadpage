@@ -125,6 +125,5 @@
     Active911 slutade sända larm från larmcentralen när jag uppgraderade till den senaste versionen av Active911s Android App. Det är ett känt problem, identifierat i ärendenummer #2017050710000311. Skulle ni kunna vara så vänliga att se till att det inte händer i kommande releaser av Active911s Android-app.
   </string>
 
-  <string name="reconnect_google">Återanslut till Googles servers</string>
   <string name="reconnect">Återanslut till %s</string>
 </resources>

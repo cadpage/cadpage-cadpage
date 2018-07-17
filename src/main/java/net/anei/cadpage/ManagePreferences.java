@@ -32,6 +32,9 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+
 @SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
 public class ManagePreferences implements SharedPreferences.OnSharedPreferenceChangeListener {
   
@@ -718,6 +721,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static String mapNetworkChk() {
     return prefs.getString(R.string.pref_map_network_chk_key);
   }
+
+  public static Constraints networkConstraint() {
+    NetworkType netReq = ManagePreferences.mapNetworkChk().charAt(0) != 'R' ? NetworkType.NOT_ROAMING : NetworkType.CONNECTED;
+    return new Constraints.Builder().setRequiredNetworkType(netReq).build();
+  }
   
   public static int gpsMapOption() {
     String val = prefs.getString(R.string.pref_gps_map_option_key);
@@ -1108,19 +1116,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setAuthRecheckStatusCnt(int newVal) {
     prefs.putInt(R.string.pref_auth_recheck_status_cnt_key, newVal);
   }
-  
-  public static String registrationId() {
-    return prefs.getString(R.string.pref_registration_id_key, null);
-  }
-  
-  public static boolean setRegistrationId(String regId) {
-    String oldRegId = registrationId();
-    prefs.putString(R.string.pref_prev_registration_id_key, oldRegId);
-    prefs.putString(R.string.pref_registration_id_key, regId);
-    if (regId == null) return (oldRegId == null);
-    else return !regId.equals(oldRegId);
-  }
-  
+
   /**
    * Determine our startup status
    * @param versionCode current version code
@@ -1152,8 +1148,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         // ID.  And the current saved registration ID is clearly invalid and should
         // be cleared
         result = true;
-        setRegistrationId(null);
-        
+        FCMInstanceIdService.resetInstanceId();;
+
         // If there was an old registration ID, that is different from the current
         // registration ID, then set the transfer flag indicating the Cadpage
         // configuration has been transfered to another device
@@ -1232,14 +1228,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     String dateStr = DATE_FORMAT.format(date);
     prefs.putString(R.string.pref_register_date_key, dateStr);
   }
-  
-  public static boolean reconnect() {
-    return prefs.getBoolean(R.string.pref_reconnect_key);
-  }
-  
-  public static void setReconnect(boolean newVal) {
-    prefs.putBoolean(R.string.pref_reconnect_key, newVal);
-  }
 
   public static void setLedColorCustom(int color) {
     prefs.putString(R.string.pref_flashled_color_custom_key, "#" + Integer.toHexString(color));
@@ -1272,15 +1260,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setLastLocAcc(float newVal) {
     prefs.putFloat(R.string.pref_last_loc_acc_key, newVal);
   }
-  
-  public static boolean directPageActive() {
-    return prefs.getBoolean(R.string.pref_direct_page_active_key);
-  }
-  
-  public static void setDirectPageActive(boolean newVal) {
-    prefs.putBoolean(R.string.pref_direct_page_active_key, newVal);
-  }
-  
+
   public static long lastGcmEventTime() {
     return prefs.getLong(R.string.pref_last_gcm_event_time_key, 0L);
   }
@@ -1362,14 +1342,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     Map<String, ?> map = prefs.mPrefs.getAll();
     
-    Object regId = null;
     for (int key : PREFERENCE_KEYS) {
       String keyName = context.getString(key);
       Object value = map.get(keyName);
-      if (key == R.string.pref_registration_id_key) regId = value;
-      if (key == R.string.pref_prev_registration_id_key) {
-        if (value != null && value.equals(regId)) value = "< Same >";
-      }
       if (key == R.string.pref_last_gcm_event_time_key || key == R.string.pref_register_req_lock_time_key){
         try {
           long time = (Long)value;
@@ -2387,7 +2362,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   private String getString(int resPrefId) {
     String result = mPrefs.getString(context.getString(resPrefId), null);
-    if (result == null) throw new RuntimeException("No configured preference value found");
+    if (result == null) result = "";
     return result;
   }
 
@@ -2600,19 +2575,15 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_paid_year_2_key,
       R.string.pref_purchase_date_2_key,
       
-      R.string.pref_registration_id_key,
-      R.string.pref_prev_registration_id_key,
       R.string.pref_prev_version_code,
       R.string.pref_register_req_lock_time_key,
       R.string.pref_register_req_key,
       R.string.pref_reregister_delay_key,
       R.string.pref_register_date_key,
-      R.string.pref_reconnect_key,
-      
+
       R.string.pref_last_loc_time_key,
       R.string.pref_last_loc_acc_key,
       
-      R.string.pref_direct_page_active_key,
       R.string.pref_last_gcm_event_type_key,
       R.string.pref_last_gcm_event_time_key,
       R.string.pref_restore_vol,

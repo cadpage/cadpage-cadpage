@@ -39,37 +39,15 @@ Det här kommer att blockera att din meddelandeservice skickar larm till dig. Ä
   </string>
   <string name="vendor_connect_msg">Meddelandeservice från %s har aktiverats</string>
   <string name="vendor_disconnect_msg">Meddelandeservice från %s har kopplats från</string>
-  <string name="vendor_reg_failure_msg">
-     Google C2DM registrering misslyckades\n
-  </string>
   <string name="vendor_register_err_msg">
     Meddelandeservice från %1$s har kopplats ner\n
     Servern svarar: %2$s
-  </string>
-  <string name="vendor_registration_error">
-    Ditt försök att koppla in meddelandeservice har nekats. Det rapporterade felet var\n %s\n
-    Vänligen rapportera detta till utvecklarna av Cadpage.
-  </string>
-  <string name="vendor_service_not_available_error">
-      Google-servrarna verkar vara upptagna just nu. Vänligen försök igen senare"
-  </string>
-  <string name="vendor_account_missing_error">
-Ett Google-konto måste vara registrerat på denna enhet innan du kan registrera dig för en meddelandeservice
-  </string>
-  <string name="vendor_authentication_failed_error">
-    Ett fel inträffade när Google skulle autentisera kontot som används av den här enheten. Vänligen kontrollera att användarnamn och lösenord som används för Google play butik är korrekta. 
   </string>
   <string name="vendor_phone_registration_error_error">
     Google meddelar att din telefon för närvarande inte stödjer push-notiser.De ger oss inte heller några tips om vad som kan vara fel. Oftast löser sig problemet genom att upprepa proceduren igen om allt från ett par sekunder tills ett par dagar
     så testa det ett par gånger innan du ger upp och E-postar programutvecklaren för ytterligare hjälp.  
   </string>
-  <string name="vendor_phone_registration_error_hard_error">
-    Google meddelar att din telefon för närvarande inte understödjer Push-notiser.Vi vet egentligen inte varför.Vänligen använd Cadpages inställning för att E-posta programutvecklaren för att fråga efter ytterligare råd.
-  </string>
-  <string name="vendor_too_many_registrations_error">
-    För många appar försöker använda googles pushmeddelandeservice. Du måste avistallera någon av de andra med hjälp av denna tjänst innan Cadpage kan ta emot pushade meddelanden   
-  </string>
-  
+
   <string name="vendor_no_web_viewer_error">
     Systemet avslår begäran att titta på en websida. Det verkar vara som att du inte har någon webläsare installerad.
   </string>

@@ -61,19 +61,12 @@ public class CadPageApplication extends Application {
       if (ManagePreferences.newVersion(versionCode)) {
         
         // Reset vendor status
-        VendorManager.instance().newReleaseReset(context);
-        
-        // The rules keep changing here
-        // Currently we always ask for a registration ID at every new release load
-        // regardless of whether or not the user is actually using direct paging.  It
-        // is going to mean a big increase for Google serer workload.  But it is what
-        // there regular GCM library does.  So that is what we are going to do
-        C2DMService.register(context, true);
+        VendorManager.instance().newReleaseReset();
       }
 
-      // If a C2DM registration was not forced normally, see if one is overdue
+      // If a FCM registration was not forced normally, see if one is overdue
       else {
-        C2DMService.checkOverdueRefresh(context);
+        FCMMessageService.checkOverdueRefresh(context);
       }
       
     } catch (Exception ex) {

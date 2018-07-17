@@ -6,8 +6,9 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import net.anei.cadpage.C2DMService;
+
 import net.anei.cadpage.CadPageActivity;
+import net.anei.cadpage.FCMInstanceIdService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.R;
 import net.anei.cadpage.HttpService.HttpRequest;
@@ -107,8 +108,8 @@ class CadpageVendor extends Vendor {
    * @return true if we actually did anything
    */
   @Override
-  boolean registerC2DMId(final Context context, String registrationId, boolean userReq, boolean transfer) {
-    if (!super.registerC2DMId(context, registrationId, userReq, transfer)) return false;
+  boolean reconnect(final Context context, String registrationId, boolean userReq, boolean transfer) {
+    if (!super.reconnect(context, registrationId, userReq, transfer)) return false;
     updateCadpageStatus(context);
     return true;
   }
@@ -141,7 +142,7 @@ class CadpageVendor extends Vendor {
       // we can pretty reliably break the connection is by unregistering the
       // current registration ID and getting a new one
       else {
-        C2DMService.unregister(context);
+        FCMInstanceIdService.resetInstanceId();
         return false;
       }
     }

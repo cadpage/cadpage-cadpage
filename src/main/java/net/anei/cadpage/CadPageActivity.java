@@ -1,8 +1,5 @@
 package net.anei.cadpage;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-
 import net.anei.cadpage.donation.Active911WarnEvent;
 import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonateScreenEvent;
@@ -43,8 +40,7 @@ public class CadPageActivity extends AppCompatActivity {
   
   private static final int RELEASE_DIALOG = 1;
   private static final int CONFIRM_DELETE_ALL_DIALOG = 2;
-  private static final int PLAY_SERVICES_REQUEST_DIALOG = 3;
-  
+
   private final PermissionManager permMgr = new PermissionManager(this);
 
   private static boolean initializing = false;
@@ -83,18 +79,6 @@ public class CadPageActivity extends AppCompatActivity {
     int height = displaymetrics.heightPixels;
     int width = displaymetrics.widthPixels;
     ManagePreferences.setScreenSize(""+width+"X"+height);
-    
-    if (!ManagePreferences.useOldGcm()) {
-      int resultCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
-      if (resultCode != ConnectionResult.SUCCESS) {
-        if (GoogleApiAvailability.getInstance().isUserResolvableError(resultCode)) {
-          Log.w("Google Play Services Recoverable error: " + resultCode);
-          GoogleApiAvailability.getInstance().getErrorDialog(this, resultCode, PLAY_SERVICES_REQUEST_DIALOG).show();
-        } else {
-          Log.w("Google Play Services are not available: " + resultCode);
-        }
-      }
-    }
 
     // If the screen is locked, we  would like both the call history and call detail
     // screens to override the lock screen.  This works fine up until Android 5.0

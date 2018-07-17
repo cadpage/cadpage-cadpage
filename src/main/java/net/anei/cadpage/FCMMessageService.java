@@ -1,10 +1,10 @@
 package net.anei.cadpage;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -16,11 +16,23 @@ import net.anei.cadpage.vendors.VendorManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.Worker;
 
 public class FCMMessageService extends FirebaseMessagingService {
 
   private static final int REFRESH_ID_TIMEOUT = 24*60*60*1000; // 1 day
-  private static final String ACTION_REFRESH_ID = "net.anei.cadpage.REFRESH_ID";
+  private static final String ACTION_REFRESH_ID = "net.anei.cadpage.FCMMessageService.REFRESH_ID";
+  private static final String ACTION_ACTIVE911_REFRESH_ID = "net.anei.cadpage.FCMMessageService.ACTIVE911_REFRESH_ID";
+
+  // Should probably be using this somewhere
+  @SuppressWarnings("unused")
+  private static final String GCM_PROJECT_ID = "1027194726673";
+
 
   @Override
   public void onCreate() {
@@ -40,9 +52,8 @@ public class FCMMessageService extends FirebaseMessagingService {
 
     Log.v("FCMMessageService:onMessageReceived()");
     Log.v("From: " + remoteMessage.getFrom());
-    Log.v("To:" + remoteMessage.getTo());
 
-    // If Cadpage is disabled, ignore incomming messages
+    // If Cadpage is disabled, ignore incoming messages
     if (!ManagePreferences.enabled()) return;
 
 
@@ -70,7 +81,7 @@ public class FCMMessageService extends FirebaseMessagingService {
     if (type.equals("PING")) {
       sendAutoAck(ackURL, vendorCode);
       VendorManager.instance().checkVendorStatus(this, vendorCode);
-      resetRefreshIDTimer(this, "PING");
+      resetRefreshIDTimer("PING");
       return;
     }
 
@@ -89,7 +100,7 @@ public class FCMMessageService extends FirebaseMessagingService {
         }
       });
       sendAutoAck(ackURL, vendorCode);
-      resetRefreshIDTimer(this, "VENDOR_" + type);
+      resetRefreshIDTimer("VENDOR_" + type);
       return;
     }
 
@@ -122,7 +133,7 @@ public class FCMMessageService extends FirebaseMessagingService {
 
   private void processContent(Map<String, String> data, String content, long timestamp) {
 
-    resetRefreshIDTimer(this, "PAGE");
+    resetRefreshIDTimer("PAGE");
 
     // Reconstruct message from data from intent fields
     String from = data.get("sender");
@@ -140,14 +151,6 @@ public class FCMMessageService extends FirebaseMessagingService {
 
     // Whatever it is, update vendor contact time
     VendorManager.instance().updateLastContactTime(vendorCode, content);
-
-    // Send receive notice to vendor app running on this device
-    if (vendorCode != null) {
-      String action = "net.anei.cadpage.RECEIVE." + vendorCode;
-      Intent sendIntent = new Intent(action);
-      Log.w("Broadcasting direct page alert");
-      SmsPopupUtils.sendImplicitBroadcast(this, sendIntent);
-    }
 
     // Get the acknowledge URL and request code
     String ackURL = data.get("ack_url");
@@ -263,29 +266,33 @@ public class FCMMessageService extends FirebaseMessagingService {
   /**
    * Reset the refresh registration ID timer, rescheduling the next refresh event
    * until REFRESH_ID_TIMEOUT msecs in the future
-   * @param context current context
    * @param eventType Event type responsible for reset request
    */
-  private static void resetRefreshIDTimer(Context context, String eventType) {
+  private static void resetRefreshIDTimer(String eventType) {
 
     long curTime = System.currentTimeMillis();
     ManagePreferences.setLastGcmEventType(eventType);
     ManagePreferences.setLastGcmEventTime(curTime);
 
     Log.v("Scheduling refresh event in " + REFRESH_ID_TIMEOUT + " msecs");
+    OneTimeWorkRequest req =
+        new OneTimeWorkRequest.Builder(RefreshIDWorker.class)
+              .setInitialDelay(REFRESH_ID_TIMEOUT, TimeUnit.MILLISECONDS)
+              .setConstraints(ManagePreferences.networkConstraint())
+              .build();
+    WorkManager mgr = WorkManager.getInstance();
+    assert mgr != null;
+    mgr.beginUniqueWork(ACTION_REFRESH_ID, ExistingWorkPolicy.REPLACE, req).enqueue();
+  }
 
-    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    assert myAM != null;
-
-    Intent refreshIntent = new Intent(context, C2DMRetryReceiver.class);
-    refreshIntent.setAction(ACTION_REFRESH_ID);
-
-    PendingIntent refreshPendingIntent =
-        PendingIntent.getBroadcast(context, 0, refreshIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-    long triggerTime = curTime + REFRESH_ID_TIMEOUT;
-    myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, refreshPendingIntent);
-
+  @SuppressWarnings("WeakerAccess")  // CAN NOT BE PRIVATE!!!!
+  public static class RefreshIDWorker extends Worker {
+    @NonNull
+    public Result doWork() {
+      Log.v("Refresh Direct Paging Registration");
+      refreshID(getApplicationContext());
+      return Result.SUCCESS;
+    }
   }
 
   /**
@@ -303,7 +310,64 @@ public class FCMMessageService extends FirebaseMessagingService {
     long eventTime = ManagePreferences.lastGcmEventTime() + REFRESH_ID_TIMEOUT;
     if (System.currentTimeMillis() > eventTime) {
       Log.v("Perform overdue GCM refresh");
-//      register(context, true);
+      refreshID(context);
+    }
+  }
+
+  private static void refreshID(Context context) {
+
+    // Reset the refresh timer
+    resetRefreshIDTimer("REFRESH");
+
+    // There doesn't seem to be a way to do this.  But if we ever figure it out
+    // this is where it goes
+
+    // But we do want to reconnect with each direct paging vendor
+    VendorManager.instance().reconnect(context, false);
+  }
+
+  public static void registerActive911(long initDelay) {
+
+    Log.v("Scheduling Active911 refresh " + initDelay + " msecs");
+
+    OneTimeWorkRequest req =
+        new OneTimeWorkRequest.Builder(RegisterActive911Worker.class)
+            .setInitialDelay(initDelay, TimeUnit.MILLISECONDS)
+            .setConstraints(ManagePreferences.networkConstraint())
+            .build();
+    WorkManager mgr = WorkManager.getInstance();
+    assert mgr != null;
+    mgr.beginUniqueWork(ACTION_ACTIVE911_REFRESH_ID, ExistingWorkPolicy.REPLACE, req).enqueue();
+  }
+
+  @SuppressWarnings("WeakerAccess")  // CAN NOT BE PRIVATE!!!!
+  public static class RegisterActive911Worker extends Worker {
+    @NonNull
+    public Result doWork() {
+      Log.v("Reconnect with Active911 service");
+     VendorManager.instance().forceActive911Reregister(getApplicationContext());
+     return Result.SUCCESS;
+    }
+  }
+
+
+  /**
+   * Generate an Email message with the current registration ID
+   * @param context current context
+   */
+  public static void emailRegistrationId(Context context) {
+
+    // Build send email intent and launch it
+    String type = "GCM";
+    Intent intent = new Intent(Intent.ACTION_SEND);
+    String emailSubject = CadPageApplication.getNameVersion() + " " + type + " registration ID";
+    intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+    intent.putExtra(Intent.EXTRA_TEXT, "My " + type + " registration ID is " + FCMInstanceIdService.getInstanceId());
+    intent.setType("message/rfc822");
+    try {
+      context.startActivity(Intent.createChooser(intent, context.getString(R.string.pref_email_title)));
+    } catch (ActivityNotFoundException ex) {
+      Log.e(ex);
     }
   }
 
