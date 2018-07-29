@@ -266,11 +266,8 @@ public class VendorManager {
     // Skip everything if the ID has not changed and a reconnect was not forced
     boolean reconect = ManagePreferences.reconnect();
 
-    // Suspend the register suppression logic to help us stay connected to Active911
-    // if (!change && !reconect) return;
-    
-    boolean transfer = ManagePreferences.transferFlag();
-    
+    String transfer = ManagePreferences.transferStatus();
+
     // Pass new reg ID to all vendors and see if any of the respond
     for (Vendor vendor : vendorList) {
       vendor.registerC2DMId(context, registrationId, reconect, transfer);

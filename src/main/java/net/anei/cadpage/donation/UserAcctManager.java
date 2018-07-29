@@ -27,7 +27,6 @@ public class UserAcctManager {
   Context context;
   private String[] userEmails = null;
   private String phoneNumber = null;
-  private String meid = null;
   private boolean developer = false;
   
   private static final Pattern SDK_PTN = Pattern.compile(".*(?:^|[_\\W])sdk(?:$|[_\\W]).*");
@@ -68,8 +67,6 @@ public class UserAcctManager {
       if (phoneNumber.startsWith("+")) phoneNumber = phoneNumber.substring(1);
       if (phoneNumber.startsWith("1")) phoneNumber = phoneNumber.substring(1);
     }
-    meid = readPhoneStatePerm ? tMgr.getDeviceId() : null;
-    if (meid == null) meid = getSerialID();
 
     updateEmailList();
 
@@ -178,7 +175,7 @@ public class UserAcctManager {
   }
 
   public String getMEID() {
-    return meid;
+    return android.os.Build.SERIAL;
   }
   
   /**

@@ -1151,6 +1151,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // We are going to need the old and new MEID numbers, so lets get them now
     String meid = UserAcctManager.instance().getMEID();
     String oldMeid = prefs.getString(R.string.pref_prev_meid_key, null);
+    if (meid != null && !meid.equals(oldMeid)) {
+      prefs.putString(R.string.pref_prev_meid_key, meid);
+    }
 
     // Next see if Cadpage has been restored to the same or another device.  We
     // determine this by checking for the non-existence of a file in the no-backup
@@ -1163,12 +1166,15 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         // be cleared
         result = true;
         setRegistrationId(null);
-        
-        // If there was an old registration ID, that is different from the current
-        // registration ID, then set the transfer flag indicating the Cadpage
-        // configuration has been transfered to another device
-        if (oldMeid != null && meid != null && !meid.equals(oldMeid)) {
-          prefs.putBoolean(R.string.pref_transfer_flag_key, true);
+
+        // If we have been restored from a backup, set transfer status to pass to
+        // any direct paging vendors
+
+        if (prevVersion > 0) {
+          String status = "Y";
+          if (meid != null && meid.length() > 0 &&
+              !meid.equals("UNKNOWN") && meid.equals(oldMeid)) status = "R";
+          prefs.putString(R.string.pref_transfer_status_key, status);
         }
       }
     } catch (IOException ex) {
@@ -1339,9 +1345,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putBoolean(R.string.pref_use_old_gcm, newVal);
   }
   
-  public static boolean transferFlag() {
-    boolean result = prefs.getBoolean(R.string.pref_transfer_flag_key);
-    if (result) prefs.putBoolean(R.string.pref_transfer_flag_key, false);
+  public static String transferStatus() {
+    String result = prefs.getString(R.string.pref_transfer_status_key, "N");
+    if (!result.equals("N")) prefs.putString(R.string.pref_transfer_status_key, "N");
     return result;
   }
   
@@ -2674,7 +2680,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_use_old_gcm,
       
       R.string.pref_prev_meid_key,
-      R.string.pref_transfer_flag_key,
+      R.string.pref_transfer_status_key,
       
       R.string.pref_no_map_gps_label
   };

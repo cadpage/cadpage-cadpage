@@ -611,7 +611,7 @@ abstract class Vendor {
     // Make sure we have network connectivity
     if (!SmsPopupUtils.haveNet(context)) return false;
 
-    sendReregister(context, ManagePreferences.registrationId(), false, false);
+    sendReregister(context, ManagePreferences.registrationId(), false);
     return true;
   }
 
@@ -650,7 +650,7 @@ abstract class Vendor {
     
     // If already enabled, we don't have to do anything
     if (enabled) {
-      sendReregister(context, ManagePreferences.registrationId(), true, false);
+      sendReregister(context, ManagePreferences.registrationId(), true);
       return;
     }
 
@@ -671,7 +671,7 @@ abstract class Vendor {
     // gotten stale from long periods of unuse.
     String regId = ManagePreferences.registrationId();
     if (regId != null) {
-      registerC2DMId(context, regId, true, false);
+      registerC2DMId(context, regId, true, "N");
       C2DMService.register(context, true);
     }
     
@@ -719,10 +719,10 @@ abstract class Vendor {
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer cadpage configuration has been transfered from another device
+   * @param transfer restore status to report to vendords
    * @return true if we actually did anything
    */
-  boolean registerC2DMId(final Context context, String registrationId, boolean userReq, boolean transfer) {
+  boolean registerC2DMId(final Context context, String registrationId, boolean userReq, String transfer) {
     
     // If we are in process of registering with server, send the web registration request
     if (inProgress) {
@@ -778,19 +778,29 @@ abstract class Vendor {
   boolean checkVendorStatus(Context context) {
     return true;
   }
-  
+
   /**
    * Send reregister request to vendor
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer cadpage configuration has been transfered from another device
    */
-  private void sendReregister(final Context context, String registrationId, boolean userReq, boolean transfer) {
+  private void sendReregister(final Context context, String registrationId, boolean userReq) {
+    sendReregister(context, registrationId, userReq, "N");
+  }
+
+  /**
+   * Send reregister request to vendor
+   * @param context current context
+   * @param registrationId registration ID
+   * @param userReq true if user requested this action
+   * @param transfer restore status to report to vendors
+   */
+  private void sendReregister(final Context context, String registrationId, boolean userReq, String transfer) {
     Uri uri = buildRequestUri("reregister", registrationId, userReq);
     Uri.Builder b = uri.buildUpon();
     b.appendQueryParameter("userReq", (userReq ? "Y" : "N"));
-    if (transfer) b.appendQueryParameter("transfer", "Y");
+    if (!transfer.equals("N")) b.appendQueryParameter("transfer", transfer);
     uri = b.build();
     HttpService.addHttpRequest(context, new HttpService.HttpRequest(uri){
       
