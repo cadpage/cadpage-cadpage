@@ -16,9 +16,12 @@ import android.widget.TextView;
  * This class handles a donation event triggered by an outside event.  Typically
  * this will be a button press in another donation dialog menu, but it could
  * also be a preference selection, or a triggered donation status check
+ *
+ * Extends RuntimeException so event can be thrown to help track down which event is responsible
+ * for crashes reported by Google Analytics
  */
 
-public abstract class DonateEvent {
+public abstract class DonateEvent extends RuntimeException {
   
   // Different alert status codes
   public enum  AlertStatus {GREEN, YELLOW, RED};

@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07202018</string>
+  <string name="release_date">07302018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-62\n
+    New Locations:\n
+    Murray County, GA\n
+    Jackson County, IN\n
+    Shelby County, IN\n
+    Bourbon County, KY (alt)\n
+    Clay County, KY\n
+    Rowen County, KY\n
+    Iberia Parish, LA\n
+    Perry County, MO\n
+    Canadian County, OK\n
+    Grayson County, VA\n
+    Westmoreland County, VA\n
+    \n
+    Location Fixes:\n
+    St Clair County, AL\n
+    Dealaware County, NY\n
+    Hertford County, NC\n
+    Fluvanna County, VA\n
+    \n
     v1.9.15-61\n
     Location Fixes:\n
     Yolo County, CA\n
@@ -39,16 +59,6 @@
     Location Fixes:\n
     Clackamas County, OR\n
     Washington County, OR\n
-    Pickens County, SC\n
-    \n
-    v1.9.15-57\n
-    New Locations:\n
-    Pease River Regional District, BC\n
-    \n
-    Location Fixes:\n
-    Jefferson County, CO\n
-    Delaware County, PA\n
-    Miami County, KS\n
-    Mid-Island Region, BC renamed to Vancouver island, BC
+    Pickens County, SC
   </string>
 </resources>

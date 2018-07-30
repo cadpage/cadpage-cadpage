@@ -104,11 +104,11 @@ class CadpageVendor extends Vendor {
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer Cadpage configuration has been copied to new device
+   * @param transfer restore status to report to vendors
    * @return true if we actually did anything
    */
   @Override
-  boolean registerC2DMId(final Context context, String registrationId, boolean userReq, boolean transfer) {
+  boolean registerC2DMId(final Context context, String registrationId, boolean userReq, String transfer) {
     if (!super.registerC2DMId(context, registrationId, userReq, transfer)) return false;
     updateCadpageStatus(context);
     return true;

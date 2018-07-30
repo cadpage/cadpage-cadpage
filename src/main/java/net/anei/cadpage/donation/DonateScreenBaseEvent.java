@@ -73,7 +73,9 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
       view.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
       setTextColor(view);
     } catch (RuntimeException ex) {
-      throw new RuntimeException(this.getClass().getName(), ex);
+      this.initCause(ex);
+      this.fillInStackTrace();
+      throw this;
     }
   }
 

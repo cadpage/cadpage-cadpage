@@ -719,7 +719,7 @@ abstract class Vendor {
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer restore status to report to vendords
+   * @param transfer restore status to report to vendors
    * @return true if we actually did anything
    */
   boolean registerC2DMId(final Context context, String registrationId, boolean userReq, String transfer) {
