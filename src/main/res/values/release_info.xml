@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07312018</string>
+  <string name="release_date">08082018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-63
+    Location Fixes:\n
+    Humboldt County, CA\n
+    Monterey County, CA\n
+    Calcasieu Parish, LA\n
+    Tangipahoa Parish, LA\n
+    Boone County, MO\n
+    Delaware County, PA\n
+    \n
+    General Fixes:\n
+    Crash when user requests payment status help in Swedish Language\n
+    \n
     v1.9.15-62\n
     New Locations:\n
     Murray County, GA\n
@@ -49,16 +61,6 @@
     Windsor County, VT\n
     \n
     General Fixes:\n
-    Additional logging to help track down MMS processing problems.\n
-    \n
-    v1.9.15-58\n
-    New Locations:\n
-    Mecklenburg County, NC (alt)\n
-    Bosque County, TX\n
-    \n
-    Location Fixes:\n
-    Clackamas County, OR\n
-    Washington County, OR\n
-    Pickens County, SC
+    Additional logging to help track down MMS processing problems.
   </string>
 </resources>
