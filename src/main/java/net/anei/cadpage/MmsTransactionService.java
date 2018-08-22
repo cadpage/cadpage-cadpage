@@ -228,8 +228,7 @@ public class MmsTransactionService extends Service {
       } catch (Exception ex) {
         Log.e(ex);
         EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-    }
+      }
       if (null == pdu) {
         Log.e("Invalid PUSH data");
         EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Invalid PUSH data");
