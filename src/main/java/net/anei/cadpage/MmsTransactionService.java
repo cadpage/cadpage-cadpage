@@ -242,7 +242,10 @@ public class MmsTransactionService extends Service {
       }
 
       // Ignore if we have already processed a notification for this message
-      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) return;
+      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) {
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Duplicate MMS notice");
+        return;
+      }
 
       // Save message for future test or error reporting use
       // Duplicate message check is ignored for now because we do not yet have a message body

@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08172018</string>
+  <string name="release_date">08222018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-65\n
+    New Location:\n
+    Henry County, MO\n
+    Clark County, OH (alt)\n
+    Monmouth County, NJ (alt)\n
+    Calhoun County, SC\n
+    \n
+    Location Fixes:\n
+    Genesee County, NY\n
+    Adams County, PA\n
+    Snohomish County, WA\n
+    Waukesha County, WI\n
+    \n
     v1.9.15-64\n
     Location Fixes:\n
     Lafourche Parish, LA\n
@@ -52,11 +65,6 @@
     Atlantic County, NJ\n
     Burlington County, NJ\n
     Lackawana County, PA\n
-    Liberty County, TX\n
-    \n
-    v1.9.15-60\n
-    Location Fixes:\n
-    East Feliciana Parish, LA\n
-    Gratiot County, MI
+    Liberty County, TX
   </string>
 </resources>
