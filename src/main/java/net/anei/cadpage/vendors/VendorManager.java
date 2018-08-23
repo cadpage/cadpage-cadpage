@@ -246,21 +246,20 @@ public class VendorManager {
    * @param userReq User requested reconnect
    */
   public void reconnect(Context context, boolean userReq) {
-    String registrationID = FCMInstanceIdService.getInstanceId();
-    reconnect(context, userReq, registrationID);
-  }
 
-  /**
-   * reconnect with all active vendors
-   * @param context current context
-   * @param userReq User requested reconnect
-   * @param registrationId new registration ID
-   */
-  public void reconnect(Context context, boolean userReq, String registrationId) {
+    // Get the registration ID.  If we do not have one yet, we cannot proceed.
+    String registrationId = FCMInstanceIdService.getInstanceId();
+    if (registrationId == null) return;
 
-    boolean transfer = ManagePreferences.transferFlag();
-    
-    // Pass new reg ID to all vendors and see if any of the respond
+    // Get transfer status.  An X value means we are waiting for READ_PHONE_STATE permission
+    // so we can determine if this is the same device or not.  Which means we cannot proceed
+    String transfer = ManagePreferences.transferStatus();
+    if (transfer.equals("X")) return;
+
+    // Any value other than "N" needs to be reset
+    if (!transfer.equals("N")) ManagePreferences.resetTransferStatus();
+
+    // Pass new reg ID and transfer status to all vendors
     for (Vendor vendor : vendorList) {
       vendor.reconnect(context, registrationId, userReq, transfer);
     }
@@ -342,7 +341,7 @@ public class VendorManager {
     // and strip off the trigger prefix
     else {
       for (Vendor vendor : vendorList) {
-        String tag = vendor.getTrigerCode();
+        String tag = vendor.getTriggerCode();
         if (tag != null && tag.length()>=4 && message.startsWith(tag)) {
           vendor.setTextPage(true);
           message = message.substring(tag.length());

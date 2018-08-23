@@ -35,7 +35,7 @@ import android.support.v4.content.ContextCompat;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
 
-@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
+@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement", "unused"})
 public class ManagePreferences implements SharedPreferences.OnSharedPreferenceChangeListener {
   
   // Preference version.  This needs to be incremented every time a new
@@ -55,7 +55,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static ManagePreferences prefs;
   private static String freeSubType;
   private static String paidSubType;
-  private static File checkFile;
 
   public static void resetPreferenceVersion() {
     prefs.putInt(R.string.pref_version_key,  PREFERENCE_VERSION-1);
@@ -69,10 +68,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     // Initialize the preference object
     prefs = new ManagePreferences(context);
-
-    // While we have a context, create the file that will be used to check for
-    // the autoreload status
-    checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
 
     Object oldMergeOption = prefs.getPreference(R.string.pref_resp_merge_key);
     if (oldMergeOption instanceof Boolean) {
@@ -89,13 +84,17 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       SmsPopupConfigActivity.initializePreferences(context);
       prefs.putInt(R.string.pref_version_key, PREFERENCE_VERSION);
     }
-    
+
+    // While we have a context, create the file that will be used to check for
+    // the autoreload status
+    File checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
+
     // There are a lot of specialized preference fixes we have to make when
     // user upgrades from an earlier version of Cadpage.  None of these have
     // to be done if there was no previous version of Cadpage.
     if (oldVersion > 0 && oldVersion < PREFERENCE_VERSION) {
 
-      // If old version < 49 use is upgrading to a version that requires explict permission to
+      // If old version < 49 use is upgrading to a version that requires explicit permission to
       // use their email account information
       //noinspection ConstantConditions
       if (oldVersion < 49) prefs.putBoolean(R.string.pref_account_security_upgrade, true);
@@ -139,7 +138,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // a full 30 day demo
       if (oldVersion < 41) {
         String location = location();
-        if (location == null || location.startsWith("General")) setAuthRunDays(0);
+        if (location.startsWith("General")) setAuthRunDays(0);
       }
       
       // If old version was < 38, we need to convert the old process general alert
@@ -227,13 +226,29 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         }
       }
     }
-    
+
+    // Next see if Cadpage has been restored to the same or another device.  We
+    // determine this by checking for the non-existence of a file in the no-backup
+    // directory.
+    try {
+      if (checkFile.createNewFile()) {
+
+        // If this is not an initial startup, we need to request a new registration ID
+        if (oldVersion > 0) {
+          FCMInstanceIdService.resetInstanceId();
+
+          // And set transfer status to "X" pending access to the current MEID value.
+          // We will figure out latter whether we are running on a new device or not
+          setTransferStatus("X");
+        }
+      }
+    } catch (IOException ex) {
+      Log.e(ex);
+    }
+
     // Set the install date if it hasn't already been set
     setInstallDate();
-    
-    // Clear GCM registration in progress flag
-    registerReqRelease();
-    
+
     // Finally set the application enable status
     String enableStr = (enabled() ? enableMsgType() : "");
     SmsPopupUtils.enableSMSPopup(context, enableStr);
@@ -488,13 +503,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // The text alert checks only count if text processing is enabled
     if (! enableMsgType().equals("C")) {
 
-      // Specifing a location other than General is good
+      // Specifying a location other than General is good
       String location = location();
-      if (location != null) {
-        for (String part : location.split(",")) {
-          if (!part.startsWith("General")) return true;
+      for (String part : location.split(",")) {
+        if (!part.startsWith("General")) return true;
         }
-      }
 
       // Or any functional sender filter is good
       if (ManagePreferences.filter().trim().length() > 1) return true;
@@ -1108,14 +1121,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static void setAuthLastCheckTime() {
     setAuthLastCheckTime(System.currentTimeMillis());
   }
-  
-  public static int authRecheckStatusCnt() {
-    return prefs.getInt(R.string.pref_auth_recheck_status_cnt_key, 0);
-  }
-  
-  public static void setAuthRecheckStatusCnt(int newVal) {
-    prefs.putInt(R.string.pref_auth_recheck_status_cnt_key, newVal);
-  }
 
   /**
    * Determine our startup status
@@ -1133,82 +1138,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       result = true;
       prefs.putInt(R.string.pref_prev_version_code, versionCode);
     }
-
-    // We are going to need the old and new MEID numbers, so lets get them now
-    String meid = UserAcctManager.instance().getMEID();
-    String oldMeid = prefs.getString(R.string.pref_prev_meid_key, null);
-
-    // Next see if Cadpage has been restored to the same or another device.  We
-    // determine this by checking for the non-existence of a file in the no-backup
-    // directory.
-    try {
-      if (checkFile.createNewFile()) {
-        
-        // If this is the case, we are going to have to request a new registration
-        // ID.  And the current saved registration ID is clearly invalid and should
-        // be cleared
-        result = true;
-        FCMInstanceIdService.resetInstanceId();;
-
-        // If there was an old registration ID, that is different from the current
-        // registration ID, then set the transfer flag indicating the Cadpage
-        // configuration has been transfered to another device
-        if (oldMeid != null && meid != null && !meid.equals(oldMeid)) {
-          prefs.putBoolean(R.string.pref_transfer_flag_key, true);
-        }
-      }
-    } catch (IOException ex) {
-      Log.e(ex);
-    }
-
-    // In any case, save the prev MEID value, just it case it
-    // changes for other reasons like permission changes
-    prefs.putString(R.string.pref_prev_meid_key, meid);
     return result;
   }
-  
-  /**
-   * Request GCM Registration request lock
-   * @param type register request type
-   * @param lockTimeout register lock timeout in msecs
-   * @return true if request has been granted
-   */
-  public static boolean registerReqLock(int type, long lockTimeout) {
-    long curTime = System.currentTimeMillis();
-    int lockType = prefs.getInt(R.string.pref_register_req_key, 0);
-    boolean force = (type != lockType);
-    if (!force) {
-      long lockTime = prefs.getLong(R.string.pref_register_req_lock_time_key, 0L);
-      if (lockTime > 0L && curTime-lockTime <= lockTimeout) return false;
-    }
-    if (force) prefs.putInt(R.string.pref_register_req_key, type);
-    prefs.putLong(R.string.pref_register_req_lock_time_key, curTime);
-    return true;
-  }
 
-  /**
-   * Release GCM registration lock
-   */
-  public static void registerReqRelease() {
-    prefs.putLong(R.string.pref_register_req_lock_time_key, 0L);
-  }
-  
-  public static int registerReq() {
-    return prefs.getInt(R.string.pref_register_req_key, 0);
-  }
-  
-  public static void setRegisterReq(int newVal) {
-    prefs.putInt(R.string.pref_register_req_key, newVal);
-  }
-  
-  public static int reregisterDelay() {
-    return prefs.getInt(R.string.pref_reregister_delay_key, 0);
-  }
-  
-  public static void setReregisterDelay(int newVal) {
-    prefs.putInt(R.string.pref_reregister_delay_key, newVal);
-  }
-  
   public static Date registerDate() {
     String dateStr = prefs.getString(R.string.pref_register_date_key, null);
     if (dateStr == null) return null;
@@ -1293,14 +1225,16 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putInt(R.string.pref_restore_mode, newVal);
   }
 
-  public static boolean transferFlag() {
-    boolean result = prefs.getBoolean(R.string.pref_transfer_flag_key);
-    if (result) prefs.putBoolean(R.string.pref_transfer_flag_key, false);
-    return result;
+  public static String transferStatus() {
+    return prefs.getString(R.string.pref_transfer_status_key, "N");
   }
-  
-  public static void setPrevMEID(String newVal) {
-    prefs.putString(R.string.pref_prev_meid_key, newVal);
+
+  public static void resetTransferStatus() {
+    setTransferStatus("N");
+  }
+
+  public static void setTransferStatus(String newVal) {
+    prefs.putString(R.string.pref_transfer_status_key, newVal);
   }
 
   public static boolean noMapGpsLabel() {
@@ -1345,7 +1279,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     for (int key : PREFERENCE_KEYS) {
       String keyName = context.getString(key);
       Object value = map.get(keyName);
-      if (key == R.string.pref_last_gcm_event_time_key || key == R.string.pref_register_req_lock_time_key){
+      if (key == R.string.pref_last_gcm_event_time_key){
         try {
           long time = (Long)value;
           if (time > 0) {
@@ -1438,7 +1372,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static boolean initialPermissionsChecked = false;
   public static void checkInitialPermissions(Runnable run) {
 
-    // This can not be called multiple times when Cadpage is launched seccessively.  Since it is not
+    // This can not be called multiple times when Cadpage is launched seccsessively.  Since it is not
     // possible for permissions be be revoked while the app is running (it is killed if they are)
     // we only need to make this rather complicated check one time.
     if (initialPermissionsChecked) {
@@ -1484,19 +1418,76 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           if (!pchecker.check()) failedCheckers.add(pchecker);
         }
         
-        // OK, we are also interested in the account permissions, but only if
-        // we are ready to launch an automatic payment recalculation
+        // OK, we are also interested in the account permissions, which has to handle
+        // two specific situations
         else if (checker instanceof PhoneInfoChecker) {
           final Context context = CadPageApplication.getContext();
-          if (DonationManager.instance().checkPaymentStatus(context)) {
+
+          // First, if Cadpage has been restored from a backup, we need READ_PHONE_STATE permission
+          // to retrieve the MEID number so we can tell if we have been restored to a different
+          // device
+          boolean checkTransferStatus = false;
+          int explainId = 0;
+          String oldMeid = null;
+          String transferStatus = transferStatus();
+          if (transferStatus.equals("X")) {
+
+            // If we are not registered with a direct paging vendor, just turn the transfer status off
+            if (!VendorManager.instance().isRegistered()) {
+              setTransferStatus("N");
+            } else {
+
+              // If we do not have an old MEID to compare things to, we cannot tell if the MEID
+              // has changed, so just assume that it has
+              oldMeid = prefs.getString(R.string.pref_prev_meid_key, null);
+              if (!isValidMEID(oldMeid))  {
+                setTransferStatus("Y");
+              }
+
+              // Otherwise we will have to wait until READ_PHONE_STATE permission has been requested
+              else {
+                checkTransferStatus = true;
+                explainId = R.string.perm_acct_info_for_restore;
+              }
+
+              // If we resolved the ambiguous transfer status, send it to the direct paging vendors
+              if (!checkTransferStatus) {
+                VendorManager.instance().reconnect(CadPageApplication.getContext(), false);
+              }
+            }
+          }
+
+          // If we have decided that we do not need to check the transfer status, we can reset
+          // the old MEID value now
+          if (!checkTransferStatus) isNewDevice(oldMeid);
+
+          // The second case is if we are about to perform an automatic payment status recalculation
+          final boolean checkPaymentStatus = DonationManager.instance().checkPaymentStatus(context);
+          if (checkPaymentStatus) explainId = R.string.perm_acct_info_for_auto_recalc;
+
+          // OK, If we determined that we need the READ_PHONE_STATE permission, let's ask for it
+          if (checkTransferStatus || checkPaymentStatus) {
+            final boolean checkTransferStatus2 = checkTransferStatus;
+            final String oldMeid2 = oldMeid;
             PhoneInfoChecker aChecker = (PhoneInfoChecker)checker;
             if (!aChecker.check(new PermissionAction(){
               @Override
               public void run(boolean ok, String[] permissions, int[] granted) {
-                UserAcctManager.instance().reloadStatus(context);
-                ManagePreferences.setAuthLastCheckTime();
+
+                // Somewhat surprising, we do not care whether it was granted or not
+                // If we needed to resolve the transfer status, do so and send it to the vendors
+                if (checkTransferStatus2) {
+                  setTransferStatus(isNewDevice(oldMeid2) ? "Y" : "R");
+                  VendorManager.instance().reconnect(CadPageApplication.getContext(), false);
+                }
+
+                // and if a payment status recalcluation is pending, go do it
+                if (checkPaymentStatus) {
+                  UserAcctManager.instance().reloadStatus(context);
+                  ManagePreferences.setAuthLastCheckTime();
+                }
               }
-            }, R.string.perm_acct_info_for_auto_recalc, false)) {
+            }, explainId, false)) {
               failedCheckers.add(aChecker);
             }
           }
@@ -1521,6 +1512,19 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       }
     }
 
+    private boolean isNewDevice(String oldMeid) {
+      String meid = UserAcctManager.instance().getMEID();
+      if (!isValidMEID(meid)) return true;
+      boolean newDevice = !meid.equals(oldMeid);
+      if (newDevice) prefs.putString(R.string.pref_prev_meid_key, meid);
+      return newDevice;
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    private boolean isValidMEID(String meid) {
+      return meid != null && meid.length() > 0 && !meid.equals("UNKNOWN");
+    }
+
     @Override
     public void onRequestPermissionResult(String[] permissions, int[] granted) {
       
@@ -1536,7 +1540,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         // Yet I have seen it happen twice in developer testing but still cannot
         // reproduce it  Arrgh!!!!!!!!!!!
         if (permList == null) {
-          Log.e(checker.toString() + "returned null permision list");
+          Log.e(checker.toString() + "returned null permission list");
           continue;
         }
         String[] perms = permList.toArray(new String[permList.size()]);
@@ -1603,6 +1607,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   private static final ReportPositionChecker reportPositionChecker = new ReportPositionChecker();
   
+  @SuppressWarnings("WeakerAccess")
   private static class ReportPositionChecker extends ListPermissionChecker {
     
     public ReportPositionChecker() {
@@ -1955,7 +1960,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * @return the current value of the preference setting
      */
     protected abstract V getPrefValue(int resPrefId);
-    
+
     /**
      * Abstract method to set the preference setting value
      * @param resPrefId preference resource ID
@@ -2036,7 +2041,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     @Override
     protected void checkPermission() {
-      checkRequestPermission(PermissionManager.READ_SMS, explainId);
+      // checkRequestPermission(PermissionManager.READ_SMS, explainId);
       checkRequestPermission(PermissionManager.READ_PHONE_STATE, explainId);
     }
 
@@ -2096,6 +2101,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   /**
    * Interface passing callback that will be invoked to perform Permission dependent action
    */
+  @SuppressWarnings("unused")
   public interface PermissionAction {
     
     /**
@@ -2134,7 +2140,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     
     /**
      * This is called to perform the necessary permission checks
-     * @param request true if user request for missing permissions should be displayd
+     * @param request true if user request for missing permissions should be displayed
      * @return true everything is good to go, false if a permission needs to be granted
      */
     public boolean check(boolean request) {
@@ -2144,7 +2150,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       reqExplainIds = new ArrayList<>();
       
       // Call the main permission checker.  This is supposed to call one of
-      // the requestPermisson() methods for any permissions that need to be requested
+      // the requestPermission() methods for any permissions that need to be requested
       checkPermission();
       
       // If any permissions need to be requested, make the request now
@@ -2278,6 +2284,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private Context context;
   private SharedPreferences mPrefs;
 
+  @SuppressWarnings("unused")
   private interface PreferenceChangeListener {
     void preferenceChanged(String key, Object newVal);
   }
@@ -2388,6 +2395,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return mPrefs.getInt(context.getString(resPrefId), defValue);
   }
   
+  @SuppressWarnings("unused")
   protected int getInt(int resPrefId) {
     int result = mPrefs.getInt(context.getString(resPrefId), Integer.MAX_VALUE);
     if (result == Integer.MAX_VALUE) throw new RuntimeException("No configured preference value found");
@@ -2398,7 +2406,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return mPrefs.getLong(context.getString(resPrefId), defValue);
   }
   
-  protected long getLong(int resPrefId) {
+  private long getLong(int resPrefId) {
     long result = mPrefs.getLong(context.getString(resPrefId), Long.MAX_VALUE);
     if (result == Long.MAX_VALUE) throw new RuntimeException("No configured preference value found");
     return result;
@@ -2569,16 +2577,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_auth_last_date_key,
       R.string.pref_auth_run_days_key,
       R.string.pref_auth_last_check_time_key,
-      R.string.pref_auth_recheck_status_cnt_key,
       R.string.pref_paid_year_1_key,
       R.string.pref_purchase_date_1_key,
       R.string.pref_paid_year_2_key,
       R.string.pref_purchase_date_2_key,
       
       R.string.pref_prev_version_code,
-      R.string.pref_register_req_lock_time_key,
-      R.string.pref_register_req_key,
-      R.string.pref_reregister_delay_key,
       R.string.pref_register_date_key,
 
       R.string.pref_last_loc_time_key,
@@ -2589,7 +2593,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_restore_vol,
 
       R.string.pref_prev_meid_key,
-      R.string.pref_transfer_flag_key,
+      R.string.pref_transfer_status_key,
       
       R.string.pref_no_map_gps_label,
 

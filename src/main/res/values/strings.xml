@@ -36,6 +36,12 @@
    need to know who you are so can find any subscription information we have associated
    with you.
    </string>
+
+  <string name="perm_acct_info_for_restore">
+    You appear to have restored a Cadpage configuration from an old backup.  We need to retrieve
+    your device serial number so we can determine if the backup was made from the same or a
+    different device.
+  </string>
    
    <string name="perm_acct_info_for_manual_recalc">
    We need to know who you are so can find any subscription information we have associated

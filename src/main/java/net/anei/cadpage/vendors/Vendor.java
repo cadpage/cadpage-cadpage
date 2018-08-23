@@ -28,9 +28,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.widget.Toast;
 
-import net.anei.cadpage.BroadcastBindings;
-
-@SuppressWarnings({"WeakerAccess", "SameReturnValue"})
+@SuppressWarnings({"WeakerAccess", "SameReturnValue", "unused"})
 abstract class Vendor {
 
   // Vendor accounts go inactive if no alerts are received
@@ -170,7 +168,7 @@ abstract class Vendor {
   /**
    * @return trigger code at beginning of SMS text page that identifies this vendor
    */
-  String getTrigerCode() {
+  String getTriggerCode() {
     return triggerCode;
   }
 
@@ -183,7 +181,7 @@ abstract class Vendor {
 
   /**
    * Determine if the sender address of a messages indicates that it originated with this vendor
-   * @param address  message sender addres
+   * @param address  message sender address
    * @return true if this address is associated with this vendor
    */
   boolean isVendorAddress(String address) {
@@ -607,7 +605,7 @@ abstract class Vendor {
    * @param context current context
    */
   void forceReregister(Context context) {
-    sendReregister(context, FCMInstanceIdService.getInstanceId(), false, false);
+    sendReregister(context, FCMInstanceIdService.getInstanceId(), false);
   }
 
   /**
@@ -645,7 +643,7 @@ abstract class Vendor {
     
     // If already enabled, we don't have to do anything
     if (enabled) {
-      sendReregister(context, FCMInstanceIdService.getInstanceId(), true, false);
+      sendReregister(context, FCMInstanceIdService.getInstanceId(), true);
       return;
     }
 
@@ -661,7 +659,7 @@ abstract class Vendor {
     // registration request to vendor server
     String regId = FCMInstanceIdService.getInstanceId();
     if (regId != null) {
-      reconnect(context, regId, true, false);
+      reconnect(context, regId, true, "N");
     }
   }
 
@@ -702,11 +700,11 @@ abstract class Vendor {
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer cadpage configuration has been transfered from another device
+   * @param transfer restore status to report to vendors
    * @return true if we actually did anything
    */
-  boolean reconnect(final Context context, String registrationId, boolean userReq, boolean transfer) {
-    
+  boolean reconnect(final Context context, String registrationId, boolean userReq, String transfer) {
+
     // If we are in process of registering with server, send the web registration request
     if (inProgress) {
       
@@ -761,19 +759,29 @@ abstract class Vendor {
   boolean checkVendorStatus(Context context) {
     return true;
   }
-  
+
   /**
    * Send reregister request to vendor
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer cadpage configuration has been transfered from another device
    */
-  private void sendReregister(final Context context, String registrationId, boolean userReq, boolean transfer) {
+  private void sendReregister(final Context context, String registrationId, boolean userReq) {
+    sendReregister(context, registrationId, userReq, "N");
+  }
+
+  /**
+   * Send reregister request to vendor
+   * @param context current context
+   * @param registrationId registration ID
+   * @param userReq true if user requested this action
+   * @param transfer restore status to report to vendors
+   */
+  private void sendReregister(final Context context, String registrationId, boolean userReq, String transfer) {
     Uri uri = buildRequestUri("reregister", registrationId, userReq);
     Uri.Builder b = uri.buildUpon();
     b.appendQueryParameter("userReq", (userReq ? "Y" : "N"));
-    if (transfer) b.appendQueryParameter("transfer", "Y");
+    if (!transfer.equals("N")) b.appendQueryParameter("transfer", transfer);
     uri = b.build();
     HttpService.addHttpRequest(context, new HttpService.HttpRequest(uri){
       

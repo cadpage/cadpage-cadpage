@@ -104,11 +104,11 @@ class CadpageVendor extends Vendor {
    * @param context current context
    * @param registrationId registration ID
    * @param userReq true if user requested this action
-   * @param transfer Cadpage configuration has been copied to new device
+   * @param transfer transfer status
    * @return true if we actually did anything
    */
   @Override
-  boolean reconnect(final Context context, String registrationId, boolean userReq, boolean transfer) {
+  boolean reconnect(final Context context, String registrationId, boolean userReq, String transfer) {
     if (!super.reconnect(context, registrationId, userReq, transfer)) return false;
     updateCadpageStatus(context);
     return true;
@@ -169,7 +169,7 @@ class CadpageVendor extends Vendor {
   private String calcExpireDate() {
     
     DonationStatus status = DonationManager.instance().status(); 
-    String expireDate = null;
+    String expireDate;
     if (status == DonationManager.DonationStatus.LIFE) expireDate = "LIFE";
     else {
       Date expDate = DonationManager.instance().expireDate();

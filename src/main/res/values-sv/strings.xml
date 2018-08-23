@@ -31,7 +31,13 @@
    Vi håller på att införa en automatisk omberäkningsfunktion av din prenumerationsstatus.Vi
    behöver veta vem du är så vi kan hitta prenumerationsinformation som vi har kopplat till dig.
    </string>
-   
+
+  <string name="perm_acct_info_for_restore"> <!-- Translate -->
+    You appear to have restored a Cadpage configuration from an old backup.  We need to retrieve
+    your device serial number so we can determine if the backup was made from the same or a
+    different device.
+  </string>
+
    <string name="perm_acct_info_for_manual_recalc">
    Vi berhöver veta vem du är så vi kan hitta prenumerationsinformation som vi har kopplat till dig.
    </string>

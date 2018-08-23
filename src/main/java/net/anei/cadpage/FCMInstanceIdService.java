@@ -32,12 +32,7 @@ public class FCMInstanceIdService extends FirebaseInstanceIdService {
   public void onTokenRefresh() {
 
     Log.v("FCMInstanceIdService:onTokenRefresh()");
-
-    String regId = getInstanceId();
-    if (regId != null) {
-      Log.w("FCM registration succeeded: " + regId);
-      VendorManager.instance().reconnect(getApplicationContext(), false, regId);
-    }
+    VendorManager.instance().reconnect(getApplicationContext(), false);
   }
 
   public static String getInstanceId() {
