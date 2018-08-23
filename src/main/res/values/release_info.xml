@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08082018</string>
+  <string name="release_date">08222018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v1.9.15-63
+    v1.9.15-65\n
+    New Location:\n
+    Henry County, MO\n
+    Clark County, OH (alt)\n
+    Monmouth County, NJ (alt)\n
+    Calhoun County, SC\n
+    \n
+    Location Fixes:\n
+    Genesee County, NY\n
+    Adams County, PA\n
+    Snohomish County, WA\n
+    Waukesha County, WI\n
+    \n
+    v1.9.15-64\n
+    Location Fixes:\n
+    Lafourche Parish, LA\n
+    Wayne County, OH\n
+    Clackamas County, OR\n
+    Washington County, OR\n
+    Berks County, PA\n
+    \n
+    v1.9.15-63\n
     Location Fixes:\n
     Humboldt County, CA\n
     Monterey County, CA\n
@@ -44,23 +65,6 @@
     Atlantic County, NJ\n
     Burlington County, NJ\n
     Lackawana County, PA\n
-    Liberty County, TX\n
-    \n
-    v1.9.15-60\n
-    Location Fixes:\n
-    East Feliciana Parish, LA\n
-    Gratiot County, MI\n
-    \n
-    v1.9.15-59\n
-    Location Fixes:\n
-    Pickens County, SC\n
-    Addison County, VT\n
-    Chittenden County, VT\n
-    Grand isle County, VT\n
-    Windham County, VT\n
-    Windsor County, VT\n
-    \n
-    General Fixes:\n
-    Additional logging to help track down MMS processing problems.
+    Liberty County, TX
   </string>
 </resources>
