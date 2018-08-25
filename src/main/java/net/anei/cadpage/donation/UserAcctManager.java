@@ -165,7 +165,7 @@ public class UserAcctManager {
     try {
       return Build.getSerial();
     } catch (SecurityException ex) {
-      return "UNKNOWN";
+      return "unknown";
     }
   }
   

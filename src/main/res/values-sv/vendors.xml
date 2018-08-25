@@ -43,10 +43,6 @@ Det här kommer att blockera att din meddelandeservice skickar larm till dig. Ä
     Meddelandeservice från %1$s har kopplats ner\n
     Servern svarar: %2$s
   </string>
-  <string name="vendor_phone_registration_error_error">
-    Google meddelar att din telefon för närvarande inte stödjer push-notiser.De ger oss inte heller några tips om vad som kan vara fel. Oftast löser sig problemet genom att upprepa proceduren igen om allt från ett par sekunder tills ett par dagar
-    så testa det ett par gånger innan du ger upp och E-postar programutvecklaren för ytterligare hjälp.  
-  </string>
 
   <string name="vendor_no_web_viewer_error">
     Systemet avslår begäran att titta på en websida. Det verkar vara som att du inte har någon webläsare installerad.

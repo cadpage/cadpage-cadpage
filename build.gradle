@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId 'net.anei.cadpage'
         versionName project.versionName + "(new)"
-        versionCode /* 100000000 + */ project.versionCode
+        versionCode /* 100000000 + */ project.versionCode + 1
         targetSdkVersion 27
         minSdkVersion 14
     }

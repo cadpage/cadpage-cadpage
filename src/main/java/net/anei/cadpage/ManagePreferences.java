@@ -1522,7 +1522,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean isValidMEID(String meid) {
-      return meid != null && meid.length() > 0 && !meid.equals("UNKNOWN");
+      return meid != null && meid.length() > 0 && !meid.equalsIgnoreCase("unknown");
     }
 
     @Override
