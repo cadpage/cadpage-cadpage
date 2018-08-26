@@ -68,7 +68,6 @@ public class DeveloperToolsManager {
     "Build Test Message",
     "Status test",
     "Generate Bug Report",
-    "Consume all purchases",
     "Test FCM MSG",
     "Crash!!!"
     
@@ -76,7 +75,7 @@ public class DeveloperToolsManager {
   
   private static final String[] valueList = new String[]{
     "100", "101", "102",
-    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "10", "11", "12", "13", "14", "15", "16", "18", "19", "20"
+    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "10", "11", "12", "13", "14", "15", "16", "19", "20"
   };
   
   private class DeveloperListPreference extends ListPreference {
@@ -240,10 +239,6 @@ public class DeveloperToolsManager {
         BugReportGenerator.generate();
         break;
 
-      case 18:    // Consume all products
-        BillingManager.instance().clearPurchaseInventory();
-        break;
-        
       case 19:    // Build a specific FCM page message
         Intent intent = new Intent(context, FCMMessageService.class);
         intent.setAction("com.google.android.c2dm.intent.RECEIVE");

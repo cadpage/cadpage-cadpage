@@ -12,13 +12,21 @@ abstract class AccountScreenEvent  extends DonateScreenEvent {
   public interface AllowAcctPermissionAction extends AccountPermApprovedEvent.AllowAcctPermissionAction{}
 
 
-  private final AllowAcctPermissionAction action;
+  private AllowAcctPermissionAction action;
+
+  protected AccountScreenEvent(AlertStatus alertStatus, int titleId) {
+    this(alertStatus, titleId, null);
+  }
 
   protected AccountScreenEvent(AlertStatus alertStatus, int titleId, final AllowAcctPermissionAction action) {
     super(alertStatus, titleId, R.string.donate_allow_acct_permission_text);
     setEvents(new AccountPermApprovedEvent(action),
               AccountPermDeniedEvent.instance()
     );
+    this.action = action;
+  }
+
+  protected void setAction(AllowAcctPermissionAction action) {
     this.action = action;
   }
 

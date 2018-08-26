@@ -4,7 +4,6 @@ import android.app.Activity;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsPopupUtils;
-import net.anei.cadpage.billing.BillingActivity;
 import net.anei.cadpage.billing.BillingManager;
 
 /**
@@ -25,10 +24,7 @@ public class AndroidDonateEvent extends DonateEvent {
   @Override
   protected void doEvent(Activity activity) {
     if (!SmsPopupUtils.haveNet(activity)) return;
-    if (!(activity instanceof BillingActivity)) {
-      throw new RuntimeException("Attempt to launch billing request from " + activity.getClass().getCanonicalName());
-    }
-    BillingManager.instance().startPurchase((BillingActivity)activity);
+    BillingManager.instance().startPurchase(activity);
 //    closeEvents(activity);
   }
   

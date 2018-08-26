@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId 'net.anei.cadpage'
         versionName project.versionName + "(new)"
-        versionCode /* 100000000 + */ project.versionCode + 1
+        versionCode /* 100000000 + */ project.versionCode + 2
         targetSdkVersion 27
         minSdkVersion 14
     }
@@ -62,6 +62,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-iid:16.0.0'
     implementation 'com.google.firebase:firebase-messaging:17.0.0'
     implementation "android.arch.work:work-runtime:1.0.0-alpha04"
+    api 'com.android.billingclient:billing:1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
