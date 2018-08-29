@@ -153,13 +153,31 @@ public class ContentQuery {
   private static void dumpKeyValue(String prefix, String key, Object value) {
     Intent intent = (value instanceof Intent ? (Intent)value : null);
     Bundle bundle = (value instanceof Bundle ? (Bundle)value : null);
-    String dispValue = (intent != null ? "Intent" : bundle != null ? "Bundle" : value == null ? "null" : value.toString());
+    String dispValue = (intent != null ? "Intent" :
+                        bundle != null ? "Bundle" :
+                        value instanceof byte[] ? dumpByteArray((byte[])value) :
+                        value == null ? "null" : value.toString());
     Log.v(prefix + key + ':' + dispValue);
     if (intent != null) dumpIntent(prefix+"  ", intent);
     else if (bundle != null) dumpBundle(prefix+"  ", bundle);
     
   }
-  
+
+  private static String dumpByteArray(byte[] data) {
+    StringBuilder sb = new StringBuilder();
+    for (byte b : data) {
+      sb.append(hexChar(b>>4));
+      sb.append(hexChar(b));
+    }
+    return sb.toString();
+  }
+
+  private static char hexChar(int b) {
+    b = b & 0xF;
+    if (b < 10) return (char)('0' + b);
+    return (char)(b-10+'A');
+  }
+
   private static String dumpFlags(int flags) {
     StringBuilder sb = new StringBuilder();
     flags = addFlag(sb, flags, Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT, "FLAG_ACTIVITY_BROUGHT_TO_FRONT");

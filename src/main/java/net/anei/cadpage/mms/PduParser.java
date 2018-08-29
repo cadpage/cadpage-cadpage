@@ -17,9 +17,7 @@
 
 package net.anei.cadpage.mms;
 
-import android.util.Config;
-import android.util.Log;
-
+import net.anei.cadpage.Log;
 import net.anei.cadpage.parsers.Base64;
 
 import java.io.ByteArrayInputStream;
@@ -77,13 +75,6 @@ public class PduParser {
      * Store the "start" parameter in "Content-Type" header field.
      */
     private static byte[] mStartParam = null;
-
-    /**
-     * The log tag.
-     */
-    private static final String LOG_TAG = "PduParser";
-    private static final boolean DEBUG = false;
-    private static final boolean LOCAL_LOGV = DEBUG ? Config.LOGD : Config.LOGV;
 
     /**
      * Constructor.
@@ -216,9 +207,8 @@ public class PduParser {
             if ((headerField >= TEXT_MIN) && (headerField <= TEXT_MAX)) {
                 pduDataStream.reset();
                 byte [] bVal = parseWapString(pduDataStream, TYPE_TEXT_STRING);
-                if (LOCAL_LOGV) {
-                    Log.v(LOG_TAG, "TextHeader: " + new String(bVal));
-                }
+                Log.v("TextHeader: " + new String(bVal));
+
                 /* we should ignore it at the moment */
                 continue;
             }
@@ -848,9 +838,7 @@ public class PduParser {
      * @param text log information
      */
     private static void log(String text) {
-        if (LOCAL_LOGV) {
-            Log.v(LOG_TAG, text);
-        }
+        Log.v(text);
     }
 
     /**
@@ -1360,7 +1348,7 @@ public class PduParser {
                             map.put(PduPart.P_CHARSET, charsetInt);
                         } catch (UnsupportedEncodingException e) {
                             // Not a well-known charset, use "*".
-                            Log.e(LOG_TAG, Arrays.toString(charsetStr), e);
+                            Log.e(Arrays.toString(charsetStr), e);
                             map.put(PduPart.P_CHARSET, CharacterSets.ANY_CHARSET);
                         }
                     } else {
@@ -1394,11 +1382,9 @@ public class PduParser {
                     lastLen = length - (startPos - tempPos);
                     break;
                 default:
-                    if (LOCAL_LOGV) {
-                        Log.v(LOG_TAG, "Not supported Content-Type parameter");
-                    }
+                        Log.v( "Not supported Content-Type parameter");
                 if (-1 == skipWapValue(pduDataStream, lastLen)) {
-                    Log.e(LOG_TAG, "Corrupt Content-Type");
+                    Log.e("Corrupt Content-Type");
                 } else {
                     lastLen = 0;
                 }
@@ -1407,7 +1393,7 @@ public class PduParser {
         }
 
         if (0 != lastLen) {
-            Log.e(LOG_TAG, "Corrupt Content-Type");
+            Log.e("Corrupt Content-Type");
         }
     }
 
@@ -1457,7 +1443,7 @@ public class PduParser {
                     contentType = parseWapString(pduDataStream, TYPE_TEXT_STRING);
                 }
             } else {
-                Log.e(LOG_TAG, "Corrupt content-type");
+                Log.e("Corrupt content-type");
                 return (PduContentTypes.contentTypes[0]).getBytes(); //"*/*"
             }
 
@@ -1468,7 +1454,7 @@ public class PduParser {
             }
 
             if (parameterLen < 0) {
-                Log.e(LOG_TAG, "Corrupt MMS message");
+                Log.e("Corrupt MMS message");
                 return (PduContentTypes.contentTypes[0]).getBytes(); //"*/*"
             }
         } else if (cur <= TEXT_MAX) {
@@ -1597,11 +1583,9 @@ public class PduParser {
                         lastLen = length - (startPos - tempPos);
                         break;
                     default:
-                        if (LOCAL_LOGV) {
-                            Log.v(LOG_TAG, "Not supported Part headers: " + header);
-                        }
+                        Log.v("Not supported Part headers: " + header);
                     if (-1 == skipWapValue(pduDataStream, lastLen)) {
-                        Log.e(LOG_TAG, "Corrupt Part headers");
+                        Log.e("Corrupt Part headers");
                         return false;
                     }
                     lastLen = 0;
@@ -1621,12 +1605,10 @@ public class PduParser {
                 tempPos = pduDataStream.available();
                 lastLen = length - (startPos - tempPos);
             } else {
-                if (LOCAL_LOGV) {
-                    Log.v(LOG_TAG, "Not supported Part headers: " + header);
-                }
+                Log.v("Not supported Part headers: " + header);
                 // Skip all headers of this part.
                 if (-1 == skipWapValue(pduDataStream, lastLen)) {
-                    Log.e(LOG_TAG, "Corrupt Part headers");
+                    Log.e("Corrupt Part headers");
                     return false;
                 }
                 lastLen = 0;
@@ -1634,7 +1616,7 @@ public class PduParser {
         }
 
         if (0 != lastLen) {
-            Log.e(LOG_TAG, "Corrupt Part headers");
+            Log.e("Corrupt Part headers");
             return false;
         }
 

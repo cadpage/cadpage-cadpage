@@ -221,7 +221,7 @@ public class MmsTransactionService extends Service {
     private void mmsReceive(Intent intent) {
       // Get raw PDU push-data from the message and parse it
       byte[] pushData = intent.getByteArrayExtra("data");
-  
+
       GenericPdu pdu = null;
       try {
         pdu = new PduParser(pushData).parse();
