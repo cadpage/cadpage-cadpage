@@ -4,6 +4,28 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-66\n
+    New Locations:\n
+    Cullman County, AL\n
+    St Clair County, AL\n
+    Tallapoosa County, AL\n
+    Maricopa County, AZ (alt)\n
+    Emanuel County, GA\n
+    Hancock County, IA\n
+    Taylor County, KY\n
+    Isabella County, MI (alt)\n
+    Morgan County, MO\n
+    Union County, PA\n
+    Coffee County, TN\n
+    Henderson County, TX\n
+    Franklin County, VT\n
+    \n
+    Location Fixes:\n
+    Watauga County, NC\n
+    \n
+    General Fixes:\n
+    Additional logging to help track down MMS processing issues\n
+    \n
     v1.9.15-65\n
     New Location:\n
     Henry County, MO\n
@@ -55,16 +77,6 @@
     St Clair County, AL\n
     Dealaware County, NY\n
     Hertford County, NC\n
-    Fluvanna County, VA\n
-    \n
-    v1.9.15-61\n
-    Location Fixes:\n
-    Yolo County, CA\n
-    Cass County, MI\n
-    Clinton County, MI\n
-    Atlantic County, NJ\n
-    Burlington County, NJ\n
-    Lackawana County, PA\n
-    Liberty County, TX
+    Fluvanna County, VA
   </string>
 </resources>
