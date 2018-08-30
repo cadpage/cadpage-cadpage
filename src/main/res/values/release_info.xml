@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-67\n
+    Location Fixes:\n
+    Berks County, PA\n
+    \n
     v1.9.15-66\n
     New Locations:\n
     Cullman County, AL\n
@@ -57,26 +61,6 @@
     Delaware County, PA\n
     \n
     General Fixes:\n
-    Crash when user requests payment status help in Swedish Language\n
-    \n
-    v1.9.15-62\n
-    New Locations:\n
-    Murray County, GA\n
-    Jackson County, IN\n
-    Shelby County, IN\n
-    Bourbon County, KY (alt)\n
-    Clay County, KY\n
-    Rowen County, KY\n
-    Iberia Parish, LA\n
-    Perry County, MO\n
-    Canadian County, OK\n
-    Grayson County, VA\n
-    Westmoreland County, VA\n
-    \n
-    Location Fixes:\n
-    St Clair County, AL\n
-    Dealaware County, NY\n
-    Hertford County, NC\n
-    Fluvanna County, VA
+    Crash when user requests payment status help in Swedish Language
   </string>
 </resources>
