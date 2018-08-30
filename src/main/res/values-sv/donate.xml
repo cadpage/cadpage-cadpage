@@ -15,6 +15,12 @@
     %s\n
     Tack för ditt stöd. 
   </string>
+
+  <string name="donate_paid_renew_title">Your %s Cadpage subscription is current</string> <!-- translate -->
+  <string name="donate_paid_renew_text"> <!-- translate -->
+    You have a %1$s Cadpage subscription will renew automatically on\n%2$s
+  </string>
+
   <string name="donate_paid_title">Din %s prenumeration på Cadpage är aktuell.</string>
   <string name="donate_paid_text">
     Du har en %1$s prenumeration på CadPage som gäller till %2$s
@@ -115,6 +121,16 @@
   <string name="donate_whats_up_title">Vad handlar det här om?</string>
   <string name="donate_active911_parse_info_title">Berätta mer</string>
   <string name="donate_email_title">Skicka email</string>
+
+  <string name="donate_android_confirm_text"> <!-- Translate -->
+    Your existing subscription expires on %1s.  If you renew your Cadpage subscription now it
+    will expire in one year and you will loose %2d days of subscription service.
+  </string>
+
+  <string name="donate_android2_title">Go ahead with purchase now</string> <!-- Translate -->
+
+  <string name="donate_android_cancel">I will purchase a subscription later</string> <!-- Translate -->
+
   <string name="donate_android_unsupported_text">
  Android Market appen rapporterar att app-i-app köp inte understödjs. Du kan behöva uppgradera Market-appen till den senaste versionen eller också måste du logga in med ett giltigt Google-konto (Välj meny &gt; Konton i Marketappen) 
   </string>

@@ -100,7 +100,6 @@ public class DeveloperToolsManager {
       switch (val) {
       
       case 1:     // Stat: Donate free
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setFreeRider(true);
         ManagePreferences.setFreeSub(false);
         ManagePreferences.setPaidYear(2, 9999);
@@ -108,7 +107,6 @@ public class DeveloperToolsManager {
         
       case 2:     // Stat: Donate paid
         ManagePreferences.setAuthRunDays(100);
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setFreeRider(false);
         ManagePreferences.setAuthLocation(null);
         setPaidYear(0);
@@ -119,7 +117,6 @@ public class DeveloperToolsManager {
         
       case 3:     // Stat: Donate warn
         ManagePreferences.setAuthRunDays(100);
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setFreeRider(false);
         ManagePreferences.setAuthLocation(null);
         setPaidYear(-1);
@@ -130,18 +127,15 @@ public class DeveloperToolsManager {
       case 4:     // Stat: Donate Limbo
       case 5:     // Stat: Donate expire
         ManagePreferences.setAuthRunDays(100);
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setFreeRider(false);
         ManagePreferences.setAuthLocation(null);
-        Date releaseDate = ManagePreferences.releaseDate();
-        setPaidYear(-1, releaseDate);
+        setPaidYear(-1);
         int dayDelta = (val == 4 ? 0 : -1);
-        setPurchaseDate(dayDelta, -1, releaseDate);
+        setPurchaseDate(dayDelta, -1);
         ManagePreferences.setFreeSub(false);
         break;
       
       case 6:     // Stat: Demo
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setFreeRider(false);
         ManagePreferences.setAuthLocation(null);
         setPaidYear();
@@ -150,7 +144,6 @@ public class DeveloperToolsManager {
         break;
         
       case 7:     // Stat: Demo expired
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setFreeRider(false);
         ManagePreferences.setAuthLocation(null);
         setPaidYear();
@@ -229,8 +222,6 @@ public class DeveloperToolsManager {
         ManagePreferences.setSponsor(null);
         ManagePreferences.setFreeSub(false);
         ManagePreferences.setAuthLocation(null);
-        ManagePreferences.setAuthExemptDate(null);
-        ManagePreferences.setAuthExemptDate(null);
         ManagePreferences.setAuthRunDays(1);
         ManagePreferences.setAuthLastCheckTime(0L);
         break;

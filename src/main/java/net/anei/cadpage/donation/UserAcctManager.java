@@ -135,7 +135,7 @@ public class UserAcctManager {
             purchaseDate = purchaseDate.replace("/", "");
           }
           String sponsor = (flds.length >= 4 ? flds[3].trim() : null);
-          calc.subscription(stat, purchaseDate, sponsor);
+          calc.subscription(stat, purchaseDate, sponsor, 0);
         }
         calc.save();
       }

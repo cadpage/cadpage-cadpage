@@ -58,16 +58,7 @@ public class MagicWordEvent extends DonateQueryEvent {
     
     // Check for two kinds of daily magic words
     int type = DonationManager.validateAuthCode(input);
-    
-    // Type one set the exempt date, which turns off release checks until
-    // the next release is loaded
-    if (type == 1) {
-      ManagePreferences.setExemptDate();
-      DonationManager.instance().reset();
-      MainDonateEvent.instance().refreshStatus();
-      return true;
-    }
-    
+
     // Type 2 sets the authorized run days to zero, resetting the demo count
     // do trial demo
     if (type == 2) {

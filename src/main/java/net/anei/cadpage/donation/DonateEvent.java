@@ -217,7 +217,7 @@ public abstract class DonateEvent {
    * Close all donation events and recalculate the donation status
    * @param activity activity that launched this event
    */
-  protected void closeEvents(Activity activity) {
+  public void closeEvents(Activity activity) {
     MainDonateEvent.instance().refreshStatus();
     activity.setResult(RESULT_CLOSE_ALL);
     activity.finish();

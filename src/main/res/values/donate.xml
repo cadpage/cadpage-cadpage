@@ -55,7 +55,12 @@
     %s\n
     Thank you for your support
   </string>
-  
+
+  <string name="donate_paid_renew_title">Your %s Cadpage subscription is current</string>
+  <string name="donate_paid_renew_text">
+    You have a %1$s Cadpage subscription will renew automatically on\n%2$s
+  </string>
+
   <string name="donate_paid_title">Your %s Cadpage subscription is current</string>
   <string name="donate_paid_text">
     You have a %1$s Cadpage subscription that is good until\n%2$s
@@ -188,7 +193,16 @@
   <string name="donate_whats_up_title">What\'s this all about??</string>
   <string name="donate_active911_parse_info_title">Tell me more</string>
   <string name="donate_email_title">Send Email</string>
-  
+
+  <string name="donate_android_confirm_text">
+    Your existing subscription expires on %1s.  And if you renew your Cadpage subscription now it
+    will expire in one year and you will loose $2d days of subscription service.
+  </string>
+
+  <string name="donate_android2_title">Go ahead with purchase now</string>
+
+  <string name="donate_android_cancel_title">I will purchase a subscription later</string>
+
   <string name="donate_android_unsupported_text">
     The Google Play Store app reports that in-app purchases are not supported.
     You may need to upgrade the Play Store app to the latest version.  Or you may

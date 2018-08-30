@@ -14,6 +14,7 @@ import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.vendors.VendorManager;
 
+@SuppressWarnings("SimplifiableIfStatement")
 public class DonationManager {
   
   // Authorization recheck interval (60 days in msecs)
@@ -29,25 +30,22 @@ public class DonationManager {
   public static final int EXPIRE_WARN_DAYS = 30;
   
   // How many times expires users can ask for another day
-  public static final int MAX_EXTRA_DAYS = 10;
-  
-  // How long a release exemption lasts
-  public static final int REL_EXEMPT_DAYS = 10;
+  private static final int MAX_EXTRA_DAYS = 10;
 
   private enum Status {GOOD, WARN, BLOCK}
   public enum DonationStatus {FREE(Status.GOOD), LIFE(Status.GOOD), AUTH_DEPT(Status.GOOD), NEW(Status.GOOD), 
-                              PAID(Status.GOOD), PAID_WARN(Status.WARN), PAID_EXPIRE(Status.BLOCK), PAID_LIMBO(Status.WARN), 
+                              PAID_RENEW(Status.GOOD), PAID(Status.GOOD), PAID_WARN(Status.WARN), PAID_EXPIRE(Status.BLOCK), PAID_LIMBO(Status.WARN),
                               SPONSOR(Status.GOOD), SPONSOR_WARN(Status.WARN), SPONSOR_EXPIRE(Status.BLOCK), SPONSOR_LIMBO(Status.WARN), 
-                              DEMO(Status.WARN), DEMO_EXPIRE(Status.BLOCK), EXEMPT(Status.WARN);
+                              DEMO(Status.WARN), DEMO_EXPIRE(Status.BLOCK);
     private final Status status;
     DonationStatus(Status status) {
       this.status = status;
     }
     
-    public Status getStatus() {
+    Status getStatus() {
       return status;
     }
-  };
+  }
   
   // Cached calculated values are only valid until this time
   private long validLimitTime = 0L;
@@ -79,8 +77,12 @@ public class DonationManager {
   // flag indicating purchase date was used in status calculations
   private boolean usedPurchaseDate;
 
+  // flag indicating we should warn user about
+  // loosing subscription days if the renew their subscription now
+  private boolean earlyRenewalWarning;
+
   /**
-   * @context current context
+   * @param context current context
    * @return true if it is time to do an automatic payment status recalculation
    */
   public boolean checkPaymentStatus(Context context) {
@@ -93,8 +95,8 @@ public class DonationManager {
     if (ManagePreferences.billingAccount() == null) return false;
 
     // OK, don't try this if we have no network connectivity!!
-    ConnectivityManager mgr = ((ConnectivityManager)
-        context.getSystemService(Context.CONNECTIVITY_SERVICE));
+    ConnectivityManager mgr = ((ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE));
+    assert mgr != null;
     NetworkInfo info = mgr.getActiveNetworkInfo();
     if (info == null  || !info.isConnected()) return false;
 
@@ -110,7 +112,7 @@ public class DonationManager {
 
   /**
    * Refresh payment status with latest information from market and from authorization server
-   * @param context
+   * @param context current context
    */
   public void refreshStatus(final Context context) {
     // Request purchase information from Android Market
@@ -172,7 +174,7 @@ public class DonationManager {
     JulianDate curJDate = new JulianDate(curDate);
     validLimitTime = curJDate.validUntilTime();
     
-    // See if user is subscribed to Capage paging.  that can change the status
+    // See if user is subscribed to Cadpage paging.  that can change the status
     // in some circumstances
     boolean paidSubReq = VendorManager.instance().isPaidSubRequired();
     
@@ -182,6 +184,7 @@ public class DonationManager {
     sponsor = null;
     JulianDate regJDate = null;
     expireDate = null;
+    int subStatus = 0;
     if (!paidSubReq) {
       sponsor = VendorManager.instance().getSponsor();
       if (sponsor != null) {
@@ -252,6 +255,7 @@ public class DonationManager {
         sponsor = ManagePreferences.sponsor();
         expireDate = tDate;
         usedPurchaseDate = true;
+        subStatus = ManagePreferences.subStatus();
       }
     }
     
@@ -266,6 +270,11 @@ public class DonationManager {
         JulianDate jReleaseDate = new JulianDate(ManagePreferences.releaseDate());
         limbo = jReleaseDate.diffDays(jExpireDate) >= 0;
       }
+
+      // If expiration date came from anything other than an existing subscription, and
+      // is not more than 5 days in the future, warn the user that getting a new subscription
+      // now will loose some time
+      if (daysTillSubExpire > 5 && subStatus == 0) earlyRenewalWarning = true;
     }
     daysTillExpire = daysTillSubExpire;
     if (!paidSubReq && daysTillDemoEnds > daysTillExpire) {
@@ -274,7 +283,6 @@ public class DonationManager {
     
     // OK, we have calculated all of the intermediate stuff.  Now use that to
     // determine the overall status
-    String location = ManagePreferences.location();
     if (ManagePreferences.freeRider()) {
       status = DonationStatus.LIFE;
       paidSubscriber = true;
@@ -285,7 +293,10 @@ public class DonationManager {
     else if (ManagePreferences.authLocation().equals(ManagePreferences.location())) {
       status = DonationStatus.AUTH_DEPT;
     } else if (expireDate != null) {
-      if (daysTillExpire > EXPIRE_WARN_DAYS) {
+      if (daysTillExpire >= 0 && subStatus == 3) {
+        status = DonationStatus.PAID_RENEW;
+      }
+      else if (daysTillExpire > EXPIRE_WARN_DAYS) {
         status = (sponsoringVendor == null && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
       }
       else if (sponsoringVendor != null) status = DonationStatus.SPONSOR;
@@ -315,27 +326,7 @@ public class DonationManager {
       sponsor = sponsoringVendor;
       expireDate = null;
     }
-    
-    // None of the exceptions apply if they are using paging service
-    if (!paidSubReq) {
 
-      // If they don't have a clear green status, check for a special release exemption
-      if (status.getStatus() != Status.GOOD) {
-        
-        // This only returns a exempt date if it is still is valid for the current release
-        // And it is only valid for period of time after the release was shipped
-        Date exemptDate = ManagePreferences.authExemptDate();
-        if (exemptDate != null) {
-          JulianDate exJDate = new JulianDate(exemptDate);
-          int days = exJDate.diffDays(curJDate);
-          if (days <= REL_EXEMPT_DAYS) {
-            status = DonationStatus.EXEMPT;
-            daysTillExpire = REL_EXEMPT_DAYS - days;
-          }
-        }
-      }
-    }
-    
     // Cadpage should be enabled unless something has expired
     // If status changed from expired to non-expired, reset the extra day count
     enabled = (status.getStatus() != Status.BLOCK);
@@ -351,8 +342,8 @@ public class DonationManager {
 
   /**
    * Report any status changes that would affect the cadpage paging service
-   * @param oldPaidSubscriber
-   * @param oldExpireDate
+   * @param oldPaidSubscriber original paid subscriber status
+   * @param oldExpireDate original expiration date
    */
   private void updatePagingStatus(boolean oldPaidSubscriber, Date oldExpireDate) {
     
@@ -464,6 +455,10 @@ public class DonationManager {
     return paidSubscriber;
   }
 
+  public boolean isEarlyRenewalWarning() {
+    return earlyRenewalWarning;
+  }
+
   /**
    * @return if the payment status required confirmation from our authorization server
    */
@@ -531,7 +526,7 @@ public class DonationManager {
     if (type > 0) return type;
     
     // OK, now that Jeanie can enter future codes, let's check
-    // tommorrow's codes
+    // tomorrow's codes
     jDate = new JulianDate(jDate, 2);
     return validateAuthCode(code, jDate);
   }

@@ -18,13 +18,14 @@ import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 
 import net.anei.cadpage.Log;
+import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonationCalculator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-@SuppressWarnings("RedundantIfStatement")
+@SuppressWarnings({"RedundantIfStatement", "SpellCheckingInspection"})
 public class BillingManager implements PurchasesUpdatedListener {
 
   // private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwirww3C/PjZeoU9xe49Z24nhKpw2nml2bhyRtp2hZysWnxskv+DpqBDXPW4o8CLnHzIld4aq6tSZhecoHRtjmpMsh+eYr76VoITEa8F/7JN5+niOspLoM7n8CpFxCDtQ4ILKXLTm5GKsfbEl7D2um0WnwVIaw3sBWKh99YAeXKp7tB/Oj8h9p9L7BLFbI00jVXzmg+4920hJ2mA0EeGM1sSdJxyh0V0k7jLEZwe8mo0nL21Ss+NbA9IVf6j4nIf4A0NUbOrTtPEBIaN1HpsKUyqdpwUYX9RIRybKE5nW0SJ3VNBBa+0ld5Yg4c5uikUznJeEVk+9KE9gV8NcNJzNLQIDAQAB";
@@ -32,6 +33,9 @@ public class BillingManager implements PurchasesUpdatedListener {
   private BillingClient mBillingClient;
 
   private List<Runnable> eventQueue = null;
+
+  private Activity donateActivity = null;
+  private DonateEvent donateEvent = null;
   
   /**
    * @return true if In-app billing is supported for this system
@@ -156,8 +160,9 @@ public class BillingManager implements PurchasesUpdatedListener {
   /**
    * Request purchase of current year product
    * @param activity current activity
+   * @param donateEvent donation event or null if none
    */
-  public void startPurchase(Activity activity) {
+  public void startPurchase(Activity activity, DonateEvent donateEvent) {
     if (!isSupported()) return;
 
     if (activity == null) return;
@@ -165,6 +170,8 @@ public class BillingManager implements PurchasesUpdatedListener {
 
     if (Log.DEBUG) Log.v("Initiating subscription purchase");
 
+    this.donateEvent = donateEvent;
+    this.donateActivity = activity;
     mBillingClient.launchBillingFlow(activity,
         BillingFlowParams.newBuilder()
             .setSku("cadpage_sub")
@@ -186,7 +193,10 @@ public class BillingManager implements PurchasesUpdatedListener {
         }
         calc.save();
       }
+      if (donateEvent != null) donateEvent.closeEvents(donateActivity);
     }
+    donateEvent = null;
+    donateActivity = null;
   }
 
   private static final DateFormat DATE_FMT = new SimpleDateFormat("MMddyyyy");
@@ -207,9 +217,11 @@ public class BillingManager implements PurchasesUpdatedListener {
       // purchase date and year will be the actual purchase year
       String year = itemId.substring(8);
       String purchaseDate;
+      int subStatus;
       if (year.startsWith("sub")) {
         purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
         year = purchaseDate.substring(4);
+        subStatus = purchase.isAutoRenewing() ? 2 : 1;
       }
 
       // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
@@ -219,11 +231,12 @@ public class BillingManager implements PurchasesUpdatedListener {
       else {
         try {
           purchaseDate = new JSONObject(purchase.getOriginalJson()).optString("developerPayload");
+          subStatus = 0;
         } catch (JSONException ex) {
           throw new RuntimeException("Error parsing developer payload");
         }
       }
-      calc.subscription(year, purchaseDate, null);
+      calc.subscription(year, purchaseDate, null, subStatus);
     }
   }
 

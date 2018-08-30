@@ -1,33 +1,14 @@
 package net.anei.cadpage.donation;
 
-import android.app.Activity;
-import net.anei.cadpage.CadPageApplication;
-import net.anei.cadpage.R;
-import net.anei.cadpage.SmsPopupUtils;
-import net.anei.cadpage.billing.BillingManager;
-
 /**
- * This is the nice top level donation event that appears when user is on
- * the free rider donate list
+ * Purchase through Google Play Store
  */
-public class AndroidDonateEvent extends DonateEvent {
+public class AndroidDonateEvent extends EventGroup {
   
-  public AndroidDonateEvent() {
-    super(AlertStatus.GREEN, R.string.donate_android_title);
+  private AndroidDonateEvent() {
+    super(AndroidDonateConfirmEvent.instance(), AndroidDonate1Event.instance());
   }
 
-  @Override
-  public boolean isEnabled() {
-    return BillingManager.instance().isSupported();
-  }
-
-  @Override
-  protected void doEvent(Activity activity) {
-    if (!SmsPopupUtils.haveNet(activity)) return;
-    BillingManager.instance().startPurchase(activity);
-//    closeEvents(activity);
-  }
-  
   private static final AndroidDonateEvent instance = new AndroidDonateEvent();
   
   public static AndroidDonateEvent instance() {

@@ -7,10 +7,11 @@ import net.anei.cadpage.ManagePreferences;
 
 public class DonationCalculator {
   
-  final int type;
-  int year = 0;
-  String purchaseDateStr = null;
-  String sponsor = null;
+  private final int type;
+  private int year = 0;
+  private String purchaseDateStr = null;
+  private String sponsor = null;
+  private int subStatus = 0;
   
   private static final Object LOCK = new Object();
 
@@ -32,6 +33,7 @@ public class DonationCalculator {
     year = ManagePreferences.paidYear(type);
     purchaseDateStr = ManagePreferences.purchaseDateString(type);
     sponsor = ManagePreferences.sponsor(type);
+    subStatus = ManagePreferences.subStatus(type);
     
     if (type == 0) {
       if (ManagePreferences.freeRider()) year = 9999;
@@ -44,11 +46,12 @@ public class DonationCalculator {
    * or from the Cadpage authorization server response.
    * @param stat - Subscription status, either a subscription year or "LIFE".
    * @param purchaseDateStr - purchase date in MMDDYYY format.
-   * @param sponsor
+   * @param sponsor sponsor
+   * @param subStatus subscription status
    */
-  public void subscription(String stat, String purchaseDateStr, String sponsor) {
+  public void subscription(String stat, String purchaseDateStr, String sponsor, int subStatus) {
     
-    Log.w("Donation Subscription type:" + type + " stat:" + stat + " date:" + purchaseDateStr + " sponsor:" + sponsor);
+    Log.w("Donation Subscription type:" + type + " stat:" + stat + " date:" + purchaseDateStr + " sponsor:" + sponsor + " subStatus:" + subStatus);
     
     // Clean up inputs
     if (purchaseDateStr != null && purchaseDateStr.length() < 4) purchaseDateStr = null;
@@ -61,11 +64,11 @@ public class DonationCalculator {
     } else {
       try {
         year = Integer.parseInt(stat);
-      } catch (NumberFormatException ex) {}
-      if (year < 2011 && year > 2050) year = -1;
+      } catch (NumberFormatException ignored) {}
+      if (year < 2011 || year > 2050) year = -1;
     }
     
-    subscription(year, purchaseDateStr, sponsor);
+    subscription(year, purchaseDateStr, sponsor, subStatus);
   }
 
   
@@ -74,9 +77,10 @@ public class DonationCalculator {
    * or from the Cadpage authorization server response.
    * @param year - paid year or 9999 for lifetime subscriptions
    * @param purchaseDateStr - purchase date in MMDDYYY format.
-   * @param sponsor
+   * @param sponsor sponsor
+   * @param subStatus subscription status
    */
-  private void subscription(int year, String purchaseDateStr, String sponsor) {
+  private void subscription(int year, String purchaseDateStr, String sponsor, int subStatus) {
     // if this year is less than current year, ignore everything
     // completely ignore everything
     if (year < this.year) return;
@@ -103,6 +107,7 @@ public class DonationCalculator {
     this.year = year;
     this.purchaseDateStr = purchaseDateStr;
     this.sponsor = sponsor;
+    this.subStatus = subStatus;
   }
   
   /**
@@ -148,6 +153,7 @@ public class DonationCalculator {
         ManagePreferences.setPaidYear(type, year);
         ManagePreferences.setPurchaseDateString(type, purchaseDateStr);
         ManagePreferences.setSponsor(type, sponsor);
+        ManagePreferences.setSubStatus(type, subStatus);
 
         // Save the current global donation status
         DonationCalculator saveCalc = new DonationCalculator(0);
@@ -158,7 +164,8 @@ public class DonationCalculator {
         for (int ii = 1; ii <= 2; ii++) {
           calc.subscription(ManagePreferences.paidYear(ii), 
                             ManagePreferences.purchaseDateString(ii), 
-                            ManagePreferences.sponsor(ii));
+                            ManagePreferences.sponsor(ii),
+                            ManagePreferences.subStatus(ii));
         }
         
         // See if final result is a donation status downgrade
@@ -167,7 +174,7 @@ public class DonationCalculator {
           EmailDeveloperActivity.logSnapshot(CadPageApplication.getContext(), "Payment Status Downgrade");
         }
         
-        // Otherwise save the new status and update everything
+        // Save the new status and update everything
         calc.save();
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();

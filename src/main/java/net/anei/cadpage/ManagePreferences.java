@@ -981,6 +981,29 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     R.string.pref_sponsor_1_key,
     R.string.pref_sponsor_2_key
   };
+
+  public static int subStatus() {
+    return subStatus(0);
+  }
+
+  public static int subStatus(int type) {
+    if (type > SUB_STATUS_IDS.length) return 0;
+    return prefs.getInt(SUB_STATUS_IDS[type], 0);
+  }
+
+  public static void setSubStatus(int status) {
+    setSubStatus(0, status);
+  }
+
+  public static void setSubStatus(int type, int status) {
+    if (type > SUB_STATUS_IDS.length) return;
+    prefs.putInt(SUB_STATUS_IDS[type], status);
+  }
+
+  private static final int[] SUB_STATUS_IDS = new int[]{
+      R.string.pref_sub_status_key,
+      R.string.pref_sub_status_1_key
+  };
   
   public static boolean freeRider() {
     return prefs.getBoolean(R.string.pref_free_rider_key);
@@ -1046,41 +1069,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     int cnt = authExtraCnt();
     prefs.putInt(R.string.pref_auth_extra_cnt_key, cnt+1);
   }
-  
-  public static Date authExemptDate() {
-    String exemptDate =  prefs.getString(R.string.pref_auth_exempt_date_key, null);
-    if (exemptDate == null) return null;
-    if (!exemptDate.equals(prefs.context.getString(R.string.release_date))) return null;
-    try {
-      return DATE_FORMAT.parse(exemptDate);
-    } catch (ParseException e) {
-      return null;
-    }
-  }
-  
-  public static void setExemptDate() {
-    setExemptDate(prefs.context.getString(R.string.release_date));
-    DonationManager.instance().reset();
-    MainDonateEvent.instance().refreshStatus();
-  }
-  
-  public static Date releaseDate() {
-    String sDate = prefs.context.getString(R.string.release_date);
-    try {
-      return DATE_FORMAT.parse(sDate);
-    } catch (ParseException e) {
-      return null;
-    }
-  }
-  
-  private static void setExemptDate(String newVal) {
-    prefs.putString(R.string.pref_auth_exempt_date_key, newVal);
-  }
-  
-  public static void setAuthExemptDate(String newVal) {
-    prefs.putString(R.string.pref_auth_exempt_date_key, newVal); 
-  }
-  
+
   public static int calcAuthRunDays(Date date) {
     if (date == null) {
       prefs.putString(R.string.pref_auth_last_date_key, null);
@@ -2569,11 +2558,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_sponsor_key,
       R.string.pref_sponsor_1_key,
       R.string.pref_sponsor_2_key,
+      R.string.pref_sub_status_key,
+      R.string.pref_sub_status_1_key,
       R.string.pref_free_sub_key,
       R.string.pref_auth_location_key,
       R.string.pref_auth_extra_date_key,
       R.string.pref_auth_extra_cnt_key,
-      R.string.pref_auth_exempt_date_key,
       R.string.pref_auth_last_date_key,
       R.string.pref_auth_run_days_key,
       R.string.pref_auth_last_check_time_key,
