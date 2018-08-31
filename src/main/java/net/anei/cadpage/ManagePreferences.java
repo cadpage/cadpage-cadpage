@@ -1070,6 +1070,15 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putInt(R.string.pref_auth_extra_cnt_key, cnt+1);
   }
 
+  public static Date releaseDate() {
+    String sDate = prefs.context.getString(R.string.release_date);
+    try {
+      return DATE_FORMAT.parse(sDate);
+    } catch (ParseException e) {
+      return null;
+    }
+  }
+
   public static int calcAuthRunDays(Date date) {
     if (date == null) {
       prefs.putString(R.string.pref_auth_last_date_key, null);

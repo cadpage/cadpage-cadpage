@@ -220,15 +220,14 @@ public class MmsTransactionService extends Service {
     private void mmsReceive(Intent intent) {
       // Get raw PDU push-data from the message and parse it
       byte[] pushData = intent.getByteArrayExtra("data");
-  
+
       GenericPdu pdu = null;
       try {
         pdu = new PduParser(pushData).parse();
       } catch (Exception ex) {
         Log.e(ex);
         EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-    }
+      }
       if (null == pdu) {
         Log.e("Invalid PUSH data");
         EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Invalid PUSH data");
@@ -242,7 +241,10 @@ public class MmsTransactionService extends Service {
       }
 
       // Ignore if we have already processed a notification for this message
-      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) return;
+      if (SmsMsgLogBuffer.getInstance().checkDuplicateNotice(message)) {
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "Duplicate MMS notice");
+        return;
+      }
 
       // Save message for future test or error reporting use
       // Duplicate message check is ignored for now because we do not yet have a message body
@@ -288,6 +290,7 @@ public class MmsTransactionService extends Service {
           continue;
         }
         if (cur == null) continue;
+
         int recNo;
         try {
           if (!cur.moveToFirst()) continue;
@@ -295,14 +298,15 @@ public class MmsTransactionService extends Service {
         } finally {
           cur.close();
         }
-
+        
         // OK, we have the desired record number
         // Now see if we can recover the content
-
+        
         Uri mmsUri = ContentUris.withAppendedId(MMS_URI, recNo);
         Uri partUri = Uri.withAppendedPath(mmsUri, "part");
         cur = qr.query(partUri, PART_COL_LIST, null, null, null);
 
+        String text;
         try {
           if (cur == null || !cur.moveToFirst()) {
 
@@ -333,7 +337,6 @@ public class MmsTransactionService extends Service {
           }
 
           // Almost there, we have a return value, try to retrieve a text component from it
-          String text;
           do {
             text = cur.getString(0);
             if (text == null) {
@@ -346,25 +349,25 @@ public class MmsTransactionService extends Service {
               text = null;
             }
           } while (cur.moveToNext());
-
-          // for better or worse, we are done with this message, so let's
-          // remove it from the processing list
-          iter.remove();
-
-          // If we didn't retrieve any text info, give it up
-          // Otherwise add the text body to our message
-          // And update the message saved in the log buffer
-          if (text == null) continue;
-          message.setMessageBody(text);
-          SmsMsgLogBuffer.getInstance().update(message);
-
-          // OK, we have a real message.  First see if it is a vendor discovery query
-          // If it is, delete the message from the message inbox
-          if (message.isDiscoveryQuery(MmsTransactionService.this)) {
-            qr.delete(mmsUri, null, null);
-          }
         } finally {
           if (cur != null) cur.close();
+        }
+        
+        // for better or worse, we are done with this message, so let's
+        // remove it from the processing list
+        iter.remove();
+        
+        // If we didn't retrieve any text info, give it up
+        // Otherwise add the text body to our message
+        // And update the message saved in the log buffer
+        if (text == null) continue;
+        message.setMessageBody(text);
+        SmsMsgLogBuffer.getInstance().update(message);
+        
+        // OK, we have a real message.  First see if it is a vendor discovery query
+        // If it is, delete the message from the message inbox
+        if (message.isDiscoveryQuery(MmsTransactionService.this)) {
+          qr.delete(mmsUri, null, null);
         }
         
         // Now that we have the full message, we can try to parse it as a CAD page

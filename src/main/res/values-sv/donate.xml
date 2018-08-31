@@ -129,7 +129,7 @@
 
   <string name="donate_android2_title">Go ahead with purchase now</string> <!-- Translate -->
 
-  <string name="donate_android_cancel">I will purchase a subscription later</string> <!-- Translate -->
+  <string name="donate_android_cancel_title">I will purchase a subscription later</string> <!-- Translate -->
 
   <string name="donate_android_unsupported_text">
  Android Market appen rapporterar att app-i-app köp inte understödjs. Du kan behöva uppgradera Market-appen till den senaste versionen eller också måste du logga in med ett giltigt Google-konto (Välj meny &gt; Konton i Marketappen) 

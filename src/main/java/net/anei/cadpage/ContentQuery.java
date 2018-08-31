@@ -29,7 +29,7 @@ public class ContentQuery {
     dumpCursor("Full MMS", cur);
   }
   
-  public static void retrieveMsg(Context context) {
+  private static void retrieveMsg(Context context) {
     
     ContentResolver res = context.getContentResolver();
     int id = -1;
@@ -39,11 +39,15 @@ public class ContentQuery {
       Uri uri  = Uri.parse("content://mms");
       Cursor cur = res.query(uri, MMS_COL_LIST, "tr_id=?", new String[]{msg_id}, null);
       if (cur == null) return;
-      Log.w("rec count:" + cur.getCount());
-      if (!cur.moveToFirst()) return;
-      id = cur.getInt(0);
-      String sub = cur.getString(1);
-      Log.w("_ID=" + id + "   sub=" + sub);
+      try {
+        Log.w("rec count:" + cur.getCount());
+        if (!cur.moveToFirst()) return;
+        id = cur.getInt(0);
+        String sub = cur.getString(1);
+        Log.w("_ID=" + id + "   sub=" + sub);
+      } finally {
+        cur.close();
+      }
     }
     
     Uri uri = Uri.parse("content://mms/"+id+"/part");
@@ -58,29 +62,10 @@ public class ContentQuery {
       text = new String(ba);
     }
     Log.w("Contents=" + text);
-//    
-//    InputStream is = null;
-//    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-//    try { 
-//      is = res.openInputStream(uri); 
-//  
-//      byte[] buffer = new byte[256]; 
-//      int len = is.read(buffer); 
-//      while (len >= 0) { 
-//      baos.write(buffer, 0, len); 
-//      len = is.read(buffer); 
-//      } 
-//    } catch (IOException ex) {
-//      throw new RuntimeException(ex.getMessage(), ex);
-//    } finally {
-//      if (is != null) try {is.close();} catch (IOException ex) {}
-//    }
-//    
-//    Log.w("Msg contents: " + baos.toString());
   }
   
   
-  public static void dumpCursor(String title, Cursor cursor) {
+  private static void dumpCursor(String title, Cursor cursor) {
     
     if (cursor == null) {
       Log.w(title + ": No Results returned");
@@ -102,6 +87,7 @@ public class ContentQuery {
   
   public static void dumpRecentTasks(Context context) {
     ActivityManager mgr = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+    assert mgr != null;
     List<ActivityManager.RecentTaskInfo> taskList = mgr.getRecentTasks(100,ActivityManager.RECENT_WITH_EXCLUDED);
     Log.w("Recent task information");
     for (ActivityManager.RecentTaskInfo task : taskList) {
@@ -154,13 +140,31 @@ public class ContentQuery {
   private static void dumpKeyValue(String prefix, String key, Object value) {
     Intent intent = (value instanceof Intent ? (Intent)value : null);
     Bundle bundle = (value instanceof Bundle ? (Bundle)value : null);
-    String dispValue = (intent != null ? "Intent" : bundle != null ? "Bundle" : value == null ? "null" : value.toString());
+    String dispValue = (intent != null ? "Intent" :
+                        bundle != null ? "Bundle" :
+                        value instanceof byte[] ? dumpByteArray((byte[])value) :
+                        value == null ? "null" : value.toString());
     Log.v(prefix + key + ':' + dispValue);
     if (intent != null) dumpIntent(prefix+"  ", intent);
     else if (bundle != null) dumpBundle(prefix+"  ", bundle);
     
   }
-  
+
+  private static String dumpByteArray(byte[] data) {
+    StringBuilder sb = new StringBuilder();
+    for (byte b : data) {
+      sb.append(hexChar(b>>4));
+      sb.append(hexChar(b));
+    }
+    return sb.toString();
+  }
+
+  private static char hexChar(int b) {
+    b = b & 0xF;
+    if (b < 10) return (char)('0' + b);
+    return (char)(b-10+'A');
+  }
+
   private static String dumpFlags(int flags) {
     StringBuilder sb = new StringBuilder();
     flags = addFlag(sb, flags, Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT, "FLAG_ACTIVITY_BROUGHT_TO_FRONT");
@@ -192,7 +196,7 @@ public class ContentQuery {
     flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_REPLACE_PENDING, "FLAG_RECEIVER_REPLACE_PENDING");
     if (flags != 0) {
       if (sb.length() > 0) sb.append(',');
-      sb.append(String.format("$08x", flags));
+      sb.append(String.format("%08x", flags));
     }
     return sb.toString();
   }
