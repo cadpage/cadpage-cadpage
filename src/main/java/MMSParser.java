@@ -16,7 +16,7 @@ public class MMSParser {
 
   private static void parseMsg(String data) {
     byte[] byteData = cvtHexString(data);
-    GenericPdu pdu = null;
+    GenericPdu pdu;
     try {
       PduParser parser = new PduParser(byteData);
       pdu = parser.parse();

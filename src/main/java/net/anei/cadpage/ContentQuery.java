@@ -9,12 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 public class ContentQuery {
   
-  private static String[] MMS_COL_LIST = new String[]{"_ID", "sub"};
-  private static String[] PART_COL_LIST = new String[]{"text", "_data"};
+  private static final String[] MMS_COL_LIST = new String[]{"_ID", "sub"};
+  private static final String[] PART_COL_LIST = new String[]{"text", "_data"};
   
   public static void query(Context context) {
     retrieveMsg(context);
@@ -28,7 +29,7 @@ public class ContentQuery {
     dumpCursor("Full MMS", cur);
   }
   
-  public static void retrieveMsg(Context context) {
+  private static void retrieveMsg(Context context) {
     
     ContentResolver res = context.getContentResolver();
     int id = -1;
@@ -38,11 +39,15 @@ public class ContentQuery {
       Uri uri  = Uri.parse("content://mms");
       Cursor cur = res.query(uri, MMS_COL_LIST, "tr_id=?", new String[]{msg_id}, null);
       if (cur == null) return;
-      Log.w("rec count:" + cur.getCount());
-      if (!cur.moveToFirst()) return;
-      id = cur.getInt(0);
-      String sub = cur.getString(1);
-      Log.w("_ID=" + id + "   sub=" + sub);
+      try {
+        Log.w("rec count:" + cur.getCount());
+        if (!cur.moveToFirst()) return;
+        id = cur.getInt(0);
+        String sub = cur.getString(1);
+        Log.w("_ID=" + id + "   sub=" + sub);
+      } finally {
+        cur.close();
+      }
     }
     
     Uri uri = Uri.parse("content://mms/"+id+"/part");
@@ -57,29 +62,10 @@ public class ContentQuery {
       text = new String(ba);
     }
     Log.w("Contents=" + text);
-//    
-//    InputStream is = null;
-//    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-//    try { 
-//      is = res.openInputStream(uri); 
-//  
-//      byte[] buffer = new byte[256]; 
-//      int len = is.read(buffer); 
-//      while (len >= 0) { 
-//      baos.write(buffer, 0, len); 
-//      len = is.read(buffer); 
-//      } 
-//    } catch (IOException ex) {
-//      throw new RuntimeException(ex.getMessage(), ex);
-//    } finally {
-//      if (is != null) try {is.close();} catch (IOException ex) {}
-//    }
-//    
-//    Log.w("Msg contents: " + baos.toString());
   }
   
   
-  public static void dumpCursor(String title, Cursor cursor) {
+  private static void dumpCursor(String title, Cursor cursor) {
     
     if (cursor == null) {
       Log.w(title + ": No Results returned");
@@ -101,6 +87,7 @@ public class ContentQuery {
   
   public static void dumpRecentTasks(Context context) {
     ActivityManager mgr = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+    assert mgr != null;
     List<ActivityManager.RecentTaskInfo> taskList = mgr.getRecentTasks(100,ActivityManager.RECENT_WITH_EXCLUDED);
     Log.w("Recent task information");
     for (ActivityManager.RecentTaskInfo task : taskList) {
@@ -202,12 +189,14 @@ public class ContentQuery {
     flags = addFlag(sb, flags, Intent.FLAG_GRANT_READ_URI_PERMISSION, "FLAG_GRANT_READ_URI_PERMISSION");
     flags = addFlag(sb, flags, Intent.FLAG_GRANT_WRITE_URI_PERMISSION, "FLAG_GRANT_WRITE_URI_PERMISSION");
     flags = addFlag(sb, flags, Intent.FLAG_INCLUDE_STOPPED_PACKAGES, "FLAG_INCLUDE_STOPPED_PACKAGES");
-    flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_FOREGROUND, "FLAG_RECEIVER_FOREGROUND");
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+      flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_FOREGROUND, "FLAG_RECEIVER_FOREGROUND");
+    }
     flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_REGISTERED_ONLY, "FLAG_RECEIVER_REGISTERED_ONLY");
     flags = addFlag(sb, flags, Intent.FLAG_RECEIVER_REPLACE_PENDING, "FLAG_RECEIVER_REPLACE_PENDING");
     if (flags != 0) {
       if (sb.length() > 0) sb.append(',');
-      sb.append(String.format("$08x", flags));
+      sb.append(String.format("%08x", flags));
     }
     return sb.toString();
   }

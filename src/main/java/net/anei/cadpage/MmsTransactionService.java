@@ -47,17 +47,16 @@ import net.anei.cadpage.mms.PduParser;
 public class MmsTransactionService extends Service {
   
   private static final Uri MMS_URI = Uri.parse("content://mms");
-  private enum EventType {TRANSACTION_REQUEST, DATA_CHANGE, TIMEOUT, TIMER_TICK, QUIT};
+  private enum EventType {TRANSACTION_REQUEST, DATA_CHANGE, TIMEOUT, TIMER_TICK, QUIT}
 
   // Column names for query searches
-  private static String[] MMS_COL_LIST = new String[]{"_ID"};
-  private static String[] PART_COL_LIST = new String[]{"text", "_data"};
+  private static final String[] MMS_COL_LIST = new String[]{"_ID"};
+  private static final String[] PART_COL_LIST = new String[]{"text", "_data"};
 
   // Timer interval, negative to disable timer
   private static final int TIMER_INTERVAL = -1;
   
   private ServiceHandler mServiceHandler;
-  private Looper mServiceLooper;
   private PowerManager.WakeLock mWakeLock;
   
   // Cached copies of different preferences we might need during off thread processing
@@ -75,9 +74,10 @@ public class MmsTransactionService extends Service {
     
     // Acquire simple power lock while we are running
     PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+    assert pm != null;
     mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MMS Connectivity");
     mWakeLock.setReferenceCounted(false);
-    mWakeLock.acquire();
+    mWakeLock.acquire(10*60*1000L /*10 minutes*/);
 
     // Start up the thread running the service.  Note that we create a
     // separate thread because the service normally runs in the process's
@@ -85,7 +85,7 @@ public class MmsTransactionService extends Service {
     HandlerThread thread = new HandlerThread("MmsTransactionService");
     thread.start();
 
-    mServiceLooper = thread.getLooper();
+    Looper mServiceLooper = thread.getLooper();
     mServiceHandler = new ServiceHandler(mServiceLooper);
 
   }
@@ -134,9 +134,9 @@ public class MmsTransactionService extends Service {
   private class ServiceHandler extends Handler {
     
     // Actual queue of pending MMS transactions
-    private List<MmsMsgEntry> msgList  = new LinkedList<MmsMsgEntry>();
+    private final List<MmsMsgEntry> msgList  = new LinkedList<>();
     
-    private ContentResolver qr;
+    private final ContentResolver qr;
 
     
     @SuppressWarnings("unused")
@@ -199,7 +199,6 @@ public class MmsTransactionService extends Service {
               stopSelf();
             }
           });
-          return;
         }
       } 
       
@@ -291,8 +290,14 @@ public class MmsTransactionService extends Service {
           continue;
         }
         if (cur == null) continue;
-        if (!cur.moveToFirst()) continue;
-        int recNo = cur.getInt(0);
+
+        int recNo;
+        try {
+          if (!cur.moveToFirst()) continue;
+          recNo = cur.getInt(0);
+        } finally {
+          cur.close();
+        }
         
         // OK, we have the desired record number
         // Now see if we can recover the content
@@ -300,48 +305,53 @@ public class MmsTransactionService extends Service {
         Uri mmsUri = ContentUris.withAppendedId(MMS_URI, recNo);
         Uri partUri = Uri.withAppendedPath(mmsUri, "part");
         cur = qr.query(partUri, PART_COL_LIST, null, null, null);
-        
-        if (cur == null || !cur.moveToFirst()) {
-          
-          // The message contents do not yet exist.  Fire off a service request
-          // to the messaging app to get these loaded if we haven't already
-          if (entry.loading) continue; 
-          if (Log.DEBUG) Log.v("Request MMS content for " + entry.message.getContentLoc()); 
-          final Intent intent = new Intent();
-          intent.setClassName("com.android.mms", "com.android.mms.transaction.TransactionService");
-          intent.putExtra("type", 1);
-          intent.putExtra("uri", ContentUris.withAppendedId(MMS_URI, recNo).toString());
-          CadPageApplication.runOnMainThread(new Runnable(){
-            @Override
-            public void run() {
-              try {
-                if (startService(intent) == null) {
-                  Log.e("Tranaction.RETRIEVE_TRANSACTION service not found");
-                }
-              } catch (Exception ex) {
-                Log.e(ex);
-                EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-              }
-              
-            }});
-          entry.loading = true;
-          continue;
-        }
-        
-        // Almost there, we have a return value, try to retrieve a text component from it
+
         String text;
-        do {
-          text = cur.getString(0);
-          if (text == null) {
-            byte[] ba = cur.getBlob(1);
-            if (ba != null) text = new String(ba);
+        try {
+          if (cur == null || !cur.moveToFirst()) {
+
+            // The message contents do not yet exist.  Fire off a service request
+            // to the messaging app to get these loaded if we haven't already
+            if (entry.loading) continue;
+            if (Log.DEBUG) Log.v("Request MMS content for " + entry.message.getContentLoc());
+            final Intent intent = new Intent();
+            intent.setClassName("com.android.mms", "com.android.mms.transaction.TransactionService");
+            intent.putExtra("type", 1);
+            intent.putExtra("uri", ContentUris.withAppendedId(MMS_URI, recNo).toString());
+            CadPageApplication.runOnMainThread(new Runnable() {
+              @Override
+              public void run() {
+                try {
+                  if (startService(intent) == null) {
+                    Log.e("Transaction.RETRIEVE_TRANSACTION service not found");
+                  }
+                } catch (Exception ex) {
+                  Log.e(ex);
+                  EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
+                }
+
+              }
+            });
+            entry.loading = true;
+            continue;
           }
-          if (text != null) {
-            text = text.trim();
-            if (!text.startsWith("<smil>")) break;
-            text = null;
-          }
-        } while (cur.moveToNext());
+
+          // Almost there, we have a return value, try to retrieve a text component from it
+          do {
+            text = cur.getString(0);
+            if (text == null) {
+              byte[] ba = cur.getBlob(1);
+              if (ba != null) text = new String(ba);
+            }
+            if (text != null) {
+              text = text.trim();
+              if (!text.startsWith("<smil>")) break;
+              text = null;
+            }
+          } while (cur.moveToNext());
+        } finally {
+          if (cur != null) cur.close();
+        }
         
         // for better or worse, we are done with this message, so let's
         // remove it from the processing list
