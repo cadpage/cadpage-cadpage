@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-68\n
+    Location Fixes:\n
+    Mahoning County, OH\n
+    Josephine County, OR\n
+    Bradley County, TN\n
+    \n
     v1.9.15-67\n
     Location Fixes:\n
     Berks County, PA\n
@@ -49,18 +55,6 @@
     Wayne County, OH\n
     Clackamas County, OR\n
     Washington County, OR\n
-    Berks County, PA\n
-    \n
-    v1.9.15-63\n
-    Location Fixes:\n
-    Humboldt County, CA\n
-    Monterey County, CA\n
-    Calcasieu Parish, LA\n
-    Tangipahoa Parish, LA\n
-    Boone County, MO\n
-    Delaware County, PA\n
-    \n
-    General Fixes:\n
-    Crash when user requests payment status help in Swedish Language
+    Berks County, PA
   </string>
 </resources>
