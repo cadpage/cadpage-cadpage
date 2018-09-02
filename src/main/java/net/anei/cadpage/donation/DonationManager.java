@@ -220,26 +220,27 @@ public class DonationManager {
     // Calculate subscription expiration date
     // (one year past the purchase date anniversary in the last paid year)
     // ((Use install date if there is no purchase date))
+    Date subExpDate = null;
     usedPurchaseDate = false;
     overpaidDays = 0;
     int daysTillSubExpire = -99999;
     int paidYear = ManagePreferences.paidYear();
     if (paidYear > 0) {
-      Date tDate = ManagePreferences.purchaseDate();
-      if (tDate == null) tDate = ManagePreferences.installDate();
+      subExpDate = ManagePreferences.purchaseDate();
+      if (subExpDate == null) subExpDate = ManagePreferences.installDate();
       Calendar cal = new GregorianCalendar();
-      cal.setTime(tDate);
-      cal.set(Calendar.YEAR, paidYear+1);
-      tDate = cal.getTime();
-      JulianDate tJDate = new JulianDate(tDate);
-      
+      cal.setTime(subExpDate);
+      cal.set(Calendar.YEAR, paidYear + 1);
+      subExpDate = cal.getTime();
+      JulianDate tJDate = new JulianDate(subExpDate);
+
       // If there is a sponsored vendor register date and they have a paid subscription
       // expiration date, compute the number of days between them.  This is the number 
       // of days they have been doubled billed by both us and the vendor
       if (regJDate != null) {
-        overpaidDays = regJDate.diffDays(tJDate); 
+        overpaidDays = regJDate.diffDays(tJDate);
       }
-      
+
       // They only get the coveted paid subscriber status if this is a real
       // paid subscription and this expiration date has not passed
       if (!ManagePreferences.freeSub()) {
@@ -248,12 +249,46 @@ public class DonationManager {
           usedPurchaseDate = true;
         }
       }
-      
+    }
+
+    // Play Store subscriptions disappear when they expire.  But we want to retain the expiration
+    // date for limbo status calculations.
+    Date saveExpDate = ManagePreferences.expireDate();
+    if (saveExpDate != null || subExpDate != null) {
+
+      // If the calculated sub expiration date is better than the saved expiration date
+      // Save the expiration date for future reference
+      if (saveExpDate == null || saveExpDate.before(subExpDate)) {
+        ManagePreferences.setExpireDate(subExpDate);
+      }
+
+      // If the saved expiration date is better than the calculated expiration date,
+      // things get complicated
+      else if (subExpDate == null || subExpDate.before(saveExpDate)) {
+
+        // If the saved expiration date has not expired, then we assume that the reason
+        // why the calculated expiration date is worse is because a previous subscription
+        // purchase has been cancelled.  So it should override the saved expiration date
+        if (saveExpDate.after(curDate)) {
+          ManagePreferences.setExpireDate(subExpDate);
+        }
+
+        // If the saved expiration date has expired, then we assume that the calculated expiration
+        // date is worse because an expired subscription has disappeared from our radar.  Which
+        // means the saved expiration date should be retained.
+        else {
+          subExpDate = saveExpDate;
+        }
+      }
+    }
+
       // If we have both a subscription and sponsor expiration date, choose the
       // latest one
-      if (expireDate == null || tDate.after(expireDate)) {
+
+    if (subExpDate != null) {
+      if (expireDate == null || subExpDate.after(expireDate)) {
         sponsor = ManagePreferences.sponsor();
-        expireDate = tDate;
+        expireDate = subExpDate;
         usedPurchaseDate = true;
         subStatus = ManagePreferences.subStatus();
       }

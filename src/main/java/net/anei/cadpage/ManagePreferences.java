@@ -1070,6 +1070,21 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putInt(R.string.pref_auth_extra_cnt_key, cnt+1);
   }
 
+  public static Date expireDate() {
+    String dateStr = prefs.getString(R.string.pref_expire_date_key, null);
+    if (dateStr == null) return null;
+    try {
+      return DATE_FORMAT.parse(dateStr);
+    } catch (ParseException ex) {
+      return null;
+    }
+  }
+
+  public static void setExpireDate(Date expireDate) {
+    String dateStr = expireDate == null ? null : DATE_FORMAT.format(expireDate);
+    prefs.putString(R.string.pref_expire_date_key, dateStr);
+  }
+
   public static Date releaseDate() {
     String sDate = prefs.context.getString(R.string.release_date);
     try {
@@ -2580,6 +2595,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_purchase_date_1_key,
       R.string.pref_paid_year_2_key,
       R.string.pref_purchase_date_2_key,
+      R.string.pref_expire_date_key,
       
       R.string.pref_prev_version_code,
       R.string.pref_register_date_key,
