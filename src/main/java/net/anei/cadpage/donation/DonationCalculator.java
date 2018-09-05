@@ -142,6 +142,8 @@ public class DonationCalculator {
           ManagePreferences.setFreeSub(false);
           ManagePreferences.setSponsor(sponsor);
         }
+
+        ManagePreferences.setSubStatus(subStatus);
       }
       
       // Subcomponent status are saved normally

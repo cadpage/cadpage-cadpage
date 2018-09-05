@@ -987,7 +987,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   public static int subStatus(int type) {
-    if (type > SUB_STATUS_IDS.length) return 0;
+    if (type >= SUB_STATUS_IDS.length) return 0;
     return prefs.getInt(SUB_STATUS_IDS[type], 0);
   }
 
@@ -996,7 +996,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   public static void setSubStatus(int type, int status) {
-    if (type > SUB_STATUS_IDS.length) return;
+    if (type >= SUB_STATUS_IDS.length) return;
     prefs.putInt(SUB_STATUS_IDS[type], status);
   }
 
