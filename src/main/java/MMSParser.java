@@ -11,6 +11,7 @@ public class MMSParser {
 
   static public void  main(String[] args) {
     Log.setTestMode(true);
+    parseMsg("8C868D908B3044394146303634413039463030303032304130303030330097383530363934303232322F545950453D504C4D4E0085045B8960349581");
     parseMsg("8C888D918B3044394146303634413039463030303032304130303030330097383530363934333338322F545950453D504C4D4E00891680383530363934303232322F545950453D504C4D4E0085045B89614E9B80");
   }
 
@@ -28,6 +29,8 @@ public class MMSParser {
       System.err.println("Invalid PUSH data");
       return;
     }
+
+    System.out.println("PDU:" + pdu.getClass().getName());
 
     SmsMmsMessage message = pdu.getMessage();
     if (message == null) {
