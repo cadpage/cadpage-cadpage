@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09052018</string>
+  <string name="release_date">09062018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-70\n
+    Location Fixes:\n
+    Jefferson County, CO\n
+    Henry County, IN\n
+    \n
     v1.9.15-69\n
     Location Fixes:\n
     Wayne County, OH\n
@@ -39,19 +44,6 @@
     Watauga County, NC\n
     \n
     General Fixes:\n
-    Additional logging to help track down MMS processing issues\n
-    \n
-    v1.9.15-65\n
-    New Location:\n
-    Henry County, MO\n
-    Clark County, OH (alt)\n
-    Monmouth County, NJ (alt)\n
-    Calhoun County, SC\n
-    \n
-    Location Fixes:\n
-    Genesee County, NY\n
-    Adams County, PA\n
-    Snohomish County, WA\n
-    Waukesha County, WI
+    Additional logging to help track down MMS processing issues
   </string>
 </resources>
