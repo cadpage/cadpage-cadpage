@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09062018</string>
+  <string name="release_date">09082018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-71\n
+    LocationFixes:\n
+    Lake County, FL\n
+    St Charles County, MO\n
+    Macon County, NC\n
+    Charleston County, SC\n
+    \n
     v1.9.15-70\n
     Location Fixes:\n
     Jefferson County, CO\n
@@ -23,27 +30,5 @@
     v1.9.15-67\n
     Location Fixes:\n
     Berks County, PA\n
-    \n
-    v1.9.15-66\n
-    New Locations:\n
-    Cullman County, AL\n
-    St Clair County, AL\n
-    Tallapoosa County, AL\n
-    Maricopa County, AZ (alt)\n
-    Emanuel County, GA\n
-    Hancock County, IA\n
-    Taylor County, KY\n
-    Isabella County, MI (alt)\n
-    Morgan County, MO\n
-    Union County, PA\n
-    Coffee County, TN\n
-    Henderson County, TX\n
-    Franklin County, VT\n
-    \n
-    Location Fixes:\n
-    Watauga County, NC\n
-    \n
-    General Fixes:\n
-    Additional logging to help track down MMS processing issues
   </string>
 </resources>
