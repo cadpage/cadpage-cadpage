@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../cadpage.iml" filepath="$PROJECT_DIR$/../cadpage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cadpage-cadpage.iml" filepath="$PROJECT_DIR$/cadpage-cadpage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cadpage-parsers/cadpage-parsers.iml" filepath="$PROJECT_DIR$/../cadpage-parsers/cadpage-parsers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cadpage-private/cadpage-private.iml" filepath="$PROJECT_DIR$/../cadpage-private/cadpage-private.iml" />
+    </modules>
+  </component>
+</project>
