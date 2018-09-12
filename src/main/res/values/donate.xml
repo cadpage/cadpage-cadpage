@@ -58,7 +58,7 @@
 
   <string name="donate_paid_renew_title">Your %s Cadpage subscription is current</string>
   <string name="donate_paid_renew_text">
-    You have a %1$s Cadpage subscription will renew automatically on\n%2$s
+    Your %1$s Cadpage subscription will renew automatically on\n%2$s
   </string>
 
   <string name="donate_paid_title">Your %s Cadpage subscription is current</string>

@@ -258,7 +258,7 @@ public class DonationManager {
 
       // If the calculated sub expiration date is better than the saved expiration date
       // Save the expiration date for future reference
-      if (saveExpDate == null || saveExpDate.before(subExpDate)) {
+      if (saveExpDate == null || subExpDate != null && saveExpDate.before(subExpDate)) {
         ManagePreferences.setExpireDate(subExpDate);
       }
 
@@ -328,7 +328,7 @@ public class DonationManager {
     else if (ManagePreferences.authLocation().equals(ManagePreferences.location())) {
       status = DonationStatus.AUTH_DEPT;
     } else if (expireDate != null) {
-      if (daysTillExpire >= 0 && subStatus == 3) {
+      if (daysTillExpire >= 0 && subStatus == 2) {
         status = DonationStatus.PAID_RENEW;
       }
       else if (daysTillExpire > EXPIRE_WARN_DAYS) {

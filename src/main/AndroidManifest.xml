@@ -62,6 +62,7 @@
     android:configChanges="keyboardHidden|orientation"
     android:label="@string/app_name"
     android:launchMode="singleTask"
+    android:debuggable="true"
     android:stateNotNeeded="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
