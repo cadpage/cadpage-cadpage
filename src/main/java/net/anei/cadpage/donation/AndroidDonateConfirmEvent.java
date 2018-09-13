@@ -6,6 +6,9 @@ import net.anei.cadpage.R;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.billing.BillingManager;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  * Purchase through Google Play Store
  */
@@ -26,7 +29,9 @@ public class AndroidDonateConfirmEvent extends DonateScreenEvent {
   protected Object[] getTextParms(int type) {
     if (type == PARM_TEXT) {
       DonationManager mgr = DonationManager.instance();
-      return new Object[]{mgr.expireDate(), mgr.daysTillExpire()};
+      Date expireDate = mgr.expireDate();
+      String sDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(expireDate);
+      return new Object[]{sDate, mgr.daysTillExpire()};
     }
     return null;
   }

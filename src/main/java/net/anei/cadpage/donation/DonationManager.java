@@ -298,6 +298,7 @@ public class DonationManager {
     // if we are in the limbo state where user can keep running Cadpage until they
     // install a release published after the expiration date
     boolean limbo = false;
+    earlyRenewalWarning = false;
     if (expireDate != null) {
       JulianDate jExpireDate = new JulianDate(expireDate);
       daysTillSubExpire = curJDate.diffDays(jExpireDate);
