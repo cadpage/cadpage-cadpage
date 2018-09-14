@@ -16,9 +16,9 @@
     Tack för ditt stöd. 
   </string>
 
-  <string name="donate_paid_renew_title">Your %s Cadpage subscription is current</string> <!-- translate -->
-  <string name="donate_paid_renew_text"> <!-- translate -->
-    Your %1$s Cadpage subscription will renew automatically on\n%2$s
+  <string name="donate_paid_renew_title">Din %s prenumeration på Cadpage är aktuell.</string>
+  <string name="donate_paid_renew_text">
+    Din %1$s prenumeration på Cadpage kommer att förnyas automatiskt den \n%2$s
   </string>
 
   <string name="donate_paid_title">Din %s prenumeration på Cadpage är aktuell.</string>
@@ -82,27 +82,22 @@
     Epostinformationen kan komma att inkluderas i epost som skickas till Cadpages supportavdelning och används för att uppdatera din betalningsstatus. Det kommer också att användas för att fråga efter din betalningsstatus i våra servrar.
   </string>
 
-  <string name="donate_billing_account_title">Billing Account</string> <!-- Translate -->
-  <string name="donate_billing_account_text"> <!-- Translate -->
-    Your current billing account is %s.\n\n
+  <string name="donate_billing_account_title">Betalningskonto</string>
+  <string name="donate_billing_account_text">
+   Ditt betalningskonto är %s.\n\n
 
-    This account information is considered private user information use without your explicit
-    permission.  For the most part, Cadpage will work just fine without it.  It is only required
-    if you are requesting a free Cadpage subscription, or using a check or Paypal to purchase a
-    Cadpage subscription, or reporting some kind of billing problem.\n\n
+    Den här kontoinformationen är privat användarinformation som används utan ditt särskilda tillstånd. För det mesta så kommer Cadpage att fungera utmärkt utan den. Den behövs endast du frågar efter ett gratisabbonemang på Cadpage, använder en check eller betalar med Paypal. Den används också när du rapporterar någon sorts betalningsproblem.\n\n
 
-    The account information may be included in emails sent to Cadpage support
-    and used to update your payment status.  It will also be used to query your payment
-    status on our servers.
+    Kontoinformationen kan inkluderas i emails som skickas till Cadpage och används för att uppdatera ditt betalningsstatus. Den används också för att undersöka din betalningsstatus på våra servrar.
   </string>
-  <string name="billing_acct_not_specified">not specified</string> <!-- Translate -->
+  <string name="billing_acct_not_specified">Inte specificerat</string>
 
-  <string name="donate_email_acct_permission_granted_text"> <!-- Translate -->
-    Select my billing account
+  <string name="donate_email_acct_permission_granted_text">
+    Välj mitt betalningskonto
   </string>
 
-  <string name="donate_email_acct_permission_denied_text"> <!-- Translate -->
-    Do not access billing account information
+  <string name="donate_email_acct_permission_denied_text">
+    Kom inte åt betalningskontoinformation.
   </string>
 
   <string name="donate_wrong_user_title">"Hörru, jag har redan betalt för det här"</string>
@@ -122,14 +117,14 @@
   <string name="donate_active911_parse_info_title">Berätta mer</string>
   <string name="donate_email_title">Skicka email</string>
 
-  <string name="donate_android_confirm_text"> <!-- Translate -->
-    Your existing subscription expires on %1s.  If you renew your Cadpage subscription now it
-    will expire in one year and you will loose %2d days of subscription service.
+  <string name="donate_android_confirm_text">
+    Ditt existerande abonnemang går ut den %1s.  Om du förnyar ditt abonnemang på Cadpage nu så kommer det att gå ut om ett år och du kommer att förlora
+    %2d dagar på din prenumeration.
   </string>
 
-  <string name="donate_android2_title">Go ahead with purchase now</string> <!-- Translate -->
+  <string name="donate_android2_title">Fortsätt med inköpet nu</string>
 
-  <string name="donate_android_cancel_title">I will purchase a subscription later</string> <!-- Translate -->
+  <string name="donate_android_cancel_title">Jag köper ett abonnemang senare</string>
 
   <string name="donate_android_unsupported_text">
  Android Market appen rapporterar att app-i-app köp inte understödjs. Du kan behöva uppgradera Market-appen till den senaste versionen eller också måste du logga in med ett giltigt Google-konto (Välj meny &gt; Konton i Marketappen) 

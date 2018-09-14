@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="pref_category_other_info_title">Other Information</string> <!-- Translate -->
-  <string name="pref_category_other_info_summary">Help and other useful information</string> <!-- Translate -->
+  <string name="pref_category_other_info_title">Annan information</string>
+  <string name="pref_category_other_info_summary">Hjälp och annan användbar information</string>
 
   <string name="pref_disclaimer_title">Friskrivning</string>
   <string name="pref_disclaimer_summary">Läs friskrivningsavtal</string>

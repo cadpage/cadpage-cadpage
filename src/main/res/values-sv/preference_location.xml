@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
   <string name="pref_category_location_title">Lokala anpassningar</string>
@@ -72,8 +72,8 @@
   <string name="pref_msgtimeout_summary">Timeout för multipla meddelanden\nAktuellt värde: %%s</string>
   <string name="pref_msgtimeout_dialog">Maximal tid i sekunder för att vänta på ett multipelt meddelande i Cadpage</string>
 
-  <string name="pref_split_min_msg_title">Split message min count</string> <!-- Translate -->
-  <string name="pref_split_min_msg_summary">Minimum expected message count\nCur value: %%s</string> <!-- Translate -->
+  <string name="pref_split_min_msg_title">Delade meddelande min nedräkning</string>
+  <string name="pref_split_min_msg_summary">Minst förväntad meddelandetid \nAktuellt värde: %%s</string>
 
   <string name="pref_rev_msg_order_title">Reversera ordning i delade meddelanden</string>
   <string name="pref_rev_msg_order_summaryon">Delade Cadpag Delade Cadpage-meddelanden kommer att läsas i ordning sist till först</string>
@@ -110,7 +110,7 @@
   <string name="pref_scanner_channel_title">Scannerkanal</string>
 
   <string name="pref_scanner_timeout_title">Timeout Scannerkanal</string>
-  <string name="pref_scanner_timeout_summary">Timeout Scannerkanal\nCur value: %%s</string>
+  <string name="pref_scanner_timeout_summary">Timeout Scannerkanal\nAktuellt värde: %%s</string>
   <string name="pref_scanner_timeout_dialog">Timeout scannerkanal i minuter (0 till avstängd)</string>
   <string name="pref_scanner_timeout_value_zero">Ingen</string>
   <string name="pref_scanner_timeout_value_other">%s min</string>

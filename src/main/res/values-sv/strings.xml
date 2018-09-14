@@ -32,10 +32,8 @@
    behöver veta vem du är så vi kan hitta prenumerationsinformation som vi har kopplat till dig.
    </string>
 
-  <string name="perm_acct_info_for_restore"> <!-- Translate -->
-    You appear to have restored a Cadpage configuration from an old backup.  We need to retrieve
-    your device serial number so we can determine if the backup was made from the same or a
-    different device.
+  <string name="perm_acct_info_for_restore">
+    Det verkar som att du har återställt Cadpages konfiguration från en gammal backup. Vi behöver få din enhets serienummer så att vi kan avgöra om backupen är gjord av samma eller en annan enhet.
   </string>
 
    <string name="perm_acct_info_for_manual_recalc">
@@ -109,14 +107,12 @@
   <string name="remember_text">Komma ihåg ditt val?</string>
 
   <!-- Duplicate notification audio warning dialog -->
-  <string name="notify_override_prompt_title">Double audio alert warning</string>  <!-- Translate -->
-  <string name="notify_override_prompt_text">  <!-- Translate -->
-    You have configured Cadpage to sound both the regular alert and a override alert when a
-    call is received.  This is probably not what you want to do.
-  </string>
-  <string name="notify_override_cancel_regular">Let me cancel the regular alert</string>  <!-- Translate -->
-  <string name="notify_override_cancel_override">Cancel the override alert</string>  <!-- Translate -->
-  <string name="notify_override_good">Let it ride</string>  <!-- Translate -->
+  <string name="notify_override_prompt_title">Varning för dubbla ljudlarm</string>
+  <string name="notify_override_prompt_text">
+    Du har konfigurerat Cadpage så att ljudet både använder den vanliga larmljudskontrollen och att Cadpage ska ligga över den kontrollen när ett larm kommer. Det är förmodligen inte vad du vill göra.</string>
+  <string name="notify_override_cancel_regular">Låt mig avbryta det vanliga larmet</string>
+  <string name="notify_override_cancel_override">Låt mig avbryta att det ligger över det vanliga larmet</string>
+  <string name="notify_override_good">Låt det vara</string>
 
   <!-- Missing map page reader dialog -->
   <string name="missing_map_page_reader_title">Saknar läsare för kartsidessök</string> 

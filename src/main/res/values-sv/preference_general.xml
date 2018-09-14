@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="pref_category_general_title">General Settings</string> <!-- Translate -->
-  <string name="pref_category_general_summary">Payment Status, Enabled, History Limit, Display Options</string> <!-- Translate -->
+  <string name="pref_category_general_title">Generella inställningar</string>
+  <string name="pref_category_general_summary">Betalningsstatus, Aktiverad, Tidsgräns larmlista, Displayalternativ</string>
 
   <string name="pref_payment_status_title">Betalningsstatus</string>
 
@@ -23,7 +23,7 @@
   <string name="pref_show_personal_summaryon">Inringares namn/telefon kommer att visas</string>
   <string name="pref_show_personal_summaryoff">Inringares namn/telefon kommer inte att visas</string>
 
-  <string name="pref_billing_account_title">Select Billing Account</string> <!-- Translate -->
+  <string name="pref_billing_account_title">Välj betalningskonto</string>
   <string name="pref_billing_account_summary">%%s</string>
 
 </resources>
