@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources> <!-- Translate everything -->
   <string name="regular_alert_title">Vanliga larm</string>
   <string name="regular_alert_text">Vanliga larm</string>
-  <string name="gen_alert_title">General Alerts</string> <!-- Translate -->
-  <string name="gen_alert_text">General Alert</string> <!-- Translate -->
+  <string name="gen_alert_title">Generella larm</string>
+  <string name="gen_alert_text">Generellt larm</string>
   <string name="run_report_title">K�r rapport</string>
   <string name="run_report_text">K�r rapport</string>
 
-  <string name="tracking_notif_title">Cadpage Position Tracking</string> <!-- Translate -->
+  <string name="tracking_notif_title">Cadpages positionsspårning</string>
   <string name="tracking_notif_text">Cadpage rapporterar din nuvarande position.</string>
 
   <string name="misc_notif_title">Bakgrundsaktivitet</string>
