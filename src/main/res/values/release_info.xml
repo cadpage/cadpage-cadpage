@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09182018</string>
+  <string name="release_date">09222018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-74\n
+    New Locations:\n
+    Cass County, IN\n
+    Carlisle County, KY\n
+    Clay County, MO (alt)\n
+    CT Connect, Sweden\n
+    \n
+    Location Fixes:\n
+    Suffolk County, NY\n
+    Patrick County, VA\n
+    Roanoke City, VA\n
+    Sweden\n
+    \n
     v1.9.15-73\n
     Location Fixes:\n
     Stockton, CA\n
@@ -28,11 +41,6 @@
     v1.9.15-70\n
     Location Fixes:\n
     Jefferson County, CO\n
-    Henry County, IN\n
-    \n
-    v1.9.15-69\n
-    Location Fixes:\n
-    Wayne County, OH\n
-    Tioga County, PA
+    Henry County, IN
   </string>
 </resources>
