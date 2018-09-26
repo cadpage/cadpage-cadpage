@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09182018</string>
+  <string name="release_date">09252018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v1.9.15-75\n
+    New Locations:\n
+    Bibb County, AL\n
+    Butte County, CA (alt)\n
+    Modoc County, CA\n
+    Champaign County, IL\n
+    Jackson County, IL\n
+    Cass County, IN\n
+    Floyd County, IN\n
+    Carlisle County, KY\n
+    Garrard County, KY\n
+    Henderson County, KY\n
+    Macomb County, MI\n
+    Van Buren County, MI\n
+    Pearl River County, MS\n
+    Scott County, MO\n
+    Cumberland County, NJ (alt)\n
+    Lake County, OR\n
+    Franklin County, TN\n
+    White County, TN\n
+    Hidalgo County, TX\n
+    Carbon County, UT\n
+    \n
+    Location Fixes:\n
+    Logan County, OH\n
+    \n
+    v1.9.15-74\n
+    New Locations:\n
+    Cass County, IN\n
+    Carlisle County, KY\n
+    Clay County, MO (alt)\n
+    CT Connect, Sweden\n
+    \n
+    Location Fixes:\n
+    Suffolk County, NY\n
+    Patrick County, VA\n
+    Roanoke City, VA\n
+    Sweden\n
+    \n
     v1.9.15-73\n
     Location Fixes:\n
     Stockton, CA\n
@@ -28,11 +67,6 @@
     v1.9.15-70\n
     Location Fixes:\n
     Jefferson County, CO\n
-    Henry County, IN\n
-    \n
-    v1.9.15-69\n
-    Location Fixes:\n
-    Wayne County, OH\n
-    Tioga County, PA
+    Henry County, IN
   </string>
 </resources>
