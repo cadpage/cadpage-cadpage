@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    The main Cadpage app no longer supports anything before Android 4.0.  This is a variant that
+    will continue to be maintained to support users back to Android 2.3.  Updates may be
+    infrequent.  And it looks like I will loose the ability to distribute them through
+    Google Play Store on November 1.  We will have to wait and see what happens then.\n
+    \n
     v1.9.15-75\n
     New Locations:\n
     Bibb County, AL\n
