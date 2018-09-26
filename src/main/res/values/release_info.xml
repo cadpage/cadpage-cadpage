@@ -4,6 +4,13 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.0-1\n
+    THIS BETA RELEASE WILL NOT WORK WITH ACTIVE911 ALERTS!!!\n
+    If you are receiving Active911 alerts, do NOT install this beta release.\n
+    \n
+    Major update taking advantage of the latest Android internal features.  Not a lot of usable
+    feature improvmements yet.  They should be coming.\n
+    \n
     v1.9.15-75\n
     New Locations:\n
     Bibb County, AL\n
@@ -56,17 +63,5 @@
     Camden County, NJ\n
     Macon County, NC\n
     Monroe County, PA\n
-    \n
-    v1.9.15-71\n
-    Location Fixes:\n
-    Lake County, FL\n
-    St Charles County, MO\n
-    Macon County, NC\n
-    Charleston County, SC\n
-    \n
-    v1.9.15-70\n
-    Location Fixes:\n
-    Jefferson County, CO\n
-    Henry County, IN
   </string>
 </resources>
