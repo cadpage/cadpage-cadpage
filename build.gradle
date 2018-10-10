@@ -14,8 +14,8 @@ android {
         applicationId 'net.anei.cadpage'
 //        versionName project.versionName + "(new)"
 //        versionCode project.versionCode + 2
-        versionName = "2.0.0-2(beta)"
-        versionCode = 20000020
+        versionName = "2.0.0-3(beta)"
+        versionCode = 20000030
         targetSdkVersion 27
         minSdkVersion 14
     }

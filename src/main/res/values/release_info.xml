@@ -4,8 +4,21 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS BETA RELEASE!!!\n
+    ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS BETA RELEASE!!!
     If you are receiving Active911 alerts, do NOT install this beta release.\n
+    \n
+    v2.0.0-3\n
+    Location Fixes:\n
+    Seminole County, FL\n
+    Madison County, IL\n
+    Pulaski County, MO\n
+    MICOM, NJ\n
+    Logan County, OH\n
+    Josephine County, OR\n
+    Erie County, PA\n
+    York County, PA\n
+    Somervell County, TX\n
+    Sweden\n
     \n
     v2.0.0-2\n
     Major update taking advantage of the latest Android internal features.  Not a lot of usable
