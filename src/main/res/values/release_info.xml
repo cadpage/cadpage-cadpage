@@ -4,10 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.0.0-1\n
-    THIS BETA RELEASE WILL NOT WORK WITH ACTIVE911 ALERTS!!!\n
+    ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS BETA RELEASE!!!\n
     If you are receiving Active911 alerts, do NOT install this beta release.\n
     \n
+    v2.0.0-2\n
     Major update taking advantage of the latest Android internal features.  Not a lot of usable
     feature improvmements yet.  They should be coming.\n
     \n
