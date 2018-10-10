@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10052018</string>
+  <string name="release_date">10092018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
@@ -11,6 +11,12 @@
     corrected in the next couple of weeks.  But for now\n
     \n
     DO NOT BECOME A BETA TESTER IF YOU ARE RECEIVING ACTIVE911 ALERTS!!\n
+    \n
+    v1.9.16-04\n
+    Location Fixes:\n
+    Pulaski County, MO\n
+    Josephine County, OR\n
+    York County, PA\n
     \n
     v1.9.16-03\n
     Location Fixes:\n
@@ -55,19 +61,6 @@
     Carbon County, UT\n
     \n
     Location Fixes:\n
-    Logan County, OH\n
-    \n
-    v1.9.15-74\n
-    New Locations:\n
-    Cass County, IN\n
-    Carlisle County, KY\n
-    Clay County, MO (alt)\n
-    CT Connect, Sweden\n
-    \n
-    Location Fixes:\n
-    Suffolk County, NY\n
-    Patrick County, VA\n
-    Roanoke City, VA\n
-    Sweden
+    Logan County, OH
   </string>
 </resources>
