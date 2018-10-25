@@ -333,7 +333,7 @@ public class SmsMessageQueue implements Serializable {
             // display message popup
             if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + mMessage.getMsgId());
             if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
-            SmsPopupActivity.launchActivity(context, mMessage);
+            SmsPopupActivity.launchActivity(fragment.getContext(), mMessage);
           }});
       }
 
