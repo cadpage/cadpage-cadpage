@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10302018</string>
+  <string name="release_date">10312018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    A new Cadpage beta release is available.  You can become a beta tester by
-    choosing that option in the Cadpage information window of the Google Play Store app.\n
+    This is the last Cadpage 1.x update that can be distributed through Play Store.
+    A new 2.x version is available as a beta release. See http://www.cadpage.org/faq/cadpage-2-0
+    for a long explanation of the current status.\n
     \n
-    The beta release is not currently supported by Active911.  We expect this to be
-    corrected in the next couple of weeks.  But for now\n
+    v1.9.17-01\n
+    Location Fixes:\n
+    Adams County, CO\n
+    Medina County, OH\n
     \n
-    DO NOT BECOME A BETA TESTER IF YOU ARE RECEIVING ACTIVE911 ALERTS!!\n
     v1.9.16-11\n
     Location Fixes:\n
     Placer County, CA\n
@@ -44,10 +46,5 @@
     v1.9.16-08\n
     Location Fixes:\n
     Loudoun County, VA\n
-    \n
-    v1.9.16-07\n
-    Location Fixes:\n
-    Shasta County, CA\n
-    Jefferson County, CO\n
   </string>
 </resources>
