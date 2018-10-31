@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -333,7 +334,14 @@ public class SmsMessageQueue implements Serializable {
             // display message popup
             if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + mMessage.getMsgId());
             if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
-            SmsPopupActivity.launchActivity(fragment.getContext(), mMessage);
+
+            // The global context was set at startup and is probably not appropriate to use to launch
+            // a new activity.  The current activity should work, but it did, on one occasion, turn
+            // out to be null.  So we will check for that before using it to launch the detail popup
+            Activity activity = fragment.getActivity();
+            if (activity != null) {
+              SmsPopupActivity.launchActivity(activity, mMessage);
+            }
           }});
       }
 
