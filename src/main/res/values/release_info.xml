@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10292018</string>
+  <string name="release_date">10302018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
@@ -11,6 +11,13 @@
     corrected in the next couple of weeks.  But for now\n
     \n
     DO NOT BECOME A BETA TESTER IF YOU ARE RECEIVING ACTIVE911 ALERTS!!\n
+    v1.9.16-11\n
+    Location Fixes:\n
+    Placer County, CA\n
+    Ocean County, NJ\n
+    Charleston County, SC\n
+    Kenosha County, WI\n
+    Vancouver Island, BC\n
     \n
     v1.9.16-10\n
     New Location:\n
@@ -42,9 +49,5 @@
     Location Fixes:\n
     Shasta County, CA\n
     Jefferson County, CO\n
-    \n
-    v1.9.16-06\n
-    New Locations:\n
-    Leon County, FL
   </string>
 </resources>
