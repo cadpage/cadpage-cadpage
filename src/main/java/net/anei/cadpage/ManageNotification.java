@@ -27,7 +27,7 @@ import android.support.v4.app.NotificationCompat;
 /*
  * This class handles the Notifications (sounds/vibrate/LED)
  */
-@SuppressWarnings("TryFinallyCanBeTryWithResources")
+@SuppressWarnings({"TryFinallyCanBeTryWithResources", "RedundantIfStatement"})
 public class ManageNotification {
 
   public static final String ALERT_CHANNEL_ID = "net.anei.cadpage.ALERT_CHANNEL_ID";
