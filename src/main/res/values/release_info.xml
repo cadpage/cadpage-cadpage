@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10242018</string>
+  <string name="release_date">10312018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS BETA RELEASE!!!
-    If you are receiving Active911 alerts, do NOT install this beta release.\n
+    ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS RELEASE!!!\n
+    If you are receiving Active911 alerts, do NOT install this release.\n
+    Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
+    \n
+    v2.0.1-1\n
+    New Location:\n
+    Routt County, CO\n
+    \n
+    Location Fixes:\n
+    Etowah County, AL\n
+    Placer County, CA\n
+    Adams County, IL\n
+    Ocean County, NJ\n
+    Adams County, CO\n
+    Ashe County, NC\n
+    Clermont County, OH\n
+    Medina County, OH\n
+    Charleston County, SC\n
+    Clevlend County, SC\n
+    Kenosha County, WI\n
+    Vancouver Island, BC\n
     \n
     v2.0.0-5\n
     Location Fixes:\n
@@ -47,45 +66,6 @@
     \n
     v2.0.0-2\n
     Major update taking advantage of the latest Android internal features.  Not a lot of usable
-    feature improvmements yet.  They should be coming.\n
-    \n
-    v1.9.15-75\n
-    New Locations:\n
-    Bibb County, AL\n
-    Butte County, CA (alt)\n
-    Modoc County, CA\n
-    Champaign County, IL\n
-    Jackson County, IL\n
-    Cass County, IN\n
-    Floyd County, IN\n
-    Carlisle County, KY\n
-    Garrard County, KY\n
-    Henderson County, KY\n
-    Macomb County, MI\n
-    Van Buren County, MI\n
-    Pearl River County, MS\n
-    Scott County, MO\n
-    Cumberland County, NJ (alt)\n
-    Lake County, OR\n
-    Franklin County, TN\n
-    White County, TN\n
-    Hidalgo County, TX\n
-    Carbon County, UT\n
-    \n
-    Location Fixes:\n
-    Logan County, OH\n
-    \n
-    v1.9.15-74\n
-    New Locations:\n
-    Cass County, IN\n
-    Carlisle County, KY\n
-    Clay County, MO (alt)\n
-    CT Connect, Sweden\n
-    \n
-    Location Fixes:\n
-    Suffolk County, NY\n
-    Patrick County, VA\n
-    Roanoke City, VA\n
-    Sweden
+    feature improvmements yet.  They should be coming.
   </string>
 </resources>
