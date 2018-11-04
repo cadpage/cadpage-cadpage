@@ -14,8 +14,11 @@ android {
 
     defaultConfig {
         applicationId 'net.anei.cadpage'
-        versionName project.versionName
-        versionCode project.versionCode
+//        versionName project.versionName
+//        versionCode project.versionCode
+        versionName = '1.9.17-02'
+        versionCode = 10917020
+
         minSdkVersion 9
         targetSdkVersion 23
     }
@@ -30,7 +33,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
+
 
 dependencies {
     implementation project(":cadpage-parsers")

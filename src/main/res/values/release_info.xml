@@ -4,9 +4,9 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    This is the last Cadpage 1.x update that can be distributed through Play Store.
-    A new 2.x version is available as a beta release. See http://www.cadpage.org/faq/cadpage-2-0
-    for a long explanation of the current status.\n
+    v1.9.17-02\n
+    Location Fixes:\n
+    New Zealand\n
     \n
     v1.9.17-01\n
     Location Fixes:\n
@@ -41,10 +41,6 @@
     Kalamazoo County, MI\n
     Benton County, OR\n
     Lawrence County, PA\n
-    Lehigh County, PA\n
-    \n
-    v1.9.16-08\n
-    Location Fixes:\n
-    Loudoun County, VA\n
+    Lehigh County, PA
   </string>
 </resources>
