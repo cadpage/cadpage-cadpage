@@ -9,6 +9,7 @@ import net.anei.cadpage.vendors.VendorManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.Display;
@@ -65,19 +66,19 @@ public class SmsPopupActivity extends Safe40Activity {
     resizeLayout();
 
     // Find the main textviews
-    fromImage = findViewById(R.id.FromImageView);
-    fromTV = findViewById(R.id.FromTextView);
-    messageTV = findViewById(R.id.MessageTextView);
+    fromImage = (ImageView)findViewById(R.id.FromImageView);
+    fromTV = (TextView)findViewById(R.id.FromTextView);
+    messageTV = (TextView)findViewById(R.id.MessageTextView);
     messageTV.setAutoLinkMask(Linkify.WEB_URLS);
-    messageReceivedTV = findViewById(R.id.HeaderTextView);
+    messageReceivedTV = (TextView)findViewById(R.id.HeaderTextView);
 
     // Enable long-press context menu
-    mainLL = findViewById(R.id.MainLinearLayout);
+    mainLL = (LinearLayout)findViewById(R.id.MainLinearLayout);
     registerForContextMenu(mainLL);
     
     // We can't hook the current donations status here because it may change
     // from msg to message.
-    donateStatusBtn = findViewById(R.id.donate_status_button);
+    donateStatusBtn = (Button)findViewById(R.id.donate_status_button);
     
     // Populate display fields
     populateViews(getIntent());
@@ -153,7 +154,7 @@ public class SmsPopupActivity extends Safe40Activity {
   }
   
   @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 
@@ -484,7 +485,7 @@ public class SmsPopupActivity extends Safe40Activity {
 //        androidTts = new TextToSpeechWrapper(SmsPopupActivity.this, androidTtsListener);
 //      } else { // Else use eyes-free text-to-speech library
 //        /*
-//         * This is an aweful fix for the loading dialog not disappearing
+//         * This is an awful fix for the loading dialog not disappearing
 //         * when the user decides to not install the TTS package but there didn't
 //         * seem like another way to hook into the current TTS library.
 //         * 
@@ -534,7 +535,7 @@ public class SmsPopupActivity extends Safe40Activity {
     // size only needed because the theme of this activity is "dialog" so it looks
     // like it's floating and doesn't seem to fill_parent like a regular activity
     if (mainLL == null) {
-      mainLL = findViewById(R.id.MainLinearLayout);
+      mainLL = (LinearLayout)findViewById(R.id.MainLinearLayout);
     }
     Display d = getWindowManager().getDefaultDisplay();
 
@@ -548,7 +549,6 @@ public class SmsPopupActivity extends Safe40Activity {
    * Launch call display popup activity
    * @param context context
    * @param message message to be displayed
-   * @return
    */
   public static void launchActivity(Context context, SmsMmsMessage message) {
     launchActivity(context, message.getMsgId());
@@ -558,7 +558,6 @@ public class SmsPopupActivity extends Safe40Activity {
    * Launch call display popup activity
    * @param context context
    * @param msgId message ID of message to be displayed
-   * @return
    */
   public static void launchActivity(Context context, int msgId) {
     Intent popup = new Intent(context, SmsPopupActivity.class);
@@ -566,6 +565,5 @@ public class SmsPopupActivity extends Safe40Activity {
     popup.putExtra(EXTRAS_MSG_ID, msgId);
     context.startActivity(popup);
   }
-
 }
 
