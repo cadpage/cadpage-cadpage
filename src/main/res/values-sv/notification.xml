@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<resources> <!-- Translate everything -->
+<resources>
   <string name="regular_alert_title">Vanliga larm</string>
   <string name="regular_alert_text">Vanliga larm</string>
   <string name="gen_alert_title">Generella larm</string>

@@ -20,9 +20,13 @@
   <string name="pref_notif_override_old_summaryon">Larmet kommer alltid att låta på full volym</string>
   <string name="pref_notif_override_old_summaryoff">Larmet kommer att låta enligt telefonens normala mute och volymkontroller.</string>
 
-  <string name="pref_notif_override_volume_title">Återinställ volymkontroll</string>
-  <string name="pref_notif_override_volume_summaryon">Larmljudet kommer att följa det vanliga larmets ljudvolym</string>
-  <string name="pref_notif_override_volume_summaryoff">Larmet kommer alltid att spelas på full volym</string>
+  <string name="pref_notif_override_volume_title">Override volume control</string>    <!-- Translate -->
+  <string name="pref_notif_override_volume_summaryon">Larmet kommer alltid att spelas på full volym</string>
+  <string name="pref_notif_override_volume_summaryoff">Larmljudet kommer att följa det vanliga larmets ljudvolym</string>
+
+  <string name="pref_notif_override_do_not_disturb_title">Override do not disturb status</string> <!-- Translate -->
+  <string name="pref_notif_override_do_not_disturb_summaryon">Alert sound will override do not disturb status</string>  <!-- Translate -->
+  <string name="pref_notif_override_do_not_disturb_summaryoff">Alert sound will not override do not disturb status</string> <!-- Translate -->
 
   <string name="pref_notif_override_sound_title">Spela Cadpages larmtoner</string>
   <string name="pref_notif_override_sound_summaryon">Cadpages larmtoner kommer att användas</string>

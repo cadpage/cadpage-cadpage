@@ -44,7 +44,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 49;
+  private static final int PREFERENCE_VERSION = 50;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -93,6 +93,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // user upgrades from an earlier version of Cadpage.  None of these have
     // to be done if there was no previous version of Cadpage.
     if (oldVersion > 0 && oldVersion < PREFERENCE_VERSION) {
+
+      // If old version < 50, reverse the override volume control setting
+      if (oldVersion < 50) {
+        boolean value = prefs.getBoolean(R.string.pref_notif_override_volume_key);
+        prefs.putBoolean(R.string.pref_notif_override_volume_key, !value);
+      }
 
       // If old version < 49 use is upgrading to a version that requires explicit permission to
       // use their email account information
@@ -2507,6 +2513,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_notif_enabled_key,
       R.string.pref_notif_override_key,
       R.string.pref_notif_override_volume_key,
+      R.string.pref_notif_override_do_not_disturb_key,
       R.string.pref_notif_override_sound_key,
       R.string.pref_notif_override_loop_key,
       R.string.pref_notif_sound_key,

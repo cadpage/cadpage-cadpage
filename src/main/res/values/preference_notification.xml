@@ -20,9 +20,13 @@
   <string name="pref_notif_override_old_summaryon">Alert sound will always play at full volume</string>
   <string name="pref_notif_override_old_summaryoff">Alert sound will follow normal mute and volume controls</string>
 
-  <string name="pref_notif_override_volume_title">Reassert volume control</string>
-  <string name="pref_notif_override_volume_summaryon">Alert sound will follow notification volume control</string>
-  <string name="pref_notif_override_volume_summaryoff">Alert sound will always play at full volume</string>
+  <string name="pref_notif_override_volume_title">Override volume control</string>
+  <string name="pref_notif_override_volume_summaryon">Alert sound will always play at full volume</string>
+  <string name="pref_notif_override_volume_summaryoff">Alert sound will follow notification volume control</string>
+
+  <string name="pref_notif_override_do_not_disturb_title">Override do not disturb status</string>
+  <string name="pref_notif_override_do_not_disturb_summaryon">Alert sound will override do not disturb status</string>
+  <string name="pref_notif_override_do_not_disturb_summaryoff">Alert sound will not override do not disturb status</string>
 
   <string name="pref_notif_override_sound_title">Play Cadpage Alert Tones</string>
   <string name="pref_notif_override_sound_summaryon">Cadpage alert tones will be used</string>

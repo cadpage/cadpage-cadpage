@@ -292,8 +292,8 @@ public class ManageNotification {
   private static void overrideVolumeControl(Context context) {
     
     // If user doesn't not want the volume maxed out, do not do anything
-    if (ManagePreferences.notifyOverrideVolume()) return;
-    
+    if (! ManagePreferences.notifyOverrideVolume()) return;
+
     // Grab audio focus
     Log.v("Grab Audio Focus");
     AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -307,22 +307,29 @@ public class ManageNotification {
     if (restoreMode < 0 && restoreVol < 0) {
       
       // Otherwise set the ringer mode to normal if it isn't there already
-    
-      int curMode = am.getRingerMode();
-      if (curMode != AudioManager.RINGER_MODE_NORMAL) {
-        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-        ManagePreferences.setRestoreMode(curMode);
-      }
-      
-      // And get the max and current volume for the notification stream
-      // If they are not equal, save the current stream volume and set
-      // it to the max value
-      int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-      int curVol = am.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
-      if (curVol != maxVol) {
-        am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVol, 0);
-        ManagePreferences.setRestoreVol(curVol);
-      }
+
+      // Late versions of Android do not allow us to do any of this if we are current in a
+      // "do not disturb" status and have not been granted permission to change that status.
+      // Testing for this situation is complicated, much easier to just do it and catch any
+      // resulting exceptions.
+
+      try {
+        int curMode = am.getRingerMode();
+        if (curMode != AudioManager.RINGER_MODE_NORMAL) {
+          am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+          ManagePreferences.setRestoreMode(curMode);
+        }
+
+        // And get the max and current volume for the notification stream
+        // If they are not equal, save the current stream volume and set
+        // it to the max value
+        int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+        int curVol = am.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+        if (curVol != maxVol) {
+          am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVol, 0);
+          ManagePreferences.setRestoreVol(curVol);
+        }
+      } catch (SecurityException ignored) {}
     }
   }
 
@@ -559,14 +566,18 @@ public class ManageNotification {
     //  and delete the restore volume level
     int vol = ManagePreferences.restoreVol();
     if (vol >= 0) {
-      am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, vol, 0);
+      try {
+        am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, vol, 0);
+      } catch (SecurityException ignored) {}
       ManagePreferences.setRestoreVol(-1);
     }
 
     // If restore mode has been set, restore that ringer mode
     int mode = ManagePreferences.restoreMode();
     if (mode >= 0) {
-      am.setRingerMode(mode);
+      try {
+        am.setRingerMode(mode);
+      } catch (SecurityException ignored) {}
       ManagePreferences.setRestoreMode(-1);
     }
     

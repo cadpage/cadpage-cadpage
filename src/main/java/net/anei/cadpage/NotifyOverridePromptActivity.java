@@ -12,13 +12,10 @@ import android.view.Window;
 import android.widget.Button;
 
 /**
- * Class handles the dialog popup requesting information be sent to developers
+ * Class handles the dialog popup reporting double audio alert configuration
  */
 public class NotifyOverridePromptActivity extends Safe40Activity {
 
-  /**
-   * Create new email dialog activity
-   */
   @Override
   protected void onCreate(Bundle bundle) {
     super.onCreate(bundle);

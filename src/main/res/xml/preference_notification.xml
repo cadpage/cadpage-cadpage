@@ -24,6 +24,13 @@
   android:title="@string/pref_notif_override_volume_title"
   android:summaryOn="@string/pref_notif_override_volume_summaryon"
   android:summaryOff="@string/pref_notif_override_volume_summaryoff"
+  android:defaultValue="true"
+  android:dependency="@string/pref_notif_override_key" />
+  <net.anei.cadpage.preferences.DoNotDisturbSwitchPreference
+  android:key="@string/pref_notif_override_do_not_disturb_key"
+  android:title="@string/pref_notif_override_do_not_disturb_title"
+  android:summaryOn="@string/pref_notif_override_do_not_disturb_summaryon"
+  android:summaryOff="@string/pref_notif_override_do_not_disturb_summaryoff"
   android:defaultValue="false"
   android:dependency="@string/pref_notif_override_key" />
   <net.anei.cadpage.preferences.SwitchPreference

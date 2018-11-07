@@ -27,9 +27,13 @@ import net.anei.cadpage.ManageUsb;
 import net.anei.cadpage.SmsService;
 import net.anei.cadpage.billing.BillingManager;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.preference.ListPreference;
 import android.preference.PreferenceGroup;
+import android.provider.Settings;
 import android.widget.Toast;
 
 /**
@@ -72,12 +76,14 @@ public class DeveloperToolsManager {
       "Status test",
       "Generate Bug Report",
       "Test FCM MSG",
-      "Crash!!!"
+      "Crash!!!",
+      "Do Not Disturb",
+      "DND granted"
   };
   
   private static final String[] valueList = new String[]{
     "100", "101", "102",
-    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20"
+    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22"
   };
   
   private class DeveloperListPreference extends ListPreference {
@@ -259,6 +265,19 @@ public class DeveloperToolsManager {
 
         case 20:    // Throw exception to test crash reporting
           throw new RuntimeException("Test Exception Handling");
+
+        case 21:    // Do not disturb
+          intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+          context.startActivity(intent);
+          break;
+
+        case 22:    // DND Granted
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            String result = nm.isNotificationPolicyAccessGranted() ? "Yes" : "No";
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+          }
+          break;
 
         case 33:    // FCM: Report
           FCMMessageService.emailRegistrationId(context);

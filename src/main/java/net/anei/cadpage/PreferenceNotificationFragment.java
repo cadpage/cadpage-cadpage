@@ -11,6 +11,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.Settings;
 
+import net.anei.cadpage.preferences.DoNotDisturbSwitchPreference;
 import net.anei.cadpage.preferences.ExtendedSwitchPreference;
 import net.anei.cadpage.preferences.OnDataChangeListener;
 
@@ -22,6 +23,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
 
   private TwoStatePreference mNotifEnabledPreference;
   private ExtendedSwitchPreference mNotifOverridePreference;
+  private DoNotDisturbSwitchPreference mDoNotDisturbSwitchPreference;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
       }
     });
 
+    mDoNotDisturbSwitchPreference = (DoNotDisturbSwitchPreference)findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
+
     ManagePreferences.registerOnSharedPreferenceChangeListener(this);
   }
 
@@ -93,6 +97,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
     // If any setting have changed, make sure that the correct value is being displayed
     mNotifEnabledPreference.setChecked(ManagePreferences.notifyEnabled());
     mNotifOverridePreference.setChecked(ManagePreferences.notifyOverride());
+    mDoNotDisturbSwitchPreference.refresh();
   }
 
   private void checkNotificationAlertConflict() {

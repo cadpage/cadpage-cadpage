@@ -53,8 +53,9 @@ public class SmsPopupActivity extends Safe40Activity {
 
   @Override
   protected void onCreate(Bundle bundle) {
+    Log.v("SmsPopupActivity.onCreate()");
     super.onCreate(bundle);
-    
+
     ManagePreferences.setPermissionManager(permMgr);
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -563,6 +564,8 @@ public class SmsPopupActivity extends Safe40Activity {
     Intent popup = new Intent(context, SmsPopupActivity.class);
     popup.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     popup.putExtra(EXTRAS_MSG_ID, msgId);
+    Log.v("Launching SmsPopupActivity");
+    ContentQuery.dumpIntent(popup);
     context.startActivity(popup);
   }
 }
