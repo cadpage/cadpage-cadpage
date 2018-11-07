@@ -8,6 +8,24 @@
     If you are receiving Active911 alerts, do NOT install this release.\n
     Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
     \n
+    v2.0.2-1\n
+    In notification Settings, the somewhat confusing \"Reassert volume control\" setting
+    as been reversed and is now \"Override volume control\".\n
+    \n
+    A new \"Override do not disturb status\" setting allows you to override the do not disturb status.\n
+    \n
+    New Locations:\n
+    Divide County, ND\n
+    \n
+    Location Fixes:\n
+    Tolland County, CT\n
+    Clayton County, GA\n
+    Delaware County, NY\n
+    Guilford County, NC\n
+    Billings County, ND\n
+    Kidder County, ND\n
+    Lehigh County, PA\n
+    \n
     v2.0.1-2\n
     Location Fixes:\n
     New Zealand\n
@@ -54,18 +72,5 @@
     Sussex County, NJ\n
     Yamhill County, OR\n
     Petersburg, VA\n
-    \n
-    v2.0.0-3\n
-    Location Fixes:\n
-    Seminole County, FL\n
-    Madison County, IL\n
-    Pulaski County, MO\n
-    MICOM, NJ\n
-    Logan County, OH\n
-    Josephine County, OR\n
-    Erie County, PA\n
-    York County, PA\n
-    Somervell County, TX\n
-    Sweden
   </string>
 </resources>
