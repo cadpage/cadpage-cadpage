@@ -8,6 +8,13 @@
     If you are receiving Active911 alerts, do NOT install this release.\n
     Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
     \n
+    v2.0.2-2\n
+    Location Fixes:\n
+    Newton County, MO\n
+    \n
+    General Fixes:\n
+    New notification logic crashes under Android 7.0 or earlier\n
+    \n
     v2.0.2-1\n
     In notification Settings, the somewhat confusing \"Reassert volume control\" setting
     as been reversed and is now \"Override volume control\".\n
@@ -59,18 +66,6 @@
     Benton County, OR\n
     Lawrence County, PA\n
     Lehigh County, PA\n
-    Loudoun County, VA\n
-    \n
-    v2.0.0-4\n
-    New Locations:\n
-    Leon County, FL\n
-    \n
-    Location Fixes:\n
-    Litchfield County, CT\n
-    New Haven County, CT\n
-    Ocean County, NJ\n
-    Sussex County, NJ\n
-    Yamhill County, OR\n
-    Petersburg, VA\n
+    Loudoun County, VA
   </string>
 </resources>
