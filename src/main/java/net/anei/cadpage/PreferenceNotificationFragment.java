@@ -97,7 +97,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
     // If any setting have changed, make sure that the correct value is being displayed
     mNotifEnabledPreference.setChecked(ManagePreferences.notifyEnabled());
     mNotifOverridePreference.setChecked(ManagePreferences.notifyOverride());
-    mDoNotDisturbSwitchPreference.refresh();
+    if (mDoNotDisturbSwitchPreference != null) mDoNotDisturbSwitchPreference.refresh();
   }
 
   private void checkNotificationAlertConflict() {
