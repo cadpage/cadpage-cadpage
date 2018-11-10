@@ -415,7 +415,7 @@ public class SmsMmsMessage implements Serializable {
         } else {
           effReqLocation = reqLocation;
         }
-        if (vendorCode != null && vendorCode.equals("Active911")) {
+        if (vendorCode != null) {
           MsgParser parser = ManageParsers.getInstance().getParser(effReqLocation);
           if (!ManagePreferences.overrideActive911SplitOptions() && parser != null) {
             splitMsgOptions = parser.getActive911SplitMsgOptions();
