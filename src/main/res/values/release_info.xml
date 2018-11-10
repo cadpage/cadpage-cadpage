@@ -8,6 +8,9 @@
     If you are receiving Active911 alerts, do NOT install this release.\n
     Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
     \n
+    v2.0.2-3\n
+    Fixed problem opening calls from call history.\n
+    \n
     v2.0.2-2\n
     Location Fixes:\n
     Newton County, MO\n
@@ -53,19 +56,6 @@
     Charleston County, SC\n
     Clevlend County, SC\n
     Kenosha County, WI\n
-    Vancouver Island, BC\n
-    \n
-    v2.0.0-5\n
-    Location Fixes:\n
-    Shasta County, CA\n
-    Jefferson County, CO\n
-    Marion County, IN\n
-    Noble County, IN\n
-    St Joseph County, IN\n
-    Kalamazoo County, MI\n
-    Benton County, OR\n
-    Lawrence County, PA\n
-    Lehigh County, PA\n
-    Loudoun County, VA
+    Vancouver Island, BC
   </string>
 </resources>
