@@ -1,13 +1,13 @@
 package net.anei.cadpage;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.MsgInfo;
 import net.anei.cadpage.vendors.VendorManager;
-import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.util.Linkify;
@@ -40,13 +40,9 @@ public class SmsPopupActivity extends Safe40Activity {
   private TextView messageReceivedTV;
   private TextView messageTV;
 
-  private final ProgressDialog mProgressDialog = null;
-
   private LinearLayout mainLL = null;
   
   private Button donateStatusBtn = null;
-
-  private boolean wasVisible = false;
 
   private static final double WIDTH = 0.9;
   private static final int MAX_WIDTH = 640;
@@ -67,19 +63,19 @@ public class SmsPopupActivity extends Safe40Activity {
     resizeLayout();
 
     // Find the main textviews
-    fromImage = (ImageView)findViewById(R.id.FromImageView);
-    fromTV = (TextView)findViewById(R.id.FromTextView);
-    messageTV = (TextView)findViewById(R.id.MessageTextView);
+    fromImage = findViewById(R.id.FromImageView);
+    fromTV = findViewById(R.id.FromTextView);
+    messageTV = findViewById(R.id.MessageTextView);
     messageTV.setAutoLinkMask(Linkify.WEB_URLS);
-    messageReceivedTV = (TextView)findViewById(R.id.HeaderTextView);
+    messageReceivedTV = findViewById(R.id.HeaderTextView);
 
     // Enable long-press context menu
-    mainLL = (LinearLayout)findViewById(R.id.MainLinearLayout);
+    mainLL = findViewById(R.id.MainLinearLayout);
     registerForContextMenu(mainLL);
     
     // We can't hook the current donations status here because it may change
     // from msg to message.
-    donateStatusBtn = (Button)findViewById(R.id.donate_status_button);
+    donateStatusBtn = findViewById(R.id.donate_status_button);
     
     // Populate display fields
     populateViews(getIntent());
@@ -89,62 +85,10 @@ public class SmsPopupActivity extends Safe40Activity {
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
 
-    // First things first, acquire wakelock, otherwise the phone may sleep
-    //ManageWakeLock.acquirePartial(getApplicationContext());
-
     setIntent(intent);
-
-    // Force a reload of the contact photo
-    //contactPhoto = null;
 
     // Re-populate views with new intent data (ie. new sms data)
     populateViews(intent);
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    if (Log.DEBUG) Log.v("SMSPopupActivity: onStart()");
-    //ManageWakeLock.acquirePartial(getApplicationContext());
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    if (Log.DEBUG) Log.v("SMSPopupActivity: onResume()");
-    wasVisible = false;
-    
-    // Supposed to workaround Android 4 problem
-    // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    if (Log.DEBUG) Log.v("SMSPopupActivity: onPause()");
-
-//    // Shutdown eyes-free TTS
-//    if (eyesFreeTts != null) {
-//      eyesFreeTts.shutdown();
-//    }
-//
-//    // Shutdown Android TTS
-//    if (androidTextToSpeechAvailable) {
-//      if (androidTts != null) {
-//        androidTts.shutdown();
-//      }
-//    }
-
-    // Dismiss loading dialog
-    if (mProgressDialog != null) {
-      mProgressDialog.dismiss();
-    }
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    if (Log.DEBUG) Log.v("SMSPopupActivity: onStop()");
   }
 
   @Override
@@ -157,19 +101,6 @@ public class SmsPopupActivity extends Safe40Activity {
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
-  }
-
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    // Log.v("SMSPopupActivity: onWindowFocusChanged(" + hasFocus + ")");
-    if (hasFocus) {
-      // This is really hacky, basically a flag that is set if the message
-      // was at some point visible. I tried using onResume() or other methods
-      // to prevent doing some things 2 times but this seemed to be the only
-      // reliable way (?)
-      wasVisible = true;
-    }
   }
 
   @Override
@@ -434,109 +365,12 @@ public class SmsPopupActivity extends Safe40Activity {
     message.acknowledge(this);
   }
 
-//  // The eyes-free text-to-speech library InitListener
-//  private final TTS.InitListener eyesFreeTtsListener = new InitListener() {
-//    public void onInit(int version) {
-//      if (mProgressDialog != null) {
-//        mProgressDialog.dismiss();
-//      }
-//      ttsInitialized = true;
-//      speakMessage();
-//    }
-//  };
-
-//  // The Android text-to-speech library OnInitListener (via wrapper class)
-//  private final TextToSpeechWrapper.OnInitListener androidTtsListener = new OnInitListener() {
-//    public void onInit(int status) {
-//      if (mProgressDialog != null) {
-//        mProgressDialog.dismiss();
-//      }
-//      if (status == TextToSpeechWrapper.SUCCESS) {
-//        ttsInitialized = true;
-//        speakMessage();
-//      } else {
-//        Toast.makeText(SmsPopupActivity.this, R.string.error_message, Toast.LENGTH_SHORT).show();
-//      }
-//    }
-//  };
-
-//  /*
-//   * Speak the message out loud using text-to-speech (either via Android text-to-speech or
-//   * via the free eyes-free text-to-speech library)
-//   */
-//  private void speakMessage() {
-//    // TODO: we should really require the keyguard be unlocked here if we are in privacy mode
-//
-//    // If not previously initialized...
-//    if (!ttsInitialized) {
-//
-//      // Show a loading dialog
-//      showDialog(DIALOG_LOADING);
-//
-//      // User interacted so remove all locks and cancel reminders
-//      ClearAllReceiver.removeCancel(getApplicationContext());
-//      ClearAllReceiver.clearAll(false);
-//
-//      // We'll use update notification to stop the sound playing
-//      // This doesn't work anymore.  Will have to be reimplemented somehow
-//      // ManageNotification.update(getApplicationContext(), message);
-//
-//      if (androidTextToSpeechAvailable) {
-//        // Android text-to-speech available (normally found on Android 1.6+, aka Donut)
-//        androidTts = new TextToSpeechWrapper(SmsPopupActivity.this, androidTtsListener);
-//      } else { // Else use eyes-free text-to-speech library
-//        /*
-//         * This is an awful fix for the loading dialog not disappearing
-//         * when the user decides to not install the TTS package but there didn't
-//         * seem like another way to hook into the current TTS library.
-//         * 
-//         * This will all go away once we can purely use the system TTS engine and do away
-//         * with the eyes-free version from Market.
-//         */
-//        // Extend TTS alert dialog so we can dismiss the loading dialog correctly
-//        class mTtsVersionAlert extends TTSVersionAlert {
-//          // Leaving this as hardcoded just as from the TTS source
-//          private final static String QUIT = "Do not install the TTS";
-//          mTtsVersionAlert(Context context) {
-//            super(context, null, null, null);
-//            setNegativeButton(QUIT, new DialogInterface.OnClickListener() {
-//              public void onClick(DialogInterface dialog, int which) {
-//                if (mProgressDialog != null) {
-//                  mProgressDialog.dismiss();
-//                }
-//              }
-//            });
-//            setOnCancelListener(new OnCancelListener() {
-//              public void onCancel(DialogInterface dialog) {
-//                if (mProgressDialog != null) {
-//                  mProgressDialog.dismiss();
-//                }
-//              }
-//            });
-//          }
-//        }
-//
-//        // Init the eyes-free text-to-speech library
-//        eyesFreeTts = new TTS(this, eyesFreeTtsListener, new mTtsVersionAlert(this));
-//      }
-//
-//    } else {
-//
-//      // Speak the message!
-//      if (androidTextToSpeechAvailable) {
-//        androidTts.speak(message.getMessageBody(), TextToSpeechWrapper.QUEUE_FLUSH, null);
-//      } else {
-//        eyesFreeTts.speak(message.getMessageBody(), 0 /* no queue mode */, null);
-//      }
-//    }
-//  }
-
   private void resizeLayout() {
     // This sets the minimum width of the activity to a minimum of 80% of the screen
     // size only needed because the theme of this activity is "dialog" so it looks
     // like it's floating and doesn't seem to fill_parent like a regular activity
     if (mainLL == null) {
-      mainLL = (LinearLayout)findViewById(R.id.MainLinearLayout);
+      mainLL = findViewById(R.id.MainLinearLayout);
     }
     Display d = getWindowManager().getDefaultDisplay();
 
@@ -545,28 +379,58 @@ public class SmsPopupActivity extends Safe40Activity {
     mainLL.setMinimumWidth(width);
     mainLL.invalidate();
   }
-  
+
+  @Override
+  protected void onStart() {
+    if (Log.DEBUG) Log.v("SmsPopupActivty.onStart()");
+    super.onStart();
+  }
+
+  @Override
+  protected void onRestart() {
+    if (Log.DEBUG) Log.v("SmsPopupActivty.onRestart()");
+    super.onRestart();
+  }
+
+  @Override
+  protected void onResume() {
+  if (Log.DEBUG) Log.v("SmsPopupActivty.onResume()");
+    super.onResume();
+  }
+
+  @Override
+  protected void onPause() {
+    if (Log.DEBUG) Log.v("SmsPopupActivty.onPause()");
+    super.onPause();
+  }
+
+  @Override
+  protected void onStop() {
+    if (Log.DEBUG) Log.v("SmsPopupActivty.onStop()");
+    super.onStop();
+  }
+
   /**
    * Launch call display popup activity
-   * @param context context
+   * @param activity parent activity
    * @param message message to be displayed
    */
-  public static void launchActivity(Context context, SmsMmsMessage message) {
-    launchActivity(context, message.getMsgId());
+  public static void launchActivity(Activity activity, SmsMmsMessage message) {
+    launchActivity(activity, message.getMsgId());
   }
   
   /**
    * Launch call display popup activity
-   * @param context context
+   * @param activity parent activity
    * @param msgId message ID of message to be displayed
    */
-  public static void launchActivity(Context context, int msgId) {
-    Intent popup = new Intent(context, SmsPopupActivity.class);
+  public static void launchActivity(Activity activity, int msgId) {
+    Intent popup = new Intent(activity, SmsPopupActivity.class);
     popup.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     popup.putExtra(EXTRAS_MSG_ID, msgId);
     Log.v("Launching SmsPopupActivity");
     ContentQuery.dumpIntent(popup);
-    context.startActivity(popup);
+    activity.startActivityForResult(popup, 0);
   }
 }
 

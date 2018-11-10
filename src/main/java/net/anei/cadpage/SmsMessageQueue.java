@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -262,7 +263,7 @@ public class SmsMessageQueue implements Serializable {
    * @return list of message currently in message queue
    */
   public synchronized SmsMmsMessage[] getMessageList() {
-    return queue.toArray(new SmsMmsMessage[queue.size()]);
+    return queue.toArray(new SmsMmsMessage[0]);
   }
   
   /**
@@ -279,9 +280,11 @@ public class SmsMessageQueue implements Serializable {
    private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private final FragmentWithContextMenu fragment;
+    private final FragmentActivity activity;
 
     Adapter(FragmentWithContextMenu fragment) {
       this.fragment = fragment;
+      this.activity = fragment.getActivity();
       setHasStableIds(true);
     }
 
@@ -316,9 +319,9 @@ public class SmsMessageQueue implements Serializable {
 
       ViewHolder(View view) {
         super(view);
-        mDateTimeView = (TextView)view.findViewById(R.id.HistoryDateTime);
-        mCallDescView = (TextView)view.findViewById(R.id.HistoryCallDesc);
-        mAddrView = (TextView)view.findViewById(R.id.HistoryAddress);
+        mDateTimeView = view.findViewById(R.id.HistoryDateTime);
+        mCallDescView = view.findViewById(R.id.HistoryCallDesc);
+        mAddrView = view.findViewById(R.id.HistoryAddress);
 
         ((ViewWithContextMenu)view).setContextMenuHandler(fragment, this);
 
@@ -335,13 +338,7 @@ public class SmsMessageQueue implements Serializable {
             if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + mMessage.getMsgId());
             if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
 
-            // The global context was set at startup and is probably not appropriate to use to launch
-            // a new activity.  The current activity should work, but it did, on one occasion, turn
-            // out to be null.  So we will check for that before using it to launch the detail popup
-            Activity activity = fragment.getActivity();
-            if (activity != null) {
-              SmsPopupActivity.launchActivity(activity, mMessage);
-            }
+            SmsPopupActivity.launchActivity(activity, mMessage);
           }});
       }
 

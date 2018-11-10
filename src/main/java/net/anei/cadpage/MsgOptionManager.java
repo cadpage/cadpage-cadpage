@@ -455,7 +455,7 @@ public class MsgOptionManager {
      * @param respCode button response code
      * @param parent parent ViewGroup
      */
-    ButtonHandler(int itemId, int resId, String respCode, ViewGroup parent) {
+    ButtonHandler(@SuppressWarnings("SameParameterValue") int itemId, int resId, String respCode, ViewGroup parent) {
       this(itemId, resId, null, respCode, parent);
     }
     
@@ -650,8 +650,8 @@ public class MsgOptionManager {
       return true;
       
     case R.id.close_app_item:
+      activity.setResult(CadPageActivity.RESULT_SHUTDOWN);
       activity.finish();
-      CadPageActivity.shutdown(activity);
       return true;
       
     case R.id.email_item:

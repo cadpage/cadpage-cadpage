@@ -1,5 +1,6 @@
 package net.anei.cadpage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;

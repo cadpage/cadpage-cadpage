@@ -32,11 +32,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class CadPageActivity extends AppCompatActivity {
-  
-  private static final String EXTRA_NOTIFY = "net.anei.cadpage.CallHistoryActivity.NOTIFY";
-  private static final String EXTRA_SHUTDOWN = "net.anei.cadpage.CallHistoryActivity.SHUTDOWN";
-  private static final String EXTRA_POPUP = "net.anei.cadpage.CallHistoryActivity.POPUP";
-  private static final String EXTRA_MSG_ID = "net.anei.cadpage.CallHistoryActivity.MSG_ID";
+
+  public static final int RESULT_SHUTDOWN = Activity.RESULT_FIRST_USER;
+
+  private static final String EXTRA_NOTIFY = "net.anei.cadpage.CadPageActivity.NOTIFY";
+  private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
+  private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
   
   private static final int RELEASE_DIALOG = 1;
   private static final int CONFIRM_DELETE_ALL_DIALOG = 2;
@@ -52,7 +53,7 @@ public class CadPageActivity extends AppCompatActivity {
    */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    if (Log.DEBUG) Log.v("CallHistoryActivity: onCreate()");
+    if (Log.DEBUG) Log.v("CadPageActivity: onCreate()");
     CadPageApplication.initialize(this);
     super.onCreate(savedInstanceState);
 
@@ -114,7 +115,7 @@ public class CadPageActivity extends AppCompatActivity {
     Intent intent = getIntent();
     
     // Log intent for debug purposes
-    Log.v("CallHistoryActivity.startup()");
+    Log.v("CadPageActivity.startup()");
     ContentQuery.dumpIntent(intent);
     
     // We have an occasional problem when an old intent is sent with the
@@ -129,12 +130,6 @@ public class CadPageActivity extends AppCompatActivity {
       return;
     }
     lockMsgId = -1;
-    
-    // If this is a shutdown request, that is as far as we need to go
-    if (intent.getBooleanExtra(EXTRA_SHUTDOWN, false)) {
-      finish();
-      return;
-    }
 
     // We do some special processing if the intent was launched by the user
     // instead of through some internal trigger.
@@ -222,7 +217,7 @@ public class CadPageActivity extends AppCompatActivity {
         final Activity context = this;
         msgId = msg.getMsgId();
         if (!context.isFinishing()) {
-          if (Log.DEBUG) Log.v("CallHistoryActivity Auto launch SmsPopup for " + msgId); 
+          if (Log.DEBUG) Log.v("CadPageActivity Auto launch SmsPopup for " + msgId);
           SmsPopupActivity.launchActivity(context, msgId);
         }
       }
@@ -339,26 +334,26 @@ public class CadPageActivity extends AppCompatActivity {
 
   @Override
   protected void onStart() {
-    if (Log.DEBUG) Log.v("CallHistoryActivity: onStart()");
+    if (Log.DEBUG) Log.v("CadPageActivity: onStart()");
     super.onStart();
   }
 
   @Override
   protected void onStop() {
-    if (Log.DEBUG) Log.v("CallHistoryActivity: onStop()");
+    if (Log.DEBUG) Log.v("CadPageActivity: onStop()");
     super.onStop();
   }
 
   @Override
   protected void onResume() { 
-    if (Log.DEBUG) Log.v("CallHistoryActivity: onResume()");
+    if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
     super.onResume(); 
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     activityActive = true; 
   } 
   
   protected void onPause() {
-    if (Log.DEBUG) Log.v("CallHistoryActivity: onPause()");
+    if (Log.DEBUG) Log.v("CadPageActivity: onPause()");
     super.onPause(); 
     activityActive = false; 
   } 
@@ -386,7 +381,13 @@ public class CadPageActivity extends AppCompatActivity {
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
-  
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == RESULT_SHUTDOWN) finish();
+  }
+
   @Override
   protected void onDestroy() {
     ManagePreferences.releasePermissionManager(permMgr);
@@ -432,16 +433,6 @@ public class CadPageActivity extends AppCompatActivity {
     intent.setFlags(flags);
     if (force) intent.putExtra(EXTRA_POPUP, true);
     return intent;
-  }
-
-  /**
-   * Called by active context to shut down the main application
-   * @param context current context
-   */
-  public static void shutdown(Context context) {
-    Intent intent = new Intent(context, CadPageActivity.class);
-    intent.putExtra(EXTRA_SHUTDOWN, true);
-    context.startActivity(intent);
   }
 
   public static boolean isInitializing() {
