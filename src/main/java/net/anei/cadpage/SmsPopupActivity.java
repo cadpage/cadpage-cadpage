@@ -428,7 +428,6 @@ public class SmsPopupActivity extends Safe40Activity {
     Intent popup = new Intent(activity, SmsPopupActivity.class);
     popup.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     popup.putExtra(EXTRAS_MSG_ID, msgId);
-    Log.v("Launching SmsPopupActivity");
     ContentQuery.dumpIntent(popup);
     activity.startActivityForResult(popup, 0);
   }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class CallHistoryFragment extends FragmentWithContextMenu {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    if (Log.DEBUG) Log.v("CallHistoryFragment.onCreateView() = Activity:" + getActivity());
     RecyclerView view = (RecyclerView) inflater.inflate(R.layout.fragment_callhistory_list, container, false);
 
     // Set the adapter
@@ -34,5 +36,11 @@ public class CallHistoryFragment extends FragmentWithContextMenu {
     view.setLayoutManager(new LinearLayoutManager(context));
     view.setAdapter(SmsMessageQueue.getInstance().listAdapter(this));
     return view;
+  }
+
+  @Override
+  public void onDetach() {
+    SmsMessageQueue.getInstance().releaseAdapter();
+    super.onDetach();
   }
 }

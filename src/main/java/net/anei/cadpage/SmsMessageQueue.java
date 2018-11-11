@@ -270,8 +270,12 @@ public class SmsMessageQueue implements Serializable {
    * @return RecyclerView.Adapter that can be bound to RecyclerView
    */
   public RecyclerView.Adapter<Adapter.ViewHolder> listAdapter(FragmentWithContextMenu fragment) {
-    if (adapter == null) adapter = new Adapter(fragment);
+    adapter = new Adapter(fragment);
     return adapter;
+  }
+
+  public void releaseAdapter() {
+    adapter = null;
   }
   
   /**
@@ -280,11 +284,9 @@ public class SmsMessageQueue implements Serializable {
    private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private final FragmentWithContextMenu fragment;
-    private final FragmentActivity activity;
 
     Adapter(FragmentWithContextMenu fragment) {
       this.fragment = fragment;
-      this.activity = fragment.getActivity();
       setHasStableIds(true);
     }
 
@@ -335,10 +337,9 @@ public class SmsMessageQueue implements Serializable {
             if (mMessage == null) return;
 
             // display message popup
-            if (Log.DEBUG) Log.v("HistoryMsgTextView User launch SmsPopup for " + mMessage.getMsgId());
             if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
 
-            SmsPopupActivity.launchActivity(activity, mMessage);
+            SmsPopupActivity.launchActivity(fragment.getActivity(), mMessage);
           }});
       }
 
