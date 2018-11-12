@@ -8,6 +8,14 @@
     If you are receiving Active911 alerts, do NOT install this release.\n
     Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
     \n
+    v2.0.2-4\n
+    Location Fixes:\n
+    Marion County, IN\n
+    MICOM, NJ\n
+    \n
+    General Fixes:\n
+    Fixed number of odd problems when you exit and then re-enter Cadpage.\n
+    \n
     v2.0.2-3\n
     Fixed problem opening calls from call history.\n
     \n
@@ -38,24 +46,6 @@
     \n
     v2.0.1-2\n
     Location Fixes:\n
-    New Zealand\n
-    \n
-    v2.0.1-1\n
-    New Location:\n
-    Routt County, CO\n
-    \n
-    Location Fixes:\n
-    Etowah County, AL\n
-    Placer County, CA\n
-    Adams County, IL\n
-    Ocean County, NJ\n
-    Adams County, CO\n
-    Ashe County, NC\n
-    Clermont County, OH\n
-    Medina County, OH\n
-    Charleston County, SC\n
-    Clevlend County, SC\n
-    Kenosha County, WI\n
-    Vancouver Island, BC
+    New Zealand
   </string>
 </resources>
