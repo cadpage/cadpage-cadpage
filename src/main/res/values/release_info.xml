@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11032018</string>
+  <string name="release_date">11132018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS RELEASE!!!\n
     If you are receiving Active911 alerts, do NOT install this release.\n
     Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
+    \n
+    v2.0.2-5\n
+    Location Fixes:\n
+    Tolland County, CT\n
+    Kent County, DE\n
+    Lehigh County, PA\n
+    Vigo County, IN\n
     \n
     v2.0.2-4\n
     Location Fixes:\n
@@ -42,10 +49,6 @@
     Guilford County, NC\n
     Billings County, ND\n
     Kidder County, ND\n
-    Lehigh County, PA\n
-    \n
-    v2.0.1-2\n
-    Location Fixes:\n
-    New Zealand
+    Lehigh County, PA
   </string>
 </resources>
