@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11132018</string>
+  <string name="release_date">11142018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    ACTIVE911 IS NOT CURRENTLY SUPPORTING THIS RELEASE!!!\n
-    If you are receiving Active911 alerts, do NOT install this release.\n
-    Details can be found at http://www.cadpage.org/faq/cadpage-2-0\n
+    v2.0.2-6\n
+    First production release of Cadpage 2.0\n
+    \n
+    In notification Settings, the somewhat confusing \"Reassert volume control\" setting
+    as been reversed and is now \"Override volume control\".\n
+    \n
+    A new \"Override do not disturb status\" setting allows you to override the do not disturb status.\n
+    \n
+    Location Fixes:\n
+    Suffolk County, NY\n
     \n
     v2.0.2-5\n
     Location Fixes:\n
@@ -34,11 +41,6 @@
     New notification logic crashes under Android 7.0 or earlier\n
     \n
     v2.0.2-1\n
-    In notification Settings, the somewhat confusing \"Reassert volume control\" setting
-    as been reversed and is now \"Override volume control\".\n
-    \n
-    A new \"Override do not disturb status\" setting allows you to override the do not disturb status.\n
-    \n
     New Locations:\n
     Divide County, ND\n
     \n
