@@ -70,6 +70,8 @@ public class KeepAliveService extends Service {
   @SuppressLint("NewApi")
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    CadPageApplication.initialize(this);
+
     if (intent != null) {
       
       // If a service shutdown was requested, do it

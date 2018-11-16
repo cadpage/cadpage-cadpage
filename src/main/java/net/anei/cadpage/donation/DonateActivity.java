@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
@@ -24,6 +25,7 @@ public class DonateActivity extends Activity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    CadPageApplication.initialize(this);
     ManagePreferences.setPermissionManager(permMgr);
     super.onCreate(savedInstanceState);
     requestWindowFeature(Window.FEATURE_NO_TITLE);

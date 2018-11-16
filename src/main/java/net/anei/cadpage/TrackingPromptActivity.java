@@ -31,6 +31,7 @@ public class TrackingPromptActivity extends Safe40Activity {
   protected void onCreate(Bundle bundle) {
     super.onCreate(bundle);
     if (Log.DEBUG) Log.v("TrackingPromptActivity: onCreate()");
+    CadPageApplication.initialize(this);
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.tracking_prompt);

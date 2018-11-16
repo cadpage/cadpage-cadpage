@@ -18,6 +18,8 @@ public class ClearAllReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     if (Log.DEBUG) Log.v("ClearAllReceiver: onReceive()");
+    CadPageApplication.initialize(context);
+
     String action = intent.getAction();
     if (action == null) return;
     int pt = action.lastIndexOf('.');

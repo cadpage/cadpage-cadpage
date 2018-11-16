@@ -64,6 +64,8 @@ public class EmailDeveloperActivity extends Safe40Activity {
     super.onCreate(bundle);
     if (Log.DEBUG) Log.v("EmailDeveloperActivity: onCreate()");
 
+    CadPageApplication.initialize(this);
+
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.popup_email);
     

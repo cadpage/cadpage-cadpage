@@ -66,6 +66,7 @@ public class MmsTransactionService extends Service {
   @Override
   public void onCreate() {
     if (Log.DEBUG) Log.v("MmsTransactionService.onCreate()");
+    CadPageApplication.initialize(this);
 
     // Give us foreground priority
     // we are saving our message list in memory and really don't want to

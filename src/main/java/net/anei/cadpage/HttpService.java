@@ -253,6 +253,8 @@ public class HttpService extends Service {
   public void onCreate() {
 
     super.onCreate();
+    CadPageApplication.initialize(this);
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }

@@ -1,8 +1,7 @@
 package net.anei.cadpage;
 
 import net.anei.cadpage.R;
-import 
-android.app.Activity;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -27,7 +26,13 @@ public class NoticeActivity extends Safe40Activity {
   private static final int MISSING_READER_DLG = 2;
   private static final int NEED_PERMISSION_DLG = 3;
   
-  String[] parms;
+  private String[] parms;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    CadPageApplication.initialize(this);
+  }
 
   @Override
   protected void onStart() {

@@ -29,6 +29,7 @@ public class ParserService extends IntentService {
 
   @Override
   protected void onHandleIntent(Intent intent) {
+    CadPageApplication.initialize(this);
 
     try {
 
