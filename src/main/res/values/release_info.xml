@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11142018</string>
+  <string name="release_date">11172018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-7\n
+    Location Fixes:\n
+    San Bernardino County, CA\n
+    Tolland County, CT\n
+    Dooly County, GA\n
+    Schley County, GAn
+    Sumter County, GA\n
+    Taylor County, GA\n
+    Vigo County, IN\n
+    Kalamzoo County, MI\n
+    Suffolk County, NY\n
+    \n
+    General Fixes:\n
+    Fixed sporadic startup crashes.\n
+    \n
     v2.0.2-6\n
     First production release of Cadpage 2.0\n
     \n
@@ -31,26 +46,6 @@
     Fixed number of odd problems when you exit and then re-enter Cadpage.\n
     \n
     v2.0.2-3\n
-    Fixed problem opening calls from call history.\n
-    \n
-    v2.0.2-2\n
-    Location Fixes:\n
-    Newton County, MO\n
-    \n
-    General Fixes:\n
-    New notification logic crashes under Android 7.0 or earlier\n
-    \n
-    v2.0.2-1\n
-    New Locations:\n
-    Divide County, ND\n
-    \n
-    Location Fixes:\n
-    Tolland County, CT\n
-    Clayton County, GA\n
-    Delaware County, NY\n
-    Guilford County, NC\n
-    Billings County, ND\n
-    Kidder County, ND\n
-    Lehigh County, PA
+    Fixed problem opening calls from call history.
   </string>
 </resources>
