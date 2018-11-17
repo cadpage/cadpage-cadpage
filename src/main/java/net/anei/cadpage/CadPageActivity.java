@@ -67,11 +67,6 @@ public class CadPageActivity extends AppCompatActivity {
 
     initializing = !ManagePreferences.initialized();
 
-    // We set up the message queue in CadPageApplication.  But new SDK rules do not allow us to
-    // start a background thread to reparse the queue messages until an activity has been launched.
-    // So we wait for activity to be running before starting the service
-    SmsMessageQueue.getInstance().startReparse(this);
-
     // Apparently only an activity can calculate the total screen size.
     // So do it now and save it in preferences so it will be included in
     // generated emails
@@ -335,6 +330,11 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onStart() {
     if (Log.DEBUG) Log.v("CadPageActivity: onStart()");
+
+    // We set up the message queue in CadPageApplication.  But new SDK rules do not allow us to
+    // start a background thread to reparse the queue messages until an activity has been launched.
+    // So we wait for activity to be running before starting the service
+    SmsMessageQueue.getInstance().startReparse(this);
     super.onStart();
   }
 

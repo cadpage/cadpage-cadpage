@@ -1,5 +1,6 @@
 package net.anei.cadpage.vendors;
 
+import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
@@ -37,6 +38,7 @@ public class VendorActivity extends Safe40Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    CadPageApplication.initialize(this);
 
     ManagePreferences.setPermissionManager(permMgr);
 
