@@ -162,7 +162,6 @@
     <service android:name=".HttpService"/>
     <service android:name=".TrackingService"/>
     <service android:name=".SmsMsgAccumulatorService"/>
-    <service android:name=".ParserService"/>
 
     <service android:name=".FCMInstanceIdService">
       <intent-filter>

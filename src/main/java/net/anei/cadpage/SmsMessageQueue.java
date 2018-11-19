@@ -13,7 +13,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -39,8 +38,6 @@ public class SmsMessageQueue implements Serializable {
   private Adapter adapter = null;
   private int newCallCount = 0;
 
-  private boolean reparse = true;
-  
   @SuppressWarnings("unchecked")
   private SmsMessageQueue(Context context) {
     this.context = context;
@@ -79,15 +76,9 @@ public class SmsMessageQueue implements Serializable {
 
     // Update new call count
     calcNewCallCount();
-  }
 
-  public void startReparse(Activity activity) {
-
-    // Start parsing messages in background service
-    if (reparse) {
-      reparse = false;
-      ParserService.startup(activity);
-    }
+    // Launch reparser startup thread
+    ParserServiceManager.startup();
   }
 
   /**
@@ -117,7 +108,7 @@ public class SmsMessageQueue implements Serializable {
    * 3 - merge message option change
    */
   public void splitOptionChange(int changeCode) {
-    ParserService.reparseSplitMsg(context, changeCode);
+    ParserServiceManager.reparseSplitMsg(changeCode);
   }
   
   /**
@@ -125,7 +116,7 @@ public class SmsMessageQueue implements Serializable {
    * after the location parser setting has been changed
    */
   public void reparseGeneral() {
-    ParserService.reparseGeneral(context);
+    ParserServiceManager.reparseGeneral();
   }
 
   /**
