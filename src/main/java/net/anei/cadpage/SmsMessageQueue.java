@@ -400,7 +400,7 @@ public class SmsMessageQueue implements Serializable {
    * Set up singleton message queue object
    * @param context context used to create object
    */
-  public static void setupInstance(Context context) {
+  synchronized public static void setupInstance(Context context) {
 	  if (Log.DEBUG) Log.v("SmsMessageQueue: SetupInstance");
     if (msgQueue == null) {
       msgQueue = new SmsMessageQueue(context);
