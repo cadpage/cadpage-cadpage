@@ -4,6 +4,14 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-9\n
+    Location Fixes:\n
+    Newton County, MO\n
+    Northampton County, PA\n
+    \n
+    General Fixes:\n
+    Yet another attempt to fix those pesky sporadic startup crashes\n
+    \n
     v2.0.2-8\n
     Location Fixes:\n
     Lincoln County, OH\n
@@ -44,13 +52,5 @@
     Kent County, DE\n
     Lehigh County, PA\n
     Vigo County, IN\n
-    \n
-    v2.0.2-4\n
-    Location Fixes:\n
-    Marion County, IN\n
-    MICOM, NJ\n
-    \n
-    General Fixes:\n
-    Fixed number of odd problems when you exit and then re-enter Cadpage.\n
   </string>
 </resources>

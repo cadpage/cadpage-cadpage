@@ -38,17 +38,25 @@ public class ParserServiceManager {
 
     private final RequestType request;
     private final int changeCode;
+    private final Exception ex;
 
-    private ParserTask(RequestType request, int changeCode) {
+    private ParserTask(RequestType request, int changeCode, Exception ex) {
       this.request = request;
       this.changeCode = changeCode;
+      this.ex = ex;
     }
 
     @Override
     public void run() {
 
       try {
-        for (SmsMmsMessage msg : SmsMessageQueue.getInstance().getMessageList()) {
+
+        // I can find no way that this can possibly return a null value.  But in some mysterious
+        // way it is, very sporadically, but several times a day.
+        SmsMessageQueue smq = SmsMessageQueue.getInstance();
+        if (smq == null) return;
+
+        for (SmsMmsMessage msg : smq.getMessageList()) {
           boolean update = false;
           switch (request) {
             case STARTUP:
@@ -80,6 +88,7 @@ public class ParserServiceManager {
 
       // Any exceptions that get thrown should be rethrown on the dispatch thread
       catch (final Exception ex) {
+        ex.initCause(this.ex);
         TopExceptionHandler.reportException(ex);
       }
     }
@@ -90,7 +99,7 @@ public class ParserServiceManager {
   }
 
   private void request(RequestType request, int changeCode) {
-    threadPool.execute(new ParserTask(request, changeCode));
+    threadPool.execute(new ParserTask(request, changeCode, new RuntimeException()));
   }
 
   private static final ParserServiceManager instance = new ParserServiceManager();

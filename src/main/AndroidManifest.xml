@@ -108,11 +108,11 @@
     <receiver android:name=".PushReceiver">
       <intent-filter android:priority="2147483647">
         <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED"/>
-
         <data android:mimeType="application/vnd.wap.mms-message"/>
       </intent-filter>
       <intent-filter>
         <action android:name="android.intent.action.CONTENT_CHANGED"/>
+        <data android:scheme="content" android:host="mms"/>
       </intent-filter>
     </receiver>
     <receiver android:name=".UsbReceiver">
