@@ -43,7 +43,7 @@ public class PushReceiver extends BroadcastReceiver {
     // services we start time to take their own wake locks.
     PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
     assert pm != null;
-    PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MMS PushReceiver");
+    PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "CadPage:MMS PushReceiver");
     wl.acquire(5000);
     
     // Pass intent on the MmsTransactionService

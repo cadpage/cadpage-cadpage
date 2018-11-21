@@ -24,6 +24,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
@@ -45,9 +46,10 @@ import net.anei.cadpage.mms.PduParser;
  * that have been determined to be possible CAD pages
  */
 public class MmsTransactionService extends Service {
-  
+
   private static final Uri MMS_URI = Uri.parse("content://mms");
-  private enum EventType {TRANSACTION_REQUEST, DATA_CHANGE, TIMEOUT, TIMER_TICK, QUIT}
+
+  private enum EventType {TRANSACTION_REQUEST, TIMEOUT, TIMER_TICK, QUIT}
 
   // Column names for query searches
   private static final String[] MMS_COL_LIST = new String[]{"_ID"};
@@ -55,10 +57,10 @@ public class MmsTransactionService extends Service {
 
   // Timer interval, negative to disable timer
   private static final int TIMER_INTERVAL = -1;
-  
+
   private ServiceHandler mServiceHandler;
   private PowerManager.WakeLock mWakeLock;
-  
+
   // Cached copies of different preferences we might need during off thread processing
   private int mmsTimeout;
 
@@ -72,13 +74,13 @@ public class MmsTransactionService extends Service {
     // we are saving our message list in memory and really don't want to
     // destroyed if we can possibly help it.
     startForeground(0, new Notification());
-    
+
     // Acquire simple power lock while we are running
-    PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
     assert pm != null;
-    mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MMS Connectivity");
+    mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "CadPage:MMS Connectivity");
     mWakeLock.setReferenceCounted(false);
-    mWakeLock.acquire(10*60*1000L /*10 minutes*/);
+    mWakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
 
     // Start up the thread running the service.  Note that we create a
     // separate thread because the service normally runs in the process's
@@ -86,8 +88,7 @@ public class MmsTransactionService extends Service {
     HandlerThread thread = new HandlerThread("MmsTransactionService");
     thread.start();
 
-    Looper mServiceLooper = thread.getLooper();
-    mServiceHandler = new ServiceHandler(mServiceLooper);
+    mServiceHandler = new ServiceHandler(thread.getLooper());
 
   }
 
@@ -95,18 +96,12 @@ public class MmsTransactionService extends Service {
   public int onStartCommand(Intent intent, int flags, int startId) {
     if (Log.DEBUG) Log.v("MmsTransactionService.onStart()");
     if (intent == null) return START_NOT_STICKY;
-    
+
     // Collect all of the preferences we might need while we are still on
     // the main thread;
-    mmsTimeout = ManagePreferences.mmsTimeout()*60000;
-    
-    EventType type;
-    if ("android.provider.Telephony.WAP_PUSH_RECEIVED".equals(intent.getAction())) {
-      type = EventType.TRANSACTION_REQUEST;
-    } else  {
-      type = EventType.DATA_CHANGE;
-    }
-    Message msg = mServiceHandler.obtainMessage(type.ordinal());
+    mmsTimeout = ManagePreferences.mmsTimeout() * 60000;
+
+    Message msg = mServiceHandler.obtainMessage(EventType.TRANSACTION_REQUEST.ordinal());
     msg.arg1 = startId;
     msg.obj = intent;
     mServiceHandler.sendMessage(msg);
@@ -122,9 +117,9 @@ public class MmsTransactionService extends Service {
 
   @Override
   public IBinder onBind(Intent intent) {
-      return null;
+    return null;
   }
-  
+
   // 
   private class MmsMsgEntry {
     SmsMmsMessage message = null;  // Message we are working on
@@ -133,18 +128,32 @@ public class MmsTransactionService extends Service {
 
   // Main thread handler class
   private class ServiceHandler extends Handler {
-    
-    // Actual queue of pending MMS transactions
-    private final List<MmsMsgEntry> msgList  = new LinkedList<>();
-    
-    private final ContentResolver qr;
 
-    
-    @SuppressWarnings("unused")
-    public ServiceHandler(Looper looper) {
+    // Actual queue of pending MMS transactions
+    private final List<MmsMsgEntry> msgList = new LinkedList<>();
+
+    private final ContentResolver qr = getContentResolver();
+
+    private class MmsContentObserver extends ContentObserver {
+      private MmsContentObserver(Handler handler) {
+        super(handler);
+      }
+
+      @Override
+      public void onChange(boolean selfChange, Uri uri) {
+        if (Log.DEBUG) Log.v("Mms Data Change  uri:" + uri);
+        mmsDataChange();
+        cleanup();
+      }
+    }
+
+    private final MmsContentObserver observer = new MmsContentObserver(this);
+
+    private ServiceHandler(Looper looper) {
       super(looper);
-      qr = getContentResolver();
-      
+
+      qr.registerContentObserver(MMS_URI, true, observer);
+
       // Start timer ticks
       if (TIMER_INTERVAL > 0) {
         sendEmptyMessageDelayed(EventType.TIMER_TICK.ordinal(), TIMER_INTERVAL);
@@ -158,64 +167,53 @@ public class MmsTransactionService extends Service {
      */
     @Override
     public void handleMessage(Message msg) {
-      
+
       try {
-  
-        
+
+
         EventType type = EventType.values()[msg.what];
         if (Log.DEBUG) Log.v("mmsTransactionService." + type);
         switch (type) {
-        case QUIT:
-          if (!msgList.isEmpty()) {
-            Log.w("TransactionService exiting with transaction still pending");
-          }
-          getLooper().quit();
-          return;
-        
-        case TRANSACTION_REQUEST:
-          Intent intent = (Intent)msg.obj;
-          mmsReceive(intent);
-          break;
-          
-        case TIMER_TICK:
-          sendEmptyMessageDelayed(EventType.TIMER_TICK.ordinal(), TIMER_INTERVAL);
-          
-        case DATA_CHANGE:
-          mmsDataChange();
-          break;
-        
-        case TIMEOUT:
-          MmsMsgEntry entry = (MmsMsgEntry)msg.obj;
-          if (msgList.remove(entry)) {
-            SmsMsgLogBuffer.getInstance().add(entry.message.timeoutMarker());
-          }
-        }
-          
-        
-        // If the message queue is empty, it is time to shut down
-        if (msgList.size() == 0) {
-          CadPageApplication.runOnMainThread(new Runnable(){
-            @Override
-            public void run() {
-              stopSelf();
+          case QUIT:
+            if (!msgList.isEmpty()) {
+              Log.w("TransactionService exiting with transaction still pending");
             }
-          });
+            getLooper().quit();
+            return;
+
+          case TRANSACTION_REQUEST:
+            Intent intent = (Intent) msg.obj;
+            mmsReceive(intent);
+            break;
+
+          case TIMER_TICK:
+            sendEmptyMessageDelayed(EventType.TIMER_TICK.ordinal(), TIMER_INTERVAL);
+
+          case TIMEOUT:
+            MmsMsgEntry entry = (MmsMsgEntry) msg.obj;
+            if (msgList.remove(entry)) {
+              SmsMsgLogBuffer.getInstance().add(entry.message.timeoutMarker());
+            }
         }
-      } 
-      
+
+        cleanup();
+      }
+
       // Exceptions thrown on this thread should be caught and rethrown on the
       // main thread where our top level exception handler will catch them.
       catch (final RuntimeException ex) {
-        CadPageApplication.runOnMainThread(new Runnable(){
+        CadPageApplication.runOnMainThread(new Runnable() {
           @Override
           public void run() {
-            throw(ex);
-          }});
+            throw (ex);
+          }
+        });
       }
     }
 
     /**
      * Process initial incoming MMS notification
+     *
      * @param intent MMS notification intent
      */
     private void mmsReceive(Intent intent) {
@@ -254,13 +252,13 @@ public class MmsTransactionService extends Service {
       // See if message passes override from filter
       // Without a message body, isPageMsg doesn't do anything more than
       // check the sender filter
-      if (! message.isPageMsg()) return;
+      if (!message.isPageMsg()) return;
 
       // Otherwise, add to the list of messages that we are waiting for content from.
       MmsMsgEntry entry = new MmsMsgEntry();
       entry.message = message;
       msgList.add(entry);
-      
+
       // Post a timeout event for this message to remove if from the queue if
       // we haven't received any data content
       Message msg = mServiceHandler.obtainMessage(EventType.TIMEOUT.ordinal());
@@ -272,12 +270,12 @@ public class MmsTransactionService extends Service {
      * Process MMS content data change
      */
     private void mmsDataChange() {
-      
+
       // Loop through all of the pending MMS message entries
       for (Iterator<MmsMsgEntry> iter = msgList.iterator(); iter.hasNext(); ) {
         MmsMsgEntry entry = iter.next();
         final SmsMmsMessage message = entry.message;
-        
+
         // Start by finding the internal record number associated with this
         // message ID.  We used to only do this once and keep using the mame
         // record number, but it turns out that we go through two different
@@ -299,10 +297,10 @@ public class MmsTransactionService extends Service {
         } finally {
           cur.close();
         }
-        
+
         // OK, we have the desired record number
         // Now see if we can recover the content
-        
+
         Uri mmsUri = ContentUris.withAppendedId(MMS_URI, recNo);
         Uri partUri = Uri.withAppendedPath(mmsUri, "part");
         cur = qr.query(partUri, PART_COL_LIST, null, null, null);
@@ -353,44 +351,63 @@ public class MmsTransactionService extends Service {
         } finally {
           if (cur != null) cur.close();
         }
-        
+
         // for better or worse, we are done with this message, so let's
         // remove it from the processing list
         iter.remove();
-        
+
         // If we didn't retrieve any text info, give it up
         // Otherwise add the text body to our message
         // And update the message saved in the log buffer
         if (text == null) continue;
         message.setMessageBody(text);
         SmsMsgLogBuffer.getInstance().update(message);
-        
+
         // OK, we have a real message.  First see if it is a vendor discovery query
         // If it is, delete the message from the message inbox
         if (message.isDiscoveryQuery(MmsTransactionService.this)) {
           qr.delete(mmsUri, null, null);
         }
-        
+
         // Now that we have the full message, we can try to parse it as a CAD page
         boolean isPage = message.isPageMsg();
-        
+
         // If not a CAD page, we are done with it
         if (!isPage) continue;
-        
-        
+
+
         // If we were not supposed to pass messages through to the SMS app
         // we try to cover our tracks by deleting this message from the MMS
         // message content
         FilterOptions options = message.getFilterOptions();
         if (!options.blockTextMsgEnabled()) qr.delete(mmsUri, null, null);
-        
+
         // Pop back to the main thread to perform the rest of the CAD page 
         // message processing
-        CadPageApplication.runOnMainThread(new Runnable(){
+        CadPageApplication.runOnMainThread(new Runnable() {
           @Override
           public void run() {
             SmsService.processCadPage(message);
-          }});
+          }
+        });
+      }
+    }
+
+    /**
+     * Cleanup - shut down everything if message queue is empty
+     */
+    private void cleanup() {
+
+      // If the message queue is empty, it is time to shut down
+      if (msgList.size() == 0) {
+        if (Log.DEBUG) Log.v("MmsTransactionService shutdown");
+        qr.unregisterContentObserver(observer);
+        CadPageApplication.runOnMainThread(new Runnable() {
+          @Override
+          public void run() {
+            stopSelf();
+          }
+        });
       }
     }
   }
