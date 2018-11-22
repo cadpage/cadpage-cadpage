@@ -1603,15 +1603,19 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       // This gets tricky because one or both permissions may be needed
       // if the values contains an S, we need RECEIVE_SMS permission
-      // if the value contains an M, we need RECEIVE_MMS permission
-      value = check(PermissionManager.RECEIVE_SMS, "S", value);
-      value = check(PermissionManager.RECEIVE_MMS, "M", value);
+      // if the value contains an M, we need RECEIVE_MMS and READ_SMS permission
+      value = check(value, "S", PermissionManager.RECEIVE_SMS);
+      value = check(value, "M", PermissionManager.READ_SMS, PermissionManager.RECEIVE_MMS);
       return value;
     }
     
-    private String check(String reqPerm, String code, String value) {
-      if (value.contains(code) && !checkRequestPermission(reqPerm)) {
-        value = value.replace(code, "");
+    private String check(String value, String code, String ... reqPerms) {
+      if (value.contains(code)) {
+        boolean missingPerm = false;
+        for (String reqPerm : reqPerms) {
+          if (!checkRequestPermission(reqPerm)) missingPerm = true;
+        }
+        if (missingPerm) value = value.replace(code, "");
       }
       return value;
     }
