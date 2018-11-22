@@ -33,7 +33,7 @@ public class ContentQuery {
     
     ContentResolver res = context.getContentResolver();
     int id = -1;
-    String msg_id = "CF1119223842400044000030000";
+    String msg_id = "ALL01021122040101211002000030000";
     
     if (id < 0) {
       Uri uri  = Uri.parse("content://mms");
