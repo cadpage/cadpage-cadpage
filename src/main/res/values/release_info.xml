@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11202018</string>
+  <string name="release_date">11212018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-11\n
+    New Location:\n
+    Edmonson County, KY\n
+    \n
+    Location Fixes:\n
+    Humboldt County, CA\n
+    \n
+    General Fixes:\n
+    Crash processing MMS messages\n
+    \n
     v2.0.2-10\n
     Fixed problems processing MMS alerts\n
     \n
@@ -36,17 +46,6 @@
     Suffolk County, NY\n
     \n
     General Fixes:\n
-    Fixed sporadic startup crashes.\n
-    \n
-    v2.0.2-6\n
-    First production release of Cadpage 2.0\n
-    \n
-    In notification Settings, the somewhat confusing \"Reassert volume control\" setting
-    as been reversed and is now \"Override volume control\".\n
-    \n
-    A new \"Override do not disturb status\" setting allows you to override the do not disturb status.\n
-    \n
-    Location Fixes:\n
-    Suffolk County, NYs
+    Fixed sporadic startup crashes.
   </string>
 </resources>
