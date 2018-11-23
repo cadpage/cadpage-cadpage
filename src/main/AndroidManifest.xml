@@ -99,6 +99,7 @@
     android:screenOrientation="user"
     android:theme="@style/Cadpage_Dialog"/>
     <activity android:name=".NoticeActivity"/>
+    <activity android:name=".PermissionFixActivity"/>
 
     <receiver android:name=".SmsReceiver">
       <intent-filter android:priority="2147483647">
@@ -146,6 +147,12 @@
 
       <intent-filter>
         <action android:name="net.anei.cadpage.ManageUsb.USB_PERMISSION"/>
+      </intent-filter>
+    </receiver>
+
+    <receiver android:name=".UpgradeReceiver">
+       <intent-filter>
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
       </intent-filter>
     </receiver>
 
