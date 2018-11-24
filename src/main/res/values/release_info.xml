@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11212018</string>
+  <string name="release_date">11242018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-12\n
+    Location Fixes:\n
+    Clarendon County, SC\n
+    \n
+    General Fixes:\n
+    Reinstall Cadpage option was not working properly.\n
+    Cadpage still crashing when processing MMS messages after upgrading to new version.\n
+    \n
     v2.0.2-11\n
     New Location:\n
     Edmonson County, KY\n
@@ -31,21 +39,6 @@
     Wayne County, OH\n
     \n
     General Fixes:\n
-    Another attempt to fix sporadic startup crashes\n
-    \n
-    v2.0.2-7\n
-    Location Fixes:\n
-    San Bernardino County, CA\n
-    Tolland County, CT\n
-    Dooly County, GA\n
-    Schley County, GAn
-    Sumter County, GA\n
-    Taylor County, GA\n
-    Vigo County, IN\n
-    Kalamzoo County, MI\n
-    Suffolk County, NY\n
-    \n
-    General Fixes:\n
-    Fixed sporadic startup crashes.
+    Another attempt to fix sporadic startup crashes
   </string>
 </resources>
