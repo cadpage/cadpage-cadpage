@@ -18,6 +18,8 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.donation.PagingProfileEvent;
 import net.anei.cadpage.donation.UserAcctManager;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -972,5 +974,15 @@ abstract class Vendor {
     } catch (ActivityNotFoundException ex) {
       showNotice(context, R.string.vendor_no_web_viewer_error, null);
     }
+  }
+
+  /**
+   * Clear all personal settings
+   */
+  @SuppressLint("ApplySharedPref")
+  void clearAll() {
+    SharedPreferences.Editor settings = prefs.edit();
+    settings.clear();
+    settings.commit();
   }
 }

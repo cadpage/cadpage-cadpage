@@ -8,13 +8,14 @@ import android.content.Intent;
 import net.anei.cadpage.CadPageActivity;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.vendors.VendorManager;
 
 /**
 Reinstall Cadpage
  */
 public class ClearDataEvent extends DonateEvent {
   
-  public ClearDataEvent() {
+  private ClearDataEvent() {
     super(AlertStatus.YELLOW, R.string.donate_btn_yes);
   }
 
@@ -27,6 +28,7 @@ public class ClearDataEvent extends DonateEvent {
     
     // Clear any shared preferences
     ManagePreferences.clearAll();
+    VendorManager.instance().clearAll();
     
     // Set up an intent to relaunch Cadpage in 1 second
     AlarmManager myAM = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);

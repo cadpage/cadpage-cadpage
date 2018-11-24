@@ -1275,7 +1275,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
     settings.clear();
-    settings.apply();
+    settings.commit();
   }
   
   
