@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-13\n
+    Location Fixes:\n
+    Shenandoah County, VA\n
+    \n
     v2.0.2-12\n
     Location Fixes:\n
     Clarendon County, SC\n
@@ -31,14 +35,6 @@
     Northampton County, PA\n
     \n
     General Fixes:\n
-    Yet another attempt to fix those pesky sporadic startup crashes\n
-    \n
-    v2.0.2-8\n
-    Location Fixes:\n
-    Lincoln County, OH\n
-    Wayne County, OH\n
-    \n
-    General Fixes:\n
-    Another attempt to fix sporadic startup crashes
+    Yet another attempt to fix those pesky sporadic startup crashes
   </string>
 </resources>
