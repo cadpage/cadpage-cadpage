@@ -33,11 +33,11 @@ public class ContentQuery {
     
     ContentResolver res = context.getContentResolver();
     int id = -1;
-    String msg_id = "ALL01021122040101211002000030000";
+    String msg_id = "http://166.216.166.67:8004/Y/1126033341600005000020000";
     
     if (id < 0) {
       Uri uri  = Uri.parse("content://mms");
-      Cursor cur = res.query(uri, MMS_COL_LIST, "tr_id=?", new String[]{msg_id}, null);
+      Cursor cur = res.query(uri, MMS_COL_LIST, "ct_l=? or m_id=?", new String[]{msg_id, msg_id}, null);
       if (cur == null) return;
       try {
         Log.w("rec count:" + cur.getCount());

@@ -282,7 +282,9 @@ public class MmsTransactionService extends Service {
         // numbers while downloading MMS content
         Cursor cur;
         try {
-          cur = qr.query(MMS_URI, MMS_COL_LIST, "tr_id=?", new String[]{message.getMmsMsgId()}, null);
+          String msgId = message.getMmsMsgId();
+          String contentLoc = message.getContentLoc();
+          cur = qr.query(MMS_URI, MMS_COL_LIST, "tr_id=? or m_id=?", new String[]{msgId, contentLoc}, null);
         } catch (IllegalStateException ex) {
           Log.e(ex);
           EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
