@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11272018</string>
+  <string name="release_date">12012018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-15\n
+    New Locations:\n
+    Chester County, PA (alt)\n
+    \n
+    Location Fixes:\n
+    Walker County, AL\n
+    Tolland County, CT\n
+    Ocean County, NJ\n
+    Yamhill County, OR\n
+    Lehigh County, PA\n
+    Brazoria County, TX\n
+    Page County, VA\n
+    Roanoke City, VA\n
+    \n
     v2.0.2-14\n
     Location Fixes:\n
     Harrison County, MS\n
@@ -32,9 +46,6 @@
     Humboldt County, CA\n
     \n
     General Fixes:\n
-    Crash processing MMS messages\n
-    \n
-    v2.0.2-10\n
-    Fixed problems processing MMS alerts\n
+    Crash processing MMS messages
   </string>
 </resources>
