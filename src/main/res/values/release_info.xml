@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12012018</string>
+  <string name="release_date">12062018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-16\n
+    New Locations:\n
+    Chesterfield County, SC\n
+    Lexington, VA\n
+    \n
+    Location Fixes:\n
+    Marion County, IN\n
+    Louisville, KY\n
+    Suffolk County, NY\n
+    Wake County, NC\n
+    Elk County, PA\n
+    Grant County, WV\n
+    \n
     v2.0.2-15\n
     New Locations:\n
     Chester County, PA (alt)\n
@@ -36,16 +49,6 @@
     \n
     General Fixes:\n
     Reinstall Cadpage option was not working properly.\n
-    Cadpage still crashing when processing MMS messages after upgrading to new version.\n
-    \n
-    v2.0.2-11\n
-    New Location:\n
-    Edmonson County, KY\n
-    \n
-    Location Fixes:\n
-    Humboldt County, CA\n
-    \n
-    General Fixes:\n
-    Crash processing MMS messages
+    Cadpage still crashing when processing MMS messages after upgrading to new version.
   </string>
 </resources>
