@@ -21,7 +21,7 @@ public class ContentQuery {
     retrieveMsg(context);
   }
   
-  public static void dumpEverything(Context context) {
+  public static void dumpEverything(Context context, int limit) {
     
     ContentResolver res = context.getContentResolver();
     Uri uri  = Uri.parse("content://mms");

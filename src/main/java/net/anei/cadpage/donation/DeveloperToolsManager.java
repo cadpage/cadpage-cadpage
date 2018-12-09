@@ -13,7 +13,6 @@ import java.util.GregorianCalendar;
 
 
 
-//import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.BugReportGenerator;
 import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.FCMMessageService;
@@ -204,6 +203,7 @@ public class DeveloperToolsManager {
           break;
 
         case 11:     // Content Query
+          ContentQuery.dumpEverything(context, 10);
           ContentQuery.query(context);
           break;
 

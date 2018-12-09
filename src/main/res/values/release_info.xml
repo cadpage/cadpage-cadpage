@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12062018</string>
+  <string name="release_date">12092018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.0.2-17\n
+    New Location:\n
+    Greene County, IL\n
+    \n
+    Location Fixes:\n
+    Washtenaw County, MI\n
+    Clearfield County, PA\n
+    McKean County, PA\n
+    \n
     v2.0.2-16\n
     New Locations:\n
     Chesterfield County, SC\n
@@ -41,14 +50,6 @@
     \n
     v2.0.2-13\n
     Location Fixes:\n
-    Shenandoah County, VA\n
-    \n
-    v2.0.2-12\n
-    Location Fixes:\n
-    Clarendon County, SC\n
-    \n
-    General Fixes:\n
-    Reinstall Cadpage option was not working properly.\n
-    Cadpage still crashing when processing MMS messages after upgrading to new version.
+    Shenandoah County, VA
   </string>
 </resources>
