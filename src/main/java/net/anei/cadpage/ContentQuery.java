@@ -21,12 +21,19 @@ public class ContentQuery {
     retrieveMsg(context);
   }
   
-  public static void dumpEverything(Context context, int limit) {
+  public static void dumpEverything(Context context) {
     
     ContentResolver res = context.getContentResolver();
     Uri uri  = Uri.parse("content://mms");
     Cursor cur = res.query(uri, null, null, null, null);
     dumpCursor("Full MMS", cur);
+  }
+
+  public static void dumpRecentMms(Context context) {
+    ContentResolver res = context.getContentResolver();
+    Uri uri  = Uri.parse("content://mms");
+    Cursor cur = res.query(uri, null, null, null, "date desc limit 5");
+    dumpCursor("Recent MMS", cur);
   }
   
   private static void retrieveMsg(Context context) {
@@ -63,7 +70,7 @@ public class ContentQuery {
     }
     Log.w("Contents=" + text);
   }
-  
+
   
   private static void dumpCursor(String title, Cursor cursor) {
     

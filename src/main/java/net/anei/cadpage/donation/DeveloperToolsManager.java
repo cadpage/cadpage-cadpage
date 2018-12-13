@@ -203,7 +203,7 @@ public class DeveloperToolsManager {
           break;
 
         case 11:     // Content Query
-          ContentQuery.dumpEverything(context, 10);
+          ContentQuery.dumpEverything(context);
           ContentQuery.query(context);
           break;
 

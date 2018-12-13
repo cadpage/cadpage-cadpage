@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.FCMInstanceIdService;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
@@ -16,7 +17,7 @@ public class MagicWordEvent extends DonateQueryEvent {
   
   private static final String LOCATION = "TXCyCreekCommCenter";
   private static final String ORG = "Cypress Creek VFD";
-  
+
   public MagicWordEvent() {
     super(null, R.string.donate_magic_word_title, R.string.donate_magic_word_text);
   }
@@ -27,6 +28,11 @@ public class MagicWordEvent extends DonateQueryEvent {
     // Special word that nobody knows about that will reset the C2DM registration code
     if (input.equalsIgnoreCase("ZAPIT")) {
       FCMInstanceIdService.resetInstanceId();
+      return true;
+    }
+
+    if (input.equalsIgnoreCase("MMSDUMP")) {
+      ContentQuery.dumpRecentMms(activity);
       return true;
     }
 
