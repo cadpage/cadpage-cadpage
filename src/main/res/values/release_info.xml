@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12092018</string>
+  <string name="release_date">12132018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
+    \n
+    v2.0.3-1\n
+    Location Fixes:\n
+    Madison County, AL\n
+    Portage County, OH\n
+    Kenosha County, WI\n
+    \n
     v2.0.2-17\n
     New Location:\n
     Greene County, IL\n
@@ -46,10 +54,6 @@
     Erie County, NY\n
     \n
     General Fixes:\n
-    Not picking up MMS alerts processed by Textra message app\n
-    \n
-    v2.0.2-13\n
-    Location Fixes:\n
-    Shenandoah County, VA
+    Not picking up MMS alerts processed by Textra message app
   </string>
 </resources>
