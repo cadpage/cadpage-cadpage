@@ -572,4 +572,21 @@
     Register with CodeMessaging
   </string>
 
+  <string name="donate_need_cadpage_support_app_title">
+    Install Cadpage mesasge support app
+  </string>
+  <string name="donate_need_cadpage_support_app_text">
+    The Cadpage app is or will soon be prohibited from processing incoming
+    text messages.  If you need this functionality to continue, you need to
+    install the Cadpage message support app.
+  </string>
+
+  <string name="donate_install_cadpage_support_app_title">
+    Install Cadpage support app
+  </string>
+
+  <string name="donate_drop_msg_support_title">
+    I do not require Cadpage text message support
+  </string>
+
 </resources>

@@ -30,6 +30,8 @@ import android.os.PowerManager;
  */
 public class PushReceiver extends BroadcastReceiver {
 
+  private static final String ACTION_WAP_PUSH_RECEIVED = "android.provider.Telephony.WAP_PUSH_RECEIVED";
+
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.v("PushReceiver: onReceive()");
@@ -38,6 +40,9 @@ public class PushReceiver extends BroadcastReceiver {
     
     // If initialization failure in progress, shut down without doing anything
     if (TopExceptionHandler.isInitFailure()) return;
+
+    // Check for correct action
+    if (!ACTION_WAP_PUSH_RECEIVED.equals(intent.getAction())) return;
 
     // Hold a wake lock for 5 seconds, enough to give any
     // services we start time to take their own wake locks.

@@ -399,4 +399,19 @@
     Registrera hos CodeMessaging
   </string>
 
+  <string name="donate_need_cadpage_support_app_title">
+    Installera Cadpages meddelande-support app
+  </string>
+  <string name="donate_need_cadpage_support_app_text">
+    Cadpage har eller kommer att förhindras att hantera inkommande textmeddelanden. Om du behöver den funktionaliteten fortsättningsvis så behöver du installera Cadpages meddelande-support app.
+  </string>
+
+  <string name="donate_install_cadpage_support_app_title">
+    Installera Cadpages support app
+  </string>
+
+  <string name="donate_drop_msg_support_title">
+    Jag behöver inte att Cadpage hanterar SMS
+  </string>
+
 </resources>

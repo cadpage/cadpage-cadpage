@@ -6,16 +6,19 @@ import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.HelpWelcomeEvent;
 import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
+import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.VendorEvent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +41,10 @@ public class CadPageActivity extends AppCompatActivity {
   private static final String EXTRA_NOTIFY = "net.anei.cadpage.CadPageActivity.NOTIFY";
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
+
+  private static final String CADPAGE_SUPPORT_PKG = "net.anei.cadpagesupport";
+  private static final String CADPAGE_SUPPORT_CLASS = "net.anei.cadpagesupport.MainActivity";
+  private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
   
   private static final int RELEASE_DIALOG = 1;
   private static final int CONFIRM_DELETE_ALL_DIALOG = 2;
@@ -47,6 +54,8 @@ public class CadPageActivity extends AppCompatActivity {
   private static boolean initializing = false;
   
   private static int lockMsgId = -1;
+
+  private boolean needSupportApp;
 
   /* (non-Javadoc)
    * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -142,41 +151,44 @@ public class CadPageActivity extends AppCompatActivity {
       ManagePreferences.checkInitialPermissions(new Runnable(){
         @Override
         public void run() {
+          needSupportApp = checkMsgSupport();
+          if (needSupportApp) return;
 
           // If user upgraded to the release that implements improved email account security, and
           // we suspect that really need to give us that email account access, let them know now.
           DonateScreenEvent event;
           if ((event = NeedAcctPermissionUpgradeEvent.instance()).isEnabled()) {
             DonateActivity.launchActivity(CadPageActivity.this, event, null);
+            return;
           }
 
           // If Cadpage is not functional with current settings, start up the new user sequence
-          else if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
+          if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
             ((HelpWelcomeEvent)event).setIntializing(init);
             DonateActivity.launchActivity(CadPageActivity.this, event, null);
+            return;
           }
 
           // If a new Active911 client may be highjacking alerts, warn user
-          else if ((event = Active911WarnEvent.instance()).isEnabled()) {
+          if ((event = Active911WarnEvent.instance()).isEnabled()) {
             DonateActivity.launchActivity(CadPageActivity.this, event, null);
+            return;
           }
 
           // Otherwise, launch the release info dialog if it hasn't already been displayed
-          else {
-            String oldRelease = ManagePreferences.release();
-            String release = CadPageApplication.getVersion();
-            if (!release.equals(oldRelease)) {
-              ManagePreferences.setRelease(release);
-              if (!trimRelease(release).equals(trimRelease(oldRelease))) {
-                showDialog(RELEASE_DIALOG);
-              }
+          String oldRelease = ManagePreferences.release();
+          String release = CadPageApplication.getVersion();
+          if (!release.equals(oldRelease)) {
+            ManagePreferences.setRelease(release);
+            if (!trimRelease(release).equals(trimRelease(oldRelease))) {
+              showDialog(RELEASE_DIALOG);
             }
+          }
 
-            // If not, see if we have discovered a direct page vendor sending us text pages
-            else {
-              event = VendorEvent.instance(1);
-              if (event.isEnabled()) DonateActivity.launchActivity(CadPageActivity.this, event, null);
-            }
+          // If not, see if we have discovered a direct page vendor sending us text pages
+          else {
+            event = VendorEvent.instance(1);
+            if (event.isEnabled()) DonateActivity.launchActivity(CadPageActivity.this, event, null);
           }
         }
       });
@@ -219,6 +231,40 @@ public class CadPageActivity extends AppCompatActivity {
     }
 
     initializing = false;
+  }
+
+  /**
+   * Check to see if the message support app is needed and/or installed
+   * @return true if user was prompted to install the support app
+   */
+  private boolean checkMsgSupport() {
+
+    // If we are still processing SMS or MMS messages, we need to some additional work
+    String msgTypes = ManagePreferences.enableMsgType();
+    if (msgTypes.contains("S") || msgTypes.contains("M")) {
+
+      // Fire off an intent to launch the support all.  If it installed and configured
+      // correctly, it will quietly die without doing anything
+      Intent intent = new Intent(Intent.ACTION_MAIN);
+      intent.addCategory(Intent.CATEGORY_LAUNCHER);
+      intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
+      intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
+
+      try {
+        startActivity(intent);
+      } catch (Exception ex) {
+
+        // If this failed because the activity is not found, ask the user to install
+        // the Cadpage support app.  For any other reason, log the event and carry on.
+        if ( (ex instanceof ActivityNotFoundException)) {
+          DonateActivity.launchActivity(CadPageActivity.this, NeedCadpageSupportAppEvent.instance(), null);
+          return true;
+        } else {
+          Log.e(ex);
+        }
+      }
+    }
+    return false;
   }
 
   /**
@@ -344,7 +390,16 @@ public class CadPageActivity extends AppCompatActivity {
     if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
     super.onResume(); 
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-    activityActive = true; 
+    activityActive = true;
+
+    // If we asked user to install the support app, make sure that is has
+    // been opened and requested the appropriate permissions
+    // (Commented out for now.  We do not need to be so aggressive about
+    // making sure the support app is functioning until we actually loose the
+    // ability to process messages ourselves
+//    if (needSupportApp) {
+//      needSupportApp = checkMsgSupport();
+//    }
   } 
   
   protected void onPause() {
