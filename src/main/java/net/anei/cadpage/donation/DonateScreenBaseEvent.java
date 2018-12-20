@@ -142,7 +142,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     DonateScreenBaseEvent event = screenEventMap.get(classname);
     if (event == null) {
       StringBuilder sb = new StringBuilder("No Event registered for " + classname);
-      sb.append("Registered Classes:\n");
+      sb.append("\nRegistered Classes:");
       for (String key : screenEventMap.keySet()) {
         sb.append("\n" + key);
       }

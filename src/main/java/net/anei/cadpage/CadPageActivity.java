@@ -2,6 +2,7 @@ package net.anei.cadpage;
 
 import net.anei.cadpage.donation.Active911WarnEvent;
 import net.anei.cadpage.donation.DonateActivity;
+import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.HelpWelcomeEvent;
@@ -257,7 +258,13 @@ public class CadPageActivity extends AppCompatActivity {
         // If this failed because the activity is not found, ask the user to install
         // the Cadpage support app.  For any other reason, log the event and carry on.
         if ( (ex instanceof ActivityNotFoundException)) {
-          DonateActivity.launchActivity(CadPageActivity.this, NeedCadpageSupportAppEvent.instance(), null);
+
+          // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
+          // can call DonateActivity.launcheActivity() before initializing NeedCadpageSupportAppEvent.
+          NeedCadpageSupportAppEvent event = NeedCadpageSupportAppEvent.instance();
+          if (event.isEnabled()) {
+            DonateActivity.launchActivity(CadPageActivity.this, NeedCadpageSupportAppEvent.instance(), null);
+          }
           return true;
         } else {
           Log.e(ex);
