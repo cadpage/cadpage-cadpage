@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12172018</string>
+  <string name="release_date">12202018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 12/17/2018\n
+    \n
+    v2.0.4-2\n
+    Location Fixes:\n
+    Park County, CO\n
+    Pike County, MO\n
+    Union County, NC\n
+    Lane County, OR\n
+    Harris County ESD1, TX\n
+    Racine County, WI\n
+    \n
+    General Fixes:\n
+    Occasional crash at startup\n
     \n
     v2.0.4-1\n
     Cadpage will prompt user to install new message support app if required\n
@@ -46,28 +58,6 @@
     Suffolk County, NY\n
     Wake County, NC\n
     Elk County, PA\n
-    Grant County, WV\n
-    \n
-    v2.0.2-15\n
-    New Locations:\n
-    Chester County, PA (alt)\n
-    \n
-    Location Fixes:\n
-    Walker County, AL\n
-    Tolland County, CT\n
-    Ocean County, NJ\n
-    Yamhill County, OR\n
-    Lehigh County, PA\n
-    Brazoria County, TX\n
-    Page County, VA\n
-    Roanoke City, VA\n
-    \n
-    v2.0.2-14\n
-    Location Fixes:\n
-    Harrison County, MS\n
-    Erie County, NY\n
-    \n
-    General Fixes:\n
-    Not picking up MMS alerts processed by Textra message app
+    Grant County, WV
   </string>
 </resources>
