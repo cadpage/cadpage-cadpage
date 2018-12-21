@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12202018</string>
+  <string name="release_date">12212018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 12/17/2018\n
+    Updated 12/21/2018\n
+    \n
+    v2.0.4-3\n
+    Location Fixes:\n
+    Anoka County, MN\n
+    Champaign County, OH\n
+    Montgomery County, OH\n
+    Florence County, SC\n
+    Overton, TX\n
+    Rockbridge Conty, VA\n
     \n
     v2.0.4-2\n
     Location Fixes:\n
@@ -45,19 +54,6 @@
     Location Fixes:\n
     Washtenaw County, MI\n
     Clearfield County, PA\n
-    McKean County, PA\n
-    \n
-    v2.0.2-16\n
-    New Locations:\n
-    Chesterfield County, SC\n
-    Lexington, VA\n
-    \n
-    Location Fixes:\n
-    Marion County, IN\n
-    Louisville, KY\n
-    Suffolk County, NY\n
-    Wake County, NC\n
-    Elk County, PA\n
-    Grant County, WV
+    McKean County, PA
   </string>
 </resources>
