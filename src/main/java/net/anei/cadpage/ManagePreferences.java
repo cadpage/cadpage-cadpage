@@ -2540,7 +2540,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_delete_unopen_key,
       R.string.pref_map_network_chk_key,
       R.string.pref_gps_map_option_key,
-      R.string.pref_lock_google_map_key,
+      R.string.pref_app_map_option_key,
       R.string.pref_show_history_address_key,
       R.string.pref_navigate_map_key,
       R.string.pref_report_position_key,
