@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12212018</string>
+  <string name="release_date">12242018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 12/21/2018\n
+    \n
+    v2.0.4-5\n
+    Location Fixes:\n
+    Adams County, PA\n
+    Clatsop County, OR\n
+    Yamhill County, OR\n
     \n
     v2.0.4-4\n
     Location Fixes:\n
@@ -48,12 +54,6 @@
     Venango County, PA\n
     \n
     General Fixes\n
-    Another attempt to fix MMS message processing\n
-    \n
-    v2.0.3-1\n
-    Location Fixes:\n
-    Madison County, AL\n
-    Portage County, OH\n
-    Kenosha County, WI
+    Another attempt to fix MMS message processing
   </string>
 </resources>
