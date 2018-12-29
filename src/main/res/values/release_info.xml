@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12242018</string>
+  <string name="release_date">12292018</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 12/21/2018\n
+    \n
+    v2.0.4-6\n
+    New Location:\n
+    Rapides Parish, LA\n
+    \n
+    Location Fixes:\n
+    Autauga County, AL\n
+    Loudoun County, VA\n
     \n
     v2.0.4-5\n
     Location Fixes:\n
@@ -41,19 +49,6 @@
     Racine County, WI\n
     \n
     General Fixes:\n
-    Occasional crash at startup\n
-    \n
-    v2.0.4-1\n
-    Cadpage will prompt user to install new message support app if required\n
-    \n
-    Location Fixes:\n
-    Montgomery County, MD\n
-    St Louis County, MO\n
-    Lawrence County, PA\n
-    Mercer County, PA\n
-    Venango County, PA\n
-    \n
-    General Fixes\n
-    Another attempt to fix MMS message processing
+    Occasional crash at startup
   </string>
 </resources>
