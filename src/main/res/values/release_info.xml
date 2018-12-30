@@ -7,6 +7,10 @@
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 12/21/2018\n
     \n
+    v2.0.4-7\n
+    Location Fixes:\n
+    Clearfield County, PA\n
+    \n
     v2.0.4-6\n
     New Location:\n
     Rapides Parish, LA\n
@@ -37,18 +41,6 @@
     Montgomery County, OH\n
     Florence County, SC\n
     Overton, TX\n
-    Rockbridge Conty, VA\n
-    \n
-    v2.0.4-2\n
-    Location Fixes:\n
-    Park County, CO\n
-    Pike County, MO\n
-    Union County, NC\n
-    Lane County, OR\n
-    Harris County ESD1, TX\n
-    Racine County, WI\n
-    \n
-    General Fixes:\n
-    Occasional crash at startup
+    Rockbridge Conty, VA
   </string>
 </resources>
