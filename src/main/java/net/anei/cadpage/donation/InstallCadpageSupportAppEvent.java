@@ -26,6 +26,10 @@ public class InstallCadpageSupportAppEvent extends DonateEvent {
     closeEvents(activity);
   }
 
+  public static void install(Activity activity) {
+
+  }
+
   private static final InstallCadpageSupportAppEvent instance = new InstallCadpageSupportAppEvent();
   public static InstallCadpageSupportAppEvent instance() {
     return instance;

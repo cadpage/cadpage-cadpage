@@ -38,6 +38,8 @@ public class CadPageApplication extends Application {
 
     Log.v("Initialization startup");
 
+    Log.v("Message access " + (MsgAccess.ALLOWED ? "allowed" : "restricted"));
+
     context = callingContext.getApplicationContext();
     mainThread = Thread.currentThread();
     mainHandler = new Handler();

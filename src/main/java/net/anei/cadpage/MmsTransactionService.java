@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -47,6 +48,7 @@ import net.anei.cadpage.mms.PduParser;
  */
 public class MmsTransactionService extends Service {
 
+  private static final String MMS_URL = "content://mms";
   private static final Uri MMS_URI = Uri.parse("content://mms");
 
   private enum EventType {TRANSACTION_REQUEST, TIMEOUT, TIMER_TICK, QUIT}
@@ -70,11 +72,6 @@ public class MmsTransactionService extends Service {
     if (Log.DEBUG) Log.v("MmsTransactionService.onCreate()");
     CadPageApplication.initialize(this);
 
-    // Give us foreground priority
-    // we are saving our message list in memory and really don't want to
-    // destroyed if we can possibly help it.
-    startForeground(0, new Notification());
-
     // Acquire simple power lock while we are running
     PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
     assert pm != null;
@@ -96,6 +93,10 @@ public class MmsTransactionService extends Service {
   public int onStartCommand(Intent intent, int flags, int startId) {
     if (Log.DEBUG) Log.v("MmsTransactionService.onStart()");
     if (intent == null) return START_NOT_STICKY;
+
+    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      startForeground(1, ManageNotification.getMiscNotification(this));
+    }
 
     // Collect all of the preferences we might need while we are still on
     // the main thread;
@@ -133,6 +134,7 @@ public class MmsTransactionService extends Service {
     private final List<MmsMsgEntry> msgList = new LinkedList<>();
 
     private final ContentResolver qr = getContentResolver();
+    private final MmsContentQuery mcq = new MmsContentQuery(MmsTransactionService.this);
 
     private class MmsContentObserver extends ContentObserver {
       private MmsContentObserver(Handler handler) {
@@ -284,7 +286,7 @@ public class MmsTransactionService extends Service {
         try {
           String msgId = message.getMmsMsgId();
           String contentLoc = message.getContentLoc();
-          cur = qr.query(MMS_URI, MMS_COL_LIST, "tr_id=? or m_id=? or m_id=?", new String[]{msgId, msgId, contentLoc}, null);
+          cur = mcq.query(MMS_URL, MMS_COL_LIST, "tr_id=? or m_id=? or m_id=?", new String[]{msgId, msgId, contentLoc}, null);
         } catch (IllegalStateException ex) {
           Log.e(ex);
           EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
@@ -302,10 +304,8 @@ public class MmsTransactionService extends Service {
 
         // OK, we have the desired record number
         // Now see if we can recover the content
-
-        Uri mmsUri = ContentUris.withAppendedId(MMS_URI, recNo);
-        Uri partUri = Uri.withAppendedPath(mmsUri, "part");
-        cur = qr.query(partUri, PART_COL_LIST, null, null, null);
+        String partUrl = MMS_URL + '/' + recNo + "/part";
+        cur = mcq.query(partUrl, PART_COL_LIST, null, null, null);
 
         String text;
         try {
@@ -313,6 +313,8 @@ public class MmsTransactionService extends Service {
 
             // The message contents do not yet exist.  Fire off a service request
             // to the messaging app to get these loaded if we haven't already
+            // This *NEVER* works any more.  But fortunately most message apps automatically
+            // download MMS content, so this really doesn't matter
             if (entry.loading) continue;
             if (Log.DEBUG) Log.v("Request MMS content for " + entry.message.getContentLoc());
             final Intent intent = new Intent();
@@ -365,24 +367,11 @@ public class MmsTransactionService extends Service {
         message.setMessageBody(text);
         SmsMsgLogBuffer.getInstance().update(message);
 
-        // OK, we have a real message.  First see if it is a vendor discovery query
-        // If it is, delete the message from the message inbox
-        if (message.isDiscoveryQuery(MmsTransactionService.this)) {
-          qr.delete(mmsUri, null, null);
-        }
-
         // Now that we have the full message, we can try to parse it as a CAD page
         boolean isPage = message.isPageMsg();
 
         // If not a CAD page, we are done with it
         if (!isPage) continue;
-
-
-        // If we were not supposed to pass messages through to the SMS app
-        // we try to cover our tracks by deleting this message from the MMS
-        // message content
-        FilterOptions options = message.getFilterOptions();
-        if (!options.blockTextMsgEnabled()) qr.delete(mmsUri, null, null);
 
         // Pop back to the main thread to perform the rest of the CAD page 
         // message processing
@@ -412,5 +401,17 @@ public class MmsTransactionService extends Service {
         });
       }
     }
+  }
+
+  public static void runIntentInService(Context context, Intent intent) {
+
+    // Pass intent on the MmsTransactionService
+    intent.setClass(context, MmsTransactionService.class);
+    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      context.startForegroundService(intent);
+    } else {
+      context.startService(intent);
+    }
+
   }
 }

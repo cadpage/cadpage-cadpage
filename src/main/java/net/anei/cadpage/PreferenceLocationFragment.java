@@ -43,6 +43,8 @@ public class PreferenceLocationFragment extends PreferenceFragment {
   private Preference scannerPref;
   private String saveLocation;
 
+  private boolean checkMsgSupport;
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,14 @@ public class PreferenceLocationFragment extends PreferenceFragment {
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.preference_location);
 
-    // Add necessary permission checks
+    // See if we are going to need to check message support.
+    // If message processing is enabled, this has already been check and we
+    // do not have to worry about it.  But if message processing is not
+    // enabled, we will need to check message support if/when it is enabled
+    String msgTypes = ManagePreferences.enableMsgType();
+    checkMsgSupport =  (!msgTypes.contains("S") && !msgTypes.contains("M"));
+
+      // Add necessary permission checks
     Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
     pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
       @Override
@@ -217,6 +226,14 @@ public class PreferenceLocationFragment extends PreferenceFragment {
           setPreferenceScreen((PreferenceScreen) preference);
         }
       }
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (checkMsgSupport) {
+      checkMsgSupport = SmsPopupUtils.checkMsgSupport(getActivity()) != 0;
     }
   }
 

@@ -4,11 +4,9 @@ import java.util.List;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -23,28 +21,25 @@ public class ContentQuery {
   
   public static void dumpEverything(Context context) {
     
-    ContentResolver res = context.getContentResolver();
-    Uri uri  = Uri.parse("content://mms");
-    Cursor cur = res.query(uri, null, null, null, null);
+    MmsContentQuery res = new MmsContentQuery(context);
+    Cursor cur = res.query("content://mms", null, null, null, null);
     dumpCursor("Full MMS", cur);
   }
 
   public static void dumpRecentMms(Context context) {
-    ContentResolver res = context.getContentResolver();
-    Uri uri  = Uri.parse("content://mms");
-    Cursor cur = res.query(uri, null, null, null, "date desc limit 5");
+    MmsContentQuery res = new MmsContentQuery(context);
+    Cursor cur = res.query("content://mms", null, null, null, "date desc limit 5");
     dumpCursor("Recent MMS", cur);
   }
   
   private static void retrieveMsg(Context context) {
-    
-    ContentResolver res = context.getContentResolver();
+
+    MmsContentQuery res = new MmsContentQuery(context);
     int id = -1;
-    String msg_id = "http://166.216.166.67:8004/Y/1126033341600005000020000";
+    String msg_id = "http://166.216.166.67:8004/Y/1230234211600006000020000";
     
     if (id < 0) {
-      Uri uri  = Uri.parse("content://mms");
-      Cursor cur = res.query(uri, MMS_COL_LIST, "ct_l=? or m_id=?", new String[]{msg_id, msg_id}, null);
+      Cursor cur = res.query("content://mms", MMS_COL_LIST, "ct_l=? or m_id=?", new String[]{msg_id, msg_id}, null);
       if (cur == null) return;
       try {
         Log.w("rec count:" + cur.getCount());
@@ -57,8 +52,7 @@ public class ContentQuery {
       }
     }
     
-    Uri uri = Uri.parse("content://mms/"+id+"/part");
-    Cursor cur = res.query(uri, PART_COL_LIST, null, null, null);
+    Cursor cur = res.query("content://mms/"+id+"/part", PART_COL_LIST, null, null, null);
     dumpCursor("MMS part", cur);
     
     if (cur == null || !cur.moveToFirst()) return;

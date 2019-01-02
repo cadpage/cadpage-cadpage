@@ -2,24 +2,20 @@ package net.anei.cadpage;
 
 import net.anei.cadpage.donation.Active911WarnEvent;
 import net.anei.cadpage.donation.DonateActivity;
-import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.HelpWelcomeEvent;
 import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
-import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.VendorEvent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,10 +39,6 @@ public class CadPageActivity extends AppCompatActivity {
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
 
-  private static final String CADPAGE_SUPPORT_PKG = "net.anei.cadpagesupport";
-  private static final String CADPAGE_SUPPORT_CLASS = "net.anei.cadpagesupport.MainActivity";
-  private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
-  
   private static final int RELEASE_DIALOG = 1;
   private static final int CONFIRM_DELETE_ALL_DIALOG = 2;
 
@@ -152,7 +144,7 @@ public class CadPageActivity extends AppCompatActivity {
       ManagePreferences.checkInitialPermissions(new Runnable(){
         @Override
         public void run() {
-          needSupportApp = checkMsgSupport();
+          needSupportApp = SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0;
           if (needSupportApp) return;
 
           // If user upgraded to the release that implements improved email account security, and
@@ -232,46 +224,6 @@ public class CadPageActivity extends AppCompatActivity {
     }
 
     initializing = false;
-  }
-
-  /**
-   * Check to see if the message support app is needed and/or installed
-   * @return true if user was prompted to install the support app
-   */
-  private boolean checkMsgSupport() {
-
-    // If we are still processing SMS or MMS messages, we need to some additional work
-    String msgTypes = ManagePreferences.enableMsgType();
-    if (msgTypes.contains("S") || msgTypes.contains("M")) {
-
-      // Fire off an intent to launch the support all.  If it installed and configured
-      // correctly, it will quietly die without doing anything
-      Intent intent = new Intent(Intent.ACTION_MAIN);
-      intent.addCategory(Intent.CATEGORY_LAUNCHER);
-      intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
-      intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
-
-      try {
-        startActivity(intent);
-      } catch (Exception ex) {
-
-        // If this failed because the activity is not found, ask the user to install
-        // the Cadpage support app.  For any other reason, log the event and carry on.
-        if ( (ex instanceof ActivityNotFoundException)) {
-
-          // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
-          // can call DonateActivity.launcheActivity() before initializing NeedCadpageSupportAppEvent.
-          NeedCadpageSupportAppEvent event = NeedCadpageSupportAppEvent.instance();
-          if (event.isEnabled()) {
-            DonateActivity.launchActivity(CadPageActivity.this, NeedCadpageSupportAppEvent.instance(), null);
-          }
-          return true;
-        } else {
-          Log.e(ex);
-        }
-      }
-    }
-    return false;
   }
 
   /**
@@ -399,14 +351,12 @@ public class CadPageActivity extends AppCompatActivity {
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     activityActive = true;
 
-    // If we asked user to install the support app, make sure that is has
-    // been opened and requested the appropriate permissions
-    // (Commented out for now.  We do not need to be so aggressive about
-    // making sure the support app is functioning until we actually loose the
-    // ability to process messages ourselves
-//    if (needSupportApp) {
-//      needSupportApp = checkMsgSupport();
-//    }
+    // If we **REALLY** need the support app, and we asked the user
+    // to install it, make sure that it has been installed and opened and
+    // everything is OK.
+    if (!MsgAccess.ALLOWED && needSupportApp) {
+      needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
+    }
   } 
   
   protected void onPause() {

@@ -6,7 +6,9 @@ import android.content.Intent;
 
 public class SmsReceiver extends BroadcastReceiver {
   
-  private static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+  public static final String ACTION_SMS_RECEIVED =
+      (MsgAccess.ALLOWED ? "android.provider.Telephony.SMS_RECEIVED"
+                         : "net.anei.cadpage.Telephony.SMS_RECEIVED");
 
   @Override
   public synchronized void onReceive(Context context, Intent intent) {

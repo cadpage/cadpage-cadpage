@@ -4,14 +4,13 @@ import android.app.IntentService;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.PowerManager;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 
 @SuppressWarnings("RedundantIfStatement")
 public class SmsService extends IntentService {
-
-  private static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
 
   // wakelock
   private static PowerManager.WakeLock sWakeLock;
@@ -24,6 +23,11 @@ public class SmsService extends IntentService {
   public int onStartCommand(Intent intent, int flags, int startId) {
     CadPageApplication.initialize(this);
     if (flags != 0) holdPowerLock(this);
+
+    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      startForeground(1, ManageNotification.getMiscNotification(this));
+    }
+
     super.onStartCommand(intent, flags, startId);
     return Service.START_REDELIVER_INTENT;
   }
@@ -62,7 +66,12 @@ public class SmsService extends IntentService {
     // start the service to handle the intent
     holdPowerLock(context);
     intent.setClass(context, SmsService.class);
-    context.startService(intent);
+    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      context.startForegroundService(intent);
+    } else {
+      context.startService(intent);
+    }
+
   }
 
   private static void holdPowerLock(Context context) {
@@ -84,7 +93,7 @@ public class SmsService extends IntentService {
 
     // Otherwise convert Intent into an SMS/MSS message
     SmsMmsMessage message = null;
-    if (ACTION_SMS_RECEIVED.equals(intent.getAction())) {
+    if (SmsReceiver.ACTION_SMS_RECEIVED.equals(intent.getAction())) {
       SmsMessage[] messages = getMessagesFromIntent(intent);
       if (messages == null) return false;
       message = new SmsMmsMessage( messages,System.currentTimeMillis());

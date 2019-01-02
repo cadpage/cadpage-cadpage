@@ -25,22 +25,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
 
-        flavorDimensions "api"
+        flavorDimensions "type"
+        productFlavors {
+            full {
+                dimension "type"
+            }
 
-        /***
-         productFlavors {current {dimension "api"
-         versionCode 100000000  + android.defaultConfig.versionCode
-         compileSdkVersion 27
-         targetSdkVersion 27
-         minSdkVersion 14}legacy {dimension "api"
-         versionNameSuffix "(a)"
-         compileSdkVersion 23
-         targetSdkVersion 23
-         maxSdkVersion 23
-         minSdkVersion 9}}***/
+            restrict {
+                dimension "type"
+                versionNameSuffix "(beta)"
+            }
+        }
     }
     compileSdkVersion 28
-//    buildToolsVersion '27.0.3'
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -50,11 +48,11 @@ android {
 
 dependencies {
     implementation project(':cadpage-parsers')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     //    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:support-v4:28.0.0'
     //    implementation 'com.google.android.gms:play-services-gcm:15.0.0'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.google.firebase:firebase-iid:16.0.0'
     implementation 'com.google.firebase:firebase-messaging:17.0.0'

@@ -22,6 +22,7 @@ package net.anei.cadpage;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.PowerManager;
 
 /**
@@ -30,7 +31,9 @@ import android.os.PowerManager;
  */
 public class PushReceiver extends BroadcastReceiver {
 
-  private static final String ACTION_WAP_PUSH_RECEIVED = "android.provider.Telephony.WAP_PUSH_RECEIVED";
+  private static final String ACTION_WAP_PUSH_RECEIVED =
+      (MsgAccess.ALLOWED ? "android.provider.Telephony.WAP_PUSH_RECEIVED"
+                         : "net.anei.cadpage.Telephony.WAP_PUSH_RECEIVED");
 
   @Override
   public void onReceive(Context context, Intent intent) {
@@ -52,8 +55,7 @@ public class PushReceiver extends BroadcastReceiver {
     wl.acquire(5000);
     
     // Pass intent on the MmsTransactionService
-    intent.setClass(context, MmsTransactionService.class);
-    context.startService(intent);
+    MmsTransactionService.runIntentInService(context, intent);
   }
 }
 
