@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12292018</string>
+  <string name="release_date">01022019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 12/21/2018\n
+    \n
+    v2.0.4-8\n
+    Stop prompting to install the support app at on 1/9/2019
+    because it will not be available.\n
+    \n
+    Location Fixes:\n
+    Madison County, AL\n
+    Madison County, IN\n
+    Chester County, PA\n
     \n
     v2.0.4-7\n
     Location Fixes:\n
@@ -32,15 +41,6 @@
     Cheboygan County, MI\n
     Mecosta County, MI\n
     Oseola County, MI\n
-    Washtenaw County, MI\n
-    \n
-    v2.0.4-3\n
-    Location Fixes:\n
-    Anoka County, MN\n
-    Champaign County, OH\n
-    Montgomery County, OH\n
-    Florence County, SC\n
-    Overton, TX\n
-    Rockbridge Conty, VA
+    Washtenaw County, MI
   </string>
 </resources>

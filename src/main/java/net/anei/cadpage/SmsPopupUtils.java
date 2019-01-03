@@ -1,6 +1,11 @@
 package net.anei.cadpage;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
@@ -136,7 +141,6 @@ public class SmsPopupUtils {
     }
   }
 
-
   /**
    * Check to see if the message support app is needed and/or installed
    * @param activity current activity
@@ -149,6 +153,9 @@ public class SmsPopupUtils {
     // If we are still processing SMS or MMS messages, we need to some additional work
     String msgTypes = ManagePreferences.enableMsgType();
     if (!msgTypes.contains("S") && !msgTypes.contains("M")) return -1;
+
+    // Ditto if support app is no longer available
+    if (!isSupportAppAvailable()) return -1;
 
     // See if support package is installed
     // if it is not, launch play store to install the update without futher ado
@@ -192,5 +199,23 @@ public class SmsPopupUtils {
       Log.e(ex);
     }
     return 0;
+  }
+
+  private static boolean isSupportAppAvailable() {
+    return System.currentTimeMillis() < SUPPORT_APP_CUTOFF_TIME;
+  }
+
+  // As things stand now, the support app will disappear the start of Jan 9, 2019
+  private static final long SUPPORT_APP_CUTOFF_TIME;
+  static {
+    Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("GMT+0"));
+    cal.set(Calendar.MONTH, 1);
+    cal.set(Calendar.DAY_OF_MONTH, 9);
+    cal.set(Calendar.YEAR, 2019);
+    cal.set(Calendar.HOUR, 0);
+    cal.set(Calendar.MINUTE, 0);
+    cal.set(Calendar.SECOND, 0);
+    cal.set(Calendar.MINUTE, 0);
+    SUPPORT_APP_CUTOFF_TIME = cal.getTimeInMillis();
   }
 }

@@ -1,5 +1,7 @@
 /build
+/full
 /release
+/restrict
 *.iml
 /.idea/misc.xml
 /.idea/workspace.xml
