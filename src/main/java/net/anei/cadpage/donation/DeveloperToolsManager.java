@@ -217,11 +217,18 @@ public class DeveloperToolsManager {
 
         case 14:    // Build test message
           SmsMmsMessage message =
-            new SmsMmsMessage("GCM", "TEAT664", "111-MIN 5 TONY ST HENDERSON AUCKLAND. (XStr CENTRAL PARK DR/) .RETAINING WALL ON FIRE . (x-401538144 y-227185845) #F2010720",
-                              System.currentTimeMillis(), "Vendor/NewZealandPager/Revised,Utility/General/Default", "Active911",
-                              "AL30/8/10[=Not Responding;ResponseResp=Resp;ResponseArriv=Arriv;ResponseCancl=Cancl;ResponseAvail=Avail;ResponseUnvl=Unvl]",
-                              "https://access.active911.com/interface/cadpage_api.php?q=anxgGg4OSW",
-                              null, null, null);
+            new SmsMmsMessage(
+              "\"Delaware Co Emg Services\" <caddbserver@delco911alerts.com>",
+              "Delco Emg Services Notification",
+              "LOC: 137 BARTRAM AV ES TN X1: FRONT ST X2: E 2ND ST Nature:FIRE-BLD BUILDING FIRE, RES/DWELLING TIME:12:25:11 Notes:   BEDROOM Inc: F19000304 Beat: ES1 LL: 39.86110 -75.29586 Disp: 481,482,LA48,LA7,ENG7,SN8,ENG12-2,RIT43,AMB2,M100B,AC48,ENG12-1,WORK\r\n\r\n\r\n",
+              System.currentTimeMillis(),
+              "US/PA/DelcoTextRelay,Utility/General/Default",
+              "Active911",
+              "AL30/8/10[=Not Responding;ResponseResp=Resp;ResponseArriv=Arriv;ResponseCancl=Cancl;ResponseAvail=Avail;ResponseUnvl=Unvl]",
+              "https://access.active911.com/interface/cadpage_api.php?q=amZPVy71TB",
+              "-1",
+              null,
+              "http://active911.com/amZPVy71TB");
 
           // Add to log buffer
           if (!SmsMsgLogBuffer.getInstance().add(message)) return;
@@ -253,21 +260,13 @@ public class DeveloperToolsManager {
           break;
 
         case 19:    // Build a specific FCM page message
-          Intent intent = new Intent(context, FCMMessageService.class);
-          intent.setAction("com.google.android.c2dm.intent.RECEIVE");
-          intent.putExtra("vendor", "CodeMessaging");
-
-          intent.putExtra("content", "CALL: SICK PERSON \r\nBOX: 1-1 \r\nADDR: 601 FAIR HAVEN CT\r\nUNIT: A12 A108 CCPM11 \r\nCITY: Federalsburg        \nDST: MD");
-          intent.putExtra("format", "Cadpage2");
-
-          context.startService(intent);
           break;
 
         case 20:    // Throw exception to test crash reporting
           throw new RuntimeException("Test Exception Handling");
 
         case 21:    // Do not disturb
-          intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+          Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
           context.startActivity(intent);
           break;
 

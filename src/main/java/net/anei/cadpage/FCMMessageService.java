@@ -62,9 +62,6 @@ public class FCMMessageService extends FirebaseMessagingService {
 
     Log.v("Message data payload:" + data);
 
-    // Likewise if Cadpage is disabled
-    if (!ManagePreferences.enabled()) return;
-
     // Get the vendor code
     String vendorCode = data.get("vendor");
     if (vendorCode == null) vendorCode = data.get("sponsor");
