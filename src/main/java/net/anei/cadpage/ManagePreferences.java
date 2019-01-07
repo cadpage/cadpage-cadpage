@@ -241,7 +241,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
         // If this is not an initial startup, we need to request a new registration ID
         if (oldVersion > 0) {
-          FCMInstanceIdService.resetInstanceId();
+          FCMMessageService.resetInstanceId();
 
           // And set transfer status to "X" pending access to the current MEID value.
           // We will figure out latter whether we are running on a new device or not

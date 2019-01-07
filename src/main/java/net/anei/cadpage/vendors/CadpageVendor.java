@@ -8,7 +8,7 @@ import android.content.Context;
 import android.net.Uri;
 
 import net.anei.cadpage.CadPageActivity;
-import net.anei.cadpage.FCMInstanceIdService;
+import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.R;
 import net.anei.cadpage.HttpService.HttpRequest;
@@ -142,7 +142,7 @@ class CadpageVendor extends Vendor {
       // we can pretty reliably break the connection is by unregistering the
       // current registration ID and getting a new one
       else {
-        FCMInstanceIdService.resetInstanceId();
+        FCMMessageService.resetInstanceId();
         return false;
       }
     }

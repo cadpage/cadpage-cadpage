@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.FCMInstanceIdService;
+import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
@@ -53,7 +53,7 @@ public class VendorManager {
 
       @Override
       public boolean onPreferenceClick(Preference preference) {
-        if (SmsPopupUtils.haveNet(context)) reconnect(context, true);
+        if (SmsPopupUtils.haveNet(context)) reconnect(context,true);
         return true;
       }});
     
@@ -245,10 +245,24 @@ public class VendorManager {
    * @param context current context
    * @param userReq User requested reconnect
    */
-  public void reconnect(Context context, boolean userReq) {
+  public void reconnect(final Context context, final boolean userReq) {
+    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
+      @Override
+      public void run(String registrationId) {
+        reconnect(context, registrationId, userReq);
+      }
+    });
+  }
 
-    // Get the registration ID.  If we do not have one yet, we cannot proceed.
-    String registrationId = FCMInstanceIdService.getInstanceId();
+  /**
+   * Reconnect all enabled vendors
+   * @param context current context
+   * @param registrationId current GCM registration token
+   * @param userReq User requested reconnect
+   */
+  public void reconnect(Context context, String registrationId, boolean userReq) {
+
+    // If we do not have a registration ID, we cannot proceed
     if (registrationId == null) return;
 
     // Get transfer status.  An X value means we are waiting for READ_PHONE_STATE permission

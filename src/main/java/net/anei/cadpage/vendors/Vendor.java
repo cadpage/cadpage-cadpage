@@ -6,7 +6,7 @@ import java.util.Date;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.EmailDeveloperActivity;
-import net.anei.cadpage.FCMInstanceIdService;
+import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.NoticeActivity;
@@ -265,17 +265,22 @@ abstract class Vendor {
    * Send a reset email address request
    * @param context current context
    */
-  void resetEmailReq(Context context) {
-    Uri uri = buildRequestUri("reset", FCMInstanceIdService.getInstanceId());
-    HttpService.addHttpRequest(context, new HttpRequest(uri){
-
+  void resetEmailReq(final Context context) {
+    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
       @Override
-      protected void processBody(String content) {
-        if (content.startsWith("200 ")) {
-          emailAddress = content.substring(4).trim();
-          saveStatus();
-          PagingProfileEvent.instance().open(CadPageApplication.getContext());
-        }
+      public void run(String registrationId) {
+        Uri uri = buildRequestUri("reset", registrationId);
+        HttpService.addHttpRequest(context, new HttpRequest(uri){
+
+          @Override
+          protected void processBody(String content) {
+            if (content.startsWith("200 ")) {
+              emailAddress = content.substring(4).trim();
+              saveStatus();
+              PagingProfileEvent.instance().open(CadPageApplication.getContext());
+            }
+          }
+        });
       }
     });
   }
@@ -581,10 +586,17 @@ abstract class Vendor {
    * Process user request vendor user profile
    * @param context current context
    */
-  void profileReq(Activity context) {
+  void profileReq(final Activity context) {
+
     if (!SmsPopupUtils.haveNet(context)) return;
-    Uri uri = buildRequestUri("profile", FCMInstanceIdService.getInstanceId());
-    viewPage(context, uri);
+
+    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
+      @Override
+      public void run(String registrationId) {
+        Uri uri = buildRequestUri("profile", registrationId);
+        viewPage(context, uri);
+      }
+    });
   }
 
   /**
@@ -606,8 +618,13 @@ abstract class Vendor {
    * Force new registration request, even if service is already enabled
    * @param context current context
    */
-  void forceReregister(Context context) {
-    sendReregister(context, FCMInstanceIdService.getInstanceId(), false);
+  void forceReregister(final Context context) {
+    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
+      @Override
+      public void run(String registrationId) {
+        sendReregister(context, registrationId, false);
+      }
+    });
   }
 
   /**
@@ -641,35 +658,39 @@ abstract class Vendor {
    * @param context current context
    * @param uri URI included in discover request or null if user request
    */
-  void registerReq(Context context, Uri uri) {
-    
-    // If already enabled, we don't have to do anything
-    if (enabled) {
-      sendReregister(context, FCMInstanceIdService.getInstanceId(), true);
-      return;
-    }
+  void registerReq(final Context context, final Uri uri) {
 
     // Make sure we have network connectivity
     if (!SmsPopupUtils.haveNet(context)) return;
 
-    // Set registration in progress flag
-    // and save the discovery URI
-    inProgress = true;
-    discoverUri = uri;
-    
-    // See if we already have a registration ID, if we do, use it to send
-    // registration request to vendor server
-    String regId = FCMInstanceIdService.getInstanceId();
-    if (regId != null) {
-      reconnect(context, regId, true, "N");
-    }
+    // We need the registration ID before we can do anything
+    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
+      @Override
+      public void run(String registrationId) {
+
+        // If already enabled, we don't have to do anything
+        if (enabled) {
+          sendReregister(context, registrationId, true);
+          return;
+        }
+
+        // Set registration in progress flag
+        // and save the discovery URI
+        inProgress = true;
+        discoverUri = uri;
+
+        // See if we already have a registration ID, if we do, use it to send
+        // registration request to vendor server
+        reconnect(context, registrationId, true, "N");
+      }
+    });
   }
 
   /**
    * Process user request to unregister from this service
    * @param context current context
    */
-  void unregisterReq(Context context) {
+  void unregisterReq(final Context context) {
     
     if (!enabled) return;
     
@@ -679,22 +700,27 @@ abstract class Vendor {
     enabled = false;
     saveStatus();
     reportStatusChange();
-    
-    // Send an unregister request to the vendor server
-    // we really don't care how it responds
-    Uri uri = buildRequestUri("unregister", FCMInstanceIdService.getInstanceId(), true);
-    HttpService.addHttpRequest(context, new HttpRequest(uri){});
-    
-    // Finally unregister from Google C2DM service.  If there are other vendor
-    // services that are still active, they will request a new registration ID
-    FCMInstanceIdService.resetInstanceId();
 
-    // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
-    if (isSponsored()) {
-      ManagePreferences.setAuthRunDays(0);
-      DonationManager.instance().reset();
-      MainDonateEvent.instance().refreshStatus();
-    }
+    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
+      @Override
+      public void run(String registrationId) {
+        // Send an unregister request to the vendor server
+        // we really don't care how it responds
+        Uri uri = buildRequestUri("unregister", registrationId, true);
+        HttpService.addHttpRequest(context, new HttpRequest(uri){});
+
+        // Finally unregister from Google C2DM service.  If there are other vendor
+        // services that are still active, they will request a new registration ID
+        FCMMessageService.resetInstanceId();
+
+        // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
+        if (isSponsored()) {
+          ManagePreferences.setAuthRunDays(0);
+          DonationManager.instance().reset();
+          MainDonateEvent.instance().refreshStatus();
+        }
+      }
+    });
   }
   
   /**
@@ -800,7 +826,7 @@ abstract class Vendor {
         
         // A 299 response indicates that the server has been having trouble with our registration ID
         // and we should request another one.
-        if (status == 299) FCMInstanceIdService.resetInstanceId();
+        if (status == 299) FCMMessageService.resetInstanceId();
         
         // A 400 request indicates that the device we have tried to register is no longer valid
         if (status == 400) {
@@ -846,7 +872,7 @@ abstract class Vendor {
         updateLastRegisterTime();
       }
       else {
-        FCMInstanceIdService.resetInstanceId();
+        FCMMessageService.resetInstanceId();
         ManagePreferences.setAuthRunDays(0);
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
