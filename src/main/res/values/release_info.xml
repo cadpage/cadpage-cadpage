@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01052019</string>
+  <string name="release_date">01082019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 01/01/2018\n
+    \n
+    v2.0.4-10\n
+    New Location:\n
+    Crawford County, KS\n
+    \n
+    Location Fix:\n
+    Park County, CO\n
+    \n
+    General Fixes:\n
+    Upgraded to latest versions of internal libraries.\n
+    Updated to work with Android 9.\n
     \n
     v2.0.4-9\n
     Location Fixes:\n
@@ -33,12 +44,6 @@
     \n
     Location Fixes:\n
     Autauga County, AL\n
-    Loudoun County, VA\n
-    \n
-    v2.0.4-5\n
-    Location Fixes:\n
-    Adams County, PA\n
-    Clatsop County, OR\n
-    Yamhill County, OR
+    Loudoun County, VA
   </string>
 </resources>
