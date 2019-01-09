@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01082019</string>
+  <string name="release_date">01092019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 01/01/2018\n
+    \n
+    v2.0.4-11\n
+    New Location:\n
+    Jay County, IN\n
+    \n
+    Location Fix:\n
+    Elk County, PA\n
     \n
     v2.0.4-10\n
     New Location:\n
@@ -36,14 +43,6 @@
     \n
     v2.0.4-7\n
     Location Fixes:\n
-    Clearfield County, PA\n
-    \n
-    v2.0.4-6\n
-    New Location:\n
-    Rapides Parish, LA\n
-    \n
-    Location Fixes:\n
-    Autauga County, AL\n
-    Loudoun County, VA
+    Clearfield County, PA
   </string>
 </resources>

@@ -202,20 +202,6 @@ public class SmsPopupUtils {
   }
 
   private static boolean isSupportAppAvailable() {
-    return System.currentTimeMillis() < SUPPORT_APP_CUTOFF_TIME;
-  }
-
-  // As things stand now, the support app will disappear the start of Jan 9, 2019
-  private static final long SUPPORT_APP_CUTOFF_TIME;
-  static {
-    Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("GMT+0"));
-    cal.set(Calendar.MONTH, 1);
-    cal.set(Calendar.DAY_OF_MONTH, 9);
-    cal.set(Calendar.YEAR, 2019);
-    cal.set(Calendar.HOUR, 0);
-    cal.set(Calendar.MINUTE, 0);
-    cal.set(Calendar.SECOND, 0);
-    cal.set(Calendar.MINUTE, 0);
-    SUPPORT_APP_CUTOFF_TIME = cal.getTimeInMillis();
+    return false;
   }
 }
