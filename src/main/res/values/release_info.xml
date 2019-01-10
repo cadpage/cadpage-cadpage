@@ -5,7 +5,17 @@
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 01/01/2018\n
+    Updated 01/09/2018\n
+    \n
+    v2.0.4-12\n
+    New Location:\n
+    Lake County, OH (alt)\n
+    \n
+    Location Fixes:\n
+    Park County, CO\n
+    \n
+    General Fixes:\n
+    Backed out change to target Android 9.  It was resulting in some unexpected issues.\n
     \n
     v2.0.4-11\n
     New Location:\n
@@ -39,10 +49,6 @@
     Location Fixes:\n
     Madison County, AL\n
     Madison County, IN\n
-    Chester County, PA\n
-    \n
-    v2.0.4-7\n
-    Location Fixes:\n
-    Clearfield County, PA
+    Chester County, PA
   </string>
 </resources>
