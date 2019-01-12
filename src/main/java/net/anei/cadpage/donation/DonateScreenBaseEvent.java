@@ -1,8 +1,10 @@
 package net.anei.cadpage.donation;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.anei.cadpage.Log;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
@@ -141,12 +143,19 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     
     DonateScreenBaseEvent event = screenEventMap.get(classname);
     if (event == null) {
-      StringBuilder sb = new StringBuilder("No Event registered for " + classname);
-      sb.append("\nRegistered Classes:");
-      for (String key : screenEventMap.keySet()) {
-        sb.append("\n" + key);
+
+      // Yet it still keeps happening (rarely) possibly because Cadpage is killed and
+      // restarted while one of our Donate activity windows is open.  Ultimate fallback is
+      // to use reflection to call the Donate event instance method.
+      Log.e("No Event registered for " + classname);
+      try {
+        Class cls = Class.forName(classname);
+        Method instanceMethod = cls.getMethod("instance");
+        event = (DonateScreenBaseEvent)instanceMethod.invoke(null);
+        Log.e("Event successfully retrieved");
+      } catch (Exception ex) {
+        throw new RuntimeException("Error creating " + classname, ex);
       }
-      throw new RuntimeException(sb.toString());
     }
     return event;
   }
