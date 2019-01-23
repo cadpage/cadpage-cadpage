@@ -202,6 +202,6 @@ public class SmsPopupUtils {
   }
 
   private static boolean isSupportAppAvailable() {
-    return false;
+    return true;
   }
 }

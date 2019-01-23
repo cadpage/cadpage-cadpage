@@ -4,8 +4,26 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    Big changes are coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 01/09/2018\n
+    Big changes may be coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
+    Updated 01/18/2018\n
+    \n
+    V2.0.5-1\n
+    Once again recommending installation of the message support app.\n
+    \n
+    Location Fixes:\n
+    Northwest Public Safety, CT\n
+    Charlevoix County, MI\n
+    Cheboygan County, MI\n
+    Emmet County, MI\n
+    Washtenaw County, MI\n
+    Anokoka County, MN\n
+    Lewis and Clark County, MT\n
+    Ulster County, NY\n
+    Hamilton County, OH\n
+    Greenville County, SC\n
+    Cooke County, TX\n
+    Harris County ESD1, TX\n
+    Prince Edward County, VA\n
     \n
     v2.0.4-12\n
     New Location:\n
@@ -40,15 +58,6 @@
     Harrison County, MS\n
     Linn County, OR\n
     Marion County, OR\n
-    Chester County, PA\n
-    \n
-    v2.0.4-8\n
-    Stop prompting to install the support app at on 1/9/2019
-    because it will not be available.\n
-    \n
-    Location Fixes:\n
-    Madison County, AL\n
-    Madison County, IN\n
     Chester County, PA
   </string>
 </resources>
