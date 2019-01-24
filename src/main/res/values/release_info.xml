@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01092019</string>
+  <string name="release_date">01242019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes may be coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 01/18/2018\n
     \n
-    V2.0.5-1\n
+    v2.0.5-2\n
+    Location Fixes:\n
+    Russell County, AL\n
+    El Paso County, CO\n
+    Litchfield County, CT\n
+    Cocoa, FL\n
+    Dooly County, GA\n
+    Macron County, GA\n
+    Marion County, GA\n
+    Schley County, GA\n
+    Sumter County, GA\n
+    Talbot County, GA\n
+    Taylor County, GA\n
+    Tift County, GA\n
+    Webster County, GA\n
+    Baltimore County, MD\n
+    MICCOM, NJ\n
+    Delaware County, NY\n
+    Brown County, WI\n
+    Calumet County, WI\n
+    Outagamie County, WI\n
+    Winnebago County, WI\n
+    Chittenden County, VT\n
+    \n
+    v2.0.5-1\n
     Once again recommending installation of the message support app.\n
     \n
     Location Fixes:\n
@@ -52,12 +76,5 @@
     General Fixes:\n
     Upgraded to latest versions of internal libraries.\n
     Updated to work with Android 9.\n
-    \n
-    v2.0.4-9\n
-    Location Fixes:\n
-    Harrison County, MS\n
-    Linn County, OR\n
-    Marion County, OR\n
-    Chester County, PA
   </string>
 </resources>
