@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01242019</string>
+  <string name="release_date">02082019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     Big changes may be coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 01/31/2018\n
+    Updated 02/08/2018\n
+    \n
+    v2.0.6-1\n
+    Location Fixes:\n
+    Windham County, CT\n
+    Pike County, GA\n
+    Hennepin County, MN\n
+    Newton County, MO\n
+    Onslow County, NC\n
+    Woodbury County, IN\n
+    Moneteau County, MO\n
+    Benton County, OR\n
     \n
     v2.0.5-4\n
     Location Fixes:\n
@@ -70,17 +81,6 @@
     Jay County, IN\n
     \n
     Location Fix:\n
-    Elk County, PA\n
-    \n
-    v2.0.4-10\n
-    New Location:\n
-    Crawford County, KS\n
-    \n
-    Location Fix:\n
-    Park County, CO\n
-    \n
-    General Fixes:\n
-    Upgraded to latest versions of internal libraries.\n
-    Updated to work with Android 9.\n
+    Elk County, PA
   </string>
 </resources>
