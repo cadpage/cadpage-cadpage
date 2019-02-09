@@ -18,10 +18,8 @@
 package net.anei.cadpage;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.Service;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -51,14 +49,14 @@ public class MmsTransactionService extends Service {
   private static final String MMS_URL = "content://mms";
   private static final Uri MMS_URI = Uri.parse("content://mms");
 
-  private enum EventType {TRANSACTION_REQUEST, TIMEOUT, TIMER_TICK, QUIT}
+  private enum EventType {TRANSACTION_REQUEST, TIMEOUT, RETRY, QUIT}
 
   // Column names for query searches
   private static final String[] MMS_COL_LIST = new String[]{"_ID"};
   private static final String[] PART_COL_LIST = new String[]{"text", "_data"};
 
-  // Timer interval, negative to disable timer
-  private static final int TIMER_INTERVAL = -1;
+  // Retry retrieve content interval
+  private static final int RETRY_INTERVAL = 1000;
 
   private ServiceHandler mServiceHandler;
   private PowerManager.WakeLock mWakeLock;
@@ -124,7 +122,6 @@ public class MmsTransactionService extends Service {
   // 
   private class MmsMsgEntry {
     SmsMmsMessage message = null;  // Message we are working on
-    boolean loading = false;      // True if we have requested data content download
   }
 
   // Main thread handler class
@@ -155,11 +152,6 @@ public class MmsTransactionService extends Service {
       super(looper);
 
       qr.registerContentObserver(MMS_URI, true, observer);
-
-      // Start timer ticks
-      if (TIMER_INTERVAL > 0) {
-        sendEmptyMessageDelayed(EventType.TIMER_TICK.ordinal(), TIMER_INTERVAL);
-      }
     }
 
     /**
@@ -171,7 +163,6 @@ public class MmsTransactionService extends Service {
     public void handleMessage(Message msg) {
 
       try {
-
 
         EventType type = EventType.values()[msg.what];
         if (Log.DEBUG) Log.v("mmsTransactionService." + type);
@@ -188,11 +179,13 @@ public class MmsTransactionService extends Service {
             mmsReceive(intent);
             break;
 
-          case TIMER_TICK:
-            sendEmptyMessageDelayed(EventType.TIMER_TICK.ordinal(), TIMER_INTERVAL);
+          case RETRY:
+            MmsMsgEntry entry = (MmsMsgEntry) msg.obj;
+            if (mmsDataChange(entry)) msgList.remove(entry);
+            break;
 
           case TIMEOUT:
-            MmsMsgEntry entry = (MmsMsgEntry) msg.obj;
+            entry = (MmsMsgEntry) msg.obj;
             if (msgList.remove(entry)) {
               SmsMsgLogBuffer.getInstance().add(entry.message.timeoutMarker());
             }
@@ -266,115 +259,114 @@ public class MmsTransactionService extends Service {
       Message msg = mServiceHandler.obtainMessage(EventType.TIMEOUT.ordinal());
       msg.obj = entry;
       mServiceHandler.sendMessageDelayed(msg, mmsTimeout);
+
+      // Occasionally, the content change notice comes in before the push request
+      // so will waste some time checking to see if the data content is already present
+      mmsDataChange();
+      cleanup();
     }
 
     /**
-     * Process MMS content data change
+     * Process generic MMS content data change
      */
     private void mmsDataChange() {
 
       // Loop through all of the pending MMS message entries
       for (Iterator<MmsMsgEntry> iter = msgList.iterator(); iter.hasNext(); ) {
-        MmsMsgEntry entry = iter.next();
-        final SmsMmsMessage message = entry.message;
+        if (mmsDataChange(iter.next())) iter.remove();
+      }
+    }
 
-        // Start by finding the internal record number associated with this
-        // message ID.  We used to only do this once and keep using the mame
-        // record number, but it turns out that we go through two different
-        // numbers while downloading MMS content
-        Cursor cur;
-        try {
-          String msgId = message.getMmsMsgId();
-          String contentLoc = message.getContentLoc();
-          cur = mcq.query(MMS_URL, MMS_COL_LIST, "tr_id=? or m_id=? or m_id=?", new String[]{msgId, msgId, contentLoc}, null);
-        } catch (IllegalStateException ex) {
-          Log.e(ex);
-          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-          continue;
+    /**
+     * Check for retrieved message data for one particular message entry
+     * @param entry entry to be checked
+     * @return true if entry processing is complete and entry should be deleted
+     */
+    private boolean mmsDataChange(MmsMsgEntry entry) {
+
+      final SmsMmsMessage message = entry.message;
+
+      // If the content query system is not yet functioning, set up a
+      // retry event to try this again later
+      if (!mcq.isActive()) {
+        Message msg = mServiceHandler.obtainMessage(EventType.RETRY.ordinal());
+        msg.obj = entry;
+        mServiceHandler.sendMessageDelayed(msg, RETRY_INTERVAL);
+        return false;
+      }
+
+      // Start by finding the internal record number associated with this
+      // message ID.  We used to only do this once and keep using the mame
+      // record number, but it turns out that we go through two different
+      // numbers while downloading MMS content
+      Cursor cur;
+      try {
+        String msgId = message.getMmsMsgId();
+        String contentLoc = message.getContentLoc();
+        cur = mcq.query(MMS_URL, MMS_COL_LIST, "tr_id=? or m_id=? or m_id=?", new String[]{msgId, msgId, contentLoc}, null);
+      } catch (IllegalStateException ex) {
+        Log.e(ex);
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
+        return false;
+      }
+      if (cur == null) return false;
+
+      int recNo;
+      try {
+        if (!cur.moveToFirst()) return false;
+        recNo = cur.getInt(0);
+      } finally {
+        cur.close();
+      }
+
+      // OK, we have the desired record number
+      // Now see if we can recover the content
+      String partUrl = MMS_URL + '/' + recNo + "/part";
+      cur = mcq.query(partUrl, PART_COL_LIST, null, null, null);
+
+      String text;
+      try {
+        if (cur == null || !cur.moveToFirst()) {
+
+          // Post a timeout event for this message to remove if from the queue if
+          // we haven't received any data content
+          Message msg = mServiceHandler.obtainMessage(EventType.RETRY.ordinal());
+          msg.obj = entry;
+          mServiceHandler.sendMessageDelayed(msg, RETRY_INTERVAL);
+          return false;
         }
-        if (cur == null) continue;
 
-        int recNo;
-        try {
-          if (!cur.moveToFirst()) continue;
-          recNo = cur.getInt(0);
-        } finally {
-          cur.close();
-        }
-
-        // OK, we have the desired record number
-        // Now see if we can recover the content
-        String partUrl = MMS_URL + '/' + recNo + "/part";
-        cur = mcq.query(partUrl, PART_COL_LIST, null, null, null);
-
-        String text;
-        try {
-          if (cur == null || !cur.moveToFirst()) {
-
-            // The message contents do not yet exist.  Fire off a service request
-            // to the messaging app to get these loaded if we haven't already
-            // This *NEVER* works any more.  But fortunately most message apps automatically
-            // download MMS content, so this really doesn't matter
-            if (entry.loading) continue;
-            if (Log.DEBUG) Log.v("Request MMS content for " + entry.message.getContentLoc());
-            final Intent intent = new Intent();
-            intent.setClassName("com.android.mms", "com.android.mms.transaction.TransactionService");
-            intent.putExtra("type", 1);
-            intent.putExtra("uri", ContentUris.withAppendedId(MMS_URI, recNo).toString());
-            CadPageApplication.runOnMainThread(new Runnable() {
-              @Override
-              public void run() {
-                try {
-                  if (startService(intent) == null) {
-                    Log.e("Transaction.RETRIEVE_TRANSACTION service not found");
-                  }
-                } catch (Exception ex) {
-                  Log.e(ex);
-                  EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
-                }
-
-              }
-            });
-            entry.loading = true;
-            continue;
+        // Almost there, we have a return value, try to retrieve a text component from it
+        do {
+          text = cur.getString(0);
+          if (text == null) {
+            byte[] ba = cur.getBlob(1);
+            if (ba != null) text = new String(ba);
           }
+          if (text != null) {
+            text = text.trim();
+            if (!text.startsWith("<smil>")) break;
+            text = null;
+          }
+        } while (cur.moveToNext());
+      } finally {
+        if (cur != null) cur.close();
+      }
 
-          // Almost there, we have a return value, try to retrieve a text component from it
-          do {
-            text = cur.getString(0);
-            if (text == null) {
-              byte[] ba = cur.getBlob(1);
-              if (ba != null) text = new String(ba);
-            }
-            if (text != null) {
-              text = text.trim();
-              if (!text.startsWith("<smil>")) break;
-              text = null;
-            }
-          } while (cur.moveToNext());
-        } finally {
-          if (cur != null) cur.close();
-        }
+      // for better or worse, we are done with this message,
+      // Any returns from this point on should request message
+      // entry be deleted
 
-        // for better or worse, we are done with this message, so let's
-        // remove it from the processing list
-        iter.remove();
+      // If we didn't retrieve any text info, give it up
+      // Otherwise add the text body to our message
+      // And update the message saved in the log buffer
+      if (text == null) return true;
+      message.setMessageBody(text);
+      SmsMsgLogBuffer.getInstance().update(message);
 
-        // If we didn't retrieve any text info, give it up
-        // Otherwise add the text body to our message
-        // And update the message saved in the log buffer
-        if (text == null) continue;
-        message.setMessageBody(text);
-        SmsMsgLogBuffer.getInstance().update(message);
-
-        // Now that we have the full message, we can try to parse it as a CAD page
-        boolean isPage = message.isPageMsg();
-
-        // If not a CAD page, we are done with it
-        if (!isPage) continue;
-
-        // Pop back to the main thread to perform the rest of the CAD page 
-        // message processing
+      // If this is a CAD page, pop back to the main thread to perform the
+      // rest of the CAD page message processing
+      if (message.isPageMsg()) {
         CadPageApplication.runOnMainThread(new Runnable() {
           @Override
           public void run() {
@@ -382,6 +374,7 @@ public class MmsTransactionService extends Service {
           }
         });
       }
+      return true;
     }
 
     /**

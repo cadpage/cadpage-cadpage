@@ -66,7 +66,7 @@ public class ContentQuery {
   }
 
   
-  private static void dumpCursor(String title, Cursor cursor) {
+  public static void dumpCursor(String title, Cursor cursor) {
     
     if (cursor == null) {
       Log.w(title + ": No Results returned");

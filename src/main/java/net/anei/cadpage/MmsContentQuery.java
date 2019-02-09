@@ -68,7 +68,14 @@ public class MmsContentQuery {
     }
   }
 
-  Cursor query(String url, String[] projection, String selection, String[] selectArgs, String sortOrder) {
+  /**
+   * @return true if content query system is up and functioning
+   */
+  public boolean isActive() {
+    return qr != null || mContentService != null;
+  }
+
+  public Cursor query(String url, String[] projection, String selection, String[] selectArgs, String sortOrder) {
 
     // If we have a content resolver, we can just use it as is
     if (qr != null) {
