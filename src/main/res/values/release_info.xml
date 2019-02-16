@@ -7,6 +7,10 @@
     Big changes may be coming!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 02/12/2018\n
     \n
+    v2.0.6-4\n
+    General Fixes:\n
+    Turned off prompt to install support message app from play store as it is no longer available there.\n
+    \n
     v2.0.6-3\n
     Location Fixes:\n
     Buffalo, NY\n
@@ -60,24 +64,6 @@
     Chittenden County, VT\n
     Danville, VA\n
     Wythe County, VA\n
-    Grant County, WV\n
-    \n
-    v2.0.5-1\n
-    Once again recommending installation of the message support app.\n
-    \n
-    Location Fixes:\n
-    Northwest Public Safety, CT\n
-    Charlevoix County, MI\n
-    Cheboygan County, MI\n
-    Emmet County, MI\n
-    Washtenaw County, MI\n
-    Anokoka County, MN\n
-    Lewis and Clark County, MT\n
-    Ulster County, NY\n
-    Hamilton County, OH\n
-    Greenville County, SC\n
-    Cooke County, TX\n
-    Harris County ESD1, TX\n
-    Prince Edward County, VA
+    Grant County, WV
   </string>
 </resources>
