@@ -1676,11 +1676,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     @Override
     protected String checkPermission(String value) {
-      
+
       // A value of P requires CALL_PHONE permission
       // A value of T requires SMS_SEND permission
       String reqPerm = value.equals("P") ? PermissionManager.CALL_PHONE :
-                       value.equals("T") ? PermissionManager.SEND_SMS : null;
+                       value.equals("T") && MsgAccess.ALLOWED ? PermissionManager.SEND_SMS : null;
       if (reqPerm == null) return null;
       return checkRequestPermission(reqPerm) ? null : "";
     }

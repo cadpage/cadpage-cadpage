@@ -11,16 +11,12 @@ import net.anei.cadpage.vendors.VendorManager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +43,7 @@ public class MsgOptionManager {
   private final List<ButtonHandler> mainButtonList = new ArrayList<>();
   
   // Broadcast receiver logging results of text send messages
-  private SendSMSReceiver receiver = null;
+  private ResponseSender responseSender = null;
   
   public MsgOptionManager(Activity activity, SmsMmsMessage message) {
     this.activity = activity;
@@ -899,77 +895,10 @@ public class MsgOptionManager {
   private void sendSMS(String target, String message){ 
     Log.v("Sending text response to " + target + " : " + message);
     
-    if (receiver == null) {
-      receiver = new SendSMSReceiver();
-      activity.registerReceiver(receiver, new IntentFilter(SMS_SENT));
-      activity.registerReceiver(receiver, new IntentFilter(SMS_DELIVERED));
-    }
-    
-    Intent sendIntent = new Intent(SMS_SENT);
-    sendIntent.setFlags(Intent.FLAG_DEBUG_LOG_RESOLUTION);
-    PendingIntent sentPI = PendingIntent.getBroadcast(activity, 0, sendIntent, 0);                
-    Intent deliverIntent = new Intent(SMS_DELIVERED);
-    deliverIntent.setFlags(Intent.FLAG_DEBUG_LOG_RESOLUTION);
-    PendingIntent deliveredPI = PendingIntent.getBroadcast(activity, 0, deliverIntent, 0);   
-
-     // The send logic apparently isn't as bulletproof as we like.  It sometimes
-     // throws a null pointer exception on the other side of an RPC.  We can't
-     // do much about it.
-    SmsManager sms = SmsManager.getDefault();
-    try {
-      sms.sendTextMessage(target, null, message, sentPI, deliveredPI);
-    } catch (NullPointerException ex) {
-      
-      Log.e(ex);
-    }
+    if (responseSender == null) responseSender = new ResponseSender(activity);
+    responseSender.sendSMS(target, message);
   }
-  
-  public static class SendSMSReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-      if (intent == null) return;
-      String action = intent.getAction();
-      if (action != null) {
-        int pt = action.lastIndexOf('.');
-        if (pt >= 0) action = action.substring(pt + 1);
-      }
-      String status;
-      switch (getResultCode()) {
-      
-      case Activity.RESULT_OK:
-        status = "OK";
-        break;
-        
-      case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-        status = "Generic failure"; 
-        break;
-        
-      case SmsManager.RESULT_ERROR_NO_SERVICE:
-        status = "No service"; 
-        break;
-        
-      case SmsManager.RESULT_ERROR_NULL_PDU:
-        status = "Null PDU";
-        break;
-        
-      case SmsManager.RESULT_ERROR_RADIO_OFF:
-        status = "Radio off";
-        break;
-        
-      case Activity.RESULT_CANCELED:
-        status = "Canceled";
-        break;                        
-      
-      default:
-        status = "" + getResultCode();
-      }
-      Log.v("SMS " + action + " status:" + status);
-    }
-  }
-  private static final String SMS_SENT = "net.anei.cadpage.MsgOptionManager.SMS_SENT";
-  private static final String SMS_DELIVERED = "net.anei.cadpage.MsgOptionManager.SMS_DELIVERED";
-  
   /**
    * Launch Active911 app if it is installed
    * @param context current context
