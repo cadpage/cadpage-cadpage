@@ -42,7 +42,9 @@ public class EditTextPreference extends android.preference.EditTextPreference {
   }
   
   public void refreshSummary() {
-    refreshSummary(getText());
+    String value = getText();
+    if (value == null) value = "";
+    refreshSummary(value);
   }
 
   public void refreshSummary(String newValue) {

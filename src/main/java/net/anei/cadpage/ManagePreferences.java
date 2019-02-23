@@ -842,7 +842,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static String callbackButtonCode(int button) {
     return prefs.getString(CALLBACK_CODE_IDS[button-1]);
   }
-  
+
   private static final int[] EXTRA_BUTTON_IDS = new int[]{
     R.string.pref_xtra_resp_button1_key,
     R.string.pref_xtra_resp_button2_key,
@@ -1277,8 +1277,31 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     settings.clear();
     settings.commit();
   }
-  
-  
+
+  /**
+   * Determine if message support app will be needed to support
+   * the message restricted version of Cadpage
+   * @return true if it will be required
+   */
+  public static boolean reqMsgSupport() {
+    String msgType = enableMsgType();
+    return msgType.contains("S") || msgType.contains("M");
+  }
+
+  /**
+   * Determine if the latest version of the message support app will
+   * be required to support the message restricted version of Cadpage
+   * @return true if it will be required
+   */
+  public static boolean reqMsgSupport2() {
+    if (!reqMsgSupport()) return false;
+    for (int btn = 1; btn <= POPUP_BUTTON_CNT; btn++) {
+      if (callbackButtonType(btn).equals("T") &&
+          callbackButtonTitle(btn).length() > 0 &&
+          callbackButtonCode(btn).length() > 0) return true;
+    }
+    return false;
+  }
 
   /**
    * Append configuration information to constructed message
@@ -2345,6 +2368,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       public void preferenceChanged(String key, Object newVal) {
         String enableMsgType = (String)newVal;
         if (enabled()) SmsPopupUtils.enableSMSPopup(context, enableMsgType);
+        SmsPopupUtils.checkMsgSupport(context);
       }
     });
 

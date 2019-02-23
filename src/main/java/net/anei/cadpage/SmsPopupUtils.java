@@ -1,43 +1,29 @@
 package net.anei.cadpage;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
-import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.preference.PreferenceManager;
 
 import net.anei.cadpage.donation.DonateActivity;
-import net.anei.cadpage.donation.InstallCadpageSupportAppEvent;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
+import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
 
 public class SmsPopupUtils {
 
   private static final String CADPAGE_SUPPORT_PKG = "net.anei.cadpagesupport";
   private static final String CADPAGE_SUPPORT_CLASS = "net.anei.cadpagesupport.MainActivity";
   private static final int CADPAGE_SUPPORT_VERSION = 14;
+  private static final int CADPAGE_SUPPORT_VERSION2 = 15;
   private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
-
-  public static final Pattern NAME_ADDR_EMAIL_PATTERN =
-    Pattern.compile("\\s*(\"[^\"]*\"|[^<>\"]+)\\s*<([^<>]+)>\\s*");
-
-  public static final Pattern QUOTED_STRING_PATTERN =
-    Pattern.compile("\\s*\"([^\"]*)\"\\s*");
 
   /**
    * Enables or disables the main SMS receiver
@@ -50,11 +36,6 @@ public class SmsPopupUtils {
   private static void enableComponent(Context context, Class<?> cls, boolean enable) {
     PackageManager pm = context.getPackageManager();
     ComponentName cn = new ComponentName(context, cls);
-
-    // Update preference so it reflects in the preference activity
-    SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-    SharedPreferences.Editor settings = myPrefs.edit();
-    settings.commit();
 
     if (enable) {
       pm.setComponentEnabledSetting(cn,
@@ -143,28 +124,53 @@ public class SmsPopupUtils {
 
   /**
    * Check to see if the message support app is needed and/or installed
-   * @param activity current activity
+   * @param context current context
    * @return -1 if message support is not needed
    *          0 if message support is needed and installed and up to date
    *          1 if user was prompted to install or update message support
    */
-  public static int checkMsgSupport(Activity activity) {
+  public static int checkMsgSupport(Context context) {
+    return checkMsgSupport(context, true);
+  }
 
-    // If we are still processing SMS or MMS messages, we need to some additional work
-    String msgTypes = ManagePreferences.enableMsgType();
-    if (!msgTypes.contains("S") && !msgTypes.contains("M")) return -1;
+  /**
+   * Check to see if the message support app is needed and/or installed
+   * @param context current context
+   * @param prompt true to actually prompt user to install message app
+   * @return -1 if message support is not needed
+   *          0 if message support is needed and installed and up to date
+   *          1 if user was/will be prompted to install or update message support
+   */
+  public static int checkMsgSupport(Context context, boolean prompt) {
 
-    // Ditto if support app is no longer available
+    // If we are not processing SMS or MMS messages, there is no need for the support app
+    if (!ManagePreferences.reqMsgSupport()) return -1;
+
+    // If support app is not available, I guess we are not going to need it
     if (!isSupportAppAvailable()) return -1;
 
+    // See which version we need.  The basic version that was distributed earlier can handle
+    // receiving SMS and MMS messages.  But sending text messages requires a newer version that
+    // is only available from the download page
+    int version = ManagePreferences.reqMsgSupport2() ? CADPAGE_SUPPORT_VERSION2 : CADPAGE_SUPPORT_VERSION;
+
     // See if support package is installed
-    // if it is not, launch play store to install the update without futher ado
-    PackageManager pm = activity.getPackageManager();
+    // if it is not, launch play store to install the update without further ado
+    PackageManager pm = context.getPackageManager();
     try {
       PackageInfo pi = pm.getPackageInfo(CADPAGE_SUPPORT_PKG, 0);
-      if (pi.versionCode < CADPAGE_SUPPORT_VERSION) {
-        Log.v("Requesting support app upgrade");
-        InstallCadpageSupportAppEvent.install(activity);
+      Log.v("Cadpage Message Support app version " + pi.versionCode + " is installed");
+      if (pi.versionCode < version) {
+
+        // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
+        // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
+        if (prompt) {
+          UpdateCadpageSupportAppEvent event = UpdateCadpageSupportAppEvent.instance();
+          if (event.isEnabled()) {
+            Log.v("Requesting support app upgrade");
+            DonateActivity.launchActivity(context, event, null);
+          }
+        }
         return 1;
       }
     }
@@ -174,34 +180,38 @@ public class SmsPopupUtils {
     catch (PackageManager.NameNotFoundException ex) {
 
       // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
-      // can call DonateActivity.launcheActivity() before initializing NeedCadpageSupportAppEvent.
-      NeedCadpageSupportAppEvent event = NeedCadpageSupportAppEvent.instance();
-      if (event.isEnabled()) {
-        Log.v("Requesting support app install");
-        DonateActivity.launchActivity(activity, NeedCadpageSupportAppEvent.instance(), null);
-        return 1;
+      // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
+      if (prompt) {
+        NeedCadpageSupportAppEvent event = NeedCadpageSupportAppEvent.instance();
+        if (event.isEnabled()) {
+          Log.v("Requesting support app install");
+          DonateActivity.launchActivity(context, NeedCadpageSupportAppEvent.instance(), null);
+        }
       }
-      return 0;
+      return 1;
     }
 
     // Fire off an intent to launch the support app.  If it installed and configured
     // correctly, it will quietly die without doing anything.  There should not be any way that
     // this can fail, but if it does, we will log an error and continue
-    Intent intent = new Intent(Intent.ACTION_MAIN);
-    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-    intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
-    intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
+    if (prompt) {
+      Intent intent = new Intent(Intent.ACTION_MAIN);
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      intent.addCategory(Intent.CATEGORY_LAUNCHER);
+      intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
+      intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
 
-    try {
-      activity.startActivity(intent);
-      Log.v("Cadpage support app installed and current");
-    } catch (Exception ex) {
-      Log.e(ex);
+      try {
+        context.startActivity(intent);
+        Log.v("Cadpage support app installed and current");
+      } catch (Exception ex) {
+        Log.e(ex);
+      }
     }
     return 0;
   }
 
   private static boolean isSupportAppAvailable() {
-    return false;
+    return !MsgAccess.ALLOWED;
   }
 }

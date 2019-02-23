@@ -11,6 +11,7 @@ import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.preferences.EditTextPreference;
 
 public class PreferenceButtonFragment extends PreferenceFragment {
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -71,5 +72,4 @@ public class PreferenceButtonFragment extends PreferenceFragment {
       }
     });
   }
-
 }

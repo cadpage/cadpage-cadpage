@@ -5,6 +5,7 @@ import android.app.Activity;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
+import net.anei.cadpage.SmsPopupUtils;
 
 /*
     Install Cadpage mesasge support app
@@ -24,6 +25,13 @@ public class NeedCadpageSupportAppEvent extends DonateScreenEvent {
   @Override
   protected boolean overrideWindowTitle() {
     return true;
+  }
+
+  @Override
+  public void onStart(DonateActivity activity) {
+    if (SmsPopupUtils.checkMsgSupport(activity, false) != 1) {
+      closeEvents(activity);
+    }
   }
 
   private static final NeedCadpageSupportAppEvent instance = new NeedCadpageSupportAppEvent();

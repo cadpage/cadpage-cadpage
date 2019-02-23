@@ -77,8 +77,8 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   private boolean activityActive = false;
   
   protected void onPause() {
-     super.onPause();
-     activityActive = false; 
+    super.onPause();
+    activityActive = false;
   } 
   
   public boolean onKeyUp(int keyCode, KeyEvent event)  {

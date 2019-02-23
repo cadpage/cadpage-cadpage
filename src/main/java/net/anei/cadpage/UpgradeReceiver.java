@@ -41,6 +41,12 @@ public class UpgradeReceiver extends BroadcastReceiver {
 
     // Call PermissionFixActivity.checkMMSPermission() to do the real work
     PermissionFixActivity.checkMMSPermission(context);
+
+    // Something else to check.  If user has upgraded to a message restricted version of
+    // Cadpage, check to make sure the message support app is installed
+    if (!MsgAccess.ALLOWED) {
+      SmsPopupUtils.checkMsgSupport(context);
+    }
   }
 }
 

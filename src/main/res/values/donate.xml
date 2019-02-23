@@ -581,6 +581,15 @@
     install the Cadpage message support app.
   </string>
 
+  <string name="donate_update_cadpage_support_app_title">
+    Update Cadpage mesasge support app
+  </string>
+  <string name="donate_update_cadpage_support_app_text">
+    The Cadpage message support app you have installed is outdated and will
+    need to be updated if it is to perform all of the functions that you are
+    requesting of Cadpage.
+  </string>
+
   <string name="donate_install_cadpage_support_app_title">
     Install Cadpage support app
   </string>

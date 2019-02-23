@@ -16,7 +16,7 @@ public class InstallCadpageSupportAppEvent extends DonateEvent {
 
   @Override
   protected void doEvent(Activity activity) {
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=net.anei.cadpagesupport"));
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cadpage.org/download-cadpage"));
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     try {
       activity.startActivity(intent);
@@ -24,10 +24,6 @@ public class InstallCadpageSupportAppEvent extends DonateEvent {
       Log.e(ex);
     }
     closeEvents(activity);
-  }
-
-  public static void install(Activity activity) {
-
   }
 
   private static final InstallCadpageSupportAppEvent instance = new InstallCadpageSupportAppEvent();
