@@ -34,6 +34,7 @@ android {
             restrict {
                 dimension "type"
                 versionNameSuffix "(beta)"
+                versionCode android.defaultConfig.versionCode + 1
             }
         }
     }
