@@ -1293,14 +1293,19 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * be required to support the message restricted version of Cadpage
    * @return true if it will be required
    */
-  public static boolean reqMsgSupport2() {
-    if (!reqMsgSupport()) return false;
+  public static String callbackTypeSummary() {
+    boolean textResponse = false;
+    boolean phoneResponse = false;
     for (int btn = 1; btn <= POPUP_BUTTON_CNT; btn++) {
-      if (callbackButtonType(btn).equals("T") &&
-          callbackButtonTitle(btn).length() > 0 &&
-          callbackButtonCode(btn).length() > 0) return true;
+      if (callbackButtonTitle(btn).length() > 0 &&
+          callbackButtonCode(btn).length() > 0) {
+        String type = callbackButtonType(btn);
+        if (type.contains("T")) textResponse = true;
+        if (type.contains("P")) phoneResponse = true;
+      }
     }
-    return false;
+    return (textResponse ? (phoneResponse ? "TP" : "T") :
+             phoneResponse ? "P" : "");
   }
 
   /**
@@ -1700,10 +1705,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     protected String checkPermission(String value) {
 
+      // If we are not allowed to initiate phone calls, there is nothing to check
+      if (!MsgAccess.ALLOWED) return null;
+
       // A value of P requires CALL_PHONE permission
       // A value of T requires SMS_SEND permission
       String reqPerm = value.equals("P") ? PermissionManager.CALL_PHONE :
-                       value.equals("T") && MsgAccess.ALLOWED ? PermissionManager.SEND_SMS : null;
+                       value.equals("T") ? PermissionManager.SEND_SMS : null;
       if (reqPerm == null) return null;
       return checkRequestPermission(reqPerm) ? null : "";
     }

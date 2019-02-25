@@ -684,14 +684,8 @@ public class MsgOptionManager {
       String phone = respCode;
       Matcher match = PHONE_TEXT_PTN.matcher(respCode);
       if (match.matches()) phone = match.group(1);
-      try {
-        String urlPhone = "tel:" + phone;
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse(urlPhone));
-        activity.startActivity(intent);
-      } catch (Exception e) {
-        Log.v("SMSPopupActivity: Phone call failed" + e.getMessage());
-      }
+      if (responseSender == null) responseSender = new ResponseSender(activity);
+      responseSender.callPhone(phone);
       return true;
       
     case R.id.resp_text_item:

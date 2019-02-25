@@ -23,7 +23,9 @@ public class SmsPopupUtils {
   private static final String CADPAGE_SUPPORT_CLASS = "net.anei.cadpagesupport.MainActivity";
   private static final int CADPAGE_SUPPORT_VERSION = 14;
   private static final int CADPAGE_SUPPORT_VERSION2 = 15;
+  private static final int CADPAGE_SUPPORT_VERSION3 = 16;
   private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
+  private static final String EXTRA_CADPAGE_PHONE = "net.anei.cadpage.CALL_PHONE";
 
   /**
    * Enables or disables the main SMS receiver
@@ -151,8 +153,13 @@ public class SmsPopupUtils {
 
     // See which version we need.  The basic version that was distributed earlier can handle
     // receiving SMS and MMS messages.  But sending text messages requires a newer version that
-    // is only available from the download page
-    int version = ManagePreferences.reqMsgSupport2() ? CADPAGE_SUPPORT_VERSION2 : CADPAGE_SUPPORT_VERSION;
+    // is only available from the download page and calling phone numbers requires and even newer
+    // version
+    String callbackType = ManagePreferences.callbackTypeSummary();
+    boolean callbackText = callbackType.contains("T");
+    boolean callbackPhone = callbackType.contains("P");
+    int version = (callbackPhone ? CADPAGE_SUPPORT_VERSION3 :
+                   callbackText ? CADPAGE_SUPPORT_VERSION2 : CADPAGE_SUPPORT_VERSION);
 
     // See if support package is installed
     // if it is not, launch play store to install the update without further ado
@@ -200,6 +207,7 @@ public class SmsPopupUtils {
       intent.addCategory(Intent.CATEGORY_LAUNCHER);
       intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
       intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
+      if (callbackPhone) intent.putExtra(EXTRA_CADPAGE_PHONE, true);
 
       try {
         context.startActivity(intent);

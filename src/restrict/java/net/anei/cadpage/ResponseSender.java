@@ -23,7 +23,7 @@ public class ResponseSender {
   public void sendSMS(String target, String message){
 
     // Send intent to support app which does the real work
-    Intent intent = new Intent("new.anei.cadpagesupport.SendSMS");
+    Intent intent = new Intent("net.anei.cadpagesupport.SendSMS");
     intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ResponseSender");
     intent.putExtra("target", target);
     intent.putExtra("message", message);
@@ -48,6 +48,36 @@ public class ResponseSender {
         activity.startActivity(intent);
       } catch (Exception ex2) {
         Log.e(ex2);
+      }
+    }
+  }
+
+  /**
+   * Call phone number to report response status
+   * @param phone phone number to call
+   */
+  public void callPhone(String phone) {
+
+    // Send intent to support app which does the real work
+    Intent intent = new Intent("net.anei.cadpagesupport.CALL_PHONE");
+    intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ResponseSender");
+    intent.putExtra("phone", phone);
+
+    List<ResolveInfo> rcvrs =
+        activity.getPackageManager().queryBroadcastReceivers(intent, 0);
+    if (rcvrs != null && ! rcvrs.isEmpty()) {
+      activity.sendBroadcast(intent);
+    }
+
+    else {
+      // Fallback is to ask dialer to prompt user to make the call
+      try {
+        String urlPhone = "tel:" + phone;
+        intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse(urlPhone));
+        activity.startActivity(intent);
+      } catch (Exception e) {
+        Log.v("SMSPopupActivity: Phone call failed" + e.getMessage());
       }
     }
   }

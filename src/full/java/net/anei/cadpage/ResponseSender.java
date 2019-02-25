@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.telephony.SmsManager;
 
 public class ResponseSender {
@@ -95,4 +96,18 @@ public class ResponseSender {
   private static final String SMS_SENT = "net.anei.cadpage.MsgOptionManager.SMS_SENT";
   private static final String SMS_DELIVERED = "net.anei.cadpage.MsgOptionManager.SMS_DELIVERED";
 
+  /**
+   * Call phone number to report response status
+   * @param phone phone number to call
+   */
+  public void callPhone(String phone) {
+    try {
+      String urlPhone = "tel:" + phone;
+      Intent intent = new Intent(Intent.ACTION_CALL);
+      intent.setData(Uri.parse(urlPhone));
+      activity.startActivity(intent);
+    } catch (Exception e) {
+      Log.v("SMSPopupActivity: Phone call failed" + e.getMessage());
+    }
+  }
 }
