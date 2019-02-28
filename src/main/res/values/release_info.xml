@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02252019</string>
+  <string name="release_date">02282019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     New beta release is available!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 02/25/2019\n
+    \n
+    v2.0.7-3\n
+    Location Fixes:\n
+    Baltimore County, MD\n
+    Washtenaw County, MI\n
+    Yadkin County, NC\n
+    Montgomery County, PA\n
+    Loudoun County, VA\n
+    \n
+    General Fixes:\n
+    Crash processing MMS messages with Samsung Messages\n
     \n
     v2.0.7-2 (beta only)\n
     Moved the logic and permissions required to make outgoing phone calls to the message support app.\n
@@ -25,27 +36,6 @@
     \n
     v2.0.6-3\n
     Location Fixes:\n
-    Buffalo, NY\n
-    \n
-    v2.0.6-2\n
-    Location Fixes:\n
-    St Louis County, MO\n
-    Portage County, OH\n
-    Benton County, OR\n
-    Crawford County, PA\n
-    \n
-    General Fixes:\n
-    Fixed timing problem with MMS message processing\n
-    \n
-    v2.0.6-1\n
-    Location Fixes:\n
-    Windham County, CT\n
-    Pike County, GA\n
-    Hennepin County, MN\n
-    Newton County, MO\n
-    Onslow County, NC\n
-    Woodbury County, IN\n
-    Moneteau County, MO\n
-    Benton County, OR\n
+    Buffalo, NY
   </string>
 </resources>
