@@ -340,8 +340,19 @@ public class MmsTransactionService extends Service {
         do {
           text = cur.getString(0);
           if (text == null) {
-            byte[] ba = cur.getBlob(1);
-            if (ba != null) text = new String(ba);
+            switch (cur.getType(1)) {
+              case Cursor.FIELD_TYPE_BLOB:
+
+                byte[] ba = cur.getBlob(1);
+                if (ba != null) text = new String(ba);
+                break;
+
+              case Cursor.FIELD_TYPE_STRING:
+                text = cur.getString(1);
+                break;
+
+              default:
+            }
           }
           if (text != null) {
             text = text.trim();
