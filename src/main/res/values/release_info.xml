@@ -7,6 +7,13 @@
     New beta release is available!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 02/25/2019\n
     \n
+    v2.0.7-5\n
+    Location Fixes:\n
+    Blount County, AL\n
+    Clay County, MO\n
+    Holmes County, OH\n
+    Warren County, PA\n
+    \n
     v2.0.7-4\n
     Location Fixes:\n
     Bibb County, AL\n
@@ -36,9 +43,5 @@
     Location Fixes:\nCalvert County, MD\n
     Montcalm County, MI\n
     Greenville County, SC\n
-    \n
-    v2.0.6-4\n
-    General Fixes:\n
-    Turned off prompt to install support message app from play store as it is no longer available there.
   </string>
 </resources>
