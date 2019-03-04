@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02282019</string>
+  <string name="release_date">03012019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     New beta release is available!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 02/25/2019\n
+    \n
+    v2.0.7-4\n
+    Location Fixes:\n
+    Bibb County, AL\n
+    Marshall County, AL\n
+    Warren County, PA\n
+    Augusta County, VA\n
     \n
     v2.0.7-3\n
     Location Fixes:\n
@@ -32,10 +39,6 @@
     \n
     v2.0.6-4\n
     General Fixes:\n
-    Turned off prompt to install support message app from play store as it is no longer available there.\n
-    \n
-    v2.0.6-3\n
-    Location Fixes:\n
-    Buffalo, NY
+    Turned off prompt to install support message app from play store as it is no longer available there.
   </string>
 </resources>
