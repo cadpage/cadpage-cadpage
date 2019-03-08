@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03012019</string>
+  <string name="release_date">03072019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    New beta release is available!!  For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 02/25/2019\n
+    This is it!  This release of Cadpage will not process SMS or MMS dispatch alerts
+    unless you have the Cadpage support app installed.  If you need the support app and it is
+    not currently installed, you will be prompted to install it when this upgrade is installed.
+    For details see http://www.cadpage.org/faq/cadpage-2-0\n
+    Updated 03/07/2019\n
+    \n
+    v2.1.1-1\n
+    Location Fixes:\n
+    Marshall County, AL\n
+    Calhoun County, MI\n
+    Osage County, MO\n
     \n
     v2.0.7-5\n
     Location Fixes:\n
@@ -33,15 +42,6 @@
     Crash processing MMS messages with Samsung Messages\n
     \n
     v2.0.7-2 (beta only)\n
-    Moved the logic and permissions required to make outgoing phone calls to the message support app.\n
-    \n
-    v2.0.7-1\n
-    New Locations:\n
-    Rankin County, MS\n
-    \n
-    Vermillion County, IN\n
-    Location Fixes:\nCalvert County, MD\n
-    Montcalm County, MI\n
-    Greenville County, SC\n
+    Moved the logic and permissions required to make outgoing phone calls to the message support app.
   </string>
 </resources>

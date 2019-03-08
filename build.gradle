@@ -29,12 +29,13 @@ android {
         productFlavors {
             full {
                 dimension "type"
+                versionNameSuffix "(M)"
+                versionCode android.defaultConfig.versionCode + 1
             }
 
             restrict {
                 dimension "type"
-                versionNameSuffix "(beta)"
-                versionCode android.defaultConfig.versionCode + 1
+                versionNameSuffix "(R)"
             }
         }
     }
