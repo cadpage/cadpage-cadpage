@@ -8,7 +8,15 @@
     unless you have the Cadpage support app installed.  If you need the support app and it is
     not currently installed, you will be prompted to install it when this upgrade is installed.
     For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 03/07/2019\n
+    Updated 03/09/2019\n
+    \n
+    v2.1.1-2\n
+    New Locations:\n
+    Madison County, MS\n
+    Yazoo County, MS\n
+    \n
+    Location Fixes:\n
+    Rankin County, MS\n
     \n
     v2.1.1-1\n
     Location Fixes:\n
@@ -39,9 +47,6 @@
     Loudoun County, VA\n
     \n
     General Fixes:\n
-    Crash processing MMS messages with Samsung Messages\n
-    \n
-    v2.0.7-2 (beta only)\n
-    Moved the logic and permissions required to make outgoing phone calls to the message support app.
+    Crash processing MMS messages with Samsung Messages
   </string>
 </resources>
