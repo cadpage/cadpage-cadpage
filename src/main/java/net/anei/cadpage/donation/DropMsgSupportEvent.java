@@ -19,11 +19,11 @@ public class DropMsgSupportEvent extends DonateEvent {
     super(null, R.string.donate_drop_msg_support_title);
   }
 
-//  @Override
-//  public boolean isEnabled() {
-//    // This is only an option if registered with a direct paging vendor
-//    return VendorManager.instance().isRegistered();
-//  }
+  @Override
+  public boolean isEnabled() {
+    // This is only an option if registered with a direct paging vendor
+    return VendorManager.instance().isRegistered();
+  }
 
   @Override
   protected void doEvent(Activity activity) {
