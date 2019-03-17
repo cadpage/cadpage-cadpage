@@ -4,11 +4,18 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    This is it!  This release of Cadpage will not process SMS or MMS dispatch alerts
-    unless you have the Cadpage support app installed.  If you need the support app and it is
-    not currently installed, you will be prompted to install it when this upgrade is installed.
-    For details see http://www.cadpage.org/faq/cadpage-2-0\n
-    Updated 03/09/2019\n
+    If you are having trouble reciving Cadpage alerts on a Samsung device, see
+    http://www.cadpage.org/faq/cadpage-2-0\n
+    Updated 03/16/2019\n
+    \n
+    v2.1.2-1\n
+    Location Fixes:\n
+    Washtenaw County, MI\n
+    Madison County, MO\n
+    Cattaraugus County, NY\n
+    Onslow County, NC\n
+    Crawford County, PA\n
+    Franklin County, TN\n
     \n
     v2.1.1-3\n
     New Locations:\n
@@ -44,13 +51,6 @@
     Blount County, AL\n
     Clay County, MO\n
     Holmes County, OH\n
-    Warren County, PA\n
-    \n
-    v2.0.7-4\n
-    Location Fixes:\n
-    Bibb County, AL\n
-    Marshall County, AL\n
-    Warren County, PA\n
-    Augusta County, VA
+    Warren County, PA
   </string>
 </resources>
