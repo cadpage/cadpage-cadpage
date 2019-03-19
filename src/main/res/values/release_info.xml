@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03172019</string>
+  <string name="release_date">03192019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
@@ -8,8 +8,16 @@
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
     \n
+    v2.1.2-3
+    Backed out targeting latest version of Android (again)\n
+    \n
+    Location Fixes:\n
+    Macon County, NC\n
+    Adams County, OH\n
+    Marion County, OR\n
+    \n
     v2.1.2-2\n
-    Updated to use latest suport libraries and target latest version of Android.
+    Updated to use latest suport libraries and target latest version of Android.\n
     \n
     v2.1.2-1\n
     Location Fixes:\n
