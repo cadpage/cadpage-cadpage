@@ -249,6 +249,16 @@ public class SmsMessageQueue implements Serializable {
   }
 
   /**
+   * @return true if message queue contains any text alerts
+   */
+  public synchronized boolean containsTextAlerts() {
+    for (SmsMmsMessage msg : queue) {
+      if (msg.isTextAlert()) return true;
+    }
+    return false;
+  }
+
+  /**
    * Retrieve list of messages in the queue at this moment.  Returned as an array that can be
    * safely worked on a worker thread free of concerns about changes made to the original queue.
    * @return list of message currently in message queue

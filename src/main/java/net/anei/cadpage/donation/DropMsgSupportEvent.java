@@ -1,13 +1,10 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
 
-import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsMessageQueue;
 import net.anei.cadpage.vendors.VendorManager;
 
 /**
@@ -15,14 +12,19 @@ import net.anei.cadpage.vendors.VendorManager;
  */
 public class DropMsgSupportEvent extends DonateEvent {
 
-  protected DropMsgSupportEvent() {
+  private DropMsgSupportEvent() {
     super(null, R.string.donate_drop_msg_support_title);
   }
 
   @Override
   public boolean isEnabled() {
+
     // This is only an option if registered with a direct paging vendor
-    return VendorManager.instance().isRegistered();
+    // or if there are zero text alerts in the message queue.  The later
+    // case will most likely happen when Cadpage is initially started with
+    // the intention of registering with Cadpage
+    return VendorManager.instance().isRegistered() ||
+           !SmsMessageQueue.getInstance().containsTextAlerts();
   }
 
   @Override

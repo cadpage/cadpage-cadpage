@@ -1407,6 +1407,10 @@ public class SmsMmsMessage implements Serializable {
     return parseInfo.expectMore(getSplitMsgOptions());
   }
 
+  public boolean isTextAlert() {
+    return messageType != MESSAGE_TYPE_C2DM;
+  }
+
   /**
    * Class to interpret numeric subparameter from acknowledgment request string
    * Number parameters must follow a single letter parameter that keys them.  Multiple
