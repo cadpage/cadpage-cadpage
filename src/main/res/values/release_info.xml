@@ -8,7 +8,16 @@
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
     \n
-    v2.1.2-3
+    v2.1.2-4\n
+    Location Fixes:\n
+    Marion County, IN\n
+    Northampton County, PA\n
+    Kanawha County, WV\n
+    \n
+    General Fixes:\n
+    Fixed problem preventing new Cadpage users from registering with direct paging vendors\n
+    \n
+    v2.1.2-3\n
     Backed out targeting latest version of Android (again)\n
     \n
     Location Fixes:\n
@@ -41,27 +50,6 @@
     Josephine County, OR\n
     \n
     General Fixes:\n
-    Users dependent on Cadpage text message processing were being allowed to disable it.\n
-    \n
-    v2.1.1-2\n
-    New Locations:\n
-    Madison County, MS\n
-    Yazoo County, MS\n
-    \n
-    Location Fixes:\n
-    Rankin County, MS\n
-    \n
-    v2.1.1-1\n
-    Location Fixes:\n
-    Marshall County, AL\n
-    Calhoun County, MI\n
-    Osage County, MO\n
-    \n
-    v2.0.7-5\n
-    Location Fixes:\n
-    Blount County, AL\n
-    Clay County, MO\n
-    Holmes County, OH\n
-    Warren County, PA
+    Users dependent on Cadpage text message processing were being allowed to disable it.
   </string>
 </resources>
