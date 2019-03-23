@@ -15,7 +15,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -443,7 +442,7 @@ public class MsgOptionManager {
     ButtonHandler(int itemId, String title, String respCode, ViewGroup parent) {
       this(itemId, 0, title, respCode, parent);
     }
-    
+
     /**
      * Response button constructor
      * @param itemId button item ID
@@ -454,7 +453,7 @@ public class MsgOptionManager {
     ButtonHandler(@SuppressWarnings("SameParameterValue") int itemId, int resId, String respCode, ViewGroup parent) {
       this(itemId, resId, null, respCode, parent);
     }
-    
+
     /**
      * Common constructor 
      * @param itemId button item ID
@@ -900,17 +899,10 @@ public class MsgOptionManager {
    * @return true if Active911 app is installed, false otherwise
    */
   public static boolean launchActive911(Context context, boolean launch) {
-    Intent intent = new Intent(Intent.ACTION_MAIN);
-    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    intent.setClassName("com.active911.app", "com.active911.app.MainActivity");
-
     PackageManager pm = context.getPackageManager();
-    List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
-    if (list == null || list.size() == 0) return false;
-    
+    Intent intent = pm.getLaunchIntentForPackage("com.active911.app");
+    if (intent == null) return false;
+
     if (!launch) return true;
     Log.w("Launching Active911");
     String active911Code = VendorManager.instance().getActive911Code();
