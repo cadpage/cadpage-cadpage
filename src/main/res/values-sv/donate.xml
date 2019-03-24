@@ -118,8 +118,8 @@
   <string name="donate_email_title">Skicka email</string>
 
   <string name="donate_android_confirm_text">
-    Ditt existerande abonnemang går ut den %1s.  Om du förnyar ditt abonnemang på Cadpage nu så kommer det att gå ut om ett år och du kommer att förlora
-    %2d dagar på din prenumeration.
+    Ditt existerande abonnemang går ut den %1$s.  Om du förnyar ditt abonnemang på Cadpage nu så kommer det att gå ut om ett år och du kommer att förlora
+    %2$d dagar på din prenumeration.
   </string>
 
   <string name="donate_android2_title">Fortsätt med inköpet nu</string>

@@ -195,8 +195,8 @@
   <string name="donate_email_title">Send Email</string>
 
   <string name="donate_android_confirm_text">
-    Your existing subscription expires on %1s.  And if you renew your Cadpage subscription now it
-    will expire in one year and you will loose %2d days of subscription service.
+    Your existing subscription expires on %1$s.  And if you renew your Cadpage subscription now it
+    will expire in one year and you will loose %2$d days of subscription service.
   </string>
 
   <string name="donate_android2_title">Go ahead with purchase now</string>
