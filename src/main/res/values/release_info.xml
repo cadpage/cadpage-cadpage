@@ -8,6 +8,20 @@
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
     \n
+    v2.1.2-7\n
+    Location Fixes:\n
+    Hot Springs County, AR\n
+    Fresno County, CA\n
+    Monterey County, CA\n
+    Marion County, IN\n
+    Crawford County, KS\n
+    Lake County, MI\n
+    Mecosta County, MI\n
+    Brown County, MN\n
+    Baker County, OR\n
+    Monroe county, PA\n
+    Snohomish County, WA\n
+    \n
     v2.1.2-6\n
     Location Fixes:\n
     Marion County, IN\n
@@ -40,9 +54,6 @@
     Location Fixes:\n
     Macon County, NC\n
     Adams County, OH\n
-    Marion County, OR\n
-    \n
-    v2.1.2-2\n
-    Updated to use latest suport libraries and target latest version of Android.
+    Marion County, OR
   </string>
 </resources>
