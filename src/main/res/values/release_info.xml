@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03242019</string>
+  <string name="release_date">04102019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    If you are having trouble reciving Cadpage alerts on a Samsung device, see
+    If you are having trouble receiving Cadpage alerts on a Samsung device, see
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
+    \n
+    v2.1.2-8\n
+    Location Fixes:\n
+    Marion County, GA\n
+    Webster County, GA\n
+    Lycoming County, PA\n
+    Monroeville, PA\n
+    Sweden\n
     \n
     v2.1.2-7\n
     Location Fixes:\n
@@ -48,14 +56,6 @@
     Kanawha County, WV\n
     \n
     General Fixes:\n
-    Fixed problem preventing new Cadpage users from registering with direct paging vendors\n
-    \n
-    v2.1.2-3\n
-    Backed out targeting latest version of Android (again)\n
-    \n
-    Location Fixes:\n
-    Macon County, NC\n
-    Adams County, OH\n
-    Marion County, OR
+    Fixed problem preventing new Cadpage users from registering with direct paging vendors
   </string>
 </resources>
