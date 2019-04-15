@@ -128,12 +128,22 @@ public class CadPageActivity extends AppCompatActivity {
     }
     lockMsgId = -1;
 
-    // We do some special processing if the intent was launched by the user
-    // instead of through some internal trigger.
+    // See if this request is going to pop up an alert window
+    SmsMmsMessage msg;
     if (Intent.ACTION_MAIN.equals(intent.getAction()) &&
-        intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
-        (intent.getFlags() & Intent.FLAG_FROM_BACKGROUND) == 0) {
-      
+        intent.hasCategory(Intent.CATEGORY_LAUNCHER)) {
+      msg = null;
+    } else if (msgId >= 0) {
+      msg = SmsMessageQueue.getInstance().getMessage(msgId);
+    } else {
+      boolean force = intent.getBooleanExtra(EXTRA_POPUP, false);
+      msg = SmsMessageQueue.getInstance().getDisplayMessage(force);
+    }
+
+    // If there is no message popup display and we were started by some kind of
+    // user interaction, go through the startup special processing checks
+    if (msg == null && (intent.getFlags() & Intent.FLAG_FROM_BACKGROUND) == 0) {
+
       // First clear any pending notification
       ClearAllReceiver.clearAll(this);
 
@@ -188,38 +198,28 @@ public class CadPageActivity extends AppCompatActivity {
     }
     
     // Otherwise, if we should automatically display a call, do it now
-    else {
+    else if (msg != null) {
 
       // But first to the initial permission check
       ManagePreferences.checkInitialPermissions(null);
 
-      SmsMmsMessage msg;
-      if (msgId >= 0) {
-        msg = SmsMessageQueue.getInstance().getMessage(msgId);
-      } else {
-        boolean force = intent.getBooleanExtra(EXTRA_POPUP, false);
-        msg = SmsMessageQueue.getInstance().getDisplayMessage(force);
+      // Before we open the call display window, see if notifications were requested
+      // And if they were, see if we should launch the Scanner channel open.
+      // We can't do this in the Broadcast Receiver because this window obscures it
+      // completely, so their Activity won't launch.
+
+      if (intent.getBooleanExtra(EXTRA_NOTIFY, false)) {
+        ManageNotification.show(this, msg);
+        SmsService.launchScanner(this);
       }
-      if (msg != null)  {
-        
-        // Before we open the call display window, see if notifications were requested
-        // And if they were, see if we should launch the Scanner channel open.
-        // We can't do this in the Broadcast Receiver because this window obscures it
-        // completely, so their Activity won't launch.
-        
-        if (intent.getBooleanExtra(EXTRA_NOTIFY, false)) {
-          ManageNotification.show(this, msg);
-          SmsService.launchScanner(this);
-        }
-     
-        // OK, go ahead and open the call display window
-        // Delay by 100 msecs in attempt to avoid a nasty badtokenException.
-        final Activity context = this;
-        msgId = msg.getMsgId();
-        if (!context.isFinishing()) {
-          if (Log.DEBUG) Log.v("CadPageActivity Auto launch SmsPopup for " + msgId);
-          SmsPopupActivity.launchActivity(context, msgId);
-        }
+
+      // OK, go ahead and open the call display window
+      // Delay by 100 msecs in attempt to avoid a nasty badtokenException.
+      final Activity context = this;
+      msgId = msg.getMsgId();
+      if (!context.isFinishing()) {
+        if (Log.DEBUG) Log.v("CadPageActivity Auto launch SmsPopup for " + msgId);
+        SmsPopupActivity.launchActivity(context, msgId);
       }
     }
 
