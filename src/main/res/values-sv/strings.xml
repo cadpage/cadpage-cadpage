@@ -111,58 +111,55 @@
   <string name="notify_override_prompt_text">
     Du har konfigurerat Cadpage så att ljudet både använder den vanliga larmljudskontrollen och att Cadpage ska ligga över den kontrollen när ett larm kommer. Det är förmodligen inte vad du vill göra.
   </string>
-  <string name="notify_override_prompt_extra8_text"> <!-- Translate -->
-    \nWarning: Simply turning off the regular alerts is not advised since it will also suppress
-    the vibrate notification.  Instead, you should change the notification sound to "None"
+  <string name="notify_override_prompt_extra8_text">
+    \nWarning: Att bara stänga av det vanliga larmet är inte att rekommendera eftersom det också kommer att stänga av vibrationerna. Istället bör du ändra notifikationsinställningarna för ljud till "Inget"
   </string>
-  <string name="notify_override_prompt_extra9_text"> <!-- Translate -->
-    \nWarning: Simply turning off the regular alerts is not advised since it will also suppress
-    the vibrate notification.  Instead, you should open the advanced notification settings and
-    set the notification sound to \"None\"
+  <string name="notify_override_prompt_extra9_text">
+    \nWarning: Att bara stänga av det vanliga larmet är inte att rekommendera eftersom det också kommer att stänga av vibrationerna.Öppna istället de avancerade notifikationsinställningarna och ställ in notifikationsljudet \"None\"
   </string>
-  <string name="notify_override_cancel_regular">Låt mig tysta den vanliga varningen</string>    <!-- Translate -->
+  <string name="notify_override_cancel_regular">Låt mig tysta den vanliga varningen</string>
   <string name="notify_override_cancel_override">Låt mig avbryta att det ligger över det vanliga larmet</string>
   <string name="notify_override_good">Låt det vara</string>
 
   <!-- change vibrate setting dialog -->
-  <string name="notify_vibrate_prompt_title"> <!-- Translate -->
-    How to change the alert vibrate setting
+  <string name="notify_vibrate_prompt_title">
+    Hur ändrar jag vibrationslarmsinställningarna
   </string>
-  <string name="notify_vibrate_prompt_text"> <!-- Translate -->
-    Changing the vibration setting now requires changing the system notification configuration settings.
+  <string name="notify_vibrate_prompt_text">
+    För att ändra vibrationsinställningarna krävs det att du ändrar i systemnotifieringsinställningarna.
   </string>
-  <string name="notify_vibrate_prompt_off_v8_text"> <!-- Translate -->
-    To turn vibrations off, turn off the vibrate setting.
+  <string name="notify_vibrate_prompt_off_v8_text">
+    För att stänga av vibrationerna, stäng av vibrationsinställningarna.
   </string>
-  <string name="notify_vibrate_prompt_off_v9_text"> <!-- Translate -->
-    To turn vibrations off, open advanced settings and turn off the vibrate setting.
+  <string name="notify_vibrate_prompt_off_v9_text">
+    För att stänga av vibrationerna, öppna de avancerade inställningarna och stäng av vibrationerna.
   </string>
   <string name="notify_vibrate_prompt_on_v8_text"> <!-- Translate -->
     To turn vibrations on, turn on the vibrate setting.
   </string>
-  <string name="notify_vibrate_prompt_on_v9_text"> <!-- Translate -->
-    To turn vibrations on, open advanced settings and turn on the vibrate setting.
+  <string name="notify_vibrate_prompt_on_v9_text">
+    För att sätta på vibrationerna, öppna de avancerade inställningarna och sätt på vibrationerna.
   </string>
-  <string name="notify_vibrate_prompt_on_override_v8_text"> <!-- Translate -->
-    To turn vibrations on without messing with the audio alert override\n
-    1) Regular dispatch alerts must be turned on\n
-    2) Importance must be set to "High: Make sound"\n
-    3) Sound must be set to \"None\"\n
-    4) Vibrate setting must be turned on
+  <string name="notify_vibrate_prompt_on_override_v8_text">
+    För att sätta på vibrationer utan att mickla med det ljudande larmet\n
+    1) Vanliga larm måste vara aktiverade\n
+    2) Prioritet måste vara ställd på "Hög: Spela ljud"\n
+    3) Ljudet måste vara ställt på \"None\"\n
+    4) Vibrationsinställningarna måste vara påsatta
   </string>
-  <string name="notify_vibrate_prompt_on_override_v9_text"> <!-- Translate -->
-    To turn vibrations on without messing with audio alert override\n
-    1) Show notifications must be turned on\n
-    2) Behavior must be set to \"Make sound\"\n
-    3) Open advanced settings\n
-    4) Sound must be set to \"None\"\n
-    5) Vibrate setting must be turned on
+  <string name="notify_vibrate_prompt_on_override_v9_text">
+    För att sätta på vibrationer utan att mickla med det ljudande larmet\n
+    1) Visa notifikationer måste vara påsatt\n
+    2) Uppförande måste vara inställt på \"Make sound\"\n
+    3) Öppna avancerade inställningar\n
+    4) Ljudet måste vara inställt på \"None\"\n
+    5) Vibrationsinställningar måste vara inställda på på
   </string>
-  <string name="notify_vibrate_regular"> <!-- Translate -->
-    OK, Let\'s go do it!
+  <string name="notify_vibrate_regular">
+    OK, vi kör på det!
   </string>
-  <string name="notify_vibrate_cancel"> <!-- Translate -->
-    Never mind
+  <string name="notify_vibrate_cancel">
+    Strunta i det
   </string>
 
   <!-- Missing map page reader dialog -->
