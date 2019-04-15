@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,9 +11,11 @@ import android.preference.TwoStatePreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 
 import net.anei.cadpage.preferences.DoNotDisturbSwitchPreference;
 import net.anei.cadpage.preferences.ExtendedSwitchPreference;
+import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 import net.anei.cadpage.preferences.OnDataChangeListener;
 
 public class PreferenceNotificationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -23,6 +26,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
 
   private TwoStatePreference mNotifEnabledPreference;
   private ExtendedSwitchPreference mNotifOverridePreference;
+  private NewVibrateSwitchPreference mNewVibrateSwitchPreference = null;
   private DoNotDisturbSwitchPreference mDoNotDisturbSwitchPreference;
 
   @Override
@@ -49,13 +53,12 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
         @TargetApi(Build.VERSION_CODES.O)
         @Override
         public boolean onPreferenceClick(Preference preference) {
-          Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-          intent.putExtra(Settings.EXTRA_APP_PACKAGE, getActivity().getPackageName());
-          intent.putExtra(Settings.EXTRA_CHANNEL_ID, ManageNotification.ALERT_CHANNEL_ID);
-          startActivity(intent);
+          launchChannelConfig(getActivity());
           return true;
         }
       });
+
+      mNewVibrateSwitchPreference = (NewVibrateSwitchPreference)findPreference(getString(R.string.pref_vibrate_key));
     }
 
     final TwoStatePreference overrideSoundPref = (TwoStatePreference)findPreference(getString(R.string.pref_notif_override_sound_key));
@@ -98,12 +101,16 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
     mNotifEnabledPreference.setChecked(ManagePreferences.notifyEnabled());
     mNotifOverridePreference.setChecked(ManagePreferences.notifyOverride());
     if (mDoNotDisturbSwitchPreference != null) mDoNotDisturbSwitchPreference.refresh();
+    if (mNewVibrateSwitchPreference != null) mNewVibrateSwitchPreference.refresh();
   }
 
   private void checkNotificationAlertConflict() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
     Context context = getActivity();
     boolean conflict = ManageNotification.checkNotificationAlertConflict(context);
-    if (conflict && !acceptConflict) NotifyOverridePromptActivity.show(context);
+    if (conflict && !acceptConflict) {
+      NotifyOverridePromptActivity.show(context);
+    }
     acceptConflict = conflict;
   }
 
@@ -117,5 +124,13 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
   public void onDestroy() {
     super.onDestroy();
     ManagePreferences.unregisterOnSharedPreferenceChangeListener(this);
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.O)
+  public static void launchChannelConfig(Context context) {
+    Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+    intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
+    intent.putExtra(Settings.EXTRA_CHANNEL_ID, ManageNotification.ALERT_CHANNEL_ID);
+    context.startActivity(intent);
   }
 }

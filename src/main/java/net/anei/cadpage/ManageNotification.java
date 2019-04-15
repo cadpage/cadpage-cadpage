@@ -138,6 +138,25 @@ public class ManageNotification {
     return true;
   }
 
+  /**
+   * Determine if Oreo notification chanel is configured to vibrate
+   * @param context current context
+   * @return true if notification channel is configured to vibrate
+   */
+  public static boolean isVibrateEnabled(Context context) {
+
+    // Only an issue with Android Oreo
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
+    if (!ManagePreferences.notifyEnabled()) return false;
+
+    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert nm != null;
+    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+    if (channel == null) return false;
+    if (channel.getImportance() < NotificationManager.IMPORTANCE_DEFAULT) return false;
+    return channel.shouldVibrate();
+  }
+
   public static Notification getMiscNotification(Context context) {
       return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
   }

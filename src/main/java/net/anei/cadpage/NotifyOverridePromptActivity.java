@@ -1,11 +1,10 @@
 package net.anei.cadpage;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -14,6 +13,7 @@ import android.widget.Button;
 /**
  * Class handles the dialog popup reporting double audio alert configuration
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class NotifyOverridePromptActivity extends Safe40Activity {
 
   @Override
@@ -25,18 +25,26 @@ public class NotifyOverridePromptActivity extends Safe40Activity {
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.notify_override_prompt);
 
+    // Extra text should only be displayed is vibrate setting is currently enabled
+    View view8 = findViewById(R.id.NotifyOverrideExtra8Text);
+    View view9 = findViewById(R.id.NotifyOverrideExtra9Text);
+    if (ManageNotification.isVibrateEnabled(this)) {
+      boolean v9 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
+      view8.setVisibility(v9 ? View.GONE : View.VISIBLE);
+      view9.setVisibility(v9 ? View.VISIBLE : View.GONE);
+    } else {
+      view8.setVisibility(View.GONE);
+      view9.setVisibility(View.GONE);
+    }
+
     // Cancel regular notification button
     // Opens chanel settings preferences so user can cancel the audio alert
     // We will check if this was actually done when we are resumed
     Button button = findViewById(R.id.NotifyOverrideCancelRegularBtn);
     button.setOnClickListener(new OnClickListener(){
-      @TargetApi(Build.VERSION_CODES.O)
       @Override
       public void onClick(View view) {
-        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
-        intent.putExtra(Settings.EXTRA_CHANNEL_ID, ManageNotification.ALERT_CHANNEL_ID);
-        startActivity(intent);
+        PreferenceNotificationFragment.launchChannelConfig(NotifyOverridePromptActivity.this);
       }
     });
 
@@ -71,7 +79,6 @@ public class NotifyOverridePromptActivity extends Safe40Activity {
    * Check if user has configured conflicting audio alerts, and if they have, launch
    * a dialog box to warn them about the situation
    * @param context - current context
-   * @return true if conflicting audio alerts have been configured
    */
   static public void show(Context context) {
     Intent intent = new Intent(context, NotifyOverridePromptActivity.class);

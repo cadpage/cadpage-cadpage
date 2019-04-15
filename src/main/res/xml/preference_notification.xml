@@ -12,6 +12,13 @@
   android:title="@string/pref_notif_config_title"
   android:summary="@string/pref_notif_config_summary"
   android:dependency="@string/pref_notif_enabled_key"/>
+  <net.anei.cadpage.preferences.NewVibrateSwitchPreference
+  android:key="@string/pref_vibrate_key"
+  android:title="@string/pref_vibrate_title"
+  android:summaryOn="@string/pref_vibrate_summaryon"
+  android:summaryOff="@string/pref_vibrate_summaryoff"
+  android:defaultValue="@string/pref_vibrate_default"
+  android:dependency="@string/pref_notif_enabled_key" />
   <net.anei.cadpage.preferences.ExtendedSwitchPreference
   android:key="@string/pref_notif_override_key"
   android:title="@string/pref_notif_override_title"

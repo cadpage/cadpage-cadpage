@@ -137,9 +137,59 @@
     You have configured Cadpage to sound both the regular alert and a override alert when a
     call is received.  This is probably not what you want to do.
   </string>
-  <string name="notify_override_cancel_regular">Let me cancel the regular alert</string>
+  <string name="notify_override_prompt_extra8_text">
+    \nWarning: Simply turning off the regular alerts is not advised since it will also suppress
+    the vibrate notification.  Instead, you should change the notification sound to "None"
+  </string>
+  <string name="notify_override_prompt_extra9_text">
+    \nWarning: Simply turning off the regular alerts is not advised since it will also suppress
+    the vibrate notification.  Instead, you should open the advanced notification settings and
+    set the notification sound to \"None\"
+  </string>
+  <string name="notify_override_cancel_regular">Let me silence the regular alert</string>
   <string name="notify_override_cancel_override">Cancel the override alert</string>
   <string name="notify_override_good">Let it ride</string>
+
+  <!-- change vibrate setting dialog -->
+  <string name="notify_vibrate_prompt_title">
+    How to change the alert vibrate setting
+  </string>
+  <string name="notify_vibrate_prompt_text">
+    Changing the vibration setting now requires changing the system notification configuration settings.
+  </string>
+  <string name="notify_vibrate_prompt_off_v8_text">
+    To turn vibrations off, turn off the vibrate setting.
+  </string>
+  <string name="notify_vibrate_prompt_off_v9_text">
+    To turn vibrations off, open advanced settings and turn off the vibrate setting.
+  </string>
+  <string name="notify_vibrate_prompt_on_v8_text">
+    To turn vibrations on, turn on the vibrate setting.
+  </string>
+  <string name="notify_vibrate_prompt_on_v9_text">
+    To turn vibrations on, open advanced settings and turn on the vibrate setting.
+  </string>
+  <string name="notify_vibrate_prompt_on_override_v8_text">
+    To turn vibrations on without messing with the audio alert override\n
+    1) Regular dispatch alerts must be turned on\n
+    2) Importance must be set to "High: Make sound"\n
+    3) Sound must be set to \"None\"\n
+    4) Vibrate setting must be turned on
+  </string>
+  <string name="notify_vibrate_prompt_on_override_v9_text">
+    To turn vibrations on without messing with audio alert override\n
+    1) Show notifications must be turned on\n
+    2) Behavior must be set to \"Make sound\"\n
+    3) Open advanced settings\n
+    4) Sound must be set to \"None\"\n
+    5) Vibrate setting must be turned on
+  </string>
+  <string name="notify_vibrate_regular">
+    OK, Let\'s go do it!
+  </string>
+  <string name="notify_vibrate_cancel">
+    Never mind
+  </string>
 
   <!-- Missing map page reader dialog -->
   <string name="missing_map_page_reader_title">Missing Map Page Reader</string>

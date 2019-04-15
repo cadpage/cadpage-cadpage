@@ -28,16 +28,35 @@
   </LinearLayout>  
   <include
     layout="@layout/popup_divider" />
-    <TextView
-      android:text="@string/notify_override_prompt_text"
-      android:textAppearance="?android:attr/textAppearanceMedium"
-      android:textColor="?android:attr/textColorPrimaryDisableOnly"
-      android:layout_height="wrap_content"
-      android:layout_width="fill_parent"
-      android:gravity="center"
-      android:paddingRight="10dp"
-      android:paddingLeft="10dp" 
-      />
+  <TextView
+    android:text="@string/notify_override_prompt_text"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textColor="?android:attr/textColorPrimaryDisableOnly"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:gravity="center"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp" />
+  <TextView
+  android:id="@+id/NotifyOverrideExtra8Text"
+  android:text="@string/notify_override_prompt_extra8_text"
+  android:textAppearance="?android:attr/textAppearanceMedium"
+  android:textColor="?android:attr/textColorPrimaryDisableOnly"
+  android:layout_height="wrap_content"
+  android:layout_width="fill_parent"
+  android:gravity="center"
+  android:paddingRight="10dp"
+  android:paddingLeft="10dp" />
+  <TextView
+  android:id="@+id/NotifyOverrideExtra9Text"
+  android:text="@string/notify_override_prompt_extra9_text"
+  android:textAppearance="?android:attr/textAppearanceMedium"
+  android:textColor="?android:attr/textColorPrimaryDisableOnly"
+  android:layout_height="wrap_content"
+  android:layout_width="fill_parent"
+  android:gravity="center"
+  android:paddingRight="10dp"
+  android:paddingLeft="10dp" />
   <Button
     android:id="@+id/NotifyOverrideCancelRegularBtn"
     android:layout_height="wrap_content"

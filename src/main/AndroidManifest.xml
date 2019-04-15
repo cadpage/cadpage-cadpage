@@ -84,6 +84,10 @@
     android:screenOrientation="user"
     android:theme="@style/Cadpage_Dialog"/>
     <activity
+    android:name=".NotifyVibratePromptActivity"
+    android:screenOrientation="user"
+    android:theme="@style/Cadpage_Dialog"/>
+    <activity
     android:name=".donation.DonateActivity"
     android:screenOrientation="user"
     android:theme="@style/Cadpage_Case"/>
