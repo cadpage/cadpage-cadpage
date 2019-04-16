@@ -134,8 +134,8 @@
   <string name="notify_vibrate_prompt_off_v9_text">
     För att stänga av vibrationerna, öppna de avancerade inställningarna och stäng av vibrationerna.
   </string>
-  <string name="notify_vibrate_prompt_on_v8_text"> <!-- Translate -->
-    To turn vibrations on, turn on the vibrate setting.
+  <string name="notify_vibrate_prompt_on_v8_text">
+    För att sätta på vibrationerna, sätt på vibrationsinställningen.
   </string>
   <string name="notify_vibrate_prompt_on_v9_text">
     För att sätta på vibrationerna, öppna de avancerade inställningarna och sätt på vibrationerna.
