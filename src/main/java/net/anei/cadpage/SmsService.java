@@ -21,12 +21,13 @@ public class SmsService extends IntentService {
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    CadPageApplication.initialize(this);
-    if (flags != 0) holdPowerLock(this);
 
     if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }
+
+    CadPageApplication.initialize(this);
+    if (flags != 0) holdPowerLock(this);
 
     super.onStartCommand(intent, flags, startId);
     return Service.START_REDELIVER_INTENT;

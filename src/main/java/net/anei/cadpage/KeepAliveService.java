@@ -70,7 +70,6 @@ public class KeepAliveService extends Service {
   @SuppressLint("NewApi")
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    CadPageApplication.initialize(this);
 
     if (intent != null) {
       
@@ -92,6 +91,8 @@ public class KeepAliveService extends Service {
                           .setContentIntent(pint)
                           .build();
         startForeground(NOTIFICATION_ALERT, nf);
+        
+        CadPageApplication.initialize(this);
       }
     }
     return Service.START_NOT_STICKY;

@@ -96,7 +96,6 @@ public class TrackingService extends Service implements LocationListener {
   @Override
   public void onCreate() {
     Log.v("LocationService starting up");
-    CadPageApplication.initialize(this);
 
     // Set up a handler to manage location tracking termination
     mHandler = new Handler();
@@ -112,6 +111,8 @@ public class TrackingService extends Service implements LocationListener {
         .setContentIntent(pint)
         .build();
     startForeground(TRACKING_NOTIFICATION, nf);
+
+    CadPageApplication.initialize(this);
   }
 
   @SuppressLint("MissingPermission")

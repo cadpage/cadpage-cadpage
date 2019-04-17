@@ -68,7 +68,6 @@ public class MmsTransactionService extends Service {
   @Override
   public void onCreate() {
     if (Log.DEBUG) Log.v("MmsTransactionService.onCreate()");
-    CadPageApplication.initialize(this);
 
     // Acquire simple power lock while we are running
     PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -95,6 +94,8 @@ public class MmsTransactionService extends Service {
     if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }
+
+    CadPageApplication.initialize(this);
 
     // Collect all of the preferences we might need while we are still on
     // the main thread;
