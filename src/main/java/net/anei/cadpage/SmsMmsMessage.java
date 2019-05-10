@@ -703,7 +703,7 @@ public class SmsMmsMessage implements Serializable {
   public synchronized boolean reparseGeneral() {
     
     // We only are interested in calls parsed by one of the general location parsers
-    if (location == null || ! location.startsWith("General")) return false;
+    if (location == null || ! location.startsWith("General") || location.equals("ORBentonCountyC")) return false;
   
     
     // The effective location code is the vendor requested parser code if there is one, otherwise
