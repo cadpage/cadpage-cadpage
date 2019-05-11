@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05042019</string>
+  <string name="release_date">05112019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     If you are having trouble receiving Cadpage alerts on a Samsung device, see
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
+    \n
+    v2.1.3-5\n
+    New Locations:\n
+    Tate County, MS\n
+    \n
+    Location Fixes:\n
+    Fairbanks, AK\n
+    Hamilton County, IN\n
+    Benton County, OR\n
+    Linn County, OR\n
+    Snyder County, PA\n
+    Union County, PA\n
+    Greenville County, SC\n
+    Humble, TX\n
+    Waynesboro, VA\n
     \n
     v2.1.3-4\n
     Location Fixes:\n
@@ -55,13 +70,5 @@
     General Fixes:\n
     Some specialized initialization checking was being skipped when
     Cadpage is launched from the Capage widget.\n
-    \n
-    v2.1.2-8\n
-    Location Fixes:\n
-    Marion County, GA\n
-    Webster County, GA\n
-    Lycoming County, PA\n
-    Monroeville, PA\n
-    Sweden
   </string>
 </resources>
