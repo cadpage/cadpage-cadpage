@@ -218,14 +218,29 @@ public class DeveloperToolsManager {
         case 14:    // Build test message
           SmsMmsMessage message =
             new SmsMmsMessage(
-              "\"Delaware Co Emg Services\" <caddbserver@delco911alerts.com>",
-              "Delco Emg Services Notification",
-              "LOC: 137 BARTRAM AV ES TN X1: FRONT ST X2: E 2ND ST Nature:FIRE-BLD BUILDING FIRE, RES/DWELLING TIME:12:25:11 Notes:   BEDROOM Inc: F19000304 Beat: ES1 LL: 39.86110 -75.29586 Disp: 481,482,LA48,LA7,ENG7,SN8,ENG12-2,RIT43,AMB2,M100B,AC48,ENG12-1,WORK\r\n\r\n\r\n",
+              "<Larmserver@kallareetuna.se>",
+              "",
+              "Presentationsgrupp : ETUNA AUTOMATLARM\n" +
+                  "Talgrupp           : E-tunaIns\n" +
+                  "Objektinfo         : objektsinfo\n" +
+                  "Notering           :\n" +
+                  "Notering\n" +
+                  "Fritext            :\n" +
+                  "Fritext\n" +
+                  "Namn               : Torshälla teststationen\n" +
+                  "Nyckel             : Nyckel\n" +
+                  "Adress\n" +
+                  "            : Testgatan\n" +
+                  "Adressbeskriv.     : Vänster vid torget\n" +
+                  "Plats              : Brandstationen\n" +
+                  "Samhälle           :\n" +
+                  "Torshälla\n" +
+                  "Position WGS84     : La = 59° 25,265'N    Lo = 016° 28,357'E\n",
               System.currentTimeMillis(),
-              "US/PA/DelcoTextRelay,Utility/General/Default",
+              "SE/Kumla/Nerikesbrandkar,Vendor/Sweden/Zenit,Utility/General/Default",
               "Active911",
-              "AL30/8/10[=Not Responding;ResponseResp=Resp;ResponseArriv=Arriv;ResponseCancl=Cancl;ResponseAvail=Avail;ResponseUnvl=Unvl]",
-              "https://access.active911.com/interface/cadpage_api.php?q=amZPVy71TB",
+              "AL30/8/10[=Not Responding;ResponseKvitt=Kvitt;ResponseFra=Fra;ResponseKlar=Klar;ResponseHem=Hem;ResponseIndisp=Indisp",
+              "https://access.active911.com/interface/cadpage_api.php?q=aHDlyd18YM",
               "-1",
               null,
               "http://active911.com/amZPVy71TB");
