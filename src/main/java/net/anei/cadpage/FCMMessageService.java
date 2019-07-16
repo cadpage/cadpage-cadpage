@@ -43,14 +43,10 @@ public class FCMMessageService extends FirebaseMessagingService {
   @Override
   public void onCreate() {
     Log.v("FCMMessageService.onCreate()");
-
-    // If initialization failure in progress, shut down without doing anything
-    if (TopExceptionHandler.isInitFailure()) return;
+    super.onCreate();
 
     // Make sure everything is initialized
-    CadPageApplication.initialize(this);
-
-    super.onCreate();
+    if (!CadPageApplication.initialize(this)) return;
   }
 
   @Override

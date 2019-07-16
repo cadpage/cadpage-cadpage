@@ -16,7 +16,7 @@ public class ReminderReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     if (Log.DEBUG) Log.v("ReminderReceivere: onReceive()");
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
 
     String action = intent.getAction();
 

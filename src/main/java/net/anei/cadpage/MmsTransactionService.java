@@ -95,7 +95,7 @@ public class MmsTransactionService extends Service {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }
 
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
 
     // Collect all of the preferences we might need while we are still on
     // the main thread;

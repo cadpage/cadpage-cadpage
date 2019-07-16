@@ -25,7 +25,10 @@ public class DonateActivity extends Activity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) {
+      finish();
+      return;
+    }
     ManagePreferences.setPermissionManager(permMgr);
     super.onCreate(savedInstanceState);
     requestWindowFeature(Window.FEATURE_NO_TITLE);

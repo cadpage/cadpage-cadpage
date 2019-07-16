@@ -30,11 +30,8 @@ public class UsbReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.v("UsbReceiver: onReceive()");
-    
-    // If initialization failure in progress, shut down without doing anything
-    if (TopExceptionHandler.isInitFailure()) return;
 
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
 
     // Everything else gets handed off to the service intent
     ManageUsb.instance().onReceive(context, intent);

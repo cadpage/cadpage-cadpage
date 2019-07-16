@@ -38,11 +38,8 @@ public class PushReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.v("PushReceiver: onReceive()");
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
     ContentQuery.dumpIntent(intent);
-    
-    // If initialization failure in progress, shut down without doing anything
-    if (TopExceptionHandler.isInitFailure()) return;
 
     // Check for correct action
     if (!ACTION_WAP_PUSH_RECEIVED.equals(intent.getAction())) return;

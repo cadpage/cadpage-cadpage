@@ -26,7 +26,7 @@ public class SmsService extends IntentService {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }
 
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
     if (flags != 0) holdPowerLock(this);
 
     super.onStartCommand(intent, flags, startId);

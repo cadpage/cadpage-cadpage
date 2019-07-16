@@ -33,11 +33,8 @@ public class UpgradeReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.v("UpgradeReceiver: onReceive()");
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
     ContentQuery.dumpIntent(intent);
-    
-    // If initialization failure in progress, shut down without doing anything
-    if (TopExceptionHandler.isInitFailure()) return;
 
     // Call PermissionFixActivity.checkMMSPermission() to do the real work
     PermissionFixActivity.checkMMSPermission(context);

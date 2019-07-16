@@ -22,9 +22,12 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
 
-    CadPageApplication.initialize(this);
-
     super.onCreate(savedInstanceState);
+
+    if (!CadPageApplication.initialize(this)) {
+      finish();
+      return;
+    }
 
     ManagePreferences.setPermissionManager(permMgr);
   }

@@ -32,9 +32,14 @@ public class CadPageApplication extends Application {
   private static Thread mainThread = null;
   private static Handler mainHandler = null;
 
-  public static synchronized void initialize(Context callingContext) {
+  /**
+   * Initialize everything
+   * @param callingContext current calling context
+   * @return true if successful
+   */
+  public static synchronized boolean initialize(Context callingContext) {
 
-    if (context != null) return;
+    if (context != null) return !TopExceptionHandler.isInitFailure();
 
     Log.v("Initialization startup");
 
@@ -70,9 +75,10 @@ public class CadPageApplication extends Application {
       else {
         FCMMessageService.checkOverdueRefresh(context);
       }
-      
+
     } catch (Exception ex) {
       TopExceptionHandler.initializationFailure(context, ex);
+      return false;
     }
     
     // Reinitialize any Widget triggers.  This shouldn't be necessary, but it
@@ -81,6 +87,7 @@ public class CadPageApplication extends Application {
   
     TopExceptionHandler.enable(context);
     Log.v("Initialization complete");
+    return true;
     
   }
 

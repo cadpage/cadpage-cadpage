@@ -22,7 +22,7 @@ public class CadPageWidget extends AppWidgetProvider {
   public void onUpdate(Context context,AppWidgetManager appWidgetManager, int[] appWidgetIds){
     
     Log.v("CadpageWidget.onUpdate(" + appWidgetIds.length + ")");
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
 
     updateEnabled(context,appWidgetManager,appWidgetIds);
    
@@ -107,7 +107,7 @@ public class CadPageWidget extends AppWidgetProvider {
   @Override 
   public void onReceive(Context context, Intent intent){
     Log.v("Widget Activity");
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
 
     ContentQuery.dumpIntent(intent);
 

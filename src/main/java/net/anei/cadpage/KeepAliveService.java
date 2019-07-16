@@ -71,6 +71,8 @@ public class KeepAliveService extends Service {
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
 
+    if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
+
     if (intent != null) {
       
       // If a service shutdown was requested, do it
@@ -92,7 +94,6 @@ public class KeepAliveService extends Service {
                           .build();
         startForeground(NOTIFICATION_ALERT, nf);
         
-        CadPageApplication.initialize(this);
       }
     }
     return Service.START_NOT_STICKY;

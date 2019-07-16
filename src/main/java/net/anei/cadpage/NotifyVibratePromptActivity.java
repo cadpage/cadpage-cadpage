@@ -23,7 +23,10 @@ public class NotifyVibratePromptActivity extends Safe40Activity {
   protected void onCreate(Bundle bundle) {
     super.onCreate(bundle);
     if (Log.DEBUG) Log.v("NotifyOverridePromptActivity: onCreate()");
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) {
+      finish();
+      return;
+    };
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.notify_vibrate_prompt);

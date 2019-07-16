@@ -51,7 +51,10 @@ public class SmsPopupActivity extends Safe40Activity {
   protected void onCreate(Bundle bundle) {
     Log.v("SmsPopupActivity.onCreate()");
     super.onCreate(bundle);
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) {
+      finish();
+      return;
+    }
 
     ManagePreferences.setPermissionManager(permMgr);
 

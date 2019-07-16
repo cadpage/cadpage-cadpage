@@ -13,11 +13,8 @@ public class SmsReceiver extends BroadcastReceiver {
   @Override
   public synchronized void onReceive(Context context, Intent intent) {
     Log.v("SMSReceiver: onReceive()");
-    CadPageApplication.initialize(context);
+    if (!CadPageApplication.initialize(context)) return;
     ContentQuery.dumpIntent(intent);
-    
-    // If initialization failure in progress, shut down without doing anything
-    if (TopExceptionHandler.isInitFailure()) return;
 
     // Anything except an SMS received request should be ignored
     if (!ACTION_SMS_RECEIVED.equals(intent.getAction())) return;

@@ -31,7 +31,10 @@ public class NoticeActivity extends Safe40Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) {
+      finish();
+      return;
+    }
   }
 
   @Override

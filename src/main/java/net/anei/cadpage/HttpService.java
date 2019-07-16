@@ -257,7 +257,7 @@ public class HttpService extends Service {
     }
 
     super.onCreate();
-    CadPageApplication.initialize(this);
+    if (!CadPageApplication.initialize(this)) return;
 
 
     // Launch the HttpServiceThread that is going to do all of the work

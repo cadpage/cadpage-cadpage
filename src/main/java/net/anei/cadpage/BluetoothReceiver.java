@@ -32,7 +32,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
     Log.v("BluetoothReceiver: onReceive()");
     
     // If initialization failure in progress, shut down without doing anything
-    if (TopExceptionHandler.isInitFailure()) return;
+    if (!CadPageApplication.initialize(context)) return;
 
     // Everything else gets handed off to the service intent
     ManageBluetooth.instance().onReceive(context, intent);
