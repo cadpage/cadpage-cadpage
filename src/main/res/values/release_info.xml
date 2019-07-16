@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07062019</string>
+  <string name="release_date">07162019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
     If you are having trouble receiving Cadpage alerts on a Samsung device, see
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
+    \n
+    v2.1.3-16\n
+    New Locations:\n
+    Coryell County, TX\n
+    Edmonton, AB\n
+    Leduc County, AB\n
+    \n
+    Location Fixes:\n
+    Suisun City, CA\n
+    Mesa County, CO\n
+    Henry County, GA\n
+    Ada County, ID\n
+    Avolyelles Parish, LA\n
+    Portage County, OH\n
+    Summit County, OH\n
+    Jasper County, SC\n
     \n
     v2.1.3-15\n
     Location Fixes:\n
@@ -62,17 +78,6 @@
     Washtenaw County, MI\n
     Dolphin County, PA\n
     Grant County, WV\n
-    Sweden\n
-    \n
-    v2.1.3-11\n
-    New Locations:\n
-    Franklin County, TX\n
-    \n
-    Location Fixes:\n
-    Broward County, FL\n
-    Boyd County, KY\n
-    Cherokee County, NC\n
-    Benton County, OR\n
-    Oak Ridge, TN\n
+    Sweden
   </string>
 </resources>
