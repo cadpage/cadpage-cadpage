@@ -401,6 +401,9 @@ public class MmsTransactionService extends Service {
         CadPageApplication.runOnMainThread(new Runnable() {
           @Override
           public void run() {
+            if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+              stopForeground(true);
+            }
             stopSelf();
           }
         });

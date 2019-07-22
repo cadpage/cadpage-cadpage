@@ -271,6 +271,11 @@ public class HttpService extends Service {
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      startForeground(1, ManageNotification.getMiscNotification(this));
+    }
+
     if (flags != 0) holdPowerLock(this);
     super.onStartCommand(intent, flags, startId);
     return Service.START_REDELIVER_INTENT;
@@ -301,6 +306,7 @@ public class HttpService extends Service {
         synchronized(reqQueue) {
           req = reqQueue.poll();
           if (req == null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) stopForeground(true);
             stopSelf();
             return;
           }
