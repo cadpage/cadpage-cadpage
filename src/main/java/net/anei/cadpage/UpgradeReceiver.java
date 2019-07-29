@@ -36,8 +36,8 @@ public class UpgradeReceiver extends BroadcastReceiver {
     if (!CadPageApplication.initialize(context)) return;
     ContentQuery.dumpIntent(intent);
 
-    // Call PermissionFixActivity.checkMMSPermission() to do the real work
-    PermissionFixActivity.checkMMSPermission(context);
+    // Call PermissionFixActivity.checkPermissions() to do the real work
+    PermissionFixActivity.checkPermissions(context);
 
     // Something else to check.  If user has upgraded to a message restricted version of
     // Cadpage, check to make sure the message support app is installed

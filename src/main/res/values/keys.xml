@@ -64,6 +64,8 @@
     <string name="pref_notif_repeat_key">notif_repeat</string>
     <string name="pref_notif_repeat_interval_key">notif_repeat_interval</string>
     <string name="pref_notif_timeout_key">notif_timeout</string>
+    <string name="pref_notif_check_abort_key">notif_check_abort</string>
+    <string name="pref_notif_abort_key">notif_abort</string>
     <string name="pref_resp_button_config_key">rep_button_config</string>
     <string name="pref_resp_type_key">resp_type</string>
     <string name="pref_resp_merge_key">resp_merge</string>

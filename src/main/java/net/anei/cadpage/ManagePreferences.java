@@ -694,7 +694,23 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static int notifyRepeatInterval() {
     return prefs.getIntValue(R.string.pref_notif_repeat_interval_key);
   }
-  
+
+  public static boolean notifyCheckAbort() {
+    return prefs.getBoolean(R.string.pref_notif_check_abort_key);
+  }
+
+  public static void setNotifyCheckAbort(boolean newVal) {
+    prefs.putBoolean(R.string.pref_notif_check_abort_key, newVal);
+  }
+
+  public static boolean notifyAbort() {
+    return prefs.getBoolean(R.string.pref_notif_abort_key);
+  }
+
+  public static void setNotifyAbort(boolean newVal) {
+    prefs.putBoolean(R.string.pref_notif_abort_key, newVal);
+  }
+
   public static boolean popupEnabled() {
     return prefs.getBoolean(R.string.pref_popup_enabled_key);
   }
@@ -1363,7 +1379,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int PERM_REQ_PHONE_INFO = 12;
   private static final int PERM_REQ_LOCATION_TRACKING = 13;
   private static final int PERM_REQ_USER_ALERT_SOUND = 14;
-  private static final int PERM_REQ_LIMIT = 14;
+  private static final int PERM_REQ_NOTIFY_ABORT = 15;
+  private static final int PERM_REQ_LIMIT = 15;
   
   private static final PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
@@ -1774,6 +1791,33 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       return true;
     }
   }
+
+  /********************************************************************
+   * Permission checking when the system will not play override sound without external storage permission
+   * This not a user adjustable setting, it gets set when the Android system throws a security exception
+   * when we try to show a notification.  It is only checked during the initialization permision check
+   ********************************************************************/
+
+  private static class NotifyAbortChecker extends CheckBoxPermissionChecker {
+
+    public NotifyAbortChecker() {
+      super(PERM_REQ_NOTIFY_ABORT, R.string.pref_notif_abort_key);
+    }
+
+    @Override
+    protected Boolean checkPermission(Boolean value) {
+
+      // If notifications are not enabled, no problem
+      if (!notifyEnabled()) return null;
+
+      // false value requires READ_EXTERNAL_STORAGE permission
+      // because it may need to read audio alert files on external storage
+      if (!value) return null;
+      if (checkRequestPermission(PermissionManager.READ_EXTERNAL_STORAGE, R.string.perm_notify_abort)) return null;
+      return false;
+    }
+  }
+
 
   /********************************************************************************
    * Generic permission checker used to handle ListPreference preference values
@@ -2561,6 +2605,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_notif_timeout_key,
       R.string.pref_notif_delay_key,
       R.string.pref_notif_req_ack_key,
+      R.string.pref_notif_check_abort_key,
+      R.string.pref_notif_abort_key,
       
       R.string.pref_vibrate_key,
       R.string.pref_vibrate_pattern_key,

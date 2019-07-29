@@ -52,6 +52,11 @@
    Du vill att Cadpage ska använda en rington som kan vara sparat på ditt externa SD-kort.
    </string>
 
+  <string name="perm_notify_abort"> <!-- Translate -->
+     For unknown reasons, the Android system will not show Cadpage notification
+     alerts until you grant data storage permission.
+   </string>
+
   <string name="perm_grant_acct_access">
     Du ber Cadpage komma åt din information om ditt epost-konto. För att göra det så behöver vi identifiera ditt Google-konto.
   </string>

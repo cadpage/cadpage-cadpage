@@ -42,7 +42,19 @@ public class PermissionFixActivity extends AppCompatActivity {
     super.onDestroy();
   }
 
-  public static void checkMMSPermission(Context context) {
+  public static void checkPermissions(Context context) {
+
+    boolean launch = false;
+
+    // There are two situations that need to be checked for immediately
+    // The first is an upgrade to SDK level 28 can cause regular system
+    // notification audio alerts to crash if the read external data
+    // permission has not been granted.  We already checked for this condition
+    // during notification initialization which would have set the notifyAbort()
+    // setting.  We just need to check that.
+    if (ManagePreferences.notifyAbort()) {
+      launch = true;
+    }
 
     // Since we bumped the taget SDK level to 27, reading MMS messages requires SMS_READ permission
     // which was not needed before.  New logic checks for this situation and corrects it when the
@@ -53,12 +65,17 @@ public class PermissionFixActivity extends AppCompatActivity {
     // the app has been upgraded, check for the missing permission situation, and if detected,
     // launch this activity to fix things.  Once fixed, we shut down and no one is any wiser
 
-    if (ManagePreferences.enableMsgType().contains("M") &&
-        !PermissionManager.isGranted(context, PermissionManager.READ_SMS)) {
+    else if (ManagePreferences.enableMsgType().contains("M") &&
+             !PermissionManager.isGranted(context, PermissionManager.READ_SMS)) {
+      launch = true;
+    }
+
+    // If we need to launch the fixit activity, do it
+    if (launch) {
       Intent intent = new Intent(context, PermissionFixActivity.class);
       int flags = Intent.FLAG_ACTIVITY_NEW_TASK |
-                  Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                  Intent.FLAG_ACTIVITY_CLEAR_TOP;
+          Intent.FLAG_ACTIVITY_SINGLE_TOP |
+          Intent.FLAG_ACTIVITY_CLEAR_TOP;
       intent.setFlags(flags);
       context.startActivity(intent);
     }

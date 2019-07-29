@@ -91,6 +91,10 @@ public class ManageNotification {
      }
      Log.v("Current Notification Channel info:" + channel.toString());
 
+     // See if the alert is going to play an audio alert
+    boolean audioAlert = channel.getImportance() >= NotificationManager.IMPORTANCE_DEFAULT &&
+                         channel.getSound() != null;
+
      channel = nm.getNotificationChannel(TRACKING_CHANNEL_ID);
      if (channel == null) {
        channel = new NotificationChannel(TRACKING_CHANNEL_ID, context.getString(R.string.tracking_notif_title), NotificationManager.IMPORTANCE_LOW);
@@ -105,6 +109,18 @@ public class ManageNotification {
        channel.setBypassDnd(false);
        nm.createNotificationChannel(channel);
      }
+
+    if (audioAlert && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      if (! ManagePreferences.notifyCheckAbort() &&
+          ! PermissionManager.isGranted(context, PermissionManager.READ_EXTERNAL_STORAGE)) {
+        Log.v("Checking Notification Security");
+        ManagePreferences.setNotifyCheckAbort(true);
+        ManageNotification.show(context, null, false);
+        NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        assert myNM != null;
+        myNM.cancel(NOTIFICATION_ALERT);
+      }
+    }
   }
 
   /**
@@ -183,7 +199,8 @@ public class ManageNotification {
   /**
    * Called by ReminderReceiver when it is time to initiate a notification
    * @param context current context
-   * @param message message this is about
+   * @param message message this is about or null if this is a dummy onetime check
+   *                to see if we can generate a notification without triggering a security exception.
    * @param first true if this is the initial notification for this call.
    */
   public static void show(Context context, SmsMmsMessage message, boolean first) {
@@ -202,7 +219,23 @@ public class ManageNotification {
     // Seems this is needed for the number value to take effect on the Notification
     activeNotice = true;
     myNM.cancel(NOTIFICATION_ALERT);
-    myNM.notify(NOTIFICATION_ALERT, n);
+
+    // Sometimes, under conditions we cannot reproduce, this throws a security
+    // exception if we do not have data storage permission
+    try {
+      myNM.notify(NOTIFICATION_ALERT, n);
+    } catch (SecurityException ex) {
+      Log.e(ex);
+      ManagePreferences.setNotifyAbort(true);
+      return;
+    }
+
+    // If this was a security check and we got to here, everything is OK
+    // so cancel the notification and return;
+    if (message == null) {
+      myNM.cancel(NOTIFICATION_ALERT);
+      return;
+    }
 
     // Schedule a reminder notification
     ReminderReceiver.scheduleReminder(context, message);
@@ -213,8 +246,13 @@ public class ManageNotification {
     }
   }
 
-  /*
+  /**
+
    * Build the notification from user preferences
+   * @param context current context
+   * @param message message this is about or null if this is a dummy onetime check
+   *                to see if we can generate a notification without triggering a security exception.
+   * @returns notification object
    */
   private static Notification buildNotification(Context context, SmsMmsMessage message) {
 
@@ -270,24 +308,29 @@ public class ManageNotification {
     if ( ManagePreferences.notifyEnabled()) {
       
       // Are we doing are own alert sound?
+      // Skip this for the dummy security check
       if (ManagePreferences.notifyOverride()) {
-        
-        // Save previous volume and set volume to max
-        overrideVolumeControl(context);
-        
-        // Start Media Player
-        startMediaPlayer(context, 0);
+
+        if (message != null) {
+          // Save previous volume and set volume to max
+          overrideVolumeControl(context);
+
+          // Start Media Player
+          startMediaPlayer(context, 0);
+        }
       } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
         Uri alarmSoundURI = Uri.parse(ManagePreferences.notifySound());
         nbuild.setSound(alarmSoundURI);
       }
     }
 
-    String call = message.getTitle();
     nbuild.setContentTitle(context.getString(R.string.cadpage_alert));
-    nbuild.setContentText(call);
-    nbuild.setStyle(new NotificationCompat.InboxStyle().addLine(call).addLine(message.getAddress()));
-    nbuild.setWhen(message.getIncidentDate().getTime());
+    if (message != null) {
+      String call = message.getTitle();
+      nbuild.setContentText(call);
+      nbuild.setStyle(new NotificationCompat.InboxStyle().addLine(call).addLine(message.getAddress()));
+      nbuild.setWhen(message.getIncidentDate().getTime());
+    }
 
     // The default intent when the notification is clicked (Inbox)
     Intent smsIntent = CadPageActivity.getLaunchIntent(context, true);

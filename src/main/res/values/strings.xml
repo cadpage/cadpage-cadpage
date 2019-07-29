@@ -63,6 +63,11 @@
    external SD card.
    </string>
 
+   <string name="perm_notify_abort">
+     For unknown reasons, the Android system will not show Cadpage notification
+     alerts until you grant data storage permission.
+   </string>
+
   <string name="perm_grant_acct_access">
     You are requesting Cadpage access to your email account information.  To do
     this, we will need to identify your Google email accounts.
