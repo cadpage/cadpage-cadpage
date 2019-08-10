@@ -1798,6 +1798,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * when we try to show a notification.  It is only checked during the initialization permision check
    ********************************************************************/
 
+  static {
+    new NotifyAbortChecker();
+  }
   private static class NotifyAbortChecker extends CheckBoxPermissionChecker {
 
     public NotifyAbortChecker() {
@@ -1810,7 +1813,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // If notifications are not enabled, no problem
       if (!notifyEnabled()) return null;
 
-      // false value requires READ_EXTERNAL_STORAGE permission
+      // true value requires READ_EXTERNAL_STORAGE permission
       // because it may need to read audio alert files on external storage
       if (!value) return null;
       if (checkRequestPermission(PermissionManager.READ_EXTERNAL_STORAGE, R.string.perm_notify_abort)) return null;

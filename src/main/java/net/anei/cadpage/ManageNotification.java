@@ -62,34 +62,34 @@ public class ManageNotification {
   public static void setup(Context context) {
 
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
-     NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-     assert nm != null;
-     NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
-     if (channel == null) {
-       channel = new NotificationChannel(ALERT_CHANNEL_ID, context.getString(R.string.regular_alert_title), NotificationManager.IMPORTANCE_HIGH);
-       channel.setDescription(context.getString(R.string.regular_alert_text));
-       channel.setBypassDnd(true);
-       channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert nm != null;
+    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+    if (channel == null) {
+      channel = new NotificationChannel(ALERT_CHANNEL_ID, context.getString(R.string.regular_alert_title), NotificationManager.IMPORTANCE_HIGH);
+      channel.setDescription(context.getString(R.string.regular_alert_text));
+      channel.setBypassDnd(true);
+      channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
 
-       channel.enableLights(ManagePreferences.flashLED());
-       channel.setLightColor(getLEDColor(context));
-       // There does not seem to be a way to set the LED blink rate :(
+      channel.enableLights(ManagePreferences.flashLED());
+      channel.setLightColor(getLEDColor(context));
+      // There does not seem to be a way to set the LED blink rate :(
 
-       channel.enableVibration(ManagePreferences.vibrate());
-       long[] vibratePattern = getVibratePattern(context);
-       if (vibratePattern != null) channel.setVibrationPattern(vibratePattern);
+      channel.enableVibration(ManagePreferences.vibrate());
+      long[] vibratePattern = getVibratePattern(context);
+      if (vibratePattern != null) channel.setVibrationPattern(vibratePattern);
 
-       if (!ManagePreferences.notifyOverride()) {
-         Uri uri = Uri.parse(ManagePreferences.notifySound());
-         AudioAttributes aa = new AudioAttributes.Builder()
-             .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
-             .build();
-         channel.setSound(uri, aa);
-       }
+      if (!ManagePreferences.notifyOverride()) {
+        Uri uri = Uri.parse(ManagePreferences.notifySound());
+        AudioAttributes aa = new AudioAttributes.Builder()
+            .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+            .build();
+        channel.setSound(uri, aa);
+      }
 
-       nm.createNotificationChannel(channel);
-     }
-     Log.v("Current Notification Channel info:" + channel.toString());
+      nm.createNotificationChannel(channel);
+    }
+    Log.v("Current Notification Channel info:" + channel.toString());
 
      // See if the alert is going to play an audio alert
     boolean audioAlert = channel.getImportance() >= NotificationManager.IMPORTANCE_DEFAULT &&
