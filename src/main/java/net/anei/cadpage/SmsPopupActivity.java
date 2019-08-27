@@ -213,6 +213,10 @@ public class SmsPopupActivity extends Safe40Activity {
       fromTV.setText(sb.toString());
       if (info.noCall()) fromTV.setMaxLines(2);
       sb = new StringBuilder();
+      if (info.getAlert().length() > 0) {
+        sb.append(info.getAlert());
+        sb.append('\n');
+      }
       if (info.getPlace().length() > 0) {
         sb.append(info.getPlace());
         sb.append('\n');
