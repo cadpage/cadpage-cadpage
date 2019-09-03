@@ -8,6 +8,22 @@
     http://www.cadpage.org/faq/cadpage-2-0\n
     Updated 03/16/2019\n
     \n
+    v2.1.4-05\n
+    New Locations:\n
+    Martin County, KY\n
+    \n
+    Location Fixes:\n
+    Limestone County, AL\n
+    Madison County, AL\n
+    Franklin County, GA\n
+    St Louis County, MO\n
+    Portage County, OH\n
+    Yamhill County, OR\n
+    Northampton County, PA\n
+    Berkeley County, SC\n
+    Midland County, TX\n
+    Danville, VA\n
+    \n
     v2.1.4-04\n
     Location Fixes:\n
     Pulaski County, AR\n
@@ -44,8 +60,5 @@
     Rockland County, NY\n
     Wake County, NC\n
     Pontotoc County, OK\n
-    \n
-    v2.1.3-21\n
-    Fixed crash when using Washington County, TN location.
   </string>
 </resources>
