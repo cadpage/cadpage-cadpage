@@ -708,6 +708,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   public static void setNotifyAbort(boolean newVal) {
+
+    // If we have identify a notification abort problem, clear the
+    // initial permissions checked flag so the next startup will
+    // report the problem.
+    if (newVal) initialPermissionsChecked = false;
     prefs.putBoolean(R.string.pref_notif_abort_key, newVal);
   }
 
