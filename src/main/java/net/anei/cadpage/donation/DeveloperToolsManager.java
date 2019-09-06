@@ -78,12 +78,14 @@ public class DeveloperToolsManager {
       "Crash!!!",
       "Do Not Disturb",
       "DND granted",
-      "Recheck notify abort"
+      "Recheck notify abort",
+
+      "Set notify abort"
   };
   
   private static final String[] valueList = new String[]{
     "100", "101", "102",
-    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23"
+    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24"
   };
   
   private class DeveloperListPreference extends ListPreference {
@@ -296,6 +298,10 @@ public class DeveloperToolsManager {
 
         case 23:    // Recheck notify abort
           ManagePreferences.setNotifyCheckAbort(false);
+          break;
+
+        case 24:    // Set notify abort
+          ManagePreferences.setNotifyAbort(true);
           break;
 
         case 33:    // FCM: Report
