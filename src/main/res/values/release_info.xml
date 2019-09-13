@@ -6,7 +6,7 @@
   <string name="release_text">
     v2.1.6-01\n
     Notifications now work under Android 10.  The call detail popup will not be displayed if Cadpage
-    is not curently active.  This is an Android 10 restriction that cannot be overridden. :(\n
+    is not currently active.  This is an Android 10 restriction that cannot be overridden. :(\n
     \n
     v2.1.5-02\n
     New Locations:\n
