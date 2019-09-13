@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09052019</string>
+  <string name="release_date">09132019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    WARNING!!!\n
-    Cadpage notifications are **NOT** working under Android 10, which is currently
-    being distributed to Pixel devices.  If you are running on a Pixel, try to avoid
-    upgrading to Android 10 until we can get this fixed.  If you have already
-    upgraded to Android 10, please switch to the Cadpage beta test track.  We will
-    probably release the Android 10 fix as beta release in the next couple days.\n
+    This version still does not work properly under Android 10.  Users who are running or wish to
+    run under Android 10 should switch to the Cadpage beta test track.  The beta version should
+    work.\n
+    \n
+    v2.1.5-02\n
+    New Locations:\n
+    Fremont County, ID\n
+    Mediina County, TX\n
+    \n
+    Location Fixes:\n
+    Escambia County, FL\n
+    Blaine County, ID\n
+    Edmonson County, KY\n
+    Flathead County, MT\n
+    Suffolk County, NY\n
+    Benton County, OR\n
     \n
     v2.1.5-01\n
     Location Fixes:\n
@@ -54,12 +64,6 @@
     installed in hopes of preventing it from failing when a real alarm is processed.\n
     \n
     Location Fixes:\n
-    Deschutes County, OR\n
-    \n
-    v2.1.4-02\n
-    Location Fixes:\n
-    Union County, NC\n
-    Mercer County, OH\n
-    Albemarle County, VA\n
+    Deschutes County, OR
   </string>
 </resources>
