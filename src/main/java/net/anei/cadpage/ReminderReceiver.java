@@ -37,13 +37,13 @@ public class ReminderReceiver extends BroadcastReceiver {
     if (message == null) return;
 
     boolean start = intent.getBooleanExtra(EXTRA_START, true);
-    ManageNotification.show(context, message, start);
+    ManageNotification.show(context, message, false, start);
   }
   
   public static void scheduleNotification(Context context, SmsMmsMessage message) {
     long delay = ManagePreferences.notifyDelay();
     if (delay == 0L) {
-      ManageNotification.show(context, message, true);
+      ManageNotification.show(context, message, false, true);
     } else {
       scheduleReminder(context, message, true, delay);
     }

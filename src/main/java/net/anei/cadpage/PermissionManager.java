@@ -38,6 +38,7 @@ public class PermissionManager {
   private static final String ACCESS_NETWORK_STATE = "android.permission.ACCESS_NETWORK_STATE";
   private static final String RECEIVE_C2DM = "com.google.android.c2dm.permission.RECEIVE";
   private static final String MODIFY_AUDIO_SETTINGS = "android.permission.MODIFY_AUDIO_SETTINGS";
+  private static final String USE_FULL_SCREEN_INTENT = "android.permission.USE_FULL_SCREEN_INTENT";
   
   
   private final Context context;
@@ -271,7 +272,8 @@ public class PermissionManager {
     ACCESS_FINE_LOCATION,
     READ_EXTERNAL_STORAGE,
     WRITE_EXTERNAL_STORAGE,
-    MODIFY_AUDIO_SETTINGS
+    MODIFY_AUDIO_SETTINGS,
+    USE_FULL_SCREEN_INTENT
   };
 
 }

@@ -119,7 +119,7 @@ public class CadPageActivity extends AppCompatActivity {
     // message, ignore all extraneous intents until we find the one that
     // displays the new page
     int msgId = intent.getIntExtra(EXTRA_MSG_ID, -1);
-    if (msgId != lockMsgId) {
+    if (msgId > 0 && msgId != lockMsgId) {
       Log.v("Discarding spurious intent");
       return;
     }
@@ -403,14 +403,8 @@ public class CadPageActivity extends AppCompatActivity {
    * Launch activity
    */
   public static void launchActivity(Context context, boolean notify, SmsMmsMessage msg) {
-    Intent intent = getLaunchIntent(context);
-    if (notify) intent.putExtra(EXTRA_NOTIFY, true);
+    Intent intent = getLaunchIntent(context, true, notify, msg);
     intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-    if (msg != null) {
-      lockMsgId = msg.getMsgId();
-      intent.putExtra(EXTRA_MSG_ID, lockMsgId);
-    }
-    
     context.startActivity(intent);
   }
   
@@ -420,9 +414,9 @@ public class CadPageActivity extends AppCompatActivity {
    * @return Intent that will launch Cadpage
    */
   public static Intent getLaunchIntent(Context context) {
-    return getLaunchIntent(context, false);
+    return getLaunchIntent(context, false, false, null);
   }
-  
+
   /**
    * Build intent to launch this activity
    * @param context current context
@@ -430,6 +424,16 @@ public class CadPageActivity extends AppCompatActivity {
    * @return Intent that will launch Cadpage
    */
   public static Intent getLaunchIntent(Context context, boolean force) {
+    return getLaunchIntent(context, force, false, null);
+  }
+
+  /**
+   * Build intent to launch this activity
+   * @param context current context
+   * @param force force detail popup window
+   * @return Intent that will launch Cadpage
+   */
+  public static Intent getLaunchIntent(Context context, boolean force, boolean notify, SmsMmsMessage msg) {
     Intent intent = new Intent(context, CadPageActivity.class);
     int flags =
       Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -437,6 +441,11 @@ public class CadPageActivity extends AppCompatActivity {
       Intent.FLAG_ACTIVITY_CLEAR_TOP;
     intent.setFlags(flags);
     if (force) intent.putExtra(EXTRA_POPUP, true);
+    if (notify) intent.putExtra(EXTRA_NOTIFY, true);
+    if (msg != null) {
+      lockMsgId = msg.getMsgId();
+      intent.putExtra(EXTRA_MSG_ID, lockMsgId);
+    }
     return intent;
   }
 

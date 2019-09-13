@@ -4,9 +4,9 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    This version still does not work properly under Android 10.  Users who are running or wish to
-    run under Android 10 should switch to the Cadpage beta test track.  The beta version should
-    work.\n
+    v2.1.6-01\n
+    Notifications now work under Android 10.  The call detail popup will not be displayed if Cadpage
+    is not curently active.  This is an Android 10 restriction that cannot be overridden. :(\n
     \n
     v2.1.5-02\n
     New Locations:\n

@@ -115,7 +115,7 @@ public class ManageNotification {
           ! PermissionManager.isGranted(context, PermissionManager.READ_EXTERNAL_STORAGE)) {
         Log.v("Checking Notification Security");
         ManagePreferences.setNotifyCheckAbort(true);
-        ManageNotification.show(context, null, false);
+        ManageNotification.show(context, null, false, false);
         NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         assert myNM != null;
         myNM.cancel(NOTIFICATION_ALERT);
@@ -174,7 +174,7 @@ public class ManageNotification {
   }
 
   public static Notification getMiscNotification(Context context) {
-      return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
+    return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
   }
   
   /**
@@ -201,9 +201,10 @@ public class ManageNotification {
    * @param context current context
    * @param message message this is about or null if this is a dummy onetime check
    *                to see if we can generate a notification without triggering a security exception.
+   * @param fullScreen true to display full screen notification
    * @param first true if this is the initial notification for this call.
    */
-  public static void show(Context context, SmsMmsMessage message, boolean first) {
+  public static void show(Context context, SmsMmsMessage message, boolean fullScreen, boolean first) {
     
     // Save phone muted status while we have a context to work with
     AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
@@ -211,7 +212,7 @@ public class ManageNotification {
     phoneMuted =  (am.getRingerMode() != AudioManager.RINGER_MODE_NORMAL);
 
     // Build and launch the notification
-    Notification n = buildNotification(context, message);
+    Notification n = buildNotification(context, message, fullScreen);
     
     NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     assert myNM != null;
@@ -252,14 +253,16 @@ public class ManageNotification {
    * @param context current context
    * @param message message this is about or null if this is a dummy onetime check
    *                to see if we can generate a notification without triggering a security exception.
-   * @returns notification object
+   * @param fullScreen true if full screen notification should be displayed
+   * @return notification object
    */
-  private static Notification buildNotification(Context context, SmsMmsMessage message) {
+  private static Notification buildNotification(Context context, SmsMmsMessage message, boolean fullScreen) {
 
     /*
      * Ok, let's create our Notification object and set up all its parameters.
      */
-    NotificationCompat.Builder nbuild = new NotificationCompat.Builder(context, ALERT_CHANNEL_ID);
+    NotificationCompat.Builder nbuild;
+    nbuild = new NotificationCompat.Builder(context, ALERT_CHANNEL_ID);
 
     // Set auto-cancel flag
     nbuild.setAutoCancel(true);
@@ -300,7 +303,7 @@ public class ManageNotification {
         if (vibrate_pattern != null) {
           nbuild.setVibrate(vibrate_pattern);
         } else {
-          nbuild.setDefaults(Notification.DEFAULT_VIBRATE);
+          nbuild.setDefaults(NotificationCompat.DEFAULT_VIBRATE);
         }
       }
     }
@@ -333,10 +336,15 @@ public class ManageNotification {
     }
 
     // The default intent when the notification is clicked (Inbox)
-    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true);
-    PendingIntent notifIntent = PendingIntent.getActivity(context, 0, smsIntent, 0);
+    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true, false, message);
+    Log.v("Notification launch intent");
+    ContentQuery.dumpIntent(smsIntent);
+
+    PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, smsIntent,
+                                                          PendingIntent.FLAG_CANCEL_CURRENT);
     nbuild.setContentIntent(notifIntent);
-    
+    if (fullScreen) nbuild.setFullScreenIntent(notifIntent, true);
+
     // Set intent to execute if the "clear all" notifications button is pressed -
     // basically stop any future reminders.
     Intent deleteIntent = new Intent(new Intent(context, ReminderReceiver.class));
@@ -558,6 +566,7 @@ public class ManageNotification {
     
     try {
       Uri ringtonesUri = MediaStore.Audio.Media.getContentUriForPath(path);
+      if (ringtonesUri == null) return null;
       Cursor ringtoneCursor = context.getContentResolver().query(ringtonesUri, 
           new String[]{MediaStore.Audio.Media._ID}, 
           MediaStore.Audio.Media.DATA + "='?'", new String[]{path}, null);
