@@ -1,10 +1,12 @@
 package net.anei.cadpage.preferences;
 
 import net.anei.cadpage.ManageNotification;
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.SmsMessageQueue;
 import net.anei.cadpage.SmsMmsMessage;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -33,7 +35,11 @@ public class TestNotificationDialogPreference extends DialogPreference {
 
     // Show notification
     SmsMmsMessage msg = SmsMessageQueue.getInstance().getMessage(0);
-    ManageNotification.show(context, msg);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && ManagePreferences.popupEnabled()) {
+      ManageNotification.show(context, msg, true, true);
+    } else {
+      ManageNotification.show(context, msg);
+    }
 
     return super.onCreateDialogView();
   }
