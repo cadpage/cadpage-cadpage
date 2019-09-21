@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09132019</string>
+  <string name="release_date">09212019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.6-02\n
+    New Locations:\n
+    Burleson County, TX\n
+    \n
+    Location Fixes:\n
+    Gunnison County, CO\n
+    West Baton Rouge Parish, LA\n
+    Halifax County, NC\n
+    Rowan County, NC\n
+    Auglaize County, OH\n
+    Jefferson County, OH\n
+    Polk County, OR\n
+    Chester County, PA\n
+    \n
     v2.1.6-01\n
     Notifications now work under Android 10.  The call detail popup will not be displayed if Cadpage
     is not currently active.  This is an Android 10 restriction that cannot be overridden. :(\n
@@ -43,27 +57,6 @@
     Northampton County, PA\n
     Berkeley County, SC\n
     Midland County, TX\n
-    Danville, VA\n
-    \n
-    v2.1.4-04\n
-    Location Fixes:\n
-    Pulaski County, AR\n
-    Siskiyou County, CA\n
-    Tazewell County, IL\n
-    Tipton County, IN\n
-    Lyon County, MN\n
-    Craven County, NC\n
-    Macon County, NC\n
-    Pickens County, SC\n
-    \n
-    v2.1.4-03\n
-    Modified to target Android 9.  For most users, upgrading to this release will be
-    uneventful.  For reasons that remain mysterious, a handful of users will discover that
-    regular Cadpage notifications now require permission to access user data.  Cadpage will
-    attempt to identify these users and request user data permission when this update is
-    installed in hopes of preventing it from failing when a real alarm is processed.\n
-    \n
-    Location Fixes:\n
-    Deschutes County, OR
+    Danville, VA
   </string>
 </resources>
