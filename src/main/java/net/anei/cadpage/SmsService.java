@@ -221,6 +221,7 @@ public class SmsService extends IntentService {
       // no way of knowing if the request was successful or not.  So we also have to start
       // a full screen notification, in case it failed, and launch Radio Scanner if requested
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        ManagePreferences.setForcePopup(true);
         CadPageActivity.launchActivity(context, false, message);
         ManageNotification.show(context, message, true, true);
         launchScanner(context);

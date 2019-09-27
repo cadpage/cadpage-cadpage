@@ -1292,6 +1292,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setBillingAccount(String newVal) {
     prefs.putString(R.string.pref_billing_account_key, newVal);
   }
+
+  public static boolean forcePopup() {
+    return prefs.getBoolean(R.string.pref_force_popup);
+  }
+
+  public static void setForcePopup(boolean newVal) {
+    prefs.putBoolean(R.string.pref_force_popup, newVal);
+  }
   
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
@@ -2713,6 +2721,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       R.string.pref_no_map_gps_label,
 
-      R.string.pref_billing_account_key
+      R.string.pref_billing_account_key,
+      R.string.pref_force_popup
   };
 }

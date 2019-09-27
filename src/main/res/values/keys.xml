@@ -163,5 +163,6 @@
     <string name="pref_prev_meid_key">prev_meid</string>
     <string name="pref_transfer_status_key">transfer_status</string>
     <string name="pref_no_map_gps_label">no_map_gps_label</string>
+    <string name="pref_force_popup">force_popup</string>
 
 </resources>

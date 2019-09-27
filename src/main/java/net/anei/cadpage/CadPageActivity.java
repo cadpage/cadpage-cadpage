@@ -127,13 +127,16 @@ public class CadPageActivity extends AppCompatActivity {
 
     // See if this request is going to pop up an alert window
     SmsMmsMessage msg;
-    if (Intent.ACTION_MAIN.equals(intent.getAction()) &&
+    boolean force = ManagePreferences.forcePopup();
+    if (force) ManagePreferences.setForcePopup(false);
+    if (!force &&
+        Intent.ACTION_MAIN.equals(intent.getAction()) &&
         intent.hasCategory(Intent.CATEGORY_LAUNCHER)) {
       msg = null;
     } else if (msgId >= 0) {
       msg = SmsMessageQueue.getInstance().getMessage(msgId);
     } else {
-      boolean force = intent.getBooleanExtra(EXTRA_POPUP, false);
+      if (!force) force = intent.getBooleanExtra(EXTRA_POPUP, false);
       msg = SmsMessageQueue.getInstance().getDisplayMessage(force);
     }
 
