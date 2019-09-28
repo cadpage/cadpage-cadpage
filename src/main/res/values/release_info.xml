@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09212019</string>
+  <string name="release_date">09282019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.6-03\n
+    Location Fixes:\n
+    Colbert County, AL\n
+    Litchfield County, CT\n
+    Kent County, DE\n
+    Sguawassee County, MI\n
+    Lafourche Parish, LA\n
+    Tillamook County, OR\n
+    Columbia County, PA\n
+    Raleigh Conty, WV\n
+    Sweden\n
+    \n
     v2.1.6-02\n
     New Locations:\n
     Burleson County, TX\n
@@ -41,22 +53,6 @@
     \n
     General Fixes:\n
     Problem registering with and reporting status to CodeMessage and Cadpage Paging.\n
-    Problem reporting Android 9 notification permission problem to users.\n
-    \n
-    v2.1.4-05\n
-    New Locations:\n
-    Martin County, KY\n
-    \n
-    Location Fixes:\n
-    Limestone County, AL\n
-    Madison County, AL\n
-    Franklin County, GA\n
-    St Louis County, MO\n
-    Portage County, OH\n
-    Yamhill County, OR\n
-    Northampton County, PA\n
-    Berkeley County, SC\n
-    Midland County, TX\n
-    Danville, VA
+    Problem reporting Android 9 notification permission problem to users.
   </string>
 </resources>
