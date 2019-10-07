@@ -343,7 +343,11 @@ public class ManageNotification {
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, smsIntent,
                                                           PendingIntent.FLAG_CANCEL_CURRENT);
     nbuild.setContentIntent(notifIntent);
-    if (fullScreen) nbuild.setFullScreenIntent(notifIntent, true);
+    if (fullScreen) {
+      nbuild.setFullScreenIntent(notifIntent, true);
+      nbuild.setPriority(NotificationCompat.PRIORITY_HIGH);
+      nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
+    }
 
     // Set intent to execute if the "clear all" notifications button is pressed -
     // basically stop any future reminders.
