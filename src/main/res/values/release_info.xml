@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09282019</string>
+  <string name="release_date">10072019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.6-04\n
+    New Location:\n
+    Allegheny County, PA (alt)\n
+    \n
+    Location Fixes:\n
+    Colbert County, AL\n
+    Palm Beach County, FL\n
+    Moniteau County, MO\n
+    Burlington County, NJ\n
+    Buffalo, NY\n
+    Burnett County, TX\n
+    Gladewater, TX\n
+    \n
     v2.1.6-03\n
     Location Fixes:\n
     Colbert County, AL\n
@@ -45,14 +58,6 @@
     Edmonson County, KY\n
     Flathead County, MT\n
     Suffolk County, NY\n
-    Benton County, OR\n
-    \n
-    v2.1.5-01\n
-    Location Fixes:\n
-    Escambia County, FL\n
-    \n
-    General Fixes:\n
-    Problem registering with and reporting status to CodeMessage and Cadpage Paging.\n
-    Problem reporting Android 9 notification permission problem to users.
+    Benton County, OR
   </string>
 </resources>
