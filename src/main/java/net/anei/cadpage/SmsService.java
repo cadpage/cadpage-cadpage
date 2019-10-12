@@ -217,12 +217,11 @@ public class SmsService extends IntentService {
 
       // OK, things get complicated.
       // As of Android 10, we are not allowed to launch activities in response to background events.
-      // We will try anyway, it might work if the main activity is already running, but we have
-      // no way of knowing if the request was successful or not.  So we also have to start
-      // a full screen notification, in case it failed, and launch Radio Scanner if requested
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      // If the main activiy is visible, things will work normally.  If not, we have to start
+      // a full screen notification, and launch Radio Scanner if requested
+      if (CadPageApplication.restrictBackgroundActivity()) {
+        Log.v("Launching full screen notification");
         ManagePreferences.setForcePopup(true);
- //       CadPageActivity.launchActivity(context, false, message);
         ManageNotification.show(context, message, true, true);
         launchScanner(context);
       }

@@ -14,6 +14,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -103,14 +104,18 @@ public class TrackingService extends Service implements LocationListener {
     // Put ourselves in foreground mode, also notifying user that tracking has been activated
     Intent intent = new Intent(ACTION_SHUTDOWN, null, this, TrackingService.class);
     PendingIntent pint = PendingIntent.getService(this, 0, intent, 0);
-    Notification nf = new NotificationCompat.Builder(this, ManageNotification.TRACKING_CHANNEL_ID)
+    NotificationCompat.Builder nb = new NotificationCompat.Builder(this, ManageNotification.TRACKING_CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_stat_notify)
         .setWhen(System.currentTimeMillis())
         .setContentTitle(getString(R.string.tracking_title))
-        .setContentText(getString(R.string.tracking_text))
-        .setContentIntent(pint)
-        .build();
-    startForeground(TRACKING_NOTIFICATION, nf);
+        .setContentIntent(pint);
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+      nb.setContentText(getString(R.string.tracking_text));
+    } else {
+      nb.addAction(R.drawable.ic_stat_notify, getString(R.string.stop_tracking_text), pint);
+
+    }
+    startForeground(TRACKING_NOTIFICATION, nb.build());
 
     CadPageApplication.initialize(this);
   }

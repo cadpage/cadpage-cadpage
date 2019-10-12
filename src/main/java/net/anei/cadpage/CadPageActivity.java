@@ -45,7 +45,9 @@ public class CadPageActivity extends AppCompatActivity {
   private final PermissionManager permMgr = new PermissionManager(this);
 
   private static boolean initializing = false;
-  
+
+  private static boolean visible = false;
+
   private static int lockMsgId = -1;
 
   private boolean needSupportApp;
@@ -61,7 +63,12 @@ public class CadPageActivity extends AppCompatActivity {
       finish();
       return;
     }
-    
+
+    int flags = WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+            | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
+    getWindow().addFlags(flags);
+
     ManagePreferences.setPermissionManager(permMgr);
 
     initializing = !ManagePreferences.initialized();
@@ -74,16 +81,6 @@ public class CadPageActivity extends AppCompatActivity {
     int height = displaymetrics.heightPixels;
     int width = displaymetrics.widthPixels;
     ManagePreferences.setScreenSize(""+width+"X"+height);
-
-    // If the screen is locked, we  would like both the call history and call detail
-    // screens to override the lock screen.  This works fine up until Android 5.0
-    // at which point it seems that only one window is allowed to override the
-    // lock screen at any time.  So at that level we suppress locking the main
-    // screen so the detail screen will be visible.
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-      getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | 
-                           WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-    }
 
     setContentView(R.layout.cadpage);
 
@@ -335,12 +332,14 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onStart() {
     if (Log.DEBUG) Log.v("CadPageActivity: onStart()");
+    visible = true;
     super.onStart();
   }
 
   @Override
   protected void onStop() {
     if (Log.DEBUG) Log.v("CadPageActivity: onStop()");
+    visible = false;
     super.onStop();
   }
 
@@ -439,9 +438,10 @@ public class CadPageActivity extends AppCompatActivity {
   public static Intent getLaunchIntent(Context context, boolean force, boolean notify, SmsMmsMessage msg) {
     Intent intent = new Intent(context, CadPageActivity.class);
     int flags =
-      Intent.FLAG_ACTIVITY_NEW_TASK |
-      Intent.FLAG_ACTIVITY_SINGLE_TOP |
-      Intent.FLAG_ACTIVITY_CLEAR_TOP;
+            Intent.FLAG_ACTIVITY_NEW_TASK
+            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+            | Intent.FLAG_ACTIVITY_NO_USER_ACTION;
+
     intent.setFlags(flags);
     if (force) intent.putExtra(EXTRA_POPUP, true);
     if (notify) intent.putExtra(EXTRA_NOTIFY, true);

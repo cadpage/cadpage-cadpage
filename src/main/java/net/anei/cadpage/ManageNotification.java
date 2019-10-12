@@ -35,6 +35,8 @@ public class ManageNotification {
   public static final String TRACKING_CHANNEL_ID = "net.anei.cadpage.TRACKING_CHANNEL_ID";
 
   public static final String MISC_CHANNEL_ID = "net.anei.cadpage.MISC_CHANNEL_ID";
+
+  public static final String NOTIFY_CHANNEL_ID = "net.anei.cadpage.NOTIFY_CHANNEL_ID";
   
   private static final int MAX_PLAYER_RETRIES = 4;
 
@@ -109,6 +111,13 @@ public class ManageNotification {
        channel.setBypassDnd(false);
        nm.createNotificationChannel(channel);
      }
+
+    channel = nm.getNotificationChannel(NOTIFY_CHANNEL_ID);
+    if (channel == null) {
+      channel = new NotificationChannel(NOTIFY_CHANNEL_ID, context.getString(R.string.notify_notif_title), NotificationManager.IMPORTANCE_HIGH);
+      channel.setBypassDnd(true);
+      nm.createNotificationChannel(channel);
+    }
 
     if (audioAlert && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       if (! ManagePreferences.notifyCheckAbort() &&
@@ -345,8 +354,9 @@ public class ManageNotification {
     nbuild.setContentIntent(notifIntent);
     if (fullScreen) {
       nbuild.setFullScreenIntent(notifIntent, true);
-      nbuild.setPriority(NotificationCompat.PRIORITY_HIGH);
+      nbuild.setPriority(NotificationCompat.PRIORITY_MAX);
       nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
+      nbuild.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
     }
 
     // Set intent to execute if the "clear all" notifications button is pressed -
@@ -897,5 +907,31 @@ public class ManageNotification {
       // We consider ourselves to be the ultimate power and won't release
       // audio control for anyone
     }
+  }
+
+  public static void showNoticeNotification(Context context, String title, String text, Intent intent) {
+    NotificationCompat.Builder nbuild;
+    nbuild = new NotificationCompat.Builder(context, NOTIFY_CHANNEL_ID);
+
+    // Set auto-cancel flag
+    nbuild.setAutoCancel(true);
+
+    // Set display icon
+    nbuild.setSmallIcon(R.drawable.ic_stat_notify);
+
+    nbuild.setContentTitle(title);
+    nbuild.setContentText(text);
+
+    PendingIntent notifIntent = PendingIntent.getActivity(context, 10009, intent,
+        PendingIntent.FLAG_CANCEL_CURRENT);
+    nbuild.setContentIntent(notifIntent);
+    nbuild.setFullScreenIntent(notifIntent, true);
+    nbuild.setPriority(NotificationCompat.PRIORITY_MAX);
+    nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
+    nbuild.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+
+    NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert myNM != null;
+    myNM.notify(NOTIFICATION_ALERT, nbuild.build());
   }
 }

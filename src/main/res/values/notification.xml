@@ -11,4 +11,5 @@
   <string name="tracking_notif_text">Cadpage is reporting your current location</string>
 
   <string name="misc_notif_title">Background activity</string>
+  <string name="notify_notif_title">Background notifications</string>
 </resources>

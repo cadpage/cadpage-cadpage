@@ -4,6 +4,8 @@ import net.anei.cadpage.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +14,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 
 /**
  * Dummy activity that does nothing more than present a stand alone dialog
@@ -33,7 +36,6 @@ public class NoticeActivity extends Safe40Activity {
     super.onCreate(savedInstanceState);
     if (!CadPageApplication.initialize(this)) {
       finish();
-      return;
     }
   }
 
@@ -158,7 +160,18 @@ public class NoticeActivity extends Safe40Activity {
     }
     intent.putExtra(EXTRAS_TYPE, type);
     intent.putExtra(EXTRAS_PARMS, parms);
-    context.startActivity(intent);
+
+    // If we are not allowed to launch background activities, create a full screen notification
+    // In actual practice, this can only happen with the vendor notice dialog, so we will skip
+    // logic needed to build notification for the other notice dialogs.
+    if (type == VENDOR_NOTICE_DLG && CadPageApplication.restrictBackgroundActivity()) {
+      ManageNotification.showNoticeNotification(context, context.getString(R.string.vendor_notice_title), parms[0], intent);
+    }
+
+    // Otherwise launch activity normally
+    else {
+      context.startActivity(intent);
+    }
   }
 
 }

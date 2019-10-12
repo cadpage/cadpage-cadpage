@@ -11,4 +11,6 @@
   <string name="tracking_notif_text">Cadpage rapporterar din nuvarande position.</string>
 
   <string name="misc_notif_title">Bakgrundsaktivitet</string>
+  <string name="notify_notif_title">Background notifications</string>   <!-- Translate -->
+
 </resources>

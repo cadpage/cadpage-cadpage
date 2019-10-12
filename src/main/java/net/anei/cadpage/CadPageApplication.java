@@ -6,17 +6,26 @@ import net.anei.cadpage.vendors.VendorManager;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+
+
+import android.arch.lifecycle.DefaultLifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
 /**
  * Main CadPage application
  * which is where we need to do our one time initialization
  */
-public class CadPageApplication extends Application {
+public class CadPageApplication extends Application implements DefaultLifecycleObserver {
+
+  private static boolean appVisible = false;
 
   /* (non-Javadoc)
    * @see android.app.Application#onCreate()
@@ -24,6 +33,7 @@ public class CadPageApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
+    ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
     initialize(this);
   }
 
@@ -31,6 +41,18 @@ public class CadPageApplication extends Application {
   private static Context context = null;
   private static Thread mainThread = null;
   private static Handler mainHandler = null;
+
+  @Override
+  public void onStart(@NonNull LifecycleOwner owner) {
+    appVisible = true;
+    Log.v("Cadpage is now visible.");
+  }
+
+  @Override
+  public void onStop(@NonNull LifecycleOwner owner) {
+    appVisible = false;
+    Log.v("Cadpage is no longer visible.");
+  }
 
   /**
    * Initialize everything
@@ -135,8 +157,18 @@ public class CadPageApplication extends Application {
     }
   }
 
-  
   public static Context getContext() {
     return context;
   }
+
+  /**
+   * @return true if background activities are restricted
+   */
+  public static boolean restrictBackgroundActivity() {
+
+    // Starting with Android 10, background activities cannot be launched unless some portion
+    // of the app is visible
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !appVisible;
+  }
+
 }

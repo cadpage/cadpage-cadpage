@@ -105,6 +105,7 @@
   </string>
   <string name="tracking_title">Cadpage positionsspårare aktiv</string>
   <string name="tracking_text">Välj för att avbryta positionsspårning</string>
+  <string name="stop_tracking_text">Stop position tracking</string> <!-- Translate -->
   <string name="tracking_prompt_title">Koppla till positionsspårning</string>
   <string name="tracking_prompt_text">Vill du att Cadpage ska rapportera din position till andra enheter i realtid?</string>
   <string name="yes">Ja</string>
