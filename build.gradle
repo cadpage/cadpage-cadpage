@@ -16,12 +16,21 @@ android {
         targetSdkVersion 29
         minSdkVersion 14
     }
+    signingConfigs {
+	release {
+		storeFile file(".keystore")
+		storePassword System.getenv("CADPAGE_APK_PASSWORD")
+		keyAlias "my-key-alias"
+		keyPassword System.getenv("CADPAGE_APK_PASSWORD")
+	}
+    }
     dexOptions {
         jumboMode = true
     }
     buildTypes {
         release {
             minifyEnabled false
+	    signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
 
