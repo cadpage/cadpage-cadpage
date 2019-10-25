@@ -52,11 +52,18 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     for (int ndx = 0; ndx < appMapValues.length; ndx++) {
       String value = appMapValues[ndx].toString();
       String pkgName = (value.equals("ArcGIS Navigator") ? "com.esri.navigator" :
-          value.equals("Waze") ? "com.waze" : null);
+                        value.equals("Waze") ? "com.waze" :
+                        value.equals("OsmAnd") ? "net.osmand.plus,net.osmand" : null);
       if (pkgName != null) {
-        try {
-          getActivity().getPackageManager().getPackageInfo(pkgName, 0);
-        } catch (PackageManager.NameNotFoundException ex2) {
+        boolean good = false;
+        for (String pkg : pkgName.split(",")) {
+          try {
+            getActivity().getPackageManager().getPackageInfo(pkgName, 0);
+            good = true;
+            break;
+          } catch (PackageManager.NameNotFoundException ex2) {}
+        }
+        if (!good) {
           if (value.equals(oldVal)) appMapPref.setValue("Google");
           continue;
         }

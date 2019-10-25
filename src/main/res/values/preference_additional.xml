@@ -41,12 +41,14 @@
     <item>Google</item>
     <item>ArcGIS Navigator</item>
     <item>Waze</item>
+    <item>OsmAnd</item>
     <item>Other</item>
   </string-array>
   <string-array name="pref_app_map_option_entries">
     <item>Google</item>
     <item>ArcGIS Navigator</item>
     <item>Waze</item>
+    <item>OsmAnd</item>
     <item>Other</item>
   </string-array>
 
