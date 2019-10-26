@@ -58,8 +58,10 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
         boolean good = false;
         for (String pkg : pkgName.split(",")) {
           try {
-            getActivity().getPackageManager().getPackageInfo(pkgName, 0);
+            Log.v("Check package " + pkg);
+            getActivity().getPackageManager().getPackageInfo(pkg, 0);
             good = true;
+            Log.v("package found");
             break;
           } catch (PackageManager.NameNotFoundException ex2) {}
         }

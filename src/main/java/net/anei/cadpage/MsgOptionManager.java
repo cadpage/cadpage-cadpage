@@ -724,6 +724,25 @@ public class MsgOptionManager {
     boolean navigateMap = ManagePreferences.navigateMap();
     boolean gps = GPS_LOC_PTN.matcher(searchStr).matches();
     if (!gps) searchStr = searchStr.replaceAll(" *& *", " AT ");
+
+    if (mapOption.equals("OsmAnd")) {
+      String dispName = (gps ? message.getAddress() : null);
+      Intent intent = OsmAndHelper.getIntent(searchStr, gps, navigateMap, dispName);
+
+      Log.w("Map Request:");
+      ContentQuery.dumpIntent(intent);
+
+      try {
+        context.startActivity(intent);
+        return;
+      } catch (ActivityNotFoundException ex) {
+        // OsmAnd not installed, drop back to Google mapping
+        Log.w("Map request failed");
+        mapOption = "Google";
+      }
+    }
+
+
     searchStr = Uri.encode(searchStr);
 
     // ArcGIS Navigator has different request protocols
@@ -783,13 +802,15 @@ public class MsgOptionManager {
       ContentQuery.dumpIntent(intent);
       
       try {
+        if (intent != null) {
           context.startActivity(intent);
           return;
+        }
       } catch (ActivityNotFoundException ex) {
           // Waze not installed, drop back to Google mapping
         Log.w("Map request failed");
-        mapOption = "Google";
       }
+      mapOption = "Google";
     }
     
     // Everything other than Waze
