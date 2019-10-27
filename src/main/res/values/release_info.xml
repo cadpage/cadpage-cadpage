@@ -4,6 +4,18 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-05\n
+    New Locations:\n
+    Claiborne County, TN\n
+    King William County, VA\n
+    Amelia County, VA (alt)\n
+    \n
+    Location Fixes:\n
+    Madison County, NY\n
+    \n
+    General Fixes:\n
+    Cadpage was not recognizing recent subscription renewals.\n
+    \n
     v2.1.7-04\n
     Location Fixes:\n
     Gilpin County, CO\n
@@ -40,18 +52,5 @@
     Butler County, OH\n
     Cascade County, MT\n
     Pickens County, SC\n
-    \n
-    v2.1.6-04\n
-    New Location:\n
-    Allegheny County, PA (alt)\n
-    \n
-    Location Fixes:\n
-    Colbert County, AL\n
-    Palm Beach County, FL\n
-    Moniteau County, MO\n
-    Burlington County, NJ\n
-    Buffalo, NY\n
-    Burnett County, TX\n
-    Gladewater, TX
   </string>
 </resources>
