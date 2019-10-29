@@ -163,6 +163,21 @@ public class ManageNotification {
     return true;
   }
 
+  public static boolean checkPopupAlertConflict(Context context) {
+
+    // This is only a problem if we are running Android 10 or better
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return false;
+
+    // And the show alert popup option is enabled
+    if (!ManagePreferences.popupEnabled()) return false;
+
+    // And the regular dispatch notification chanel importance is less than high
+    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert nm != null;
+    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+    return channel.getImportance() < NotificationManager.IMPORTANCE_HIGH;
+  }
+
   /**
    * Determine if Oreo notification chanel is configured to vibrate
    * @param context current context

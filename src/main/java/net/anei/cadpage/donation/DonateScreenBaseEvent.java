@@ -174,4 +174,28 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * @param activity current activity
    */
   public void onStart(DonateActivity activity) {}
+
+  /**
+   * Check to see if we need to display the check popup config warning
+   * and display it if needed
+   * @param context current context
+   * @return true if check popup config warning window has been started
+   */
+  public boolean launch(Context context) {
+    return launch(context, null);
+  }
+
+  /**
+   * Check to see if we need to display the check popup config warning
+   * and display it if needed
+   * @param context current context
+   * @param msg current message
+   * @return true if check popup config warning window has been started
+   */
+  public boolean launch(Context context, SmsMmsMessage msg) {
+    if (!isEnabled()) return false;
+    DonateActivity.launchActivity(context, this, msg);
+    return true;
+  }
+
 }

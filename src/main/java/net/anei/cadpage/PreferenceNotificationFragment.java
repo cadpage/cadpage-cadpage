@@ -13,6 +13,7 @@ import android.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 
+import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.preferences.DoNotDisturbSwitchPreference;
 import net.anei.cadpage.preferences.ExtendedSwitchPreference;
 import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
@@ -96,6 +97,9 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
 
     // Check if we should bring up the double audio alert warning
     checkNotificationAlertConflict();
+
+    // And make sure popup enabled configurations are consistent
+    CheckPopupEvent.instance().launch(getActivity());
 
     // If any setting have changed, make sure that the correct value is being displayed
     mNotifEnabledPreference.setChecked(ManagePreferences.notifyEnabled());

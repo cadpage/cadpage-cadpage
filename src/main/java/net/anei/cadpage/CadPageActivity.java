@@ -1,8 +1,8 @@
 package net.anei.cadpage;
 
 import net.anei.cadpage.donation.Active911WarnEvent;
+import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
-import net.anei.cadpage.donation.DonateScreenEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.HelpWelcomeEvent;
 import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
@@ -12,11 +12,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -45,8 +42,6 @@ public class CadPageActivity extends AppCompatActivity {
   private final PermissionManager permMgr = new PermissionManager(this);
 
   private static boolean initializing = false;
-
-  private static boolean visible = false;
 
   private static int lockMsgId = -1;
 
@@ -148,48 +143,41 @@ public class CadPageActivity extends AppCompatActivity {
       // with the initial permission checking logic.  So rather than do it immediately, we stuff
       // it in a Runnable object to be executed when the initial permission checking is complete
       final boolean init = initializing;
-      ManagePreferences.checkInitialPermissions(new Runnable(){
-        @Override
-        public void run() {
-          needSupportApp = SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0;
-          if (needSupportApp) return;
+      ManagePreferences.checkInitialPermissions(() -> {
+        needSupportApp = SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0;
+        if (needSupportApp) return;
 
-          // If user upgraded to the release that implements improved email account security, and
-          // we suspect that really need to give us that email account access, let them know now.
-          DonateScreenEvent event;
-          if ((event = NeedAcctPermissionUpgradeEvent.instance()).isEnabled()) {
-            DonateActivity.launchActivity(CadPageActivity.this, event, null);
-            return;
-          }
+        // If user upgraded to the release that implements improved email account security, and
+        // we suspect that really need to give us that email account access, let them know now.
+        if (NeedAcctPermissionUpgradeEvent.instance().launch(CadPageActivity.this)) return;
 
-          // If Cadpage is not functional with current settings, start up the new user sequence
-          if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
-            ((HelpWelcomeEvent)event).setIntializing(init);
-            DonateActivity.launchActivity(CadPageActivity.this, event, null);
-            return;
-          }
+        // If Cadpage is not functional with current settings, start up the new user sequence
+        HelpWelcomeEvent event;
+        if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
+          event.setIntializing(init);
+          DonateActivity.launchActivity(CadPageActivity.this, event, null);
+          return;
+        }
 
-          // If a new Active911 client may be highjacking alerts, warn user
-          if ((event = Active911WarnEvent.instance()).isEnabled()) {
-            DonateActivity.launchActivity(CadPageActivity.this, event, null);
-            return;
-          }
+        // Check call popup window configuration
+        if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
 
-          // Otherwise, launch the release info dialog if it hasn't already been displayed
-          String oldRelease = ManagePreferences.release();
-          String release = CadPageApplication.getVersion();
-          if (!release.equals(oldRelease)) {
-            ManagePreferences.setRelease(release);
-            if (!trimRelease(release).equals(trimRelease(oldRelease))) {
-              showDialog(RELEASE_DIALOG);
-            }
-          }
+        // If a new Active911 client may be highjacking alerts, warn user
+        if (Active911WarnEvent.instance().launch(CadPageActivity.this)) return;
 
-          // If not, see if we have discovered a direct page vendor sending us text pages
-          else {
-            event = VendorEvent.instance(1);
-            if (event.isEnabled()) DonateActivity.launchActivity(CadPageActivity.this, event, null);
+        // Otherwise, launch the release info dialog if it hasn't already been displayed
+        String oldRelease = ManagePreferences.release();
+        String release = CadPageApplication.getVersion();
+        if (!release.equals(oldRelease)) {
+          ManagePreferences.setRelease(release);
+          if (!trimRelease(release).equals(trimRelease(oldRelease))) {
+            showDialog(RELEASE_DIALOG);
           }
+        }
+
+        // If not, see if we have discovered a direct page vendor sending us text pages
+        else {
+          VendorEvent.instance(1).launch(CadPageActivity.this);
         }
       });
     }
@@ -269,11 +257,7 @@ public class CadPageActivity extends AppCompatActivity {
         .setIcon(R.drawable.ic_launcher)
         .setTitle(R.string.confirm_delete_all_title)
         .setMessage(R.string.confirm_delete_all_text)
-        .setPositiveButton(R.string.yes, new OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            SmsMessageQueue.getInstance().clearAll();
-          }})
+        .setPositiveButton(R.string.yes, (dialog, which) -> SmsMessageQueue.getInstance().clearAll())
         .setNegativeButton(R.string.no, null)
         .create();
     }
@@ -332,14 +316,12 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onStart() {
     if (Log.DEBUG) Log.v("CadPageActivity: onStart()");
-    visible = true;
     super.onStart();
   }
 
   @Override
   protected void onStop() {
     if (Log.DEBUG) Log.v("CadPageActivity: onStop()");
-    visible = false;
     super.onStop();
   }
 

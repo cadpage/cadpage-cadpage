@@ -37,7 +37,7 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
   @Override
   public boolean followup(Activity activity, int req, int result, Intent data) {
     if (ManagePreferences.isFunctional()) {
-      DonateActivity.launchActivity(activity, HelpCadpageReadyEvent.instance(), null);
+      HelpCadpageReadyEvent.instance().launch(activity);
     }
     return true;
   }
