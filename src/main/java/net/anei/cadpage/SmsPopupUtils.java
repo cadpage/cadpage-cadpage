@@ -13,7 +13,6 @@ import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
 
@@ -66,6 +65,7 @@ public class SmsPopupUtils {
     // If we don't return false
     ConnectivityManager mgr = ((ConnectivityManager) 
         context.getSystemService(Context.CONNECTIVITY_SERVICE));
+    assert mgr != null;
     NetworkInfo info = mgr.getActiveNetworkInfo();
     if (info == null || !info.isConnected()) {
       showNetworkFailure(context, R.string.network_err_not_connected);
@@ -109,18 +109,16 @@ public class SmsPopupUtils {
       PackageManager pm = context.getPackageManager();
       List<ResolveInfo> matches = pm.queryBroadcastReceivers(intent, 0);
 
-      if (matches != null) {
-        for (ResolveInfo resolveInfo : matches) {
-          ComponentName cn =
-              new ComponentName(resolveInfo.activityInfo.applicationInfo.packageName,
-                  resolveInfo.activityInfo.name);
+      for (ResolveInfo resolveInfo : matches) {
+        ComponentName cn =
+            new ComponentName(resolveInfo.activityInfo.applicationInfo.packageName,
+                resolveInfo.activityInfo.name);
 
-          intent.setComponent(cn);
-          ContentQuery.dumpIntent(intent);
-          context.sendBroadcast(intent, permission);
-        }
-        intent.setComponent(null);
+        intent.setComponent(cn);
+        ContentQuery.dumpIntent(intent);
+        context.sendBroadcast(intent, permission);
       }
+      intent.setComponent(null);
     }
   }
 
@@ -171,13 +169,7 @@ public class SmsPopupUtils {
 
         // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
         // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
-        if (prompt) {
-          UpdateCadpageSupportAppEvent event = UpdateCadpageSupportAppEvent.instance();
-          if (event.isEnabled()) {
-            Log.v("Requesting support app upgrade");
-            DonateActivity.launchActivity(context, event, null);
-          }
-        }
+        if (prompt) UpdateCadpageSupportAppEvent.instance().launch(context);
         return 1;
       }
     }
@@ -188,13 +180,7 @@ public class SmsPopupUtils {
 
       // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
       // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
-      if (prompt) {
-        NeedCadpageSupportAppEvent event = NeedCadpageSupportAppEvent.instance();
-        if (event.isEnabled()) {
-          Log.v("Requesting support app install");
-          DonateActivity.launchActivity(context, NeedCadpageSupportAppEvent.instance(), null);
-        }
-      }
+      if (prompt) NeedCadpageSupportAppEvent.instance().launch(context);
       return 1;
     }
 

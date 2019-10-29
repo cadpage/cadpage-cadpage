@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import net.anei.cadpage.donation.CheckPopupEvent;
+
 public class CadPageWidget extends AppWidgetProvider {
   
   private static final String ACTION_UPDATE = "net.anei.cadpage.UpdateWidget";

@@ -598,4 +598,21 @@
     I do not require Cadpage text message support
   </string>
 
+  <string name="check_popup_title">
+    Popup Configuration Problem
+  </string>
+
+  <string name="check_popup_text">
+    As of Android 10, the Cadpage show alarm popup window option requires that the \"Pop on screen\"
+    option be enabled for the regular dispatch notification category
+  </string>
+
+  <string name="enable_notify_popup_title">
+    Enable notification \"Pop on screen\" option
+  </string>
+
+  <string name="disable_cadpage_popup_title">
+    Disable Cadpage show alarm popup option
+  </string>
+
 </resources>

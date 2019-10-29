@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.donation.UserAcctManager;
@@ -2451,6 +2452,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       @Override
       public void preferenceChanged(String key, Object newVal) {
         CadPageWidget.update(context);
+        CheckPopupEvent.instance().launch(context);
       }
     });
 

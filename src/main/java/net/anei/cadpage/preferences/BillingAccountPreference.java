@@ -18,7 +18,7 @@ public class BillingAccountPreference extends EditTextPreference {
 
   @Override
   protected void onClick() {
-    DonateActivity.launchActivity(getContext(), BillingAccountEvent.instance(), null);
+    BillingAccountEvent.instance().launch(getContext());
   }
 
   @Override

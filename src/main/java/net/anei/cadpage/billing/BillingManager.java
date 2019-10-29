@@ -3,7 +3,9 @@ package net.anei.cadpage.billing;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.app.Activity;
@@ -214,14 +216,21 @@ public class BillingManager implements PurchasesUpdatedListener {
     if (itemId.startsWith("cadpage_")) {
 
       // Subscriptions start with sub.  Purchase date will be the actual
-      // purchase date and year will be the actual purchase year
+      // purchase date.  The fact that a subscription is being reported means that it
+      // should be honored, so adjust the year to make the subscription current
       String year = itemId.substring(8);
       String purchaseDate;
       int subStatus;
       if (year.startsWith("sub")) {
         purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
-        year = purchaseDate.substring(4);
+        Calendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        int iYear = cal.get(Calendar.YEAR);
+        int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
+        if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
+        year = Integer.toString(iYear);
         subStatus = purchase.isAutoRenewing() ? 2 : 1;
+        Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
       }
 
       // We used to emulate subscriptions with a series of inapp product purchases.  We do not do

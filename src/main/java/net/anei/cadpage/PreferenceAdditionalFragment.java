@@ -9,6 +9,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.TwoStatePreference;
 
+import net.anei.cadpage.donation.CheckPopupEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +29,7 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     mPopupEnabledPreference = (TwoStatePreference) findPreference(getString(R.string.pref_popup_enabled_key));
 
     Preference pref = findPreference(getString(R.string.pref_report_position_key));
-    pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return ManagePreferences.checkReportPosition((ListPreference) preference, (String) newValue);
-      }
-    });
+    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkReportPosition((ListPreference) preference, (String) newValue));
 
     // Disable the pass through option which is unusable starting in Kit Kat
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -73,17 +70,12 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
       appMapValueList.add(value);
       appMapEntryList.add(appMapEntries[ndx].toString());
     }
-    appMapPref.setEntries(appMapEntryList.toArray(new String[appMapEntryList.size()]));
-    appMapPref.setEntryValues(appMapValueList.toArray(new String[appMapValueList.size()]));
+    appMapPref.setEntries(appMapEntryList.toArray(new String[0]));
+    appMapPref.setEntryValues(appMapValueList.toArray(new String[0]));
 
     // The No Show In Call preference requires the READ_PHONE_STATE permission
     pref = findPreference(getString(R.string.pref_noShowInCall_key));
-    pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return ManagePreferences.checkNoShowInCall((TwoStatePreference)preference, (Boolean)newValue);
-      }
-    });
+    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkNoShowInCall((TwoStatePreference)preference, (Boolean)newValue));
   }
 
   /**
@@ -138,5 +130,4 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     // Check for changes to values that are accessable from the widget
     mPopupEnabledPreference.setChecked(ManagePreferences.popupEnabled());
   }
-
 }
