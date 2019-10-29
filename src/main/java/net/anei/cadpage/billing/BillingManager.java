@@ -224,11 +224,13 @@ public class BillingManager implements PurchasesUpdatedListener {
       if (year.startsWith("sub")) {
         purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
         Calendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(System.currentTimeMillis());
         int iYear = cal.get(Calendar.YEAR);
-        int curMonthDay = cal.get(Calendar.MONTH)*10+cal.get(Calendar.DAY_OF_MONTH);
-        if (curMonthDay > Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
+        int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
+        if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
         year = Integer.toString(iYear);
         subStatus = purchase.isAutoRenewing() ? 2 : 1;
+        Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
       }
 
       // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
