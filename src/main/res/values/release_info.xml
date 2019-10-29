@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10252019</string>
+  <string name="release_date">10282019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-06\n
+    General Fixes:\n
+    Another attempt to fix the subscription renewal logic\n
+    \n
     v2.1.7-05\n
     New Locations:\n
     Claiborne County, TN\n
@@ -39,18 +43,6 @@
     \n
     Location Fixes:\n
     Butler County, OH\n
-    Erie County, PA\n
-    \n
-    v2.1.7-01\n
-    Call detail popups now work in Android 10.  But only screen is locked or Android
-    decides you are not doing anything at the time.  Otherwise you get the HUD notification.\n
-    \n
-    New Locations:\n
-    Fountain County, IN\n
-    \n
-    Location Fixes:\n
-    Butler County, OH\n
-    Cascade County, MT\n
-    Pickens County, SC\n
+    Erie County, PA
   </string>
 </resources>
