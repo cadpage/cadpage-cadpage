@@ -52,9 +52,8 @@
    Du vill att Cadpage ska använda en rington som kan vara sparat på ditt externa SD-kort.
    </string>
 
-  <string name="perm_notify_abort"> <!-- Translate -->
-     For unknown reasons, the Android system will not show Cadpage notification
-     alerts until you grant data storage permission.
+  <string name="perm_notify_abort">
+     På grund av någon okänd orsak så visar inte Androidsystemet Cadpage-notifikationer tills du ger din tillåtelse att komma åt data-storage.
    </string>
 
   <string name="perm_grant_acct_access">
@@ -105,7 +104,7 @@
   </string>
   <string name="tracking_title">Cadpage positionsspårare aktiv</string>
   <string name="tracking_text">Välj för att avbryta positionsspårning</string>
-  <string name="stop_tracking_text">Stop position tracking</string> <!-- Translate -->
+  <string name="stop_tracking_text">Sluta spåra position</string>
   <string name="tracking_prompt_title">Koppla till positionsspårning</string>
   <string name="tracking_prompt_text">Vill du att Cadpage ska rapportera din position till andra enheter i realtid?</string>
   <string name="yes">Ja</string>
