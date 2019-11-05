@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11032019</string>
+  <string name="release_date">11052019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-08\n
+    Location Fixes:\n
+    Macon County, NC\n
+    Warren County, OH\n
+    \n
     v2.1.7-07\n
     New Locations:\n
     Ballard County, KY\n
@@ -40,18 +45,6 @@
     v2.1.7-04\n
     Location Fixes:\n
     Gilpin County, CO\n
-    Burlington County, NJ\n
-    \n
-    v2.1.7-03\n
-    New Locations:\n
-    Grundy County, TN\n
-    Cherokee County, TX\n
-    \n
-    Location Fixes:\n
-    Morgan County, AL\n
-    Larimer County, CO\n
-    West Baton Rouge Parish, LA\n
-    Craven County, NC\n
-    Adams County, PA
+    Burlington County, NJ
   </string>
 </resources>
