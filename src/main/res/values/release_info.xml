@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-10\n
+    Location Fixes:\n
+    Marshall County, AL\n
+    Lee County, FL\n
+    \n
     v2.1.7-09\n
     Location Fixes:\n
     Caldwell County, MO\n
@@ -33,18 +38,6 @@
     \n
     v2.1.7-06\n
     General Fixes:\n
-    Another attempt to fix the subscription renewal logic\n
-    \n
-    v2.1.7-05\n
-    New Locations:\n
-    Claiborne County, TN\n
-    King William County, VA\n
-    Amelia County, VA (alt)\n
-    \n
-    Location Fixes:\n
-    Madison County, NY\n
-    \n
-    General Fixes:\n
-    Cadpage was not recognizing recent subscription renewals.
+    Another attempt to fix the subscription renewal logic
   </string>
 </resources>
