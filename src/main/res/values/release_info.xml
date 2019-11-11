@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11072019</string>
+  <string name="release_date">11112019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-11\n
+    Location Fixes:\n
+    Cleburne County, AL\n
+    Marshall County, AL\n
+    Effingham County, GA\n
+    Howell County, MO\n
+    Erie County, PA\n
+    Rockingham County, VA\n
+    Fauquier County, VA\n
+    \n
     v2.1.7-10\n
     Location Fixes:\n
     Marshall County, AL\n
@@ -34,10 +44,6 @@
     \n
     General Fixes:\n
     Added warning about another configuration issue that prevents call popups from
-    working under Android 10\n
-    \n
-    v2.1.7-06\n
-    General Fixes:\n
-    Another attempt to fix the subscription renewal logic
+    working under Android 10
   </string>
 </resources>
