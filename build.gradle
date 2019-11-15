@@ -58,7 +58,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.4.0'
     implementation 'android.arch.work:work-runtime:1.0.0'
     implementation 'android.arch.lifecycle:common-java8:1.0.0'
-    api 'com.android.billingclient:billing:1.0'
+    implementation 'com.android.billingclient:billing:2.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

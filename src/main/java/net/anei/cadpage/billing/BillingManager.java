@@ -13,21 +13,21 @@ import android.content.Context;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 
+import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetailsParams;
 
 import net.anei.cadpage.Log;
 import net.anei.cadpage.donation.DonateEvent;
 import net.anei.cadpage.donation.DonationCalculator;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-
-@SuppressWarnings({"RedundantIfStatement", "SpellCheckingInspection"})
+@SuppressWarnings({"SpellCheckingInspection"})
 public class BillingManager implements PurchasesUpdatedListener {
 
   // private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwirww3C/PjZeoU9xe49Z24nhKpw2nml2bhyRtp2hZysWnxskv+DpqBDXPW4o8CLnHzIld4aq6tSZhecoHRtjmpMsh+eYr76VoITEa8F/7JN5+niOspLoM7n8CpFxCDtQ4ILKXLTm5GKsfbEl7D2um0WnwVIaw3sBWKh99YAeXKp7tB/Oj8h9p9L7BLFbI00jVXzmg+4920hJ2mA0EeGM1sSdJxyh0V0k7jLEZwe8mo0nL21Ss+NbA9IVf6j4nIf4A0NUbOrTtPEBIaN1HpsKUyqdpwUYX9RIRybKE5nW0SJ3VNBBa+0ld5Yg4c5uikUznJeEVk+9KE9gV8NcNJzNLQIDAQAB";
@@ -56,7 +56,7 @@ public class BillingManager implements PurchasesUpdatedListener {
     // will be called once setup completes.
     if (Log.DEBUG) Log.v("Starting billing setup.");
 
-    mBillingClient = BillingClient.newBuilder(context).setListener(this).build();
+    mBillingClient = BillingClient.newBuilder(context).enablePendingPurchases().setListener(this).build();
 
     // Restore transactions when billing connection is established
     // Queue event to restore our purchase status
@@ -67,7 +67,7 @@ public class BillingManager implements PurchasesUpdatedListener {
    * Shutdown billing manager
    */
   public void destroy() {
-    Log.v("Destroying the billnig manager.");
+    Log.v("Destroying the billing manager.");
 
     if (mBillingClient != null && mBillingClient.isReady()) {
       mBillingClient.endConnection();
@@ -105,12 +105,12 @@ public class BillingManager implements PurchasesUpdatedListener {
       Log.v("Initiating billing connection");
       mBillingClient.startConnection(new BillingClientStateListener() {
         @Override
-        public void onBillingSetupFinished(@BillingClient.BillingResponse int billingResponseCode) {
-          Log.v("Billing connection complete. Response code: " + billingResponseCode);
+        public void onBillingSetupFinished(BillingResult billingResponseCode) {
+          Log.v("Billing connection complete. Response code: " + billingResponseCode.getDebugMessage());
           inProgress = false;
 
           // If we are connected, run all of the queued events
-          if (billingResponseCode == BillingClient.BillingResponse.OK) {
+          if (billingResponseCode.getResponseCode() == BillingClient.BillingResponseCode.OK) {
 
             // Run any events that have been queued waiting for this to happen
             if (eventQueue != null) {
@@ -145,7 +145,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 
       private void collectResults(DonationCalculator calc, String skuType) {
         Purchase.PurchasesResult result = mBillingClient.queryPurchases(skuType);
-        if (result.getResponseCode() == BillingClient.BillingResponse.OK) {
+        if (result.getResponseCode() == BillingClient.BillingResponseCode.OK) {
           List<Purchase> list = result.getPurchasesList();
           if (list != null) {
             for (Purchase purchase : list) {
@@ -174,18 +174,31 @@ public class BillingManager implements PurchasesUpdatedListener {
 
     this.donateEvent = donateEvent;
     this.donateActivity = activity;
-    mBillingClient.launchBillingFlow(activity,
-        BillingFlowParams.newBuilder()
-            .setSku("cadpage_sub")
-            .setType(BillingClient.SkuType.SUBS)
-            .build());
+
+    List<String> skuList = new ArrayList<> ();
+    skuList.add("cadpage_sub");
+    SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder()
+          .setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
+    mBillingClient.querySkuDetailsAsync(params.build(),
+        (billingResult, skuDetailsList) -> {
+            if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+              Log.e("Error retrieving SKU details: " + billingResult.getDebugMessage());
+            } else if (skuDetailsList == null || skuDetailsList.size() == 0) {
+              Log.e("No SKU details found");
+            } else {
+              mBillingClient.launchBillingFlow(activity,
+                  BillingFlowParams.newBuilder()
+                      .setSkuDetails(skuDetailsList.get(0))
+                      .build());
+            }
+          });
   }
 
   @Override
-  public void onPurchasesUpdated(int responseCode, @Nullable List<Purchase> purchases) {
+  public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
 
-    if (Log.DEBUG) Log.v("Purchase result:" + responseCode);
-    if (responseCode == BillingClient.BillingResponse.OK) {
+    if (Log.DEBUG) Log.v("Purchase result:" + billingResult.getDebugMessage());
+    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
       if (purchases != null) {
         DonationCalculator calc = new DonationCalculator(1);
         calc.load();
@@ -211,42 +224,49 @@ public class BillingManager implements PurchasesUpdatedListener {
   private void registerPurchaseState(Purchase purchase, DonationCalculator calc) {
     if (Log.DEBUG) Log.v(purchase.toString());
 
+    // Confirm item purchase is complete
+    if (purchase.getPurchaseState() != Purchase.PurchaseState.PURCHASED) return;
+
+    // Acknowledge the purchase if it hasn't already been acknowledged.
+    if (!purchase.isAcknowledged()) {
+      if (Log.DEBUG) Log.v("Acknowledging purchase");
+      AcknowledgePurchaseParams acknowledgePurchaseParams =
+          AcknowledgePurchaseParams.newBuilder()
+              .setPurchaseToken(purchase.getPurchaseToken())
+              .build();
+      mBillingClient.acknowledgePurchase(acknowledgePurchaseParams, billingResult -> Log.v("Purchase acknowledged: " + billingResult.getDebugMessage()));
+    }
+
     // Get the purchase Sku code and confirm that it starts with Cadpage
     String itemId = purchase.getSku();
-    if (itemId.startsWith("cadpage_")) {
+    if (!itemId.startsWith("cadpage_")) return;
 
-      // Subscriptions start with sub.  Purchase date will be the actual
-      // purchase date.  The fact that a subscription is being reported means that it
-      // should be honored, so adjust the year to make the subscription current
-      String year = itemId.substring(8);
-      String purchaseDate;
-      int subStatus;
-      if (year.startsWith("sub")) {
-        purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
-        Calendar cal = new GregorianCalendar();
-        cal.setTimeInMillis(System.currentTimeMillis());
-        int iYear = cal.get(Calendar.YEAR);
-        int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
-        if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
-        year = Integer.toString(iYear);
-        subStatus = purchase.isAutoRenewing() ? 2 : 1;
-        Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
-      }
-
-      // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
-      // that anymore, but still need to support to old purchases.  Year is derived from name of
-      // the purchased product.  Purchase date was stored in developerPayload field which is not
-      // supported by billing library, so we will have to retrieve it ourselves
-      else {
-        try {
-          purchaseDate = new JSONObject(purchase.getOriginalJson()).optString("developerPayload");
-          subStatus = 0;
-        } catch (JSONException ex) {
-          throw new RuntimeException("Error parsing developer payload");
-        }
-      }
-      calc.subscription(year, purchaseDate, null, subStatus);
+    // Subscriptions start with sub.  Purchase date will be the actual
+    // purchase date.  The fact that a subscription is being reported means that it
+    // should be honored, so adjust the year to make the subscription current
+    String year = itemId.substring(8);
+    String purchaseDate;
+    int subStatus;
+    if (year.startsWith("sub")) {
+      purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
+      Calendar cal = new GregorianCalendar();
+      cal.setTimeInMillis(System.currentTimeMillis());
+      int iYear = cal.get(Calendar.YEAR);
+      int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
+      if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
+      year = Integer.toString(iYear);
+      subStatus = purchase.isAutoRenewing() ? 2 : 1;
+      Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
     }
+
+    // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
+    // that anymore, but still need to support to old purchases.  Year is derived from name of
+    // the purchased product.  Purchase date was stored in developerPayload field
+    else {
+      purchaseDate = purchase.getDeveloperPayload();
+      subStatus = 0;
+    }
+    calc.subscription(year, purchaseDate, null, subStatus);
   }
 
   private static final BillingManager instance = new BillingManager();
