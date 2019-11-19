@@ -333,12 +333,15 @@ public class HttpService extends Service {
       
       // Add new request to request queue and launch the HttpService
       // We don't need to pass anything, just make sure it got started
+      boolean startService = reqQueue.isEmpty();
       reqQueue.add(request);
-      Intent intent = new Intent(context, HttpService.class);
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        context.startForegroundService(intent);
-      } else {
-        context.startService(intent);
+      if (startService) {
+        Intent intent = new Intent(context, HttpService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          context.startForegroundService(intent);
+        } else {
+          context.startService(intent);
+        }
       }
     }
   }
