@@ -25,20 +25,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
 
-        flavorDimensions "type"
+        flavorDimensions "store", "type"
         productFlavors {
+
+            google {
+                dimension "store"
+                versionNameSuffix "G"
+                versionCode 0
+            }
+
+            aptoide {
+                dimension "store"
+                versionNameSuffix "A"
+                versionCode 1
+            }
+
             full {
                 dimension "type"
-                versionNameSuffix "(M)"
-                versionCode android.defaultConfig.versionCode + 1
+                versionNameSuffix "M"
+                versionCode 1
             }
 
             restrict {
                 dimension "type"
-                versionNameSuffix "(R)"
+                versionNameSuffix "R"
+                versionCode 0
             }
         }
     }
+
+    applicationVariants.all { variant ->
+        def storeVersion = variant.productFlavors.get(0).versionCode
+        def typeVersion = variant.productFlavors.get(1).versionCode
+        def version = storeVersion * 1000000000 + defaultConfig.versionCode + typeVersion
+        variant.outputs.each { output ->
+            output.versionCodeOverride = version
+        }
+    }
+
     compileSdkVersion 29
 
     compileOptions {
