@@ -169,7 +169,10 @@ public class SmsPopupUtils {
 
         // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
         // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
-        if (prompt) UpdateCadpageSupportAppEvent.instance().launch(context);
+        if (prompt) {
+          UpdateCadpageSupportAppEvent.instance().launch(context);
+          Log.v("Requesting Capage Message Support app upgrade");
+        }
         return 1;
       }
     }
@@ -180,7 +183,10 @@ public class SmsPopupUtils {
 
       // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
       // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
-      if (prompt) NeedCadpageSupportAppEvent.instance().launch(context);
+      if (prompt) {
+        NeedCadpageSupportAppEvent.instance().launch(context);
+        Log.v("Requesting Cadpage Message Support app install");
+      }
       return 1;
     }
 

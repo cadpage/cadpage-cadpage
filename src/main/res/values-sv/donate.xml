@@ -421,21 +421,20 @@
     Jag behöver inte att Cadpage hanterar SMS
   </string>
 
-  <string name="check_popup_title">  <!-- Translate -->
-    Popup Configuration Problem
+  <string name="check_popup_title">
+    Popup konfigurationsproblem
   </string>
 
-  <string name="check_popup_text">  <!-- Translate -->
-    As of Android 10, the Cadpage show alarm popup window option requires that the \"Pop on screen\"
-    option be enabled for the regular dispatch notification category
+  <string name="check_popup_text">
+    Från och med Android 10 krävs det för att Cadpages larm-popupfönster ska fungera att \"Pop on screen\" skall vara aktiverat för den vanliga larmnotifikationskategorin
   </string>
 
-  <string name="enable_notify_popup_title">  <!-- Translate -->
-    Enable notification \"Pop on screen\" option
+  <string name="enable_notify_popup_title">
+    Aktivera notifikationsalternativet \"Pop on screen\" 
   </string>
 
-  <string name="disable_cadpage_popup_title">  <!-- Translate -->
-    Disable Cadpage show alarm popup option
+  <string name="disable_cadpage_popup_title">
+    Avaktivera Cadpages visa alarmpopups alternativ
   </string>
 
 </resources>

@@ -101,7 +101,6 @@
     <activity android:name=".NoticeActivity"/>
     <activity android:name=".PermissionFixActivity"/>
 
-<!-- Disable UsbReceiver
     <receiver android:name=".UsbReceiver">
       <intent-filter>
         <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
@@ -139,7 +138,6 @@
         <action android:name="net.anei.cadpage.ManageUsb.USB_PERMISSION"/>
       </intent-filter>
     </receiver>
--->
 
     <receiver android:name=".UpgradeReceiver">
        <intent-filter>

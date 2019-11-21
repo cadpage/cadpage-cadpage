@@ -1,48 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10282019</string>
+  <string name="release_date">11172019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.1.7-06\n
-    General Fixes:\n
-    Another attempt to fix the subscription renewal logic\n
-    \n
-    v2.1.7-05\n
+    v2.1.7-12\n
     New Locations:\n
-    Claiborne County, TN\n
-    King William County, VA\n
-    Amelia County, VA (alt)\n
+    Jefferson Davis Parish, LA\n
+    Middlesex County, NJ (alt)\n
+    Kerr County, TX\n
     \n
     Location Fixes:\n
-    Madison County, NY\n
+    Adams County, CO\n
+    Litchfield County, CT\n
+    St Joseph County, IN\n
+    Smith County, TX\n
     \n
-    General Fixes:\n
-    Cadpage was not recognizing recent subscription renewals.\n
-    \n
-    v2.1.7-04\n
+    v2.1.7-11\n
     Location Fixes:\n
-    Gilpin County, CO\n
-    Burlington County, NJ\n
+    Cleburne County, AL\n
+    Marshall County, AL\n
+    Effingham County, GA\n
+    Howell County, MO\n
+    Erie County, PA\n
+    Rockingham County, VA\n
+    Fauquier County, VA\n
     \n
-    v2.1.7-03\n
-    New Locations:\n
-    Grundy County, TN\n
-    Cherokee County, TX\n
-    \n
+    v2.1.7-10\n
     Location Fixes:\n
-    Morgan County, AL\n
-    Larimer County, CO\n
-    West Baton Rouge Parish, LA\n
-    Craven County, NC\n
-    Adams County, PA\n
+    Marshall County, AL\n
+    Lee County, FL\n
     \n
-    v2.1.7-02\n
-    New Location:\n
-    Gilpin County, CO\n
-    \n
+    v2.1.7-09\n
     Location Fixes:\n
-    Butler County, OH\n
-    Erie County, PA
+    Caldwell County, MO\n
+    Erie County, PA\n
+    \n
+    v2.1.7-08\n
+    Location Fixes:\n
+    Macon County, NC\n
+    Warren County, OH
   </string>
 </resources>
