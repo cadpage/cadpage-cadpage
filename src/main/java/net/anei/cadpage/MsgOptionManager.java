@@ -727,7 +727,7 @@ public class MsgOptionManager {
 
     if (mapOption.equals("OsmAnd")) {
       String dispName = (gps ? message.getAddress() : null);
-      Intent intent = OsmAndHelper.getIntent(searchStr, gps, navigateMap, dispName);
+      Intent intent = OsmAndHelper.getIntent(context, searchStr, gps, navigateMap, dispName);
 
       Log.w("Map Request:");
       ContentQuery.dumpIntent(intent);

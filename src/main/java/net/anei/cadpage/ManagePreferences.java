@@ -1394,7 +1394,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int PERM_REQ_LOCATION_TRACKING = 13;
   private static final int PERM_REQ_USER_ALERT_SOUND = 14;
   private static final int PERM_REQ_NOTIFY_ABORT = 15;
-  private static final int PERM_REQ_LIMIT = 15;
+  private static final int PERM_APP_MAP_OPTION = 16;
+  private static final int PERM_REQ_LIMIT = 16;
   
   private static final PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
@@ -1832,6 +1833,30 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       if (!value) return null;
       if (checkRequestPermission(PermissionManager.READ_EXTERNAL_STORAGE, R.string.perm_notify_abort)) return null;
       return false;
+    }
+  }
+
+  /********************************************************************
+   * Permission checking the map app option preference
+   ********************************************************************/
+  public static boolean checkAppMapOption(ListPreference pref, String value) {
+    return appMapOptionChecker.check(pref, value);
+  }
+
+  private static final AppMapOptionChecker appMapOptionChecker = new AppMapOptionChecker();
+
+  @SuppressWarnings("WeakerAccess")
+  private static class AppMapOptionChecker extends ListPermissionChecker {
+
+    public AppMapOptionChecker() {
+      super(PERM_APP_MAP_OPTION, R.string.pref_app_map_option_key);
+    }
+
+    @Override
+    protected String checkPermission(String value) {
+
+      if (!value.equals("OsmAnd")) return null;
+      return checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION) ? null : "Google";
     }
   }
 

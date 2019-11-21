@@ -68,6 +68,10 @@
      alerts until you grant data storage permission.
    </string>
 
+  <string name="perm_app_map_option">
+    OsmAnd support requires access to your current location
+  </string>
+
   <string name="perm_grant_acct_access">
     You are requesting Cadpage access to your email account information.  To do
     this, we will need to identify your Google email accounts.

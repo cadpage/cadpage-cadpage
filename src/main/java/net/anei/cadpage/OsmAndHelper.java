@@ -2,11 +2,13 @@ package net.anei.cadpage;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.location.LocationManager;
 
 import net.anei.cadpage.parsers.MsgParser;
-
 import java.util.Properties;
 import java.util.regex.Pattern;
+import android.content.Context;
+import android.location.Location;
 
 /**
  * Utility class supporting the interface with the OsmAnd mapping app
@@ -25,16 +27,28 @@ class OsmAndHelper {
   private static final String PARAM_PROFILE = "profile";
   private static final String PARAM_SHOW_SEARCH_RESULTS = "show_search_results";
   private static final String PARAM_FORCE = "force";
+  private static final String PARAM_START_LAT = "start_lat";
+  private static final String PARAM_START_LON = "start_lon";
+  private static final String PARAM_SEARCH_LAT = "search_lat";
+  private static final String PARAM_SEARCH_LON = "search_lon";
+
 
   /**
    * Return intent to launch OsmAnd map search
+   * @param context current context
    * @param searchStr raw map search string
    * @param gps true if searchStr contains GPS coordinates
    * @param navigateMap true if user wishes to jump straight into turn by turn navigation
    * @param destName name to be displayed at destination
    * @return intent needed to launch OsmAnd
    */
-  public static Intent getIntent(String searchStr, boolean gps, boolean navigateMap, String destName) {
+  public static Intent getIntent(Context context, String searchStr, boolean gps, boolean navigateMap, String destName) {
+    LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+    Location loc = null;
+    try {
+      assert locationManager != null;
+      loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    } catch (SecurityException ignored) {}
 
     // Are we navigating to GPS coordinates?
     Uri uri;
@@ -54,11 +68,26 @@ class OsmAndHelper {
     // Regular address search
     else {
       searchStr = convertSearchString(searchStr);
-      uri = getUri(NAVIGATE_SEARCH,
-                    PARAM_DEST_SEARCH_QUERY, searchStr,
-                    PARAM_SHOW_SEARCH_RESULTS, "false",
-                    PARAM_PROFILE, "car",
-                    PARAM_FORCE, "true");
+
+      if (loc != null) {
+        String lat = String.format("%f", loc.getLatitude());
+        String lon = String.format("%f", loc.getLongitude());
+        uri = getUri(NAVIGATE_SEARCH,
+            PARAM_DEST_SEARCH_QUERY, searchStr,
+            PARAM_SHOW_SEARCH_RESULTS, "false",
+            PARAM_PROFILE, "car",
+            PARAM_START_LAT, lat,
+            PARAM_START_LON, lon,
+            PARAM_SEARCH_LAT, lat,
+            PARAM_SEARCH_LON, lon,
+            PARAM_FORCE, "true");
+      } else {
+        uri = getUri(NAVIGATE_SEARCH,
+            PARAM_DEST_SEARCH_QUERY, searchStr,
+            PARAM_SHOW_SEARCH_RESULTS, "false",
+            PARAM_PROFILE, "car",
+            PARAM_FORCE, "true");
+      }
     }
     return new Intent(Intent.ACTION_VIEW, uri);
   }
@@ -89,15 +118,8 @@ class OsmAndHelper {
   private static String convertSearchString(String searchStr) {
     searchStr = searchStr.toUpperCase();
     MsgParser.Parser p = new MsgParser.Parser(searchStr);
-    String addr = p.get(',');
-    String city = p.get(',');
-    String state = p.get(',');
-    if (state.length() == 0 && city.length() == 2) {
-      state = city;
-      city = "";
-    }
-    StringBuilder sb = new StringBuilder();
-    if (city.length() > 0) sb.append(city);
+     StringBuilder sb = new StringBuilder();
+     String addr = p.get(',');
 
     for (String token : MBLANKS_PTN.split(addr)) {
       String token2 = ADDRESS_CODES.getProperty(token);
@@ -106,84 +128,8 @@ class OsmAndHelper {
       sb.append(token);
     }
 
-    if (state.length() > 0) {
-      state = STATE_CODES.getProperty(state);
-      if (state != null) {
-        if (sb.length() > 0) sb.append(' ');
-        sb.append(state);
-      }
-    }
-
-    return sb.toString();
+   return sb.toString();
   }
-
-  private static final Properties STATE_CODES = MsgParser.buildCodeTable(new String[]{
-      "AL", "ALABAMA",
-      "AK", "ALASKA",
-      "AZ", "ARIZONA",
-      "AR", "ARKANSAS",
-      "CA", "CALIFORNIA",
-      "CO", "COLORADO",
-      "CT", "CONNECTICUT",
-      "DE", "DELAWARE",
-      "FL", "FLORIDA",
-      "GA", "GEORGIA",
-      "HI", "HAWAII",
-      "ID", "IDAHO",
-      "IL", "ILLINOIS",
-      "IN", "INDIANA",
-      "IA", "IOWA",
-      "KS", "KANSAS",
-      "KY", "KENTUCKY",
-      "LA", "LOUISIANA",
-      "ME", "MAINE",
-      "MD", "MARYLAND",
-      "MA", "MASSACHUSETTS",
-      "MI", "MICHIGAN",
-      "MN", "MINNESOTA",
-      "MS", "MISSISSIPPI",
-      "MO", "MISSOURI",
-      "MT", "MONTANA",
-      "NE", "NEBRASKA",
-      "NV", "NEVADA",
-      "NH", "NEW HAMPSHIRE",
-      "NJ", "NEW JERSEY",
-      "NM", "NEW MEXICO",
-      "NY", "NEW YORK",
-      "NC", "NORTH CAROLINA",
-      "ND", "NORTH DAKOTA",
-      "OH", "OHIO",
-      "OK", "OKLAHOMA",
-      "OR", "OREGON",
-      "PA", "PENNSYLVANIA",
-      "RI", "RHODE ISLAND",
-      "SC", "SOUTH CAROLINA",
-      "SD", "SOUTH DAKOTA",
-      "TN", "TENNESSEE",
-      "TX", "TEXAS",
-      "UT", "UTAH",
-      "VT", "VERMONT",
-      "VA", "VIRGINIA",
-      "WA", "WASHINGTON",
-      "WV", "WEST VIRGINIA",
-      "WI", "WISCONSIN",
-      "WY", "WYOMING",
-
-      "DC", "DISTRICT OF COLUMBIA",
-      "MH", "MARSHALL ISLANDS",
-
-      "AB", "ALBERTA",
-      "BC", "BRITISH COLUMBIA",
-      "MB", "MANITOBA",
-      "NB", "NEW BRUNSWICK",
-      "NS", "NOVA SCOTIA",
-      "NT", "NORTWEST TERRITORIES",
-      "ON", "ONTARIO",
-      "PE", "PRINCE EDWARD ISLAND",
-      "QC", "QUEBEC",
-      "SK", "SASKATCHEWAN",
-      "YT", "YUKON"
-  });
 
   private static final Properties ADDRESS_CODES = MsgParser.buildCodeTable(new String[]{
       "ALY",    "ALLEY",

@@ -73,6 +73,9 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     appMapPref.setEntries(appMapEntryList.toArray(new String[0]));
     appMapPref.setEntryValues(appMapValueList.toArray(new String[0]));
 
+    // And add a permission check for the OSM And option
+    appMapPref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkAppMapOption((ListPreference) preference, (String) newValue));
+
     // The No Show In Call preference requires the READ_PHONE_STATE permission
     pref = findPreference(getString(R.string.pref_noShowInCall_key));
     pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkNoShowInCall((TwoStatePreference)preference, (Boolean)newValue));
