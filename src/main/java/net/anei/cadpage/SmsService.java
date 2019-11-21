@@ -22,7 +22,7 @@ public class SmsService extends IntentService {
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
 
-    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }
 
@@ -67,7 +67,7 @@ public class SmsService extends IntentService {
     // start the service to handle the intent
     holdPowerLock(context);
     intent.setClass(context, SmsService.class);
-    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       context.startForegroundService(intent);
     } else {
       context.startService(intent);

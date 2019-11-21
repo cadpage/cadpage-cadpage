@@ -212,6 +212,6 @@ public class SmsPopupUtils {
   }
 
   private static boolean isSupportAppAvailable() {
-    return !MsgAccess.ALLOWED;
+    return !BuildConfig.MSG_ALLOWED;
   }
 }

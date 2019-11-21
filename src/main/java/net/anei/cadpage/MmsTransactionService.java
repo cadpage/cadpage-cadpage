@@ -91,7 +91,7 @@ public class MmsTransactionService extends Service {
     if (Log.DEBUG) Log.v("MmsTransactionService.onStart()");
     if (intent == null) return START_NOT_STICKY;
 
-    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       startForeground(1, ManageNotification.getMiscNotification(this));
     }
 
@@ -401,7 +401,7 @@ public class MmsTransactionService extends Service {
         CadPageApplication.runOnMainThread(new Runnable() {
           @Override
           public void run() {
-            if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
               stopForeground(true);
             }
             stopSelf();
@@ -415,7 +415,7 @@ public class MmsTransactionService extends Service {
 
     // Pass intent on the MmsTransactionService
     intent.setClass(context, MmsTransactionService.class);
-    if (!MsgAccess.ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       context.startForegroundService(intent);
     } else {
       context.startService(intent);

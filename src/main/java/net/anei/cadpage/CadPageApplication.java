@@ -65,7 +65,7 @@ public class CadPageApplication extends Application implements DefaultLifecycleO
 
     Log.v("Initialization startup");
 
-    Log.v("Message access " + (MsgAccess.ALLOWED ? "allowed" : "restricted"));
+    Log.v("Message access " + (BuildConfig.MSG_ALLOWED ? "allowed" : "restricted"));
 
     context = callingContext.getApplicationContext();
     mainThread = Thread.currentThread();

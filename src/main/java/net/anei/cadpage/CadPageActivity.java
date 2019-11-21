@@ -335,7 +335,7 @@ public class CadPageActivity extends AppCompatActivity {
     // If we **REALLY** need the support app, and we asked the user
     // to install it, make sure that it has been installed and opened and
     // everything is OK.
-    if (!MsgAccess.ALLOWED && needSupportApp) {
+    if (!BuildConfig.MSG_ALLOWED && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
     }
   } 

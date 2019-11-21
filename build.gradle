@@ -32,24 +32,28 @@ android {
                 dimension "store"
                 versionNameSuffix "G"
                 versionCode 0
+                buildConfigField "boolean", "APTOIDE", "false"
             }
 
             aptoide {
                 dimension "store"
                 versionNameSuffix "A"
                 versionCode 1
+                buildConfigField "boolean", "APTOIDE", "true"
             }
 
             full {
                 dimension "type"
                 versionNameSuffix "M"
                 versionCode 1
+                buildConfigField "boolean", "MSG_ALLOWED", "true"
             }
 
             restrict {
                 dimension "type"
                 versionNameSuffix "R"
                 versionCode 0
+                buildConfigField "boolean", "MSG_ALLOWED", "false"
             }
         }
     }

@@ -41,7 +41,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
 
     // Something else to check.  If user has upgraded to a message restricted version of
     // Cadpage, check to make sure the message support app is installed
-    if (!MsgAccess.ALLOWED) {
+    if (!BuildConfig.MSG_ALLOWED) {
       SmsPopupUtils.checkMsgSupport(context);
     }
   }
