@@ -10,14 +10,17 @@
     <string name="pref_paid_year_key">paid_year</string>
     <string name="pref_paid_year_1_key">paid_year_1</string>
     <string name="pref_paid_year_2_key">paid_year_2</string>
+    <string name="pref_paid_year_3_key">paid_year_3</string>
     <string name="pref_purchase_date_key">purchase_date</string>
     <string name="pref_purchase_date_1_key">purchase_date_1</string>
     <string name="pref_purchase_date_2_key">purchase_date_2</string>
+    <string name="pref_purchase_date_3_key">purchase_date_3</string>
     <string name="pref_free_rider_key">free_rider</string>
     <string name="pref_free_sub_key">free_sub</string>
     <string name="pref_sponsor_key">sponsor</string>
     <string name="pref_sponsor_1_key">sponsor_1</string>
     <string name="pref_sponsor_2_key">sponsor_2</string>
+    <string name="pref_sponsor_3_key">sponsor_3</string>
     <string name="pref_sub_status_key">sub_status</string>
     <string name="pref_sub_status_1_key">sub_status_1</string>
     <string name="pref_auth_location_key">auth_locaton</string>

@@ -245,7 +245,7 @@ public class FCMMessageService extends FirebaseMessagingService {
 
       // also add phone number.  CodeMessaging wants this to identify users who
       // are getting text and direct pages
-      String phone = UserAcctManager.instance().getPhoneNumber();
+      String phone = UserAcctManager.instance().getPhoneNumber(context);
       if (phone != null) bld.appendQueryParameter("phone", phone);
     }
 

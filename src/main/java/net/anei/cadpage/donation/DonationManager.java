@@ -9,8 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
-import net.anei.cadpage.R;
-import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.vendors.VendorManager;
 
@@ -110,26 +108,6 @@ public class DonationManager {
     return (curTime - lastTime > AUTH_CHECK_INTERVAL);
   }
 
-  /**
-   * Refresh payment status with latest information from market and from authorization server
-   * @param context current context
-   */
-  public void refreshStatus(final Context context) {
-    // Request purchase information from Android Market
-    // When this information is returned, listeners will pass it to
-    // processSubscription()
-    BillingManager.instance().restoreTransactions();
-    
-    // Request authorization information from authorization server
-    // this will also call our processSubscription() method
-    ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
-      @Override
-      public void run(boolean ok, String[] permissions, int[] granted) {
-        UserAcctManager.instance().reloadStatus(context);
-      }
-    }, R.string.perm_acct_info_for_manual_recalc);
-  }
-  
   /**
    * Calculate all cached values
    * and report any status changes to paging service
@@ -389,7 +367,7 @@ public class DonationManager {
     // If neither the paid subscriber or expiration date have changed
     // nothing needs to be done
     boolean expDateSame = (expireDate == null ? oldExpireDate == null
-                                              : oldExpireDate != null && expireDate.equals(oldExpireDate));
+                                              : expireDate.equals(oldExpireDate));
     if (paidSubscriber == oldPaidSubscriber && expDateSame) return;
 
     // Report whatever changed to the Cadpage service vendor

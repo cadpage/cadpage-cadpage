@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -934,7 +935,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int[] PAID_YEAR_RES_IDS = new int[]{
     R.string.pref_paid_year_key,
     R.string.pref_paid_year_1_key,
-    R.string.pref_paid_year_2_key
+    R.string.pref_paid_year_2_key,
+    R.string.pref_paid_year_3_key
   };
   
   public static Date purchaseDate() {
@@ -983,7 +985,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int[] PURCHASE_DATE_RES_IDS = new int[]{
     R.string.pref_purchase_date_key,
     R.string.pref_purchase_date_1_key,
-    R.string.pref_purchase_date_2_key
+    R.string.pref_purchase_date_2_key,
+    R.string.pref_purchase_date_3_key
   };
   
   public static String sponsor() {
@@ -1007,7 +1010,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int[] SPONSOR_RES_IDS = new int[]{
     R.string.pref_sponsor_key,
     R.string.pref_sponsor_1_key,
-    R.string.pref_sponsor_2_key
+    R.string.pref_sponsor_2_key,
+    R.string.pref_sponsor_3_key
   };
 
   public static int subStatus() {
@@ -1561,7 +1565,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
                 // and if a payment status recalcluation is pending, go do it
                 if (checkPaymentStatus) {
-                  UserAcctManager.instance().reloadStatus(context);
+                  BillingManager.instance().restoreTransactions(context);
                   ManagePreferences.setAuthLastCheckTime();
                 }
               }
@@ -2693,6 +2697,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_sponsor_key,
       R.string.pref_sponsor_1_key,
       R.string.pref_sponsor_2_key,
+      R.string.pref_sponsor_3_key,
       R.string.pref_sub_status_key,
       R.string.pref_sub_status_1_key,
       R.string.pref_free_sub_key,
@@ -2706,6 +2711,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_purchase_date_1_key,
       R.string.pref_paid_year_2_key,
       R.string.pref_purchase_date_2_key,
+      R.string.pref_paid_year_3_key,
+      R.string.pref_purchase_date_3_key,
       R.string.pref_expire_date_key,
       
       R.string.pref_prev_version_code,

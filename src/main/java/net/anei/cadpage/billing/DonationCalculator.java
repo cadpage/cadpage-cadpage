@@ -1,9 +1,11 @@
-package net.anei.cadpage.donation;
+package net.anei.cadpage.billing;
 
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.EmailDeveloperActivity;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.MainDonateEvent;
 
 public class DonationCalculator {
   
@@ -20,6 +22,7 @@ public class DonationCalculator {
    * @param type 0 - overall donation status<br>
    *             1 - Google Play Store donation status
    *             2 - Authorization server donation status
+   *             3 - Aptoide Play Store donation status
    */
   public DonationCalculator(int type) {
     this.type = type;
@@ -43,7 +46,7 @@ public class DonationCalculator {
   
   /**
    * Process one subscription request, this can come from the Android market interface
-   * or from the Cadpage authorization server response.
+   * or from the Cadpage authorization server response or the Aptoide store.
    * @param stat - Subscription status, either a subscription year or "LIFE".
    * @param purchaseDateStr - purchase date in MMDDYYY format.
    * @param sponsor sponsor
@@ -163,7 +166,7 @@ public class DonationCalculator {
       
         // Recalculate the new global donation status
         DonationCalculator calc = new DonationCalculator(0);
-        for (int ii = 1; ii <= 2; ii++) {
+        for (int ii = 1; ii <= 3; ii++) {
           calc.subscription(ManagePreferences.paidYear(ii), 
                             ManagePreferences.purchaseDateString(ii), 
                             ManagePreferences.sponsor(ii),

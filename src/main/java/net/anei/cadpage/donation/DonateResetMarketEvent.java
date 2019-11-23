@@ -2,6 +2,7 @@ package net.anei.cadpage.donation;
 
 import android.app.Activity;
 import net.anei.cadpage.R;
+import net.anei.cadpage.billing.BillingManager;
 
 /**
 Recalculate Purchase Status
@@ -10,14 +11,11 @@ public class DonateResetMarketEvent extends AccountScreenEvent {
   
   private DonateResetMarketEvent() {
     super(AlertStatus.YELLOW, R.string.donate_reset_market_title);
-    setAction(new AllowAcctPermissionAction() {
-      @Override
-      public void doEvent(Activity activity) {
+    setAction(activity -> {
 
-        // Request complete status reload
-        DonationManager.instance().refreshStatus(activity);
-        closeEvents(activity);
-      }
+      // Request complete status reload
+      BillingManager.instance().restoreTransactions(activity);
+      closeEvents(activity);
     });
   }
 
