@@ -2,6 +2,7 @@ package net.anei.cadpage.donation;
 
 import android.app.Activity;
 
+import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.billing.BillingManager;
@@ -14,8 +15,11 @@ import java.util.Date;
  */
 public class AndroidDonateConfirmEvent extends DonateScreenEvent {
 
+  private static int DONATE_ANDROID_TITLE =
+      BuildConfig.APTOIDE ? R.string.donate_android_aptoide_title : R.string.donate_android_google_title;
+
   public AndroidDonateConfirmEvent() {
-    super(AlertStatus.GREEN, R.string.donate_android_title, R.string.donate_android_confirm_text,
+    super(AlertStatus.GREEN, DONATE_ANDROID_TITLE, R.string.donate_android_confirm_text,
           AndroidDonate2Event.instance(),
           AndroidDonateCancelEvent.instance());
   }

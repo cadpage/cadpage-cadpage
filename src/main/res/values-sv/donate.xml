@@ -111,7 +111,8 @@
     Du har inte fått larm från %s på mer än 60 dagar vilket får oss att tro att ditt konto inte längre är aktivt.  Har vi fel om det, använd "Skicka epost"-knappen för att kontakta oss så fixar vi det.
   </string>
 
-  <string name="donate_android_title">Köpt genom Android market</string>
+  <string name="donate_android_google_title">Purchase through Google Play Store</string> <!-- Translate -->
+  <string name="donate_android_aptoide_title">Purchase through Aptoide Store</string> <!-- Translate -->
   <string name="donate_paypal_title">Köpt genom PayPal</string>
   <string name="donate_whats_up_title">Vad handlar det här om?</string>
   <string name="donate_active911_parse_info_title">Berätta mer</string>

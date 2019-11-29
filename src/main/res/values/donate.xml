@@ -188,7 +188,8 @@
     "Send Email" button to contact us and we will get this fixed.
   </string>
   
-  <string name="donate_android_title">Purchase through Google Play Store</string>
+  <string name="donate_android_google_title">Purchase through Google Play Store</string>
+  <string name="donate_android_aptoide_title">Purchase through Aptoide Store</string>
   <string name="donate_paypal_title">Purchase through PayPal</string>
   <string name="donate_whats_up_title">What\'s this all about??</string>
   <string name="donate_active911_parse_info_title">Tell me more</string>

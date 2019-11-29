@@ -18,12 +18,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDexApplication;
 
 /**
  * Main CadPage application
  * which is where we need to do our one time initialization
  */
-public class CadPageApplication extends Application implements DefaultLifecycleObserver {
+public class CadPageApplication extends MultiDexApplication implements DefaultLifecycleObserver {
 
   private static boolean appVisible = false;
 

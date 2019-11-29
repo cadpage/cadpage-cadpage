@@ -6,6 +6,8 @@ import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.SmsMessageQueue;
 import net.anei.cadpage.SmsMmsMessage;
+import net.anei.cadpage.billing.BillingActivity;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,7 +16,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Window;
 
-public class DonateActivity extends Activity {
+public class DonateActivity extends BillingActivity {
   
   private static final String EXTRA_SCREEN_NAME = "net.anei.cadpage.DonateActivity.SCREEN_NAME";
   private static final String EXTRA_MSG_ID =      "net.anei.cadpage.DonateActivity.MSG_ID";

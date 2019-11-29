@@ -40,6 +40,9 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
     restoreTransactions(context);
   }
 
+  @Override
+  public void initialize(Activity activity) {}
+
   /**
    * Shutdown billing manager
    */
@@ -112,7 +115,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
   }
 
   @Override
-  void doStartPurchase(Activity activity) {
+  void doStartPurchase(BillingActivity activity) {
 
     List<String> skuList = new ArrayList<> ();
     skuList.add("cadpage_sub");

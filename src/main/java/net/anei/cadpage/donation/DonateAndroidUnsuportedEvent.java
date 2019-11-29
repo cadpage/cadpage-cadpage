@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.R;
 import net.anei.cadpage.billing.BillingManager;
 
@@ -13,9 +14,12 @@ app)
 
  */
 public class DonateAndroidUnsuportedEvent extends DonateScreenEvent {
-  
+
+  private static int DONATE_ANDROID_TITLE =
+      BuildConfig.APTOIDE ? R.string.donate_android_aptoide_title : R.string.donate_android_google_title;
+
   public DonateAndroidUnsuportedEvent() {
-    super(AlertStatus.YELLOW, R.string.donate_android_title, R.string.donate_android_unsupported_text);
+    super(AlertStatus.YELLOW, DONATE_ANDROID_TITLE, R.string.donate_android_unsupported_text);
   }
 
   @Override

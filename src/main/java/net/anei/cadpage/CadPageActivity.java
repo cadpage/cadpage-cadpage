@@ -1,5 +1,6 @@
 package net.anei.cadpage;
 
+import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.donation.Active911WarnEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
@@ -67,6 +68,8 @@ public class CadPageActivity extends AppCompatActivity {
     ManagePreferences.setPermissionManager(permMgr);
 
     initializing = !ManagePreferences.initialized();
+
+    BillingManager.instance().initialize(this);
 
     // Apparently only an activity can calculate the total screen size.
     // So do it now and save it in preferences so it will be included in

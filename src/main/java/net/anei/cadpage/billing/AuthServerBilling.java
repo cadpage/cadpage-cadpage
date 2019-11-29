@@ -25,6 +25,9 @@ class AuthServerBilling extends Billing {
     setStatus(BillingStatus.OK);
   }
 
+  @Override
+  public void initialize(Activity activity) {}
+
   /**
    * Shutdown billing manager
    */
@@ -96,7 +99,7 @@ class AuthServerBilling extends Billing {
   private static final DateFormat DATE_FMT = new SimpleDateFormat("MM/dd/yyyy");
 
   @Override
-  void doStartPurchase(Activity activity) {
+  void doStartPurchase(BillingActivity activity) {
     throw new RuntimeException("AuthServerBilling does not support purchases");
   }
 }

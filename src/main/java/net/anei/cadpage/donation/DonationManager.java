@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.parsers.MsgParser;
@@ -470,7 +472,7 @@ public class DonationManager {
   }
 
   public boolean isEarlyRenewalWarning() {
-    return earlyRenewalWarning;
+    return earlyRenewalWarning && !BuildConfig.APTOIDE;
   }
 
   /**
