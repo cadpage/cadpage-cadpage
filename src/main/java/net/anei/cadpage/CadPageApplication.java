@@ -5,8 +5,6 @@ import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
-
 
 import android.arch.lifecycle.DefaultLifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;

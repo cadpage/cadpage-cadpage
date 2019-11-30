@@ -2,8 +2,8 @@
 /full
 /release
 /restrict
+/aptoide*
 /google*
-/aptoid*
 *.iml
 /.gradle
 /.idea

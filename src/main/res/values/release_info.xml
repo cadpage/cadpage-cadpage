@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11172019</string>
+  <string name="release_date">11252019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-13\n
+    Location Fixes:\n
+    Douglas County, CO\n
+    Spencer County, KY\n
+    Geauga County, OH\n
+    Chester County, PA\n
+    Rockingham County, VA\n
+    \n
     v2.1.7-12\n
     New Locations:\n
     Jefferson Davis Parish, LA\n
@@ -34,11 +42,6 @@
     v2.1.7-09\n
     Location Fixes:\n
     Caldwell County, MO\n
-    Erie County, PA\n
-    \n
-    v2.1.7-08\n
-    Location Fixes:\n
-    Macon County, NC\n
-    Warren County, OH
+    Erie County, PA
   </string>
 </resources>

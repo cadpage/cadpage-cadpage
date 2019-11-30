@@ -1,6 +1,5 @@
 package net.anei.cadpage.billing;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,13 +21,12 @@ import net.anei.cadpage.ManagePreferences;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-@SuppressWarnings({"UnnecessaryReturnStatement", "SpellCheckingInspection"})
+@SuppressWarnings({"SpellCheckingInspection"})
 class AptoideBilling extends Billing implements PurchasesUpdatedListener {
 
   private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApHzsCH1/xZtjQRkLmIWzrY6SASyVdUGp71sD86K849MQrLY8Dn7xnPV4+Z+dyy8cBkjEFPSImrnkeLKQFg6ASHxqV+eLskZl0CGBjg0u+ImRD37RpQoJtP/VcNgpQIo8V0qNoZv2E9l1Q0Y7lnlPJiE7fhwUk4oyG6eLihJreQ4UeXon7nA81iBOFvsdlVAc+ovHnk4MaGZ4Vyp7lsOg76PbVYgUHlg10df3KT0jdmH0EJUdVIUZibYQonS2BX1kz8VRvFJ7GQAbrfRtDaIU0qCniSMmggpL+K05opkB8bV+I7MjhMEDDMEXEhVOGRHt0NFRS3SuL8ZR8Iy4myWyrwIDAQAB";
@@ -95,6 +93,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
     calc.save();
   }
 
+  @SuppressWarnings("SameParameterValue")
   private void collectResults(DonationCalculator calc, String skuType) {
     PurchasesResult result = mBillingClient.queryPurchases(skuType);
     if (result.getResponseCode() == BillingClient.BillingResponseCode.OK) {
