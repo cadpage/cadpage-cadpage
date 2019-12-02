@@ -67,6 +67,13 @@ android {
         }
     }
 
+    variantFilter { variant ->
+        def names = variant.flavors*.name
+        if (names.contains("aptoide") && !names.contains("full")) {
+            setIgnore(true)
+        }
+    }
+
     compileSdkVersion 29
 
     compileOptions {
