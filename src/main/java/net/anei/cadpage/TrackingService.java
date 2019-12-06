@@ -4,28 +4,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 
-public class TrackingService extends Service implements LocationListener {
+public class TrackingService extends Service implements LocationTracker.LocationChangeListener {
 
-  // Expected accuracy degradation in m/msec
-  private static final double LOC_ACC_ADJUSTMENT = .002;  // About 2 m/sec
 
   private static final String ACTION_SHUTDOWN = "ACTION_SHUTDOWN";
   private static final String ACTION_REPORT = "ACTION_REPORT";
@@ -90,9 +83,6 @@ public class TrackingService extends Service implements LocationListener {
   // Queue of outstanding location requests
   private final List<LocationRequest> requestQueue = new LinkedList<>();
 
-  // Best location service
-  private String bestProvider = null;
-
   @SuppressLint("NewApi")
   @Override
   public void onCreate() {
@@ -156,34 +146,7 @@ public class TrackingService extends Service implements LocationListener {
     // If not, create a new entry and add it to the queue
     if (!found) requestQueue.add(new LocationRequest(url, endTime));
 
-    // If we don't have an active best provider, set one up and
-    LocationManager locMgr = (LocationManager)this.getSystemService(LOCATION_SERVICE);
-    assert locMgr != null;
-    if (bestProvider == null) {
-      Criteria criteria = new Criteria();
-      criteria.setAccuracy(Criteria.ACCURACY_FINE);
-      bestProvider = locMgr.getBestProvider(criteria, true);
-      if (bestProvider != null) locMgr.requestLocationUpdates(bestProvider, minDist, minTime, this);
-    }
-
-    // Get a list of all enabled location providers see which one 
-    // provides the best last known location
-    Location bestLoc = null;
-    for (String name : locMgr.getProviders(true)) {
-      Location loc = locMgr.getLastKnownLocation(name);
-      if (loc == null) continue;
-      Log.v("lastKnownLocation:" + loc.toString());
-      if (bestLoc != null) {
-        float deltaAcc = loc.getAccuracy() - bestLoc.getAccuracy();
-        long deltaTime = loc.getTime() - bestLoc.getTime();
-        deltaAcc -= deltaTime * LOC_ACC_ADJUSTMENT;
-        if (deltaAcc < 0) continue;
-      }
-      bestLoc = loc;
-    }
-    
-    // Use the that best last known position to prime things
-    onLocationChanged(bestLoc);
+    LocationTracker.instance().start(this, minDist, minTime, this);
 
     return Service.START_REDELIVER_INTENT;
   }
@@ -194,7 +157,7 @@ public class TrackingService extends Service implements LocationListener {
   }
 
   @Override
-  public void onLocationChanged(Location location) {
+  public void locationChange(Location location) {
 
     // If no location, skip it
     if (location == null) return;
@@ -222,26 +185,8 @@ public class TrackingService extends Service implements LocationListener {
   @Override
   public void onDestroy() {
     Log.v("Shutting down LocationService");
-    LocationManager locMgr = (LocationManager)this.getSystemService(LOCATION_SERVICE);
-    assert locMgr != null;
-    locMgr.removeUpdates(this);
-    bestProvider = null;
+    LocationTracker.instance().stop(this, this);
     if (sWakeLock != null) sWakeLock.release();
-  }
-
-  @Override
-  public void onProviderDisabled(String provider) {
-    Log.v("LocationService - provider disabled:" + provider);
-  }
-
-  @Override
-  public void onProviderEnabled(String provider) {
-    Log.v("LocationService - provider enabled:" + provider);
-  }
-
-  @Override
-  public void onStatusChanged(String provider, int status, Bundle extras) {
-    Log.v("LocationService - status change:" + provider + ":" + status);
   }
 
   /**

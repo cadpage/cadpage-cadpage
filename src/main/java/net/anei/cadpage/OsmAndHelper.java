@@ -2,7 +2,6 @@ package net.anei.cadpage;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.location.LocationManager;
 
 import net.anei.cadpage.parsers.MsgParser;
 import java.util.Properties;
@@ -13,6 +12,7 @@ import android.location.Location;
 /**
  * Utility class supporting the interface with the OsmAnd mapping app
  */
+@SuppressWarnings("SpellCheckingInspection")
 class OsmAndHelper {
 
   private static final String PREFIX = "osmand.api://";
@@ -42,13 +42,9 @@ class OsmAndHelper {
    * @param destName name to be displayed at destination
    * @return intent needed to launch OsmAnd
    */
+  @SuppressWarnings("unused")
   public static Intent getIntent(Context context, String searchStr, boolean gps, boolean navigateMap, String destName) {
-    LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-    Location loc = null;
-    try {
-      assert locationManager != null;
-      loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-    } catch (SecurityException ignored) {}
+    Location loc = LocationTracker.instance().getBestLocation(context);
 
     // Are we navigating to GPS coordinates?
     Uri uri;
