@@ -65,7 +65,8 @@ public class LocationTracker {
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         bestProvider = locMgr.getBestProvider(criteria, true);
         if (bestProvider != null) {
-           locMgr.requestLocationUpdates(bestProvider, minDist, minTime, myListener);
+          Log.v("Turning on location tracking");
+          locMgr.requestLocationUpdates(bestProvider, minDist, minTime, myListener);
         }
       }
     }
@@ -82,6 +83,7 @@ public class LocationTracker {
 
     listenerList.remove(listener);
     if (listenerList.isEmpty()) {
+      Log.v("Turning off location tracking");
       LocationManager locMgr = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
       assert locMgr != null;
       locMgr.removeUpdates(myListener);
