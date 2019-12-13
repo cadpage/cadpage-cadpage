@@ -4,6 +4,16 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-17\n
+    New Locations:\n
+    Stewart County, GA\n
+    \n
+    Location Fixes:\n
+    Lake County, FL\n
+    Dougherty County, GA\n
+    Athens County, OH\n
+    Orangeburg County, SC\n
+    \n
     v2.1.7-16\n
     New Locations:\n
     Caldwell County, KY\n
@@ -37,18 +47,6 @@
     Spencer County, KY\n
     Geauga County, OH\n
     Chester County, PA\n
-    Rockingham County, VA\n
-    \n
-    v2.1.7-12\n
-    New Locations:\n
-    Jefferson Davis Parish, LA\n
-    Middlesex County, NJ (alt)\n
-    Kerr County, TX\n
-    \n
-    Location Fixes:\n
-    Adams County, CO\n
-    Litchfield County, CT\n
-    St Joseph County, IN\n
-    Smith County, TX
+    Rockingham County, VA
   </string>
 </resources>
