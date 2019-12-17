@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12102019</string>
+  <string name="release_date">12172019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-18\n
+    Location Fixes:\n
+    Madison County, IL\n
+    Madison County, IN\n
+    Kenton County, KY\n
+    Kentucky State Police, KY\n
+    Scott County, MO\n
+    Madison County, NY\n
+    Chatham County, NC\n
+    Marion County, NC\n
+    Elk County, PA\n
+    \n
     v2.1.7-17\n
     New Locations:\n
     Stewart County, GA\n
@@ -39,14 +51,6 @@
     Location Fixes:\n
     Benton County, OR\n
     Lancaster County, PA\n
-    Jackson County, WV\n
-    \n
-    v2.1.7-13\n
-    Location Fixes:\n
-    Douglas County, CO\n
-    Spencer County, KY\n
-    Geauga County, OH\n
-    Chester County, PA\n
-    Rockingham County, VA
+    Jackson County, WV
   </string>
 </resources>
