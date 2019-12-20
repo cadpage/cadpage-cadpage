@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12172019</string>
+  <string name="release_date">12202019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-19\n
+    Location Fixes:\n
+    Hot Springs, AR\n
+    Citrus County, FL\n
+    Madison County, NY\n
+    Macon County, NC\n
+    \n
+    Misc Fixes:\n
+    Compatibility issue with latest Android 10 release\n
+    \n
     v2.1.7-18\n
     Location Fixes:\n
     Madison County, IL\n
@@ -41,16 +51,6 @@
     Location Fixes:\n
     Burlington County, NJ\n
     Madison County, NY\n
-    Crowley, TX\n
-    \n
-    v2.1.7-14\n
-    New Locations:\n
-    Westmoreland County, PA (alt)\n
-    Dallas County, TX (alt)\n
-    \n
-    Location Fixes:\n
-    Benton County, OR\n
-    Lancaster County, PA\n
-    Jackson County, WV
+    Crowley, TX
   </string>
 </resources>
