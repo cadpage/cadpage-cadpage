@@ -94,10 +94,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.4.0'
     implementation 'android.arch.work:work-runtime:1.0.0'
     implementation 'android.arch.lifecycle:common-java8:1.0.0'
-    implementation 'com.android.billingclient:billing:2.0.3'
+    implementation 'com.android.billingclient:billing:2.1.10'
     aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
     aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
     aptoideImplementation 'com.blockchainds:appcoins-contract-proxy:0.5.1.32b'
-}
+W}
 
 apply plugin: 'com.google.gms.google-services'
