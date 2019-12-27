@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import com.android.billingclient.api.BillingClient;
 import com.appcoins.sdk.billing.AppCoinsBillingStateListener;
 import com.appcoins.sdk.billing.AppcoinsBillingClient;
 import com.appcoins.sdk.billing.BillingFlowParams;
@@ -15,7 +14,6 @@ import com.appcoins.sdk.billing.PurchasesUpdatedListener;
 import com.appcoins.sdk.billing.ResponseCode;
 import com.appcoins.sdk.billing.SkuDetails;
 import com.appcoins.sdk.billing.SkuDetailsParams;
-import com.appcoins.sdk.billing.SkuDetailsResponseListener;
 import com.appcoins.sdk.billing.helpers.CatapultBillingAppCoinsFactory;
 import com.appcoins.sdk.billing.types.SkuType;
 
@@ -92,14 +90,14 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
     Log.v("Aptoide Restore Billing Transactions");
     DonationCalculator calc = new DonationCalculator(3);
 //    collectResults(calc, BillingClient.SkuType.SUBS);
-    collectResults(calc, BillingClient.SkuType.INAPP);
+    collectResults(calc, SkuType.inapp);
     calc.save();
   }
 
   @SuppressWarnings("SameParameterValue")
-  private void collectResults(DonationCalculator calc, String skuType) {
-    PurchasesResult result = mBillingClient.queryPurchases(skuType);
-    if (result.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+  private void collectResults(DonationCalculator calc, SkuType skuType) {
+    PurchasesResult result = mBillingClient.queryPurchases(skuType.toString());
+    if (result.getResponseCode() == ResponseCode.OK.getValue()) {
       List<Purchase> list = result.getPurchases();
       if (list != null) {
         for (Purchase purchase : list) {
@@ -150,22 +148,18 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
             payload,
             null);
 
-    Log.v(billingFlowParams.toString());
     int response = mBillingClient.launchBillingFlow(activity, billingFlowParams);
-    if (response != BillingClient.BillingResponseCode.OK) {
+    if (response != ResponseCode.OK.getValue()) {
       Log.e("Purchase failure: " + response);
     }
 
     SkuDetailsParams params = new SkuDetailsParams();
     params.setItemType(SkuType.inapp.toString());
-    mBillingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener(){
-      @Override
-      public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
-        Log.v("SkuDetailsResponse: " + responseCode);
-        if (skuDetailsList != null) {
-          for (SkuDetails details : skuDetailsList) {
-            Log.v(details.toString());
-          }
+    mBillingClient.querySkuDetailsAsync(params, (responseCode, skuDetailsList) -> {
+      Log.v("SkuDetailsResponse: " + responseCode);
+      if (skuDetailsList != null) {
+        for (SkuDetails details : skuDetailsList) {
+          Log.v(details.toString());
         }
       }
     });
@@ -180,7 +174,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
   public void onPurchasesUpdated(int billingResult, @Nullable List<Purchase> purchases) {
 
     if (Log.DEBUG) Log.v("Purchase result:" + billingResult);
-    if (billingResult == BillingClient.BillingResponseCode.OK) {
+    if (billingResult == ResponseCode.OK.getValue()) {
       if (purchases != null) {
         DonationCalculator calc = new DonationCalculator(1);
         calc.load();
