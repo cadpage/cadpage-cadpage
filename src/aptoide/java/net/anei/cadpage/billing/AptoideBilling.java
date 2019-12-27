@@ -13,6 +13,9 @@ import com.appcoins.sdk.billing.Purchase;
 import com.appcoins.sdk.billing.PurchasesResult;
 import com.appcoins.sdk.billing.PurchasesUpdatedListener;
 import com.appcoins.sdk.billing.ResponseCode;
+import com.appcoins.sdk.billing.SkuDetails;
+import com.appcoins.sdk.billing.SkuDetailsParams;
+import com.appcoins.sdk.billing.SkuDetailsResponseListener;
 import com.appcoins.sdk.billing.helpers.CatapultBillingAppCoinsFactory;
 import com.appcoins.sdk.billing.types.SkuType;
 
@@ -147,10 +150,25 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
             payload,
             null);
 
+    Log.v(billingFlowParams.toString());
     int response = mBillingClient.launchBillingFlow(activity, billingFlowParams);
     if (response != BillingClient.BillingResponseCode.OK) {
       Log.e("Purchase failure: " + response);
     }
+
+    SkuDetailsParams params = new SkuDetailsParams();
+    params.setItemType(SkuType.inapp.toString());
+    mBillingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener(){
+      @Override
+      public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
+        Log.v("SkuDetailsResponse: " + responseCode);
+        if (skuDetailsList != null) {
+          for (SkuDetails details : skuDetailsList) {
+            Log.v(details.toString());
+          }
+        }
+      }
+    });
   }
 
   @Override
