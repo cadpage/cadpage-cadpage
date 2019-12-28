@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12202019</string>
+  <string name="release_date">12282019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-20\n
+    New Locations:\n
+    Rio Grande County, CO\n
+    Boundary County, ID\n
+    Cook County, IL (alt)\n
+    \n
+    Location Fixes:\n
+    Phelps County, MO\n
+    Burlington County, NJ\n
+    \n
     v2.1.7-19\n
     Location Fixes:\n
     Hot Springs, AR\n
@@ -45,12 +55,6 @@
     Pender County, NC\n
     Jasper County, SC\n
     Aransas County, TX\n
-    Rock County, WI\n
-    \n
-    v2.1.7-15\n
-    Location Fixes:\n
-    Burlington County, NJ\n
-    Madison County, NY\n
-    Crowley, TX
+    Rock County, WI
   </string>
 </resources>
