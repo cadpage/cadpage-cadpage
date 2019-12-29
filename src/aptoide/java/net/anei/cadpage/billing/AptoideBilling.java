@@ -3,6 +3,9 @@ package net.anei.cadpage.billing;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import com.appcoins.sdk.billing.AppCoinsBillingStateListener;
@@ -17,6 +20,7 @@ import com.appcoins.sdk.billing.SkuDetailsParams;
 import com.appcoins.sdk.billing.helpers.CatapultBillingAppCoinsFactory;
 import com.appcoins.sdk.billing.types.SkuType;
 
+import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 
@@ -31,6 +35,8 @@ import java.util.List;
 class AptoideBilling extends Billing implements PurchasesUpdatedListener {
 
   private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApHzsCH1/xZtjQRkLmIWzrY6SASyVdUGp71sD86K849MQrLY8Dn7xnPV4+Z+dyy8cBkjEFPSImrnkeLKQFg6ASHxqV+eLskZl0CGBjg0u+ImRD37RpQoJtP/VcNgpQIo8V0qNoZv2E9l1Q0Y7lnlPJiE7fhwUk4oyG6eLihJreQ4UeXon7nA81iBOFvsdlVAc+ovHnk4MaGZ4Vyp7lsOg76PbVYgUHlg10df3KT0jdmH0EJUdVIUZibYQonS2BX1kz8VRvFJ7GQAbrfRtDaIU0qCniSMmggpL+K05opkB8bV+I7MjhMEDDMEXEhVOGRHt0NFRS3SuL8ZR8Iy4myWyrwIDAQAB";
+
+  private static final int RC_ONE_STEP = 99333;
 
   private AppcoinsBillingClient mBillingClient;
 
@@ -137,20 +143,27 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
       year = purchaseDate.substring(4);
     }
 
-    String item = "cadpage_" + year;
+    String item = "cadpage" + year;
     String payload = purchaseDate;
 
     Log.v("Purchase request for " + item + " payload:" + payload);
 
+    String ref = Long.toString(System.currentTimeMillis());
+
+    purchase1(activity, item, payload, ref);
+  }
+
+  private boolean purchase1(BillingActivity activity, String item, String payload, String reference) {
     BillingFlowParams billingFlowParams =
         new BillingFlowParams(item, SkuType.inapp.toString(),
-            "orderId=" + System.currentTimeMillis(),
+            reference,
             payload,
             null);
 
     int response = mBillingClient.launchBillingFlow(activity, billingFlowParams);
     if (response != ResponseCode.OK.getValue()) {
       Log.e("Purchase failure: " + response);
+//      return false;
     }
 
     SkuDetailsParams params = new SkuDetailsParams();
@@ -163,10 +176,60 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
         }
       }
     });
+    return true;
   }
 
+  private boolean purchase2(BillingActivity activity, String item, String payload, String reference) {
+    Uri uri = Uri.parse("https://apichain.catappult.io/transaction/inapp").buildUpon()
+        .appendQueryParameter("product", item)
+        .appendQueryParameter("domain", "net.anei.cadpage")
+        .appendQueryParameter("data", payload)
+        .appendQueryParameter("order_reference", reference)
+        .build();
+
+    Intent intent = buildTargetIntent(activity, uri.toString());
+    Log.v("Puchase request intent");
+    ContentQuery.dumpIntent(intent);
+    try {
+      activity.startActivityForResult(intent, RC_ONE_STEP);
+      return true;
+    } catch (Exception ex) {
+      Log.e(ex);
+      return false;
+    }
+  }
+  private Intent buildTargetIntent(BillingActivity activity, String url) {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse(url));
+
+    // Check if there is an application that can process the AppCoins Billing
+    // flow
+    PackageManager packageManager = activity.getApplicationContext().getPackageManager();
+    List<ResolveInfo> appsList = packageManager
+        .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+    for (ResolveInfo app : appsList) {
+      if (app.activityInfo.packageName.equals("cm.aptoide.pt")) {
+        // If there's aptoide installed always choose Aptoide as default to open
+        // url
+        intent.setPackage(app.activityInfo.packageName);
+        break;
+      } else if (app.activityInfo.packageName.equals("com.appcoins.wallet")) {
+        // If Aptoide is not installed and wallet is installed then choose Wallet
+        // as default to open url
+        intent.setPackage(app.activityInfo.packageName);
+      }
+    }
+    return intent;
+  }
   @Override
   void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == RC_ONE_STEP) {
+      if (resultCode == Activity.RESULT_OK) {
+        Log.v("Purchase Result Intent");
+        ContentQuery.dumpIntent(data);
+      }
+      return;
+    }
     mBillingClient.onActivityResult(requestCode, resultCode, data);
   }
 
@@ -234,5 +297,4 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
     }
     calc.subscription(year, purchaseDate, null, subStatus);
   }
-
 }
