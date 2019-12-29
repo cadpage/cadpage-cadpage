@@ -56,6 +56,10 @@
      På grund av någon okänd orsak så visar inte Androidsystemet Cadpage-notifikationer tills du ger din tillåtelse att komma åt data-storage.
    </string>
 
+  <string name="perm_app_map_option"> <!-- Translate -->
+    OsmAnd support requires access to your current location
+  </string>
+
   <string name="perm_grant_acct_access">
     Du ber Cadpage komma åt din information om ditt epost-konto. För att göra det så behöver vi identifiera ditt Google-konto.
   </string>

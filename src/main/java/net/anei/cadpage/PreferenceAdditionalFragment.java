@@ -49,11 +49,20 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     for (int ndx = 0; ndx < appMapValues.length; ndx++) {
       String value = appMapValues[ndx].toString();
       String pkgName = (value.equals("ArcGIS Navigator") ? "com.esri.navigator" :
-          value.equals("Waze") ? "com.waze" : null);
+                        value.equals("Waze") ? "com.waze" :
+                        value.equals("OsmAnd") ? "net.osmand.plus,net.osmand" : null);
       if (pkgName != null) {
-        try {
-          getActivity().getPackageManager().getPackageInfo(pkgName, 0);
-        } catch (PackageManager.NameNotFoundException ex2) {
+        boolean good = false;
+        for (String pkg : pkgName.split(",")) {
+          try {
+            Log.v("Check package " + pkg);
+            getActivity().getPackageManager().getPackageInfo(pkg, 0);
+            good = true;
+            Log.v("package found");
+            break;
+          } catch (PackageManager.NameNotFoundException ex2) {}
+        }
+        if (!good) {
           if (value.equals(oldVal)) appMapPref.setValue("Google");
           continue;
         }
@@ -63,6 +72,9 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     }
     appMapPref.setEntries(appMapEntryList.toArray(new String[0]));
     appMapPref.setEntryValues(appMapValueList.toArray(new String[0]));
+
+    // And add a permission check for the OSM And option
+    appMapPref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkAppMapOption((ListPreference) preference, (String) newValue));
 
     // The No Show In Call preference requires the READ_PHONE_STATE permission
     pref = findPreference(getString(R.string.pref_noShowInCall_key));

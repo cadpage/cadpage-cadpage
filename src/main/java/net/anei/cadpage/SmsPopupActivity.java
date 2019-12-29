@@ -2,6 +2,7 @@ package net.anei.cadpage;
 
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -26,7 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-public class SmsPopupActivity extends Safe40Activity {
+public class SmsPopupActivity extends Safe40Activity implements LocationTracker.LocationChangeListener {
   
   private static final String EXTRAS_MSG_ID = "SmsPopupActivity.MSG_ID";
   
@@ -331,7 +332,7 @@ public class SmsPopupActivity extends Safe40Activity {
    * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
    */
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     if (optManager != null && optManager.menuItemSelected(item.getItemId(), true)) return true;
     return super.onOptionsItemSelected(item);
   }
@@ -388,10 +389,21 @@ public class SmsPopupActivity extends Safe40Activity {
     mainLL.invalidate();
   }
 
+  private boolean trackingActive = false;
+
   @Override
   protected void onStart() {
     if (Log.DEBUG) Log.v("SmsPopupActivty.onStart()");
     super.onStart();
+
+    // If we are using the OSM mapping option, turn on GPS tracking whenever this window is active
+    // just in case the user requests a map display
+    String mapOption = ManagePreferences.appMapOption();
+
+    if (mapOption.equals("OsmAnd")) {
+      trackingActive = true;
+      LocationTracker.instance().start(this, 10, 10, this);
+    }
   }
 
   @Override
@@ -416,6 +428,17 @@ public class SmsPopupActivity extends Safe40Activity {
   protected void onStop() {
     if (Log.DEBUG) Log.v("SmsPopupActivty.onStop()");
     super.onStop();
+
+    // If we turned on GPS tracking, turn it off now
+    if (trackingActive) {
+      trackingActive = false;
+      LocationTracker.instance().stop(this, this);
+    }
+  }
+
+  @Override
+  public void locationChange(Location location) {
+    // We do not actually do anything with the location.  Just need to keep tracking active
   }
 
   /**
