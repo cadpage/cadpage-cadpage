@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12102019</string>
+  <string name="release_date">12282019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.7-20\n
+    New Locations:\n
+    Rio Grande County, CO\n
+    Boundary County, ID\n
+    Cook County, IL (alt)\n
+    \n
+    Location Fixes:\n
+    Phelps County, MO\n
+    Burlington County, NJ\n
+    \n
+    v2.1.7-19\n
+    Location Fixes:\n
+    Hot Springs, AR\n
+    Citrus County, FL\n
+    Madison County, NY\n
+    Macon County, NC\n
+    \n
+    Misc Fixes:\n
+    Compatibility issue with latest Android 10 release\n
+    \n
+    v2.1.7-18\n
+    Location Fixes:\n
+    Madison County, IL\n
+    Madison County, IN\n
+    Kenton County, KY\n
+    Kentucky State Police, KY\n
+    Scott County, MO\n
+    Madison County, NY\n
+    Chatham County, NC\n
+    Marion County, NC\n
+    Elk County, PA\n
+    \n
+    v2.1.7-17\n
+    New Locations:\n
+    Stewart County, GA\n
+    \n
+    Location Fixes:\n
+    Lake County, FL\n
+    Dougherty County, GA\n
+    Athens County, OH\n
+    Orangeburg County, SC\n
+    \n
     v2.1.7-16\n
     New Locations:\n
     Caldwell County, KY\n
@@ -13,42 +55,6 @@
     Pender County, NC\n
     Jasper County, SC\n
     Aransas County, TX\n
-    Rock County, WI\n
-    \n
-    v2.1.7-15\n
-    Location Fixes:\n
-    Burlington County, NJ\n
-    Madison County, NY\n
-    Crowley, TX\n
-    \n
-    v2.1.7-14\n
-    New Locations:\n
-    Westmoreland County, PA (alt)\n
-    Dallas County, TX (alt)\n
-    \n
-    Location Fixes:\n
-    Benton County, OR\n
-    Lancaster County, PA\n
-    Jackson County, WV\n
-    \n
-    v2.1.7-13\n
-    Location Fixes:\n
-    Douglas County, CO\n
-    Spencer County, KY\n
-    Geauga County, OH\n
-    Chester County, PA\n
-    Rockingham County, VA\n
-    \n
-    v2.1.7-12\n
-    New Locations:\n
-    Jefferson Davis Parish, LA\n
-    Middlesex County, NJ (alt)\n
-    Kerr County, TX\n
-    \n
-    Location Fixes:\n
-    Adams County, CO\n
-    Litchfield County, CT\n
-    St Joseph County, IN\n
-    Smith County, TX
+    Rock County, WI
   </string>
 </resources>
