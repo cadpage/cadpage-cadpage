@@ -83,7 +83,7 @@ public class CadPageWidget extends AppWidgetProvider {
     
     SmsMessageQueue instance = SmsMessageQueue.getInstance();
     int newCallCount = (instance == null ? 0 : instance.getNewCallCount());
-    views.setTextColor(R.id.widget_text_newcalls, Color.WHITE);
+    views.setTextColor(R.id.widget_text_newcalls, Color.BLACK);
     views.setTextViewText(R.id.widget_text_newcalls, Integer.toString(newCallCount));
     
     appWidgetManager.updateAppWidget(appWidgetIds, views);
