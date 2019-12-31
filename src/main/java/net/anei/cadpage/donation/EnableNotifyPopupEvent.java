@@ -1,18 +1,11 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
-import net.anei.cadpage.CadPageActivity;
-import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PreferenceNotificationFragment;
 import net.anei.cadpage.R;
-import net.anei.cadpage.vendors.VendorManager;
 
 /**
  Enable notification "Pop on screen" option

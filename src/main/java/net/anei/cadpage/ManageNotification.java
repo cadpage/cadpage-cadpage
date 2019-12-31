@@ -22,7 +22,7 @@ import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 
 /*
  * This class handles the Notifications (sounds/vibrate/LED)

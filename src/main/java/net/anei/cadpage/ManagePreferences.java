@@ -32,7 +32,7 @@ import android.preference.TwoStatePreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
