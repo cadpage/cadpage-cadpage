@@ -4,6 +4,14 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.8-01\n
+    Added support for Open Street Maps mapping.\n
+    \n
+    Location Fixes:\n
+    Edgecombe County, NC\n
+    Randolph County, NC\n
+    Stanly County, NC\n
+    \n
     v2.1.7-20\n
     New Locations:\n
     Rio Grande County, CO\n
@@ -44,17 +52,6 @@
     Lake County, FL\n
     Dougherty County, GA\n
     Athens County, OH\n
-    Orangeburg County, SC\n
-    \n
-    v2.1.7-16\n
-    New Locations:\n
-    Caldwell County, KY\n
-    \n
-    Location Fixes:\n
-    Morgan County, MO\n
-    Pender County, NC\n
-    Jasper County, SC\n
-    Aransas County, TX\n
-    Rock County, WI
+    Orangeburg County, SC
   </string>
 </resources>
