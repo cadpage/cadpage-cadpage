@@ -98,13 +98,8 @@ public class TrackingService extends Service implements LocationTracker.Location
         .setSmallIcon(R.drawable.ic_stat_notify)
         .setWhen(System.currentTimeMillis())
         .setContentTitle(getString(R.string.tracking_title))
-        .setContentIntent(pint);
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-      nb.setContentText(getString(R.string.tracking_text));
-    } else {
-      nb.addAction(R.drawable.ic_stat_notify, getString(R.string.stop_tracking_text), pint);
-
-    }
+        .setContentIntent(pint)
+        .addAction(R.drawable.ic_stat_notify, getString(R.string.stop_tracking_text), pint);
     startForeground(TRACKING_NOTIFICATION, nb.build());
 
     CadPageApplication.initialize(this);

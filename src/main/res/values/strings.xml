@@ -132,9 +132,8 @@
   </string>
   
   <string name="tracking_title">Cadpage position tracking active</string>
-  <string name="tracking_text">Select to cancel position tracking</string>
   <string name="stop_tracking_text">Stop position tracking</string>
-  
+
   <string name="tracking_prompt_title">Enable Position Tracking</string>
   <string name="tracking_prompt_text">Would you like Cadpage to report your real time position to other responders?</string>
   <string name="yes">Yes</string>

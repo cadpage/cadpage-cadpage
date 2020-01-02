@@ -268,7 +268,11 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
 
     // Get the purchase Sku code and confirm that it starts with Cadpage
     String itemId = purchase.getSku();
-    if (!itemId.startsWith("cadpage_")) return;
+    if (!itemId.startsWith("cadpage")) return;
+
+    // We changed naming conventions for Aptoide products.  So correct name to match the
+    // Google standard
+    itemId = "cadpage_" + itemId.substring(8);
 
     // Subscriptions start with sub.  Purchase date will be the actual
     // purchase date.  The fact that a subscription is being reported means that it
