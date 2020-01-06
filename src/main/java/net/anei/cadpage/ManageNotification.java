@@ -36,8 +36,9 @@ public class ManageNotification {
 
   public static final String MISC_CHANNEL_ID = "net.anei.cadpage.MISC_CHANNEL_ID";
 
-  public static final String NOTIFY_CHANNEL_ID = "net.anei.cadpage.NOTIFY_CHANNEL_ID";
-  
+  private static final String OLD_NOTIFY_CHANNEL_ID = "net.anei.cadpage.NOTIFY_CHANNEL_ID";
+  public static final String NOTIFY_CHANNEL_ID = "net.anei.cadpage.NOTIFY_CHANNEL_ID_2";
+
   private static final int MAX_PLAYER_RETRIES = 4;
 
   private static final int NOTIFICATION_ALERT = 1337;
@@ -87,6 +88,8 @@ public class ManageNotification {
             .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
             .build();
         channel.setSound(uri, aa);
+      } else {
+        channel.setSound(null, null);
       }
 
       nm.createNotificationChannel(channel);
@@ -102,6 +105,7 @@ public class ManageNotification {
        channel = new NotificationChannel(TRACKING_CHANNEL_ID, context.getString(R.string.tracking_notif_title), NotificationManager.IMPORTANCE_LOW);
        channel.setDescription(context.getString(R.string.tracking_notif_text));
        channel.setBypassDnd(false);
+       channel.setSound(null, null);
        nm.createNotificationChannel(channel);
      }
 
@@ -109,6 +113,7 @@ public class ManageNotification {
      if (channel == null) {
        channel = new NotificationChannel(MISC_CHANNEL_ID, context.getString(R.string.misc_notif_title), NotificationManager.IMPORTANCE_NONE);
        channel.setBypassDnd(false);
+       channel.setSound(null, null);
        nm.createNotificationChannel(channel);
      }
 
@@ -116,8 +121,11 @@ public class ManageNotification {
     if (channel == null) {
       channel = new NotificationChannel(NOTIFY_CHANNEL_ID, context.getString(R.string.notify_notif_title), NotificationManager.IMPORTANCE_HIGH);
       channel.setBypassDnd(true);
+      channel.setSound(null, null);
       nm.createNotificationChannel(channel);
     }
+
+    nm.deleteNotificationChannel(OLD_NOTIFY_CHANNEL_ID);
 
     if (audioAlert && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       if (! ManagePreferences.notifyCheckAbort() &&
@@ -286,7 +294,14 @@ public class ManageNotification {
      * Ok, let's create our Notification object and set up all its parameters.
      */
     NotificationCompat.Builder nbuild;
-    nbuild = new NotificationCompat.Builder(context, ALERT_CHANNEL_ID);
+
+    // Select the appropriate channel.  Usually this is the regular alert channel.  But if notifications
+    // are not enabled, we are being called to use the full screen notification process required to
+    // pop up a detail screen starting with Android 10.  In which case we do not want the regular
+    // audio and vibrate options and should use the quiet background notification channel rather
+    // than the regular alert channel.
+    String channelId = ManagePreferences.notifyEnabled() ? ALERT_CHANNEL_ID : NOTIFY_CHANNEL_ID;
+    nbuild = new NotificationCompat.Builder(context, channelId);
 
     // Set auto-cancel flag
     nbuild.setAutoCancel(true);
