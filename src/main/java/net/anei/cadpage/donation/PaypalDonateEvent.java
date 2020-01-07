@@ -30,6 +30,11 @@ public class PaypalDonateEvent extends AccountScreenEvent {
     });
   }
 
+  @Override
+  public boolean isEnabled() {
+    return DonationManager.instance().status() != DonationManager.DonationStatus.PAID_RENEW;
+  }
+
   private static final PaypalDonateEvent instance = new PaypalDonateEvent();
   
   public static PaypalDonateEvent instance() {

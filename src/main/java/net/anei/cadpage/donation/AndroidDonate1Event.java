@@ -22,7 +22,9 @@ public class AndroidDonate1Event extends DonateEvent {
 
   @Override
   public boolean isEnabled() {
-    return BillingManager.instance().isSupported() && !DonationManager.instance().isEarlyRenewalWarning();
+    return BillingManager.instance().isSupported() &&
+           DonationManager.instance().status() != DonationManager.DonationStatus.PAID_RENEW &&
+           !DonationManager.instance().isEarlyRenewalWarning();
   }
 
   @Override
