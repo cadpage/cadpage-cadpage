@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01052019</string>
+  <string name="release_date">01072019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.8-03\n
+    New Location:\n
+    Ogemaw County, MI\n
+    \n
+    Location Fixes:\n
+    Merged Keller into Tarrant County, TX\n
+    Sweden\n
+    \n
+    General Fixes:\n
+    Removed all prompts to purchase Cadpage subscriptions when user
+    already has an auto-renewing subscription\n
+    \n
     v2.1.8-02\n
     Location Fixes:\n
     Stanly County, NC\n
@@ -37,18 +49,6 @@
     Macon County, NC\n
     \n
     Misc Fixes:\n
-    Compatibility issue with latest Android 10 release\n
-    \n
-    v2.1.7-18\n
-    Location Fixes:\n
-    Madison County, IL\n
-    Madison County, IN\n
-    Kenton County, KY\n
-    Kentucky State Police, KY\n
-    Scott County, MO\n
-    Madison County, NY\n
-    Chatham County, NC\n
-    Marion County, NC\n
-    Elk County, PA
+    Compatibility issue with latest Android 10 release
   </string>
 </resources>
