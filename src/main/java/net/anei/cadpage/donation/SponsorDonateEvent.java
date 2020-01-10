@@ -20,6 +20,7 @@ public class SponsorDonateEvent extends DonateScreenEvent {
   public SponsorDonateEvent() {
     super(AlertStatus.GREEN, R.string.donate_sponsor_title, R.string.donate_sponsor_text,
            AndroidDonateEvent.instance(),
+           DonateAndroidSuppressedEvent.instance(),
            PaypalDonateEvent.instance(),
            MagicWordEvent.instance(),
            DonateResetMarketEvent.instance());

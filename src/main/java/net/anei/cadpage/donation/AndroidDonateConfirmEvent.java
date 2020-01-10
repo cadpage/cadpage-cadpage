@@ -15,9 +15,6 @@ import java.util.Date;
  */
 public class AndroidDonateConfirmEvent extends DonateScreenEvent {
 
-  private static int DONATE_ANDROID_TITLE =
-      BuildConfig.APTOIDE ? R.string.donate_android_aptoide_title : R.string.donate_android_google_title;
-
   public AndroidDonateConfirmEvent() {
     super(AlertStatus.GREEN, DONATE_ANDROID_TITLE, R.string.donate_android_confirm_text,
           AndroidDonate2Event.instance(),

@@ -198,6 +198,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
       return false;
     }
   }
+
   private Intent buildTargetIntent(BillingActivity activity, String url) {
     Intent intent = new Intent(Intent.ACTION_VIEW);
     intent.setData(Uri.parse(url));
@@ -221,7 +222,9 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
     }
     return intent;
   }
-  @Override
+
+
+    @Override
   void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RC_ONE_STEP) {
       if (resultCode == Activity.RESULT_OK) {

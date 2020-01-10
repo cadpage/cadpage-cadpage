@@ -1,5 +1,7 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.BuildConfig;
+import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,7 +23,12 @@ import android.widget.TextView;
 
 @SuppressWarnings("unused")
 public abstract class DonateEvent {
-  
+
+  // Title to be used when making in-app purchases
+  static int DONATE_ANDROID_TITLE =
+      BuildConfig.APTOIDE ? R.string.donate_android_aptoide_title : R.string.donate_android_google_title;
+
+
   // Different alert status codes
   public enum  AlertStatus {GREEN, YELLOW, RED}
 

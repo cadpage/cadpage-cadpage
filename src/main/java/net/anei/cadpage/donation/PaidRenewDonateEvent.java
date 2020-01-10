@@ -17,6 +17,7 @@ public class PaidRenewDonateEvent extends DonateScreenEvent {
     super(AlertStatus.GREEN, R.string.donate_paid_renew_title, R.string.donate_paid_renew_text,
           VendorEvent.instance(1),
           AndroidDonateEvent.instance(),
+          DonateAndroidSuppressedEvent.instance(),
           PaypalDonateEvent.instance(),
           MagicWordEvent.instance(),
           DonateResetMarketEvent.instance());

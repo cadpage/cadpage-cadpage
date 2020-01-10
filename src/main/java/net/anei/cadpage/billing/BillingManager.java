@@ -44,7 +44,15 @@ public class BillingManager {
    * @return true if In-app billing is supported for this system
    */
   public boolean isSupported() {
+    if (isSuppressed()) return false;
     return purchaseClient != null && purchaseClient.isSupported();
+  }
+
+  /**
+   * @return true if in-app billing should be permanently suppressed
+   */
+  public boolean isSuppressed() {
+    return BuildConfig.APTOIDE;
   }
 
   /**

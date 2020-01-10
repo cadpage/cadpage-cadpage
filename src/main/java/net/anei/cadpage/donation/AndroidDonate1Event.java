@@ -13,9 +13,6 @@ import net.anei.cadpage.billing.BillingManager;
  */
 public class AndroidDonate1Event extends DonateEvent {
 
-  private static int DONATE_ANDROID_TITLE =
-      BuildConfig.APTOIDE ? R.string.donate_android_aptoide_title : R.string.donate_android_google_title;
-
   private AndroidDonate1Event() {
     super(AlertStatus.GREEN, DONATE_ANDROID_TITLE);
   }

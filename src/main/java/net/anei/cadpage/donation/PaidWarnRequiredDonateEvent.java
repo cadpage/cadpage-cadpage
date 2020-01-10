@@ -20,8 +20,9 @@ public class PaidWarnRequiredDonateEvent extends DonateScreenEvent {
   
   public PaidWarnRequiredDonateEvent() {
     super(AlertStatus.YELLOW, R.string.donate_paid_warn_required_title, R.string.donate_paid_warn_required_text,
-        AndroidDonateEvent.instance(), 
-        DonateAndroidUnsuportedEvent.instance(), 
+        AndroidDonateEvent.instance(),
+        DonateAndroidSuppressedEvent.instance(),
+        DonateAndroidUnsuportedEvent.instance(),
         AndroidDonateProblemEvent.instance(),
         DonateResetMarketEvent.instance(),
         WrongUserDonateEvent.instance());

@@ -17,8 +17,9 @@ public class SponsorExpireRequiredDonateEvent extends DonateScreenEvent {
   
   public SponsorExpireRequiredDonateEvent() {
     super(AlertStatus.RED, R.string.donate_sponsor_expire_required_title, R.string.donate_sponsor_expire_required_text,
-        AndroidDonateEvent.instance(), 
-        DonateAndroidUnsuportedEvent.instance(), 
+        AndroidDonateEvent.instance(),
+        DonateAndroidSuppressedEvent.instance(),
+        DonateAndroidUnsuportedEvent.instance(),
         AndroidDonateProblemEvent.instance(),
         DonateResetMarketEvent.instance(),
         WrongUserDonateEvent.instance(),

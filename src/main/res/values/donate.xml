@@ -209,13 +209,12 @@
     You may need to upgrade the Play Store app to the latest version.  Or you may
     need to give it a valid Google account. 
   </string>
-  
-  <string name="donate_android_beta_text">
-    For technical reasons, you cannot make Google Play purchases from a beta
-    release of Cadpage.  You will have to wait until you install an official
-    release of Cadpage from the Google Play Store.
+
+  <string name="donate_android_suppressed_text">
+    Sadly, Aptoide Store payments are not working and Aptoide support has been unhelpful.
+    Until this is resolved, Paypal payments are your only option.
   </string>
-  
+
   <string name="donate_magic_word_title">I have an authorization code</string>
   <string name="donate_magic_word_text">Enter authorization code</string>
   <string name="donate_magic_word_reject">
@@ -615,5 +614,4 @@
   <string name="disable_cadpage_popup_title">
     Disable Cadpage show alarm popup option
   </string>
-
 </resources>

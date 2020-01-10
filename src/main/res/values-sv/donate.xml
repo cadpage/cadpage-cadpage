@@ -130,9 +130,12 @@
   <string name="donate_android_unsupported_text">
  Android Market appen rapporterar att app-i-app köp inte understödjs. Du kan behöva uppgradera Market-appen till den senaste versionen eller också måste du logga in med ett giltigt Google-konto (Välj meny &gt; Konton i Marketappen) 
   </string>
-  <string name="donate_android_beta_text">
-    På grund av tekniska skäl så kan du inte handla på Android Market från en betaversion av Cadpage. Du måste installera en officiell release av Cadpage från Android Market.
+
+  <string name="donate_android_suppressed_text"> <!-- Translate -->
+    Sadly, Aptoide Store payments are not working and Aptoide support has been unhelpful.
+    Until this is resolved, Paypal payments are your only option.
   </string>
+
   <string name="donate_magic_word_title">Jag har en autentiseringskod</string>
   <string name="donate_magic_word_text">Fyll i autentiseringskod</string>
   <string name="donate_magic_word_reject">
