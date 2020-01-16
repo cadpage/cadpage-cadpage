@@ -180,7 +180,13 @@
     It helps if the email includes your full name somewhere so we can use it to
     look you up in our payment records.  We will do our best to get this fixed.
   </string>
-  
+
+  <string name="donate_request_refund_title">"Please refund my last Cadpage purchase"</string>
+  <string name="donate_request_refund_text">
+    No problem.  Our policy is to issue full refunds for anyone requesting them within 3 months.
+    Clicking the button below will send us an email requesting your purchase refund.
+  </string>
+
   <string name="donate_inactive_sponsor_title">"I am registered with %s"</string>
   <string name="donate_inactive_sponsor_text">
     You have not received an alert from %s for more than 60 days, leading us to believe
@@ -207,7 +213,7 @@
   <string name="donate_android_unsupported_text">
     The Google Play Store app reports that in-app purchases are not supported.
     You may need to upgrade the Play Store app to the latest version.  Or you may
-    need to give it a valid Google account. 
+    need to give it a valid Google account.
   </string>
 
   <string name="donate_android_suppressed_text">

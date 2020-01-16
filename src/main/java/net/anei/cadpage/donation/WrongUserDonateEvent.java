@@ -4,7 +4,7 @@ import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
 /*
-I've made a Paypal donation
+Hey, I've already paid for this
 
 Our sincere apologies.  Cadpage tracks you by your Google Market account
 "which is %s. If this doesn't match the Paypal account you used to donate"

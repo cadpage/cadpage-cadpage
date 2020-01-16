@@ -33,7 +33,9 @@ import android.widget.TextView;
  */
 public class EmailDeveloperActivity extends Safe40Activity {
 
-  public enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER, MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR, ACTIVE911_SUPPORT, NEED_HELP }
+  public enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER,
+                          MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR,
+                          ACTIVE911_SUPPORT, NEED_HELP, REQUEST_REFUND }
 
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
@@ -460,6 +462,13 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // to grant the permissions to read the number because this does not work
     // because the Activity we are basing this on is no longer alive
     sendEmailRequest2(context, EmailType.NEED_HELP, true, 0, true);
+  }
+
+  public static void sendRequestRefundEmail(Context context) {
+
+    // Also sends a request directly to the email client, without
+    // bring up a request screen first.
+    sendEmailRequest2(context, EmailType.REQUEST_REFUND, false, 0, true);
   }
 
   /**

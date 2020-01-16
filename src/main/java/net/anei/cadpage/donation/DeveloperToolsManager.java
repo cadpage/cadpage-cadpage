@@ -120,8 +120,8 @@ public class DeveloperToolsManager {
           ManagePreferences.setAuthRunDays(100);
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          setPaidYear(0);
-          setPurchaseDate(-200, -1);
+          setPaidYear(-1);
+          setPurchaseDate(-89, -1);
           ManagePreferences.setInstallDate(ManagePreferences.purchaseDate());
           ManagePreferences.setFreeSub(false);
           break;

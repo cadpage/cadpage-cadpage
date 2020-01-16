@@ -106,6 +106,12 @@
     Det underlättar om mailet hela ditt namn någonstans så vi kan undersöka i vår betalningshistorik. Vi ska göra vårt bästa för att fixa til det här.
   </string>
 
+  <string name="donate_request_refund_title">"Please refund my last Cadpage purchase"</string> <!-- Translate -->
+  <string name="donate_request_refund_text"> <!-- Translate -->
+    No problem.  Our policy is to issue full refunds for anyone requesting them within 3 months.
+    Clicking the button below will send us an email requesting your purchase refund.
+  </string>
+
   <string name="donate_inactive_sponsor_title">"Jag är registrerad hos %s"</string>
   <string name="donate_inactive_sponsor_text">
     Du har inte fått larm från %s på mer än 60 dagar vilket får oss att tro att ditt konto inte längre är aktivt.  Har vi fel om det, använd "Skicka epost"-knappen för att kontakta oss så fixar vi det.

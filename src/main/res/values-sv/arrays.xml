@@ -12,6 +12,7 @@
     <item>Inaktivt sponsorkonto</item>
     <item>Active911s Android-release blockerar larm till Cadpage</item>
     <item>Jag behöver hjälp</item>
+    <item>Please refund my last subscription purchase</item> <!-- Translate -->
   </string-array>
   <string-array name="email_devel_text">
     <item>Vill du skicka ett email till utvecklarna av CadPage gällande generella fel eller kommentarer?</item>

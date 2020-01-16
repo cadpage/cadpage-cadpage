@@ -55,6 +55,9 @@ public class DonationManager {
   
   // Cached days since install
   private int daysSinceInstall;
+
+  // Cached days since purchase
+  private int daysSincePurchase;
   
   // cached days until Cadpage expires
   private int daysTillExpire;
@@ -204,12 +207,16 @@ public class DonationManager {
     usedPurchaseDate = false;
     overpaidDays = 0;
     int daysTillSubExpire = -99999;
+    daysSincePurchase = -99999;
     int paidYear = ManagePreferences.paidYear();
     if (paidYear > 0) {
       subExpDate = ManagePreferences.purchaseDate();
       if (subExpDate == null) subExpDate = ManagePreferences.installDate();
       Calendar cal = new GregorianCalendar();
       cal.setTime(subExpDate);
+      cal.set(Calendar.YEAR, paidYear);
+      JulianDate purJDate = new JulianDate(cal.getTime());
+      daysSincePurchase = purJDate.diffDays(curJDate);
       cal.set(Calendar.YEAR, paidYear + 1);
       subExpDate = cal.getTime();
       JulianDate tJDate = new JulianDate(subExpDate);
@@ -472,7 +479,14 @@ public class DonationManager {
   }
 
   public boolean isEarlyRenewalWarning() {
+    calculate();
     return earlyRenewalWarning && !BuildConfig.APTOIDE;
+  }
+
+  public boolean isRefundPrompt() {
+    calculate();
+    return (status == DonationStatus.PAID || status == DonationStatus.PAID_RENEW) &&
+           (daysSincePurchase >= 0 && daysSincePurchase < 90);
   }
 
   /**
