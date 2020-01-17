@@ -106,10 +106,10 @@
     Det underlättar om mailet hela ditt namn någonstans så vi kan undersöka i vår betalningshistorik. Vi ska göra vårt bästa för att fixa til det här.
   </string>
 
-  <string name="donate_request_refund_title">"Please refund my last Cadpage purchase"</string> <!-- Translate -->
-  <string name="donate_request_refund_text"> <!-- Translate -->
-    No problem.  Our policy is to issue full refunds for anyone requesting them within 3 months.
-    Clicking the button below will send us an email requesting your purchase refund.
+  <string name="donate_request_refund_title">"Vänligen återbetala mitt senaste inköp av Cadpage"</string>
+  <string name="donate_request_refund_text">
+    Inga problem. Vår policy är att återbetala alla som vill ha tillbaka sina pengar inom 3 månader. Om du klickar på knappen nedan så kommer du att skicka oss ett email där du begär din återbetalning.
+   
   </string>
 
   <string name="donate_inactive_sponsor_title">"Jag är registrerad hos %s"</string>
@@ -117,8 +117,8 @@
     Du har inte fått larm från %s på mer än 60 dagar vilket får oss att tro att ditt konto inte längre är aktivt.  Har vi fel om det, använd "Skicka epost"-knappen för att kontakta oss så fixar vi det.
   </string>
 
-  <string name="donate_android_google_title">Purchase through Google Play Store</string> <!-- Translate -->
-  <string name="donate_android_aptoide_title">Purchase through Aptoide Store</string> <!-- Translate -->
+  <string name="donate_android_google_title">Köpt genom Google play butik</string>
+  <string name="donate_android_aptoide_title">Köpt genom Aptoide Store</string>
   <string name="donate_paypal_title">Köpt genom PayPal</string>
   <string name="donate_whats_up_title">Vad handlar det här om?</string>
   <string name="donate_active911_parse_info_title">Berätta mer</string>
@@ -137,9 +137,9 @@
  Android Market appen rapporterar att app-i-app köp inte understödjs. Du kan behöva uppgradera Market-appen till den senaste versionen eller också måste du logga in med ett giltigt Google-konto (Välj meny &gt; Konton i Marketappen) 
   </string>
 
-  <string name="donate_android_suppressed_text"> <!-- Translate -->
-    Sadly, Aptoide Store payments are not working and Aptoide support has been unhelpful.
-    Until this is resolved, Paypal payments are your only option.
+  <string name="donate_android_suppressed_text">
+    Tyvärr så fungerar inte betalningarna från Aptoide Store och Aptoids support har varit ohjälpsam. Tills det är löst så är Paypal-betalningar ditt enda alternativ.
+   
   </string>
 
   <string name="donate_magic_word_title">Jag har en autentiseringskod</string>
