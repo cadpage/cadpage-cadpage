@@ -1305,6 +1305,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setForcePopup(boolean newVal) {
     prefs.putBoolean(R.string.pref_force_popup, newVal);
   }
+
+  public static boolean useOldMMS() {
+    return prefs.getBoolean(R.string.pref_use_old_mms);
+  }
+
+  public static void setUseOldMMS(boolean newValue) {
+    prefs.putBoolean(R.string.pref_use_old_mms, newValue);
+  }
   
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
@@ -2756,6 +2764,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_no_map_gps_label,
 
       R.string.pref_billing_account_key,
-      R.string.pref_force_popup
+      R.string.pref_force_popup,
+      R.string.pref_use_old_mms
   };
 }

@@ -18,27 +18,41 @@
 package net.anei.cadpage;
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
+import android.telephony.SmsManager;
+import android.text.TextUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import net.anei.cadpage.mms.GenericPdu;
 import net.anei.cadpage.mms.PduParser;
+import net.anei.cadpage.mms.RetrieveConf;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * This service is responsible for retrieving the actual content of MMS messages
@@ -46,10 +60,14 @@ import net.anei.cadpage.mms.PduParser;
  */
 public class MmsTransactionService extends Service {
 
+  private static final String ACTION_DOWNLOAD_COMPLETE = "net.anei.cadpage.DOWNLOAD_COMPLETE";
+  private static final String EXTRA_TRANSACTION_ID = "transction_id";
+  private static final String EXTRA_FILENAME = "filename";
+
   private static final String MMS_URL = "content://mms";
   private static final Uri MMS_URI = Uri.parse("content://mms");
 
-  private enum EventType {TRANSACTION_REQUEST, TIMEOUT, RETRY, QUIT}
+  private enum EventType {TRANSACTION_REQUEST, DOWNLOAD, TIMEOUT, RETRY, QUIT}
 
   // Column names for query searches
   private static final String[] MMS_COL_LIST = new String[]{"_ID"};
@@ -90,6 +108,7 @@ public class MmsTransactionService extends Service {
   public int onStartCommand(Intent intent, int flags, int startId) {
     if (Log.DEBUG) Log.v("MmsTransactionService.onStart()");
     if (intent == null) return START_NOT_STICKY;
+    ContentQuery.dumpIntent(intent);
 
     if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       startForeground(1, ManageNotification.getMiscNotification(this));
@@ -101,7 +120,8 @@ public class MmsTransactionService extends Service {
     // the main thread;
     mmsTimeout = ManagePreferences.mmsTimeout() * 60000;
 
-    Message msg = mServiceHandler.obtainMessage(EventType.TRANSACTION_REQUEST.ordinal());
+    EventType type = ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction()) ? EventType.DOWNLOAD : EventType.TRANSACTION_REQUEST;
+    Message msg = mServiceHandler.obtainMessage(type.ordinal());
     msg.arg1 = startId;
     msg.obj = intent;
     mServiceHandler.sendMessage(msg);
@@ -142,6 +162,7 @@ public class MmsTransactionService extends Service {
       @Override
       public void onChange(boolean selfChange, Uri uri) {
         if (Log.DEBUG) Log.v("Mms Data Change  uri:" + uri);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) return;
         mmsDataChange();
         cleanup();
       }
@@ -178,6 +199,11 @@ public class MmsTransactionService extends Service {
           case TRANSACTION_REQUEST:
             Intent intent = (Intent) msg.obj;
             mmsReceive(intent);
+            break;
+
+          case DOWNLOAD:
+            intent = (Intent) msg.obj;
+            mmsDownload(intent);
             break;
 
           case RETRY:
@@ -260,6 +286,143 @@ public class MmsTransactionService extends Service {
       Message msg = mServiceHandler.obtainMessage(EventType.TIMEOUT.ordinal());
       msg.obj = entry;
       mServiceHandler.sendMessageDelayed(msg, mmsTimeout);
+
+      // And figure out which message processer to use from here
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) {
+        int subscriptionId = intent.getExtras().getInt("subscription", -1);
+        newMmsMessage(message, subscriptionId);
+      } else {
+        oldMmsMessage(message);
+      }
+    }
+
+    /**
+     * Use new logic to process MMS message
+     * @param message message to be processed
+     * @param subscriptionId subscription ID
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    private void newMmsMessage(SmsMmsMessage message, int subscriptionId) {
+
+      String contentLocation = message.getLocation();
+      String transactionId = message.getMmsMsgId();
+
+      File contentFile = new File(getCacheDir(), "MMS_DWN." + transactionId);
+
+      SmsManager smsManager;
+      if (subscriptionId != -1) {
+        smsManager = SmsManager.getSmsManagerForSubscriptionId(subscriptionId);
+      } else {
+        smsManager = SmsManager.getDefault();
+      }
+
+      final Bundle configOverrides = smsManager.getCarrierConfigValues();
+
+      if (configOverrides.getBoolean(SmsManager.MMS_CONFIG_APPEND_TRANSACTION_ID)) {
+        if (!contentLocation.contains(transactionId)) contentLocation += transactionId;
+      }
+
+      if (TextUtils.isEmpty(configOverrides.getString(SmsManager.MMS_CONFIG_USER_AGENT))) {
+        configOverrides.remove(SmsManager.MMS_CONFIG_USER_AGENT);
+      }
+
+      if (TextUtils.isEmpty(configOverrides.getString(SmsManager.MMS_CONFIG_UA_PROF_URL))) {
+        configOverrides.remove(SmsManager.MMS_CONFIG_UA_PROF_URL);
+      }
+
+      Intent intent = new Intent(ACTION_DOWNLOAD_COMPLETE);
+      intent.setClass(MmsTransactionService.this, MmsTransactionService.class);
+      intent.putExtra(EXTRA_TRANSACTION_ID, transactionId);
+      intent.putExtra(EXTRA_FILENAME, contentFile.getAbsoluteFile());
+      PendingIntent pIntent =
+          PendingIntent.getService(MmsTransactionService.this, 1, intent,
+                                    PendingIntent.FLAG_ONE_SHOT);
+
+      smsManager.downloadMultimediaMessage(MmsTransactionService.this,
+          contentLocation,
+          Uri.fromFile(contentFile),
+          configOverrides,
+          pIntent);
+
+    }
+
+    private void mmsDownload(Intent intent) {
+      String transactionId = intent.getStringExtra(EXTRA_TRANSACTION_ID);
+      File contentFile = new File(intent.getStringExtra(EXTRA_FILENAME));
+
+      try {
+
+        // Retrieve the message from our message table
+        SmsMmsMessage message = null;
+        for (Iterator<MmsMsgEntry> iter = msgList.iterator(); iter.hasNext(); ) {
+          SmsMmsMessage msg = iter.next().message;
+          if (msg.getMmsMsgId() == transactionId) {
+            message = msg;
+            iter.remove();
+            break;
+          }
+        }
+
+        if (message == null) {
+          Log.w("No matching MMS message for transaction " + transactionId);
+          return;
+        }
+
+        byte[] data = readFile(contentFile);
+
+        GenericPdu pdu = null;
+        pdu = new PduParser(data).parse();
+
+        if (null == pdu) {
+          Log.e("Invalid content data");
+          return;
+        }
+
+        if (!(pdu instanceof RetrieveConf)) {
+          Log.e("MMS content expected RetrieveConf not " + pdu.getClass().getName());
+          return;
+        }
+        RetrieveConf retrieved = (RetrieveConf) pdu;
+
+      }
+
+      catch (Exception ex) {
+        Log.e(ex);
+        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS content failure");
+      }
+
+      finally {
+        contentFile.delete();
+        cleanup();
+      }
+    }
+
+    /**
+     * Read byte stream from file
+     * @param file file to be opened and read
+     * @return file contents as a byte array
+     */
+    byte[] readFile(File file) throws IOException {
+      InputStream is = null;
+      try {
+        is = new FileInputStream(file);
+        ByteArrayOutputStream os = null;
+        int b;
+        while ((b = is.read()) >= 0) {
+          os.write(b);
+        }
+        return os.toByteArray();
+      }
+      finally {
+        if (is != null) is.close();
+      }
+    }
+
+    /**
+     * Use old logic to process MMS message
+     * @param message message to be processed
+     */
+    private void oldMmsMessage(SmsMmsMessage message) {
 
       // Occasionally, the content change notice comes in before the push request
       // so will waste some time checking to see if the data content is already present
