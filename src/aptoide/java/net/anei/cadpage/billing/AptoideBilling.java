@@ -150,7 +150,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
 
     String ref = Long.toString(System.currentTimeMillis());
 
-    purchase1(activity, item, payload, ref);
+    purchase2(activity, item, payload, ref);
   }
 
   private boolean purchase1(BillingActivity activity, String item, String payload, String reference) {
