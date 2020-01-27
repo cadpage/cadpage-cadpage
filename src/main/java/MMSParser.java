@@ -1,7 +1,9 @@
+import com.google.android.mms.pdu_alt.GenericPdu;
+import com.google.android.mms.pdu_alt.PduParser;
+
 import net.anei.cadpage.Log;
+import net.anei.cadpage.MmsUtil;
 import net.anei.cadpage.SmsMmsMessage;
-import net.anei.cadpage.mms.GenericPdu;
-import net.anei.cadpage.mms.PduParser;
 
 /**
  * Test MMS message parsing
@@ -11,8 +13,7 @@ public class MMSParser {
 
   static public void  main(String[] args) {
     Log.setTestMode(true);
-    parseMsg("8C868D908B3044394146303634413039463030303032304130303030330097383530363934303232322F545950453D504C4D4E0085045B8960349581");
-    parseMsg("8C888D918B3044394146303634413039463030303032304130303030330097383530363934333338322F545950453D504C4D4E00891680383530363934303232322F545950453D504C4D4E0085045B89614E9B80");
+    parseMsg("8C8298414B52423031303330313234303031383039313231303033303030303330303030008D918912806A65616E40636164706167652E6F726700961CEA616E6F74686572206F6E652062697465732074686520647573740086818A808E01988805810303F48083687474703A2F2F3130372E3232352E38392E3133323A383030352F592F3031323430303138303931323130303330303030333030303000");
   }
 
   private static void parseMsg(String data) {
@@ -32,7 +33,7 @@ public class MMSParser {
 
     System.out.println("PDU:" + pdu.getClass().getName());
 
-    SmsMmsMessage message = pdu.getMessage();
+    SmsMmsMessage message = MmsUtil.getMessage(pdu);
     if (message == null) {
       System.err.println("Empty MMS message");
       return;

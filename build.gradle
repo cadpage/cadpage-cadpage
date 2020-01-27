@@ -95,6 +95,10 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation ('com.klinkerapps:android-smsmms:5.2.5') {
+        exclude group: 'com.squareup.okhttp', module: 'okhttp'
+        exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
+    }
     googleImplementation 'com.android.billingclient:billing:2.1.0'
     aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
     aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
