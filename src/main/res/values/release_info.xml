@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01262019</string>
+  <string name="release_date">01312019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.9-04\n
+    New Locations:\n
+    Monroe County, IL\n
+    \n
+    Location Fixes:\n
+    Mendocino County, CA\n
+    Adams County, CO\n
+    Haywood County, NC\n
+    Columbia County, PA\n
+    Lexington County, SC\n
+    Pickens County, SC\n
+    Racine County, WI\n
+    \n
     v2.1.9-03\n
     New Locations:\n
     Erie County, NY (alt)\n
@@ -55,20 +68,5 @@
     General Fixes:\n
     Removed all prompts to purchase Cadpage subscriptions when user
     already has an auto-renewing subscription\n
-    \n
-    v2.1.8-02\n
-    Location Fixes:\n
-    Stanly County, NC\n
-    \n
-    Misc Fixes:\n
-    Notifications could not be turned off for certain setting combinations under Android 10\n
-    \n
-    v2.1.8-01\n
-    Added support for Open Street Maps mapping.\n
-    \n
-    Location Fixes:\n
-    Edgecombe County, NC\n
-    Randolph County, NC\n
-    Stanly County, NC\n
   </string>
 </resources>
