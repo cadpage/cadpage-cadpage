@@ -71,35 +71,32 @@
 
   <PreferenceCategory
     android:title="@string/pref_screen_category">
-    <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_screen_on_key"
-      android:title="@string/pref_screen_on_title"
-      android:summaryOn="@string/pref_screen_on_summaryon"
-      android:summaryOff="@string/pref_screen_on_summaryoff"
-      android:defaultValue="@string/pref_screen_on_default" />
-      <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_timeout_key"
-      android:title="@string/pref_timeout_title"
-      android:summary="@string/pref_timeout_summary"
-      android:entries="@array/pref_timeout_entries"
-      android:entryValues="@array/pref_timeout_values"
-      android:defaultValue="@string/pref_timeout_default"
-      android:dependency="@string/pref_screen_on_key" />
     <net.anei.cadpage.preferences.ListPreference
       android:key="@string/pref_textsize_key"
       android:title="@string/pref_textsize_title"
       android:summary="@string/pref_textsize_summary"
       android:entries="@array/pref_textsize_entries"
       android:entryValues="@array/pref_textsize_values"
-      android:defaultValue="@string/pref_textsize_default"
-      android:dependency="@string/pref_screen_on_key" />
+      android:defaultValue="@string/pref_textsize_default" />
+    <net.anei.cadpage.preferences.ListPreference
+      android:key="@string/pref_timeout_key"
+      android:title="@string/pref_timeout_title"
+      android:summary="@string/pref_timeout_summary"
+      android:entries="@array/pref_timeout_entries"
+      android:entryValues="@array/pref_timeout_values"
+      android:defaultValue="@string/pref_timeout_default" />
+    <net.anei.cadpage.preferences.SwitchPreference
+      android:key="@string/pref_screen_on_key"
+      android:title="@string/pref_screen_on_title"
+      android:summaryOn="@string/pref_screen_on_summaryon"
+      android:summaryOff="@string/pref_screen_on_summaryoff"
+      android:defaultValue="@string/pref_screen_on_default" />
     <net.anei.cadpage.preferences.SwitchPreference
       android:key="@string/pref_dimscreen_key"
       android:title="@string/pref_dimscreen_title"
       android:summaryOn="@string/pref_dimscreen_summaryon"
       android:summaryOff="@string/pref_dimscreen_summaryoff"
-      android:defaultValue="@string/pref_dimscreen_default"
-      android:dependency="@string/pref_screen_on_key" />
+      android:defaultValue="@string/pref_dimscreen_default" />
   </PreferenceCategory>
 
 </PreferenceScreen>

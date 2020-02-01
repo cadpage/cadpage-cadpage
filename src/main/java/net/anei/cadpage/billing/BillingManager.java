@@ -52,8 +52,7 @@ public class BillingManager {
    * @return true if in-app billing should be permanently suppressed
    */
   public boolean isSuppressed() {
-    // return BuildConfig.APTOIDE;
-    return false;
+    return BuildConfig.APTOIDE;
   }
 
   /**
