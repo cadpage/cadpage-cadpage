@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.PowerManager;
 
 
@@ -9,7 +10,12 @@ public class ManageWakeLock {
 
   @SuppressWarnings("deprecation")
   public static synchronized void acquireFull(Context mContext) {
-    
+
+    // All of this wakelock logic does not appear to be needed as
+    // of Android 10.  Possibly much earlier, but we lack the ability
+    // to do much testing in earlier versions so will let it ride.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return;
+
     int timeout = ManagePreferences.timeout();
     if (timeout <= 0) return;
     

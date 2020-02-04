@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01152019</string>
+  <string name="release_date">01312019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.9-04\n
+    New Locations:\n
+    Monroe County, IL\n
+    \n
+    Location Fixes:\n
+    Mendocino County, CA\n
+    Adams County, CO\n
+    Haywood County, NC\n
+    Columbia County, PA\n
+    Lexington County, SC\n
+    Pickens County, SC\n
+    Racine County, WI\n
+    \n
+    v2.1.9-03\n
+    New Locations:\n
+    Erie County, NY (alt)\n
+    \n
+    Location Fixes:\n
+    DeSoto County, MS\n
+    Pontotoc County, MS\n
+    Cattaraugus County, NY\n
+    Cuyahoga County, OH\n
+    McCormick County, SC\n
+    \n
+    v2.1.9-02\n
+    New Locations:
+    Dauphin County, PA (alt)\n
+    \n
+    Location Fixes:\n
+    Groton, CT merged into New London County, CT\n
+    Carter County, KY\n
+    \n
     v2.1.9-01\n
     Added payment menu option to request refund of recent subscription purchase.  This should
     provide some relief for users who are surprised when an old subscription automatically
@@ -36,40 +68,5 @@
     General Fixes:\n
     Removed all prompts to purchase Cadpage subscriptions when user
     already has an auto-renewing subscription\n
-    \n
-    v2.1.8-02\n
-    Location Fixes:\n
-    Stanly County, NC\n
-    \n
-    Misc Fixes:\n
-    Notifications could not be turned off for certain setting combinations under Android 10\n
-    \n
-    v2.1.8-01\n
-    Added support for Open Street Maps mapping.\n
-    \n
-    Location Fixes:\n
-    Edgecombe County, NC\n
-    Randolph County, NC\n
-    Stanly County, NC\n
-    \n
-    v2.1.7-20\n
-    New Locations:\n
-    Rio Grande County, CO\n
-    Boundary County, ID\n
-    Cook County, IL (alt)\n
-    \n
-    Location Fixes:\n
-    Phelps County, MO\n
-    Burlington County, NJ\n
-    \n
-    v2.1.7-19\n
-    Location Fixes:\n
-    Hot Springs, AR\n
-    Citrus County, FL\n
-    Madison County, NY\n
-    Macon County, NC\n
-    \n
-    Misc Fixes:\n
-    Compatibility issue with latest Android 10 release
   </string>
 </resources>

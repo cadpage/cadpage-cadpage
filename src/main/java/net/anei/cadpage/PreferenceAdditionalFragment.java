@@ -33,8 +33,14 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
 
     // Disable the pass through option which is unusable starting in Kit Kat
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      pref = findPreference(getString(R.string.pref_passthrusms_key));
-      deletePreference(pref);
+      deletePreference(R.string.pref_passthrusms_key);
+    }
+
+    // Disable the screen control options which are ignored starting in Android 10
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      deletePreference(R.string.pref_timeout_key);
+      deletePreference(R.string.pref_screen_on_key);
+      deletePreference(R.string.pref_dimscreen_key);
     }
 
     // mapping app preference only includes entries for ArcGIS Navigator and Waze that we want to remove
@@ -81,30 +87,23 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkNoShowInCall((TwoStatePreference)preference, (Boolean)newValue));
   }
 
-  /**
-   * Remove preference from preference tree
-   * @param pref Preference to be removed
-   */
-  private void deletePreference(Preference pref) {
-    PreferenceGroup parent = findParent(getPreferenceScreen(), pref);
-    if (parent != null) parent.removePreference(pref);
+  private void deletePreference(int resId) {
+    String prefKey = getString(resId);
+    deletePreference(getPreferenceScreen(), prefKey);
   }
 
-  /**
-   * Find parent of preference in preference tree
-   * @param root - root of preference tree
-   * @param pref - Preference
-   */
-  private PreferenceGroup findParent(PreferenceGroup root, Preference pref) {
+  private boolean deletePreference(PreferenceGroup root, String prefKey) {
     for (int ndx = 0; ndx < root.getPreferenceCount(); ndx++) {
       Preference child = root.getPreference(ndx);
-      if (child == pref) return root;
       if (child instanceof PreferenceGroup) {
-        PreferenceGroup parent = findParent((PreferenceGroup)child, pref);
-        if (parent != null) return parent;
+        if (deletePreference((PreferenceGroup)child, prefKey)) return true;
+      }
+      else if (prefKey.equals(child.getKey())) {
+        root.removePreference(child);
+        return true;
       }
     }
-    return null;
+    return false;
   }
 
   // Save display text size so we can tell if it changed
