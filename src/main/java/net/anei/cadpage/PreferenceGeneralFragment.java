@@ -3,9 +3,8 @@ package net.anei.cadpage;
 import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.TwoStatePreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import androidx.preference.TwoStatePreference;
+import androidx.preference.Preference;
 
 import net.anei.cadpage.donation.DeveloperToolsManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -21,29 +20,27 @@ public class PreferenceGeneralFragment extends PreferenceFragment {
   private BillingAccountPreference mBillingAccountPreference;
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     // Load the preferences from an XML resource
-    addPreferencesFromResource(R.xml.preference_general);
+    setPreferencesFromResource(R.xml.preference_general, rootKey);
 
     // Save specific preferences we might need later
-    mEnabledPreference = (TwoStatePreference) findPreference(getString(R.string.pref_enabled_key));
+    mEnabledPreference = findPreference(getString(R.string.pref_enabled_key));
 
     // Set up the payment status tracking screens
     Preference donate = findPreference(getString(R.string.pref_payment_status_key));
     MainDonateEvent.instance().setPreference(getActivity(), donate);
 
-    mBillingAccountPreference = (BillingAccountPreference)findPreference(getString(R.string.pref_billing_account_key));
+    mBillingAccountPreference = findPreference(getString(R.string.pref_billing_account_key));
 
     // Email developer response
     Preference emailPref = findPreference(getString(R.string.pref_email_key));
-    emailPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        EmailDeveloperActivity.sendGeneralEmail(getActivity());
-        return true;
-      }});
+    assert emailPref != null;
+    emailPref.setOnPreferenceClickListener(preference -> {
+      EmailDeveloperActivity.sendGeneralEmail(getActivity());
+      return true;
+    });
 
     // Add developer dialog preference if appropriate
     DeveloperToolsManager.instance().addPreference(getActivity(), getPreferenceScreen());

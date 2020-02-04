@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.Context;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.parsers.ManageParsers;
@@ -20,18 +19,18 @@ public class LocationManager {
   
   private Preference descPreference;
   
-  private final List<String> locationList = new ArrayList<String>();
-  private final List<String> nameList = new ArrayList<String>();
+  private final List<String> locationList = new ArrayList<>();
+  private final List<String> nameList = new ArrayList<>();
   
   private OnPreferenceChangeListener listener = null;
   
-  private static final Map<String,String> STATE_MAP = new HashMap<String,String>();
+  private static final Map<String,String> STATE_MAP = new HashMap<>();
   static {
     STATE_MAP.put("AL", "ALABAMA");
     STATE_MAP.put("AK", "ALASKA");
     
     STATE_MAP.put("AZ", "ARIZONA");
-    STATE_MAP.put("AR", "ARKANSAW");
+    STATE_MAP.put("AR", "ARKANSAS");
     
     STATE_MAP.put("ID", "IDAHO");
     STATE_MAP.put("IL", "ILLINOIS");
@@ -50,10 +49,10 @@ public class LocationManager {
     STATE_MAP.put("NE", "NEBRASKA");
     STATE_MAP.put("NV", "NEVADA");
     STATE_MAP.put("NH", "NEW HAMPSHIRE");
-    STATE_MAP.put("NJ", "NEW JERSY");
+    STATE_MAP.put("NJ", "NEW JERSEY");
     STATE_MAP.put("NY", "NEW YORK");
     STATE_MAP.put("NC", "NORTH CAROLINA");
-    STATE_MAP.put("ND", "NORTH DAKTA");
+    STATE_MAP.put("ND", "NORTH DAKOTA");
     
     STATE_MAP.put("VT", "VERMONT");
     STATE_MAP.put("VA", "VIRGINIA");
@@ -80,7 +79,7 @@ public class LocationManager {
       return str;
     }};
   
-  public LocationManager(Context ctx, Preference descPreference) {
+  public LocationManager(Preference descPreference) {
     
     this.descPreference = descPreference;
     

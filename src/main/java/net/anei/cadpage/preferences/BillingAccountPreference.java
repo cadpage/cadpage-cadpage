@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.BillingAccountEvent;
 
 public class BillingAccountPreference extends EditTextPreference {

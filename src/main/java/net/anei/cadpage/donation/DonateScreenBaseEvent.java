@@ -11,9 +11,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.view.Window;
 import android.widget.TextView;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public abstract class DonateScreenBaseEvent extends DonateEvent {
 
   private final int titleId;
@@ -110,7 +110,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
   
   // Map use to identify Screen events by classname
   private static final Map<String, DonateScreenBaseEvent> screenEventMap =
-      new HashMap<String, DonateScreenBaseEvent>();
+      new HashMap<>();
   
   /**
    * Register a Donate screen event for future retrieval
@@ -125,6 +125,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * @param classname class name of registered event
    * @return registered donate screen event
    */
+  @SuppressWarnings("unchecked")
   public static DonateScreenBaseEvent getScreenEvent(String classname) {
     
     // Very rarely, we will called before the registration map has been initialized

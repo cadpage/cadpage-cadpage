@@ -7,11 +7,11 @@ import net.anei.cadpage.SmsMmsMessage;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
-import android.preference.DialogPreference;
+import androidx.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class TestNotificationDialogPreference extends DialogPreference {
+public class TestNotificationDialogPreference extends Preference {
   private final Context context;
 
   public TestNotificationDialogPreference(Context _context, AttributeSet attrs) {
@@ -25,13 +25,7 @@ public class TestNotificationDialogPreference extends DialogPreference {
   }
 
   @Override
-  public void onDismiss(DialogInterface dialog) {
-    super.onDismiss(dialog);
-    ManageNotification.clear(context);
-  }
-
-  @Override
-  protected View onCreateDialogView() {
+  protected void onClick() {
 
     // Show notification
     SmsMmsMessage msg = SmsMessageQueue.getInstance().getMessage(0);
@@ -40,8 +34,5 @@ public class TestNotificationDialogPreference extends DialogPreference {
     } else {
       ManageNotification.show(context, msg);
     }
-
-    return super.onCreateDialogView();
   }
-
 }

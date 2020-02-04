@@ -21,17 +21,16 @@ import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsMsgLogBuffer;
-import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.ManageUsb;
 import net.anei.cadpage.SmsService;
-import net.anei.cadpage.billing.BillingManager;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.preference.ListPreference;
-import android.preference.PreferenceGroup;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceGroup;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -88,6 +87,7 @@ public class DeveloperToolsManager {
     "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24"
   };
   
+  @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
   private class DeveloperListPreference extends ListPreference {
     
     private final Activity context;
@@ -102,11 +102,9 @@ public class DeveloperToolsManager {
     }
 
     @Override
-    protected void onDialogClosed(boolean positiveResult) {
-      super.onDialogClosed(positiveResult);
-      if (!positiveResult) return;
-      
-      int val = Integer.parseInt(getValue().toString());
+    protected boolean persistString(String value) {
+
+      int val = Integer.parseInt(getValue());
       Log.v("Developer option:" + val);
       switch (val) {
 
@@ -249,13 +247,13 @@ public class DeveloperToolsManager {
               "http://active911.com/amZPVy71TB");
 
           // Add to log buffer
-          if (!SmsMsgLogBuffer.getInstance().add(message)) return;
+          if (!SmsMsgLogBuffer.getInstance().add(message)) return true;
 
           // See if the current parser will accept this as a CAD page
           boolean isPage = message.isPageMsg(SmsMmsMessage.PARSE_FLG_FORCE);
 
           // This should never happen,
-          if (!isPage) return;
+          if (!isPage) return true;
 
           // Process the message
           SmsService.processCadPage(message);
@@ -284,13 +282,16 @@ public class DeveloperToolsManager {
           throw new RuntimeException("Test Exception Handling");
 
         case 21:    // Do not disturb
-          Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-          context.startActivity(intent);
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            context.startActivity(intent);
+          }
           break;
 
         case 22:    // DND Granted
           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            assert nm != null;
             String result = nm.isNotificationPolicyAccessGranted() ? "Yes" : "No";
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
           }
@@ -322,6 +323,7 @@ public class DeveloperToolsManager {
       }
       DonationManager.instance().reset();
       MainDonateEvent.instance().refreshStatus();
+      return true;
     }
     
     private void setPurchaseDate(int dayOffset, int yearOffset, Date baseDate) {
@@ -374,6 +376,7 @@ public class DeveloperToolsManager {
   }
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
+  @SuppressWarnings("SameParameterValue")
   private Date buildDate(String dateStr) {
     try {
       return DATE_FORMAT.parse(dateStr);

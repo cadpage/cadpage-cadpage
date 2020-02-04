@@ -3,9 +3,9 @@ package net.anei.cadpage.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class ListPreference extends android.preference.ListPreference {
+public class ListPreference extends androidx.preference.ListPreference {
 
-  String origSummary;
+  private String origSummary;
 
   public ListPreference(Context context) {
     super(context);
@@ -18,17 +18,9 @@ public class ListPreference extends android.preference.ListPreference {
   }
 
   @Override
-  protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-    super.onSetInitialValue(restoreValue, defaultValue);
+  protected void onSetInitialValue(Object defaultValue) {
+    super.onSetInitialValue(defaultValue);
     refreshSummary();
-  }
-
-  @Override
-  protected void onDialogClosed(boolean positiveResult) {
-    super.onDialogClosed(positiveResult);
-    if (positiveResult) {
-      refreshSummary();
-    }
   }
 
   @Override
@@ -40,10 +32,8 @@ public class ListPreference extends android.preference.ListPreference {
     if (listener != null) listener.onPreferenceChange(this, value);
   }
 
-  public void refreshSummary() {
+  private void refreshSummary() {
     if (origSummary == null) origSummary = getSummary().toString().replace("%%", "%");
-    if (origSummary != null) {
-      setSummary(String.format(origSummary, getEntry()));
-    }
+    setSummary(String.format(origSummary, getEntry()));
   }
 }

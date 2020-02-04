@@ -4,6 +4,8 @@ package net.anei.cadpage.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.preference.SwitchPreference;
+
 public class ExtendedSwitchPreference extends SwitchPreference {
   
   private OnDataChangeListener listener = null;

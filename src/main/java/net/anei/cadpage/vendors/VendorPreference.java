@@ -1,8 +1,7 @@
 package net.anei.cadpage.vendors;
 
 import android.content.Context;
-import android.preference.SwitchPreference;
-import android.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 class VendorPreference extends SwitchPreference {
   
@@ -23,19 +22,11 @@ class VendorPreference extends SwitchPreference {
     
     // Onchange listener that always returns false.  User cannot actually
     // change the preference setting directly
-    setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
-      }
-    });
+    setOnPreferenceChangeListener((preference, newValue) -> false);
     
-    setOnPreferenceClickListener(new OnPreferenceClickListener(){
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        VendorActivity.launchActivity(getContext(), VendorPreference.this.vendor);
-        return true;
-      }
+    setOnPreferenceClickListener(preference -> {
+      VendorActivity.launchActivity(getContext(), VendorPreference.this.vendor);
+      return true;
     });
   }
 

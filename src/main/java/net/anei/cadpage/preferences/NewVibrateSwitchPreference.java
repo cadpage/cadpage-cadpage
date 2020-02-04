@@ -3,7 +3,7 @@ package net.anei.cadpage.preferences;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.preference.SwitchPreference;
+import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
 
 import net.anei.cadpage.ManageNotification;

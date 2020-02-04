@@ -1,15 +1,12 @@
 package net.anei.cadpage;
 
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceGroup;
-import android.preference.TwoStatePreference;
-
-import net.anei.cadpage.donation.CheckPopupEvent;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +16,16 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
   private TwoStatePreference mPopupEnabledPreference;
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     // Load the preferences from an XML resource
-    addPreferencesFromResource(R.xml.preference_additional);
+    setPreferencesFromResource(R.xml.preference_additional, rootKey);
 
     // Save specific preferences we might need later
-    mPopupEnabledPreference = (TwoStatePreference) findPreference(getString(R.string.pref_popup_enabled_key));
+    mPopupEnabledPreference = findPreference(getString(R.string.pref_popup_enabled_key));
 
     Preference pref = findPreference(getString(R.string.pref_report_position_key));
+    assert pref != null;
     pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkReportPosition((ListPreference) preference, (String) newValue));
 
     // Disable the pass through option which is unusable starting in Kit Kat
@@ -46,7 +43,8 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
     // mapping app preference only includes entries for ArcGIS Navigator and Waze that we want to remove
     // if the corresponding app is not installed on this device.  If the current value is set to
     // a value that is removed from the list, default it back to "Google"
-    ListPreference appMapPref = (ListPreference)findPreference(getString(R.string.pref_app_map_option_key));
+    ListPreference appMapPref = findPreference(getString(R.string.pref_app_map_option_key));
+    assert appMapPref != null;
     String oldVal = appMapPref.getValue();
     CharSequence[] appMapEntries = appMapPref.getEntries();
     CharSequence[] appMapValues = appMapPref.getEntryValues();
@@ -62,11 +60,13 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
         for (String pkg : pkgName.split(",")) {
           try {
             Log.v("Check package " + pkg);
-            getActivity().getPackageManager().getPackageInfo(pkg, 0);
+            Activity activity = getActivity();
+            assert(activity != null);
+            activity.getPackageManager().getPackageInfo(pkg, 0);
             good = true;
             Log.v("package found");
             break;
-          } catch (PackageManager.NameNotFoundException ex2) {}
+          } catch (PackageManager.NameNotFoundException ignored) {}
         }
         if (!good) {
           if (value.equals(oldVal)) appMapPref.setValue("Google");
@@ -84,26 +84,8 @@ public class PreferenceAdditionalFragment extends PreferenceFragment {
 
     // The No Show In Call preference requires the READ_PHONE_STATE permission
     pref = findPreference(getString(R.string.pref_noShowInCall_key));
+    assert pref != null;
     pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkNoShowInCall((TwoStatePreference)preference, (Boolean)newValue));
-  }
-
-  private void deletePreference(int resId) {
-    String prefKey = getString(resId);
-    deletePreference(getPreferenceScreen(), prefKey);
-  }
-
-  private boolean deletePreference(PreferenceGroup root, String prefKey) {
-    for (int ndx = 0; ndx < root.getPreferenceCount(); ndx++) {
-      Preference child = root.getPreference(ndx);
-      if (child instanceof PreferenceGroup) {
-        if (deletePreference((PreferenceGroup)child, prefKey)) return true;
-      }
-      else if (prefKey.equals(child.getKey())) {
-        root.removePreference(child);
-        return true;
-      }
-    }
-    return false;
   }
 
   // Save display text size so we can tell if it changed

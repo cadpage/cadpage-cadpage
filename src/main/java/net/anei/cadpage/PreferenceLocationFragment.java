@@ -3,17 +3,15 @@ package net.anei.cadpage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.TwoStatePreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -25,7 +23,6 @@ import net.anei.cadpage.preferences.EditTextPreference;
 import net.anei.cadpage.preferences.LocationSwitchPreference;
 import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
-import net.anei.cadpage.preferences.OnDialogClosedListener;
 
 public class PreferenceLocationFragment extends PreferenceFragment {
 
@@ -45,27 +42,22 @@ public class PreferenceLocationFragment extends PreferenceFragment {
 
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     // Load the preferences from an XML resource
-    addPreferencesFromResource(R.xml.preference_location);
+    setPreferencesFromResource(R.xml.preference_location, rootKey);
 
       // Add necessary permission checks
     Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
-    pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue);
-      }
-    });
+    assert pref != null;
+    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue));
 
     // Save location so we can tell when it changes
     saveLocation = ManagePreferences.location();
 
     // Set up the two location preference screens
     Preference descPreference = findPreference(getString(R.string.pref_loc_desc_key));
-    LocationManager locMgr = new LocationManager(getActivity(), descPreference);
+    LocationManager locMgr = new LocationManager(descPreference);
     setupLocationMenu(R.string.pref_location_tree_key, false, locMgr);
     setupLocationMenu(R.string.pref_location_mtree_key, true, locMgr);
     locMgr.updateDisplay();
@@ -80,67 +72,52 @@ public class PreferenceLocationFragment extends PreferenceFragment {
     // On top of all that, the general alert box is enabled only if the current
     // parser has a default filter OR a user filter has been specified
 
-    filterPref = (net.anei.cadpage.preferences.EditTextPreference)
-        findPreference(getString(R.string.pref_filter_key));
-    filterPref.setDialogClosedListener(new OnDialogClosedListener(){
-      @Override
-      public void onDialogClosed(boolean positiveResult) {
-        if (positiveResult) {
-          if ("General".equals(saveLocation)) {
-            DonationManager.instance().reset();
-            MainDonateEvent.instance().refreshStatus();
-          }
-        }
+    filterPref = findPreference(getString(R.string.pref_filter_key));
+    assert filterPref != null;
+    filterPref.setOnPreferenceChangeListener((pref2, value) -> {
+      if ("General".equals(saveLocation)) {
+        DonationManager.instance().reset();
+        MainDonateEvent.instance().refreshStatus();
       }
+      return true;
     });
 
-    overrideFilterPref = (TwoStatePreference)
-        findPreference(getString(R.string.pref_override_filter_key));
+    overrideFilterPref = findPreference(getString(R.string.pref_override_filter_key));
+    assert overrideFilterPref != null;
     filterPref.setEnabled(overrideFilterPref.isChecked());
-    overrideFilterPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        filterPref.setEnabled((Boolean)newValue);
-        return true;
-      }
+    overrideFilterPref.setOnPreferenceChangeListener((preference, newValue) -> {
+      filterPref.setEnabled((Boolean)newValue);
+      return true;
     });
 
     adjustLocationChange(ManagePreferences.location(), false);
-    locMgr.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        adjustLocationChange((String)newValue, true);
-        return true;
-      }
+    locMgr.setOnPreferenceChangeListener((preference, newValue) -> {
+      adjustLocationChange((String)newValue, true);
+      return true;
     });
 
     // Have to play some games with the override default settings
     // If the override defaults is turned on, enable the default city and state items
     // If it is turned off, force the default city and state to the current parser
     // defaults and disable them.
-    overrideDefaultPref = (TwoStatePreference)
-        findPreference(getString(R.string.pref_override_default_key));
-    defCityPref = (EditTextPreference)
-        findPreference(getString(R.string.pref_defcity_key));
-    defStatePref = (EditTextPreference)
-        findPreference(getString(R.string.pref_defstate_key));
+    overrideDefaultPref = findPreference(getString(R.string.pref_override_default_key));
+    defCityPref = findPreference(getString(R.string.pref_defcity_key));
+    defStatePref = findPreference(getString(R.string.pref_defstate_key));
 
-    overrideDefaultPref = (TwoStatePreference)
-        findPreference(getString(R.string.pref_override_default_key));
-    overrideDefaultPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean value = (Boolean) newValue;
-        if (! value) {
-          defCityPref.setText(parserDefCity);
-          defCityPref.refreshSummary();
-          defStatePref.setText(parserDefState);
-          defStatePref.refreshSummary();
-        }
-        defCityPref.setEnabled(value);
-        defStatePref.setEnabled(value);
-        return true;
-      }});
+    overrideDefaultPref = findPreference(getString(R.string.pref_override_default_key));
+    assert overrideDefaultPref != null;
+    overrideDefaultPref.setOnPreferenceChangeListener((preference, newValue) -> {
+      boolean value = (Boolean) newValue;
+      if (! value) {
+        defCityPref.setText(parserDefCity);
+        defCityPref.refreshSummary();
+        defStatePref.setText(parserDefState);
+        defStatePref.refreshSummary();
+      }
+      defCityPref.setEnabled(value);
+      defStatePref.setEnabled(value);
+      return true;
+    });
 
     // Make an initial call to our preference change listener to set up the
     // correct default summary displays
@@ -152,57 +129,53 @@ public class PreferenceLocationFragment extends PreferenceFragment {
     if (scannerPref != null) {
       String channel = ManagePreferences.scannerChannel();
       scannerPref.setSummary(channel);
-      scannerPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
-        @Override
-        public boolean onPreferenceClick(Preference pref) {
+      scannerPref.setOnPreferenceClickListener(pref1 -> {
 
-          // When clicked, ask the scanner app to select a favorite channel
-          Intent intent = new Intent("com.scannerradio.intent.action.ACTION_PICK");
+        // When clicked, ask the scanner app to select a favorite channel
+        Intent intent = new Intent("com.scannerradio.intent.action.ACTION_PICK");
+        try {
+          startActivityForResult(intent, REQ_SCANNER_CHANNEL);
+        } catch (Exception ex) {
+
+          if (! (ex instanceof ActivityNotFoundException)) Log.e(ex);
+
+          // Scanner radio either isn't installed, or isn't responding to the ACTION_PICK
+          // request.  Check the package manager to which, if any, are currently installed
+          Activity activity = getActivity();
+          assert activity != null;
+          PackageManager pkgMgr = activity.getPackageManager();
+          String pkgName = "com.scannerradio_pro";
+          boolean installed = false;
           try {
-            startActivityForResult(intent, REQ_SCANNER_CHANNEL);
-          } catch (Exception ex) {
-
-            if (! (ex instanceof ActivityNotFoundException)) Log.e(ex);
-
-            // Scanner radio either isn't installed, or isn't responding to the ACTION_PICK
-            // request.  Check the package manager to which, if any, are currently installed
-            PackageManager pkgMgr = getActivity().getPackageManager();
-            String pkgName = "com.scannerradio_pro";
-            boolean installed = false;
+            pkgMgr.getPackageInfo(pkgName, 0);
+            installed = true;
+          } catch (PackageManager.NameNotFoundException ignored) {}
+          if (! installed) {
+            pkgName = "com.scannerradio";
             try {
               pkgMgr.getPackageInfo(pkgName, 0);
               installed = true;
             } catch (PackageManager.NameNotFoundException ignored) {}
-            if (! installed) {
-              pkgName = "com.scannerradio";
-              try {
-                pkgMgr.getPackageInfo(pkgName, 0);
-                installed = true;
-              } catch (PackageManager.NameNotFoundException ignored) {}
-            }
-
-            // OK, show a dialog box asking if they want to install Scanner Radio
-            final String pkgName2 = pkgName;
-            new AlertDialog.Builder(getActivity())
-                .setMessage(installed ? R.string.scanner_not_current : R.string.scanner_not_installed)
-                .setPositiveButton(R.string.donate_btn_yes, new DialogInterface.OnClickListener(){
-                  @Override
-                  public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName2));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    try {
-                      getActivity().startActivity(intent);
-                    } catch (ActivityNotFoundException ex) {
-                      Log.e(ex);
-                    }
-                  }
-                })
-                .setNegativeButton(R.string.donate_btn_no, null)
-                .create().show();
-
           }
-          return true;
+
+          // OK, show a dialog box asking if they want to install Scanner Radio
+          final String pkgName2 = pkgName;
+          new AlertDialog.Builder(getActivity())
+              .setMessage(installed ? R.string.scanner_not_current : R.string.scanner_not_installed)
+              .setPositiveButton(R.string.donate_btn_yes, (dialog, which) -> {
+                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName2));
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                  getActivity().startActivity(intent1);
+                } catch (ActivityNotFoundException ex1) {
+                  Log.e(ex1);
+                }
+              })
+              .setNegativeButton(R.string.donate_btn_no, null)
+              .create().show();
+
         }
+        return true;
       });
     }
 
@@ -236,7 +209,7 @@ public class PreferenceLocationFragment extends PreferenceFragment {
 
     // Get the preference screen we will be building
     Resources res = getResources();
-    PreferenceScreen main = (PreferenceScreen)findPreference(res.getString(resId));
+    PreferenceScreen main = findPreference(res.getString(resId));
     buildLocationMenu(ParserList.MASTER_LIST, main, multi, locMgr);
   }
 
@@ -250,7 +223,7 @@ public class PreferenceLocationFragment extends PreferenceFragment {
   private void buildLocationMenu(ParserList.ParserCategory parserCategory, PreferenceScreen screen, boolean multi, LocationManager locMgr) {
     for (ParserList.ParserEntry entry : parserCategory.getParserList()) {
       if (!entry.isCategory()) throw new RuntimeException("Top level parser entry " + entry.getParserName() + " must be a category");
-      Preference pref = buildLocationItem(entry.getCategory(), screen, multi, locMgr);
+      Preference pref = buildLocationItem(entry.getCategory(), multi, locMgr);
       screen.addPreference(pref);
     }
   }
@@ -258,12 +231,11 @@ public class PreferenceLocationFragment extends PreferenceFragment {
   /**
    * Construct a preference item corresponding to a single parser entry
    * @param category root preference category
-   * @param parent parent preference screen
    * @param multi true if we are setting up multiple location selection menu
    * @param locMgr location manager
    * @return constructed preference
    */
-  private Preference buildLocationItem(ParserList.ParserCategory category, PreferenceScreen parent, boolean multi, LocationManager locMgr) {
+  private Preference buildLocationItem(ParserList.ParserCategory category, boolean multi, LocationManager locMgr) {
 
     // Current rules are that category must contain only  subcategory or only parser entries.  See which this is
     String catName = category.getName();
@@ -279,7 +251,9 @@ public class PreferenceLocationFragment extends PreferenceFragment {
 
     // If it only contains subcategories, build a new preference screen with them
     if (subcat) {
-      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(getActivity());
+      Activity activity = getActivity();
+      assert activity != null;
+      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(activity);
       sub.setTitle(catName);
       buildLocationMenu(category, sub, multi, locMgr);
       return sub;
@@ -291,7 +265,9 @@ public class PreferenceLocationFragment extends PreferenceFragment {
     // If we are doing multiple selections, create a new preference screen and fill it
     // a location checkbox for each parser entry
     if (multi) {
-      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(getActivity());
+      Activity activity = getActivity();
+      assert activity != null;
+      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(activity);
       sub.setTitle(catName);
       for (ParserList.ParserEntry entry : entries) {
         sub.addPreference(
@@ -305,7 +281,7 @@ public class PreferenceLocationFragment extends PreferenceFragment {
 
     // If we are doing single location selections, build a list preference
     // that can select from any of the parsers in this category
-    LocationListPreference list = new LocationListPreference(getActivity(), locMgr, parent);
+    LocationListPreference list = new LocationListPreference(getActivity(), locMgr);
     list.setTitle(catName);
     list.setDialogTitle(catName);
 

@@ -6,8 +6,7 @@ import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.Preference;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -122,12 +121,10 @@ public abstract class DonateEvent {
 
     // Set up a preference clicked listener
     final Activity act = activity;
-    pref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        doEvent(act, null);
-        return true;
-      }});
+    pref.setOnPreferenceClickListener(preference -> {
+      doEvent(act, null);
+      return true;
+    });
     
     // And we are done
     return true;
@@ -142,7 +139,7 @@ public abstract class DonateEvent {
     if (alertStatus == null) return input;
     int color = ALERT_COLORS[alertStatus.ordinal()];
     SpannableString span = new SpannableString(input);
-    if (color != 0) span.setSpan(new ForegroundColorSpan(color), 0, input.length(), 0);
+    span.setSpan(new ForegroundColorSpan(color), 0, input.length(), 0);
     return span;
   }
   
@@ -164,12 +161,7 @@ public abstract class DonateEvent {
     button.setText(activity.getString(titleId, getTextParms(PARM_TITLE)));
     
     // Set up button clicked listener to call our doEvent method
-    button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        doEvent(act, msg);
-      }
-    });
+    button.setOnClickListener(v -> doEvent(act, msg));
 
     // Add button to parent view and we are finished
     parent.addView(button);
@@ -196,12 +188,7 @@ public abstract class DonateEvent {
     button.setText(setAlertColor(title));
     
     // Set up button clicked listener to call our doEvent method
-    button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        doEvent(activity, msg);
-      }
-    });
+    button.setOnClickListener(v -> doEvent(activity, msg));
     
     // Green status buttons can disappear, everything else should be visible
     button.setVisibility(alertStatus == null || alertStatus == AlertStatus.GREEN ? View.GONE : View.VISIBLE);

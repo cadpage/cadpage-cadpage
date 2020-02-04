@@ -1,8 +1,7 @@
 package net.anei.cadpage.preferences;
 
 import android.content.Context;
-import android.preference.SwitchPreference;
-import android.view.View;
+import androidx.preference.SwitchPreference;
 
 public class LocationSwitchPreference extends SwitchPreference {
   
@@ -19,9 +18,8 @@ public class LocationSwitchPreference extends SwitchPreference {
   }
 
   @Override
-  protected void onBindView(View view) {
-    setChecked(locMgr.isSet(location));
-    super.onBindView(view);
+  protected boolean getPersistedBoolean(boolean defaultReturnValue) {
+    return locMgr.isSet(location);
   }
 
   @Override

@@ -1,20 +1,21 @@
 package net.anei.cadpage;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 
 import net.anei.cadpage.vendors.VendorManager;
 
+import java.util.Objects;
+
 public class PreferenceDirectFragment extends PreferenceFragment {
+
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     // Load the preferences from an XML resource
-    addPreferencesFromResource(R.xml.preference_direct);
+    setPreferencesFromResource(R.xml.preference_direct, rootKey);
 
     // Set up C2DM vendor preference screen
-    VendorManager.instance().setupPreference(getActivity(), getPreferenceScreen());
+    VendorManager.instance().setupPreference(Objects.requireNonNull(getActivity()), getPreferenceScreen());
 
   }
 }

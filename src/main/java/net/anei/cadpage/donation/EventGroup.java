@@ -2,7 +2,7 @@ package net.anei.cadpage.donation;
 
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
-import android.preference.Preference;
+import androidx.preference.Preference;
 import android.view.ViewGroup;
 
 /**

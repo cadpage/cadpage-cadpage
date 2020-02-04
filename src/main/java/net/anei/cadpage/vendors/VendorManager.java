@@ -14,9 +14,8 @@ import net.anei.cadpage.donation.UserAcctManager;
 import android.content.Context;
 import android.net.Uri;
 import android.net.Uri.Builder;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * This class manages all of the Vendor classes
@@ -49,13 +48,11 @@ public class VendorManager {
   public void setupPreference(final Context context, PreferenceScreen pref) {
     
     Preference reconnectPref = pref.findPreference(context.getString(R.string.pref_reconnect_key));
-    reconnectPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        if (SmsPopupUtils.haveNet(context)) reconnect(context,true);
-        return true;
-      }});
+    assert reconnectPref != null;
+    reconnectPref.setOnPreferenceClickListener(preference -> {
+      if (SmsPopupUtils.haveNet(context)) reconnect(context,true);
+      return true;
+    });
     
     boolean developer = UserAcctManager.instance().isDeveloper();
     int order = 10;
@@ -246,12 +243,7 @@ public class VendorManager {
    * @param userReq User requested reconnect
    */
   public void reconnect(final Context context, final boolean userReq) {
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
-      @Override
-      public void run(String registrationId) {
-        reconnect(context, registrationId, userReq);
-      }
-    });
+    FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq));
   }
 
   /**

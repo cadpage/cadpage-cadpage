@@ -3,10 +3,9 @@ package net.anei.cadpage.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class EditTextPreference extends android.preference.EditTextPreference {
+public class EditTextPreference extends androidx.preference.EditTextPreference {
 
   private String origSummary;
-  private OnDialogClosedListener dialogClosedListener = null;
 
   public EditTextPreference(Context context) {
     super(context);
@@ -17,22 +16,11 @@ public class EditTextPreference extends android.preference.EditTextPreference {
     super(context, attrs);
     origSummary = getSummary().toString().replace("%%", "%");
   }
-  
-  public void setDialogClosedListener(OnDialogClosedListener dialogClosedListener) {
-    this.dialogClosedListener = dialogClosedListener;
-  }
 
   @Override
-  protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-    super.onSetInitialValue(restoreValue, defaultValue);
+  protected void onSetInitialValue(Object defaultValue) {
+    super.onSetInitialValue(defaultValue);
     refreshSummary();
-  }
-
-  @Override
-  protected void onDialogClosed(boolean positiveResult) {
-    super.onDialogClosed(positiveResult);
-    if (dialogClosedListener != null) dialogClosedListener.onDialogClosed(positiveResult); 
-    if (positiveResult) refreshSummary();
   }
 
   @Override
@@ -47,11 +35,9 @@ public class EditTextPreference extends android.preference.EditTextPreference {
     refreshSummary(value);
   }
 
-  public void refreshSummary(String newValue) {
+  private void refreshSummary(String newValue) {
     if (origSummary == null) origSummary = getSummary().toString().replace("%%", "%");
-    if (origSummary != null) {
-      setSummary(String.format(origSummary, translateValue(newValue)));
-    }
+    setSummary(String.format(origSummary, translateValue(newValue)));
   }
 
   protected String translateValue(String value) {

@@ -5,10 +5,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.preference.SwitchPreference;
+import androidx.preference.SwitchPreference;
 import android.provider.Settings;
 import android.util.AttributeSet;
-import android.view.View;
 
 @TargetApi(Build.VERSION_CODES.O_MR1)
 public class DoNotDisturbSwitchPreference extends SwitchPreference {
@@ -28,14 +27,6 @@ public class DoNotDisturbSwitchPreference extends SwitchPreference {
 
   public DoNotDisturbSwitchPreference(Context context) {
     super(context);
-  }
-
-  @Override
-  protected void onBindView(View view) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-      setEnabled(false);
-    }
-    super.onBindView(view);
   }
 
   @Override

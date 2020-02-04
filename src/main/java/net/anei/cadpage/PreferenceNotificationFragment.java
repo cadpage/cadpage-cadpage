@@ -1,14 +1,15 @@
 package net.anei.cadpage;
 
-import android.annotation.TargetApi;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.TwoStatePreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+
+import androidx.annotation.NonNull;
+import androidx.preference.TwoStatePreference;
+import androidx.preference.Preference;
 import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 
@@ -16,7 +17,8 @@ import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.preferences.DoNotDisturbSwitchPreference;
 import net.anei.cadpage.preferences.ExtendedSwitchPreference;
 import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
-import net.anei.cadpage.preferences.OnDataChangeListener;
+
+import java.util.Objects;
 
 public class PreferenceNotificationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -49,38 +51,37 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       Preference pref = findPreference(getString(R.string.pref_notif_config_key));
-      pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-        @TargetApi(Build.VERSION_CODES.O)
-        @Override
-        public boolean onPreferenceClick(Preference preference) {
-          launchChannelConfig(getActivity());
-          return true;
-        }
+      assert pref != null;
+      pref.setOnPreferenceClickListener(preference -> {
+        launchChannelConfig(Objects.requireNonNull(getActivity()));
+        return true;
       });
 
-      mNewVibrateSwitchPreference = (NewVibrateSwitchPreference)findPreference(getString(R.string.pref_vibrate_key));
+      mNewVibrateSwitchPreference = findPreference(getString(R.string.pref_vibrate_key));
     }
 
-    final TwoStatePreference overrideSoundPref = (TwoStatePreference)findPreference(getString(R.string.pref_notif_override_sound_key));
-    overrideSoundPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return ManagePreferences.checkOverrideNotifySound((TwoStatePreference) preference, (Boolean)newValue);
-      }
-    });
+    final TwoStatePreference overrideSoundPref = findPreference(getString(R.string.pref_notif_override_sound_key));
+    assert overrideSoundPref != null;
+    overrideSoundPref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkOverrideNotifySound((TwoStatePreference) preference, (Boolean)newValue));
 
-    mNotifEnabledPreference = (TwoStatePreference)findPreference(getString(R.string.pref_notif_enabled_key));
-    mNotifOverridePreference = (ExtendedSwitchPreference)findPreference(getString(R.string.pref_notif_override_key));
-    mNotifOverridePreference.setOnDataChangeListener(new OnDataChangeListener(){
-      @Override
-      public void onDataChange(Preference preference) {
-        ManagePreferences.checkOverrideNotifySound(overrideSoundPref);
-      }
-    });
+    mNotifEnabledPreference = findPreference(getString(R.string.pref_notif_enabled_key));
+    mNotifOverridePreference = findPreference(getString(R.string.pref_notif_override_key));
+    assert mNotifOverridePreference != null;
+    mNotifOverridePreference.setOnDataChangeListener(preference -> ManagePreferences.checkOverrideNotifySound(overrideSoundPref));
 
-    mDoNotDisturbSwitchPreference = (DoNotDisturbSwitchPreference)findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
+    // Remove DoNotDisturb setting if it is not applicable
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+      deletePreference(R.string.pref_notif_override_do_not_disturb_key);
+    } else {
+      mDoNotDisturbSwitchPreference = findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
+    }
 
     ManagePreferences.registerOnSharedPreferenceChangeListener(this);
+  }
+
+  @Override
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+
   }
 
   @Override
@@ -118,7 +119,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putBoolean(ACCEPT_CONFLICT_KEY, acceptConflict);
   }

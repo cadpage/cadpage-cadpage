@@ -4,8 +4,6 @@ import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -57,12 +55,7 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
     // Add a cancel button at bottom of list
     Button btn = new Button(activity);
     btn.setText(R.string.donate_btn_cancel);
-    btn.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        activity.finish();
-      }
-    });
+    btn.setOnClickListener(v -> activity.finish());
     btnList.addView(btn);
   }
 

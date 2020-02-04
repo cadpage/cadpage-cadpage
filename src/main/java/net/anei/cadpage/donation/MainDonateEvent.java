@@ -1,10 +1,11 @@
 package net.anei.cadpage.donation;
 
 import net.anei.cadpage.SmsMmsMessage;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.preference.TwoStatePreference;
-import android.preference.Preference;
+import androidx.preference.Preference;
 import android.widget.Button;
 
 /**
@@ -123,6 +124,7 @@ public class MainDonateEvent extends DonateScreenEvent {
     return result;
   }
 
+  @SuppressLint("StaticFieldLeak")
   private static final MainDonateEvent instance = new MainDonateEvent();
   
   public static MainDonateEvent instance() {

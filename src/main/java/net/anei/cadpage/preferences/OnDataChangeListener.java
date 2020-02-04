@@ -1,6 +1,6 @@
 package net.anei.cadpage.preferences;
 
-import android.preference.Preference;
+import androidx.preference.Preference;
 
 public interface OnDataChangeListener {
   public void onDataChange(Preference preference);
