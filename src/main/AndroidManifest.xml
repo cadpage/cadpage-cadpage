@@ -175,6 +175,11 @@
       android:resource="@xml/widget"/>
     </receiver>
 
+    <provider android:name=".providers.MmsBodyProvider"
+      android:grantUriPermissions="true"
+      android:exported="false"
+      android:authorities="net.anei.cadpage.provider.securesms.mms" />
+
   </application>
 
 </manifest>

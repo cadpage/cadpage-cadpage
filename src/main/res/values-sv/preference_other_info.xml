@@ -18,8 +18,9 @@
 
   <string name="pref_about_title">Om</string>
   <string name="pref_about_summary">Om Cadpage</string>
-  <string name="pref_about_text">
+  <string name="pref_about_text"> <!-- Translate -->
       Skapad av Derrick Bennett och Ken Corbin med stöd av Jean Goul, baserad på kod av : Adam K (SMS Popup Application)\n
+      New MMS processing logic shamelessly copied from Android-Signal\n
       Svensk översättning av Roger Ehrstedt\n
   </string>
 

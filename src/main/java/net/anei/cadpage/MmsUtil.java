@@ -23,11 +23,6 @@ import com.google.android.mms.pdu_alt.EncodedStringValue;
 import com.google.android.mms.pdu_alt.GenericPdu;
 import com.google.android.mms.pdu_alt.NotificationInd;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import androidx.annotation.NonNull;
@@ -51,7 +46,7 @@ public class MmsUtil {
     String content = getStringValue(npdu.getContentLocation());
     String msgId = getStringValue(npdu.getTransactionId());
     return new SmsMmsMessage(msgCls, from, subject, content, msgId,
-        System.currentTimeMillis());
+                             System.currentTimeMillis());
   }
 
   private static String getStringValue(EncodedStringValue val) {
@@ -72,27 +67,6 @@ public class MmsUtil {
       return new String(bytes, CharacterSets.MIMENAME_ISO_8859_1);
     } catch (UnsupportedEncodingException e) {
       throw new AssertionError("ISO_8859_1 must be supported!");
-    }
-  }
-
-  public static byte[] readFile(File file) throws IOException {
-    return readFully(new FileInputStream(file));
-  }
-
-  private static byte[] readFully(InputStream in) throws IOException {
-    try {
-      ByteArrayOutputStream bout = new ByteArrayOutputStream();
-      byte[] buffer = new byte[4096];
-      int read;
-
-      while ((read = in.read(buffer)) != -1) {
-        bout.write(buffer, 0, read);
-      }
-
-      return bout.toByteArray();
-    }
-    finally {
-      in.close();
     }
   }
 }

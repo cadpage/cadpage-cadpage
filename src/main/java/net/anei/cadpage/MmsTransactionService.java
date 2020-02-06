@@ -37,16 +37,20 @@ import android.os.PowerManager;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import com.google.android.mms.pdu_alt.GenericPdu;
 import com.google.android.mms.pdu_alt.PduBody;
 import com.google.android.mms.pdu_alt.PduParser;
 import com.google.android.mms.pdu_alt.RetrieveConf;
+
+import net.anei.cadpage.providers.MmsBodyProvider;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -59,7 +63,7 @@ public class MmsTransactionService extends Service {
 
   private static final String ACTION_DOWNLOAD_COMPLETE = "net.anei.cadpage.DOWNLOAD_COMPLETE";
   private static final String EXTRA_TRANSACTION_ID = "TRANSACTION_ID";
-  private static final String EXTRA_FILENAME = "DOWNLOAD_FILE";
+  private static final String EXTRA_URI = "DOWNLOAD_URI";
 
   private static final String MMS_URL = "content://mms";
   private static final Uri MMS_URI = Uri.parse("content://mms");
@@ -305,10 +309,9 @@ public class MmsTransactionService extends Service {
 
       String contentLocation = message.getContentLoc();
       String transactionId = message.getMmsMsgId();
+      Uri downloadUri = MmsBodyProvider.makeTemporaryPointer(MmsTransactionService.this).getUri();
 
-      File contentFile = new File(getCacheDir(), "MMS_DWN." + transactionId);
-
-      Log.v("Requesting MMS content download from " + contentLocation + " to " + contentFile);
+      Log.v("Requesting MMS content download from " + contentLocation + " to " + downloadUri);
 
       SmsManager smsManager;
       if (subscriptionId != -1) {
@@ -334,14 +337,14 @@ public class MmsTransactionService extends Service {
       Intent intent = new Intent(ACTION_DOWNLOAD_COMPLETE);
       intent.setClass(MmsTransactionService.this, MmsTransactionService.class);
       intent.putExtra(EXTRA_TRANSACTION_ID, transactionId);
-      intent.putExtra(EXTRA_FILENAME, contentFile.getAbsolutePath());
+      intent.putExtra(EXTRA_URI, downloadUri.toString());
       PendingIntent pIntent =
           PendingIntent.getService(MmsTransactionService.this, 1, intent,
                                     PendingIntent.FLAG_ONE_SHOT);
 
       smsManager.downloadMultimediaMessage(MmsTransactionService.this,
           contentLocation,
-          Uri.fromFile(contentFile),
+          downloadUri,
           configOverrides,
           pIntent);
 
@@ -351,30 +354,36 @@ public class MmsTransactionService extends Service {
       Log.v("Processing MMS Download");
       ContentQuery.dumpIntent(intent);
       String transactionId = intent.getStringExtra(EXTRA_TRANSACTION_ID);
-      String filename = intent.getStringExtra(EXTRA_FILENAME);
-      Log.v("MMS Download complete for " + transactionId + " to " + filename);
-      if (transactionId == null || filename == null) return;
-      File contentFile = new File(filename);
+      String downloadUri = intent.getStringExtra(EXTRA_URI);
+      Log.v("MMS Download complete for " + transactionId + " to " + downloadUri);
+      if (transactionId == null || downloadUri == null) return;
+
+      // Retrieve the message from our message table
+      SmsMmsMessage message = null;
+      for (Iterator<MmsMsgEntry> iter = msgList.iterator(); iter.hasNext(); ) {
+        SmsMmsMessage msg = iter.next().message;
+        if (msg.getMmsMsgId().equals(transactionId)) {
+          message = msg;
+          iter.remove();
+          break;
+        }
+      }
+
+      if (message == null) {
+        Log.w("No matching MMS message for transaction " + transactionId);
+        return;
+      }
+
+      MmsBodyProvider.Pointer pointer =
+          new MmsBodyProvider.Pointer(MmsTransactionService.this, Uri.parse(downloadUri));
 
       try {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        copy(pointer.getInputStream(), baos);
+        pointer.close();
 
-        // Retrieve the message from our message table
-        SmsMmsMessage message = null;
-        for (Iterator<MmsMsgEntry> iter = msgList.iterator(); iter.hasNext(); ) {
-          SmsMmsMessage msg = iter.next().message;
-          if (msg.getMmsMsgId().equals(transactionId)) {
-            message = msg;
-            iter.remove();
-            break;
-          }
-        }
-
-        if (message == null) {
-          Log.w("No matching MMS message for transaction " + transactionId);
-          return;
-        }
-
-        byte[] data = MmsUtil.readFile(contentFile);
+        byte[] data = baos.toByteArray();
+        Log.i(baos.size() + "-byte response: " + ContentQuery.dumpByteArray(data));
 
         GenericPdu pdu = new PduParser(data).parse();
         if (null == pdu) {
@@ -404,9 +413,24 @@ public class MmsTransactionService extends Service {
       }
 
       finally {
-        //noinspection ResultOfMethodCallIgnored
-        contentFile.delete();
+        pointer.close();
         cleanup();
+      }
+    }
+
+    private void copy(InputStream in, OutputStream out) throws IOException {
+      try {
+        byte[] buffer = new byte[8192];
+        int read;
+        long total = 0;
+
+        while ((read = in.read(buffer)) != -1) {
+          out.write(buffer, 0, read);
+          total += read;
+        }
+      } finally {
+        in.close();
+        out.close();
       }
     }
 
