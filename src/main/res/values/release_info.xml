@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01312019</string>
+  <string name="release_date">02082019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.10-01\n
+    Processing of MMS dispatch alerts under Android 5 and up no longer requires the
+    assistance of a compatible message app.\n
+    \n
+    Screen control options that serve no purpose under Android 10 have been removed.\n
+    \n
+    Location Fixes:\n
+    Marion County, SC\n
+    Neuces County, TX\n
+    Warren County, VA\n
+    \n
     v2.1.9-04\n
     New Locations:\n
     Monroe County, IL\n
@@ -55,18 +66,6 @@
     Phelps County, MO\n
     Burlington County, NJ\n
     Benton County, OR\n
-    Charleston County, SC\n
-    \n
-    v2.1.8-03\n
-    New Location:\n
-    Ogemaw County, MI\n
-    \n
-    Location Fixes:\n
-    Merged Keller into Tarrant County, TX\n
-    Sweden\n
-    \n
-    General Fixes:\n
-    Removed all prompts to purchase Cadpage subscriptions when user
-    already has an auto-renewing subscription\n
+    Charleston County, SC
   </string>
 </resources>
