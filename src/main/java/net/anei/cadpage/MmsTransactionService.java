@@ -292,12 +292,12 @@ public class MmsTransactionService extends Service {
       mServiceHandler.sendMessageDelayed(msg, mmsTimeout);
 
       // And figure out which message processor to use from here
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) {
-        int subscriptionId = intent.getIntExtra("subscription", -1);
-        newMmsMessage(message, subscriptionId);
-      } else {
+//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) {
+//        int subscriptionId = intent.getIntExtra("subscription", -1);
+//        newMmsMessage(message, subscriptionId);
+//      } else {
         oldMmsMessage();
-      }
+//      }
     }
     /**
      * Use new logic to process MMS message
