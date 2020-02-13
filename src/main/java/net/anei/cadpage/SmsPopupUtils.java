@@ -23,6 +23,7 @@ public class SmsPopupUtils {
   private static final int CADPAGE_SUPPORT_VERSION = 14;
   private static final int CADPAGE_SUPPORT_VERSION2 = 15;
   private static final int CADPAGE_SUPPORT_VERSION3 = 16;
+  private static final int CADPAGE_SUPPORT_VERSION4 = 17;
   private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
   private static final String EXTRA_CADPAGE_PHONE = "net.anei.cadpage.CALL_PHONE";
 
@@ -153,39 +154,31 @@ public class SmsPopupUtils {
     // receiving SMS and MMS messages.  But sending text messages requires a newer version that
     // is only available from the download page and calling phone numbers requires and even newer
     // version
+    int version;
     String callbackType = ManagePreferences.callbackTypeSummary();
-    boolean callbackText = callbackType.contains("T");
     boolean callbackPhone = callbackType.contains("P");
-    int version = (callbackPhone ? CADPAGE_SUPPORT_VERSION3 :
-                   callbackText ? CADPAGE_SUPPORT_VERSION2 : CADPAGE_SUPPORT_VERSION);
-
-    // See if support package is installed
-    // if it is not, launch play store to install the update without further ado
-    PackageManager pm = context.getPackageManager();
-    try {
-      PackageInfo pi = pm.getPackageInfo(CADPAGE_SUPPORT_PKG, 0);
-      Log.v("Cadpage Message Support app version " + pi.versionCode + " is installed");
-      if (pi.versionCode < version) {
-
-        // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
-        // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
-        if (prompt) {
-          UpdateCadpageSupportAppEvent.instance().launch(context);
-          Log.v("Requesting Capage Message Support app upgrade");
-        }
-        return 1;
-      }
+    if (!ManagePreferences.useOldMMS()) {
+      version = CADPAGE_SUPPORT_VERSION4;
+    } else if (callbackPhone) {
+      version = CADPAGE_SUPPORT_VERSION3;
+    } else if (callbackType.contains("T")) {
+      version = CADPAGE_SUPPORT_VERSION2;
+    } else {
+      version = CADPAGE_SUPPORT_VERSION;
     }
 
-    // If not installed, prompt user to either install it
-    // or turn off text message support
-    catch (PackageManager.NameNotFoundException ex) {
-
-      // event.isEnabled() always returns true.  But if we do not make the call, the optimizer
-      // can call DonateActivity.launchActivity() before initializing NeedCadpageSupportAppEvent.
+    // Get the installed support app version and see if it meets are needs
+    // If it does not, issue user prompt if requested.  In any case, return 1
+    int installedVersion = getSupportAppVersion(context);
+    if (installedVersion < version) {
       if (prompt) {
-        NeedCadpageSupportAppEvent.instance().launch(context);
-        Log.v("Requesting Cadpage Message Support app install");
+        if (installedVersion <= 0) {
+          NeedCadpageSupportAppEvent.instance().launch(context);
+          Log.v("Requesting Cadpage Message Support app install");
+        } else {
+          UpdateCadpageSupportAppEvent.instance().launch(context);
+          Log.v("Requesting Cadpage Message Support app upgrade");
+        }
       }
       return 1;
     }
@@ -211,7 +204,76 @@ public class SmsPopupUtils {
     return 0;
   }
 
+  /**
+   * Fix any Cadpage settings that are incompatible with the currently installed support app
+   * @param context current context
+   */
+  public static void fixMsgSupport(Context context) {
+
+    // If we are not processing SMS or MMS messages, nothing needs to be  done
+    if (!ManagePreferences.reqMsgSupport()) return;
+
+    // If support app is not needed, nothing needs to be done
+    if (!isSupportAppAvailable()) return;
+
+    // Get the installed support app version.  If it is the latest version
+    // nothing needs to be done
+    int version = getSupportAppVersion(context);
+    if (version == CADPAGE_SUPPORT_VERSION4) return;
+
+    // If not installed at all, turn off all text message processing
+    if (version <= 0) {
+      ManagePreferences.setEnableMsgType("C");
+      return;
+    }
+
+    // We know that MMS downloads are not supported, so request the old MMS logic
+    if (!ManagePreferences.useOldMMS()) ManagePreferences.setUseOldMMS(true);
+
+    // Remove any callback codes that are not supported by the current support app
+    if (version < CADPAGE_SUPPORT_VERSION3) {
+      String removeCode = version < CADPAGE_SUPPORT_VERSION2 ? "TP" : "P";
+      ManagePreferences.removeCallbackCode(removeCode);
+    }
+  }
+
   private static boolean isSupportAppAvailable() {
     return !BuildConfig.MSG_ALLOWED;
+  }
+
+  /**
+   * Get current version number of installed support app
+   * @param context current context
+   * @return version umber of support app if installed, zero otherwise
+   */
+  private static int getSupportAppVersion(Context context) {
+
+    // See if support package is installed
+    // if it is not, launch play store to install the update without further ado
+    PackageManager pm = context.getPackageManager();
+    try {
+      PackageInfo pi = pm.getPackageInfo(CADPAGE_SUPPORT_PKG, 0);
+      return pi.versionCode;
+    }
+    catch (PackageManager.NameNotFoundException ex) {
+      return 0;
+    }
+  }
+
+  /**
+   * Determine if we should default to old MMS support.  Which we only if the support app is
+   * installed, but it is an older version that does not support the new MMS logic.
+   * @param context current context
+   * @return true if we should default to using old MMS logic
+   */
+  public static boolean isOldMMSDefault(Context context) {
+    PackageManager pm = context.getPackageManager();
+    try {
+      PackageInfo pi = pm.getPackageInfo(CADPAGE_SUPPORT_PKG, 0);
+      return pi.versionCode < CADPAGE_SUPPORT_VERSION4;
+    }
+    catch (PackageManager.NameNotFoundException ex) {
+      return false;
+    }
   }
 }

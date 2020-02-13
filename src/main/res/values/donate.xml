@@ -604,6 +604,10 @@
     I do not require Cadpage text message support
   </string>
 
+  <string name="donate_fix_msg_support_title">
+    Fix Cadpage settings
+  </string>
+
   <string name="check_popup_title">
     Popup Configuration Problem
   </string>

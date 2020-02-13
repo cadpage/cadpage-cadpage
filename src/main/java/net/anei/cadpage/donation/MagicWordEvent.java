@@ -62,16 +62,6 @@ public class MagicWordEvent extends DonateQueryEvent {
       return true;
     }
 
-    if (input.equalsIgnoreCase("OLDMMS")) {
-      ManagePreferences.setUseOldMMS(true);
-      return true;
-    }
-
-    if (input.equalsIgnoreCase("NEWMMS")) {
-      ManagePreferences.setUseOldMMS(false);
-      return true;
-    }
-
     // Check for two kinds of daily magic words
     int type = DonationManager.validateAuthCode(input);
 

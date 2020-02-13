@@ -35,7 +35,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.telephony.SmsManager;
-import android.text.TextUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -292,12 +291,12 @@ public class MmsTransactionService extends Service {
       mServiceHandler.sendMessageDelayed(msg, mmsTimeout);
 
       // And figure out which message processor to use from here
-//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) {
-//        int subscriptionId = intent.getIntExtra("subscription", -1);
-//        newMmsMessage(message, subscriptionId);
-//      } else {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) {
+        int subscriptionId = intent.getIntExtra("subscription", -1);
+        newMmsMessage(message, subscriptionId);
+      } else {
         oldMmsMessage();
-//      }
+      }
     }
     /**
      * Use new logic to process MMS message
@@ -307,11 +306,11 @@ public class MmsTransactionService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     private void newMmsMessage(SmsMmsMessage message, int subscriptionId) {
 
-      String contentLocation = message.getContentLoc();
+      String contentLoc = message.getContentLoc();
       String transactionId = message.getMmsMsgId();
       Uri downloadUri = MmsBodyProvider.makeTemporaryPointer(MmsTransactionService.this).getUri();
 
-      Log.v("Requesting MMS content download from " + contentLocation + " to " + downloadUri);
+      Log.v("Requesting MMS content download from " + contentLoc + " to " + downloadUri);
 
       SmsManager smsManager;
       if (subscriptionId != -1) {
@@ -323,15 +322,7 @@ public class MmsTransactionService extends Service {
       final Bundle configOverrides = smsManager.getCarrierConfigValues();
 
       if (configOverrides.getBoolean(SmsManager.MMS_CONFIG_APPEND_TRANSACTION_ID)) {
-        if (!contentLocation.contains(transactionId)) contentLocation += transactionId;
-      }
-
-      if (TextUtils.isEmpty(configOverrides.getString(SmsManager.MMS_CONFIG_USER_AGENT))) {
-        configOverrides.remove(SmsManager.MMS_CONFIG_USER_AGENT);
-      }
-
-      if (TextUtils.isEmpty(configOverrides.getString(SmsManager.MMS_CONFIG_UA_PROF_URL))) {
-        configOverrides.remove(SmsManager.MMS_CONFIG_UA_PROF_URL);
+        if (!contentLoc.contains(transactionId)) contentLoc += transactionId;
       }
 
       Intent intent = new Intent(ACTION_DOWNLOAD_COMPLETE);
@@ -340,15 +331,15 @@ public class MmsTransactionService extends Service {
       intent.putExtra(EXTRA_URI, downloadUri.toString());
       PendingIntent pIntent =
           PendingIntent.getService(MmsTransactionService.this, 1, intent,
-                                    PendingIntent.FLAG_ONE_SHOT);
+              PendingIntent.FLAG_ONE_SHOT);
 
-      smsManager.downloadMultimediaMessage(MmsTransactionService.this,
-          contentLocation,
-          downloadUri,
-          configOverrides,
-          pIntent);
+      if (!MMSDownloader.downloadMMS(MmsTransactionService.this, smsManager, contentLoc,
+                                      downloadUri, pIntent)) {
+        Log.e("New MMS Download failed - fallback to old MMS download");
+        oldMmsMessage();
+      }
 
-    }
+      }
 
     private void mmsDownload(Intent intent) {
       Log.v("Processing MMS Download");

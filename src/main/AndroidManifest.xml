@@ -177,7 +177,7 @@
 
     <provider android:name=".providers.MmsBodyProvider"
       android:grantUriPermissions="true"
-      android:exported="false"
+      android:exported="true"
       android:authorities="net.anei.cadpage.provider.securesms.mms" />
 
   </application>

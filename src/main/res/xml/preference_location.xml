@@ -74,6 +74,13 @@
     android:entryValues="@array/pref_enable_msg_type_values"
     android:defaultValue="@string/pref_enable_msg_type_default" />
 
+    <net.anei.cadpage.preferences.SwitchPreference
+    android:key="@string/pref_use_old_mms_key"
+    android:title="@string/pref_use_old_mms_title"
+    android:summaryOn="@string/pref_use_old_mms_summaryon"
+    android:summaryOff="@string/pref_use_old_mms_summaryoff"
+    android:defaultValue="false" />
+
     <net.anei.cadpage.preferences.ListPreference
     android:key="@string/pref_mms_timeout_key"
     android:title="@string/pref_mms_timeout_title"

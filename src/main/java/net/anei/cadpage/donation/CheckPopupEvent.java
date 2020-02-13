@@ -34,7 +34,7 @@ public class CheckPopupEvent extends DonateScreenEvent {
   }
 
   @Override
-  public void onStart(DonateActivity activity) {
+  public void onRestart(DonateActivity activity) {
     if (!isEnabled()) closeEvents(activity);
   }
 

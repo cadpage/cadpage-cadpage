@@ -11,7 +11,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.view.Window;
 import android.widget.TextView;
 
 public abstract class DonateScreenBaseEvent extends DonateEvent {
@@ -109,8 +108,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
   
   
   // Map use to identify Screen events by classname
-  private static final Map<String, DonateScreenBaseEvent> screenEventMap =
-      new HashMap<String, DonateScreenBaseEvent>();
+  private static final Map<String, DonateScreenBaseEvent> screenEventMap = new HashMap<>();
   
   /**
    * Register a Donate screen event for future retrieval
@@ -173,7 +171,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * Called to perform and status changes that resulted while this activity was suspended
    * @param activity current activity
    */
-  public void onStart(DonateActivity activity) {}
+  public void onRestart(DonateActivity activity) {}
 
   /**
    * Check to see if we need to display the check popup config warning

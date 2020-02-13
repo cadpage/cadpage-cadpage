@@ -49,6 +49,10 @@
     <item>Endast Meddelandeservice</item>
   </string-array>
 
+  <string name="pref_use_old_mms_title">Use old MMS content download logic</string> <!-- Translate -->
+  <string name="pref_use_old_mms_summaryon">Wait for message app to download MMS content</string> <!-- Translate -->
+  <string name="pref_use_old_mms_summaryoff">Cadpage will download MMS content</string> <!-- Translate -->
+
   <string name="pref_mms_timeout_title">Tidsgräns för MMS-nedladdning</string>
   <string name="pref_mms_timeout_summary">Max nedladdningstid för MMS\nAktuellt värde:%%s min</string>
 
