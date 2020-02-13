@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02082019</string>
+  <string name="release_date">02122019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-01\n
+    Second attempt at implementing updated MMS alert processing.  This time there is a new
+    setting to disable it and use the old logic.  Default will be to use old logic for existing
+    users and new logic for new users.  Using the new logic requires an update to the support app.\n
+    \n
     v2.1.10-02\n
     Disabled new MMS dispatch alert logic which turns out to not work.\n
     \n
@@ -48,27 +53,6 @@
     \n
     Location Fixes:\n
     Groton, CT merged into New London County, CT\n
-    Carter County, KY\n
-    \n
-    v2.1.9-01\n
-    Added payment menu option to request refund of recent subscription purchase.  This should
-    provide some relief for users who are surprised when an old subscription automatically
-    renews.\n
-    \n
-    An alternate version of Cadpage is now available in the Aptoide store that does not
-    require an auxiliary support app to process incoming text messages.\n
-    \n
-    New Locations:\n
-    Cook County, IL (alt)\n
-    Wetzel County, WV\n
-    \n
-    Location Fixes:\n
-    Dallas County, AL\n
-    Sibley County, MN\n
-    DeSoto County, MS\n
-    Phelps County, MO\n
-    Burlington County, NJ\n
-    Benton County, OR\n
-    Charleston County, SC
+    Carter County, KY
   </string>
 </resources>
