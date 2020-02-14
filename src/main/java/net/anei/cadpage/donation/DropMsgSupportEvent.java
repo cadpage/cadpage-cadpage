@@ -2,9 +2,9 @@ package net.anei.cadpage.donation;
 
 import android.app.Activity;
 
-import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMessageQueue;
+import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.vendors.VendorManager;
 
 /**
@@ -29,7 +29,7 @@ public class DropMsgSupportEvent extends DonateEvent {
 
   @Override
   protected void doEvent(Activity activity) {
-    ManagePreferences.setEnableMsgType("C", null);
+    SmsPopupUtils.fixMsgSupport(activity);
     closeEvents(activity);
   }
 

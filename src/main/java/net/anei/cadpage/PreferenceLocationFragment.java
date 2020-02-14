@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.preference.TwoStatePreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 
 import net.anei.cadpage.donation.DonationManager;
@@ -27,7 +26,7 @@ import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.preferences.OnDialogClosedListener;
 
-public class PreferenceLocationFragment extends PreferenceFragment {
+public class PreferenceLocationFragment extends PreferenceRestorableFragment {
 
   private static final int REQ_SCANNER_CHANNEL = 1;
 

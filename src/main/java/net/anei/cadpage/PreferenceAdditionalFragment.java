@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.TwoStatePreference;
 
@@ -14,7 +13,7 @@ import net.anei.cadpage.donation.CheckPopupEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreferenceAdditionalFragment extends PreferenceFragment {
+public class PreferenceAdditionalFragment extends PreferenceRestorableFragment {
 
   private TwoStatePreference mPopupEnabledPreference;
 

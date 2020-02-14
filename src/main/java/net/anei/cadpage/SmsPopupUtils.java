@@ -222,18 +222,32 @@ public class SmsPopupUtils {
     if (version == CADPAGE_SUPPORT_VERSION4) return;
 
     // If not installed at all, turn off all text message processing
+    boolean fixed = false;
     if (version <= 0) {
-      ManagePreferences.setEnableMsgType("C");
-      return;
+      if (!ManagePreferences.enableMsgType().equals("C")) {
+        ManagePreferences.setEnableMsgType("C");
+        fixed = true;
+      }
     }
 
-    // We know that MMS downloads are not supported, so request the old MMS logic
-    if (!ManagePreferences.useOldMMS()) ManagePreferences.setUseOldMMS(true);
+    else {
 
-    // Remove any callback codes that are not supported by the current support app
-    if (version < CADPAGE_SUPPORT_VERSION3) {
-      String removeCode = version < CADPAGE_SUPPORT_VERSION2 ? "TP" : "P";
-      ManagePreferences.removeCallbackCode(removeCode);
+      // We know that MMS downloads are not supported, so request the old MMS logic
+      if (!ManagePreferences.useOldMMS()) {
+        ManagePreferences.setUseOldMMS(true);
+        fixed = true;
+      }
+
+      // Remove any callback codes that are not supported by the current support app
+      if (version < CADPAGE_SUPPORT_VERSION3) {
+        String removeCode = version < CADPAGE_SUPPORT_VERSION2 ? "TP" : "P";
+        if (ManagePreferences.removeCallbackCode(removeCode)) fixed = true;
+      }
+    }
+
+    // If we fixed anything, see if we need to restore a visible preference
+    if (fixed) {
+      PreferenceRestorableFragment.restorePreferenceValue();
     }
   }
 

@@ -1,11 +1,10 @@
 package net.anei.cadpage;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 
 import net.anei.cadpage.vendors.VendorManager;
 
-public class PreferenceDirectFragment extends PreferenceFragment {
+public class PreferenceDirectFragment extends PreferenceRestorableFragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

@@ -3,14 +3,13 @@ package net.anei.cadpage;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.widget.BaseAdapter;
 
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.preferences.EditTextPreference;
 
-public class PreferenceButtonFragment extends PreferenceFragment {
+public class PreferenceButtonFragment extends PreferenceRestorableFragment {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

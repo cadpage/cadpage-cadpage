@@ -1,11 +1,10 @@
 package net.anei.cadpage;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 
 import net.anei.cadpage.preferences.DialogPreference;
 
-public class PreferenceOtherInfoFragment extends PreferenceFragment {
+public class PreferenceOtherInfoFragment extends PreferenceRestorableFragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

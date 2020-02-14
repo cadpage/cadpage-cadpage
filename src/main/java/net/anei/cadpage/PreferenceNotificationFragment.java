@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.TwoStatePreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 
@@ -18,7 +17,7 @@ import net.anei.cadpage.preferences.ExtendedSwitchPreference;
 import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 import net.anei.cadpage.preferences.OnDataChangeListener;
 
-public class PreferenceNotificationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PreferenceNotificationFragment extends PreferenceRestorableFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
   private static final String ACCEPT_CONFLICT_KEY = "accept_conflict";
 

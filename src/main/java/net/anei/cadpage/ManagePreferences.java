@@ -1371,18 +1371,21 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
              phoneResponse ? "P" : "");
   }
 
-  public static void removeCallbackCode(String code) {
-     for (int btn = 1; btn <= POPUP_BUTTON_CNT; btn++) {
+  public static boolean removeCallbackCode(String code) {
+    boolean result = false;
+    for (int btn = 1; btn <= POPUP_BUTTON_CNT; btn++) {
       if (callbackButtonTitle(btn).length() > 0 &&
           callbackButtonCode(btn).length() > 0) {
         String type = callbackButtonType(btn);
         if (type.length() > 0 && code.contains(type)) {
+          result = false;
           setCallbackButtonType(btn, "");
           setCallbackButtonTitle(btn, "");
           setCallbackButtonCode(btn, "");
         }
       }
     }
+    return result;
   }
 
   /**
@@ -2491,7 +2494,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
-  PreferenceChangeListener msgSupportListener = (key, newVal) -> SmsPopupUtils.checkMsgSupport(context);
+  PreferenceChangeListener msgSupportListener = (key, newVal) -> {
+    if (SmsPopupUtils.checkMsgSupport(context) == 1) {
+      PreferenceRestorableFragment.setPreferenceKey(key);
+    } else {
+      PreferenceRestorableFragment.setPreferenceKey(null);
+    }
+  };
 
   private void armListeners() {
     mPrefs.registerOnSharedPreferenceChangeListener(this);

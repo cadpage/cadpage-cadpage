@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.TwoStatePreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
 import net.anei.cadpage.donation.DeveloperToolsManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -13,7 +12,7 @@ import net.anei.cadpage.preferences.BillingAccountPreference;
 
 import static android.app.Activity.RESULT_OK;
 
-public class PreferenceGeneralFragment extends PreferenceFragment {
+public class PreferenceGeneralFragment extends PreferenceRestorableFragment {
 
   private static final int BILLING_ACCT_REQ = 99991;
 
