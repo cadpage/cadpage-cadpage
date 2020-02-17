@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02152019</string>
+  <string name="release_date">02162019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.10-04\n
+    Location Fixes:\n
+    Macon County, NC\n
+    \n
     v2.1.10-03\n
     Location Fixes:\n
     Tolland County, CT\n
@@ -40,17 +44,6 @@
     Columbia County, PA\n
     Lexington County, SC\n
     Pickens County, SC\n
-    Racine County, WI\n
-    \n
-    v2.1.9-03\n
-    New Locations:\n
-    Erie County, NY (alt)\n
-    \n
-    Location Fixes:\n
-    DeSoto County, MS\n
-    Pontotoc County, MS\n
-    Cattaraugus County, NY\n
-    Cuyahoga County, OH\n
-    McCormick County, SC
+    Racine County, WI
   </string>
 </resources>
