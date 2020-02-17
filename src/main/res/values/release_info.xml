@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02122019</string>
+  <string name="release_date">02162019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
@@ -8,6 +8,21 @@
     Second attempt at implementing updated MMS alert processing.  This time there is a new
     setting to disable it and use the old logic.  Default will be to use old logic for existing
     users and new logic for new users.  Using the new logic requires an update to the support app.\n
+    \n
+    v2.1.10-04\n
+    Location Fixes:\n
+    Macon County, NC\n
+    \n
+    v2.1.10-03\n
+    Location Fixes:\n
+    Tolland County, CT\n
+    Barry County, MI\n
+    Scott County, MO\n
+    Nash County, NC\n
+    Madison County, OH\n
+    Dallas County, TX\n
+    Botetourt County, VA\n
+    Roanoke County, VA\n
     \n
     v2.1.10-02\n
     Disabled new MMS dispatch alert logic which turns out to not work.\n
@@ -22,37 +37,5 @@
     Marion County, SC\n
     Neuces County, TX\n
     Warren County, VA\n
-    \n
-    v2.1.9-04\n
-    New Locations:\n
-    Monroe County, IL\n
-    \n
-    Location Fixes:\n
-    Mendocino County, CA\n
-    Adams County, CO\n
-    Haywood County, NC\n
-    Columbia County, PA\n
-    Lexington County, SC\n
-    Pickens County, SC\n
-    Racine County, WI\n
-    \n
-    v2.1.9-03\n
-    New Locations:\n
-    Erie County, NY (alt)\n
-    \n
-    Location Fixes:\n
-    DeSoto County, MS\n
-    Pontotoc County, MS\n
-    Cattaraugus County, NY\n
-    Cuyahoga County, OH\n
-    McCormick County, SC\n
-    \n
-    v2.1.9-02\n
-    New Locations:
-    Dauphin County, PA (alt)\n
-    \n
-    Location Fixes:\n
-    Groton, CT merged into New London County, CT\n
-    Carter County, KY
   </string>
 </resources>
