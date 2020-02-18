@@ -1378,7 +1378,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           callbackButtonCode(btn).length() > 0) {
         String type = callbackButtonType(btn);
         if (type.length() > 0 && code.contains(type)) {
-          result = false;
+          result = true;
           setCallbackButtonType(btn, "");
           setCallbackButtonTitle(btn, "");
           setCallbackButtonCode(btn, "");
@@ -2497,8 +2497,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   PreferenceChangeListener msgSupportListener = (key, newVal) -> {
     if (SmsPopupUtils.checkMsgSupport(context) == 1) {
       PreferenceRestorableFragment.setPreferenceKey(key);
-    } else {
-      PreferenceRestorableFragment.setPreferenceKey(null);
     }
   };
 

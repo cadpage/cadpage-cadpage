@@ -37,6 +37,7 @@ public class PreferenceRestorableFragment extends PreferenceFragment {
    * Restore the visible value of a preference if it is displayed by this fragment
    */
   private void doRestorePreferenceValue() {
+    if (curPrefKey == null) return;
     Preference pref = findPreference(curPrefKey);
     if (pref == null) return;
     SharedPreferences prefs = pref.getSharedPreferences();
@@ -52,7 +53,7 @@ public class PreferenceRestorableFragment extends PreferenceFragment {
   }
 
   public static void setPreferenceKey(String prefKey) {
-    Log.v("PreferenceRestoreableFragment.setPrefernceKey(" + prefKey + ")");
+    Log.v("PreferenceRestoreableFragment.setPreferenceKey(" + prefKey + ")");
     curPrefKey = prefKey;
   }
 

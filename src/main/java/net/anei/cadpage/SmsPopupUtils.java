@@ -16,6 +16,7 @@ import android.net.NetworkInfo;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
 
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class SmsPopupUtils {
 
   private static final String CADPAGE_SUPPORT_PKG = "net.anei.cadpagesupport";
@@ -170,6 +171,7 @@ public class SmsPopupUtils {
     // Get the installed support app version and see if it meets are needs
     // If it does not, issue user prompt if requested.  In any case, return 1
     int installedVersion = getSupportAppVersion(context);
+    Log.v("Installed support version:" + installedVersion);
     if (installedVersion < version) {
       if (prompt) {
         if (installedVersion <= 0) {
