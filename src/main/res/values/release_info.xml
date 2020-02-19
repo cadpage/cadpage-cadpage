@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02162019</string>
+  <string name="release_date">02192019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.1.11-01\n
+    v2.1.11-02\n
     Second attempt at implementing updated MMS alert processing.  This time there is a new
     setting to disable it and use the old logic.  Default will be to use old logic for existing
     users and new logic for new users.  Using the new logic requires an update to the support app.\n
+    \n
+    v2.10-05\n
+    New Locations:\n
+    Tolland County, CT (alt)\n
+    \n
+    Location Fixes:\n
+    Jones County, NC\n
+    Lenoir County, NC\n
+    Macon County, NC\n
+    Clarendon County, SC\n
     \n
     v2.1.10-04\n
     Location Fixes:\n
@@ -25,17 +35,6 @@
     Roanoke County, VA\n
     \n
     v2.1.10-02\n
-    Disabled new MMS dispatch alert logic which turns out to not work.\n
-    \n
-    v2.1.10-01\n
-    Processing of MMS dispatch alerts under Android 5 and up no longer requires the
-    assistance of a compatible message app.\n
-    \n
-    Screen control options that serve no purpose under Android 10 have been removed.\n
-    \n
-    Location Fixes:\n
-    Marion County, SC\n
-    Neuces County, TX\n
-    Warren County, VA\n
+    Disabled new MMS dispatch alert logic which turns out to not work.
   </string>
 </resources>
