@@ -204,7 +204,11 @@ public class TrackingService extends Service implements LocationTracker.Location
     intent.putExtra(EXTRA_END_TIME, SystemClock.uptimeMillis() + duration);
     intent.putExtra(EXTRA_MIN_DIST, minDist);
     intent.putExtra(EXTRA_MIN_TIME, minTime);
-    context.startService(intent);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      context.startForegroundService(intent);
+    } else {
+      context.startService(intent);
+    }
   }
 
   private static void holdPowerLock(Context context) {

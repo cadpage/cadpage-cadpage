@@ -1757,7 +1757,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // A Y (always) value required the ACCESS_FINE_LOCATION permission
       // A A (ask) value will request the permission only when the users requests location tracking
       if (!value.equals("Y")) return null;
-      return checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION) ? null : "A";
+
+      // We need to check two permissions, and cannot use the && shortcut because the checkRequestPermission
+      // method has necessary side effects requiring that both calls be made
+      boolean g1 = checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
+      boolean g2 = checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
+      return g1 && g2 ? null : "A";
     }
   }
   
@@ -2208,6 +2213,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     protected void checkPermission() {
       checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
+      checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
     }
   }
   
