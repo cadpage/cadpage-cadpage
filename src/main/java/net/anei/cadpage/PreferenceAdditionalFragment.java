@@ -11,7 +11,7 @@ import androidx.preference.TwoStatePreference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreferenceAdditionalFragment extends PreferenceFragment {
+public class PreferenceAdditionalFragment extends PreferenceRestorableFragment {
 
   private TwoStatePreference mPopupEnabledPreference;
 

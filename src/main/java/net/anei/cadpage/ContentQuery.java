@@ -151,7 +151,7 @@ public class ContentQuery {
     
   }
 
-  private static String dumpByteArray(byte[] data) {
+  public static String dumpByteArray(byte[] data) {
     StringBuilder sb = new StringBuilder();
     for (byte b : data) {
       sb.append(hexChar(b>>4));

@@ -52,6 +52,10 @@
     <item>Direct paging only</item>
   </string-array>
 
+  <string name="pref_use_old_mms_title">Use old MMS content download logic</string>
+  <string name="pref_use_old_mms_summaryon">Wait for message app to download MMS content</string>
+  <string name="pref_use_old_mms_summaryoff">Cadpage will download MMS content</string>
+
   <string name="pref_mms_timeout_title">MMS download timeout</string>
   <string name="pref_mms_timeout_summary">MMS content download time limit\nCur value:%%s min</string>
   <string-array name="pref_mms_timeout_values" tools:ignore="MissingTranslation">

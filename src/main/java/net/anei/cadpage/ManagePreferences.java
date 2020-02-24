@@ -46,7 +46,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 50;
+  private static final int PREFERENCE_VERSION = 51;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -92,8 +92,17 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     File checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
 
     // There are a lot of specialized preference fixes we have to make when
-    // user upgrades from an earlier version of Cadpage.  None of these have
-    // to be done if there was no previous version of Cadpage.
+    // user upgrades from an earlier version of Cadpage.  Defaulting the use old MMS logic is
+    // exceptional in that it should be applied the initial Cadpage installs as well as upgrades
+    // to where it was first defined.
+    if (oldVersion < 51) {
+      if (SmsPopupUtils.isOldMMSDefault(context)) {
+        prefs.putBoolean(R.string.pref_use_old_mms_key, true);
+      }
+    }
+
+    // All of the other specialized preference fixes are only applied to a Cadpage upgrade.  The
+    // are not performed for new cadpage installs.
     if (oldVersion > 0 && oldVersion < PREFERENCE_VERSION) {
 
       // If old version < 50, reverse the override volume control setting
@@ -365,6 +374,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   public static String enableMsgType() {
     return prefs.getString(R.string.pref_enable_msg_type_key);
+  }
+
+  public static void setEnableMsgType(String newVal) {
+    prefs.putString(R.string.pref_enable_msg_type_key, newVal);
   }
 
   public static int mmsTimeout() {
@@ -852,7 +865,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static String callbackButtonTitle(int button) {
     return prefs.getString(CALLBACK_TITLE_IDS[button-1]);
   }
-  
+
+  private static void setCallbackButtonTitle(int button, String value) {
+    prefs.putString(CALLBACK_TITLE_IDS[button-1], value);
+  }
+
   private static final int[] CALLBACK_CODE_IDS = new int[]{
     R.string.pref_callback1_key,
     R.string.pref_callback2_key,
@@ -864,6 +881,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   public static String callbackButtonCode(int button) {
     return prefs.getString(CALLBACK_CODE_IDS[button-1]);
+  }
+
+  private static void setCallbackButtonCode(int button, String value) {
+    prefs.putString(CALLBACK_CODE_IDS[button-1], value);
   }
 
   private static final int[] EXTRA_BUTTON_IDS = new int[]{
@@ -1305,7 +1326,15 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setForcePopup(boolean newVal) {
     prefs.putBoolean(R.string.pref_force_popup, newVal);
   }
-  
+
+  public static boolean useOldMMS() {
+    return prefs.getBoolean(R.string.pref_use_old_mms_key);
+  }
+
+  public static void setUseOldMMS(boolean newVal) {
+    prefs.putBoolean(R.string.pref_use_old_mms_key, newVal);
+  }
+
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
     settings.clear();
@@ -1340,6 +1369,23 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
     return (textResponse ? (phoneResponse ? "TP" : "T") :
              phoneResponse ? "P" : "");
+  }
+
+  public static boolean removeCallbackCode(String code) {
+    boolean result = false;
+    for (int btn = 1; btn <= POPUP_BUTTON_CNT; btn++) {
+      if (callbackButtonTitle(btn).length() > 0 &&
+          callbackButtonCode(btn).length() > 0) {
+        String type = callbackButtonType(btn);
+        if (type.length() > 0 && code.contains(type)) {
+          result = true;
+          setCallbackButtonType(btn, "");
+          setCallbackButtonTitle(btn, "");
+          setCallbackButtonCode(btn, "");
+        }
+      }
+    }
+    return result;
   }
 
   /**
@@ -1711,7 +1757,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // A Y (always) value required the ACCESS_FINE_LOCATION permission
       // A A (ask) value will request the permission only when the users requests location tracking
       if (!value.equals("Y")) return null;
-      return checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION) ? null : "A";
+
+      // We need to check two permissions, and cannot use the && shortcut because the checkRequestPermission
+      // method has necessary side effects requiring that both calls be made
+      boolean g1 = checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
+      boolean g2 = checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
+      return g1 && g2 ? null : "A";
     }
   }
   
@@ -2162,6 +2213,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     protected void checkPermission() {
       checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
+      checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
     }
   }
   
@@ -2448,49 +2500,38 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
+  PreferenceChangeListener msgSupportListener = (key, newVal) -> {
+    if (SmsPopupUtils.checkMsgSupport(context) == 1) {
+      PreferenceRestorableFragment.setPreferenceKey(key);
+    }
+  };
+
   private void armListeners() {
     mPrefs.registerOnSharedPreferenceChangeListener(this);
 
-    registerListener(R.string.pref_enabled_key, new PreferenceChangeListener(){
-      @Override
-      public void preferenceChanged(String key, Object newVal) {
-        boolean enabled = (Boolean)newVal;
-        String enableStr = (enabled ? enableMsgType() : "");
-        SmsPopupUtils.enableSMSPopup(context, enableStr);
-        CadPageWidget.update(context);
-      }
+    registerListener(R.string.pref_enabled_key, (String key, Object newVal) -> {
+      boolean enabled = (Boolean)newVal;
+      String enableStr = (enabled ? enableMsgType() : "");
+      SmsPopupUtils.enableSMSPopup(context, enableStr);
+      CadPageWidget.update(context);
     });
 
-    registerListener(R.string.pref_enable_msg_type_key, new PreferenceChangeListener(){
-      @Override
-      public void preferenceChanged(String key, Object newVal) {
-        String enableMsgType = (String)newVal;
-        if (enabled()) SmsPopupUtils.enableSMSPopup(context, enableMsgType);
-        SmsPopupUtils.checkMsgSupport(context);
-      }
+    registerListener(R.string.pref_enable_msg_type_key, msgSupportListener);
+    registerListener(R.string.pref_use_old_mms_key, msgSupportListener);
+    for (int btn = 0; btn < CALLBACK_BUTTON_CNT; btn++) {
+      registerListener(CALLBACK_TYPE_IDS[btn], msgSupportListener);
+      registerListener(CALLBACK_TITLE_IDS[btn], msgSupportListener);
+      registerListener(CALLBACK_CODE_IDS[btn], msgSupportListener);
+    }
+
+    registerListener(R.string.pref_notif_enabled_key, (String key, Object newVal) -> CadPageWidget.update(context));
+
+    registerListener(R.string.pref_popup_enabled_key, (String key, Object newVal) -> {
+      CadPageWidget.update(context);
+      CheckPopupEvent.instance().launch(context);
     });
 
-    registerListener(R.string.pref_notif_enabled_key, new PreferenceChangeListener(){
-      @Override
-      public void preferenceChanged(String key, Object newVal) {
-        CadPageWidget.update(context);
-      }
-    });
-
-    registerListener(R.string.pref_popup_enabled_key, new PreferenceChangeListener(){
-      @Override
-      public void preferenceChanged(String key, Object newVal) {
-        CadPageWidget.update(context);
-        CheckPopupEvent.instance().launch(context);
-      }
-    });
-
-    registerListener(R.string.pref_show_history_address_key, new PreferenceChangeListener(){
-      @Override
-      public void preferenceChanged(String key, Object newVal) {
-        SmsMessageQueue.getInstance().notifyDataChange();
-      }
-    });
+    registerListener(R.string.pref_show_history_address_key, (String key, Object newVal) -> SmsMessageQueue.getInstance().notifyDataChange());
   }
 
   @Override
@@ -2621,6 +2662,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_defcity_key,
       R.string.pref_defstate_key,
       R.string.pref_enable_msg_type_key,
+      R.string.pref_use_old_mms_key,
       R.string.pref_timeout_key,
       R.string.pref_mms_timeout_key,
       R.string.pref_loglimit_key,

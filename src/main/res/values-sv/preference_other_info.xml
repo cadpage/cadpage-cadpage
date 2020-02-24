@@ -20,6 +20,7 @@
   <string name="pref_about_summary">Om Cadpage</string>
   <string name="pref_about_text">
       Skapad av Derrick Bennett och Ken Corbin med stöd av Jean Goul, baserad på kod av : Adam K (SMS Popup Application)\n
+      Ny logik för processande av MMS, skamlöst kopierat från Android-Signal\n
       Svensk översättning av Roger Ehrstedt\n
   </string>
 

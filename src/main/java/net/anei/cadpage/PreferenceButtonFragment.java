@@ -6,7 +6,7 @@ import androidx.preference.PreferenceScreen;
 
 import androidx.preference.EditTextPreference;
 
-public class PreferenceButtonFragment extends PreferenceFragment {
+public class PreferenceButtonFragment extends PreferenceRestorableFragment {
 
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

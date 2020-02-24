@@ -13,12 +13,7 @@ class HelpDoEnableSmsEvent extends DonateEvent {
 
   @Override
   protected void doEvent(final Activity activity) {
-    ManagePreferences.setEnableMsgType("CS", new Runnable(){
-      @Override
-      public void run() {
-        ((DonateActivity)activity).switchEvent(HelpTextDispatchEvent.instance(), null);
-      }
-    });
+    ManagePreferences.setEnableMsgType("CS");
   }
 
   private static final HelpDoEnableSmsEvent instance = new HelpDoEnableSmsEvent();

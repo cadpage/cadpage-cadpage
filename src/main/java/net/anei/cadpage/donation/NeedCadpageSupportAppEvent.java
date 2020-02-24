@@ -28,7 +28,7 @@ public class NeedCadpageSupportAppEvent extends DonateScreenEvent {
   }
 
   @Override
-  public void onStart(DonateActivity activity) {
+  public void onRestart(DonateActivity activity) {
     if (SmsPopupUtils.checkMsgSupport(activity, false) != 1) {
       closeEvents(activity);
     }

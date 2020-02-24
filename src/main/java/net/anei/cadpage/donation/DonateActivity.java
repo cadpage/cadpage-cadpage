@@ -48,9 +48,9 @@ public class DonateActivity extends BillingActivity {
   }
 
   @Override
-  protected void onStart() {
-    super.onStart();
-    event.onStart(this);
+  protected void onRestart() {
+    super.onRestart();
+    event.onRestart(this);
   }
 
   @Override

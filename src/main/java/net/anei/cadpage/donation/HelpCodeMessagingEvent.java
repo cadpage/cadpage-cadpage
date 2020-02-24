@@ -21,7 +21,7 @@ public class HelpCodeMessagingEvent extends DonateScreenEvent {
   }
 
   @Override
-  public void onStart(DonateActivity activity) {
+  public void onRestart(DonateActivity activity) {
 
     // If Cadpage is now functional, switch to the Cadpage Ready menu node
     if (ManagePreferences.isFunctional()) activity.switchEvent(HelpCadpageReadyEvent.instance(), null);

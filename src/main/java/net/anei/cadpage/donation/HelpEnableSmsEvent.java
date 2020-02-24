@@ -17,6 +17,8 @@ center is located
  */
 public class HelpEnableSmsEvent extends DonateScreenEvent {
 
+  private SmsMmsMessage msg;
+
   private HelpEnableSmsEvent() {
     super(R.string.help_text_dispatch_title, R.string.help_text_dispatch_wintitle, R.string.help_enable_sms_text,
           HelpDoEnableSmsEvent.instance());
@@ -25,12 +27,22 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
   @Override
   public void create(Activity activity, SmsMmsMessage msg) {
 
+    this.msg = msg;
+
     // If SMS message processing is enabled, we want to switch to the regular text processing menu
     // Otherwise process normally
     if (ManagePreferences.enableMsgType().contains("S")) {
       ((DonateActivity)activity).switchEvent(HelpTextDispatchEvent.instance(), msg);
     } else {
       super.create(activity, msg);
+    }
+  }
+
+  @Override
+  public void onRestart(DonateActivity activity) {
+    super.onRestart(activity);
+    if (ManagePreferences.enableMsgType().contains("S")) {
+      activity.switchEvent(HelpTextDispatchEvent.instance(), msg);
     }
   }
 

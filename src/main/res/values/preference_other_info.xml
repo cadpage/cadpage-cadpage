@@ -19,6 +19,7 @@
   <string name="pref_about_summary">About Cadpage</string>
   <string name="pref_about_text">
        By Derrick Bennett and Ken Corbin supported by Jean Goul, based on Code by : Adam K (SMS Popup Application)\n
+       New MMS processing logic shamelessly copied from Android-Signal\n
        Swedish translation by Roger Ehrstedt
    </string>
 

@@ -20,7 +20,7 @@ import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 
 import java.util.Objects;
 
-public class PreferenceNotificationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PreferenceNotificationFragment extends PreferenceRestorableFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
   private static final String ACCEPT_CONFLICT_KEY = "accept_conflict";
 

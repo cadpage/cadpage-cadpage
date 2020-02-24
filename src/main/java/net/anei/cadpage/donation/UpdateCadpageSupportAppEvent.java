@@ -14,7 +14,8 @@ public class UpdateCadpageSupportAppEvent extends DonateScreenEvent {
 
   private UpdateCadpageSupportAppEvent() {
     super(AlertStatus.RED, R.string.donate_update_cadpage_support_app_title, R.string.donate_update_cadpage_support_app_text,
-          InstallCadpageSupportAppEvent.instance());
+          InstallCadpageSupportAppEvent.instance(),
+          FixMsgSupportEvent.instance());
   }
 
   @Override
@@ -23,7 +24,7 @@ public class UpdateCadpageSupportAppEvent extends DonateScreenEvent {
   }
 
   @Override
-  public void onStart(DonateActivity activity) {
+  public void onRestart(DonateActivity activity) {
     if (SmsPopupUtils.checkMsgSupport(activity, false) != 1) {
       closeEvents(activity);
     }

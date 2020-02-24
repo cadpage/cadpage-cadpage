@@ -24,7 +24,7 @@ import net.anei.cadpage.preferences.LocationSwitchPreference;
 import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
 
-public class PreferenceLocationFragment extends PreferenceFragment {
+public class PreferenceLocationFragment extends PreferenceRestorableFragment {
 
   private static final int REQ_SCANNER_CHANNEL = 1;
 

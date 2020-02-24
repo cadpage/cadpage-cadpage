@@ -6,8 +6,7 @@ import net.anei.cadpage.vendors.VendorManager;
 
 import java.util.Objects;
 
-public class PreferenceDirectFragment extends PreferenceFragment {
-
+public class PreferenceDirectFragment extends PreferenceRestorableFragment {
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 

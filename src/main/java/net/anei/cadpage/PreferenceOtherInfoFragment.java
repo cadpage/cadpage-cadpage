@@ -4,8 +4,7 @@ import android.os.Bundle;
 
 import net.anei.cadpage.preferences.DialogPreference;
 
-public class PreferenceOtherInfoFragment extends PreferenceFragment {
-
+public class PreferenceOtherInfoFragment extends PreferenceRestorableFragment {
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
