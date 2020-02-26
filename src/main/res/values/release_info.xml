@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02232019</string>
+  <string name="release_date">02262019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-04\n
+    Location Fixes:\n
+    Erie County, PA\n
+    Juniata County, PA\n
+    Charleston County, SC\n
+    \n
     v2.1.11-03\n
     For Active911 users under Android 10.  Cadpage now requests permission to report your location
     when it is not active.\n
@@ -33,20 +39,6 @@
     \n
     v2.1.10-04\n
     Location Fixes:\n
-    Macon County, NC\n
-    \n
-    v2.1.10-03\n
-    Location Fixes:\n
-    Tolland County, CT\n
-    Barry County, MI\n
-    Scott County, MO\n
-    Nash County, NC\n
-    Madison County, OH\n
-    Dallas County, TX\n
-    Botetourt County, VA\n
-    Roanoke County, VA\n
-    \n
-    v2.1.10-02\n
-    Disabled new MMS dispatch alert logic which turns out to not work.
+    Macon County, NC
   </string>
 </resources>
