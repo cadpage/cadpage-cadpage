@@ -5,15 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 import android.view.KeyEvent;
 
-import java.util.List;
-
 @SuppressWarnings("SimplifiableIfStatement")
-public class SmsPopupConfigActivity extends PreferenceActivity {
+public class SmsPopupConfigActivity extends AppCompatActivity
+  implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback{
 
   public static final String EXTRA_PREFERENCE = "PreferenceActivity.PREFERENCE";
 
@@ -30,16 +33,30 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     super.onCreate(savedInstanceState);
 
     ManagePreferences.setPermissionManager(permMgr);
+
+    getSupportFragmentManager()
+      .beginTransaction()
+      .replace(android.R.id.content, new PreferenceHeadersFragment())
+      .commit();
+
   }
 
   @Override
-  public void onBuildHeaders(List<Header> target) {
-    loadHeadersFromResource(R.xml.preference_headers, target);
-  }
+  public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
 
-  @Override
-  protected boolean isValidFragment(String fragmentName) {
-    return fragmentName.startsWith("net.anei.cadpage.Preference") && fragmentName.endsWith("Fragment");
+    // Instantiate the new Fragment
+    final Bundle args = pref.getExtras();
+    final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
+      getClassLoader(),
+      pref.getFragment());
+    fragment.setArguments(args);
+    fragment.setTargetFragment(caller, 0);
+    // Replace the existing Fragment with the new Fragment
+    getSupportFragmentManager().beginTransaction()
+      .replace(R.id.content, fragment)
+      .addToBackStack(null)
+      .commit();
+    return true;
   }
 
   @Override

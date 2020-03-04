@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <Preference
-    android:key="@string/pref_payment_status_key"
-    android:title="@string/pref_payment_status_title"/>
+    app:key="@string/pref_payment_status_key"
+    app:title="@string/pref_payment_status_title"/>
 
   <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_enabled_key"
-    android:title="@string/pref_enabled_title"
-    android:summaryOn="@string/pref_enabled_summaryon"
-    android:summaryOff="@string/pref_enabled_summaryoff"
-    android:defaultValue="true" />
+    app:key="@string/pref_enabled_key"
+    app:title="@string/pref_enabled_title"
+    app:summaryOn="@string/pref_enabled_summaryon"
+    app:summaryOff="@string/pref_enabled_summaryoff"
+    app:defaultValue="true" />
 
   <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_history_limit_key"
-    android:title="@string/pref_history_limit_title"
-    android:summary="@string/pref_history_limit_summary"
-    android:entries="@array/pref_history_limit_entries"
-    android:entryValues="@array/pref_history_limit_entries"
-    android:dialogTitle="@string/pref_history_limit_title"
-    android:defaultValue="@string/pref_history_limit_default" />
+    app:key="@string/pref_history_limit_key"
+    app:title="@string/pref_history_limit_title"
+    app:summary="@string/pref_history_limit_summary"
+    app:entries="@array/pref_history_limit_entries"
+    app:entryValues="@array/pref_history_limit_entries"
+    app:dialogTitle="@string/pref_history_limit_title"
+    app:defaultValue="@string/pref_history_limit_default" />
 
   <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_show_history_address_key"
-    android:title="@string/pref_show_history_address_title"
-    android:summaryOn="@string/pref_show_history_address_summaryon"
-    android:summaryOff="@string/pref_show_history_address_summaryoff"
-    android:defaultValue="true" />
+    app:key="@string/pref_show_history_address_key"
+    app:title="@string/pref_show_history_address_title"
+    app:summaryOn="@string/pref_show_history_address_summaryon"
+    app:summaryOff="@string/pref_show_history_address_summaryoff"
+    app:defaultValue="true" />
 
   <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_show_personal_key"
-    android:title="@string/pref_show_personal_title"
-    android:summaryOn="@string/pref_show_personal_summaryon"
-    android:summaryOff="@string/pref_show_personal_summaryoff"
-    android:defaultValue="@string/pref_show_personal_default" />
+    app:key="@string/pref_show_personal_key"
+    app:title="@string/pref_show_personal_title"
+    app:summaryOn="@string/pref_show_personal_summaryon"
+    app:summaryOff="@string/pref_show_personal_summaryoff"
+    app:defaultValue="@string/pref_show_personal_default" />
 
   <net.anei.cadpage.preferences.BillingAccountPreference
-    android:key="@string/pref_billing_account_key"
-    android:title="@string/pref_billing_account_title"
-    android:summary="@string/pref_billing_account_summary"/>
+    app:key="@string/pref_billing_account_key"
+    app:title="@string/pref_billing_account_title"
+    app:summary="@string/pref_billing_account_summary"/>
 
   <PreferenceScreen
-  android:title="@string/pref_review_title"
-  android:summary="@string/pref_review_summary">
+  app:title="@string/pref_review_title"
+  app:summary="@string/pref_review_summary">
     <intent
-    android:action="android.intent.action.VIEW"
-    android:data="@string/pref_review_url" />
+    app:action="android.intent.action.VIEW"
+    app:data="@string/pref_review_url" />
   </PreferenceScreen>
 
   <Preference
-  android:key="@string/pref_email_key"
-  android:title="@string/pref_email_title"
-  android:summary="@string/pref_email_summary" />
+  app:key="@string/pref_email_key"
+  app:title="@string/pref_email_title"
+  app:summary="@string/pref_email_summary" />
 
 </PreferenceScreen>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-    android:key="@string/pref_reconnect_key"
-    android:title="@string/pref_reconnect_title"
-    android:summary="@string/pref_reconnect_summary"
-    android:order="1000"/>
+    app:key="@string/pref_reconnect_key"
+    app:title="@string/pref_reconnect_title"
+    app:summary="@string/pref_reconnect_summary"
+    app:order="1000"/>
 
 </PreferenceScreen>

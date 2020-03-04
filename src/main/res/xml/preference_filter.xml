@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidDomInspection -->
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
   <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_gen_alert_option_key"
-    android:title="@string/pref_gen_alert_option_title"
-    android:summary="@string/pref_gen_alert_option_summary"
-    android:entries="@array/pref_alert_option_text"
-    android:entryValues="@array/pref_alert_option_values"
-    android:defaultValue=""/>
+    app:key="@string/pref_gen_alert_option_key"
+    app:title="@string/pref_gen_alert_option_title"
+    app:summary="@string/pref_gen_alert_option_summary"
+    app:entries="@array/pref_alert_option_text"
+    app:entryValues="@array/pref_alert_option_values"
+    app:defaultValue=""/>
   <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_run_report_option_key"
-    android:title="@string/pref_run_report_option_title"
-    android:summary="@string/pref_run_report_option_summary"
-    android:entries="@array/pref_alert_option_text"
-    android:entryValues="@array/pref_alert_option_values"
-    android:defaultValue=""/>
+    app:key="@string/pref_run_report_option_key"
+    app:title="@string/pref_run_report_option_title"
+    app:summary="@string/pref_run_report_option_summary"
+    app:entries="@array/pref_alert_option_text"
+    app:entryValues="@array/pref_alert_option_values"
+    app:defaultValue=""/>
 </PreferenceScreen>

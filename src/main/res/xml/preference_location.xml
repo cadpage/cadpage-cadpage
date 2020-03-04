@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidDomInspection -->
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-    android:key="@string/pref_loc_desc_key"
-    android:title="@string/pref_loc_desc_title"/>
+    app:key="@string/pref_loc_desc_key"
+    app:title="@string/pref_loc_desc_title"/>
 
     <PreferenceScreen
-    android:key="@string/pref_location_tree_key"
-    android:title="@string/pref_location_title"
-    android:summary="@string/pref_location_summary"/>
+    app:key="@string/pref_location_tree_key"
+    app:title="@string/pref_location_title"
+    app:summary="@string/pref_location_summary"/>
 
     <PreferenceScreen
-    android:key="@string/pref_location_mtree_key"
-    android:title="@string/pref_multi_location_title"
-    android:summary="@string/pref_multi_location_summary"/>
+    app:key="@string/pref_location_mtree_key"
+    app:title="@string/pref_multi_location_title"
+    app:summary="@string/pref_multi_location_summary"/>
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_override_filter_key"
-    android:title="@string/pref_override_filter_title"
-    android:summaryOn="@string/pref_override_filter_summaryon"
-    android:summaryOff="@string/pref_override_filter_summaryoff"
-    android:defaultValue="@string/pref_override_filter_default" />
+    app:key="@string/pref_override_filter_key"
+    app:title="@string/pref_override_filter_title"
+    app:summaryOn="@string/pref_override_filter_summaryon"
+    app:summaryOff="@string/pref_override_filter_summaryoff"
+    app:defaultValue="@string/pref_override_filter_default" />
 
     <net.anei.cadpage.preferences.EditTextPreference
-    android:dialogTitle="@string/pref_filter_title"
-    android:dialogMessage="@string/pref_filter_dialog"
-    android:key="@string/pref_filter_key"
-    android:title="@string/pref_filter_title"
-    android:summary="@string/pref_filter_summary"
-    android:defaultValue="" />
+    app:dialogTitle="@string/pref_filter_title"
+    app:dialogMessage="@string/pref_filter_dialog"
+    app:key="@string/pref_filter_key"
+    app:title="@string/pref_filter_title"
+    app:summary="@string/pref_filter_summary"
+    app:defaultValue="" />
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_show_source_key"
-    android:title="@string/pref_show_source_title"
-    android:summaryOn="@string/pref_show_source_summaryon"
-    android:summaryOff="@string/pref_show_source_summaryoff"
-    android:defaultValue="@string/pref_show_source_default" />
+    app:key="@string/pref_show_source_key"
+    app:title="@string/pref_show_source_title"
+    app:summaryOn="@string/pref_show_source_summaryon"
+    app:summaryOff="@string/pref_show_source_summaryoff"
+    app:defaultValue="@string/pref_show_source_default" />
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_override_default_key"
-    android:title="@string/pref_override_default_title"
-    android:summaryOn="@string/pref_override_default_summaryon"
-    android:summaryOff="@string/pref_override_default_summaryoff"
-    android:defaultValue="@string/pref_override_default_default" />
+    app:key="@string/pref_override_default_key"
+    app:title="@string/pref_override_default_title"
+    app:summaryOn="@string/pref_override_default_summaryon"
+    app:summaryOff="@string/pref_override_default_summaryoff"
+    app:defaultValue="@string/pref_override_default_default" />
 
     <net.anei.cadpage.preferences.EditTextPreference
-    android:dialogTitle="@string/pref_defcity_title"
-    android:dialogMessage="@string/pref_defcity_dialog"
-    android:key="@string/pref_defcity_key"
-    android:title="@string/pref_defcity_title"
-    android:summary="@string/pref_defcity_summary"
-    android:capitalize="characters"
-    android:inputType="textVisiblePassword"
-    android:defaultValue="" />
+    app:dialogTitle="@string/pref_defcity_title"
+    app:dialogMessage="@string/pref_defcity_dialog"
+    app:key="@string/pref_defcity_key"
+    app:title="@string/pref_defcity_title"
+    app:summary="@string/pref_defcity_summary"
+    app:capitalize="characters"
+    app:inputType="textVisiblePassword"
+    app:defaultValue="" />
 
     <net.anei.cadpage.preferences.EditTextPreference
-    android:dialogTitle="@string/pref_defstate_title"
-    android:dialogMessage="@string/pref_defstate_dialog"
-    android:key="@string/pref_defstate_key"
-    android:title="@string/pref_defstate_title"
-    android:summary="@string/pref_defstate_summary"
-    android:capitalize="characters"
-    android:inputType="textVisiblePassword"
-    android:defaultValue="" />
+    app:dialogTitle="@string/pref_defstate_title"
+    app:dialogMessage="@string/pref_defstate_dialog"
+    app:key="@string/pref_defstate_key"
+    app:title="@string/pref_defstate_title"
+    app:summary="@string/pref_defstate_summary"
+    app:capitalize="characters"
+    app:inputType="textVisiblePassword"
+    app:defaultValue="" />
 
     <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_enable_msg_type_key"
-    android:title="@string/pref_enable_msg_type_title"
-    android:summary="@string/pref_enable_msg_type_summary"
-    android:entries="@array/pref_enable_msg_type_entries"
-    android:entryValues="@array/pref_enable_msg_type_values"
-    android:defaultValue="@string/pref_enable_msg_type_default" />
+    app:key="@string/pref_enable_msg_type_key"
+    app:title="@string/pref_enable_msg_type_title"
+    app:summary="@string/pref_enable_msg_type_summary"
+    app:entries="@array/pref_enable_msg_type_entries"
+    app:entryValues="@array/pref_enable_msg_type_values"
+    app:defaultValue="@string/pref_enable_msg_type_default" />
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_use_old_mms_key"
-    android:title="@string/pref_use_old_mms_title"
-    android:summaryOn="@string/pref_use_old_mms_summaryon"
-    android:summaryOff="@string/pref_use_old_mms_summaryoff"
-    android:defaultValue="false" />
+    app:key="@string/pref_use_old_mms_key"
+    app:title="@string/pref_use_old_mms_title"
+    app:summaryOn="@string/pref_use_old_mms_summaryon"
+    app:summaryOff="@string/pref_use_old_mms_summaryoff"
+    app:defaultValue="false" />
 
     <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_mms_timeout_key"
-    android:title="@string/pref_mms_timeout_title"
-    android:summary="@string/pref_mms_timeout_summary"
-    android:entries="@array/pref_mms_timeout_values"
-    android:entryValues="@array/pref_mms_timeout_values"
-    android:dialogTitle="@string/pref_mms_timeout_title"
-    android:defaultValue="@string/pref_mms_timeout_default"/>
+    app:key="@string/pref_mms_timeout_key"
+    app:title="@string/pref_mms_timeout_title"
+    app:summary="@string/pref_mms_timeout_summary"
+    app:entries="@array/pref_mms_timeout_values"
+    app:entryValues="@array/pref_mms_timeout_values"
+    app:dialogTitle="@string/pref_mms_timeout_title"
+    app:defaultValue="@string/pref_mms_timeout_default"/>
 
     <net.anei.cadpage.preferences.ListPreference
-    android:key="@string/pref_loglimit_key"
-    android:title="@string/pref_loglimit_title"
-    android:summary="@string/pref_loglimit_summary"
-    android:entries="@array/pref_loglimit_values"
-    android:entryValues="@array/pref_loglimit_values"
-    android:dialogTitle="@string/pref_loglimit_title"
-    android:defaultValue="@string/pref_loglimit_default"/>
+    app:key="@string/pref_loglimit_key"
+    app:title="@string/pref_loglimit_title"
+    app:summary="@string/pref_loglimit_summary"
+    app:entries="@array/pref_loglimit_values"
+    app:entryValues="@array/pref_loglimit_values"
+    app:dialogTitle="@string/pref_loglimit_title"
+    app:defaultValue="@string/pref_loglimit_default"/>
 
     <PreferenceScreen
-    android:title="@string/pref_split_msg_merge_title"
-    android:summary="@string/pref_split_msg_merge_summary">
+    app:title="@string/pref_split_msg_merge_title"
+    app:summary="@string/pref_split_msg_merge_summary">
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_override_active911_split_key"
-      android:title="@string/pref_override_active911_split_title"
-      android:summaryOn="@string/pref_override_active911_split_summaryon"
-      android:summaryOff="@string/pref_override_active911_split_summaryoff"
-      android:defaultValue="false"/>
+      app:key="@string/pref_override_active911_split_key"
+      app:title="@string/pref_override_active911_split_title"
+      app:summaryOn="@string/pref_override_active911_split_summaryon"
+      app:summaryOff="@string/pref_override_active911_split_summaryoff"
+      app:defaultValue="false"/>
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_split_direct_page_key"
-      android:title="@string/pref_split_direct_page_title"
-      android:summaryOn="@string/pref_split_direct_page_summaryon"
-      android:summaryOff="@string/pref_split_direct_page_summaryoff"
-      android:defaultValue="@string/pref_split_direct_page_default"/>
+      app:key="@string/pref_split_direct_page_key"
+      app:title="@string/pref_split_direct_page_title"
+      app:summaryOn="@string/pref_split_direct_page_summaryon"
+      app:summaryOff="@string/pref_split_direct_page_summaryoff"
+      app:defaultValue="@string/pref_split_direct_page_default"/>
 
       <net.anei.cadpage.preferences.EditTextPreference
-      android:dialogTitle="@string/pref_msgtimeout_title"
-      android:dialogMessage="@string/pref_msgtimeout_dialog"
-      android:key="@string/pref_msgtimeout_key"
-      android:title="@string/pref_msgtimeout_title"
-      android:summary="@string/pref_msgtimeout_summary"
-      android:inputType="number"
-      android:defaultValue="@string/pref_msgtimeout_default"/>
+      app:dialogTitle="@string/pref_msgtimeout_title"
+      app:dialogMessage="@string/pref_msgtimeout_dialog"
+      app:key="@string/pref_msgtimeout_key"
+      app:title="@string/pref_msgtimeout_title"
+      app:summary="@string/pref_msgtimeout_summary"
+      app:inputType="number"
+      app:defaultValue="@string/pref_msgtimeout_default"/>
 
       <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_split_min_msg_key"
-      android:title="@string/pref_split_min_msg_title"
-      android:summary="@string/pref_split_min_msg_summary"
-      android:entries="@array/pref_split_min_msg_values"
-      android:entryValues="@array/pref_split_min_msg_values"
-      android:dialogTitle="@string/pref_split_min_msg_title"
-      android:defaultValue="@string/pref_split_min_msg_default"/>
+      app:key="@string/pref_split_min_msg_key"
+      app:title="@string/pref_split_min_msg_title"
+      app:summary="@string/pref_split_min_msg_summary"
+      app:entries="@array/pref_split_min_msg_values"
+      app:entryValues="@array/pref_split_min_msg_values"
+      app:dialogTitle="@string/pref_split_min_msg_title"
+      app:defaultValue="@string/pref_split_min_msg_default"/>
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_rev_msg_order_key"
-      android:title="@string/pref_rev_msg_order_title"
-      android:summaryOn="@string/pref_rev_msg_order_summaryon"
-      android:summaryOff="@string/pref_rev_msg_order_summaryoff"
-      android:defaultValue="@string/pref_rev_msg_order_default"/>
+      app:key="@string/pref_rev_msg_order_key"
+      app:title="@string/pref_rev_msg_order_title"
+      app:summaryOn="@string/pref_rev_msg_order_summaryon"
+      app:summaryOff="@string/pref_rev_msg_order_summaryoff"
+      app:defaultValue="@string/pref_rev_msg_order_default"/>
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_mix_msg_order_key"
-      android:title="@string/pref_mix_msg_order_title"
-      android:summaryOn="@string/pref_mix_msg_order_summaryon"
-      android:summaryOff="@string/pref_mix_msg_order_summaryoff"
-      android:defaultValue="false"/>
+      app:key="@string/pref_mix_msg_order_key"
+      app:title="@string/pref_mix_msg_order_title"
+      app:summaryOn="@string/pref_mix_msg_order_summaryon"
+      app:summaryOff="@string/pref_mix_msg_order_summaryoff"
+      app:defaultValue="false"/>
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_split_blank_ins_key"
-      android:title="@string/pref_split_blank_ins_title"
-      android:summaryOn="@string/pref_split_blank_ins_summaryon"
-      android:summaryOff="@string/pref_split_blank_ins_summaryoff"
-      android:defaultValue="@string/pref_split_blank_ins_default" />
+      app:key="@string/pref_split_blank_ins_key"
+      app:title="@string/pref_split_blank_ins_title"
+      app:summaryOn="@string/pref_split_blank_ins_summaryon"
+      app:summaryOff="@string/pref_split_blank_ins_summaryoff"
+      app:defaultValue="@string/pref_split_blank_ins_default" />
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_split_chk_sender_key"
-      android:title="@string/pref_split_chk_sender_title"
-      android:summaryOn="@string/pref_split_chk_sender_summaryon"
-      android:summaryOff="@string/pref_split_chk_sender_summaryoff"
-      android:defaultValue="@string/pref_split_chk_sender_default" />
+      app:key="@string/pref_split_chk_sender_key"
+      app:title="@string/pref_split_chk_sender_title"
+      app:summaryOn="@string/pref_split_chk_sender_summaryon"
+      app:summaryOff="@string/pref_split_chk_sender_summaryoff"
+      app:defaultValue="@string/pref_split_chk_sender_default" />
 
       <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_split_keep_lead_break_key"
-      android:title="@string/pref_split_keep_lead_break_title"
-      android:summaryOn="@string/pref_split_keep_lead_break_summaryon"
-      android:summaryOff="@string/pref_split_keep_lead_break_summaryoff"
-      android:defaultValue="@string/pref_split_keep_lead_break_default" />
+      app:key="@string/pref_split_keep_lead_break_key"
+      app:title="@string/pref_split_keep_lead_break_title"
+      app:summaryOn="@string/pref_split_keep_lead_break_summaryon"
+      app:summaryOff="@string/pref_split_keep_lead_break_summaryoff"
+      app:defaultValue="@string/pref_split_keep_lead_break_default" />
 
     </PreferenceScreen>
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_suppress_dup_msg_key"
-    android:title="@string/pref_suppress_dup_msg_title"
-    android:summaryOn="@string/pref_suppress_dup_msg_summaryon"
-    android:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
-    android:defaultValue="@string/pref_suppress_dup_msg_default" />
+    app:key="@string/pref_suppress_dup_msg_key"
+    app:title="@string/pref_suppress_dup_msg_title"
+    app:summaryOn="@string/pref_suppress_dup_msg_summaryon"
+    app:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
+    app:defaultValue="@string/pref_suppress_dup_msg_default" />
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_override_vendor_loc_key"
-    android:title="@string/pref_override_vendor_loc_title"
-    android:summaryOn="@string/pref_override_vendor_loc_summaryon"
-    android:summaryOff="@string/pref_override_vendor_loc_summaryoff"
-    android:defaultValue="@string/pref_override_vendor_loc_default" />
+    app:key="@string/pref_override_vendor_loc_key"
+    app:title="@string/pref_override_vendor_loc_title"
+    app:summaryOn="@string/pref_override_vendor_loc_summaryon"
+    app:summaryOff="@string/pref_override_vendor_loc_summaryoff"
+    app:defaultValue="@string/pref_override_vendor_loc_default" />
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_activate_scanner_key"
-    android:title="@string/pref_activate_scanner_title"
-    android:summaryOn="@string/pref_activate_scanner_summaryon"
-    android:summaryOff="@string/pref_activate_scanner_summaryoff"
-    android:defaultValue="@string/pref_activate_scanner_default" />
+    app:key="@string/pref_activate_scanner_key"
+    app:title="@string/pref_activate_scanner_title"
+    app:summaryOn="@string/pref_activate_scanner_summaryon"
+    app:summaryOff="@string/pref_activate_scanner_summaryoff"
+    app:defaultValue="@string/pref_activate_scanner_default" />
 
     <Preference
-    android:key="@string/pref_scanner_channel_key"
-    android:title="@string/pref_scanner_channel_title" />
+    app:key="@string/pref_scanner_channel_key"
+    app:title="@string/pref_scanner_channel_title" />
 
     <net.anei.cadpage.preferences.ScannerTimeoutPreference
-    android:dialogTitle="@string/pref_scanner_timeout_title"
-    android:dialogMessage="@string/pref_scanner_timeout_dialog"
-    android:key="@string/pref_scanner_timeout_key"
-    android:title="@string/pref_scanner_timeout_title"
-    android:summary="@string/pref_scanner_timeout_summary"
-    android:inputType="number"
-    android:defaultValue="@string/pref_scanner_timeout_default"/>
+    app:dialogTitle="@string/pref_scanner_timeout_title"
+    app:dialogMessage="@string/pref_scanner_timeout_dialog"
+    app:key="@string/pref_scanner_timeout_key"
+    app:title="@string/pref_scanner_timeout_title"
+    app:summary="@string/pref_scanner_timeout_summary"
+    app:inputType="number"
+    app:defaultValue="@string/pref_scanner_timeout_default"/>
 
     <net.anei.cadpage.preferences.SwitchPreference
-    android:key="@string/pref_publish_pages_key"
-    android:title="@string/pref_publish_pages_title"
-    android:summaryOn="@string/pref_publish_pages_summaryon"
-    android:summaryOff="@string/pref_publish_pages_summaryoff"
-    android:defaultValue="@string/pref_publish_pages_default" />
+    app:key="@string/pref_publish_pages_key"
+    app:title="@string/pref_publish_pages_title"
+    app:summaryOn="@string/pref_publish_pages_summaryon"
+    app:summaryOff="@string/pref_publish_pages_summaryoff"
+    app:defaultValue="@string/pref_publish_pages_default" />
 
 </PreferenceScreen>

@@ -1,253 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidDomInspection -->
 <PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <PreferenceScreen
-    android:title="@string/pref_main_button_config_title"
-    android:summary="@string/pref_main_button_config_summary">
+    app:title="@string/pref_main_button_config_title"
+    app:summary="@string/pref_main_button_config_summary">
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_button1_key"
-      android:title="@string/pref_button1_title"
-      android:summary="@string/pref_button_summary"
-      android:entries="@array/pref_button_text"
-      android:entryValues="@array/pref_button_values"
-      android:dialogTitle="@string/pref_button1_title"
-      android:defaultValue="@string/pref_button1_default"/>
+      app:key="@string/pref_button1_key"
+      app:title="@string/pref_button1_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button1_title"
+      app:defaultValue="@string/pref_button1_default"/>
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_button2_key"
-      android:title="@string/pref_button2_title"
-      android:summary="@string/pref_button_summary"
-      android:entries="@array/pref_button_text"
-      android:entryValues="@array/pref_button_values"
-      android:dialogTitle="@string/pref_button2_title"
-      android:defaultValue="@string/pref_button2_default"/>
+      app:key="@string/pref_button2_key"
+      app:title="@string/pref_button2_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button2_title"
+      app:defaultValue="@string/pref_button2_default"/>
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_button3_key"
-      android:title="@string/pref_button3_title"
-      android:summary="@string/pref_button_summary"
-      android:entries="@array/pref_button_text"
-      android:entryValues="@array/pref_button_values"
-      android:dialogTitle="@string/pref_button3_title"
-      android:defaultValue="@string/pref_button3_default"/>
+      app:key="@string/pref_button3_key"
+      app:title="@string/pref_button3_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button3_title"
+      app:defaultValue="@string/pref_button3_default"/>
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_button4_key"
-      android:title="@string/pref_button4_title"
-      android:summary="@string/pref_button_summary"
-      android:entries="@array/pref_button_text"
-      android:entryValues="@array/pref_button_values"
-      android:dialogTitle="@string/pref_button4_title"
-      android:defaultValue="@string/pref_button4_default"/>
+      app:key="@string/pref_button4_key"
+      app:title="@string/pref_button4_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button4_title"
+      app:defaultValue="@string/pref_button4_default"/>
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_button5_key"
-      android:title="@string/pref_button5_title"
-      android:summary="@string/pref_button_summary"
-      android:entries="@array/pref_button_text"
-      android:entryValues="@array/pref_button_values"
-      android:dialogTitle="@string/pref_button5_title"
-      android:defaultValue="@string/pref_button5_default"/>
+      app:key="@string/pref_button5_key"
+      app:title="@string/pref_button5_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button5_title"
+      app:defaultValue="@string/pref_button5_default"/>
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_button6_key"
-      android:title="@string/pref_button6_title"
-      android:summary="@string/pref_button_summary"
-      android:entries="@array/pref_button_text"
-      android:entryValues="@array/pref_button_values"
-      android:dialogTitle="@string/pref_button6_title"
-      android:defaultValue="@string/pref_button6_default"/>
+      app:key="@string/pref_button6_key"
+      app:title="@string/pref_button6_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button6_title"
+      app:defaultValue="@string/pref_button6_default"/>
     <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_alt_map_button_key"
-      android:title="@string/pref_alt_map_button_title"
-      android:summaryOn="@string/pref_alt_map_button_summaryon"
-      android:summaryOff="@string/pref_alt_map_button_summaryoff"
-      android:defaultValue="true" />
+      app:key="@string/pref_alt_map_button_key"
+      app:title="@string/pref_alt_map_button_title"
+      app:summaryOn="@string/pref_alt_map_button_summaryon"
+      app:summaryOff="@string/pref_alt_map_button_summaryoff"
+      app:defaultValue="true" />
     <net.anei.cadpage.preferences.SwitchPreference
-      android:key="@string/pref_map_page_button_key"
-      android:title="@string/pref_map_page_button_title"
-      android:summaryOn="@string/pref_map_page_button_summaryon"
-      android:summaryOff="@string/pref_map_page_button_summaryoff"
-      android:defaultValue="true" />
+      app:key="@string/pref_map_page_button_key"
+      app:title="@string/pref_map_page_button_title"
+      app:summaryOn="@string/pref_map_page_button_summaryon"
+      app:summaryOff="@string/pref_map_page_button_summaryoff"
+      app:defaultValue="true" />
   </PreferenceScreen>
   <PreferenceScreen
-    android:key="@string/pref_resp_button_config_key"
-    android:title="@string/pref_resp_button_config_title"
-    android:summary="@string/pref_resp_button_config_summary">
+    app:key="@string/pref_resp_button_config_key"
+    app:title="@string/pref_resp_button_config_title"
+    app:summary="@string/pref_resp_button_config_summary">
 
     <net.anei.cadpage.preferences.ListPreference
-      android:key="@string/pref_resp_merge_key"
-      android:defaultValue="@string/pref_resp_merge_default"
-      android:title="@string/pref_resp_merge_title"
-      android:summary="@string/pref_resp_merge_summary"
-      android:entries="@array/pref_resp_merge_text"
-      android:entryValues="@array/pref_resp_merge_values"/>
+      app:key="@string/pref_resp_merge_key"
+      app:defaultValue="@string/pref_resp_merge_default"
+      app:title="@string/pref_resp_merge_title"
+      app:summary="@string/pref_resp_merge_summary"
+      app:entries="@array/pref_resp_merge_text"
+      app:entryValues="@array/pref_resp_merge_values"/>
 
     <PreferenceCategory
-      android:title="@string/pref_resp_button_config_title">
+      app:title="@string/pref_resp_button_config_title">
 
       <PreferenceScreen
-        android:key="@string/pref_callback1_screen_key"
-        android:title="@string/pref_resp_button1_title">
+        app:key="@string/pref_callback1_screen_key"
+        app:title="@string/pref_resp_button1_title">
         <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_callback1_type_key"
-          android:defaultValue="@string/pref_resp_type_default"
-          android:title="@string/pref_resp_type_title"
-          android:summary="@string/pref_resp_type_summary"
-          android:entries="@array/pref_resp_type_text"
-          android:entryValues="@array/pref_resp_type_values"/>
+          app:key="@string/pref_callback1_type_key"
+          app:defaultValue="@string/pref_resp_type_default"
+          app:title="@string/pref_resp_type_title"
+          app:summary="@string/pref_resp_type_summary"
+          app:entries="@array/pref_resp_type_text"
+          app:entryValues="@array/pref_resp_type_values"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback1_title_key"
-          android:title="@string/pref_desc_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue="@string/responding_text"/>
+          app:key="@string/pref_callback1_title_key"
+          app:title="@string/pref_desc_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue="@string/responding_text"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback1_key"
-          android:title="@string/pref_code_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:dialogMessage="@string/pref_code_callback_msg"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback1_key"
+          app:title="@string/pref_code_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:dialogMessage="@string/pref_code_callback_msg"
+          app:defaultValue=""/>
       </PreferenceScreen>
 
       <PreferenceScreen
-        android:key="@string/pref_callback2_screen_key"
-        android:title="@string/pref_resp_button2_title">
+        app:key="@string/pref_callback2_screen_key"
+        app:title="@string/pref_resp_button2_title">
         <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_callback2_type_key"
-          android:defaultValue="@string/pref_resp_type_default"
-          android:title="@string/pref_resp_type_title"
-          android:summary="@string/pref_resp_type_summary"
-          android:entries="@array/pref_resp_type_text"
-          android:entryValues="@array/pref_resp_type_values"/>
+          app:key="@string/pref_callback2_type_key"
+          app:defaultValue="@string/pref_resp_type_default"
+          app:title="@string/pref_resp_type_title"
+          app:summary="@string/pref_resp_type_summary"
+          app:entries="@array/pref_resp_type_text"
+          app:entryValues="@array/pref_resp_type_values"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback2_title_key"
-          android:title="@string/pref_desc_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue="@string/not_responding_text"/>
+          app:key="@string/pref_callback2_title_key"
+          app:title="@string/pref_desc_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue="@string/not_responding_text"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback2_key"
-          android:title="@string/pref_code_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:dialogMessage="@string/pref_code_callback_msg"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback2_key"
+          app:title="@string/pref_code_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:dialogMessage="@string/pref_code_callback_msg"
+          app:defaultValue=""/>
       </PreferenceScreen>
 
       <PreferenceScreen
-        android:key="@string/pref_callback3_screen_key"
-        android:title="@string/pref_resp_button3_title">
+        app:key="@string/pref_callback3_screen_key"
+        app:title="@string/pref_resp_button3_title">
         <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_callback3_type_key"
-          android:defaultValue="@string/pref_resp_type_default"
-          android:title="@string/pref_resp_type_title"
-          android:summary="@string/pref_resp_type_summary"
-          android:entries="@array/pref_resp_type_text"
-          android:entryValues="@array/pref_resp_type_values"/>
+          app:key="@string/pref_callback3_type_key"
+          app:defaultValue="@string/pref_resp_type_default"
+          app:title="@string/pref_resp_type_title"
+          app:summary="@string/pref_resp_type_summary"
+          app:entries="@array/pref_resp_type_text"
+          app:entryValues="@array/pref_resp_type_values"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback3_title_key"
-          android:title="@string/pref_desc_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback3_title_key"
+          app:title="@string/pref_desc_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue=""/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback3_key"
-          android:title="@string/pref_code_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:dialogMessage="@string/pref_code_callback_msg"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback3_key"
+          app:title="@string/pref_code_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:dialogMessage="@string/pref_code_callback_msg"
+          app:defaultValue=""/>
       </PreferenceScreen>
 
       <PreferenceScreen
-        android:key="@string/pref_callback4_screen_key"
-        android:title="@string/pref_resp_button4_title">
+        app:key="@string/pref_callback4_screen_key"
+        app:title="@string/pref_resp_button4_title">
         <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_callback4_type_key"
-          android:defaultValue="@string/pref_resp_type_default"
-          android:title="@string/pref_resp_type_title"
-          android:summary="@string/pref_resp_type_summary"
-          android:entries="@array/pref_resp_type_text"
-          android:entryValues="@array/pref_resp_type_values"/>
+          app:key="@string/pref_callback4_type_key"
+          app:defaultValue="@string/pref_resp_type_default"
+          app:title="@string/pref_resp_type_title"
+          app:summary="@string/pref_resp_type_summary"
+          app:entries="@array/pref_resp_type_text"
+          app:entryValues="@array/pref_resp_type_values"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback4_title_key"
-          android:title="@string/pref_desc_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback4_title_key"
+          app:title="@string/pref_desc_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue=""/>
         <net.anei.cadpage.preferences.EditTextPreference
-        android:key="@string/pref_callback4_key"
-          android:title="@string/pref_code_callback_title"
-          android:dialogMessage="@string/pref_code_callback_msg"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue=""/>
+        app:key="@string/pref_callback4_key"
+          app:title="@string/pref_code_callback_title"
+          app:dialogMessage="@string/pref_code_callback_msg"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue=""/>
       </PreferenceScreen>
 
       <PreferenceScreen
-        android:key="@string/pref_callback5_screen_key"
-        android:title="@string/pref_resp_button5_title">
+        app:key="@string/pref_callback5_screen_key"
+        app:title="@string/pref_resp_button5_title">
         <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_callback5_type_key"
-          android:defaultValue="@string/pref_resp_type_default"
-          android:title="@string/pref_resp_type_title"
-          android:summary="@string/pref_resp_type_summary"
-          android:entries="@array/pref_resp_type_text"
-          android:entryValues="@array/pref_resp_type_values"/>
+          app:key="@string/pref_callback5_type_key"
+          app:defaultValue="@string/pref_resp_type_default"
+          app:title="@string/pref_resp_type_title"
+          app:summary="@string/pref_resp_type_summary"
+          app:entries="@array/pref_resp_type_text"
+          app:entryValues="@array/pref_resp_type_values"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback5_title_key"
-          android:title="@string/pref_desc_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback5_title_key"
+          app:title="@string/pref_desc_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue=""/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback5_key"
-          android:title="@string/pref_code_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:dialogMessage="@string/pref_code_callback_msg"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback5_key"
+          app:title="@string/pref_code_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:dialogMessage="@string/pref_code_callback_msg"
+          app:defaultValue=""/>
       </PreferenceScreen>
 
       <PreferenceScreen
-        android:key="@string/pref_callback6_screen_key"
-        android:title="@string/pref_resp_button6_title">
+        app:key="@string/pref_callback6_screen_key"
+        app:title="@string/pref_resp_button6_title">
         <net.anei.cadpage.preferences.ListPreference
-        android:key="@string/pref_callback6_type_key"
-          android:defaultValue="@string/pref_resp_type_default"
-          android:title="@string/pref_resp_type_title"
-          android:summary="@string/pref_resp_type_summary"
-          android:entries="@array/pref_resp_type_text"
-          android:entryValues="@array/pref_resp_type_values"/>
+        app:key="@string/pref_callback6_type_key"
+          app:defaultValue="@string/pref_resp_type_default"
+          app:title="@string/pref_resp_type_title"
+          app:summary="@string/pref_resp_type_summary"
+          app:entries="@array/pref_resp_type_text"
+          app:entryValues="@array/pref_resp_type_values"/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback6_title_key"
-          android:title="@string/pref_desc_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback6_title_key"
+          app:title="@string/pref_desc_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:defaultValue=""/>
         <net.anei.cadpage.preferences.EditTextPreference
-          android:key="@string/pref_callback6_key"
-          android:title="@string/pref_code_callback_title"
-          android:summary="@string/pref_button_summary"
-          android:dialogMessage="@string/pref_code_callback_msg"
-          android:defaultValue=""/>
+          app:key="@string/pref_callback6_key"
+          app:title="@string/pref_code_callback_title"
+          app:summary="@string/pref_button_summary"
+          app:dialogMessage="@string/pref_code_callback_msg"
+          app:defaultValue=""/>
       </PreferenceScreen>
 
     </PreferenceCategory>
     <PreferenceCategory
-    android:title="@string/pref_xtra_resp_button_config_title">
+    app:title="@string/pref_xtra_resp_button_config_title">
       <net.anei.cadpage.preferences.ListPreference
-        android:key="@string/pref_xtra_resp_button1_key"
-        android:defaultValue="@string/pref_xtra_resp_button1_default"
-        android:title="@string/pref_button1_title"
-        android:summary="@string/pref_button_summary"
-        android:entries="@array/pref_button_text"
-        android:entryValues="@array/pref_button_values"
-        android:dialogTitle="@string/pref_button1_title"/>
+        app:key="@string/pref_xtra_resp_button1_key"
+        app:defaultValue="@string/pref_xtra_resp_button1_default"
+        app:title="@string/pref_button1_title"
+        app:summary="@string/pref_button_summary"
+        app:entries="@array/pref_button_text"
+        app:entryValues="@array/pref_button_values"
+        app:dialogTitle="@string/pref_button1_title"/>
       <net.anei.cadpage.preferences.ListPreference
-        android:key="@string/pref_xtra_resp_button2_key"
-        android:defaultValue="@string/pref_xtra_resp_button2_default"
-        android:title="@string/pref_button2_title"
-        android:summary="@string/pref_button_summary"
-        android:entries="@array/pref_button_text"
-        android:entryValues="@array/pref_button_values"
-        android:dialogTitle="@string/pref_button2_title"/>
+        app:key="@string/pref_xtra_resp_button2_key"
+        app:defaultValue="@string/pref_xtra_resp_button2_default"
+        app:title="@string/pref_button2_title"
+        app:summary="@string/pref_button_summary"
+        app:entries="@array/pref_button_text"
+        app:entryValues="@array/pref_button_values"
+        app:dialogTitle="@string/pref_button2_title"/>
       <net.anei.cadpage.preferences.ListPreference
-        android:key="@string/pref_xtra_resp_button3_key"
-        android:defaultValue="@string/pref_xtra_resp_button3_default"
-        android:title="@string/pref_button3_title"
-        android:summary="@string/pref_button_summary"
-        android:entries="@array/pref_button_text"
-        android:entryValues="@array/pref_button_values"
-        android:dialogTitle="@string/pref_button3_title"/>
+        app:key="@string/pref_xtra_resp_button3_key"
+        app:defaultValue="@string/pref_xtra_resp_button3_default"
+        app:title="@string/pref_button3_title"
+        app:summary="@string/pref_button_summary"
+        app:entries="@array/pref_button_text"
+        app:entryValues="@array/pref_button_values"
+        app:dialogTitle="@string/pref_button3_title"/>
     </PreferenceCategory>
   </PreferenceScreen>
 </PreferenceScreen>
