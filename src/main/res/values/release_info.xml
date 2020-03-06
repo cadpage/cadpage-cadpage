@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02282019</string>
+  <string name="release_date">03062019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-06\n
+    Location Fixes:\n
+    Houston County, GA\n
+    Lunenburg County, VA\n
+    \n
     v2.1.11-05\n
     Location Fixes:\n
     Rankin Count, MS\n
@@ -29,16 +34,6 @@
     v2.1.11-02\n
     Second attempt at implementing updated MMS alert processing.  This time there is a new
     setting to disable it and use the old logic.  Default will be to use old logic for existing
-    users and new logic for new users.  Using the new logic requires an update to the support app.\n
-    \n
-    v2.10-05\n
-    New Locations:\n
-    Tolland County, CT (alt)\n
-    \n
-    Location Fixes:\n
-    Jones County, NC\n
-    Lenoir County, NC\n
-    Macon County, NC\n
-    Clarendon County, SC
+    users and new logic for new users.  Using the new logic requires an update to the support app.
   </string>
 </resources>
