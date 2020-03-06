@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidDomInspection -->
 <PreferenceScreen
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference
+  <Preference
     app:key="@string/pref_loc_desc_key"
     app:title="@string/pref_loc_desc_title"/>
 
-    <PreferenceScreen
+  <PreferenceScreen
     app:key="@string/pref_location_tree_key"
     app:title="@string/pref_location_title"
     app:summary="@string/pref_location_summary"/>
 
-    <PreferenceScreen
+  <PreferenceScreen
     app:key="@string/pref_location_mtree_key"
     app:title="@string/pref_multi_location_title"
     app:summary="@string/pref_multi_location_summary"/>
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_override_filter_key"
     app:title="@string/pref_override_filter_title"
     app:summaryOn="@string/pref_override_filter_summaryon"
     app:summaryOff="@string/pref_override_filter_summaryoff"
     app:defaultValue="@string/pref_override_filter_default" />
 
-    <net.anei.cadpage.preferences.EditTextPreference
+  <net.anei.cadpage.preferences.EditTextPreference
     app:dialogTitle="@string/pref_filter_title"
     app:dialogMessage="@string/pref_filter_dialog"
     app:key="@string/pref_filter_key"
@@ -32,41 +33,39 @@
     app:summary="@string/pref_filter_summary"
     app:defaultValue="" />
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_show_source_key"
     app:title="@string/pref_show_source_title"
     app:summaryOn="@string/pref_show_source_summaryon"
     app:summaryOff="@string/pref_show_source_summaryoff"
     app:defaultValue="@string/pref_show_source_default" />
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_override_default_key"
     app:title="@string/pref_override_default_title"
     app:summaryOn="@string/pref_override_default_summaryon"
     app:summaryOff="@string/pref_override_default_summaryoff"
     app:defaultValue="@string/pref_override_default_default" />
 
-    <net.anei.cadpage.preferences.EditTextPreference
+  <net.anei.cadpage.preferences.EditTextPreference
     app:dialogTitle="@string/pref_defcity_title"
     app:dialogMessage="@string/pref_defcity_dialog"
     app:key="@string/pref_defcity_key"
     app:title="@string/pref_defcity_title"
     app:summary="@string/pref_defcity_summary"
-    app:capitalize="characters"
-    app:inputType="textVisiblePassword"
+    android:inputType="textCapCharacters"
     app:defaultValue="" />
 
-    <net.anei.cadpage.preferences.EditTextPreference
+  <net.anei.cadpage.preferences.EditTextPreference
     app:dialogTitle="@string/pref_defstate_title"
     app:dialogMessage="@string/pref_defstate_dialog"
     app:key="@string/pref_defstate_key"
     app:title="@string/pref_defstate_title"
     app:summary="@string/pref_defstate_summary"
-    app:capitalize="characters"
-    app:inputType="textVisiblePassword"
+    android:inputType="textCapCharacters"
     app:defaultValue="" />
 
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_enable_msg_type_key"
     app:title="@string/pref_enable_msg_type_title"
     app:summary="@string/pref_enable_msg_type_summary"
@@ -74,14 +73,14 @@
     app:entryValues="@array/pref_enable_msg_type_values"
     app:defaultValue="@string/pref_enable_msg_type_default" />
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_use_old_mms_key"
     app:title="@string/pref_use_old_mms_title"
     app:summaryOn="@string/pref_use_old_mms_summaryon"
     app:summaryOff="@string/pref_use_old_mms_summaryoff"
     app:defaultValue="false" />
 
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_mms_timeout_key"
     app:title="@string/pref_mms_timeout_title"
     app:summary="@string/pref_mms_timeout_summary"
@@ -90,7 +89,7 @@
     app:dialogTitle="@string/pref_mms_timeout_title"
     app:defaultValue="@string/pref_mms_timeout_default"/>
 
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_loglimit_key"
     app:title="@string/pref_loglimit_title"
     app:summary="@string/pref_loglimit_summary"
@@ -99,34 +98,34 @@
     app:dialogTitle="@string/pref_loglimit_title"
     app:defaultValue="@string/pref_loglimit_default"/>
 
-    <PreferenceScreen
+  <PreferenceScreen
     app:title="@string/pref_split_msg_merge_title"
     app:summary="@string/pref_split_msg_merge_summary">
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_override_active911_split_key"
       app:title="@string/pref_override_active911_split_title"
       app:summaryOn="@string/pref_override_active911_split_summaryon"
       app:summaryOff="@string/pref_override_active911_split_summaryoff"
       app:defaultValue="false"/>
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_split_direct_page_key"
       app:title="@string/pref_split_direct_page_title"
       app:summaryOn="@string/pref_split_direct_page_summaryon"
       app:summaryOff="@string/pref_split_direct_page_summaryoff"
       app:defaultValue="@string/pref_split_direct_page_default"/>
 
-      <net.anei.cadpage.preferences.EditTextPreference
+    <net.anei.cadpage.preferences.EditTextPreference
       app:dialogTitle="@string/pref_msgtimeout_title"
       app:dialogMessage="@string/pref_msgtimeout_dialog"
       app:key="@string/pref_msgtimeout_key"
       app:title="@string/pref_msgtimeout_title"
       app:summary="@string/pref_msgtimeout_summary"
-      app:inputType="number"
+      android:inputType="number"
       app:defaultValue="@string/pref_msgtimeout_default"/>
 
-      <net.anei.cadpage.preferences.ListPreference
+    <net.anei.cadpage.preferences.ListPreference
       app:key="@string/pref_split_min_msg_key"
       app:title="@string/pref_split_min_msg_title"
       app:summary="@string/pref_split_min_msg_summary"
@@ -135,35 +134,35 @@
       app:dialogTitle="@string/pref_split_min_msg_title"
       app:defaultValue="@string/pref_split_min_msg_default"/>
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_rev_msg_order_key"
       app:title="@string/pref_rev_msg_order_title"
       app:summaryOn="@string/pref_rev_msg_order_summaryon"
       app:summaryOff="@string/pref_rev_msg_order_summaryoff"
       app:defaultValue="@string/pref_rev_msg_order_default"/>
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_mix_msg_order_key"
       app:title="@string/pref_mix_msg_order_title"
       app:summaryOn="@string/pref_mix_msg_order_summaryon"
       app:summaryOff="@string/pref_mix_msg_order_summaryoff"
       app:defaultValue="false"/>
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_split_blank_ins_key"
       app:title="@string/pref_split_blank_ins_title"
       app:summaryOn="@string/pref_split_blank_ins_summaryon"
       app:summaryOff="@string/pref_split_blank_ins_summaryoff"
       app:defaultValue="@string/pref_split_blank_ins_default" />
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_split_chk_sender_key"
       app:title="@string/pref_split_chk_sender_title"
       app:summaryOn="@string/pref_split_chk_sender_summaryon"
       app:summaryOff="@string/pref_split_chk_sender_summaryoff"
       app:defaultValue="@string/pref_split_chk_sender_default" />
 
-      <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_split_keep_lead_break_key"
       app:title="@string/pref_split_keep_lead_break_title"
       app:summaryOn="@string/pref_split_keep_lead_break_summaryon"
@@ -172,41 +171,41 @@
 
     </PreferenceScreen>
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_suppress_dup_msg_key"
     app:title="@string/pref_suppress_dup_msg_title"
     app:summaryOn="@string/pref_suppress_dup_msg_summaryon"
     app:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
     app:defaultValue="@string/pref_suppress_dup_msg_default" />
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_override_vendor_loc_key"
     app:title="@string/pref_override_vendor_loc_title"
     app:summaryOn="@string/pref_override_vendor_loc_summaryon"
     app:summaryOff="@string/pref_override_vendor_loc_summaryoff"
     app:defaultValue="@string/pref_override_vendor_loc_default" />
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_activate_scanner_key"
     app:title="@string/pref_activate_scanner_title"
     app:summaryOn="@string/pref_activate_scanner_summaryon"
     app:summaryOff="@string/pref_activate_scanner_summaryoff"
     app:defaultValue="@string/pref_activate_scanner_default" />
 
-    <Preference
+  <Preference
     app:key="@string/pref_scanner_channel_key"
     app:title="@string/pref_scanner_channel_title" />
 
-    <net.anei.cadpage.preferences.ScannerTimeoutPreference
+  <net.anei.cadpage.preferences.ScannerTimeoutPreference
     app:dialogTitle="@string/pref_scanner_timeout_title"
     app:dialogMessage="@string/pref_scanner_timeout_dialog"
     app:key="@string/pref_scanner_timeout_key"
     app:title="@string/pref_scanner_timeout_title"
     app:summary="@string/pref_scanner_timeout_summary"
-    app:inputType="number"
+    android:inputType="number"
     app:defaultValue="@string/pref_scanner_timeout_default"/>
 
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_publish_pages_key"
     app:title="@string/pref_publish_pages_title"
     app:summaryOn="@string/pref_publish_pages_summaryon"

@@ -4,6 +4,8 @@ package net.anei.cadpage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -21,6 +23,7 @@ import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 import java.util.Objects;
 
 public class PreferenceNotificationFragment extends PreferenceRestorableFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+
 
   private static final String ACCEPT_CONFLICT_KEY = "accept_conflict";
 
@@ -130,6 +133,48 @@ public class PreferenceNotificationFragment extends PreferenceRestorableFragment
     ManagePreferences.unregisterOnSharedPreferenceChangeListener(this);
   }
 
+  private static final int REQUEST_CODE_ALERT_RINGTONE = 99342;
+
+  @Override
+  public boolean onPreferenceTreeClick(Preference preference) {
+    if (preference.getKey().equals(getString(R.string.pref_notif_sound_key))) {
+        Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, preference.getTitle());
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, Settings.System.DEFAULT_NOTIFICATION_URI);
+
+        String existingValue = ManagePreferences.notifySound();
+        if (existingValue != null) {
+            if (existingValue.length() == 0) {
+              // Select "Silent"
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+            } else {
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(existingValue));
+            }
+        } else {
+          // No ringtone has been selected, set to the default
+            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Settings.System.DEFAULT_NOTIFICATION_URI);
+        }
+
+        startActivityForResult(intent, REQUEST_CODE_ALERT_RINGTONE);
+        return true;
+    } else {
+        return super.onPreferenceTreeClick(preference);
+    }
+}
+
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == REQUEST_CODE_ALERT_RINGTONE && data != null) {
+        Uri ringtone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+        String ringtoneStr = ringtone != null ? ringtone.toString() : "";
+        ManagePreferences.setNotifySound(ringtoneStr);
+    } else {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}
   @RequiresApi(api = Build.VERSION_CODES.O)
   public static void launchChannelConfig(Context context) {
     Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);

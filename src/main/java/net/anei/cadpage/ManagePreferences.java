@@ -644,6 +644,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static String notifySound() {
     return prefs.getString(R.string.pref_notif_sound_key);
   }
+
+  public static void setNotifySound(String newVal) {
+    prefs.putString(R.string.pref_notif_sound_key, newVal);
+  }
   
   public static int notifyTimeout() {
     return prefs.getIntValue(R.string.pref_notif_timeout_key);

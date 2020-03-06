@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:app="http://schemas.android.com/apk/res-auto">
-  <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_delete_unopen_key"
     app:title="@string/pref_delete_unopen_title"
     app:summaryOn="@string/pref_delete_unopen_summaryon"
@@ -31,7 +31,7 @@
     app:entryValues="@array/pref_app_map_option_entries"
     app:dialogTitle="@string/pref_app_map_option_title"
     app:defaultValue="@string/pref_app_map_option_default" />
-  <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_navigate_map_key"
     app:title="@string/pref_navigate_map_title"
     app:summaryOn="@string/pref_navigate_map_summaryon"
@@ -48,20 +48,20 @@
 
   <PreferenceCategory
     app:title="@string/pref_popup_control">
-    <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_popup_enabled_key"
       app:title="@string/pref_popup_enabled_title"
       app:summaryOn="@string/pref_popup_enabled_summaryon"
       app:summaryOff="@string/pref_popup_enabled_summaryoff"
       app:defaultValue="true" />
-    <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_noShowInCall_key"
       app:title="@string/pref_noShowInCall_title"
       app:summaryOn="@string/pref_noShowInCall_summaryon"
       app:summaryOff="@string/pref_noShowInCall_summaryoff"
       app:defaultValue="@string/pref_noShowInCall_default"
       app:dependency="@string/pref_popup_enabled_key"/>
-    <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_passthrusms_key"
       app:title="@string/pref_passthrusms_title"
       app:summaryOff="@string/pref_passthrusms_summaryoff"
@@ -85,13 +85,13 @@
       app:entries="@array/pref_timeout_entries"
       app:entryValues="@array/pref_timeout_values"
       app:defaultValue="@string/pref_timeout_default" />
-    <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_screen_on_key"
       app:title="@string/pref_screen_on_title"
       app:summaryOn="@string/pref_screen_on_summaryon"
       app:summaryOff="@string/pref_screen_on_summaryoff"
       app:defaultValue="@string/pref_screen_on_default" />
-    <net.anei.cadpage.preferences.SwitchPreference
+    <SwitchPreference
       app:key="@string/pref_dimscreen_key"
       app:title="@string/pref_dimscreen_title"
       app:summaryOn="@string/pref_dimscreen_summaryon"

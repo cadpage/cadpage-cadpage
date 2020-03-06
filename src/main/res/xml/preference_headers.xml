@@ -4,44 +4,44 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <!-- Warning, any changes to this list must be reflected in the preference tree list
-       used by SmsPopuConfigActivity.initializePreferences() -->
+       used by SmsPopupConfigActivity.initializePreferences() -->
 
   <Preference
   app:fragment="net.anei.cadpage.PreferenceGeneralFragment"
   app:title="@string/pref_category_general_title"
   app:summary="@string/pref_category_general_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceNotificationFragment"
   app:title="@string/pref_category_notif_title"
   app:summary="@string/pref_category_notif_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceAdditionalFragment"
   app:title="@string/pref_category_additional_title"
   app:summary="@string/pref_category_additional_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceButtonFragment"
   app:title="@string/pref_category_button_title"
   app:summary="@string/pref_category_button_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceFilterFragment"
   app:title="@string/pref_category_filter_title"
   app:summary="@string/pref_category_filter_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceLocationFragment"
   app:title="@string/pref_category_location_title"
   app:summary="@string/pref_category_location_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceDirectFragment"
   app:title="@string/pref_category_direct_title"
   app:summary="@string/pref_category_direct_summary" />
 
-  <header
+  <Preference
   app:fragment="net.anei.cadpage.PreferenceOtherInfoFragment"
   app:title="@string/pref_category_other_info_title"
   app:summary="@string/pref_category_other_info_summary" />

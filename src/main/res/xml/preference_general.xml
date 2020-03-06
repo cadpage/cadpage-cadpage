@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
   <Preference
     app:key="@string/pref_payment_status_key"
     app:title="@string/pref_payment_status_title"/>
 
-  <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_enabled_key"
     app:title="@string/pref_enabled_title"
     app:summaryOn="@string/pref_enabled_summaryon"
@@ -22,14 +23,14 @@
     app:dialogTitle="@string/pref_history_limit_title"
     app:defaultValue="@string/pref_history_limit_default" />
 
-  <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_show_history_address_key"
     app:title="@string/pref_show_history_address_title"
     app:summaryOn="@string/pref_show_history_address_summaryon"
     app:summaryOff="@string/pref_show_history_address_summaryoff"
     app:defaultValue="true" />
 
-  <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_show_personal_key"
     app:title="@string/pref_show_personal_title"
     app:summaryOn="@string/pref_show_personal_summaryon"
@@ -41,17 +42,17 @@
     app:title="@string/pref_billing_account_title"
     app:summary="@string/pref_billing_account_summary"/>
 
-  <PreferenceScreen
-  app:title="@string/pref_review_title"
-  app:summary="@string/pref_review_summary">
+  <Preference
+    app:title="@string/pref_review_title"
+    app:summary="@string/pref_review_summary">
     <intent
-    app:action="android.intent.action.VIEW"
-    app:data="@string/pref_review_url" />
-  </PreferenceScreen>
+      android:action="android.intent.action.VIEW"
+      android:data="@string/pref_review_url" />
+  </Preference>
 
   <Preference
-  app:key="@string/pref_email_key"
-  app:title="@string/pref_email_title"
-  app:summary="@string/pref_email_summary" />
+    app:key="@string/pref_email_key"
+    app:title="@string/pref_email_title"
+    app:summary="@string/pref_email_summary" />
 
 </PreferenceScreen>

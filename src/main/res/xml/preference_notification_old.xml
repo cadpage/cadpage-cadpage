@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
   <PreferenceCategory
   app:title="@string/pref_notif_default_title">
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_notif_enabled_key"
     app:title="@string/pref_notif_enabled_title"
     app:summaryOn="@string/pref_notif_enabled_summaryon"
     app:summaryOff="@string/pref_notif_enabled_summaryoff"
     app:defaultValue="true" />
-    <net.anei.cadpage.preferences.ExtendedSwitchPreference
+  <net.anei.cadpage.preferences.ExtendedSwitchPreference
     app:key="@string/pref_notif_override_key"
     app:title="@string/pref_notif_override_old_title"
     app:summaryOn="@string/pref_notif_override_old_summaryon"
     app:summaryOff="@string/pref_notif_override_old_summaryoff"
     app:defaultValue="false"
     app:dependency="@string/pref_notif_enabled_key" />
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_notif_override_volume_key"
     app:title="@string/pref_notif_override_volume_title"
     app:summaryOn="@string/pref_notif_override_volume_summaryon"
     app:summaryOff="@string/pref_notif_override_volume_summaryoff"
     app:defaultValue="false"
     app:dependency="@string/pref_notif_override_key" />
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_notif_override_sound_key"
     app:title="@string/pref_notif_override_sound_title"
     app:summaryOn="@string/pref_notif_override_sound_summaryon"
     app:summaryOff="@string/pref_notif_override_sound_summaryoff"
     app:defaultValue="true"
     app:dependency="@string/pref_notif_override_key" />
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_notif_override_loop_key"
+
     app:title="@string/pref_notif_override_loop_title"
     app:summaryOn="@string/pref_notif_override_loop_summaryon"
     app:summaryOff="@string/pref_notif_override_loop_summaryoff"
     app:defaultValue="true"
     app:dependency="@string/pref_notif_override_key" />
-    <RingtonePreference
+  <Preference
     app:key="@string/pref_notif_sound_key"
     app:title="@string/pref_notif_sound_title"
     app:summary="@string/pref_notif_sound_summary"
-    app:ringtoneType="all"
-    app:showDefault="true"
-    app:showSilent="true"
     app:dependency="@string/pref_notif_enabled_key"
     app:defaultValue="content://settings/system/notification_sound" />
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_notif_timeout_key"
     app:title="@string/pref_notif_timeout_title"
     app:summary="@string/pref_notif_timeout_summary"
@@ -55,7 +54,7 @@
     app:entryValues="@array/pref_notif_timeout_values"
     app:defaultValue="@string/pref_notif_timeout_default"
     app:dependency="@string/pref_notif_enabled_key" />
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_notif_repeat_interval_key"
     app:title="@string/pref_notif_repeat_interval_title"
     app:summary="@string/pref_notif_repeat_interval_summary"
@@ -64,16 +63,16 @@
     app:dialogTitle="@string/pref_notif_repeat_interval_dialogTitle"
     app:defaultValue="@string/pref_notif_repeat_interval_default"
     app:dependency="@string/pref_notif_enabled_key" />
-    <net.anei.cadpage.preferences.TestNotificationDialogPreference
+  <net.anei.cadpage.preferences.TestNotificationDialogPreference
     app:key="@string/pref_notif_test_key"
-    app:dialogIcon="@drawable/app:ic_dialog_alert"
+    app:dialogIcon="@drawable/android:ic_dialog_alert"
     app:title="@string/pref_notif_test_title"
     app:dialogTitle="@string/pref_notif_test_title"
     app:dialogMessage="@string/pref_notif_test_message"
     app:summary="@string/pref_notif_test_summary"
     app:dependency="@string/pref_notif_enabled_key"
     app:negativeButtonText="@null" />
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_notif_delay_key"
     app:title="@string/pref_notif_delay_title"
     app:summary="@string/pref_notif_delay_summary"
@@ -82,7 +81,7 @@
     app:dialogTitle="@string/pref_notif_delay_dialogTitle"
     app:defaultValue="@string/pref_notif_delay_default"
     app:dependency="@string/pref_notif_enabled_key" />
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_notif_req_ack_key"
     app:title="@string/pref_notif_req_ack_title"
     app:summaryOn="@string/pref_notif_req_ack_summaryon"
@@ -93,14 +92,14 @@
   </PreferenceCategory>
   <PreferenceCategory
   app:title="@string/pref_vibrate_category_title">
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_vibrate_key"
     app:title="@string/pref_vibrate_title"
     app:summaryOn="@string/pref_vibrate_summaryon"
     app:summaryOff="@string/pref_vibrate_summaryoff"
     app:defaultValue="@string/pref_vibrate_default"
     app:dependency="@string/pref_notif_enabled_key" />
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_vibrate_pattern_key"
     app:title="@string/pref_vibrate_pattern_title"
     app:summary="@string/pref_vibrate_pattern_summary"
@@ -112,14 +111,14 @@
 
   <PreferenceCategory
   app:title="@string/pref_flashled_category_title">
-    <net.anei.cadpage.preferences.SwitchPreference
+  <SwitchPreference
     app:key="@string/pref_flashled_key"
     app:title="@string/pref_flashled_title"
     app:summaryOn="@string/pref_flashled_summaryon"
     app:summaryOff="@string/pref_flashled_summaryoff"
     app:defaultValue="@string/pref_flashled_default"
     app:dependency="@string/pref_notif_enabled_key" />
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_flashled_color_key"
     app:title="@string/pref_flashled_color_title"
     app:summary="@string/pref_flashled_color_summary"
@@ -127,7 +126,7 @@
     app:entryValues="@array/pref_led_color_values"
     app:defaultValue="@string/pref_flashled_color_default"
     app:dependency="@string/pref_flashled_key" />
-    <net.anei.cadpage.preferences.ListPreference
+  <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_flashled_pattern_key"
     app:title="@string/pref_flashled_pattern_title"
     app:summary="@string/pref_flashled_pattern_summary"

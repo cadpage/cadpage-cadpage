@@ -2,7 +2,7 @@
 <PreferenceScreen
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Preference
+  <Preference
     app:key="@string/pref_reconnect_key"
     app:title="@string/pref_reconnect_title"
     app:summary="@string/pref_reconnect_summary"

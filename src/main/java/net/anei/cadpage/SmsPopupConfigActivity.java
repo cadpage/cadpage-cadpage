@@ -138,11 +138,11 @@ public class SmsPopupConfigActivity extends AppCompatActivity
    * @param activity current activity
    */
   public static void selectLocation(Activity activity) {
-    Intent intent = new Intent(activity, SmsPopupConfigActivity.class);
-    intent.putExtra(EXTRA_SHOW_FRAGMENT, PreferenceLocationFragment.class.getName());
-    Bundle bundle = new Bundle();
-    bundle.putInt(EXTRA_PREFERENCE, R.string.pref_location_tree_key);
-    intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, bundle);
-    activity.startActivityForResult(intent, 0);
+//    Intent intent = new Intent(activity, SmsPopupConfigActivity.class);
+//    intent.putExtra(EXTRA_SHOW_FRAGMENT, PreferenceLocationFragment.class.getName());
+//    Bundle bundle = new Bundle();
+//    bundle.putInt(EXTRA_PREFERENCE, R.string.pref_location_tree_key);
+//    intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, bundle);
+//    activity.startActivityForResult(intent, 0);
   }
 }
