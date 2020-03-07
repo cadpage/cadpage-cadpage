@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-07\n
+    Location Fixes:\n
+    Rowan County, NC\n
+    Deschutes County, OR\n
+    \n
     v2.1.11-06\n
     Location Fixes:\n
     Houston County, GA\n
@@ -29,11 +34,6 @@
     Nash County, NC\n
     Erie County, PA\n
     Lufkin, TX\n
-    Mecklenburg County, VA\n
-    \n
-    v2.1.11-02\n
-    Second attempt at implementing updated MMS alert processing.  This time there is a new
-    setting to disable it and use the old logic.  Default will be to use old logic for existing
-    users and new logic for new users.  Using the new logic requires an update to the support app.
+    Mecklenburg County, VA
   </string>
 </resources>
