@@ -133,7 +133,7 @@ public class PreferenceNotificationFragment extends PreferenceRestorableFragment
     ManagePreferences.unregisterOnSharedPreferenceChangeListener(this);
   }
 
-  private static final int REQUEST_CODE_ALERT_RINGTONE = 99342;
+  private static final int REQUEST_CODE_ALERT_RINGTONE = 9991;
 
   @Override
   public boolean onPreferenceTreeClick(Preference preference) {

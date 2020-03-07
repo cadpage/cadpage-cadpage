@@ -34,9 +34,10 @@ public class SmsPopupConfigActivity extends AppCompatActivity
 
     ManagePreferences.setPermissionManager(permMgr);
 
+    setContentView(R.layout.settings);
     getSupportFragmentManager()
       .beginTransaction()
-      .replace(android.R.id.content, new PreferenceHeadersFragment())
+      .replace(R.id.settings_content, new PreferenceHeadersFragment())
       .commit();
 
   }
@@ -53,7 +54,7 @@ public class SmsPopupConfigActivity extends AppCompatActivity
     fragment.setTargetFragment(caller, 0);
     // Replace the existing Fragment with the new Fragment
     getSupportFragmentManager().beginTransaction()
-      .replace(R.id.content, fragment)
+      .replace(R.id.settings_content, fragment)
       .addToBackStack(null)
       .commit();
     return true;
