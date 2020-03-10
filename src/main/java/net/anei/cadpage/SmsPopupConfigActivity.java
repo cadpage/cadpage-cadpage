@@ -120,21 +120,6 @@ public class SmsPopupConfigActivity extends AppCompatActivity
   }
 
   /**
-   * initialize all uninitialized preferences
-   * @param context current context
-   */
-  public static void initializePreferences(Context context) {
-    PreferenceManager.setDefaultValues(context, R.xml.preference_general, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_notification_old, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_additional, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_button, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_filter, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_location, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_direct, true);
-    PreferenceManager.setDefaultValues(context, R.xml.preference_other_info, true);
-  }
-
-  /**
    * Launch the Select Single Location setting
    * @param activity current activity
    */

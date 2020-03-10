@@ -12,7 +12,7 @@ import net.anei.cadpage.preferences.BillingAccountPreference;
 
 import static android.app.Activity.RESULT_OK;
 
-public class PreferenceGeneralFragment extends PreferenceRestorableFragment {
+public class PreferenceGeneralFragment extends PreferenceFragment {
 
   private static final int BILLING_ACCT_REQ = 99991;
 

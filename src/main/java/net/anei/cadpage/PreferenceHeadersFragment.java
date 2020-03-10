@@ -2,7 +2,7 @@ package net.anei.cadpage;
 
 import android.os.Bundle;
 
-public class PreferenceHeadersFragment extends PreferenceRestorableFragment {
+public class PreferenceHeadersFragment extends PreferenceFragment {
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 

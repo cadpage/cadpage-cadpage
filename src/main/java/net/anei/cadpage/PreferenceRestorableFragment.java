@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
  * PreferenceFragment subclass that adds the ability to restore a the visible preference status
  * of a preference whose value has been changed without it's knowledge
  */
-public class PreferenceRestorableFragment extends PreferenceFragment {
+abstract public class PreferenceRestorableFragment extends PreferenceFragment {
 
   private static PreferenceRestorableFragment curInstance = null;
   private static String curPrefKey = null;
