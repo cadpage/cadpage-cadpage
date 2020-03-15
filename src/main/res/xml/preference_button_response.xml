@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+xmlns:app="http://schemas.android.com/apk/res-auto">
+  app:key="@string/pref_resp_button_config_key"
+  app:title="@string/pref_resp_button_config_title"
+  app:summary="@string/pref_resp_button_config_summary">
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_resp_merge_key"
+    app:defaultValue="@string/pref_resp_merge_default"
+    app:title="@string/pref_resp_merge_title"
+    app:summary="@string/pref_resp_merge_summary"
+    app:entries="@array/pref_resp_merge_text"
+    app:entryValues="@array/pref_resp_merge_values"/>
+
+  <PreferenceCategory
+    app:title="@string/pref_resp_button_config_title">
+
+    <Preference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn1"
+      app:title="@string/pref_resp_button1_title"/>
+    <Preference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn2"
+      app:title="@string/pref_resp_button2_title"/>
+    <Preference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn3"
+      app:title="@string/pref_resp_button3_title"/>
+    <Preference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn4"
+      app:title="@string/pref_resp_button4_title"/>
+    <Preference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn5"
+      app:title="@string/pref_resp_button5_title"/>
+    <Preference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn6"
+      app:title="@string/pref_resp_button6_title"/>
+
+  </PreferenceCategory>
+  <PreferenceCategory
+  app:title="@string/pref_xtra_resp_button_config_title">
+    <net.anei.cadpage.preferences.ListPreference
+      app:key="@string/pref_xtra_resp_button1_key"
+      app:defaultValue="@string/pref_xtra_resp_button1_default"
+      app:title="@string/pref_button1_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button1_title"/>
+    <net.anei.cadpage.preferences.ListPreference
+      app:key="@string/pref_xtra_resp_button2_key"
+      app:defaultValue="@string/pref_xtra_resp_button2_default"
+      app:title="@string/pref_button2_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button2_title"/>
+    <net.anei.cadpage.preferences.ListPreference
+      app:key="@string/pref_xtra_resp_button3_key"
+      app:defaultValue="@string/pref_xtra_resp_button3_default"
+      app:title="@string/pref_button3_title"
+      app:summary="@string/pref_button_summary"
+      app:entries="@array/pref_button_text"
+      app:entryValues="@array/pref_button_values"
+      app:dialogTitle="@string/pref_button3_title"/>
+  </PreferenceCategory>
+</PreferenceScreen>
