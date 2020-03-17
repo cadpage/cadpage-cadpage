@@ -17,23 +17,29 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     app:title="@string/pref_resp_button_config_title">
 
     <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn1"
-      app:title="@string/pref_resp_button1_title"/>
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn1Fragment"
+      app:title="@string/pref_resp_button1_title"
+      app:key="@string/pref_callback1_screen_key"/>
     <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn2"
-      app:title="@string/pref_resp_button2_title"/>
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn2Fragment"
+      app:title="@string/pref_resp_button2_title"
+      app:key="@string/pref_callback2_screen_key"/>
     <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn3"
-      app:title="@string/pref_resp_button3_title"/>
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn3Fragment"
+      app:title="@string/pref_resp_button3_title"
+      app:key="@string/pref_callback3_screen_key"/>
     <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn4"
-      app:title="@string/pref_resp_button4_title"/>
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn4Fragment"
+      app:title="@string/pref_resp_button4_title"
+      app:key="@string/pref_callback4_screen_key"/>
     <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn5"
-      app:title="@string/pref_resp_button5_title"/>
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn5Fragment"
+      app:title="@string/pref_resp_button5_title"
+      app:key="@string/pref_callback5_screen_key"/>
     <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn6"
-      app:title="@string/pref_resp_button6_title"/>
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn6Fragment"
+      app:title="@string/pref_resp_button6_title"
+      app:key="@string/pref_callback6_screen_key"/>
 
   </PreferenceCategory>
   <PreferenceCategory
