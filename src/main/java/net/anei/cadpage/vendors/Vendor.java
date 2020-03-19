@@ -509,6 +509,12 @@ abstract class Vendor {
    */
   @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
   void addStatusInfo(StringBuilder sb) {
+
+    // The only way prefs can be null is if regular initialization threw an exception and we are
+    // trying to report that fact to the user.  Which has happened exactly one from someone on some
+    // kind of non-standard system.  So now we check for it
+    if (prefs == null) return;
+
     sb.append("\n\nVendor:" + vendorCode);
     sb.append("\nenabled:" + enabled);
     sb.append("\ninactive:" + inactive);

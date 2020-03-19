@@ -1,52 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02232019</string>
+  <string name="release_date">03162019</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.1.11-03\n
-    For Active911 users under Android 10.  Cadpage now requests permission to report your location
-    when it is not active.\n
-    \n
+    v2.1.11-09\n
     Location Fixes:\n
-    Chatham County, GA\n
-    Brunswick County, NC\n
+    Jefferson County, CO\n
+    Deschutes County, OR\n
+    \n
+    v2.1.11-08\n
+    Location Fixes:\n
+    Vigo County, IN\n
+    Graves County, KY\n
+    Dade County, GA\n
+    Macon County, MO\n
     Nash County, NC\n
-    Erie County, PA\n
-    Lufkin, TX\n
-    Mecklenburg County, VA\n
+    Pennington County, SD\n
     \n
-    v2.1.11-02\n
-    Second attempt at implementing updated MMS alert processing.  This time there is a new
-    setting to disable it and use the old logic.  Default will be to use old logic for existing
-    users and new logic for new users.  Using the new logic requires an update to the support app.\n
+    General Fixes:\n
+    Obscure crash by sideloaded Cadpage\n
     \n
-    v2.10-05\n
-    New Locations:\n
-    Tolland County, CT (alt)\n
-    \n
+    v2.1.11-07\n
     Location Fixes:\n
-    Jones County, NC\n
-    Lenoir County, NC\n
-    Macon County, NC\n
-    Clarendon County, SC\n
+    Rowan County, NC\n
+    Deschutes County, OR\n
     \n
-    v2.1.10-04\n
+    v2.1.11-06\n
     Location Fixes:\n
-    Macon County, NC\n
+    Houston County, GA\n
+    Lunenburg County, VA\n
     \n
-    v2.1.10-03\n
+    v2.1.11-05\n
     Location Fixes:\n
-    Tolland County, CT\n
-    Barry County, MI\n
-    Scott County, MO\n
-    Nash County, NC\n
-    Madison County, OH\n
-    Dallas County, TX\n
-    Botetourt County, VA\n
-    Roanoke County, VA\n
-    \n
-    v2.1.10-02\n
-    Disabled new MMS dispatch alert logic which turns out to not work.
+    Rankin Count, MS
   </string>
 </resources>

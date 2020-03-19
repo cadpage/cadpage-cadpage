@@ -269,6 +269,7 @@ public class SmsPopupUtils {
     PackageManager pm = context.getPackageManager();
     try {
       PackageInfo pi = pm.getPackageInfo(CADPAGE_SUPPORT_PKG, 0);
+      if (pi == null) return 0;
       return pi.versionCode;
     }
     catch (PackageManager.NameNotFoundException ex) {
