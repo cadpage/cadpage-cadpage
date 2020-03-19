@@ -5,30 +5,34 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.preference.TwoStatePreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.ManageParsers;
 import net.anei.cadpage.parsers.MsgParser;
+import net.anei.cadpage.parsers.ParserList;
 import net.anei.cadpage.parsers.SplitMsgOptions;
 import net.anei.cadpage.preferences.EditTextPreference;
+import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
+import net.anei.cadpage.preferences.LocationSwitchPreference;
 
-public class PreferenceLocationFragment extends PreferenceRestorableFragment {
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
+
+public class PreferenceLocationMenuFragment extends PreferenceRestorableFragment {
 
   private static final int REQ_SCANNER_CHANNEL = 1;
-
-  private LocationManager locMgr;
 
   private String parserDefCity = "";
   private String parserDefState = "";
   private TwoStatePreference overrideFilterPref;
-  private net.anei.cadpage.preferences.EditTextPreference filterPref;
+  private EditTextPreference filterPref;
 
   private TwoStatePreference overrideDefaultPref;
   private EditTextPreference defCityPref;
@@ -37,9 +41,6 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment {
   private Preference scannerPref;
   private String saveLocation;
 
-  public LocationManager getLocationManager() {
-    return locMgr;
-  }
 
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -55,9 +56,11 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment {
     // Save location so we can tell when it changes
     saveLocation = ManagePreferences.location();
 
-    // Set up the location description summary
+    // Set up the two location preference screens
     Preference descPreference = findPreference(getString(R.string.pref_loc_desc_key));
-    locMgr = new LocationManager(descPreference);
+    LocationManager locMgr = new LocationManager(descPreference);
+    setupLocationMenu(R.string.pref_location_tree_key, false, locMgr);
+    setupLocationMenu(R.string.pref_location_mtree_key, true, locMgr);
     locMgr.updateDisplay();
 
     // The location, filter override checkbox, and filter edit box have a complex
@@ -176,12 +179,129 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment {
         return true;
       });
     }
+
+    //  OK, everything should be set up
+    // If we were supposed to launch a specific preference screen,
+    // find it and substitute it for the top level preference screen
+    Bundle args = getArguments();
+    if (args != null) {
+      int id = args.getInt(SmsPopupConfigActivity.EXTRA_PREFERENCE, -1);
+      if (id >= 0) {
+        Preference preference = findPreference(getString(id));if (preference != null) {
+          setPreferenceScreen((PreferenceScreen) preference);
+        }
+      }
+    }
   }
 
   @Override
   public void onPause() {
     Log.v("PreferenceLocationFragment.onPause()");
     super.onPause();
+  }
+
+  /**
+   * Set up location menu tree
+   * @param resId resource ID of the preference screen to be constructed
+   * @param multi true if we are building a multi-location preference tree
+   * false if we are building a normal single location preference tree
+   */
+  private void setupLocationMenu(int resId, boolean multi, LocationManager locMgr) {
+
+    // Get the preference screen we will be building
+    Resources res = getResources();
+    PreferenceScreen main = findPreference(res.getString(resId));
+    buildLocationMenu(ParserList.MASTER_LIST, main, multi, locMgr);
+  }
+
+  /**
+   * Construct a preference screen corresponding to a configured parser category
+   * @param parserCategory parser category
+   * @param screen preference screen being set up
+   * @param multi true if we are setting up a multiple location selection menu
+   * @param locMgr Location manager
+   */
+  private void buildLocationMenu(ParserList.ParserCategory parserCategory, PreferenceScreen screen, boolean multi, LocationManager locMgr) {
+    for (ParserList.ParserEntry entry : parserCategory.getParserList()) {
+      if (!entry.isCategory()) throw new RuntimeException("Top level parser entry " + entry.getParserName() + " must be a category");
+      Preference pref = buildLocationItem(entry.getCategory(), multi, locMgr);
+      screen.addPreference(pref);
+    }
+  }
+
+  /**
+   * Construct a preference item corresponding to a single parser entry
+   * @param category root preference category
+   * @param multi true if we are setting up multiple location selection menu
+   * @param locMgr location manager
+   * @return constructed preference
+   */
+  private Preference buildLocationItem(ParserList.ParserCategory category, boolean multi, LocationManager locMgr) {
+
+    // Current rules are that category must contain only  subcategory or only parser entries.  See which this is
+    String catName = category.getName();
+    ParserList.ParserEntry[] entries = category.getParserList();
+    boolean subcat = false;
+    boolean plist = false;
+    for (ParserList.ParserEntry entry : entries) {
+      if (entry.isCategory()) subcat = true;
+      else plist = true;
+    }
+    if (subcat && plist) throw new RuntimeException("Parser group " + catName + " mixes parser and category entries");
+    if (!subcat && !plist) throw new RuntimeException("Parser group " + catName + " is empty");
+
+    // If it only contains subcategories, build a new preference screen with them
+    if (subcat) {
+      Activity activity = getActivity();
+      assert activity != null;
+      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(activity);
+      sub.setTitle(catName);
+      buildLocationMenu(category, sub, multi, locMgr);
+      return sub;
+    }
+
+    // Otherwise we are handing a parser list
+    // What we do next depends on whether this is a single or multiple selection menu
+
+    // If we are doing multiple selections, create a new preference screen and fill it
+    // a location checkbox for each parser entry
+    if (multi) {
+      Activity activity = getActivity();
+      assert activity != null;
+      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(activity);
+      sub.setTitle(catName);
+      for (ParserList.ParserEntry entry : entries) {
+        sub.addPreference(
+            new LocationSwitchPreference(getActivity(), entry.getParserName(),
+                stripStateAbbrv(entry.getLocName()),
+                locMgr)
+        );
+      }
+      return sub;
+    }
+
+    // If we are doing single location selections, build a list preference
+    // that can select from any of the parsers in this category
+    LocationListPreference list = new LocationListPreference(getActivity(), locMgr);
+    list.setTitle(catName);
+    list.setDialogTitle(catName);
+
+    String[] values = new String[entries.length];
+    String[] names = new String[entries.length];
+    for (int ndx = 0; ndx < entries.length; ndx++) {
+      ParserList.ParserEntry entry = entries[ndx];
+      values[ndx] = entry.getParserName();
+      names[ndx] = stripStateAbbrv(entry.getLocName());
+    }
+    list.setEntryValues(values);
+    list.setEntries(names);
+    return list;
+  }
+
+  private static String stripStateAbbrv(String name) {
+    int pt = name.indexOf(',');
+    if (pt >= 0) name = name.substring(0,pt);
+    return name;
   }
 
   /**
