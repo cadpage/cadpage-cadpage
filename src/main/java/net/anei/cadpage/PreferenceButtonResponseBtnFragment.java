@@ -7,16 +7,16 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-abstract class PreferenceButtonResponseBtnFragment extends PreferenceRestorableFragment {
-
-  private final int button;
-
-  PreferenceButtonResponseBtnFragment(int button) {
-    this.button = button;
-  }
+public class PreferenceButtonResponseBtnFragment extends PreferenceRestorableFragment {
 
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+
+    Bundle args = getArguments();
+    if (args == null) throw new RuntimeException("No arguments passed to PreferenceButtonResponseBtnFragment");
+    final int button = args.getInt("button", -1);
+    if (button < 0) throw new RuntimeException("No button defined for PreferenceButtonResponseBtnFragment");
+
     String defaultDesc = button == 1 ? getString(R.string.responding_text) :
                          button == 2 ? getString(R.string.not_responding_text) : "";
 

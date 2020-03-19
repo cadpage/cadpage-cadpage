@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-xmlns:app="http://schemas.android.com/apk/res-auto">
-  app:key="@string/pref_resp_button_config_key"
-  app:title="@string/pref_resp_button_config_title"
-  app:summary="@string/pref_resp_button_config_summary">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_resp_merge_key"
@@ -16,30 +13,30 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
   <PreferenceCategory
     app:title="@string/pref_resp_button_config_title">
 
-    <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn1Fragment"
+    <net.anei.cadpage.preferences.ResponseBtnPreference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtnFragment"
       app:title="@string/pref_resp_button1_title"
-      app:key="@string/pref_callback1_screen_key"/>
-    <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn2Fragment"
+      app:button="1"/>
+    <net.anei.cadpage.preferences.ResponseBtnPreference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtnFragment"
       app:title="@string/pref_resp_button2_title"
-      app:key="@string/pref_callback2_screen_key"/>
-    <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn3Fragment"
+      app:button="2"/>
+    <net.anei.cadpage.preferences.ResponseBtnPreference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtnFragment"
       app:title="@string/pref_resp_button3_title"
-      app:key="@string/pref_callback3_screen_key"/>
-    <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn4Fragment"
+      app:button="3"/>
+    <net.anei.cadpage.preferences.ResponseBtnPreference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtnFragment"
       app:title="@string/pref_resp_button4_title"
-      app:key="@string/pref_callback4_screen_key"/>
-    <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn5Fragment"
+      app:button="4"/>
+    <net.anei.cadpage.preferences.ResponseBtnPreference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtnFragment"
       app:title="@string/pref_resp_button5_title"
-      app:key="@string/pref_callback5_screen_key"/>
-    <Preference
-      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtn6Fragment"
+      app:button="5"/>
+    <net.anei.cadpage.preferences.ResponseBtnPreference
+      app:fragment="net.anei.cadpage.PreferenceButtonResponseBtnFragment"
       app:title="@string/pref_resp_button6_title"
-      app:key="@string/pref_callback6_screen_key"/>
+      app:button="6"/>
 
   </PreferenceCategory>
   <PreferenceCategory

@@ -10,8 +10,14 @@
             <flag name="fill" value="4" />
         </attr>
     </declare-styleable>
+
     <declare-styleable name="FlowLayout_LayoutParams">
     	<attr name="layout_breakLine" format="boolean" />
-        <attr name="layout_horizontalSpacing" format="dimension" />
+      <attr name="layout_horizontalSpacing" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="PreferenceButtonResponseBtn">
+        <attr name="button" format="integer"/>
+    </declare-styleable>
+
 </resources>
