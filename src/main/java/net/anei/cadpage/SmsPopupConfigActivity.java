@@ -52,6 +52,7 @@ public class SmsPopupConfigActivity extends AppCompatActivity
       pref.getFragment());
     fragment.setArguments(args);
     fragment.setTargetFragment(caller, 0);
+
     // Replace the existing Fragment with the new Fragment
     getSupportFragmentManager().beginTransaction()
       .replace(R.id.settings_content, fragment)

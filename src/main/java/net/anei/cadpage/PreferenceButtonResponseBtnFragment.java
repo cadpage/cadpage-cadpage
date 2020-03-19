@@ -10,17 +10,15 @@ import androidx.preference.PreferenceScreen;
 abstract class PreferenceButtonResponseBtnFragment extends PreferenceRestorableFragment {
 
   private final int button;
-  private final String defaultDesc;
 
   PreferenceButtonResponseBtnFragment(int button) {
     this.button = button;
-    defaultDesc = button == 1 ? getString(R.string.responding_text) :
-                  button == 2 ? getString(R.string.not_responding_text) :
-                  "";
   }
 
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    String defaultDesc = button == 1 ? getString(R.string.responding_text) :
+                         button == 2 ? getString(R.string.not_responding_text) : "";
 
     Context context = getPreferenceManager().getContext();
     PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
@@ -48,6 +46,8 @@ abstract class PreferenceButtonResponseBtnFragment extends PreferenceRestorableF
     codePref.setSummary(getString(R.string.pref_button_summary));
     codePref.setDialogMessage(R.string.pref_code_callback_msg);
     screen.addPreference(codePref);
+
+    setPreferenceScreen(screen);
 
     // Code field is only enabled if response type is set to something
     codePref.setEnabled(typePref.getValue().length() > 0);

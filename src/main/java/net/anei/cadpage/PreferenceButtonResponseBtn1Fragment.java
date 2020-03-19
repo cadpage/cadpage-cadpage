@@ -1,7 +1,7 @@
 package net.anei.cadpage;
 
-abstract class PreferenceButtonResponseBtn1Fragment extends PreferenceButtonResponseBtnFragment {
-  PreferenceButtonResponseBtn1Fragment() {
+public class PreferenceButtonResponseBtn1Fragment extends PreferenceButtonResponseBtnFragment {
+  public PreferenceButtonResponseBtn1Fragment() {
     super(1);
   }
 }

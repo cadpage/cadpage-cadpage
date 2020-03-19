@@ -53,6 +53,7 @@ abstract class PreferenceFragment extends PreferenceFragmentCompat {
       R.xml.preference_button_response,
     R.xml.preference_filter,
     R.xml.preference_location,
+      R.xml.preference_split_merge_options,
     R.xml.preference_direct,
     R.xml.preference_other_info
   };
