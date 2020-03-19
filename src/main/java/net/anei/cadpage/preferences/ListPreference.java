@@ -5,16 +5,29 @@ import android.util.AttributeSet;
 
 public class ListPreference extends androidx.preference.ListPreference {
 
-  private String origSummary;
+  private String origSummary = null;
 
   public ListPreference(Context context) {
     super(context);
-    origSummary = getSummary().toString().replace("%%", "%");
+    setOrigSummary();
   }
 
   public ListPreference(Context context, AttributeSet attrs) {
     super(context, attrs);
-    origSummary = getSummary().toString().replace("%%", "%");
+    setOrigSummary();
+  }
+
+  @Override
+  public void setSummary(CharSequence summary) {
+    super.setSummary(summary);
+    setOrigSummary();
+  }
+
+  private void setOrigSummary() {
+    if (origSummary != null) return;
+    CharSequence summary = getSummary();
+    if (summary == null) return;
+    origSummary = summary.toString().replace("%%", "%");
   }
 
   @Override
@@ -33,7 +46,7 @@ public class ListPreference extends androidx.preference.ListPreference {
   }
 
   private void refreshSummary() {
-    if (origSummary == null) origSummary = getSummary().toString().replace("%%", "%");
+    if (origSummary == null) return;
     setSummary(String.format(origSummary, getEntry()));
   }
 }

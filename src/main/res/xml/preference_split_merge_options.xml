@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidDomInspection -->
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <SwitchPreference
+    app:key="@string/pref_override_active911_split_key"
+    app:title="@string/pref_override_active911_split_title"
+    app:summaryOn="@string/pref_override_active911_split_summaryon"
+    app:summaryOff="@string/pref_override_active911_split_summaryoff"
+    app:defaultValue="false"/>
+
+  <SwitchPreference
+    app:key="@string/pref_split_direct_page_key"
+    app:title="@string/pref_split_direct_page_title"
+    app:summaryOn="@string/pref_split_direct_page_summaryon"
+    app:summaryOff="@string/pref_split_direct_page_summaryoff"
+    app:defaultValue="@string/pref_split_direct_page_default"/>
+
+  <net.anei.cadpage.preferences.EditTextPreference
+    app:dialogTitle="@string/pref_msgtimeout_title"
+    app:dialogMessage="@string/pref_msgtimeout_dialog"
+    app:key="@string/pref_msgtimeout_key"
+    app:title="@string/pref_msgtimeout_title"
+    app:summary="@string/pref_msgtimeout_summary"
+    android:inputType="number"
+    app:defaultValue="@string/pref_msgtimeout_default"/>
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_split_min_msg_key"
+    app:title="@string/pref_split_min_msg_title"
+    app:summary="@string/pref_split_min_msg_summary"
+    app:entries="@array/pref_split_min_msg_values"
+    app:entryValues="@array/pref_split_min_msg_values"
+    app:dialogTitle="@string/pref_split_min_msg_title"
+    app:defaultValue="@string/pref_split_min_msg_default"/>
+
+  <SwitchPreference
+    app:key="@string/pref_rev_msg_order_key"
+    app:title="@string/pref_rev_msg_order_title"
+    app:summaryOn="@string/pref_rev_msg_order_summaryon"
+    app:summaryOff="@string/pref_rev_msg_order_summaryoff"
+    app:defaultValue="@string/pref_rev_msg_order_default"/>
+
+  <SwitchPreference
+    app:key="@string/pref_mix_msg_order_key"
+    app:title="@string/pref_mix_msg_order_title"
+    app:summaryOn="@string/pref_mix_msg_order_summaryon"
+    app:summaryOff="@string/pref_mix_msg_order_summaryoff"
+    app:defaultValue="false"/>
+
+  <SwitchPreference
+    app:key="@string/pref_split_blank_ins_key"
+    app:title="@string/pref_split_blank_ins_title"
+    app:summaryOn="@string/pref_split_blank_ins_summaryon"
+    app:summaryOff="@string/pref_split_blank_ins_summaryoff"
+    app:defaultValue="@string/pref_split_blank_ins_default" />
+
+  <SwitchPreference
+    app:key="@string/pref_split_chk_sender_key"
+    app:title="@string/pref_split_chk_sender_title"
+    app:summaryOn="@string/pref_split_chk_sender_summaryon"
+    app:summaryOff="@string/pref_split_chk_sender_summaryoff"
+    app:defaultValue="@string/pref_split_chk_sender_default" />
+
+  <SwitchPreference
+    app:key="@string/pref_split_keep_lead_break_key"
+    app:title="@string/pref_split_keep_lead_break_title"
+    app:summaryOn="@string/pref_split_keep_lead_break_summaryon"
+    app:summaryOff="@string/pref_split_keep_lead_break_summaryoff"
+    app:defaultValue="@string/pref_split_keep_lead_break_default" />
+
+</PreferenceScreen>

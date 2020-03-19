@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.preference.TwoStatePreference;

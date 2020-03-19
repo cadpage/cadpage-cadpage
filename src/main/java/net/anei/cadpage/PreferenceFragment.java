@@ -34,15 +34,7 @@ abstract class PreferenceFragment extends PreferenceFragmentCompat {
     return false;
   }
 
-  abstract protected int getPreferenceId();
-
-  public PreferenceFragment() {
-    if (!Arrays.contains(PREF_ID_LIST, getPreferenceId())) {
-
-    }
-  }
-
-  /**
+   /**
    * initialize all uninitialized preferences
    * @param context current context
    */
@@ -57,10 +49,12 @@ abstract class PreferenceFragment extends PreferenceFragmentCompat {
     R.xml.preference_notification_old,
     R.xml.preference_additional,
     R.xml.preference_button,
+      R.xml.preference_button_main,
+      R.xml.preference_button_response,
     R.xml.preference_filter,
     R.xml.preference_location,
+      R.xml.preference_split_merge_options,
     R.xml.preference_direct,
     R.xml.preference_other_info
   };
-
 }
