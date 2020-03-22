@@ -584,9 +584,11 @@ public class ManageNotification {
    */
   private static void setMediaPlayerDataSourceUsingFileDescriptor(MediaPlayer mp, String fileInfo) throws IOException {
     Log.v("File Desc Media Player Setup - " + fileInfo);
-    File file = new File(fileInfo);
-    FileInputStream inputStream = new FileInputStream(file);
+    File file = null;
+    FileInputStream inputStream = null;
     try {
+      file = new File(fileInfo);
+      inputStream = new FileInputStream(file);
       mp.reset();
       mp.setDataSource(inputStream.getFD());
     } catch (IOException ex) {
@@ -594,7 +596,7 @@ public class ManageNotification {
       Log.e(ex);
       throw ex;
     } finally {
-      inputStream.close();
+      if (inputStream != null) inputStream.close();
     }
   }
 
