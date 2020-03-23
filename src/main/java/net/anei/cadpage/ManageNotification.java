@@ -205,8 +205,34 @@ public class ManageNotification {
     return channel.shouldVibrate();
   }
 
-  public static Notification getMiscNotification(Context context) {
-    return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
+  /**
+   * Return misc notification used for short term tasks requiring a foreground service
+   * @param context current context
+   * @param textId ID text to explain what Cadpage is doing
+   * @return notification
+   */
+  public static Notification getMiscNotification(Context context, int textId) {
+    NotificationCompat.Builder nbuild = new NotificationCompat.Builder(context, MISC_CHANNEL_ID);
+
+    // Set display icon
+    nbuild.setSmallIcon(R.drawable.ic_stat_notify);
+
+    // From Oreo on, these are set at the notification channel level
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      nbuild.setPriority(NotificationCompat.PRIORITY_MIN);
+      nbuild.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+    }
+
+    nbuild.setContentTitle(context.getString(R.string.app_name));
+    nbuild.setContentText(context.getString(textId));
+
+    // The default intent when the notification is clicked (Inbox)
+    Intent intent = CadPageActivity.getLaunchIntent(context);
+    PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, intent,
+        PendingIntent.FLAG_CANCEL_CURRENT);
+    nbuild.setContentIntent(notifIntent);
+
+    return nbuild.build();
   }
   
   /**

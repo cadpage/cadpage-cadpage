@@ -253,7 +253,7 @@ public class HttpService extends Service {
   public void onCreate() {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this));
+      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_http_request));
     }
 
     super.onCreate();
@@ -273,7 +273,7 @@ public class HttpService extends Service {
   public int onStartCommand(Intent intent, int flags, int startId) {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this));
+      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_http_request));
     }
 
     if (flags != 0) holdPowerLock(this);
