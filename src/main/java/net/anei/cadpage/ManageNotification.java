@@ -225,13 +225,6 @@ public class ManageNotification {
 
     nbuild.setContentTitle(context.getString(R.string.app_name));
     nbuild.setContentText(context.getString(textId));
-
-    // The default intent when the notification is clicked (Inbox)
-    Intent intent = CadPageActivity.getLaunchIntent(context);
-    PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, intent,
-        PendingIntent.FLAG_CANCEL_CURRENT);
-    nbuild.setContentIntent(notifIntent);
-
     return nbuild.build();
   }
   
