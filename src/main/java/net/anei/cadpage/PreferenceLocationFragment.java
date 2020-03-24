@@ -15,7 +15,6 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.ManageParsers;
 import net.anei.cadpage.parsers.MsgParser;
-import net.anei.cadpage.parsers.SplitMsgOptions;
 import net.anei.cadpage.preferences.EditTextPreference;
 import net.anei.cadpage.preferences.LocationManager;
 
@@ -245,11 +244,6 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment {
   // the call history data on the off chance that a general format message
   // can use the new location code.
   private String oldLocation = null;
-  private boolean oldSplitBlank = false;
-  private boolean oldSplitKeepLeadBreak = false;
-  private boolean oldRevMsgOrder = false;
-  private boolean oldMixedMsgOrder = false;
-
 
   @Override
   public void onStart() {
@@ -257,32 +251,12 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment {
     // Save the setting that might be important if they change
     oldLocation = ManagePreferences.location();
 
-    SplitMsgOptions options = ManagePreferences.getDefaultSplitMsgOptions();
-    oldSplitBlank = options.splitBlankIns();
-    oldSplitKeepLeadBreak = options.splitKeepLeadBreak();
-    oldRevMsgOrder = options.revMsgOrder();
-    oldMixedMsgOrder = options.mixedMsgOrder();
-
     super.onStart();
   }
 
   @Override
   public void onStop() {
     super.onStop();
-
-    // If any of the split message options have changed, reparse any possibly affected calls
-    SplitMsgOptions options = ManagePreferences.getDefaultSplitMsgOptions();
-    boolean splitBlank = options.splitBlankIns();
-    boolean splitKeepLeadBreak = options.splitKeepLeadBreak();
-    boolean revMsgOrder = options.revMsgOrder();
-    boolean mixedMsgOrder = options.mixedMsgOrder();
-    int changeCode;
-    if (revMsgOrder != oldRevMsgOrder || mixedMsgOrder != oldMixedMsgOrder) changeCode = 3;
-    else if (splitBlank != oldSplitBlank) changeCode = 2;
-    else if (splitKeepLeadBreak != oldSplitKeepLeadBreak) changeCode = 1;
-    else changeCode = 0;
-    if (changeCode > 0) SmsMessageQueue.getInstance().splitOptionChange(changeCode);
-
 
     String location = ManagePreferences.location();
     if (!location.equals(oldLocation)) {
