@@ -8,15 +8,17 @@
     app:key="@string/pref_loc_desc_key"
     app:title="@string/pref_loc_desc_title"/>
 
-  <PreferenceScreen
-    app:key="@string/pref_location_tree_key"
+  <net.anei.cadpage.preferences.LocationMenuPreference
+    app:fragment="net.anei.cadpage.PreferenceLocationMenuFragment"
     app:title="@string/pref_location_title"
-    app:summary="@string/pref_location_summary"/>
+    app:summary="@string/pref_location_summary"
+    app:mtree="false"/>
 
-  <PreferenceScreen
-    app:key="@string/pref_location_mtree_key"
+  <net.anei.cadpage.preferences.LocationMenuPreference
+    app:fragment="net.anei.cadpage.PreferenceLocationMenuFragment"
     app:title="@string/pref_multi_location_title"
-    app:summary="@string/pref_multi_location_summary"/>
+    app:summary="@string/pref_multi_location_summary"
+    app:mtree="true"/>
 
   <SwitchPreference
     app:key="@string/pref_override_filter_key"

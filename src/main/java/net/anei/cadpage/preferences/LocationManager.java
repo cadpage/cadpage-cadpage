@@ -144,6 +144,11 @@ s   */
     return (locationList.size() == 1 ? locationList.get(0) : "");
   }
 
+  // Return list of selected locations
+  public String[] getLocationList() {
+    return locationList.toArray(new String[0]);
+  }
+
   /**
    * Determine if location checkbox should be checked
    * @param location requested location
@@ -191,6 +196,7 @@ s   */
    * Update summary display for all main location preference screens
    */
   public void updateDisplay() {
+    if (descPreference == null) return;
     StringBuilder sb = new StringBuilder();
     for (String name : nameList) {
       if (sb.length() > 0) sb.append('\n');

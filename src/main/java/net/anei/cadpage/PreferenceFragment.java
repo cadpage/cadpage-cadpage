@@ -45,16 +45,17 @@ abstract class PreferenceFragment extends PreferenceFragmentCompat {
   }
 
   private static final int[] PREF_ID_LIST = new int[]{
-    R.xml.preference_general,
-    R.xml.preference_notification_old,
-    R.xml.preference_additional,
-    R.xml.preference_button,
-      R.xml.preference_button_main,
-      R.xml.preference_button_response,
-    R.xml.preference_filter,
-    R.xml.preference_location,
-      R.xml.preference_split_merge_options,
-    R.xml.preference_direct,
-    R.xml.preference_other_info
+    R.xml.preference_headers
+//    R.xml.preference_general,
+//    R.xml.preference_notification_old,
+//    R.xml.preference_additional,
+//    R.xml.preference_button,
+//      R.xml.preference_button_main,
+//      R.xml.preference_button_response,
+//    R.xml.preference_filter,
+//    R.xml.preference_location,
+//      R.xml.preference_split_merge_options,
+//    R.xml.preference_direct,
+//    R.xml.preference_other_info
   };
 }
