@@ -205,8 +205,27 @@ public class ManageNotification {
     return channel.shouldVibrate();
   }
 
-  public static Notification getMiscNotification(Context context) {
-    return new NotificationCompat.Builder(context, MISC_CHANNEL_ID).build();
+  /**
+   * Return misc notification used for short term tasks requiring a foreground service
+   * @param context current context
+   * @param textId ID text to explain what Cadpage is doing
+   * @return notification
+   */
+  public static Notification getMiscNotification(Context context, int textId) {
+    NotificationCompat.Builder nbuild = new NotificationCompat.Builder(context, MISC_CHANNEL_ID);
+
+    // Set display icon
+    nbuild.setSmallIcon(R.drawable.ic_stat_notify);
+
+    // From Oreo on, these are set at the notification channel level
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      nbuild.setPriority(NotificationCompat.PRIORITY_MIN);
+      nbuild.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+    }
+
+    nbuild.setContentTitle(context.getString(R.string.app_name));
+    nbuild.setContentText(context.getString(textId));
+    return nbuild.build();
   }
   
   /**
@@ -584,9 +603,11 @@ public class ManageNotification {
    */
   private static void setMediaPlayerDataSourceUsingFileDescriptor(MediaPlayer mp, String fileInfo) throws IOException {
     Log.v("File Desc Media Player Setup - " + fileInfo);
-    File file = new File(fileInfo);
-    FileInputStream inputStream = new FileInputStream(file);
+    File file = null;
+    FileInputStream inputStream = null;
     try {
+      file = new File(fileInfo);
+      inputStream = new FileInputStream(file);
       mp.reset();
       mp.setDataSource(inputStream.getFD());
     } catch (IOException ex) {
@@ -594,7 +615,7 @@ public class ManageNotification {
       Log.e(ex);
       throw ex;
     } finally {
-      inputStream.close();
+      if (inputStream != null) inputStream.close();
     }
   }
 

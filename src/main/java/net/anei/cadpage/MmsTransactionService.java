@@ -111,7 +111,7 @@ public class MmsTransactionService extends Service {
     ContentQuery.dumpIntent(intent);
 
     if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this));
+      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_mms_alert));
     }
 
     if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;

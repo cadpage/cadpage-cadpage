@@ -23,7 +23,7 @@ public class SmsService extends IntentService {
   public int onStartCommand(Intent intent, int flags, int startId) {
 
     if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this));
+      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_sms_alert));
     }
 
     if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;

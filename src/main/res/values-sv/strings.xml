@@ -2,6 +2,9 @@
 <resources>
   <!-- App Strings -->
   <string name="cadpage_alert">Cadpage larm!</string>
+  <string name="notify_mms_alert">Inkommande multi-mediameddelande</string>
+  <string name="notify_sms_alert">Inkommande textmeddelande</string>
+  <string name="notify_http_request">Skickar internetförfrågan</string>
   <string name="app_name">Cadpage</string>
   <string name="call_history">Larmhistorik:</string>
   <string name="new_text_at">Nytt larm mottaget %s</string>
