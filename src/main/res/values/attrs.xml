@@ -21,7 +21,7 @@
     </declare-styleable>
 
     <declare-styleable name="PreferenceLocationMenu">
-        <attr name="mtree" format="boolean"/>
+        <attr name="multi" format="boolean"/>
     </declare-styleable>
 
 </resources>

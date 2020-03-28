@@ -18,15 +18,15 @@ public class LocationMenuPreference extends Preference {
   public LocationMenuPreference(Context context, AttributeSet attrs) {
     super(context, attrs);
 
-    boolean mtree;
+    boolean multi;
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLocationMenu);
     try {
-      mtree = a.getBoolean(R.styleable.PreferenceLocationMenu_mtree, false);
+      multi = a.getBoolean(R.styleable.PreferenceLocationMenu_multi, false);
     } finally {
       a.recycle();
     }
 
     Bundle args = getExtras();
-    args.putBoolean("mtree",  mtree);
+    args.putBoolean("multi",  multi);
   }
 }

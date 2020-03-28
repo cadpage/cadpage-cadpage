@@ -8,6 +8,8 @@ import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.preferences.LocationMultiSelectListPreference;
 
+import java.util.Objects;
+
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -21,7 +23,7 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
     Bundle args = getArguments();
     if (args == null)
       throw new RuntimeException("No arguments passed to PreferenceLocationMenuFragment");
-    final boolean mTree = args.getBoolean("mTree");
+    boolean multi = args.getBoolean("multi");
 
     Fragment parent = getTargetFragment();
     final LocationManager locMgr =
@@ -30,7 +32,7 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
         : new LocationManager(null);
 
     // Set up the location preference screen
-    Preference main = buildLocationItem(ParserList.MASTER_LIST, mTree, locMgr);
+    Preference main = buildLocationItem(ParserList.MASTER_LIST, multi, locMgr);
     if (!(main instanceof PreferenceScreen)) {
       throw new RuntimeException("Location menu main screen is not a PreferenceScreen");
     }
@@ -88,21 +90,9 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
 
     // And use that to construct a multi-select list or a regular single select list
     if (multi) {
-      LocationMultiSelectListPreference list = new LocationMultiSelectListPreference(context, locMgr);
-      list.setKey(key);
-      list.setTitle(catName);
-      list.setDialogTitle(catName);
-      list.setEntryValues(values);
-      list.setEntries(names);
-      return list;
+      return new LocationMultiSelectListPreference(context, locMgr, key, catName, values, names);
     } else {
-      LocationListPreference list = new LocationListPreference(context, locMgr);
-      list.setKey(key);
-      list.setTitle(catName);
-      list.setDialogTitle(catName);
-      list.setEntryValues(values);
-      list.setEntries(names);
-      return list;
+      return new LocationListPreference(context, this, locMgr, key, catName, values, names);
     }
   }
 
@@ -110,5 +100,9 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
     int pt = name.indexOf(',');
     if (pt >= 0) name = name.substring(0,pt);
     return name;
+  }
+
+  public void requestClose() {
+    Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
   }
 }

@@ -1,44 +1,53 @@
 package net.anei.cadpage.preferences;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
+
+import net.anei.cadpage.PreferenceLocationMenuFragment;
+
+import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
+import androidx.preference.PreferenceDataStore;
 
 public class LocationListPreference extends ListPreference {
-  
+
+  private final PreferenceLocationMenuFragment parent;
   private final LocationManager locMgr;
 
-  public LocationListPreference(Context context, LocationManager locMgr) {
+  public LocationListPreference(Context context, PreferenceLocationMenuFragment parent, final LocationManager locMgr,
+                                String key, String catName, String[]values, String[] names) {
     super(context);
+    this.parent = parent;
     this.locMgr = locMgr;
+    setKey(key);
+    setTitle(catName);
+    setDialogTitle(catName);
+    setEntryValues(values);
+    setEntries(names);
+    setPreferenceDataStore(new PreferenceDataStore(){
+      @Nullable
+      @Override
+      public String getString(String key, @Nullable String defValue) {
+        return locMgr.getLocSetting();
+      }
+
+      @Override
+      public void putString(String key, @Nullable String value) {
+        locMgr.setNewLocation(value);
+      }
+    });
+  }
+
+  private boolean requestClose = false;
+
+  @Override
+  public boolean callChangeListener(Object newValue) {
+    requestClose = super.callChangeListener(newValue);
+    return requestClose;
   }
 
   @Override
-  protected String getPersistedString(String defaultReturnValue) {
-    return locMgr.getLocSetting();
+  public void setValue(String value) {
+    super.setValue(value);
+    if (requestClose) this.parent.requestClose();
   }
-
-  @Override
-  protected boolean persistString(String value) {
-    locMgr.setNewLocation(value);
-    return true;
-  }
-
-//  @Override
-//  protected void onDialogClosed(boolean positiveResult) {
-//    super.onDialogClosed(positiveResult);
-//    if (positiveResult) {
-//      locMgr.setNewLocation(getValue());
-//      Dialog dlg = parent.getDialog();
-//      if (dlg !=  null) {
-//        dlg.dismiss();
-//      } else {
-//        Context context = getContext();
-//        if (context instanceof Activity) {
-//          ((Activity)context).finish();
-//        }
-//      }
-//    }
-//  }
 }
