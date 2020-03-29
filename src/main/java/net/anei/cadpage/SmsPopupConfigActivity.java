@@ -45,6 +45,8 @@ public class SmsPopupConfigActivity extends AppCompatActivity
   @Override
   public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
 
+    Log.v("Instantiating preference fragment: " + pref.getFragment() + " for " + pref.getKey());
+
     // Instantiate the new Fragment
     final Bundle args = pref.getExtras();
     final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(

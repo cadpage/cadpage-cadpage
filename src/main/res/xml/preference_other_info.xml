@@ -36,6 +36,7 @@
 
   <net.anei.cadpage.preferences.DialogPreference
     app:negativeButtonText="@null"
+    app:key="@string/pref_releasenotes_key"
     app:title="@string/pref_releasenotes_title"
     app:summary="@string/pref_releasenotes_summary"
     app:dialogIcon="@drawable/ic_launcher"
