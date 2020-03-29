@@ -233,7 +233,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
       }
       return;
     }
-    mBillingClient.onActivityResult(requestCode, resultCode, data);
+    if (mBillingClient != null) mBillingClient.onActivityResult(requestCode, resultCode, data);
   }
 
   @Override

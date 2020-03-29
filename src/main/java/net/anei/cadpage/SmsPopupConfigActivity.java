@@ -18,7 +18,7 @@ import android.view.KeyEvent;
 public class SmsPopupConfigActivity extends AppCompatActivity
   implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback{
 
-  public static final String EXTRA_PREFERENCE = "PreferenceActivity.PREFERENCE";
+  public static final String EXTRA_SELECT_LOCATION = "PreferenceActivity.SELECT_LOCATION";
 
   private final PermissionManager permMgr = new PermissionManager(this);
 
@@ -35,17 +35,17 @@ public class SmsPopupConfigActivity extends AppCompatActivity
     ManagePreferences.setPermissionManager(permMgr);
 
     setContentView(R.layout.settings);
+
+    boolean selectLocation = getIntent().getBooleanExtra(EXTRA_SELECT_LOCATION, false);
+    PreferenceFragment fragment = selectLocation ? new PreferenceLocationMenuFragment() : new PreferenceHeadersFragment();
     getSupportFragmentManager()
       .beginTransaction()
-      .replace(R.id.settings_content, new PreferenceHeadersFragment())
+      .replace(R.id.settings_content, fragment)
       .commit();
-
   }
 
   @Override
   public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-
-    Log.v("Instantiating preference fragment: " + pref.getFragment() + " for " + pref.getKey());
 
     // Instantiate the new Fragment
     final Bundle args = pref.getExtras();
@@ -123,15 +123,21 @@ public class SmsPopupConfigActivity extends AppCompatActivity
   }
 
   /**
+   * Open main settings menu
+   * @param context current context
+   */
+  public static void launchSettings(Context context) {
+    Intent intent = new Intent(context, SmsPopupConfigActivity.class);
+    context.startActivity(intent);
+  }
+
+  /**
    * Launch the Select Single Location setting
    * @param activity current activity
    */
   public static void selectLocation(Activity activity) {
-//    Intent intent = new Intent(activity, SmsPopupConfigActivity.class);
-//    intent.putExtra(EXTRA_SHOW_FRAGMENT, PreferenceLocationFragment.class.getName());
-//    Bundle bundle = new Bundle();
-//    bundle.putInt(EXTRA_PREFERENCE, R.string.pref_location_tree_key);
-//    intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, bundle);
-//    activity.startActivityForResult(intent, 0);
+    Intent intent = new Intent(activity, SmsPopupConfigActivity.class);
+    intent.putExtra(EXTRA_SELECT_LOCATION, true);
+    activity.startActivityForResult(intent, 0);
   }
 }

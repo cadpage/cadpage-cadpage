@@ -83,7 +83,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // If the old version doesn't match the current version, we need to reload
     // the preference defaults and update the preference version
     if (oldVersion != PREFERENCE_VERSION) {
-      PreferenceFragment.initializePreferences(context);
+      PreferenceHeadersFragment.initializePreferences(context);
       prefs.putInt(R.string.pref_version_key, PREFERENCE_VERSION);
     }
 

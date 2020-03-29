@@ -4,6 +4,8 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.preference.PreferenceManager;
 import androidx.preference.TwoStatePreference;
 import androidx.preference.Preference;
 

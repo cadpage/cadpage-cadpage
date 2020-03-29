@@ -11,6 +11,8 @@ import net.anei.cadpage.preferences.LocationMultiSelectListPreference;
 import java.util.Objects;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -21,9 +23,7 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     Bundle args = getArguments();
-    if (args == null)
-      throw new RuntimeException("No arguments passed to PreferenceLocationMenuFragment");
-    boolean multi = args.getBoolean("multi");
+    boolean multi = args == null ? false : args.getBoolean("multi");
 
     Fragment parent = getTargetFragment();
     final LocationManager locMgr =
@@ -103,6 +103,13 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
   }
 
   public void requestClose() {
-    Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
+    FragmentActivity activity = getActivity();
+    if (activity == null) return;
+    FragmentManager fragMgr = activity.getSupportFragmentManager();
+    if (fragMgr.getBackStackEntryCount() == 0) {
+      activity.finish();
+    } else {
+      fragMgr.popBackStack();
+    }
   }
 }

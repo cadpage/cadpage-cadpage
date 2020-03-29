@@ -293,8 +293,7 @@ public class CadPageActivity extends AppCompatActivity {
     switch (item.getItemId()) {
     
     case R.id.settings_item:
-      Intent intent = new Intent(this, SmsPopupConfigActivity.class);
-      startActivity(intent);
+      SmsPopupConfigActivity.launchSettings(this);
       return true;
       
     case R.id.markallopened_item:
