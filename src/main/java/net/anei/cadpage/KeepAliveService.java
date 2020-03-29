@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 
@@ -41,7 +42,11 @@ public class KeepAliveService extends Service {
       intent.putExtra("ICON", icon);
       intent.putExtra("TITLE", title);
       intent.putExtra("TEXT", text);
-      context.startService(intent);
+      if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        context.startForegroundService(intent);
+      } else {
+        context.startService(intent);
+      }
     }
   }
   
