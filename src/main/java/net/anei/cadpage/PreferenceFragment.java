@@ -2,8 +2,6 @@ package net.anei.cadpage;
 
 import android.content.Context;
 
-import org.spongycastle.util.Arrays;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
@@ -32,10 +30,5 @@ abstract class PreferenceFragment extends PreferenceFragmentCompat {
       }
     }
     return false;
-  }
-
-  public void initializePreferences(Context context, int resId) {
-    PreferenceManager.setDefaultValues(context, resId, true);
-    PreferenceManager pm = new PreferenceManager(context);
   }
 }
