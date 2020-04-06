@@ -146,7 +146,6 @@
     <string name="pref_scanner_channel_key">scannerChannel</string>
     <string name="pref_scanner_channel_app_node_key">scannerChannelNode</string>
     <string name="pref_scanner_timeout_key">scannerTimeout</string>
-    <string name="pref_publish_pages_key">publish_pages</string>
     <string name="pref_passthrusms_key">passthrusms</string>
     <string name="pref_disclaimer_key">disclaimer</string>
     <string name="pref_privacy_policy_key">privacy_policy</string>

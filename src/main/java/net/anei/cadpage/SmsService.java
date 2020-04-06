@@ -199,9 +199,6 @@ public class SmsService extends IntentService {
     // Add new message to the message queue
     SmsMessageQueue.getInstance().addNewMsg(message);
 
-    // Publish message contents if so requested
-    if (ManagePreferences.publishPages()) message.broadcastIntent(context, false);
-
     // See if any notifications are enabled
     boolean notify = options.noticeEnabled();
 

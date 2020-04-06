@@ -115,7 +115,6 @@ public class MsgOptionManager {
     R.id.delete_item, 
     R.id.close_item, 
     R.id.email_item,
-    R.id.publish_item, 
     R.id.close_app_item,
     R.id.more_info_item,
     R.id.start_radio_item,
@@ -131,7 +130,6 @@ public class MsgOptionManager {
     R.string.delete_item_text, 
     R.string.close_item_text, 
     R.string.email_item_text,
-    R.string.publish_item_text, 
     R.string.close_app_item_text,
     R.string.more_info_item_text,
     R.string.start_radio_item_text,
@@ -420,7 +418,7 @@ public class MsgOptionManager {
   private class ButtonHandler implements OnClickListener {
     final private int itemId;
     final private Button button;
-    private String respCode = null;
+    private final String respCode;
 
     /**
      * Normal constructor for regular button items
@@ -570,7 +568,7 @@ public class MsgOptionManager {
 
       // Start radio button only visible if there is a scanner channel to open
     case R.id.start_radio_item:
-      item.setVisible(ManagePreferences.scannerChannel() != null);
+      item.setVisible(ManagePreferences.isScannerChannelSelected());
       break;
       
     case R.id.active911_item:
@@ -652,11 +650,7 @@ public class MsgOptionManager {
     case R.id.email_item:
       EmailDeveloperActivity.sendMessageEmail(activity,  message.getMsgId());
       return true;
-      
-    case R.id.publish_item:
-      message.broadcastIntent(activity, true);
-      return true;
-      
+
     case R.id.more_info_item:
       message.showMoreInfo(activity);
       return true;
@@ -802,10 +796,8 @@ public class MsgOptionManager {
       ContentQuery.dumpIntent(intent);
       
       try {
-        if (intent != null) {
-          context.startActivity(intent);
-          return;
-        }
+        context.startActivity(intent);
+        return;
       } catch (ActivityNotFoundException ex) {
           // Waze not installed, drop back to Google mapping
         Log.w("Map request failed");

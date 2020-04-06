@@ -558,7 +558,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     if (channel == null) channel = "<None Selected>";
     return channel;
   }
-  
+
+  public static boolean isScannerChannelSelected() {
+    String channel = prefs.getString(R.string.pref_scanner_channel_key, null);
+    return channel != null;
+  }
+
   public static void setScannerChannel(String newVal) {
     prefs.putString(R.string.pref_scanner_channel_key, newVal);
   }
@@ -608,11 +613,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final String SCAN_DESCRIPTION_KEY = "description";
   private static final String SCAN_LOCALE_KEY = "localeDirectoryLine";
   private static final String SCAN_FLD_DELIM = "<!>";
-  
-  public static boolean publishPages() {
-    return prefs.getBoolean(R.string.pref_publish_pages_key);
-  }
-  
+
   public static boolean notifyEnabled() {
     return prefs.getBoolean(R.string.pref_notif_enabled_key);
   }
@@ -2685,8 +2686,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       R.string.pref_scanner_channel_key,
       R.string.pref_scanner_channel_app_node_key,
       R.string.pref_scanner_timeout_key,
-      R.string.pref_publish_pages_key,
-      
+
       R.string.pref_notif_enabled_key,
       R.string.pref_notif_override_key,
       R.string.pref_notif_override_volume_key,

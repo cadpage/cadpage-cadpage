@@ -139,11 +139,4 @@
     android:inputType="number"
     app:defaultValue="@string/pref_scanner_timeout_default"/>
 
-  <SwitchPreference
-    app:key="@string/pref_publish_pages_key"
-    app:title="@string/pref_publish_pages_title"
-    app:summaryOn="@string/pref_publish_pages_summaryon"
-    app:summaryOff="@string/pref_publish_pages_summaryoff"
-    app:defaultValue="@string/pref_publish_pages_default" />
-
 </PreferenceScreen>

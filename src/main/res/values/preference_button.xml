@@ -67,7 +67,6 @@
     <item>@string/close_item_text</item>
     <item>@string/close_app_item_text</item>
     <item>@string/email_item_text</item>
-    <item>@string/publish_item_text</item>
     <item>@string/more_info_item_text</item>
     <item>@string/start_radio_item_text</item>
     <item>@string/active911_item_text</item>
@@ -86,7 +85,6 @@
   <string name="close_item_text">Close</string>
   <string name="close_app_item_text">Close App</string>
   <string name="email_item_text">Report Problem</string>
-  <string name="publish_item_text">Publish Page</string>
   <string name="more_info_item_text">More Info</string>
   <string name="start_radio_item_text">Start Radio</string>
   <string name="active911_item_text">Active911</string>

@@ -33,9 +33,6 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import static net.anei.cadpage.BroadcastBindings.*;
-
-
 
 public class SmsMmsMessage implements Serializable {
 
@@ -79,10 +76,7 @@ public class SmsMmsMessage implements Serializable {
   
   // Tracking configured Active911 parsers that we do not yet support
   private String missingParsers = null;
-  
-  // Dead member replaced by vendor
-  private final String sponsor = null;
-  
+
   // C2DM page information
   private String ackReq = null;
   private String ackURL = null;
@@ -254,7 +248,7 @@ public class SmsMmsMessage implements Serializable {
     if (!match.find()) return null;
     return match.group(1);
   }
-  private static final Pattern ACTIVE911_CODE_PTN = Pattern.compile("[&\\?]q=([A-Za-z0-9]+)\\b");
+  private static final Pattern ACTIVE911_CODE_PTN = Pattern.compile("[&?]q=([A-Za-z0-9]+)\\b");
   
   private void reportDataChange() {
     if (msgId > 0) SmsMessageQueue.getInstance().notifyDataChange();
@@ -277,7 +271,7 @@ public class SmsMmsMessage implements Serializable {
     if (fromAddress == null) fromAddress = "";
     try {
       messageClass = sms.getMessageClass();
-    } catch (NullPointerException ex) {}
+    } catch (NullPointerException ignored) {}
     sentTime = sms.getTimestampMillis();
 
     String body;
@@ -285,11 +279,13 @@ public class SmsMmsMessage implements Serializable {
       body = sms.getDisplayMessageBody();
     } else {
       StringBuilder bodyText = new StringBuilder();
-      for (int i = 0; i < messages.length; i++) {
+      for (SmsMessage message : messages) {
         // getMessageBody has been throwing exceptions on occasion :(
         try {
-          bodyText.append(messages[i].getMessageBody());
-        } catch (NullPointerException ex) {Log.e(ex);}
+          bodyText.append(message.getMessageBody());
+        } catch (NullPointerException ex) {
+          Log.e(ex);
+        }
       }
       body = bodyText.toString();
     }
@@ -471,7 +467,7 @@ public class SmsMmsMessage implements Serializable {
         if (this.messageBody == null) {
           this.messageBody = msg.messageBody;
         } else {
-          if (extraMsgBody == null) extraMsgBody = new ArrayList<String>();
+          if (extraMsgBody == null) extraMsgBody = new ArrayList<>();
           extraMsgBody.add(msg.messageBody);
         }
       }
@@ -498,9 +494,6 @@ public class SmsMmsMessage implements Serializable {
   private void readObject(java.io.ObjectInputStream stream)
   throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    
-    // Retrieve vendor Code from old Sponsor code
-    if (vendorCode == null) vendorCode = sponsor;
 
     // To reduce startup overhead we do not parse message information now.
     // Instead messages will be parsed in a background thread
@@ -769,7 +762,7 @@ public class SmsMmsMessage implements Serializable {
     origCal.setTime(cal.getTime());
     cal.set(Calendar.HOUR_OF_DAY, timeArry[0]);
     cal.set(Calendar.MINUTE, timeArry[1]);
-    cal.set(Calendar.SECOND, (timeArry[2]>=0 ? timeArry[2] : 0));
+    cal.set(Calendar.SECOND, (Math.max(timeArry[2], 0)));
     cal.set(Calendar.MILLISECOND, 0);
     
     // If there is no date field, retain the date from the time received
@@ -820,7 +813,8 @@ public class SmsMmsMessage implements Serializable {
     }
     return result;
   }
-  
+  private static final Pattern DATE_TIME_DELIM = Pattern.compile("[/:-]");
+
   /**
    * Split up an entered date or time field into component integer parts
    * @param field date/time field to be parsed
@@ -828,7 +822,6 @@ public class SmsMmsMessage implements Serializable {
    * values, last one will be -1 if it was not present.  Returns null if
    * field is not a valid date/time string
    */
-  private static final Pattern DATE_TIME_DELIM = Pattern.compile("[/:-]");
   private static int[] splitDateTime(String field) {
     if (field.length() == 0) return null;
     String[] parts = DATE_TIME_DELIM.split(field);
@@ -866,12 +859,12 @@ public class SmsMmsMessage implements Serializable {
       
       // Looks good
       return new Date(time);
-    } catch (NumberFormatException ex) {}
+    } catch (NumberFormatException ignored) {}
     
     // No go, try as UMT Date/time
     try {
       return SERVER_DATE_FMT.parse(serverTime);
-    } catch (ParseException ex) {}
+    } catch (ParseException ignored) {}
     
     return null;
       
@@ -1153,70 +1146,6 @@ public class SmsMmsMessage implements Serializable {
     if (defUseGPS) return info.getMapAddress(defCity, defState);
     return info.getMapAddress(useGPS, defCity, defState);
   }
-  
-  /**
-   * Broadcast message information for 3rd party apps
-   * @param context broadcast context
-   * @param republish true if this is a republish event
-   */
-  public void broadcastIntent(Context context, boolean republish) {
-    Intent intent = new Intent(ACTION);
-    intent.putExtra(EXTRA_MSG_ID, msgId);
-    intent.putExtra(EXTRA_REPUBLISH, republish);
-    putExtraString(intent, EXTRA_FROM, getFromAddress());
-    putExtraString(intent, EXTRA_SUBJECT, getSubject());
-    putExtraString(intent, EXTRA_MESSAGE, getMessageBody());
-    intent.putExtra(EXTRA_TIME, timestamp);
-    putExtraString(intent, EXTRA_LOC_CODE, location);
-    
-    FilterOptions options = getFilterOptions();
-    intent.putExtra(EXTRA_QUIET_MODE, 
-         !(options.noticeEnabled() || options.popupEnabled()));
-    
-    MsgInfo info = getInfo();
-    if (info != null) {
-      putExtraString(intent, EXTRA_LOC_CITY, info.getDefCity());
-      putExtraString(intent, EXTRA_LOC_STATE, info.getDefState());
-      putExtraString(intent, EXTRA_PARSE_CALL_CODE, info.getCode());
-      putExtraString(intent, EXTRA_PARSE_CALL, info.getExtendedCall());
-      putExtraString(intent, EXTRA_PARSE_INFO, info.getSupp());
-      putExtraString(intent, EXTRA_PARSE_PLACE, info.getPlace());
-      putExtraString(intent, EXTRA_PARSE_ADDRESS, info.getAddress());
-      putExtraString(intent, EXTRA_PARSE_CITY, info.getCity());
-      putExtraString(intent, EXTRA_PARSE_STATE, info.getState());
-      String mapAddress = getMapAddress();
-      if (mapAddress != null) {
-        putExtraString(intent, EXTRA_PARSE_MAP_ADDRESS, mapAddress);
-      }
-      putExtraString(intent, EXTRA_PARSE_APT, info.getApt());
-      putExtraString(intent, EXTRA_PARSE_MAP, info.getMap());
-      putExtraString(intent, EXTRA_PARSE_BOX, info.getBox());
-      putExtraString(intent, EXTRA_PARSE_AGENCY, info.getSource());
-      putExtraString(intent, EXTRA_PARSE_UNIT, info.getUnit());
-      putExtraString(intent, EXTRA_PARSE_CALL_ID, info.getCallId());
-      putExtraString(intent, EXTRA_PARSE_NAME, info.getName());
-      putExtraString(intent, EXTRA_PARSE_PHONE, info.getPhone());
-      putExtraString(intent, EXTRA_PARSE_PRIORITY, info.getPriority());
-      putExtraString(intent, EXTRA_PARSE_CHANNEL, info.getChannel());
-      putExtraString(intent, EXTRA_PARSE_GPSLOC, info.getGPSLoc());
-      putExtraString(intent, EXTRA_PARSE_DISP_DATE, info.getDate());
-      putExtraString(intent, EXTRA_PARSE_DISP_TIME, info.getTime());
-      putExtraString(intent, EXTRA_PARSE_INFO_URL, info.getInfoURL());
-      intent.putExtra(EXTRA_PREFER_GPS, info.isPreferGPSLoc());
-      MsgParser.MapPageStatus mapPageStatus = info.getMapPageStatus();
-      if (mapPageStatus != null) {
-        putExtraString(intent, EXTRA_MAP_PAGE_STATUS, mapPageStatus.toString());
-      }
-      putExtraString(intent, EXTRA_MAP_PAGE_URL, info.getMapPageURL());
-    }
-    
-    Log.v("Broadcasting intent");
-    SmsPopupUtils.sendImplicitBroadcast(context, intent, PERMISSION);
-  }
-  
-  private static void putExtraString(Intent intent, String key, String value) {
-    if (value != null && value.length() > 0) intent.putExtra(key, value);
-  }
 
   /**
    * Display message information in call history display
@@ -1242,7 +1171,7 @@ public class SmsMmsMessage implements Serializable {
     if (ManagePreferences.showHistoryAddress()) {
       MsgInfo info = getInfo();
       if (info != null) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(info.getAddress());
         String apt = info.getApt();
         if (apt.length() > 0) {

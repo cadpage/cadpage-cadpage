@@ -119,8 +119,4 @@
   <string name="pref_scanner_timeout_value_zero">Ingen</string>
   <string name="pref_scanner_timeout_value_other">%s min</string>
 
-  <string name="pref_publish_pages_title">Publicera larmärenden</string>
-  <string name="pref_publish_pages_summaryon">Larmärenden kommer att publiceras för 3:e partsapplikation</string>
-  <string name="pref_publish_pages_summaryoff">Larmärenden kommer inte publiceras för 3:e partsapplikation</string>
-
 </resources>
