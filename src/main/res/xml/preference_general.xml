@@ -3,17 +3,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <Preference
-    app:key="@string/pref_payment_status_key"
-    app:title="@string/pref_payment_status_title"/>
-
-  <SwitchPreference
-    app:key="@string/pref_enabled_key"
-    app:title="@string/pref_enabled_title"
-    app:summaryOn="@string/pref_enabled_summaryon"
-    app:summaryOff="@string/pref_enabled_summaryoff"
-    app:defaultValue="true" />
-
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_history_limit_key"
     app:title="@string/pref_history_limit_title"

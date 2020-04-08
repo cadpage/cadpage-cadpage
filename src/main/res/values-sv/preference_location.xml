@@ -40,15 +40,6 @@
   <string name="pref_defstate_summary">Aktuellt värde: %%s</string>
   <string name="pref_defstate_dialog">Välj ort i förvald stat</string>
 
-  <string name="pref_enable_msg_type_title">Meddelandetyp behandlad</string>
-  <string name="pref_enable_msg_type_summary">Cadpage kommer att behandla\n%%s</string>
-  <string-array name="pref_enable_msg_type_entries">
-    <item>Endast SMS meddelanden</item>
-    <item>Endast MMS meddelanden</item>
-    <item>SMS och MMS meddelanden</item>
-    <item>Endast Meddelandeservice</item>
-  </string-array>
-
   <string name="pref_use_old_mms_title">Använd gamla logiken för att ladda ner MMS</string>
   <string name="pref_use_old_mms_summaryon">Vänta tills meddelandeappen laddat ner innehållet</string>
   <string name="pref_use_old_mms_summaryoff">Cadpage kommer att ladda ner MMS-innehåll</string>

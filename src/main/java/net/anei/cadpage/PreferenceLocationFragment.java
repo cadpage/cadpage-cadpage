@@ -46,11 +46,6 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment {
     // Load the preferences from an XML resource
     setPreferencesFromResource(R.xml.preference_location, rootKey);
 
-      // Add necessary permission checks
-    Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
-    assert pref != null;
-    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue));
-
     // Save location so we can tell when it changes
     saveLocation = ManagePreferences.location();
 

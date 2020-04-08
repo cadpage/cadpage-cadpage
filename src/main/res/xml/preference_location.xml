@@ -67,14 +67,6 @@
     android:inputType="textCapCharacters"
     app:defaultValue="" />
 
-  <net.anei.cadpage.preferences.ListPreference
-    app:key="@string/pref_enable_msg_type_key"
-    app:title="@string/pref_enable_msg_type_title"
-    app:summary="@string/pref_enable_msg_type_summary"
-    app:entries="@array/pref_enable_msg_type_entries"
-    app:entryValues="@array/pref_enable_msg_type_values"
-    app:defaultValue="@string/pref_enable_msg_type_default" />
-
   <SwitchPreference
     app:key="@string/pref_use_old_mms_key"
     app:title="@string/pref_use_old_mms_title"

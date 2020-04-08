@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="pref_category_general_title">Generella inställningar</string>
-  <string name="pref_category_general_summary">Betalningsstatus, Aktiverad, Tidsgräns larmlista, Displayalternativ</string>
-
-  <string name="pref_payment_status_title">Betalningsstatus</string>
-
-  <string name="pref_enabled_title">Aktivera Cadpage</string>
-  <string name="pref_enabled_summaryon">Cadpage är aktiverat</string>
-  <string name="pref_enabled_summaryoff">Cadpage är avaktiverat</string>
 
   <string name="pref_history_limit_title">Gräns för larmhistorik</string>
   <string name="pref_history_limit_summary">

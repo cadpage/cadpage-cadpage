@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="pref_category_general_title">General Settings</string>
-  <string name="pref_category_general_summary">Payment Status, Enabled, History Limit, Display options</string>
-
-  <string name="pref_payment_status_title">Payment Status</string>
-
-  <string name="pref_enabled_title">Enable Cadpage</string>
-  <string name="pref_enabled_summaryon">Cadpage is enabled</string>
-  <string name="pref_enabled_summaryoff">Cadpage is disabled</string>
 
   <string name="pref_history_limit_title">Call History Limit</string>
   <string name="pref_history_limit_summary">

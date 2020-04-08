@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="pref_payment_status_title">Payment Status</string>
+
+  <string name="pref_enabled_title">Enable Cadpage</string>
+  <string name="pref_enabled_summaryon">Cadpage is enabled</string>
+  <string name="pref_enabled_summaryoff">Cadpage is disabled</string>
+
+  <string name="pref_enable_msg_type_title">Alert Message Type</string>
+  <string name="pref_enable_msg_type_summary">Cadpage will process\n%%s</string>
+  <string-array name="pref_enable_msg_type_values" tools:ignore="MissingTranslation">
+    <item>CS</item>
+    <item>CM</item>
+    <item>CSM</item>
+    <item>C</item>
+  </string-array>
+  <string-array name="pref_enable_msg_type_entries">
+    <item>SMS messages only</item>
+    <item>MMS messages only</item>
+    <item>SMS and MMS messages</item>
+    <item>Direct paging only</item>
+  </string-array>
+
+</resources>

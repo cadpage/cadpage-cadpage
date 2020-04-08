@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 import android.view.KeyEvent;
 
@@ -37,7 +36,7 @@ public class SmsPopupConfigActivity extends AppCompatActivity
     setContentView(R.layout.settings);
 
     boolean selectLocation = getIntent().getBooleanExtra(EXTRA_SELECT_LOCATION, false);
-    PreferenceFragment fragment = selectLocation ? new PreferenceLocationMenuFragment() : new PreferenceHeadersFragment();
+    PreferenceFragment fragment = selectLocation ? new PreferenceLocationMenuFragment() : new PreferenceMainFragment();
     getSupportFragmentManager()
       .beginTransaction()
       .replace(R.id.settings_content, fragment)

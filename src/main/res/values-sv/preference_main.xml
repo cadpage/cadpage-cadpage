@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pref_payment_status_title">Betalningsstatus</string>
+
+  <string name="pref_enabled_title">Aktivera Cadpage</string>
+  <string name="pref_enabled_summaryon">Cadpage är aktiverat</string>
+  <string name="pref_enabled_summaryoff">Cadpage är avaktiverat</string>
+
+  <string name="pref_enable_msg_type_title">Alert Message Type</string> <!-- Translate -->
+  <string name="pref_enable_msg_type_summary">Cadpage kommer att behandla\n%%s</string>
+  <string-array name="pref_enable_msg_type_entries">
+    <item>Endast SMS meddelanden</item>
+    <item>Endast MMS meddelanden</item>
+    <item>SMS och MMS meddelanden</item>
+    <item>Endast Meddelandeservice</item>
+  </string-array>
+
+</resources>
