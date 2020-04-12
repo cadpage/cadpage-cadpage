@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="pref_category_location_title">Location Settings</string>
-  <string name="pref_category_location_summary">CAD Page Processing Details</string>
 
   <string name="pref_loc_desc_title">Current Location</string>
 
@@ -11,11 +10,12 @@
   <string name="pref_multi_location_title">Select Multiple Locations</string>
   <string name="pref_multi_location_summary">Select multiple locations</string>
 
-  <string name="pref_override_filter_title">Override location filter</string>
-  <string name="pref_override_filter_summaryon">Location filter will be overridden</string>
-  <string name="pref_override_filter_summaryoff">Location filter %s is active</string>
+  <string name="pref_loc_filter_title">Sender Address Filter</string>
+  <string name="pref_override_filter_title">Override sender address filter</string>
+  <string name="pref_override_filter_summaryon">Sender address filter will be overridden</string>
+  <string name="pref_override_filter_summaryoff">Sender address filter %s is active</string>
 
-  <string name="pref_filter_title">From: (Filter)</string>
+  <string name="pref_filter_title">Sender address filter</string>
   <string name="pref_filter_summary">Only Messages from this address will be checked.
     Cur value: %%s</string>
   <string name="pref_filter_dialog">Enter Email address to filter messages. No entry
@@ -25,6 +25,7 @@
   <string name="pref_show_source_summaryon">Will display source of alert</string>
   <string name="pref_show_source_summaryoff">Will not display source of alert</string>
 
+  <string name="pref_loc_defaults_title">Default City/State</string>
   <string name="pref_override_default_title">Override Default City/State</string>
   <string name="pref_override_default_summaryon">Use user default city/state</string>
   <string name="pref_override_default_summaryoff">Use location default city/state</string>

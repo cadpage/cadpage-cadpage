@@ -33,6 +33,7 @@
     <string name="pref_expire_date_key">pref_expire_date</string>
     <string name="pref_prev_version_code">prev_version_code</string>
     <string name="pref_register_date_key">register_date</string>
+    <string name="pref_category_location_key">category_location</string>
     <string name="pref_payment_status_key">paymentstatus</string>
     <string name="pref_enabled_key">enabled</string>
     <string name="pref_enable_msg_type_key">enable_msg_type</string>
@@ -121,10 +122,12 @@
     <string name="pref_location_key">location</string>
     <string name="pref_location_tree_key">locationTree</string>
     <string name="pref_location_mtree_key">locationMTree</string>
+    <string name="pref_loc_filter_key">loc_filter</string>
     <string name="pref_override_filter_key">override_filter</string>
     <string name="pref_filter_key">filter</string>
-    <string name="pref_gen_alert_key">gen_alert</string> <!-- no longer used -->
+    <string name="pref_gen_alert_key">gen_alert</string> <!-- no longer used. But still has to be converted -->
     <string name="pref_show_source_key">show_source</string>
+    <string name="pref_loc_defaults_key">loc_defaults</string>
     <string name="pref_override_default_key">overrideDefaultLoc</string>
     <string name="pref_defstate_key">defaultState</string>
     <string name="pref_defcity_key">defaultCity</string>
@@ -166,5 +169,4 @@
     <string name="pref_transfer_status_key">transfer_status</string>
     <string name="pref_no_map_gps_label">no_map_gps_label</string>
     <string name="pref_force_popup">force_popup</string>
-
 </resources>

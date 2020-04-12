@@ -404,9 +404,17 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static boolean overrideFilter() {
     return prefs.getBoolean(R.string.pref_override_filter_key);
   }
+
+  public static void setOverrideFilter(boolean newValue) {
+    prefs.putBoolean(R.string.pref_override_filter_key, newValue);
+  }
   
   public static String filter() {
     return prefs.getString(R.string.pref_filter_key);
+  }
+
+  public static void setFilter(String newValue) {
+    prefs.putString(R.string.pref_filter_key, newValue);
   }
   
   public static boolean showSource() {
@@ -417,7 +425,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return prefs.getBoolean(R.string.pref_override_default_key);
   }
   
-  private static void setOverrideDefaults(boolean newVal) {
+  public static void setOverrideDefaults(boolean newVal) {
     prefs.putBoolean(R.string.pref_override_default_key, newVal);
   }
   
@@ -425,7 +433,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return prefs.getString(R.string.pref_defcity_key);
   }
   
-  private static void setDefaultCity(String newVal) {
+  public static void setDefaultCity(String newVal) {
     prefs.putString(R.string.pref_defcity_key, newVal);
   }
   
@@ -433,7 +441,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return prefs.getString(R.string.pref_defstate_key);
   }
   
-  private static void setDefaultState(String newVal) {
+  public static void setDefaultState(String newVal) {
     prefs.putString(R.string.pref_defstate_key, newVal);
   }
   

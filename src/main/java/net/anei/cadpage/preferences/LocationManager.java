@@ -11,19 +11,25 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.parsers.ManageParsers;
+import net.anei.cadpage.parsers.MsgParser;
 
 /**
  * Class coordinates everything that needs to be done about the location setting
  */
 public class LocationManager {
-  
-  private Preference descPreference;
-  
+
+  public interface Provider {
+    LocationManager getLocationManager();
+  }
+
   private final List<String> locationList = new ArrayList<>();
   private final List<String> nameList = new ArrayList<>();
   
   private OnPreferenceChangeListener listener = null;
-  
+
+  private String saveLocation;
+  private MsgParser parser = null;
+
   private static final Map<String,String> STATE_MAP = new HashMap<>();
   static {
     STATE_MAP.put("AL", "ALABAMA");
@@ -79,11 +85,9 @@ public class LocationManager {
       return str;
     }};
   
-  public LocationManager(Preference descPreference) {
-    
-    this.descPreference = descPreference;
-    
-    for (String loc : ManagePreferences.location().split(",")) {
+  public LocationManager() {
+    saveLocation = ManagePreferences.location();
+    for (String loc : saveLocation.split(",")) {
       locationList.add(loc);
       nameList.add(ManageParsers.getInstance().getLocName(loc));
     }
@@ -180,29 +184,34 @@ s   */
       }
       newLocation = sb.toString();
     }
-    
+
+    saveLocation = newLocation;
+    parser = null;
+
     // Set preference and
     // call notification listener if there is one
     ManagePreferences.setLocation(newLocation);
     if (listener != null) {
       listener.onPreferenceChange(null, newLocation);
     }
-    
-    // Set the summary display on both location preference screens
-    updateDisplay();
+  }
+
+  public MsgParser getParser() {
+    if (parser == null) parser = ManageParsers.getInstance().getParser(saveLocation);
+    return parser;
   }
 
   /**
-   * Update summary display for all main location preference screens
+   * @return Preference SummaryProvider to generate location summary preference line
    */
-  public void updateDisplay() {
-    if (descPreference == null) return;
-    StringBuilder sb = new StringBuilder();
-    for (String name : nameList) {
-      if (sb.length() > 0) sb.append('\n');
-      sb.append(name);
-    }
-    
-    descPreference.setSummary(sb.toString());
+  public Preference.SummaryProvider getSummaryProvider() {
+    return preference -> {
+      StringBuilder sb = new StringBuilder();
+      for (String name : nameList) {
+        if (sb.length() > 0) sb.append('\n');
+        sb.append(name);
+      }
+      return sb.toString();
+    };
   }
 }

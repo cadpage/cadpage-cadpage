@@ -21,4 +21,7 @@
     <item>Direct paging only</item>
   </string-array>
 
+  <string name="pref_category_support_title">Support and Feedback</string>
+  <string name="pref_category_support_summary">Reviews, FAQs, and developer support</string>
+
 </resources>

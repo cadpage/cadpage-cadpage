@@ -9,10 +9,10 @@ import com.google.android.gms.common.AccountPicker;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
-class AccountPermApprovedEvent extends DonateEvent {
+public class AccountPermApprovedEvent extends DonateEvent {
 
 
-  private static final int BILLING_ACCT_REQ = 1;
+  public static final int BILLING_ACCT_REQ = 99991;
 
   public interface AllowAcctPermissionAction {
     public void doEvent(Activity activity);

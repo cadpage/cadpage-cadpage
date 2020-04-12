@@ -2,7 +2,6 @@
 <resources>
 
   <string name="pref_category_location_title">Lokala anpassningar</string>
-  <string name="pref_category_location_summary">Larmbehandlingsdetaljer</string>
 
   <string name="pref_loc_desc_title">Aktuell position</string>
 
@@ -12,11 +11,12 @@
   <string name="pref_multi_location_title">Välj flera positioner</string>
   <string name="pref_multi_location_summary">Välj flera positioner</string>
 
-  <string name="pref_override_filter_title">Skriv över positionsfilter</string>
-  <string name="pref_override_filter_summaryon">Positionsfilter kommer att skrivas över</string>
-  <string name="pref_override_filter_summaryoff">Positionsfilter %s är aktivt</string>
+  <string name="pref_loc_filter_title">Sender Address Filter</string> <!-- Translate -->
+  <string name="pref_override_filter_title">Override sender address filter</string> <!-- Translate -->
+  <string name="pref_override_filter_summaryon">Sender address filter will be overridden</string> <!-- Translate -->
+  <string name="pref_override_filter_summaryoff">Sender address filter %s is active</string> <!-- Translate -->
 
-  <string name="pref_filter_title">Från: (Filter)</string>
+  <string name="pref_filter_title">Sender address filter</string> <!-- Translate -->
   <string name="pref_filter_summary">
     Endast meddelanden från denna adress kommer att beaktas. Aktuellt värde: %%s
   </string>
@@ -28,6 +28,7 @@
   <string name="pref_show_source_summaryon">Kommer att visa källan till larm</string>
   <string name="pref_show_source_summaryoff">Kommer inte att visa källan till larm</string>
 
+  <string name="pref_loc_defaults_title">Default City/State</string> <!-- Translate -->
   <string name="pref_override_default_title">Skriv över förvald stat/stad</string>
   <string name="pref_override_default_summaryon">Använd användardefinierad stat/stad</string>
   <string name="pref_override_default_summaryoff">Använd förvald stat/stad</string>

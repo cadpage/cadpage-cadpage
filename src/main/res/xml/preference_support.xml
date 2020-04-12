@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <Preference
+    app:title="@string/pref_review_title"
+    app:summary="@string/pref_review_summary">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="@string/pref_review_url" />
+  </Preference>
+
+  <Preference
+    app:key="@string/pref_email_key"
+    app:title="@string/pref_email_title"
+    app:summary="@string/pref_email_summary" />
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_loglimit_key"
+    app:title="@string/pref_loglimit_title"
+    app:summary="@string/pref_loglimit_summary"
+    app:entries="@array/pref_loglimit_values"
+    app:entryValues="@array/pref_loglimit_values"
+    app:dialogTitle="@string/pref_loglimit_title"
+    app:defaultValue="@string/pref_loglimit_default"/>
+
+  <net.anei.cadpage.preferences.BillingAccountPreference
+    app:key="@string/pref_billing_account_key"
+    app:title="@string/pref_billing_account_title"
+    app:summary="@string/pref_billing_account_summary"/>
+
+</PreferenceScreen>

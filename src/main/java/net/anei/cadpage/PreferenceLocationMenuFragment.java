@@ -27,9 +27,9 @@ public class PreferenceLocationMenuFragment extends PreferenceFragment {
 
     Fragment parent = getTargetFragment();
     final LocationManager locMgr =
-      parent instanceof PreferenceLocationFragment
-        ? ((PreferenceLocationFragment) parent).getLocationManager()
-        : new LocationManager(null);
+      parent instanceof LocationManager.Provider
+        ? ((LocationManager.Provider) parent).getLocationManager()
+        : new LocationManager();
 
     // Set up the location preference screen
     Preference main = buildLocationItem(ParserList.MASTER_LIST, multi, locMgr);
