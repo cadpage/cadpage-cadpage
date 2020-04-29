@@ -31,7 +31,7 @@ android {
             google {
                 dimension "store"
                 versionNameSuffix "G"
-                versionCode 0
+                versionCode 1
                 buildConfigField "boolean", "APTOIDE", "false"
             }
 
