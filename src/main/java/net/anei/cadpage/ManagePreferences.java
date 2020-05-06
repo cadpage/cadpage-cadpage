@@ -2516,7 +2516,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       CadPageWidget.update(context);
     });
 
-    registerListener(R.string.pref_enable_msg_type_key, msgSupportListener);
+    registerListener(R.string.pref_enable_msg_type_key, (String key, Object newVal) -> {
+      if (enabled()) {
+        SmsPopupUtils.enableSMSPopup(context, (String)newVal);
+      }
+      msgSupportListener.preferenceChanged(key, newVal);
+    });
+
     registerListener(R.string.pref_use_old_mms_key, msgSupportListener);
     for (int btn = 0; btn < CALLBACK_BUTTON_CNT; btn++) {
       registerListener(CALLBACK_TYPE_IDS[btn], msgSupportListener);
