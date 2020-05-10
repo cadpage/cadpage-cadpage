@@ -36,8 +36,9 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     MainDonateEvent.instance().setPreference(getActivity(), donate);
 
     // Set up the location description summary
-    Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
+    final Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
+    enableLocPreference(locPreference, ManagePreferences.enableMsgType());
 
     // Save specific preferences we might need later
     mEnabledPreference = findPreference(getString(R.string.pref_enabled_key));
@@ -45,10 +46,19 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     // Add necessary permission checks
     Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
     assert pref != null;
-    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue));
+    pref.setOnPreferenceChangeListener((preference, newValue) -> {
+      if (!ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue)) return false;
+      enableLocPreference(locPreference, (String)newValue);
+      return true;
+    });
 
     // Add developer dialog preference if appropriate
     DeveloperToolsManager.instance().addPreference(getActivity(), getPreferenceScreen());
+  }
+
+  private void enableLocPreference(Preference locPreference, String enableMsgType) {
+    boolean enable = enableMsgType.contains("S") || enableMsgType.contains("M");
+    locPreference.setEnabled(enable);
   }
 
   @Override
