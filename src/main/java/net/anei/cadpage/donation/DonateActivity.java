@@ -53,6 +53,10 @@ public class DonateActivity extends BillingActivity {
     event.onRestart(this);
   }
 
+  public void fakeRestart() {
+    event.onRestart(this);
+  }
+
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
