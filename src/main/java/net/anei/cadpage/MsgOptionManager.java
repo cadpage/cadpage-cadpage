@@ -728,6 +728,7 @@ public class MsgOptionManager {
     if (mapOption.equals("OsmAnd")) {
       String dispName = (gps ? message.getAddress() : null);
       Intent intent = OsmAndHelper.getIntent(context, searchStr, gps, navigateMap, dispName);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
       Log.w("Map Request:");
       ContentQuery.dumpIntent(intent);
@@ -767,6 +768,7 @@ public class MsgOptionManager {
       // Build and launch map request
       Uri uri = Uri.parse(sb.toString());
       Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
       Log.w("Map Request:");
       ContentQuery.dumpIntent(intent);
@@ -797,7 +799,8 @@ public class MsgOptionManager {
       // Build and launch map request
       Uri uri = Uri.parse(sb.toString());
       Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-      
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
       Log.w("Map Request:");
       ContentQuery.dumpIntent(intent);
       
@@ -851,7 +854,8 @@ public class MsgOptionManager {
     // Build and launch map request
     Uri uri = Uri.parse(sb.toString());
     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-    
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
     if (mapOption.equals("Google")) intent.setPackage(GOOGLE_MAP_PKG);
     
     Log.w("Map Request:");
@@ -874,7 +878,7 @@ public class MsgOptionManager {
     
     Uri uri = Uri.parse(url);
     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     switch (mapPageStatus) {
     case ADOBE:
       intent.setClassName("com.adobe.reader", "com.adobe.reader.AdobeReader");
@@ -928,6 +932,7 @@ public class MsgOptionManager {
     Log.w("Launching Active911");
     String active911Code = VendorManager.instance().getActive911Code();
     if (active911Code != null) intent.putExtra("CadpageAccount", active911Code);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     ContentQuery.dumpIntent(intent);
     try {
       context.startActivity(intent);
