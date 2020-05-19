@@ -52,6 +52,16 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
       return true;
     });
 
+    // Set up summary displays
+    pref = findPreference(getString(R.string.pref_category_scanner_key));
+    assert pref != null;
+    pref.setSummaryProvider((pref2) -> {
+      String channel = ManagePreferences.scannerChannel();
+      if (channel.equals("<None selected")) return channel;
+      String auto = getString(ManagePreferences.activeScanner() ? R.string.auto : R.string.manual);
+      return auto + " - " + channel;
+    });
+
     // Add developer dialog preference if appropriate
     DeveloperToolsManager.instance().addPreference(getActivity(), getPreferenceScreen());
   }
@@ -95,12 +105,16 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
 //    R.xml.preference_general,
     R.xml.preference_notification_old,
     R.xml.preference_additional,
-    R.xml.preference_button,
-    R.xml.preference_button_main,
-    R.xml.preference_button_response,
-    R.xml.preference_filter,
-    R.xml.preference_split_merge_options,
     R.xml.preference_direct,
-    R.xml.preference_other_info
+    R.xml.preference_other_info,
+
+
+    R.xml.preference_filter,
+    R.xml.preference_scanner_radio,
+    R.xml.preference_button,
+      R.xml.preference_button_main,
+      R.xml.preference_button_response,
+    R.xml.preference_msg_processing,
+    R.xml.preference_split_merge_options,
   };
 }

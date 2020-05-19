@@ -220,4 +220,7 @@
   </string>
 
   <string name="reconnect">Reconnect with %s</string>
+
+  <string name="auto">Auto</string>
+  <string name="manual">Manual</string>
 </resources>

@@ -27,39 +27,58 @@
     app:key="@string/pref_category_location_key"
     app:title="@string/pref_category_location_title" />
 
-  <Preference
-  app:fragment="net.anei.cadpage.PreferenceNotificationFragment"
-  app:title="@string/pref_category_notif_title"
-  app:summary="@string/pref_category_notif_summary" />
+  <!-- start work tag -->
 
   <Preference
-  app:fragment="net.anei.cadpage.PreferenceAdditionalFragment"
-  app:title="@string/pref_category_additional_title"
-  app:summary="@string/pref_category_additional_summary" />
+    app:fragment="net.anei.cadpage.PreferenceNotificationFragment"
+    app:title="@string/pref_category_notif_title"
+    app:summary="@string/pref_category_notif_summary" />
 
   <Preference
-  app:fragment="net.anei.cadpage.PreferenceButtonFragment"
-  app:title="@string/pref_category_button_title"
-  app:summary="@string/pref_category_button_summary" />
+    app:fragment="net.anei.cadpage.PreferenceAdditionalFragment"
+    app:title="@string/pref_category_additional_title"
+    app:summary="@string/pref_category_additional_summary" />
 
   <Preference
-  app:fragment="net.anei.cadpage.PreferenceFilterFragment"
-  app:title="@string/pref_category_filter_title"
-  app:summary="@string/pref_category_filter_summary" />
-
-  <Preference
-  app:fragment="net.anei.cadpage.PreferenceDirectFragment"
-  app:title="@string/pref_category_direct_title"
-  app:summary="@string/pref_category_direct_summary" />
+    app:fragment="net.anei.cadpage.PreferenceDirectFragment"
+    app:title="@string/pref_category_direct_title"
+    app:summary="@string/pref_category_direct_summary" />
 
   <Preference
     app:fragment="net.anei.cadpage.PreferenceSupportFragment"
     app:title="@string/pref_category_support_title"
     app:summary="@string/pref_category_support_summary" />
 
+  <!-- end work tag -->
+
   <Preference
-  app:fragment="net.anei.cadpage.PreferenceOtherInfoFragment"
-  app:title="@string/pref_category_other_info_title"
-  app:summary="@string/pref_category_other_info_summary" />
+    app:fragment="net.anei.cadpage.PreferenceOtherInfoFragment"
+    app:title="@string/pref_category_other_info_title"
+    app:summary="@string/pref_category_other_info_summary" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceFilterFragment"
+    app:title="@string/pref_category_filter_title"
+    app:summary="@string/pref_category_filter_summary" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.ScannerRadioFragment"
+    app:key="@string/pref_category_scanner_key"
+    app:title="@string/pref_category_scanner_radio_title" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceButtonFragment"
+    app:title="@string/pref_category_button_title"
+    app:summary="@string/pref_category_button_summary" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceMsgProcessingFragment"
+    app:title="@string/pref_category_msg_processing_title"
+    app:summary="@string/pref_category_msg_processing_summary"/>
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceSplitMergeOptionsFragment"
+    app:title="@string/pref_split_msg_merge_title"
+    app:summary="@string/pref_split_msg_merge_summary"/>
 
 </PreferenceScreen>

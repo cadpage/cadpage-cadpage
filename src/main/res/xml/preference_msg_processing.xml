@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <SwitchPreference
+    app:key="@string/pref_use_old_mms_key"
+    app:title="@string/pref_use_old_mms_title"
+    app:summaryOn="@string/pref_use_old_mms_summaryon"
+    app:summaryOff="@string/pref_use_old_mms_summaryoff"
+    app:defaultValue="false" />
+
+  <SwitchPreference
+    app:key="@string/pref_suppress_dup_msg_key"
+    app:title="@string/pref_suppress_dup_msg_title"
+    app:summaryOn="@string/pref_suppress_dup_msg_summaryon"
+    app:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
+    app:defaultValue="@string/pref_suppress_dup_msg_default" />
+
+</PreferenceScreen>

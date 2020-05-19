@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import androidx.preference.Preference;
 
-public class PreferenceLocationFragmentXXX extends PreferenceRestorableFragment {
+public class PreferenceScannerRadioFragment extends PreferenceFragment {
 
   private static final int REQ_SCANNER_CHANNEL = 1;
 
@@ -20,7 +20,7 @@ public class PreferenceLocationFragmentXXX extends PreferenceRestorableFragment 
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     // Load the preferences from an XML resource
-    setPreferencesFromResource(R.xml.preference_location, rootKey);
+    setPreferencesFromResource(R.xml.preference_scanner_radio, rootKey);
 
     // Set up Scanner channel selection preference
     scannerPref = findPreference(getString(R.string.pref_scanner_channel_key));
@@ -59,52 +59,22 @@ public class PreferenceLocationFragmentXXX extends PreferenceRestorableFragment 
           // OK, show a dialog box asking if they want to install Scanner Radio
           final String pkgName2 = pkgName;
           new AlertDialog.Builder(getActivity())
-              .setMessage(installed ? R.string.scanner_not_current : R.string.scanner_not_installed)
-              .setPositiveButton(R.string.donate_btn_yes, (dialog, which) -> {
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName2));
-                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                try {
-                  getActivity().startActivity(intent1);
-                } catch (ActivityNotFoundException ex1) {
-                  Log.e(ex1);
-                }
-              })
-              .setNegativeButton(R.string.donate_btn_no, null)
-              .create().show();
+            .setMessage(installed ? R.string.scanner_not_current : R.string.scanner_not_installed)
+            .setPositiveButton(R.string.donate_btn_yes, (dialog, which) -> {
+              Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName2));
+              intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              try {
+                getActivity().startActivity(intent1);
+              } catch (ActivityNotFoundException ex1) {
+                Log.e(ex1);
+              }
+            })
+            .setNegativeButton(R.string.donate_btn_no, null)
+            .create().show();
 
         }
         return true;
       });
-    }
-  }
-
-  @Override
-  public void onPause() {
-    Log.v("PreferenceLocationFragment.onPause()");
-    super.onPause();
-  }
-
-  // If location code changes during this session, force a rebuild of
-  // the call history data on the off chance that a general format message
-  // can use the new location code.
-  private String oldLocation = null;
-
-  @Override
-  public void onStart() {
-
-    // Save the setting that might be important if they change
-    oldLocation = ManagePreferences.location();
-
-    super.onStart();
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-
-    String location = ManagePreferences.location();
-    if (!location.equals(oldLocation)) {
-      SmsMessageQueue.getInstance().reparseGeneral();
     }
   }
 
@@ -127,5 +97,4 @@ public class PreferenceLocationFragmentXXX extends PreferenceRestorableFragment 
     }
     super.onActivityResult(requestCode, resultCode, data);
   }
-
 }

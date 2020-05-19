@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <SwitchPreference
+    app:key="@string/pref_activate_scanner_key"
+    app:title="@string/pref_activate_scanner_title"
+    app:summaryOn="@string/pref_activate_scanner_summaryon"
+    app:summaryOff="@string/pref_activate_scanner_summaryoff"
+    app:defaultValue="@string/pref_activate_scanner_default" />
+
+  <Preference
+    app:key="@string/pref_scanner_channel_key"
+    app:title="@string/pref_scanner_channel_title" />
+
+  <net.anei.cadpage.preferences.ScannerTimeoutPreference
+    app:dialogTitle="@string/pref_scanner_timeout_title"
+    app:dialogMessage="@string/pref_scanner_timeout_dialog"
+    app:key="@string/pref_scanner_timeout_key"
+    app:title="@string/pref_scanner_timeout_title"
+    app:summary="@string/pref_scanner_timeout_summary"
+    android:inputType="number"
+    app:defaultValue="@string/pref_scanner_timeout_default"/>
+
+</PreferenceScreen>
