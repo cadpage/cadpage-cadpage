@@ -128,7 +128,6 @@
     <string name="pref_filter_key">filter</string>
     <string name="pref_gen_alert_key">gen_alert</string> <!-- no longer used. But still has to be converted -->
     <string name="pref_show_source_key">show_source</string>
-    <string name="pref_loc_defaults_key">loc_defaults</string>
     <string name="pref_override_default_key">overrideDefaultLoc</string>
     <string name="pref_defstate_key">defaultState</string>
     <string name="pref_defcity_key">defaultCity</string>

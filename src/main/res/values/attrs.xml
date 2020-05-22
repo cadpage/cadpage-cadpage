@@ -24,4 +24,8 @@
         <attr name="multi" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="PreferenceLocationFragment">
+        <attr name="direct" format="boolean"/>
+    </declare-styleable>
+
 </resources>

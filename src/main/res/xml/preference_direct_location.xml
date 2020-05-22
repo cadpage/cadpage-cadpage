@@ -3,6 +3,13 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
+  <SwitchPreference
+    app:key="@string/pref_override_vendor_loc_key"
+    app:title="@string/pref_override_vendor_loc_title"
+    app:summaryOn="@string/pref_override_vendor_loc_summaryon"
+    app:summaryOff="@string/pref_override_vendor_loc_summaryoff"
+    app:defaultValue="@string/pref_override_vendor_loc_default" />
+
   <Preference
     app:key="@string/pref_loc_desc_key"
     app:title="@string/pref_loc_desc_title"/>
@@ -11,19 +18,20 @@
     app:fragment="net.anei.cadpage.PreferenceLocationMenuFragment"
     app:title="@string/pref_location_title"
     app:summary="@string/pref_location_summary"
-    app:multi="false"/>
+    app:multi="false"
+    app:dependency="@string/pref_override_vendor_loc_key" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceLocationFragment"
+    app:key="@string/pref_category_location_key"
+    app:title="@string/pref_category_location_title"
+    app:direct="true"
+    app:dependency="@string/pref_override_vendor_loc_key"/>
 
   <net.anei.cadpage.preferences.LocationMenuPreference
     app:fragment="net.anei.cadpage.PreferenceLocationMenuFragment"
     app:title="@string/pref_multi_location_title"
     app:summary="@string/pref_multi_location_summary"
     app:multi="true"/>
-
-  <Preference
-    app:fragment="net.anei.cadpage.PreferenceLocationFilterFragment"
-    app:key="@string/pref_loc_filter_key"
-    app:title="@string/pref_loc_filter_title" />
-
-  <net.anei.cadpage.preferences.OverrideLocationPreference />
 
 </PreferenceScreen>

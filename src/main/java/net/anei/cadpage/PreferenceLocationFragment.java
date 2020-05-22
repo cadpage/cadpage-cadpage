@@ -30,8 +30,11 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment imp
         ? ((LocationManager.Provider) parent).getLocationManager()
         : new LocationManager();
 
+    Bundle args = getArguments();
+    boolean direct = args == null ? false : args.getBoolean("direct");
+
     // Load the preferences from an XML resource
-    setPreferencesFromResource(R.xml.preference_location, rootKey);
+    setPreferencesFromResource(direct ? R.xml.preference_direct_location : R.xml.preference_location, rootKey);
 
     // Save location so we can tell when it changes
     saveLocation = ManagePreferences.location();
@@ -47,33 +50,17 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment imp
       return true;
     });
 
-    Preference filterPref = findPreference(getString(R.string.pref_loc_filter_key));
-    assert filterPref != null;
-    filterPref.setSummaryProvider(preference -> {
-      String result = ManagePreferences.overrideFilter()
-                         ? ManagePreferences.filter()
-                         : locMgr.getParser().getFilter();
-      if (result.length() == 0) result = "Disabled";
-      return result;
-    });
-
-    Preference defaultsPref = findPreference(getString(R.string.pref_loc_defaults_key));
-    assert defaultsPref != null;
-    defaultsPref.setSummaryProvider(preference -> {
-      String city, state;
-      if (ManagePreferences.overrideDefaults()) {
-        city = ManagePreferences.defaultCity();
-        state = ManagePreferences.defaultState();
-      } else {
-        MsgParser parser = locMgr.getParser();
-        city = parser.getDefaultCity();
-        state = parser.getDefaultState();
-      }
-      if (city.length() == 0 && state.length() == 0) return "None";
-      if (city.length() == 0) return state;
-      if (state.length() == 0) return city;
-      return city + ", " + state;
-    });
+    if (!direct) {
+      Preference filterPref = findPreference(getString(R.string.pref_loc_filter_key));
+      assert filterPref != null;
+      filterPref.setSummaryProvider(preference -> {
+        String result = ManagePreferences.overrideFilter()
+          ? ManagePreferences.filter()
+          : locMgr.getParser().getFilter();
+        if (result.length() == 0) result = "Disabled";
+        return result;
+      });
+    }
   }
 
   /**

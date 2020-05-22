@@ -20,11 +20,4 @@
     app:dialogTitle="@string/pref_mms_timeout_title"
     app:defaultValue="@string/pref_mms_timeout_default"/>
 
-  <SwitchPreference
-    app:key="@string/pref_override_vendor_loc_key"
-    app:title="@string/pref_override_vendor_loc_title"
-    app:summaryOn="@string/pref_override_vendor_loc_summaryon"
-    app:summaryOff="@string/pref_override_vendor_loc_summaryoff"
-    app:defaultValue="@string/pref_override_vendor_loc_default" />
-
 </PreferenceScreen>

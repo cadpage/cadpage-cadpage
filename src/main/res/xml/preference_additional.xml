@@ -37,14 +37,6 @@
     app:summaryOn="@string/pref_navigate_map_summaryon"
     app:summaryOff="@string/pref_navigate_map_summaryoff"
     app:defaultValue="false" />
-  <net.anei.cadpage.preferences.ListPreference
-    app:key="@string/pref_report_position_key"
-    app:title="@string/pref_report_position_title"
-    app:summary="@string/pref_report_position_summary"
-    app:entries="@array/pref_report_position_entries"
-    app:entryValues="@array/pref_report_position_values"
-    app:dialogTitle="@string/pref_report_position_title"
-    app:defaultValue="@string/pref_report_position_default" />
 
   <PreferenceCategory
     app:title="@string/pref_popup_control">

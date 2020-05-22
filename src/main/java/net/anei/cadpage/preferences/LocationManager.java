@@ -206,6 +206,7 @@ s   */
    */
   public Preference.SummaryProvider getSummaryProvider() {
     return preference -> {
+      if (preference.isEnabled()) return "N/A";
       StringBuilder sb = new StringBuilder();
       for (String name : nameList) {
         if (sb.length() > 0) sb.append('\n');

@@ -25,7 +25,8 @@
   <Preference
     app:fragment="net.anei.cadpage.PreferenceLocationFragment"
     app:key="@string/pref_category_location_key"
-    app:title="@string/pref_category_location_title" />
+    app:title="@string/pref_category_location_title"
+    app:direct="false"/>
 
   <!-- start work tag -->
 
@@ -39,6 +40,8 @@
     app:title="@string/pref_category_additional_title"
     app:summary="@string/pref_category_additional_summary" />
 
+  <!-- end work tag -->
+
   <Preference
     app:fragment="net.anei.cadpage.PreferenceDirectFragment"
     app:title="@string/pref_category_direct_title"
@@ -48,8 +51,6 @@
     app:fragment="net.anei.cadpage.PreferenceSupportFragment"
     app:title="@string/pref_category_support_title"
     app:summary="@string/pref_category_support_summary" />
-
-  <!-- end work tag -->
 
   <Preference
     app:fragment="net.anei.cadpage.PreferenceOtherInfoFragment"

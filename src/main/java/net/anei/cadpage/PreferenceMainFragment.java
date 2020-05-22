@@ -100,15 +100,16 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     R.xml.preference_location,
       R.xml.preference_location_filter,
       R.xml.preference_location_defaults,
-    R.xml.preference_support,
 
-//    R.xml.preference_general,
+
     R.xml.preference_notification_old,
     R.xml.preference_additional,
+
+
     R.xml.preference_direct,
+      R.xml.preference_direct_location,
+    R.xml.preference_support,
     R.xml.preference_other_info,
-
-
     R.xml.preference_filter,
     R.xml.preference_scanner_radio,
     R.xml.preference_button,
