@@ -4,6 +4,19 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-18\n
+    New Locations:\n
+    St Joseph County, IN (alt)\n
+    Hopkins County, KY\n
+    Big Horn County, WY\n
+    \n
+    Location Fixes:\n
+    Los Angeles County, CA\n
+    Henderson County, NC\n
+    McDowell County, NC\n
+    Josephine County, OR\n
+    Chester County, SC\n
+    \n
     v2.1.11-17\n
     New Locations:\n
     Marion County, IA\n
@@ -68,17 +81,6 @@
     Edgecombe County, NC\n
     Lee County, SC\n
     Bedford County, VA\n
-    Taber, AB\n
-    \n
-    v2.1.11-13\n
-    Location Fixes:\n
-    Contra Costa County, CA\n
-    Orange County, NC\n
-    Wayne County, OH\n
-    Adams County, PA\n
-    Roane County, TN\n
-    Dallas County, TX\n
-    Henry County, VA\n
-    Harrison County, WV
+    Taber, AB
   </string>
 </resources>
