@@ -8,6 +8,7 @@ import net.anei.cadpage.vendors.VendorManager;
 import java.util.Objects;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 public class PreferenceDirectFragment extends PreferenceFragment implements LocationManager.Provider {
@@ -36,10 +37,15 @@ public class PreferenceDirectFragment extends PreferenceFragment implements Loca
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.preference_direct);
 
+    // Hide advanced preference options
+    getPreferenceScreen().setInitialExpandedChildrenCount(vendorCnt+1);
+
     // Set up the location description summary
     Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
 
-    getPreferenceScreen().setInitialExpandedChildrenCount(vendorCnt+1);
+    Preference pref = findPreference(getString(R.string.pref_report_position_key));
+    assert pref != null;
+    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkReportPosition((ListPreference) preference, (String) newValue));
   }
 }

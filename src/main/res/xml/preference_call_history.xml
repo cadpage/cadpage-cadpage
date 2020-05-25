@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidDomInspection -->
 <PreferenceScreen
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_history_limit_key"
@@ -13,17 +13,25 @@
     app:defaultValue="@string/pref_history_limit_default" />
 
   <SwitchPreference
+    app:key="@string/pref_delete_unopen_key"
+    app:title="@string/pref_delete_unopen_title"
+    app:summaryOn="@string/pref_delete_unopen_summaryon"
+    app:summaryOff="@string/pref_delete_unopen_summaryoff"
+    app:defaultValue="@string/pref_delete_unopen_default" />
+
+  <SwitchPreference
     app:key="@string/pref_show_history_address_key"
     app:title="@string/pref_show_history_address_title"
     app:summaryOn="@string/pref_show_history_address_summaryon"
     app:summaryOff="@string/pref_show_history_address_summaryoff"
     app:defaultValue="true" />
 
-  <SwitchPreference
-    app:key="@string/pref_show_personal_key"
-    app:title="@string/pref_show_personal_title"
-    app:summaryOn="@string/pref_show_personal_summaryon"
-    app:summaryOff="@string/pref_show_personal_summaryoff"
-    app:defaultValue="@string/pref_show_personal_default" />
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_textsize_key"
+    app:title="@string/pref_textsize_title"
+    app:summary="@string/pref_textsize_summary"
+    app:entries="@array/pref_textsize_entries"
+    app:entryValues="@array/pref_textsize_values"
+    app:defaultValue="@string/pref_textsize_default" />
 
 </PreferenceScreen>

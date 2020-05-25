@@ -30,9 +30,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
   private boolean acceptConflict = false;
 
   private TwoStatePreference mNotifEnabledPreference;
-  private ExtendedSwitchPreference mNotifOverridePreference;
   private NewVibrateSwitchPreference mNewVibrateSwitchPreference = null;
-  private DoNotDisturbSwitchPreference mDoNotDisturbSwitchPreference;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -63,21 +61,18 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
       mNewVibrateSwitchPreference = findPreference(getString(R.string.pref_vibrate_key));
     }
 
-    final TwoStatePreference overrideSoundPref = findPreference(getString(R.string.pref_notif_override_sound_key));
-    assert overrideSoundPref != null;
-    overrideSoundPref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkOverrideNotifySound((TwoStatePreference) preference, (Boolean)newValue));
-
     mNotifEnabledPreference = findPreference(getString(R.string.pref_notif_enabled_key));
-    mNotifOverridePreference = findPreference(getString(R.string.pref_notif_override_key));
-    assert mNotifOverridePreference != null;
-    mNotifOverridePreference.setOnDataChangeListener(preference -> ManagePreferences.checkOverrideNotifySound(overrideSoundPref));
 
-    // Remove DoNotDisturb setting if it is not applicable
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-      deletePreference(R.string.pref_notif_override_do_not_disturb_key);
-    } else {
-      mDoNotDisturbSwitchPreference = findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
-    }
+    Preference pref = findPreference(getString(R.string.pref_notif_override_category_key));
+    assert pref != null;
+    pref.setSummaryProvider((pref2) -> {
+      if (!ManagePreferences.notifyOverride()) return "Off";
+      StringBuffer sb = new StringBuffer("On; Max Vol ");
+      sb.append(ManagePreferences.notifyOverrideVolume() ? "On" : "Off");
+      sb.append("; Loop ");
+      sb.append(ManagePreferences.notifyOverrideLoop() ? "On" : "Off");
+      return sb.toString();
+    });
 
     ManagePreferences.registerOnSharedPreferenceChangeListener(this);
   }
@@ -106,8 +101,6 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
 
     // If any setting have changed, make sure that the correct value is being displayed
     mNotifEnabledPreference.setChecked(ManagePreferences.notifyEnabled());
-    mNotifOverridePreference.setChecked(ManagePreferences.notifyOverride());
-    if (mDoNotDisturbSwitchPreference != null) mDoNotDisturbSwitchPreference.refresh();
     if (mNewVibrateSwitchPreference != null) mNewVibrateSwitchPreference.refresh();
   }
 

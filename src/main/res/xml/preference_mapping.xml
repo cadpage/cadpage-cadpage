@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidDomInspection -->
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_map_network_chk_key"
+    app:title="@string/pref_map_network_chk_title"
+    app:summary="@string/pref_map_network_chk_summary"
+    app:entries="@array/pref_map_network_chk_entries"
+    app:entryValues="@array/pref_map_network_chk_values"
+    app:dialogTitle="@string/pref_map_network_chk_title"
+    app:defaultValue="@string/pref_map_network_chk_default" />
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_gps_map_option_key"
+    app:title="@string/pref_gps_map_option_title"
+    app:summary="@string/pref_gps_map_option_summary"
+    app:entries="@array/pref_gps_map_option_entries"
+    app:entryValues="@array/pref_gps_map_option_values"
+    app:dialogTitle="@string/pref_gps_map_option_title"
+    app:defaultValue="@string/pref_gps_map_option_default" />
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_app_map_option_key"
+    app:title="@string/pref_app_map_option_title"
+    app:summary="@string/pref_app_map_option_summary"
+    app:entries="@array/pref_app_map_option_values"
+    app:entryValues="@array/pref_app_map_option_entries"
+    app:dialogTitle="@string/pref_app_map_option_title"
+    app:defaultValue="@string/pref_app_map_option_default" />
+
+  <SwitchPreference
+    app:key="@string/pref_navigate_map_key"
+    app:title="@string/pref_navigate_map_title"
+    app:summaryOn="@string/pref_navigate_map_summaryon"
+    app:summaryOff="@string/pref_navigate_map_summaryoff"
+    app:defaultValue="false" />
+
+</PreferenceScreen>

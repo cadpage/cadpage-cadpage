@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidDomInspection -->
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <SwitchPreference
+    app:key="@string/pref_popup_enabled_key"
+    app:title="@string/pref_popup_enabled_title"
+    app:summaryOn="@string/pref_popup_enabled_summaryon"
+    app:summaryOff="@string/pref_popup_enabled_summaryoff"
+    app:defaultValue="true" />
+
+  <SwitchPreference
+    app:key="@string/pref_noShowInCall_key"
+    app:title="@string/pref_noShowInCall_title"
+    app:summaryOn="@string/pref_noShowInCall_summaryon"
+    app:summaryOff="@string/pref_noShowInCall_summaryoff"
+    app:defaultValue="@string/pref_noShowInCall_default"
+    app:dependency="@string/pref_popup_enabled_key"/>
+
+  <SwitchPreference
+    app:key="@string/pref_show_source_key"
+    app:title="@string/pref_show_source_title"
+    app:summaryOn="@string/pref_show_source_summaryon"
+    app:summaryOff="@string/pref_show_source_summaryoff"
+    app:defaultValue="@string/pref_show_source_default" />
+
+  <SwitchPreference
+    app:key="@string/pref_show_personal_key"
+    app:title="@string/pref_show_personal_title"
+    app:summaryOn="@string/pref_show_personal_summaryon"
+    app:summaryOff="@string/pref_show_personal_summaryoff"
+    app:defaultValue="@string/pref_show_personal_default" />
+
+</PreferenceScreen>

@@ -16,4 +16,11 @@
     app:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
     app:defaultValue="@string/pref_suppress_dup_msg_default" />
 
+  <SwitchPreference
+    app:key="@string/pref_passthrusms_key"
+    app:title="@string/pref_passthrusms_title"
+    app:summaryOff="@string/pref_passthrusms_summaryoff"
+    app:summaryOn="@string/pref_passthrusms_summaryon"
+    app:defaultValue="@string/pref_passthrusms_default" />
+
 </PreferenceScreen>

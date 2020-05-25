@@ -4,13 +4,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <SwitchPreference
-    app:key="@string/pref_show_source_key"
-    app:title="@string/pref_show_source_title"
-    app:summaryOn="@string/pref_show_source_summaryon"
-    app:summaryOff="@string/pref_show_source_summaryoff"
-    app:defaultValue="@string/pref_show_source_default" />
-
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_mms_timeout_key"
     app:title="@string/pref_mms_timeout_title"

@@ -50,6 +50,7 @@
     <string name="pref_notif_config_key">notfication_config</string>
     <string name="pref_notif_enabled_key">notification</string>
     <string name="pref_notif_override_key">override</string>
+    <string name="pref_notif_override_category_key">override_category</string>
     <string name="pref_notif_override_volume_key">override_volume</string>
     <string name="pref_notif_override_do_not_disturb_key">override_do_not_disturb</string>
     <string name="pref_notif_override_sound_key">override_sound</string>
@@ -169,4 +170,5 @@
     <string name="pref_transfer_status_key">transfer_status</string>
     <string name="pref_no_map_gps_label">no_map_gps_label</string>
     <string name="pref_force_popup">force_popup</string>
+    <string name="pref_category_screen_control_key">category_screen_control</string>
 </resources>

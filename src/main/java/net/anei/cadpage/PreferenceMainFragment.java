@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import net.anei.cadpage.donation.DeveloperToolsManager;
@@ -10,6 +11,7 @@ import net.anei.cadpage.preferences.LocationManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 public class PreferenceMainFragment extends PreferenceFragment implements LocationManager.Provider{
@@ -62,6 +64,13 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
       return auto + " - " + channel;
     });
 
+    // Disable the screen control options which are ignored starting in Android 10
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      deletePreference(R.string.pref_category_screen_control_key);
+      PreferenceScreen ps = getPreferenceScreen();
+      ps.setInitialExpandedChildrenCount(ps.getInitialExpandedChildrenCount()-1);
+    }
+
     // Add developer dialog preference if appropriate
     DeveloperToolsManager.instance().addPreference(getActivity(), getPreferenceScreen());
   }
@@ -100,12 +109,12 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     R.xml.preference_location,
       R.xml.preference_location_filter,
       R.xml.preference_location_defaults,
-
-
     R.xml.preference_notification_old,
-    R.xml.preference_additional,
-
-
+      R.xml.preference_notification_override,
+    R.xml.preference_screen_control,
+    R.xml.preference_call_history,
+    R.xml.preference_call_detail,
+    R.xml.preference_mapping,
     R.xml.preference_direct,
       R.xml.preference_direct_location,
     R.xml.preference_support,

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_timeout_key"
+    app:title="@string/pref_timeout_title"
+    app:summary="@string/pref_timeout_summary"
+    app:entries="@array/pref_timeout_entries"
+    app:entryValues="@array/pref_timeout_values"
+    app:defaultValue="@string/pref_timeout_default" />
+
+  <SwitchPreference
+    app:key="@string/pref_screen_on_key"
+    app:title="@string/pref_screen_on_title"
+    app:summaryOn="@string/pref_screen_on_summaryon"
+    app:summaryOff="@string/pref_screen_on_summaryoff"
+    app:defaultValue="@string/pref_screen_on_default" />
+
+  <SwitchPreference
+    app:key="@string/pref_dimscreen_key"
+    app:title="@string/pref_dimscreen_title"
+    app:summaryOn="@string/pref_dimscreen_summaryon"
+    app:summaryOff="@string/pref_dimscreen_summaryoff"
+    app:defaultValue="@string/pref_dimscreen_default" />
+
+</PreferenceScreen>

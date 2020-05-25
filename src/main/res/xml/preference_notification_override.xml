@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <net.anei.cadpage.preferences.ExtendedSwitchPreference
+    app:key="@string/pref_notif_override_key"
+    app:title="@string/pref_notif_override_title"
+    app:summaryOn="@string/pref_notif_override_summaryon"
+    app:summaryOff="@string/pref_notif_override_summaryoff"
+    app:defaultValue="false"
+    app:dependency="@string/pref_notif_enabled_key" />
+
+  <SwitchPreference
+    app:key="@string/pref_notif_override_volume_key"
+    app:title="@string/pref_notif_override_volume_title"
+    app:summaryOn="@string/pref_notif_override_volume_summaryon"
+    app:summaryOff="@string/pref_notif_override_volume_summaryoff"
+    app:defaultValue="true"
+    app:dependency="@string/pref_notif_override_key" />
+
+  <net.anei.cadpage.preferences.DoNotDisturbSwitchPreference
+    app:key="@string/pref_notif_override_do_not_disturb_key"
+    app:title="@string/pref_notif_override_do_not_disturb_title"
+    app:summaryOn="@string/pref_notif_override_do_not_disturb_summaryon"
+    app:summaryOff="@string/pref_notif_override_do_not_disturb_summaryoff"
+    app:defaultValue="false"
+    app:dependency="@string/pref_notif_override_key" />
+
+  <SwitchPreference
+    app:key="@string/pref_notif_override_sound_key"
+    app:title="@string/pref_notif_override_sound_title"
+    app:summaryOn="@string/pref_notif_override_sound_summaryon"
+    app:summaryOff="@string/pref_notif_override_sound_summaryoff"
+    app:defaultValue="true"
+    app:dependency="@string/pref_notif_override_key" />
+
+  <SwitchPreference
+    app:key="@string/pref_notif_override_loop_key"
+    app:title="@string/pref_notif_override_loop_title"
+    app:summaryOn="@string/pref_notif_override_loop_summaryon"
+    app:summaryOff="@string/pref_notif_override_loop_summaryoff"
+    app:defaultValue="true"
+    app:dependency="@string/pref_notif_override_key" />
+
+</PreferenceScreen>

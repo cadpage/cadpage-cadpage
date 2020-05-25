@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  app:initialExpandedChildrenCount="12">
 
   <Preference
     app:key="@string/pref_payment_status_key"
@@ -28,19 +29,27 @@
     app:title="@string/pref_category_location_title"
     app:direct="false"/>
 
-  <!-- start work tag -->
-
   <Preference
     app:fragment="net.anei.cadpage.PreferenceNotificationFragment"
     app:title="@string/pref_category_notif_title"
     app:summary="@string/pref_category_notif_summary" />
 
   <Preference
-    app:fragment="net.anei.cadpage.PreferenceAdditionalFragment"
-    app:title="@string/pref_category_additional_title"
-    app:summary="@string/pref_category_additional_summary" />
+    app:key="@string/pref_category_screen_control_key"
+    app:fragment="net.anei.cadpage.PreferenceScreenControlFragment"
+    app:title="@string/pref_category_screen_control_title" />
 
-  <!-- end work tag -->
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceCallHistoryFragment"
+    app:title="@string/pref_category_call_history_title" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceCallDetailFragment"
+    app:title="@string/pref_category_call_detail_title" />
+
+  <Preference
+    app:fragment="net.anei.cadpage.PreferenceMappingFragment"
+    app:title="@string/pref_category_mapping_title" />
 
   <Preference
     app:fragment="net.anei.cadpage.PreferenceDirectFragment"

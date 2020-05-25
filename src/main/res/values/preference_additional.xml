@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-  <string name="pref_category_additional_title">Additional Settings</string>
-  <string name="pref_category_additional_summary">Additional Cadpage configuration</string>
 
   <string name="pref_delete_unopen_title">Delete Unopened Calls</string>
   <string name="pref_delete_unopen_summaryon">Allow unopened calls to be deleted</string>
@@ -69,8 +67,6 @@
     <item>Ask?</item>
   </string-array>
 
-  <string name="pref_popup_control">Alarm Popup Control</string>
-
   <string name="pref_popup_enabled_title">Show Popup</string>
   <string name="pref_popup_enabled_summaryon">Alarm will display popup window</string>
   <string name="pref_popup_enabled_summaryoff">Alarm will not display popup window</string>
@@ -82,8 +78,6 @@
   <string name="pref_passthrusms_title">Pass Calls through to SMS Client</string>
   <string name="pref_passthrusms_summaryoff">Do not pass Cadpage calls to SMS Client</string>
   <string name="pref_passthrusms_summaryon">Pass all calls through to default SMS Client</string>
-
-  <string name="pref_screen_category">Screen Control</string>
 
   <string name="pref_screen_on_title">Screen On for Popup</string>
   <string name="pref_screen_on_summaryon">Screen will turn on when popup shows</string>
