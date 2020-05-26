@@ -9,6 +9,15 @@
     app:summaryOff="@string/pref_use_old_mms_summaryoff"
     app:defaultValue="false" />
 
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_mms_timeout_key"
+    app:title="@string/pref_mms_timeout_title"
+    app:summary="@string/pref_mms_timeout_summary"
+    app:entries="@array/pref_mms_timeout_values"
+    app:entryValues="@array/pref_mms_timeout_values"
+    app:dialogTitle="@string/pref_mms_timeout_title"
+    app:defaultValue="@string/pref_mms_timeout_default"/>
+
   <SwitchPreference
     app:key="@string/pref_suppress_dup_msg_key"
     app:title="@string/pref_suppress_dup_msg_title"

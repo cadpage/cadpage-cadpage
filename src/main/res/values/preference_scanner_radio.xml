@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-  <string name="pref_category_scanner_radio_title">Scanner Radio Options</string>
-
 </resources>

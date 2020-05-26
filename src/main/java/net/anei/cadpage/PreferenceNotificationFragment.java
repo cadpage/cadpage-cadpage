@@ -16,8 +16,6 @@ import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 
 import net.anei.cadpage.donation.CheckPopupEvent;
-import net.anei.cadpage.preferences.DoNotDisturbSwitchPreference;
-import net.anei.cadpage.preferences.ExtendedSwitchPreference;
 import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 
 import java.util.Objects;

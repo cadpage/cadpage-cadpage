@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="pref_category_button_title">Knappar</string>
-  <string name="pref_category_button_summary">Konfigurera larmdetaljers knappmeny</string>
-
   <string name="pref_main_button_config_title">Huvudknappmeny</string>
   <string name="pref_main_button_config_summary">Konfigurera huvudknappmeny</string>
 

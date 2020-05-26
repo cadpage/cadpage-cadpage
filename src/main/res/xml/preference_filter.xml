@@ -2,6 +2,7 @@
 <!--suppress AndroidDomInspection -->
 <PreferenceScreen
   xmlns:app="http://schemas.android.com/apk/res-auto">
+
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_gen_alert_option_key"
     app:title="@string/pref_gen_alert_option_title"
@@ -9,6 +10,7 @@
     app:entries="@array/pref_alert_option_text"
     app:entryValues="@array/pref_alert_option_values"
     app:defaultValue=""/>
+
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_run_report_option_key"
     app:title="@string/pref_run_report_option_title"

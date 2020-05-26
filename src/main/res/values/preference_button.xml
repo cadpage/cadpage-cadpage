@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-  <string name="pref_category_button_title">Buttons</string>
-  <string name="pref_category_button_summary">Configure call detail button menus</string>
-
   <string name="pref_main_button_config_title">Main Button Menu </string>
   <string name="pref_main_button_config_summary">Configure main button menu</string>
 

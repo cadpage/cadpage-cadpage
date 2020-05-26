@@ -15,7 +15,42 @@
     <item>Endast Meddelandeservice</item>
   </string-array>
 
+  <string name="pref_category_location_title">Lokala anpassningar</string>
+
+  <string name="pref_category_notif_title">Notifieringar</string>
+  <string name="pref_category_notif_summary">Blandade notifieringsinställningar</string>
+
+  <string name="pref_category_screen_control_title">Screen Control Options</string> <!-- Translate -->
+
+  <string name="pref_category_call_history_title">Call History Options</string> <!-- Translate -->
+
+  <string name="pref_category_call_detail_title">Call Detail Options</string> <!-- Translate -->
+
+  <string name="pref_category_mapping_title">Mapping Options</string>  <!-- Translate -->
+
+  <string name="pref_category_direct_title">Meddelandeservice</string>
+  <string name="pref_category_direct_summary">Ställ in meddelandeservice</string>
+
   <string name="pref_category_support_title">Support and Feedback</string> <!-- Translate -->
+
   <string name="pref_category_support_summary">Reviews, FAQs, and developer support</string> <!-- Translate -->
 
+  <string name="pref_category_other_info_title">Annan information</string>
+  <string name="pref_category_other_info_summary">Hjälp och annan användbar information</string>
+
+  <string name="pref_category_filter_title">Filtreringsinställningar</string>
+  <string name="pref_category_filter_summary">Val för att specificera hur vissa typer av larm ska hanteras</string>
+
+  <string name="pref_category_scanner_radio_title">Scanner Radio Options</string>  <!-- Translate -->
+
+  <string name="pref_category_button_title">Knappar</string>
+  <string name="pref_category_button_summary">Konfigurera larmdetaljers knappmeny</string>
+
+  <string name="pref_category_msg_processing_title">Message Processing Options</string> <!-- Translate -->
+  <string name="pref_category_msg_processing_summary"></string>  <!-- Translate -->
+
+  <string name="pref_split_msg_merge_title">Alternativ för delade larm-meddelanden</string>
+  <string name="pref_split_msg_merge_summary">
+      Alternativ för att kontrollera hur uppdelade larmmeddelanden klistras ihop till ett enda larmmeddelande
+  </string>
 </resources>

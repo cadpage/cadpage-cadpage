@@ -21,7 +21,43 @@
     <item>Direct paging only</item>
   </string-array>
 
+  <string name="pref_category_location_title">Location Settings</string>
+
+  <string name="pref_category_notif_title">Notifications</string>
+  <string name="pref_category_notif_summary">Various notification settings</string>
+
+  <string name="pref_category_screen_control_title">Screen Control Options</string>
+
+  <string name="pref_category_call_history_title">Call History Options</string>
+
+  <string name="pref_category_call_detail_title">Call Detail Options</string>
+
+  <string name="pref_category_mapping_title">Mapping Options</string>
+
+  <string name="pref_category_direct_title">Direct Paging Vendors</string>
+  <string name="pref_category_direct_summary">Set up direct paging service</string>
+
   <string name="pref_category_support_title">Support and Feedback</string>
+
   <string name="pref_category_support_summary">Reviews, FAQs, and developer support</string>
+
+  <string name="pref_category_other_info_title">Other Information</string>
+  <string name="pref_category_other_info_summary">Help and other useful information</string>
+
+  <string name="pref_category_filter_title">Filter Settings</string>
+  <string name="pref_category_filter_summary">Options to specify special handling for certain types of alerts</string>
+
+  <string name="pref_category_scanner_radio_title">Scanner Radio Options</string>
+
+  <string name="pref_category_button_title">Buttons</string>
+  <string name="pref_category_button_summary">Configure call detail button menus</string>
+
+  <string name="pref_category_msg_processing_title">Message Processing Options</string>
+  <string name="pref_category_msg_processing_summary"></string>
+
+  <string name="pref_split_msg_merge_title">Split Alert Merge Options</string>
+  <string name="pref_split_msg_merge_summary">
+      Options that control how split up alert messages are merged back into a single alert
+  </string>
 
 </resources>
