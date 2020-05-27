@@ -31,13 +31,6 @@
     app:title="@string/pref_notif_override_title"
     app:dependency="@string/pref_notif_enabled_key" />
 
-  <Preference
-    app:key="@string/pref_notif_sound_key"
-    app:title="@string/pref_notif_sound_title"
-    app:summary="@string/pref_notif_sound_summary"
-    app:dependency="@string/pref_notif_override_key"
-    app:defaultValue="content://settings/system/notification_sound" />
-
   <net.anei.cadpage.preferences.ListPreference
     app:key="@string/pref_notif_timeout_key"
     app:title="@string/pref_notif_timeout_title"

@@ -31,7 +31,7 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment imp
         : new LocationManager();
 
     Bundle args = getArguments();
-    boolean direct = args == null ? false : args.getBoolean("direct");
+    boolean direct = args != null && args.getBoolean("direct");
 
     // Load the preferences from an XML resource
     setPreferencesFromResource(direct ? R.xml.preference_direct_location : R.xml.preference_location, rootKey);

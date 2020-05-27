@@ -17,6 +17,7 @@ public class PreferenceLocationFilterFragment extends PreferenceRestorableFragme
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     Fragment parent = getTargetFragment();
+    assert parent != null;
     LocationManager locMgr = ((LocationManager.Provider) parent).getLocationManager();
     MsgParser parser = locMgr.getParser();
 

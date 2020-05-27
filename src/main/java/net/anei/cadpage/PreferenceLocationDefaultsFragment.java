@@ -9,7 +9,7 @@ import net.anei.cadpage.preferences.LocationManager;
 import androidx.fragment.app.Fragment;
 import androidx.preference.TwoStatePreference;
 
-public class PreferenceLocationDefaultsFragment extends PreferenceRestorableFragment {
+class PreferenceLocationDefaultsFragment extends PreferenceRestorableFragment {
 
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

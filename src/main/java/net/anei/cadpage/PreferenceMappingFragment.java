@@ -2,15 +2,12 @@ package net.anei.cadpage;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 
 public class PreferenceMappingFragment extends PreferenceFragment {
 

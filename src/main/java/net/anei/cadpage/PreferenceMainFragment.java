@@ -39,6 +39,7 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
 
     // Set up the location description summary
     final Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
+    assert locPreference != null;
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
     enableLocPreference(locPreference, ManagePreferences.enableMsgType());
 
