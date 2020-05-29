@@ -72,7 +72,7 @@
     app:summary="@string/pref_category_filter_summary" />
 
   <Preference
-    app:fragment="net.anei.cadpage.ScannerRadioFragment"
+    app:fragment="net.anei.cadpage.PreferenceScannerRadioFragment"
     app:key="@string/pref_category_scanner_key"
     app:title="@string/pref_category_scanner_radio_title" />
 

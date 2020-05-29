@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import android.os.Build;
 import android.os.Bundle;
 
 public class PreferenceScreenControlFragment extends PreferenceFragment {

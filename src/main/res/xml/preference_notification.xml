@@ -25,6 +25,14 @@
     app:defaultValue="@string/pref_vibrate_default"
     app:dependency="@string/pref_notif_enabled_key" />
 
+  <net.anei.cadpage.preferences.DoNotDisturbSwitchPreference
+    app:key="@string/pref_notif_override_do_not_disturb_key"
+    app:title="@string/pref_notif_override_do_not_disturb_title"
+    app:summaryOn="@string/pref_notif_override_do_not_disturb_summaryon"
+    app:summaryOff="@string/pref_notif_override_do_not_disturb_summaryoff"
+    app:defaultValue="false"
+    app:dependency="@string/pref_notif_enabled_key" />
+
   <Preference
     app:key="@string/pref_notif_override_category_key"
     app:fragment="net.anei.cadpage.PreferenceNotificationOverrideFragment"

@@ -14,6 +14,7 @@ import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 
 import net.anei.cadpage.donation.CheckPopupEvent;
+import net.anei.cadpage.preferences.DoNotDisturbSwitchPreference;
 import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
 
   private TwoStatePreference mNotifEnabledPreference;
   private NewVibrateSwitchPreference mNewVibrateSwitchPreference = null;
-
+  private DoNotDisturbSwitchPreference mDoNotDisturbSwitchPreference = null;
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -46,6 +47,8 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
       acceptConflict = ManageNotification.checkNotificationAlertConflict(getActivity());
     }
 
+    mNotifEnabledPreference = findPreference(getString(R.string.pref_notif_enabled_key));
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       Preference pref = findPreference(getString(R.string.pref_notif_config_key));
       assert pref != null;
@@ -57,7 +60,12 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
       mNewVibrateSwitchPreference = findPreference(getString(R.string.pref_vibrate_key));
     }
 
-    mNotifEnabledPreference = findPreference(getString(R.string.pref_notif_enabled_key));
+    // Remove DoNotDisturb setting if it is not applicable
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+      deletePreference(R.string.pref_notif_override_do_not_disturb_key);
+    } else {
+      mDoNotDisturbSwitchPreference = findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
+    }
 
     Preference pref = findPreference(getString(R.string.pref_notif_override_category_key));
     assert pref != null;
@@ -96,6 +104,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
     // If any setting have changed, make sure that the correct value is being displayed
     mNotifEnabledPreference.setChecked(ManagePreferences.notifyEnabled());
     if (mNewVibrateSwitchPreference != null) mNewVibrateSwitchPreference.refresh();
+    if (mDoNotDisturbSwitchPreference != null) mDoNotDisturbSwitchPreference.refresh();
   }
 
   private void checkNotificationAlertConflict() {
