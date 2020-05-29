@@ -13,10 +13,16 @@ public class PreferenceMsgProcessingFragment extends PreferenceFragment {
     // Load the preferences from an XML resource
     setPreferencesFromResource(R.xml.preference_msg_processing, rootKey);
 
-    // old MMS logic option only enabled if we are processing MMS messages
+    // MMS options are only enabled if we are processing MMS messages
+    boolean mms = ManagePreferences.enableMsgType().contains("M");
+
     Preference pref = findPreference(getString(R.string.pref_use_old_mms_key));
     assert(pref != null);
-    pref.setEnabled(ManagePreferences.enableMsgType().contains("M"));
+    pref.setEnabled(mms);
+
+    pref = findPreference(getString(R.string.pref_mms_timeout_key));
+    assert(pref != null);
+    pref.setEnabled(mms);
 
   // Disable the pass through option which is unusable starting in Kit Kat
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

@@ -19,7 +19,7 @@ import net.anei.cadpage.preferences.NewVibrateSwitchPreference;
 
 import java.util.Objects;
 
-public class PreferenceNotificationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PreferenceNotificationFragment extends PreferenceFragment {
 
 
   private static final String ACCEPT_CONFLICT_KEY = "accept_conflict";
@@ -75,20 +75,11 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
              "; Loop " +
              (ManagePreferences.notifyOverrideLoop() ? "On" : "Off");
     });
-
-    ManagePreferences.registerOnSharedPreferenceChangeListener(this);
   }
 
   @Override
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
-  }
-
-  @Override
-  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-    // Check if we should bring up the double audio alert warning
-    checkNotificationAlertConflict();
   }
 
   @Override
@@ -121,12 +112,6 @@ public class PreferenceNotificationFragment extends PreferenceFragment implement
   public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putBoolean(ACCEPT_CONFLICT_KEY, acceptConflict);
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    ManagePreferences.unregisterOnSharedPreferenceChangeListener(this);
   }
 
   @RequiresApi(api = Build.VERSION_CODES.O)
