@@ -60,4 +60,12 @@
       Options that control how split up alert messages are merged back into a single alert
   </string>
 
+  <!-- Summary fragments -->
+  <string name="pref_on">On</string>
+  <string name="pref_off">Off</string>
+  <string name="pref_max_vol">Max Vol</string>
+  <string name="pref_loop">Loop</string>
+  <string name="pref_sec">sec</string>
+  <string name="pref_min">min</string>
+
 </resources>

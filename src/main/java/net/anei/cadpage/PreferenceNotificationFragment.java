@@ -71,9 +71,10 @@ public class PreferenceNotificationFragment extends PreferenceFragment {
     assert pref != null;
     pref.setSummaryProvider((pref2) -> {
       if (!ManagePreferences.notifyOverride()) return "Off";
-      return "On; Max Vol " + (ManagePreferences.notifyOverrideVolume() ? "On" : "Off") +
-             "; Loop " +
-             (ManagePreferences.notifyOverrideLoop() ? "On" : "Off");
+      return getString(R.string.pref_on) + "; " + getString(R.string.pref_max_vol) +
+             (ManagePreferences.notifyOverrideVolume() ? getString(R.string.pref_on) : getString(R.string.pref_off)) +
+             "; " + getString(R.string.pref_loop) +
+             (ManagePreferences.notifyOverrideLoop() ? getString(R.string.pref_on) : getString(R.string.pref_off));
     });
   }
 

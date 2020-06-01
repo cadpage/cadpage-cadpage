@@ -31,6 +31,7 @@
 
   <Preference
     app:fragment="net.anei.cadpage.PreferenceNotificationFragment"
+    app:key="@string/pref_category_notification_key"
     app:title="@string/pref_category_notif_title"
     app:summary="@string/pref_category_notif_summary" />
 

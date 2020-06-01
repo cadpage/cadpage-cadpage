@@ -34,6 +34,7 @@
     <string name="pref_prev_version_code">prev_version_code</string>
     <string name="pref_register_date_key">register_date</string>
     <string name="pref_category_location_key">category_location</string>
+    <string name="pref_category_notification_key">category_notification</string>
     <string name="pref_category_scanner_key">category_scanner</string>
     <string name="pref_payment_status_key">paymentstatus</string>
     <string name="pref_enabled_key">enabled</string>

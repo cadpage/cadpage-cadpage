@@ -223,4 +223,6 @@
 
   <string name="auto">Auto</string>
   <string name="manual">Manual</string>
+
+  <string name="not_selected">&lt;Not Selected&gt;</string>
 </resources>

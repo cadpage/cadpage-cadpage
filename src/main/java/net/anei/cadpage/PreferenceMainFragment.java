@@ -55,6 +55,15 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
       return true;
     });
 
+    pref = findPreference(getString(R.string.pref_category_notification_key));
+    assert pref != null;
+    pref.setSummaryProvider((pref2) -> {
+      if (!ManagePreferences.notifyEnabled()) return "off";
+      return "on for " + displayTime(ManagePreferences.notifyTimeout()) +
+             "; repeat " + displayTime(ManagePreferences.notifyRepeatInterval());
+
+    });
+
     // Set up summary displays
     pref = findPreference(getString(R.string.pref_category_scanner_key));
     assert pref != null;
@@ -79,6 +88,16 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
   private void enableLocPreference(Preference locPreference, String enableMsgType) {
     boolean enable = enableMsgType.contains("S") || enableMsgType.contains("M");
     locPreference.setEnabled(enable);
+  }
+
+  private String displayTime(int secs) {
+    if (secs < 0) {
+      return "off";
+    } else if (secs < 60) {
+      return Integer.toString(secs) + ' ' + getString(R.string.pref_sec);
+    } else {
+      return Integer.toString(secs/60) + ' ' + getString(R.string.pref_min);
+    }
   }
 
   @Override
