@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05292020</string>
+  <string name="release_date">06012020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-20\n
+    New Locations:\n
+    Cameron County, TX\n
+    \n
+    Location Fixes:\n
+    Prince Georges County, MD\n
+    Anoka County, NN\n
+    Rutherford County, NC\n
+    \n
     v2.1.11-19\n
     New Locations:\n
     Orange County, FL (alt)\n
@@ -69,18 +78,6 @@
     Taber, AB\n
     \n
     General Fixes:\n
-    Odd problems with the statup help menus\n
-    \n
-    v2.1.11-15\n
-    New Locations:\n
-    Adams County, PA (Alt)\n
-    Mercer County, WV\n
-    Aivia AED\n
-    \n
-    Location Fixes:\n
-    Montezuma County, CO\n
-    Prince Georges County, MD\n
-    Sullivan County, NY\n
-    Petersburg, VA
+    Odd problems with the statup help menus
   </string>
 </resources>
