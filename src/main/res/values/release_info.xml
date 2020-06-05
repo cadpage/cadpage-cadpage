@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06012020</string>
+  <string name="release_date">06052020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-21\n
+    New Locations:\n
+    Morgan County, IN\n
+    \n
+    Location Fixes:\n
+    Monroe County, IL\n
+    Frederick County, MD\n
+    Jefferson City, MO\n
+    Lake County, OH\n
+    Newberry County, SC\n
+    \n
     v2.1.11-20\n
     New Locations:\n
     Cameron County, TX\n
@@ -57,27 +68,6 @@
     Zandt County, TX\n
     \n
     General Fixes:\n
-    Recents key can now be used to switch between launched map and Cadpage.\n
-    \n
-    v2.1.11-16\n
-    New Locations:\n
-    Franklin County, AL\n
-    Howard County, MO\n
-    Richland County, ND\n
-    Bath County, VA\n
-    Clay County, WV\n
-    \n
-    Location Fixes:\n
-    Citrus County, FL\n
-    Prince Georges County, MD\n
-    Missoula County, MT\n
-    Belmont County, OH\n
-    Crawford County, OH\n
-    Yukon, OK\n
-    Armstrong County, PA\n
-    Taber, AB\n
-    \n
-    General Fixes:\n
-    Odd problems with the statup help menus
+    Recents key can now be used to switch between launched map and Cadpage.
   </string>
 </resources>
