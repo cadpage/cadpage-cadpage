@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06052020</string>
+  <string name="release_date">06162020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-22\n
+    New Locations:\n
+    Inyo County, CA\n
+    Swain County, NC\n
+    Haywood County, TN\n
+    Harris County, TX (alt)\n
+    \n
+    Location Fixes:\n
+    Archuleta County, CO\n
+    Madison County, IN\n
+    Leelanau County, MI\n
+    Frederick County, MD\n
+    Washington County, MO\n
+    Flathead County, MT\n
+    Fayette County, PA\n
+    Westmoreland County, VA\n
+    Pochohantas County, WV\n
+    \n
     v2.1.11-21\n
     New Locations:\n
     Morgan County, IN\n
@@ -48,26 +66,6 @@
     Henderson County, NC\n
     McDowell County, NC\n
     Josephine County, OR\n
-    Chester County, SC\n
-    \n
-    v2.1.11-17\n
-    New Locations:\n
-    Marion County, IA\n
-    Atascosa County, TX\n
-    \n
-    Location Fixes:\n
-    Cathedral City, CA\n
-    Madera County, CA\n
-    Yolo County, CA\n
-    El Paso County, CO\n
-    Wright County, MO\n
-    Carroll County, NH\n
-    Yukon, OK\n
-    Newberry County, SC\n
-    Bexar County, TX\n
-    Zandt County, TX\n
-    \n
-    General Fixes:\n
-    Recents key can now be used to switch between launched map and Cadpage.
+    Chester County, SC
   </string>
 </resources>
