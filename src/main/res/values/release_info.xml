@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06162020</string>
+  <string name="release_date">06192020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-23\n
+    Location Fixes:\n
+    Massac County, IL\n
+    Lincoln County, MO\n
+    Madison County, NY\n
+    Lake County, OH\n
+    Louisa County, VA\n
+    \n
     v2.1.11-22\n
     New Locations:\n
     Inyo County, CA\n
@@ -53,19 +61,6 @@
     Maverick County, TX\n
     \n
     Location Fixes:\n
-    Lawrence County, KY\n
-    \n
-    v2.1.11-18\n
-    New Locations:\n
-    St Joseph County, IN (alt)\n
-    Hopkins County, KY\n
-    Big Horn County, WY\n
-    \n
-    Location Fixes:\n
-    Los Angeles County, CA\n
-    Henderson County, NC\n
-    McDowell County, NC\n
-    Josephine County, OR\n
-    Chester County, SC
+    Lawrence County, KY
   </string>
 </resources>
