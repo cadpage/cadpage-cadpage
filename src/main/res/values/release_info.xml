@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06192020</string>
+  <string name="release_date">06192320</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-24\n
+    Location Fixes:\n
+    Madera County, CA\n
+    Madison County, IL\n
+    Montgomery County, MD\n
+    Ray County, MO\n
+    \n
     v2.1.11-23\n
     Location Fixes:\n
     Massac County, IL\n
@@ -48,19 +55,6 @@
     Location Fixes:\n
     Prince Georges County, MD\n
     Anoka County, NN\n
-    Rutherford County, NC\n
-    \n
-    v2.1.11-19\n
-    New Locations:\n
-    Orange County, FL (alt)\n
-    Crawford County, IL\n
-    Prince Georges County, MD (alt)\n
-    Dunklin County, MO\n
-    Madison County, NC (alt)\n
-    Washington County, RI (alt)\n
-    Maverick County, TX\n
-    \n
-    Location Fixes:\n
-    Lawrence County, KY
+    Rutherford County, NC
   </string>
 </resources>
