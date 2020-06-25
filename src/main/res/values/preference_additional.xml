@@ -108,7 +108,7 @@
   </string-array>
 
   <string name="pref_textsize_title">Text Size</string>
-  <string name="pref_textsize_summary">Select the Text size for History Screen Messages</string>
+  <string name="pref_textsize_summary">Select the Text size for History Screen Messages: %%s</string>
   <string-array name="pref_textsize_values" tools:ignore="MissingTranslation">
     <item>14</item>
     <item>16</item>

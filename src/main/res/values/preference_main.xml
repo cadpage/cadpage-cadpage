@@ -64,6 +64,8 @@
   <string name="pref_on">On</string>
   <string name="pref_off">Off</string>
   <string name="pref_max_vol">Max Vol</string>
+  <string name="pref_on_for">On for</string>
+  <string name="pref_repeat">Repeat</string>
   <string name="pref_loop">Loop</string>
   <string name="pref_sec">sec</string>
   <string name="pref_min">min</string>

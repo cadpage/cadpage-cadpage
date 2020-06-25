@@ -7,12 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
-
-
-
-
-
 import net.anei.cadpage.BugReportGenerator;
 import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.FCMMessageService;
@@ -95,6 +89,7 @@ public class DeveloperToolsManager {
     public DeveloperListPreference(Activity context) {
       super(context);
       this.context = context;
+      setKey("pref_developer_tools");
       setTitle("Developer Debug Tools");
       setSummary("Only available for developers");
       setEntries(entryList);
@@ -118,8 +113,7 @@ public class DeveloperToolsManager {
           ManagePreferences.setAuthRunDays(100);
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          setPaidYear(-1);
-          setPurchaseDate(-89, -1);
+          setExpireDate(+90);
           ManagePreferences.setInstallDate(ManagePreferences.purchaseDate());
           ManagePreferences.setFreeSub(false);
           break;
@@ -128,8 +122,7 @@ public class DeveloperToolsManager {
           ManagePreferences.setAuthRunDays(100);
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          setPaidYear(-1);
-          setPurchaseDate(DonationManager.EXPIRE_WARN_DAYS-2, -3);
+          setExpireDate(DonationManager.EXPIRE_WARN_DAYS-2);
           ManagePreferences.setFreeSub(false);
           break;
 
@@ -138,9 +131,8 @@ public class DeveloperToolsManager {
           ManagePreferences.setAuthRunDays(100);
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          setPaidYear(-1);
           int dayDelta = (val == 4 ? 0 : -1);
-          setPurchaseDate(dayDelta, -1, ManagePreferences.releaseDate());
+          setExpireDate(dayDelta, ManagePreferences.releaseDate());
           ManagePreferences.setFreeSub(false);
           ManagePreferences.setExpireDate(null);
           break;
@@ -148,7 +140,7 @@ public class DeveloperToolsManager {
         case 6:     // Stat: Demo
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          setPaidYear();
+          resetPaidYear();
           ManagePreferences.setAuthRunDays(10);
           ManagePreferences.setFreeSub(false);
           break;
@@ -156,7 +148,7 @@ public class DeveloperToolsManager {
         case 7:     // Stat: Demo expired
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          setPaidYear();
+          resetPaidYear();
           ManagePreferences.setAuthRunDays(DonationManager.DEMO_LIMIT_DAYS+1);
           ManagePreferences.setFreeSub(false);
           break;
@@ -325,25 +317,12 @@ public class DeveloperToolsManager {
       MainDonateEvent.instance().refreshStatus();
       return true;
     }
-    
-    private void setPurchaseDate(int dayOffset, int yearOffset, Date baseDate) {
-      Date date = calcDate(dayOffset, yearOffset, baseDate);
-      ManagePreferences.setPurchaseDate(date);
-      ManagePreferences.setPurchaseDate(2, date);
+
+    private void setExpireDate(int dayOffset) {
+      setExpireDate(dayOffset, new Date());
     }
-    
-    private void setPurchaseDate(int dayOffset, int yearOffset) {
-      Date date = calcDate(dayOffset, yearOffset);
-      ManagePreferences.setPurchaseDate(date);
-      ManagePreferences.setPurchaseDate(2, date);
-    }
-    
-    private Date calcDate(int dayOffset, int yearOffset) {
-      return calcDate(dayOffset, yearOffset, null);
-    }
-    
-    private Date calcDate(int dayOffset, int yearOffset, Date baseDate) {
-      if (baseDate == null) baseDate = new Date();
+
+    private void setExpireDate(int dayOffset, Date baseDate) {
       Calendar cal = new GregorianCalendar();
       cal.setTime(baseDate);
       cal.set(Calendar.HOUR, 0);
@@ -351,28 +330,21 @@ public class DeveloperToolsManager {
       cal.set(Calendar.SECOND, 0);
       cal.set(Calendar.MILLISECOND, 0);
       cal.add(Calendar.DAY_OF_YEAR, dayOffset);
-      cal.add(Calendar.YEAR, yearOffset);
-      return cal.getTime();
-    }
-    
-    private void setPaidYear() {
-      setPaidYear(Integer.MIN_VALUE);
-    }
-    
-    private void setPaidYear(int yearOffset) {
-      setPaidYear(yearOffset, null);
-    }
-    
-    private void setPaidYear(int yearOffset, Date baseDate) {
-      if (baseDate == null) baseDate = new Date();
-      Calendar cal = new GregorianCalendar();
-      cal.setTime(baseDate);
+      cal.add(Calendar.YEAR, -1);
+
       int year = cal.get(Calendar.YEAR);
-      year = yearOffset == Integer.MIN_VALUE ? 0 : year+yearOffset;
       ManagePreferences.setPaidYear(year);
       ManagePreferences.setPaidYear(2, year);
+
+      Date date = cal.getTime();
+      ManagePreferences.setPurchaseDate(date);
+      ManagePreferences.setPurchaseDate(2, date);
     }
-    
+
+    private void resetPaidYear() {
+      ManagePreferences.setPaidYear(0);
+      ManagePreferences.setPaidYear(2, 0);
+    }
   }
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");

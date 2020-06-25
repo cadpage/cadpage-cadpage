@@ -19,6 +19,7 @@
     app:order="1001"/>
 
   <net.anei.cadpage.preferences.OverrideLocationPreference
+    app:key="@string/pref_category_location_key"
     app:order="1003"/>
 
 </PreferenceScreen>

@@ -59,8 +59,8 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     assert pref != null;
     pref.setSummaryProvider((pref2) -> {
       if (!ManagePreferences.notifyEnabled()) return "off";
-      return "on for " + displayTime(ManagePreferences.notifyTimeout()) +
-             "; repeat " + displayTime(ManagePreferences.notifyRepeatInterval());
+      return getString(R.string.pref_on_for) + ' ' + displayTime(ManagePreferences.notifyTimeout()) +
+             "; " + getString(R.string.pref_repeat) + ' ' + displayTime(ManagePreferences.notifyRepeatInterval());
 
     });
 
@@ -82,7 +82,7 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     }
 
     // Add developer dialog preference if appropriate
-    DeveloperToolsManager.instance().addPreference(getActivity(), getPreferenceScreen());
+    DeveloperToolsManager.instance().addPreference(requireActivity(), getPreferenceScreen());
   }
 
   private void enableLocPreference(Preference locPreference, String enableMsgType) {
@@ -91,8 +91,8 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
   }
 
   private String displayTime(int secs) {
-    if (secs < 0) {
-      return "off";
+    if (secs <= 0) {
+      return getString(R.string.pref_off);
     } else if (secs < 60) {
       return Integer.toString(secs) + ' ' + getString(R.string.pref_sec);
     } else {

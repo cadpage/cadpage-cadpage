@@ -44,8 +44,9 @@ public class VendorManager {
    * Set up Vendor configuration preference screen
    * @param context current context
    * @param pref preference to be set up with vendor config menu
+   * @returns number of vendor preferences added
    */
-  public void setupPreference(final Context context, PreferenceScreen pref) {
+  public int setupPreference(final Context context, PreferenceScreen pref) {
     
     Preference reconnectPref = pref.findPreference(context.getString(R.string.pref_reconnect_key));
     assert reconnectPref != null;
@@ -55,12 +56,13 @@ public class VendorManager {
     });
     
     boolean developer = UserAcctManager.instance().isDeveloper();
-    int order = 10;
+    int cnt = 0;
     for (Vendor vendor : vendorList) {
       if (developer || vendor.isAvailable()) {
-        pref.addPreference(new VendorPreference(context, vendor, order++));
+        pref.addPreference(new VendorPreference(context, vendor, 10*(++cnt)));
       }
     }
+    return cnt;
   }
   
   /**

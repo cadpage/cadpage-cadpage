@@ -5,8 +5,6 @@ import android.os.Bundle;
 import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.vendors.VendorManager;
 
-import java.util.Objects;
-
 import androidx.fragment.app.Fragment;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -30,18 +28,18 @@ public class PreferenceDirectFragment extends PreferenceFragment implements Loca
         ? ((LocationManager.Provider) parent).getLocationManager()
         : new LocationManager();
 
-    // Set up C2DM vendor preference screen
-    VendorManager.instance().setupPreference(Objects.requireNonNull(getActivity()), getPreferenceScreen());
-    int vendorCnt = getPreferenceScreen().getPreferenceCount();
-
     // Load the preferences from an XML resource
-    addPreferencesFromResource(R.xml.preference_direct);
+    setPreferencesFromResource(R.xml.preference_direct, rootKey);
+
+    // Add vendor specific preferences
+    int vendorCnt = VendorManager.instance().setupPreference(requireActivity(), getPreferenceScreen());
 
     // Hide advanced preference options
     getPreferenceScreen().setInitialExpandedChildrenCount(vendorCnt+1);
 
     // Set up the location description summary
     Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
+    assert locPreference != null;
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
 
     Preference pref = findPreference(getString(R.string.pref_report_position_key));

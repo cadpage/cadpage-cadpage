@@ -18,6 +18,14 @@
     app:dependency="@string/pref_notif_override_key" />
 
   <SwitchPreference
+    app:key="@string/pref_notif_override_loop_key"
+    app:title="@string/pref_notif_override_loop_title"
+    app:summaryOn="@string/pref_notif_override_loop_summaryon"
+    app:summaryOff="@string/pref_notif_override_loop_summaryoff"
+    app:defaultValue="true"
+    app:dependency="@string/pref_notif_override_key" />
+
+  <SwitchPreference
     app:key="@string/pref_notif_override_sound_key"
     app:title="@string/pref_notif_override_sound_title"
     app:summaryOn="@string/pref_notif_override_sound_summaryon"
@@ -31,13 +39,5 @@
     app:summary="@string/pref_notif_sound_summary"
     app:dependency="@string/pref_notif_override_key"
     app:defaultValue="content://settings/system/notification_sound" />
-
-  <SwitchPreference
-    app:key="@string/pref_notif_override_loop_key"
-    app:title="@string/pref_notif_override_loop_title"
-    app:summaryOn="@string/pref_notif_override_loop_summaryon"
-    app:summaryOff="@string/pref_notif_override_loop_summaryoff"
-    app:defaultValue="true"
-    app:dependency="@string/pref_notif_override_key" />
 
 </PreferenceScreen>
