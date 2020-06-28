@@ -84,7 +84,14 @@ public class VendorManager {
     if (vendor == null) return false;
     return vendor.isEnabled();
   }
-  
+
+  /**
+   * @return true if user is registered with a vendor requires a location
+   */
+  public boolean isLocationRequired() {
+    return isRegistered("Cadpage");
+  }
+
   /**
    * @return true if user is registered with a vendor that requires
    * a pad subscription

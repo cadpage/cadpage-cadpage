@@ -7,6 +7,7 @@ import android.os.Bundle;
 import net.anei.cadpage.donation.DeveloperToolsManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.preferences.LocationManager;
+import net.anei.cadpage.vendors.VendorManager;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -17,6 +18,7 @@ import androidx.preference.TwoStatePreference;
 public class PreferenceMainFragment extends PreferenceFragment implements LocationManager.Provider{
 
   private TwoStatePreference mEnabledPreference;
+  private Preference locPreference;
 
   private LocationManager locMgr;
 
@@ -38,7 +40,7 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
     MainDonateEvent.instance().setPreference(getActivity(), donate);
 
     // Set up the location description summary
-    final Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
+    locPreference = findPreference(getString(R.string.pref_category_location_key));
     assert locPreference != null;
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
     enableLocPreference(locPreference, ManagePreferences.enableMsgType());
@@ -86,7 +88,7 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
   }
 
   private void enableLocPreference(Preference locPreference, String enableMsgType) {
-    boolean enable = enableMsgType.contains("S") || enableMsgType.contains("M");
+    boolean enable = enableMsgType.contains("S") || enableMsgType.contains("M") || VendorManager.instance().isLocationRequired();
     locPreference.setEnabled(enable);
   }
 
@@ -106,6 +108,10 @@ public class PreferenceMainFragment extends PreferenceFragment implements Locati
 
     // Check for changes to values that are accessible from the widget
     mEnabledPreference.setChecked(ManagePreferences.enabled());
+
+    // And a possible change to the location enabled status
+    // (If user enabled or disabled the Cadpage paging service
+    enableLocPreference(locPreference, ManagePreferences.enableMsgType());
   }
 
   @Override
