@@ -23,7 +23,7 @@
     app:entryValues="@array/pref_enable_msg_type_values"
     app:defaultValue="@string/pref_enable_msg_type_default" />
 
-  <Preference
+  <net.anei.cadpage.preferences.LocationSettingsPreference
     app:fragment="net.anei.cadpage.PreferenceLocationFragment"
     app:key="@string/pref_category_location_key"
     app:title="@string/pref_category_location_title"

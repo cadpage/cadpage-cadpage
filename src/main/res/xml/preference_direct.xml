@@ -18,8 +18,14 @@
     app:defaultValue="@string/pref_report_position_default"
     app:order="1001"/>
 
-  <net.anei.cadpage.preferences.OverrideLocationPreference
+  <net.anei.cadpage.preferences.LocationSettingsPreference
+    app:fragment="net.anei.cadpage.PreferenceLocationFragment"
     app:key="@string/pref_category_location_key"
+    app:title="@string/pref_category_location_title"
+    app:direct="true"
+    app:order="1002"/>
+
+  <net.anei.cadpage.preferences.OverrideLocationPreference
     app:order="1003"/>
 
 </PreferenceScreen>
