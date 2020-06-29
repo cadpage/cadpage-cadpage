@@ -53,4 +53,16 @@
   <string name="pref_split_msg_merge_summary">
       Alternativ för att kontrollera hur uppdelade larmmeddelanden klistras ihop till ett enda larmmeddelande
   </string>
+
+
+  <!-- Summary fragments -->
+  <string name="pref_on">On</string>  <!-- Translate -->
+  <string name="pref_off">Off</string>  <!-- Translate -->
+  <string name="pref_max_vol">Max Vol</string>  <!-- Translate -->
+  <string name="pref_on_for">On for</string>  <!-- Translate -->
+  <string name="pref_repeat">Repeat</string>  <!-- Translate -->
+  <string name="pref_loop">Loop</string>  <!-- Translate -->
+  <string name="pref_sec">sec</string>  <!-- Translate (abbreviate seconds)  -->
+  <string name="pref_min">min</string>  <!-- Translate (abbreviate minutes) -->
+
 </resources>
