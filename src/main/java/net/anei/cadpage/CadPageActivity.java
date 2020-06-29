@@ -424,7 +424,6 @@ public class CadPageActivity extends AppCompatActivity {
     Intent intent = new Intent(context, CadPageActivity.class);
     int flags =
             Intent.FLAG_ACTIVITY_NEW_TASK
-            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
             | Intent.FLAG_ACTIVITY_NO_USER_ACTION;
 
     intent.setFlags(flags);
