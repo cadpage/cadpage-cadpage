@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06192020</string>
+  <string name="release_date">06292020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.11-25\n
+    New Locations:\n
+    Livingston County, KY\n
+    \n
+    Location Fixes:\n
+    Bartholomew County, IN\n
+    \n
     v2.1.11-24\n
     Location Fixes:\n
     Madera County, CA\n
@@ -46,15 +53,6 @@
     Frederick County, MD\n
     Jefferson City, MO\n
     Lake County, OH\n
-    Newberry County, SC\n
-    \n
-    v2.1.11-20\n
-    New Locations:\n
-    Cameron County, TX\n
-    \n
-    Location Fixes:\n
-    Prince Georges County, MD\n
-    Anoka County, NN\n
-    Rutherford County, NC
+    Newberry County, SC
   </string>
 </resources>
