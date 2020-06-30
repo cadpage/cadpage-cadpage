@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <string name="pref_activate_scanner_title">Auto Open Scanner Channel</string>
+    <string name="pref_activate_scanner_summaryon">Scanner channel will be auto opened</string>
+    <string name="pref_activate_scanner_summaryoff">Scanner channel will not be auto opened</string>
+
+    <string name="pref_scanner_channel_title">Scanner Channel</string>
+
+    <string name="pref_scanner_timeout_title">Scanner channel timeout</string>
+    <string name="pref_scanner_timeout_summary">Scanner channel timeout\nCur value: %%s</string>
+    <string name="pref_scanner_timeout_dialog">Scanner channel timeout in minutes (0 to disable)</string>
+    <string name="pref_scanner_timeout_value_zero">None</string>
+    <string name="pref_scanner_timeout_value_other">%s min</string>
+
 </resources>

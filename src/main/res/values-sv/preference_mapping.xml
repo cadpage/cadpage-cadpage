@@ -1,3 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="pref_map_network_chk_title">Status för nätverkskartor</string>
+    <string name="pref_map_network_chk_summary">Kartförfrågan tillåten när nätverksstatus är %%s</string>
+    <string-array name="pref_map_network_chk_entries">
+        <item>Ansluten</item>
+        <item>Roaming</item>
+        <item>Frånkopplad</item>
+    </string-array>
+
+    <string name="pref_gps_map_option_title">GPS-ruttningsalternativ</string>
+    <string name="pref_gps_map_option_summary">Använd GPS-koordinater för positionering: %%s</string>
+    <string-array name="pref_gps_map_option_entries">
+        <item>När rekommenderad</item>
+        <item>Aldrig</item>
+        <item>När tillgänglig</item>
+    </string-array>
+
+    <string name="pref_app_map_option_title">Kart-apps alternativ</string>
+    <string name="pref_app_map_option_summary">Använd mappnings-app: %%s</string>
+    <string name="pref_app_map_option_other">Annan</string>
+    <string-array name="pref_app_map_option_entries">
+        <item>Google</item>
+        <item>ArcGIS Navigator</item>
+        <item>Waze</item>
+        <item>OsmAnd</item>
+        <item>Annan</item>
+    </string-array>
+
+    <string name="pref_navigate_map_title">Kartnavigeringsalternativ</string>
+    <string name="pref_navigate_map_summaryon">Kartknapp öppnar ruttning</string>
+    <string name="pref_navigate_map_summaryoff">Kartknapp visar karta </string>
 </resources>

@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="pref_timeout_title">Screen Timeout</string>
+    <string name="pref_timeout_summary">The screen stay on for this time.  Cur value: %%s</string>
+    <string-array
+        name="pref_timeout_values" tools:ignore="MissingTranslation">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>300</item>
+        <item>600</item>
+    </string-array>
+    <string-array name="pref_timeout_entries">
+        <item>@string/pref_disabled</item>
+        <item>@string/pref_10s</item>
+        <item>@string/pref_20s</item>
+        <item>@string/pref_30s</item>
+        <item>@string/pref_1m</item>
+        <item>@string/pref_2m</item>
+        <item>@string/pref_5m</item>
+        <item>@string/pref_10m</item>
+    </string-array>
+
+    <string name="pref_screen_on_title">Screen On for Popup</string>
+    <string name="pref_screen_on_summaryon">Screen will turn on when popup shows</string>
+    <string name="pref_screen_on_summaryoff">Screen will not turn on when popup shows</string>
+
+    <string name="pref_dimscreen_title">Dim Popup Screen</string>
+    <string name="pref_dimscreen_summaryon">Popup screen will be dim (saves battery)</string>
+    <string name="pref_dimscreen_summaryoff">Popup screen will be bright</string>
 
 </resources>

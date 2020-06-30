@@ -4,4 +4,12 @@
   <string name="pref_reconnect_title">Återanslut direkt koppling (med. service)</string>
   <string name="pref_reconnect_summary">Återställ anslutning till aktiverad meddelandeservice</string>
 
+  <string name="pref_report_position_title">Rapportera position vid kvittens</string>
+  <string name="pref_report_position_summary">Rapportera din aktuella position när du kvitterar larm: %%s</string>
+  <string-array name="pref_report_position_entries">
+    <item>Alltid</item>
+    <item>Aldrig</item>
+    <item>Fråga?</item>
+  </string-array>
+
 </resources>

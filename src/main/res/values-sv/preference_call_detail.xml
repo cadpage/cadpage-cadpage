@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="pref_popup_enabled_title">Visa Popup</string>
+    <string name="pref_popup_enabled_summaryon">Larm visar popup-fönster</string>
+    <string name="pref_popup_enabled_summaryoff">Larm visar inte popup-fönster</string>
+
+    <string name="pref_noShowInCall_title">Begränsa i Larm-popup</string>
+    <string name="pref_noShowInCall_summaryon">Larm-popup kommer inte att visas under pågående samtal.</string>
+    <string name="pref_noShowInCall_summaryoff">Larm-popup kommer att visas under pågående samtal</string>
+
+    <string name="pref_show_source_title">Visa källan till larm</string>
+    <string name="pref_show_source_summaryon">Kommer att visa källan till larm</string>
+    <string name="pref_show_source_summaryoff">Kommer inte att visa källan till larm</string>
+
+    <string name="pref_show_personal_title">Visa personlig information</string>
+    <string name="pref_show_personal_summaryon">Inringares namn/telefon kommer att visas</string>
+    <string name="pref_show_personal_summaryoff">Inringares namn/telefon kommer inte att visas</string>
 </resources>

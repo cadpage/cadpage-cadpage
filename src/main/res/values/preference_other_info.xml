@@ -30,11 +30,5 @@
   <string name="pref_cadpage_active911_url" tools:ignore="MissingTranslation">http://www.cadpage.org/faq/cadpage-and-active911</string>
   <string name="pref_active911_parsers_url" tools:ignore="MissingTranslation">http://www.cadpage.org/faq/cadpage-and-active911-issue</string>
 
-  <string name="pref_review_title">Write a Cadpage Review</string>
-  <string name="pref_review_summary">Press \"Your Review\"</string>
-  <string name="pref_review_url">market://details?id=net.anei.cadpage</string>
-
-  <string name="pref_email_title">E-mail the Developer</string>
-  <string name="pref_email_summary">E-mail comments or bugs to the developer</string>
-
 </resources>
+

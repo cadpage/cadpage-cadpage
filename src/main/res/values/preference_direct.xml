@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
   <string name="pref_reconnect_title">Reconnect Direct Paging</string>
   <string name="pref_reconnect_summary">Restore connections with currently enabled Direct Paging vendors</string>
+
+  <string name="pref_report_position_title">Report position when responding</string>
+  <string name="pref_report_position_summary">Report your current position when responding to calls: %%s</string>
+  <string-array name="pref_report_position_values" tools:ignore="MissingTranslation">
+    <item>Y</item>
+    <item>N</item>
+    <item>A</item>
+  </string-array>
+  <string-array name="pref_report_position_entries">
+    <item>Always</item>
+    <item>Never</item>
+    <item>Ask?</item>
+  </string-array>
 </resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pref_override_active911_split_title">Ignorera inställningar i Active911 om delade larm-meddelanden</string>
+    <string name="pref_override_active911_split_summaryon">Rekommenderad inställningar i Active911 kommer att köras över</string>
+    <string name="pref_override_active911_split_summaryoff">Rekommenderade inställningar i Active911 kommer att användas</string>
+
+    <string name="pref_split_direct_page_title">Kolla efter delade larmmeddelanden från meddelandeservice</string>
+    <string name="pref_split_direct_page_summaryon">Larmmeddelanden från meddelandeservice kommer att kontrolleras så att de ej är uppdelade</string>
+    <string name="pref_split_direct_page_summaryoff">Larmmedelanden från meddelandeservice kommer inte att kontrolleras om de är uppdelade</string>
+
+    <string name="pref_msgtimeout_title">Timeout för delade meddelanden</string>
+    <string name="pref_msgtimeout_summary">Timeout för multipla meddelanden\nAktuellt värde: %%s</string>
+    <string name="pref_msgtimeout_dialog">Maximal tid i sekunder för att vänta på ett multipelt meddelande i Cadpage</string>
+
+    <string name="pref_split_min_msg_title">Delade meddelande min nedräkning</string>
+    <string name="pref_split_min_msg_summary">Minst förväntad meddelandetid \nAktuellt värde: %%s</string>
+
+    <string name="pref_rev_msg_order_title">Reversera ordning i delade meddelanden</string>
+    <string name="pref_rev_msg_order_summaryon">Delade Cadpag Delade Cadpage-meddelanden kommer att läsas i ordning sist till först</string>
+    <string name="pref_rev_msg_order_summaryoff">Delade Cadpage-meddelanden kommer att läsas i ordning först till sist</string>
+
+    <string name="pref_mix_msg_order_title">Blandad ordning på delade meddelande</string>
+    <string name="pref_mix_msg_order_summaryon">Delade CAD page meddelanden kan komma i oordning</string>
+    <string name="pref_mix_msg_order_summaryoff">Delade CAD page meddelanden kommer alltid att komma i kronologisk ordning</string>
+
+    <string name="pref_split_blank_ins_title">Sätt in blanksteg i delade meddelanden</string>
+    <string name="pref_split_blank_ins_summaryon">Blankstek kommer att sättas in mellan delade meddelanden</string>
+    <string name="pref_split_blank_ins_summaryoff">Blanksteg kommer inte att sättas in mellan delade meddelanden</string>
+
+</resources>

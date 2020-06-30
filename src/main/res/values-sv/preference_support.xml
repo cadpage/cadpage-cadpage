@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pref_review_title">Skriv en recension om Cadpage</string>
+    <string name="pref_review_summary">Tryck \"Recensera\"</string>
+    <string name="pref_review_url">market://details?id=net.anei.cadpage</string>
+
+    <string name="pref_email_title">E-posta programutvecklaren</string>
+    <string name="pref_email_summary">E-posta kommentarer eller buggar till utvecklaren.</string>
+
+    <string name="pref_loglimit_title">Gräns för meddelanderapport</string>
+    <string name="pref_loglimit_summary">Antal meddelanden som inkluderas i felrapport\nAktuellt värde : %%s</string>
+
+    <string name="pref_billing_account_title">Välj betalningskonto</string>
+    <string name="pref_billing_account_summary">%%s</string>
+
+</resources>

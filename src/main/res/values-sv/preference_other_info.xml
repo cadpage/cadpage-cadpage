@@ -28,11 +28,4 @@
   <string name="pref_cadpage_active911_title">Cadpage och Active911 appar</string>
   <string name="pref_cadpage_active911_summary">Hur du kör Cadpage och Active911 på samma enhet</string>
 
-  <string name="pref_review_title">Skriv en recension om Cadpage</string>
-  <string name="pref_review_summary">Tryck \"Recensera\"</string>
-  <string name="pref_review_url">market://details?id=net.anei.cadpage</string>
-
-  <string name="pref_email_title">E-posta programutvecklaren</string>
-  <string name="pref_email_summary">E-posta kommentarer eller buggar till utvecklaren.</string>
-
 </resources>
