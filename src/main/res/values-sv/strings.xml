@@ -188,6 +188,6 @@
 
   <string name="reconnect">Återanslut till %s</string>
 
-  <string name="auto">Auto</string> <!-- Translate -->
-  <string name="manual">Manual</string> <!-- Translate -->
+  <string name="auto">Automatiskt</string>
+  <string name="manual">Manuellt</string>
 </resources>

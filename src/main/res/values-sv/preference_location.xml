@@ -9,12 +9,12 @@
   <string name="pref_multi_location_title">Välj flera positioner</string>
   <string name="pref_multi_location_summary">Välj flera positioner</string>
 
-  <string name="pref_loc_filter_title">Sender Address Filter</string> <!-- Translate -->
-  <string name="pref_override_filter_title">Override sender address filter</string> <!-- Translate -->
-  <string name="pref_override_filter_summaryon">Sender address filter will be overridden</string> <!-- Translate -->
-  <string name="pref_override_filter_summaryoff">Sender address filter %s is active</string> <!-- Translate -->
+  <string name="pref_loc_filter_title">Filter för avsändaradress</string>
+  <string name="pref_override_filter_title">Ignorera filter för avsändaradress</string>
+  <string name="pref_override_filter_summaryon">Filter för avsändaradress kommer att ignoreras</string>
+  <string name="pref_override_filter_summaryoff">Filter för avsändaradress %s är aktiverat</string>
 
-  <string name="pref_filter_title">Sender address filter</string> <!-- Translate -->
+  <string name="pref_filter_title">Filter för avsändaradress</string>
   <string name="pref_filter_summary">
     Endast meddelanden från denna adress kommer att beaktas. Aktuellt värde: %%s
   </string>
@@ -22,7 +22,7 @@
     Skriv i e-postadress för att filtrera meddelanden. Ingen adress kommer att scanna alla. Använd ett , för att separera multipla adresser.
   </string>
 
-  <string name="pref_loc_defaults_title">Override Default City/State</string> <!-- Translate -->
+  <string name="pref_loc_defaults_title">Ignorera förvald stat/stad</string>
   <string name="pref_override_default_title">Skriv över förvald stat/stad</string>
   <string name="pref_override_default_summaryon">Använd användardefinierad stat/stad</string>
   <string name="pref_override_default_summaryoff">Använd förvald stat/stad</string>

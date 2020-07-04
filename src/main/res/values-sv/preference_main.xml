@@ -6,7 +6,7 @@
   <string name="pref_enabled_summaryon">Cadpage är aktiverat</string>
   <string name="pref_enabled_summaryoff">Cadpage är avaktiverat</string>
 
-  <string name="pref_enable_msg_type_title">Alert Message Type</string> <!-- Translate -->
+  <string name="pref_enable_msg_type_title">Typ av larmmeddelande</string>
   <string name="pref_enable_msg_type_summary">Cadpage kommer att behandla\n%%s</string>
   <string-array name="pref_enable_msg_type_entries">
     <item>Endast SMS meddelanden</item>
@@ -20,20 +20,20 @@
   <string name="pref_category_notif_title">Notifieringar</string>
   <string name="pref_category_notif_summary">Blandade notifieringsinställningar</string>
 
-  <string name="pref_category_screen_control_title">Screen Control Options</string> <!-- Translate -->
+  <string name="pref_category_screen_control_title">Alternativ för skärmkontroll</string>
 
-  <string name="pref_category_call_history_title">Call History Options</string> <!-- Translate -->
+  <string name="pref_category_call_history_title">Alternativ för larmhistorik</string>
 
-  <string name="pref_category_call_detail_title">Call Detail Options</string> <!-- Translate -->
+  <string name="pref_category_call_detail_title">Alternativ för larmdetaljer</string>
 
-  <string name="pref_category_mapping_title">Mapping Options</string>  <!-- Translate -->
+  <string name="pref_category_mapping_title">Alternativ för ruttning</string>
 
   <string name="pref_category_direct_title">Meddelandeservice</string>
   <string name="pref_category_direct_summary">Ställ in meddelandeservice</string>
 
-  <string name="pref_category_support_title">Support and Feedback</string> <!-- Translate -->
+  <string name="pref_category_support_title">Support och Feedback</string>
 
-  <string name="pref_category_support_summary">Reviews, FAQs, and developer support</string> <!-- Translate -->
+  <string name="pref_category_support_summary">Recensioner, FAQs, och support från utvecklaren</string>
 
   <string name="pref_category_other_info_title">Annan information</string>
   <string name="pref_category_other_info_summary">Hjälp och annan användbar information</string>
@@ -41,13 +41,13 @@
   <string name="pref_category_filter_title">Filtreringsinställningar</string>
   <string name="pref_category_filter_summary">Val för att specificera hur vissa typer av larm ska hanteras</string>
 
-  <string name="pref_category_scanner_radio_title">Scanner Radio Options</string>  <!-- Translate -->
+  <string name="pref_category_scanner_radio_title">Alternativ för Scanner Radio Options</string>
 
   <string name="pref_category_button_title">Knappar</string>
   <string name="pref_category_button_summary">Konfigurera larmdetaljers knappmeny</string>
 
-  <string name="pref_category_msg_processing_title">Message Processing Options</string> <!-- Translate -->
-  <string name="pref_category_msg_processing_summary"></string>  <!-- Translate -->
+  <string name="pref_category_msg_processing_title">Alternativ för meddelandehantering</string>
+  <string name="pref_category_msg_processing_summary"></string>
 
   <string name="pref_split_msg_merge_title">Alternativ för delade larm-meddelanden</string>
   <string name="pref_split_msg_merge_summary">
@@ -56,13 +56,13 @@
 
 
   <!-- Summary fragments -->
-  <string name="pref_on">On</string>  <!-- Translate -->
-  <string name="pref_off">Off</string>  <!-- Translate -->
-  <string name="pref_max_vol">Max Vol</string>  <!-- Translate -->
-  <string name="pref_on_for">On for</string>  <!-- Translate -->
-  <string name="pref_repeat">Repeat</string>  <!-- Translate -->
-  <string name="pref_loop">Loop</string>  <!-- Translate -->
-  <string name="pref_sec">sec</string>  <!-- Translate (abbreviate seconds)  -->
-  <string name="pref_min">min</string>  <!-- Translate (abbreviate minutes) -->
+  <string name="pref_on">På</string>
+  <string name="pref_off">Av</string>
+  <string name="pref_max_vol">Max Volym</string>
+  <string name="pref_on_for">På för</string>
+  <string name="pref_repeat">Repeat</string>
+  <string name="pref_loop">Loop</string>
+  <string name="pref_sec">sek</string>
+  <string name="pref_min">min</string>
 
 </resources>
