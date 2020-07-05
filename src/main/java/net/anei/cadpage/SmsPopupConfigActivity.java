@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.annotation.NonNull;
@@ -29,6 +30,9 @@ public class SmsPopupConfigActivity extends AppCompatActivity
       return;
     }
 
+    assert getSupportActionBar() != null;
+    this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     super.onCreate(savedInstanceState);
 
     ManagePreferences.setPermissionManager(permMgr);
@@ -37,6 +41,7 @@ public class SmsPopupConfigActivity extends AppCompatActivity
 
     boolean selectLocation = getIntent().getBooleanExtra(EXTRA_SELECT_LOCATION, false);
     PreferenceFragment fragment = selectLocation ? new PreferenceLocationMenuFragment() : new PreferenceMainFragment();
+    fragment.setTitle(getString(selectLocation ? R.string.pref_location_title : R.string.settings));
     getSupportFragmentManager()
       .beginTransaction()
       .replace(R.id.settings_content, fragment)
@@ -54,11 +59,27 @@ public class SmsPopupConfigActivity extends AppCompatActivity
     fragment.setArguments(args);
     fragment.setTargetFragment(caller, 0);
 
+    if (fragment instanceof PreferenceFragment) {
+      CharSequence title = pref.getTitle();
+      if (title != null) ((PreferenceFragment)fragment).setTitle(title);
+    }
+
     // Replace the existing Fragment with the new Fragment
     getSupportFragmentManager().beginTransaction()
       .replace(R.id.settings_content, fragment)
       .addToBackStack(null)
       .commit();
+    return true;
+  }
+
+  @Override
+  public boolean onSupportNavigateUp() {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    if (fragmentManager.getBackStackEntryCount() > 0) {
+      fragmentManager.popBackStack();
+    } else {
+      finish();
+    }
     return true;
   }
 
@@ -89,6 +110,9 @@ public class SmsPopupConfigActivity extends AppCompatActivity
   @Override
   protected void onResume() {
     super.onResume();
+
+    assert getSupportActionBar() != null;
+    getSupportActionBar().setTitle(R.string.settings);
 
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     activityActive = true; 

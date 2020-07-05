@@ -9,9 +9,23 @@ import androidx.preference.PreferenceManager;
 
 /**
  * Base class for preference fragment classes that need to delete unneeded
- * preferences from the preference tree
+ * preferences from the preference tree, and to set the actionbar title
  */
 abstract class PreferenceFragment extends PreferenceFragmentCompat {
+
+  CharSequence title = null;
+
+  public void setTitle(CharSequence title) {
+    this.title = title;
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (title != null) {
+      ((SmsPopupConfigActivity) getActivity()).getSupportActionBar().setTitle(title);
+    }
+  }
 
   void deletePreference(int resId) {
     String prefKey = getString(resId);

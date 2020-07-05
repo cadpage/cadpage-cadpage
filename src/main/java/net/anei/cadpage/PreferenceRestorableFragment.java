@@ -20,7 +20,7 @@ abstract public class PreferenceRestorableFragment extends PreferenceFragment {
   private static String curPrefKey = null;
 
   @Override
-  public void onCreatePreferences(@Nullable Bundle savedInstanceState, String rootKey) {
+  public void onCreate(@Nullable Bundle savedInstanceState) {
     curInstance = this;
     curPrefKey = null;
     super.onCreate(savedInstanceState);
