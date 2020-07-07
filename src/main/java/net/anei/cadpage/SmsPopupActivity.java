@@ -12,25 +12,21 @@ import net.anei.cadpage.vendors.VendorManager;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.util.Linkify;
 import android.view.ContextMenu;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-public class SmsPopupActivity extends Safe40Activity implements LocationTracker.LocationChangeListener {
+public class SmsPopupActivity extends AppCompatActivity implements LocationTracker.LocationChangeListener {
   
   private static final String EXTRAS_MSG_ID = "SmsPopupActivity.MSG_ID";
   
@@ -45,9 +41,6 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
   private TextView messageTV;
 
   private Button donateStatusBtn = null;
-
-  private static final double WIDTH = 0.9;
-  private static final int MAX_WIDTH = 640;
 
   @Override
   protected void onCreate(Bundle bundle) {
@@ -185,8 +178,8 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
 
     // Set up regular button list
     optManager = new MsgOptionManager(this, message);
-    optManager.setupButtons((ViewGroup)findViewById(R.id.RespButtonLayout),
-                            (ViewGroup)findViewById(R.id.RegButtonLayout));
+    optManager.setupButtons(findViewById(R.id.RespButtonLayout),
+                            findViewById(R.id.RegButtonLayout));
 
     MsgInfo info = message.getInfo();
 

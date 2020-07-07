@@ -5,16 +5,11 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
-import net.anei.cadpage.donation.DonationManager;
-import net.anei.cadpage.donation.MainDonateEvent;
-import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.preferences.LocationManager;
 
 public class PreferenceLocationFragment extends PreferenceRestorableFragment implements LocationManager.Provider {
 
   private LocationManager locMgr;
-
-  private String saveLocation;
 
   @Override
   public LocationManager getLocationManager() {
@@ -36,19 +31,10 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment imp
     // Load the preferences from an XML resource
     setPreferencesFromResource(direct ? R.xml.preference_direct_location : R.xml.preference_location, rootKey);
 
-    // Save location so we can tell when it changes
-    saveLocation = ManagePreferences.location();
-
     // Set up the location description summary
     Preference descPreference = findPreference(getString(R.string.pref_loc_desc_key));
     assert descPreference != null;
     descPreference.setSummaryProvider(locMgr.getSummaryProvider());
-
-    // And setup a location change preference listener
-    locMgr.setOnPreferenceChangeListener((preference, newValue) -> {
-      adjustLocationChange((String)newValue);
-      return true;
-    });
 
     if (!direct) {
       Preference filterPref = findPreference(getString(R.string.pref_loc_filter_key));
@@ -60,30 +46,6 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment imp
         if (result.length() == 0) result = "Disabled";
         return result;
       });
-    }
-  }
-
-  /**
-   * Make any necessary adjustments necessary
-   * when the location preference is changed
-   * @param location new location preference value
-   */
-  private void adjustLocationChange(String location) {
-
-    // If location changes, reset the filter and default city/state settings
-    if (!location.equals(saveLocation)) {
-      saveLocation = location;
-
-      MsgParser parser = locMgr.getParser();
-      ManagePreferences.setOverrideFilter(parser.getFilter().length() == 0);
-      ManagePreferences.setFilter(parser.getFilter());
-      ManagePreferences.setOverrideDefaults(false);
-      ManagePreferences.setDefaultCity(parser.getDefaultCity());
-      ManagePreferences.setDefaultState(parser.getDefaultState());
-
-      // And recalculate payment status
-      DonationManager.instance().reset();
-      MainDonateEvent.instance().refreshStatus();
     }
   }
 

@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.ManageParsers;
 import net.anei.cadpage.parsers.MsgParser;
 
@@ -24,8 +25,6 @@ public class LocationManager {
 
   private final List<String> locationList = new ArrayList<>();
   private final List<String> nameList = new ArrayList<>();
-  
-  private OnPreferenceChangeListener listener = null;
 
   private String saveLocation;
   private MsgParser parser = null;
@@ -92,11 +91,7 @@ public class LocationManager {
       nameList.add(ManageParsers.getInstance().getLocName(loc));
     }
   }
-  
-  public void setOnPreferenceChangeListener(OnPreferenceChangeListener listener) {
-    this.listener = listener;
-  }
-  
+
   /**
    * Called when the location is set with a item in the normal location tree
    * @param location location code
@@ -153,18 +148,6 @@ s   */
     return locationList.toArray(new String[0]);
   }
 
-  /**
-   * Determine if location checkbox should be checked
-   * @param location requested location
-   * @return if this location is active
-   */
-  public boolean isSet(String location) {
-    for (int ndx = 0; ndx < locationList.size(); ndx++) {
-      if (location.equals(locationList.get(ndx))) return true;
-    }
-    return false;
-  }
-
   // Update everything when location setting(s) change
   private void refresh() {
     
@@ -185,15 +168,27 @@ s   */
       newLocation = sb.toString();
     }
 
+    // If new location matches saved location, we're done
+    if (newLocation.equals(saveLocation)) return;
+
     saveLocation = newLocation;
     parser = null;
 
     // Set preference and
-    // call notification listener if there is one
+    // adjust related settings if necessary
     ManagePreferences.setLocation(newLocation);
-    if (listener != null) {
-      listener.onPreferenceChange(null, newLocation);
-    }
+
+    // Adjust filter settings
+    MsgParser parser = getParser();
+    ManagePreferences.setOverrideFilter(parser.getFilter().length() == 0);
+    ManagePreferences.setFilter(parser.getFilter());
+    ManagePreferences.setOverrideDefaults(false);
+    ManagePreferences.setDefaultCity(parser.getDefaultCity());
+    ManagePreferences.setDefaultState(parser.getDefaultState());
+
+    // And recalculate payment status
+    DonationManager.instance().reset();
+    MainDonateEvent.instance().refreshStatus();
   }
 
   public MsgParser getParser() {
@@ -204,7 +199,7 @@ s   */
   /**
    * @return Preference SummaryProvider to generate location summary preference line
    */
-  public Preference.SummaryProvider getSummaryProvider() {
+  public Preference.SummaryProvider<Preference> getSummaryProvider() {
     return preference -> {
       if (!preference.isEnabled()) return "N/A";
       StringBuilder sb = new StringBuilder();
