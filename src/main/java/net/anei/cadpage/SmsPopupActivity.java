@@ -46,18 +46,16 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
   protected void onCreate(Bundle bundle) {
     Log.v("SmsPopupActivity.onCreate()");
 
-    ActionBar actionBar = getSupportActionBar();
-    assert actionBar != null;
-    actionBar.setDisplayHomeAsUpEnabled(true);
-    actionBar.setTitle(R.string.cadpage_alert);
-
     super.onCreate(bundle);
     if (!CadPageApplication.initialize(this)) {
       finish();
       return;
     }
-    assert getSupportActionBar() != null;
-    this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    ActionBar actionBar = getSupportActionBar();
+    assert actionBar != null;
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setTitle(R.string.cadpage_alert);
 
     ManagePreferences.setPermissionManager(permMgr);
 
