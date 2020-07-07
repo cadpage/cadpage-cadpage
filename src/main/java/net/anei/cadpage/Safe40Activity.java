@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.KeyEvent;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 
 /**
  * Subclass of standard android.app.Activity class with some workaround that
@@ -17,7 +19,7 @@ import android.view.KeyEvent;
  * Also implements the Permssion manager interface for Android 6.0 and up
  */
 @SuppressLint("NewApi")
-abstract public class Safe40Activity extends Activity {
+abstract public class Safe40Activity extends AppCompatActivity {
   
   private boolean activityActive = false;
 

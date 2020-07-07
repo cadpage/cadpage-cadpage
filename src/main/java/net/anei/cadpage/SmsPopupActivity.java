@@ -11,6 +11,8 @@ import net.anei.cadpage.vendors.VendorManager;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.Display;
@@ -41,8 +43,6 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
   private TextView messageReceivedTV;
   private TextView messageTV;
 
-  private LinearLayout mainLL = null;
-  
   private Button donateStatusBtn = null;
 
   private static final double WIDTH = 0.9;
@@ -56,16 +56,14 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
       finish();
       return;
     }
+    assert getSupportActionBar() != null;
+    this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     ManagePreferences.setPermissionManager(permMgr);
-
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     setContentView(R.layout.popup);
     
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-
-    resizeLayout();
 
     // Find the main textviews
     fromImage = findViewById(R.id.FromImageView);
@@ -75,7 +73,7 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
     messageReceivedTV = findViewById(R.id.HeaderTextView);
 
     // Enable long-press context menu
-    mainLL = findViewById(R.id.MainLinearLayout);
+    View mainLL = findViewById(R.id.MainLinearLayout);
     registerForContextMenu(mainLL);
     
     // We can't hook the current donations status here because it may change
@@ -84,6 +82,12 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
     
     // Populate display fields
     populateViews(getIntent());
+  }
+
+  @Override
+  public boolean onSupportNavigateUp() {
+    finish();
+    return true;
   }
 
   @Override
@@ -372,21 +376,6 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
     
     // Flag message acknowledgment
     message.acknowledge(this);
-  }
-
-  private void resizeLayout() {
-    // This sets the minimum width of the activity to a minimum of 80% of the screen
-    // size only needed because the theme of this activity is "dialog" so it looks
-    // like it's floating and doesn't seem to fill_parent like a regular activity
-    if (mainLL == null) {
-      mainLL = findViewById(R.id.MainLinearLayout);
-    }
-    Display d = getWindowManager().getDefaultDisplay();
-
-    int width = d.getWidth() > MAX_WIDTH ? MAX_WIDTH : (int) (d.getWidth() * WIDTH);
-
-    mainLL.setMinimumWidth(width);
-    mainLL.invalidate();
   }
 
   private boolean trackingActive = false;
