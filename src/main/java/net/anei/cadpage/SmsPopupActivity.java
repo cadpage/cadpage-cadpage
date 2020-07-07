@@ -11,6 +11,7 @@ import net.anei.cadpage.vendors.VendorManager;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentManager;
 
 import android.text.util.Linkify;
@@ -51,6 +52,12 @@ public class SmsPopupActivity extends Safe40Activity implements LocationTracker.
   @Override
   protected void onCreate(Bundle bundle) {
     Log.v("SmsPopupActivity.onCreate()");
+
+    ActionBar actionBar = getSupportActionBar();
+    assert actionBar != null;
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setTitle(R.string.cadpage_alert);
+
     super.onCreate(bundle);
     if (!CadPageApplication.initialize(this)) {
       finish();
