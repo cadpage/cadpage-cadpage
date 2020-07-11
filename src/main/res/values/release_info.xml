@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07072020</string>
+  <string name="release_date">07112020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.12-01\n
+    A new version of Cadpage will soon be available as a beta release.  If you are interested in
+    trying it out, sign up to be a Cadpage Beta Tester in the Play Store app.\n
+    \n
+    Location Fixes:\n
+    Franklin County, GA\n
+    Lamar County, GA\n
+    Oconee County, GA\n
+    Towns County, GA\n
+    Fountain County, IN\n
+    Vermillion County, IN\n
+    Trigg County, KY\n
+    Emmet County, MI\n
+    Charlevoix County, MI\n
+    Cheboygan County, MI\n
+    Caldwell County, MO\n
+    Erie County, PA\n
+    Montgomery County, VA\n
+    Mason County, WV\n
+    \n
     v2.1.11-26\n
     Location Fixes:\n
     Conejos County, CO\n
@@ -34,24 +54,6 @@
     Lincoln County, MO\n
     Madison County, NY\n
     Lake County, OH\n
-    Louisa County, VA\n
-    \n
-    v2.1.11-22\n
-    New Locations:\n
-    Inyo County, CA\n
-    Swain County, NC\n
-    Haywood County, TN\n
-    Harris County, TX (alt)\n
-    \n
-    Location Fixes:\n
-    Archuleta County, CO\n
-    Madison County, IN\n
-    Leelanau County, MI\n
-    Frederick County, MD\n
-    Washington County, MO\n
-    Flathead County, MT\n
-    Fayette County, PA\n
-    Westmoreland County, VA\n
-    Pochohantas County, WV\n
+    Louisa County, VA
   </string>
 </resources>
