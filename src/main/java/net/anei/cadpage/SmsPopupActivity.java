@@ -2,7 +2,9 @@ package net.anei.cadpage;
 
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -50,6 +52,19 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
     if (!CadPageApplication.initialize(this)) {
       finish();
       return;
+    }
+
+    // Force screen on and override lock screen
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+      setShowWhenLocked(true);
+      setTurnScreenOn(true);
+      KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+      km.requestDismissKeyguard(this, null);
+    } else {
+      int flags = WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+              | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+              | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
+      getWindow().addFlags(flags);
     }
 
     ActionBar actionBar = getSupportActionBar();
