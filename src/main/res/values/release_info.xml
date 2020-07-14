@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07112020</string>
+  <string name="release_date">07142020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+
     v2.2.01-01\n
     Complete rewrite of the settings menu to hopefully make it more logical.\n
     \n
     Expanded call detail window to cover entire screen.\n
+    \n
+    v2.1.12-02\n
+    Location Fixes:\n
+    Franklin County, GA\n
+    Erie County, PA\n
     \n
     v2.1.12-01\n
     A new version of Cadpage will soon be available as a beta release.  If you are interested in
