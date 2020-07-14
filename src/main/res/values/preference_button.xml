@@ -48,9 +48,9 @@
     <item>3</item>
     <item>4</item>
     <item>5</item>
-    <item>8</item>
     <item>6</item>
     <item>7</item>
+    <item>8</item>
     <item>9</item>
     <item>10</item>
     <item>11</item>
@@ -62,8 +62,8 @@
     <item>@string/lock_item_text</item>
     <item>@string/delete_item_text</item>
     <item>@string/close_item_text</item>
-    <item>@string/close_app_item_text</item>
     <item>@string/email_item_text</item>
+    <item>@string/close_app_item_text</item>
     <item>@string/more_info_item_text</item>
     <item>@string/start_radio_item_text</item>
     <item>@string/active911_item_text</item>
