@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07142020</string>
+  <string name="release_date">07152020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.12-03\n
+    Location Fixes:\n
+    Harris County, KY\n
+    Erie County, PA\n
+    \n
     v2.1.12-02\n
     Location Fixes:\n
     Franklin County, GA\n
@@ -51,14 +56,6 @@
     Madera County, CA\n
     Madison County, IL\n
     Montgomery County, MD\n
-    Ray County, MO\n
-    \n
-    v2.1.11-23\n
-    Location Fixes:\n
-    Massac County, IL\n
-    Lincoln County, MO\n
-    Madison County, NY\n
-    Lake County, OH\n
-    Louisa County, VA
+    Ray County, MO
   </string>
 </resources>
