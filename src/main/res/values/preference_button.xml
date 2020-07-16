@@ -53,7 +53,6 @@
     <item>8</item>
     <item>9</item>
     <item>10</item>
-    <item>11</item>
   </string-array>
   <string-array name="pref_button_text">
     <item>@string/button_disabled</item>
