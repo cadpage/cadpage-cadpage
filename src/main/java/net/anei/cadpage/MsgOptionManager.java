@@ -156,7 +156,7 @@ public class MsgOptionManager {
     mainButtonGroup.removeAllViews();
     for (int btn = 1; btn <= ManagePreferences.POPUP_BUTTON_CNT; btn++) {
       int itemNdx = ManagePreferences.popupButton(btn);
-      if (itemNdx == 0) continue;
+      if (itemNdx <= 0 || itemNdx >= ITEM_ID_LIST.length) continue;
       if (itemNdx == 9) hasMoreInfo = true;
       addRegularButton(itemNdx, mainButtonList, mainButtonGroup);
     }
