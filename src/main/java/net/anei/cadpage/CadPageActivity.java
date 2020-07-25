@@ -18,6 +18,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -35,9 +37,6 @@ public class CadPageActivity extends AppCompatActivity {
   private static final String EXTRA_NOTIFY = "net.anei.cadpage.CadPageActivity.NOTIFY";
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
-
-  private static final int RELEASE_DIALOG = 1;
-  private static final int CONFIRM_DELETE_ALL_DIALOG = 2;
 
   private final PermissionManager permMgr = new PermissionManager(this);
 
@@ -168,7 +167,7 @@ public class CadPageActivity extends AppCompatActivity {
         if (!release.equals(oldRelease)) {
           ManagePreferences.setRelease(release);
           if (!trimRelease(release).equals(trimRelease(oldRelease))) {
-            showDialog(RELEASE_DIALOG);
+            new ReleaseDialogFragment(this).show(getSupportFragmentManager(), "release");
           }
         }
 
@@ -227,41 +226,31 @@ public class CadPageActivity extends AppCompatActivity {
     return release.substring(0,col);
   }
 
-  @Override
-  protected Dialog onCreateDialog(int id, Bundle bundle) {
-    
-    if (isFinishing()) return null;
-    
-    switch (id) {
+  public static class ReleaseDialogFragment extends DialogFragment {
 
-      case RELEASE_DIALOG:
-        int releaseId = (DonationManager.instance().isFreeVersion() ? R.string.free_release_text : R.string.release_text);
-        final SpannableString s = new SpannableString(getText(releaseId));
-        Linkify.addLinks(s, Linkify.WEB_URLS);
-        final TextView view = new TextView(this);
-        view.setText(s);
-        view.setMovementMethod(LinkMovementMethod.getInstance());
+    private Activity activity;
 
-        return new AlertDialog.Builder(this)
-        .setIcon(R.drawable.ic_launcher)
-        .setTitle(R.string.release_title)
-        .setView(view)
-        .setPositiveButton(android.R.string.ok, null)
-        .create();
-        
-      case CONFIRM_DELETE_ALL_DIALOG:
-        return new AlertDialog.Builder(this)
-        .setIcon(R.drawable.ic_launcher)
-        .setTitle(R.string.confirm_delete_all_title)
-        .setMessage(R.string.confirm_delete_all_text)
-        .setPositiveButton(R.string.yes, (dialog, which) -> SmsMessageQueue.getInstance().clearAll())
-        .setNegativeButton(R.string.no, null)
-        .create();
+    public ReleaseDialogFragment(Activity activity) {
+      this.activity = activity;
     }
-    
-    return super.onCreateDialog(id);
-  }
 
+    @Override
+    @NonNull public Dialog onCreateDialog(Bundle bundle) {
+      int releaseId = (DonationManager.instance().isFreeVersion() ? R.string.free_release_text : R.string.release_text);
+      final SpannableString s = new SpannableString(getText(releaseId));
+      Linkify.addLinks(s, Linkify.WEB_URLS);
+      final TextView view = new TextView(activity);
+      view.setText(s);
+      view.setMovementMethod(LinkMovementMethod.getInstance());
+
+      return new AlertDialog.Builder(activity)
+      .setIcon(R.drawable.ic_launcher)
+      .setTitle(R.string.release_title)
+      .setView(view)
+      .setPositiveButton(android.R.string.ok, null)
+      .create();
+    }
+  }
 
   /* (non-Javadoc)
    * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
@@ -295,15 +284,35 @@ public class CadPageActivity extends AppCompatActivity {
       return true;
       
     case R.id.clearall_item:
-      showDialog(CONFIRM_DELETE_ALL_DIALOG);
-    	return true;
+      new DeleteAllDialogFragment(this).show(getSupportFragmentManager(), "delete-all");
+      return true;
     	
     case R.id.exit_item:
-    	this.finish();
-    	return true;
-    	
+      this.finish();
+      return true;
+
     default:
-        return super.onOptionsItemSelected(item);
+      return super.onOptionsItemSelected(item);
+    }
+  }
+
+  public static class DeleteAllDialogFragment extends DialogFragment {
+
+    private Activity activity;
+
+    public DeleteAllDialogFragment(Activity activity) {
+      this.activity = activity;
+    }
+    @Override
+    @NonNull public Dialog onCreateDialog(Bundle bundle) {
+      return new AlertDialog.Builder(activity)
+              .setIcon(R.drawable.ic_launcher)
+              .setTitle(R.string.confirm_delete_all_title)
+              .setMessage(R.string.confirm_delete_all_text)
+              .setPositiveButton(R.string.yes, (dialog, which) -> SmsMessageQueue.getInstance().clearAll())
+              .setNegativeButton(R.string.no, null)
+              .create();
+
     }
   }
 
