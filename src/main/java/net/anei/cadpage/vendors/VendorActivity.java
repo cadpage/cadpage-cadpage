@@ -4,29 +4,30 @@ import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
-import net.anei.cadpage.Safe40Activity;
 import net.anei.cadpage.SmsPopupUtils;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class VendorActivity extends Safe40Activity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
+public class VendorActivity extends AppCompatActivity {
 
   private final PermissionManager permMgr = new PermissionManager(this);
 
   private static final String EXTRAS_VENDOR_CODE = "net.anei.cadpage.VendorActivity.VENDOR_CODE";
-  
-  private static final int CONFIRM_UNREGISTER_DLG = 1;
-  
+
   private TextView infoTextView;
   private Button moreInfoButton;
   private Button profileButton;
@@ -51,68 +52,45 @@ public class VendorActivity extends Safe40Activity {
     // We can't do the cool stuff until we get a Vendor code
     // But can set up the button handlers here
     moreInfoButton = findViewById(R.id.more_info_button);
-    moreInfoButton.setOnClickListener(new OnClickListener(){
-      @Override
-      public void onClick(View v) {
-        vendor.moreInfoReq(VendorActivity.this);
-      }
-    });
+    moreInfoButton.setOnClickListener(v -> vendor.moreInfoReq(VendorActivity.this));
     
     profileButton = findViewById(R.id.profile_button);
-    profileButton.setOnClickListener(new OnClickListener(){
-      @Override
-      public void onClick(View v) {
-        vendor.profileReq(VendorActivity.this);
-      }
-    });
+    profileButton.setOnClickListener(v -> vendor.profileReq(VendorActivity.this));
     
     infoTextView = findViewById(R.id.VendorInfoView);
     
     registerButton = findViewById(R.id.register_button);
-    registerButton.setOnClickListener(new OnClickListener(){
-      @Override
-      public void onClick(View v) {
-        vendor.userRegisterReq(VendorActivity.this);
-      }
-    });
+    registerButton.setOnClickListener(v -> vendor.userRegisterReq(VendorActivity.this));
     
     unregisterButton = findViewById(R.id.unregister_button);
-    unregisterButton.setOnClickListener(new OnClickListener(){
-      @Override
-      public void onClick(View v) {
-        showDialog(CONFIRM_UNREGISTER_DLG);
-      }
-    });
+    unregisterButton.setOnClickListener(v -> new ConfirmUnregisterDialogFragment(VendorActivity.this, vendor).show(getSupportFragmentManager(), "unregister_dialog"));
     
     Button btn = findViewById(R.id.cancel_button);
-    btn.setOnClickListener(new OnClickListener(){
-      @Override
-      public void onClick(View v) {
-        VendorActivity.this.finish();
-      }
-    });
+    btn.setOnClickListener(v -> VendorActivity.this.finish());
   }
 
-  @Override
-  protected Dialog onCreateDialog(int id) {
-    if (isFinishing()) return null;
-    switch (id) {
+  public static class ConfirmUnregisterDialogFragment extends DialogFragment {
 
-      case CONFIRM_UNREGISTER_DLG:
-        return new AlertDialog.Builder(this)
+    private final Activity activity;
+    private final Vendor vendor;
+
+    ConfirmUnregisterDialogFragment(Activity activity, Vendor vendor) {
+      this.activity = activity;
+      this.vendor = vendor;
+    }
+
+    @Override
+    @NonNull public Dialog onCreateDialog(Bundle bundle) {
+        return new AlertDialog.Builder(activity)
         .setMessage(R.string.vendor_confirm_unregister)
-        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            if (SmsPopupUtils.haveNet(VendorActivity.this)) {
-              vendor.unregisterReq(VendorActivity.this);
-            }
+        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+          if (SmsPopupUtils.haveNet(activity)) {
+            vendor.unregisterReq(activity);
           }
         })
         .setNegativeButton(android.R.string.no, null)
         .create();
     }
-    return super.onCreateDialog(id);
   }
 
   @Override
@@ -188,7 +166,7 @@ public class VendorActivity extends Safe40Activity {
   }
 
   @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] granted) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 

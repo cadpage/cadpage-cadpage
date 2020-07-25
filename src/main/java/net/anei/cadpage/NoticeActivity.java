@@ -5,19 +5,19 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.core.app.NotificationCompat;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Dummy activity that does nothing more than present a stand alone dialog
  * for non-activity processes that want to display a dialog box
  */
-public class NoticeActivity extends Safe40Activity {
+public class NoticeActivity extends AppCompatActivity {
   
   private static final String EXTRAS_TYPE = "net.anei.cadpage.NoticeActivity.TYPE";
   private static final String EXTRAS_PARMS = "net.anei.cadpage.NoticeActivity.PARMS";
@@ -25,8 +25,6 @@ public class NoticeActivity extends Safe40Activity {
   private static final int VENDOR_NOTICE_DLG = 1;
   private static final int MISSING_READER_DLG = 2;
   private static final int NEED_PERMISSION_DLG = 3;
-  
-  private String[] parms;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,98 +37,93 @@ public class NoticeActivity extends Safe40Activity {
   @Override
   protected void onStart() {
     super.onStart();
+
+    if (isFinishing()) return;
+
     Intent intent = getIntent();
     int type = intent.getIntExtra(EXTRAS_TYPE, -1);
     if (type < 0) return;
     
     Bundle extras = intent.getExtras();
     if (extras == null) return;
-    parms = intent.getStringArrayExtra(EXTRAS_PARMS);
-    
-    showDialog(type);
+    String[] parms = intent.getStringArrayExtra(EXTRAS_PARMS);
+
+    new NoticeDialogFragment(this, type, parms).show(getSupportFragmentManager(),  "notice");
   }
 
-  @Override
-  protected Dialog onCreateDialog(int id) {
-    
-    if (isFinishing()) return null;
-    
-    switch (id) {
+  public static class NoticeDialogFragment extends DialogFragment {
 
-      case VENDOR_NOTICE_DLG:
-        if (parms == null || parms.length < 1) return null;
-        String message = parms[0];
-        
-        return new AlertDialog.Builder(this)
-        .setIcon(R.drawable.ic_launcher)
-        .setTitle(R.string.vendor_notice_title)
-        .setMessage(message)
-        .setPositiveButton(android.R.string.ok, new OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            NoticeActivity.this.finish();
-          }})
-        .setOnCancelListener(new OnCancelListener(){
-          @Override
-          public void onCancel(DialogInterface dialog) {
-            NoticeActivity.this.finish();
-          }})
-        .create();
+    private final Activity activity;
+    private final int type;
+    private final String[] parms;
 
-      case MISSING_READER_DLG:
-        if (parms == null || parms.length < 2) return null;
-        String readerName = parms[0];
-        final String packageName = parms[1];
-        message = NoticeActivity.this.getString(R.string.missing_map_page_reader_text);
-        message = message.replace("%%", "%");
-        message = String.format(message, readerName);
-        
-        return new AlertDialog.Builder(this)
-        .setIcon(R.drawable.ic_launcher)
-        .setTitle(R.string.missing_map_page_reader_title)
-        .setMessage(message)
-        .setPositiveButton(R.string.yes, new OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            try {
-              NoticeActivity.this.startActivity(intent);
-            } catch (ActivityNotFoundException ex) {
-              Log.w("Failed to launch Google Play Store");
-              ContentQuery.dumpIntent(intent);
-            }
-            NoticeActivity.this.finish();
-          }})
-        .setNegativeButton(R.string.no, new OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            NoticeActivity.this.finish();
-          }})
-        .setOnCancelListener(new OnCancelListener(){
-          @Override
-          public void onCancel(DialogInterface dialog) {
-            NoticeActivity.this.finish();
-          }})
-        .create();
-        
-      case NEED_PERMISSION_DLG:
-        if (parms == null || parms.length < 1) return null;
-        message = parms[0];
-        return new AlertDialog.Builder(this)
-            .setIcon(R.drawable.ic_launcher)
-            .setTitle(R.string.need_permission_title)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok, new OnClickListener(){
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                NoticeActivity.this.finish();
-              }})
-            .create();
-
+    public NoticeDialogFragment(Activity activity, int type, String[] parms) {
+      this.activity = activity;
+      this.type = type;
+      this.parms = parms;
     }
-    
-    return super.onCreateDialog(id);
+
+    @Override
+    @NonNull
+    public Dialog onCreateDialog(Bundle bundle) {
+
+      switch (type) {
+
+        case VENDOR_NOTICE_DLG:
+          if (parms != null && parms.length >= 1) {
+            String message = parms[0];
+
+            return new AlertDialog.Builder(activity)
+                    .setIcon(R.drawable.ic_launcher)
+                    .setTitle(R.string.vendor_notice_title)
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> activity.finish())
+                    .setOnCancelListener(dialog -> activity.finish())
+                    .create();
+          }
+
+        case MISSING_READER_DLG:
+          if (parms != null && parms.length >= 2) {
+            String readerName = parms[0];
+            final String packageName = parms[1];
+            String message = activity.getString(R.string.missing_map_page_reader_text);
+            message = message.replace("%%", "%");
+            message = String.format(message, readerName);
+
+            return new AlertDialog.Builder(activity)
+                    .setIcon(R.drawable.ic_launcher)
+                    .setTitle(R.string.missing_map_page_reader_title)
+                    .setMessage(message)
+                    .setPositiveButton(R.string.yes, (dialog, which) -> {
+                      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
+                      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                      try {
+                        activity.startActivity(intent);
+                      } catch (ActivityNotFoundException ex) {
+                        Log.w("Failed to launch Google Play Store");
+                        ContentQuery.dumpIntent(intent);
+                      }
+                      activity.finish();
+                    })
+                    .setNegativeButton(R.string.no, (dialog, which) -> activity.finish())
+                    .setOnCancelListener(dialog -> activity.finish())
+                    .create();
+          }
+
+        case NEED_PERMISSION_DLG:
+          if (parms != null && parms.length >= 1) {
+            String message = parms[0];
+            return new AlertDialog.Builder(activity)
+                    .setIcon(R.drawable.ic_launcher)
+                    .setTitle(R.string.need_permission_title)
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> activity.finish())
+                    .create();
+          }
+      }
+
+      throw new RuntimeException("Invalid call to NoticeDialogFragment");
+    }
   }
 
   /**
@@ -170,5 +163,4 @@ public class NoticeActivity extends Safe40Activity {
       context.startActivity(intent);
     }
   }
-
 }

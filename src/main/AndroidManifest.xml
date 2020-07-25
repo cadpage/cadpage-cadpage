@@ -99,7 +99,7 @@
     <activity
     android:name=".vendors.VendorActivity"
     android:screenOrientation="user"
-    android:theme="@style/Cadpage_Dialog"/>
+    android:theme="@style/AppTheme"/>
     <activity android:name=".NoticeActivity"/>
     <activity android:name=".PermissionFixActivity"/>
 
