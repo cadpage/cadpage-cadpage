@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07152020</string>
+  <string name="release_date">07282020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.1.12-04\n
+    New Locations:\n
+    Idaho County, ID\n
+    \n
+    Location Fixes:\n
+    Dallas County, AR\n
+    Tolland County, CT\n
+    Hardee County, FL\n
+    Wayne County, MO\n
+    Camden County, NJ\n
+    Knox County, OH\n
+    Warren County, PA\n
+    Dorchester County, SC\n
+    Pennington County, SD\n
+    Harrison County, WV\n
+    \n
     v2.1.12-03\n
     Location Fixes:\n
     Harris County, KY\n
@@ -42,20 +58,6 @@
     Ulster County, NY\n
     Greene County, NC\n
     Marion County, OR\n
-    Whitman County, WA\n
-    \n
-    v2.1.11-25\n
-    New Locations:\n
-    Livingston County, KY\n
-    \n
-    Location Fixes:\n
-    Bartholomew County, IN\n
-    \n
-    v2.1.11-24\n
-    Location Fixes:\n
-    Madera County, CA\n
-    Madison County, IL\n
-    Montgomery County, MD\n
-    Ray County, MO
+    Whitman County, WA
   </string>
 </resources>
