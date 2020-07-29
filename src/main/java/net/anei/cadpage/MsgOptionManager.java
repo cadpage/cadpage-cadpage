@@ -54,8 +54,8 @@ public class MsgOptionManager {
    * @param menu menu to be constructed
    * @param display true if called from popup menu display
    */
-  public void createMenu(Menu menu, boolean display) {
-    MenuInflater inflater = activity.getMenuInflater();
+  public void createMenu(Menu menu, MenuInflater inflater, boolean display) {
+    if (inflater == null) inflater = activity.getMenuInflater();
     inflater.inflate(R.menu.message_menu, menu);
     
     // map_item is a dummy placeholder that should never appear. map_addr_item

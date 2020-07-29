@@ -8,24 +8,13 @@ import android.os.Build;
 import android.os.Bundle;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
-import net.anei.cadpage.parsers.MsgInfo;
-import net.anei.cadpage.vendors.VendorManager;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.util.Linkify;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 
 public class SmsPopupActivity extends AppCompatActivity implements LocationTracker.LocationChangeListener {
@@ -33,16 +22,8 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
   private static final String EXTRAS_MSG_ID = "SmsPopupActivity.MSG_ID";
   
   private final PermissionManager permMgr = new PermissionManager(this);
-  
-  private SmsMmsMessage message;
-  private MsgOptionManager optManager;
 
-  private ImageView fromImage;
-  private TextView fromTV;
-  private TextView messageReceivedTV;
-  private TextView messageTV;
-
-  private Button donateStatusBtn = null;
+  private SmsPopupFragment fragment = null;
 
   @Override
   protected void onCreate(Bundle bundle) {
@@ -53,6 +34,7 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
       finish();
       return;
     }
+    setContentView(R.layout.sms_popup);
 
     // Force screen on and override lock screen
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
@@ -74,27 +56,15 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
 
     ManagePreferences.setPermissionManager(permMgr);
 
-    setContentView(R.layout.popup);
-    
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
-    // Find the main textviews
-    fromImage = findViewById(R.id.FromImageView);
-    fromTV = findViewById(R.id.FromTextView);
-    messageTV = findViewById(R.id.MessageTextView);
-    messageTV.setAutoLinkMask(Linkify.WEB_URLS);
-    messageReceivedTV = findViewById(R.id.HeaderTextView);
+    fragment = new SmsPopupFragment();
+    getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.sms_popup, fragment)
+            .commit();
 
-    // Enable long-press context menu
-    View mainLL = findViewById(R.id.MainLinearLayout);
-    registerForContextMenu(mainLL);
-    
-    // We can't hook the current donations status here because it may change
-    // from msg to message.
-    donateStatusBtn = findViewById(R.id.donate_status_button);
-    
-    // Populate display fields
-    populateViews(getIntent());
+    processIntent(getIntent());
   }
 
   @Override
@@ -109,8 +79,8 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
 
     setIntent(intent);
 
-    // Re-populate views with new intent data (ie. new sms data)
-    populateViews(intent);
+    processIntent(intent);
+
   }
 
   @Override
@@ -125,47 +95,22 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 
-  @Override
-  public void onSaveInstanceState(Bundle outState) {
-
-    // Save values from most recent bundle (ie. most recent message)
-    outState.putAll(getIntent().getExtras());
-    
-    super.onSaveInstanceState(outState);
-  }
-
-
   // Populate views from intent
-  private void populateViews(Intent intent) {
-    
+  private void processIntent(Intent intent) {
+
     // Log startup intent
     ContentQuery.dumpIntent(intent);
-    
+
     // Check to see if Cadpage is operating in restricted mode, and if it is
     // launch the donation status menu.  We'll check the donation status again
     // when this menu is closed
     if (!DonationManager.instance().isEnabled()) {
       MainDonateEvent.instance().doEvent(this, null);
     }
-    
-    // Retrieve message from queue
-    SmsMessageQueue msgQueue = SmsMessageQueue.getInstance();
-    int msgId = intent.getIntExtra(EXTRAS_MSG_ID, 0);
-    SmsMmsMessage msg = msgQueue.getMessage(msgId);
-    
-    // This shouldn't be possible, unless someone other than SmsReceiver is
-    // sending rouge intents to us.  But we had better catch it, just in case
-    if (msg == null) {
-      finish();
-      return;
-    }
-    
-    // Flag message read
-    msg.setRead(true);
-    msgQueue.notifyDataChange();
 
-    // Populate views from message
-    populateViews(msg);
+    if (fragment == null) return;
+
+    fragment.setMsgId(intent.getIntExtra(EXTRAS_MSG_ID, -1));
   }
 
   /*
@@ -179,216 +124,26 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
     if (!DonationManager.instance().isEnabled()) finish();
   }
 
-  /*
-   * Populate all the main SMS/MMS views with content from the actual
-   * SmsMmsMessage
-   */
-  private void populateViews(SmsMmsMessage newMessage) {
-
-
-    // Store message
-    message = newMessage;
-
-    // Set up regular button list
-    optManager = new MsgOptionManager(this, message);
-    optManager.setupButtons(findViewById(R.id.RespButtonLayout),
-                            findViewById(R.id.RegButtonLayout));
-
-    MsgInfo info = message.getInfo();
-
-    // Hook the donate status button with the current donation status
-    MainDonateEvent.instance().setButton(this, donateStatusBtn, newMessage);
-    
-    // Update Icon to indicate direct paging source
-    int resIcon = VendorManager.instance().getVendorIconId(message.getVendorCode());
-    if (resIcon <= 0) resIcon = R.drawable.ic_launcher; 
-    fromImage.setImageResource(resIcon);
-    
-    // Update TextView that contains the timestamp for the incoming message
-    String headerText;
-    String timeStamp = message.getFormattedTimestamp(this).toString();
-    if (ManagePreferences.showSource()) {
-      String source = "";
-      if (info != null) source = info.getSource();
-      if (source.length() == 0) source = message.getLocation();
-      headerText = getString(R.string.src_text_at, source, timeStamp);//
-    } else { 
-      headerText = getString(R.string.new_text_at, timeStamp);
-    }
-    
-    String detailText;
-    
-    // Special case if we have no parsed information (which is just about impossible)
-    if (info == null) {
-      detailText = message.getTitle();
-    } 
-    
-    // Otherwise do things normally
-    else {
-  
-      // Set the from, message and header views
-      StringBuilder sb = new StringBuilder(info.getTitle());
-      fromTV.setText(sb.toString());
-      if (info.noCall()) fromTV.setMaxLines(2);
-      sb = new StringBuilder();
-      if (info.getAlert().length() > 0) {
-        sb.append(info.getAlert());
-        sb.append('\n');
-      }
-      if (info.getPlace().length() > 0) {
-        sb.append(info.getPlace());
-        sb.append('\n');
-      }
-      String addr = info.getAddress();
-      String apt = info.getApt();
-      if (apt.length() > 0) {
-        if (addr.length() > 0) addr = addr + ' ';
-        addr = addr + getString(R.string.apt_label) + apt;
-      }
-      if (addr.length() > 0) {
-        sb.append(addr);
-        sb.append('\n');
-      }
-      String city = info.getCity();
-      String st = info.getState();
-      if (st.length() > 0) {
-        if (city.length() > 0) city += ", ";
-        city += st;
-      }
-      if (city.length() > 0) {
-        sb.append(city);
-        sb.append('\n');
-      }
-      if (info.getCross().length() > 0) {
-        sb.append(getString(R.string.cross_label));
-        sb.append(info.getCross());
-        sb.append('\n');
-      }
-      if (info.getMap().length() > 0) {
-        sb.append(getString(R.string.map_label));
-        sb.append(info.getMap());
-        sb.append('\n');
-      }
-      if (info.getBox().length() > 0) {
-        sb.append(getString(R.string.box_label));
-        sb.append(info.getBox());
-        sb.append('\n');
-      }
-      if (info.getUnit().length() > 0) {
-        sb.append(getString(R.string.units_label));
-        sb.append(info.getUnit());
-        sb.append('\n');
-      }
-      if (ManagePreferences.showPersonal()) {
-        if (info.getName().length() > 0) {
-          sb.append(getString(R.string.name_label));
-          sb.append(info.getName());
-          sb.append('\n');
-        }
-        if (info.getPhone().length() > 0) {
-          sb.append(getString(R.string.phone_label));
-          sb.append(info.getPhone());
-          sb.append('\n');
-        }
-      }
-      if (info.getChannel().length() > 0) {
-        sb.append(getString(R.string.channel_label));
-        sb.append(info.getChannel());
-        sb.append('\n');
-      }
-      if (info.getSupp().length() >0) {
-        sb.append(info.getSupp());
-        sb.append('\n');
-      }
-      if (info.getCallId().length() >0) {
-        sb.append(getString(R.string.call_id_label));
-        sb.append(info.getCallId());
-        sb.append('\n');
-      }
-      
-      // Remove trailing \n
-      int len = sb.length();
-      if (len > 0) sb.setLength(len-1);
-      detailText = sb.toString();
-    }
-    messageReceivedTV.setText(headerText);
-    messageTV.setText(detailText);
-    
-    // There used to be a call to myFinish() that was invoked if this method was
-    // passed a message that was not a CAD page.  I am about as certain as I can
-    // possibly be that this is no longer possible, which is why this call no
-    // longer exists.  But the comment remains as a possible clue if someone
-    // should discover I was wrong.
-    
-    //Will add a Database method in the future.
-    //storeFileMessage();
-    
-  } //end of function
-
-  /* (non-Javadoc)
-   * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-   */
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    super.onCreateOptionsMenu(menu);
-    
-    if (optManager != null) optManager.createMenu(menu, true);
-    return true;
-  }
-
-  /* (non-Javadoc)
-   * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
-   */
-  @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
-    if (optManager != null) optManager.prepareMenu(menu);
-    return true;
-  }
-
-  /* (non-Javadoc)
-   * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-   */
-  @Override
-  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    if (optManager != null && optManager.menuItemSelected(item.getItemId(), true)) return true;
-    return super.onOptionsItemSelected(item);
-  }
-
-  /*
-   * Create Context Menu (Long-press menu)
-   */
-  @Override
-  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    super.onCreateContextMenu(menu, v, menuInfo);
-    optManager.createMenu(menu, true);
-  }
-
-  /*
-   * Context Menu Item Selected
-   */
-  @Override
-  public boolean onContextItemSelected(MenuItem item) {
-    if (optManager.menuItemSelected(item.getItemId(), true)) return true;
-    return super.onContextItemSelected(item);
-  }
-
   /**
    * Back key pressed
    */
-@Override
+  @Override
   public void onBackPressed() {
-  
+
     // Suppress back activity if response button menu is visible
     if (ManageNotification.isActiveNotice()) return;
-    
+
     // Otherwise carry on with back function
     super.onBackPressed();
-    
+
     // Clear any active notification and wake locks
     ClearAllReceiver.clearAll(this);
-    
+
     // Flag message acknowledgment
-    message.acknowledge(this);
+    if (fragment != null) {
+      SmsMmsMessage message = fragment.getMessage();
+      if (message != null) message.acknowledge(this);
+    }
   }
 
   private boolean trackingActive = false;
@@ -408,23 +163,6 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
     }
   }
 
-  @Override
-  protected void onRestart() {
-    if (Log.DEBUG) Log.v("SmsPopupActivty.onRestart()");
-    super.onRestart();
-  }
-
-  @Override
-  protected void onResume() {
-  if (Log.DEBUG) Log.v("SmsPopupActivty.onResume()");
-    super.onResume();
-  }
-
-  @Override
-  protected void onPause() {
-    if (Log.DEBUG) Log.v("SmsPopupActivty.onPause()");
-    super.onPause();
-  }
 
   @Override
   protected void onStop() {

@@ -327,20 +327,18 @@ public class SmsMessageQueue implements Serializable {
 
         ((ViewWithContextMenu)view).setContextMenuHandler(fragment, this);
 
-        view.setOnClickListener(new OnClickListener() {
-          @Override
-          public void onClick(View v) {
+        view.setOnClickListener(v -> {
 
-            // Clear any active notification and wake locks
-            ClearAllReceiver.clearAll(context);
+          // Clear any active notification and wake locks
+          ClearAllReceiver.clearAll(context);
 
-            if (mMessage == null) return;
+          if (mMessage == null) return;
 
-            // display message popup
-            if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
+          // display message popup
+          if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
 
-            SmsPopupActivity.launchActivity(fragment.getActivity(), mMessage);
-          }});
+          SmsPopupActivity.launchActivity(fragment.getActivity(), mMessage);
+        });
       }
 
       void setMessage(SmsMmsMessage msg) {
@@ -352,7 +350,7 @@ public class SmsMessageQueue implements Serializable {
       public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         if (mMessage == null) return;
         MsgOptionManager optMgr = new MsgOptionManager(fragment.getActivity(), mMessage);
-        optMgr.createMenu(menu, false);
+        optMgr.createMenu(menu, null,false);
       }
 
       @Override

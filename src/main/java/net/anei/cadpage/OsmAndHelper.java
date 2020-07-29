@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import android.content.Context;
 import android.location.Location;
 
+import androidx.annotation.NonNull;
+
 /**
  * Utility class supporting the interface with the OsmAnd mapping app
  */
@@ -42,7 +44,7 @@ class OsmAndHelper {
    * @param destName name to be displayed at destination
    * @return intent needed to launch OsmAnd
    */
-  @SuppressWarnings("unused")
+  @NonNull
   public static Intent getIntent(Context context, String searchStr, boolean gps, boolean navigateMap, String destName) {
     Location loc = LocationTracker.instance().getBestLocation(context);
 
