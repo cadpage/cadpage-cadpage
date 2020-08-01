@@ -1,6 +1,6 @@
 package net.anei.cadpage;
 
-import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
@@ -22,7 +22,7 @@ import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.MsgInfo;
 import net.anei.cadpage.vendors.VendorManager;
 
-public class SmsPopupFragment extends DialogFragment {
+public class SmsPopupFragment extends DialogFragment implements LocationTracker.LocationChangeListener {
 
   private static final String SAVED_MSG_ID = "MSG_ID";
 
@@ -63,11 +63,13 @@ public class SmsPopupFragment extends DialogFragment {
   }
 
   public void setMsgId(int msgId) {
-    if (msgId < 0) {
-      message = null;
-    } else {
-      message = SmsMessageQueue.getInstance().getMessage(msgId);
-    }
+    SmsMmsMessage msg = (msgId < 0 ? null : SmsMessageQueue.getInstance().getMessage(msgId));
+    setMessage(msg);
+  }
+
+  public void setMessage(SmsMmsMessage msg) {
+    message = msg;
+    if (visible) startTracking();
     populateViews();
   }
 
@@ -121,7 +123,7 @@ public class SmsPopupFragment extends DialogFragment {
       }
 
       // Set up regular button list
-      Activity activity = getActivity();
+      CadPageActivity activity = (CadPageActivity)getActivity();
       optManager = new MsgOptionManager(activity, message);
       optManager.setupButtons(respBtnLayout, mainBtnLayout);
 
@@ -303,4 +305,57 @@ public class SmsPopupFragment extends DialogFragment {
     if (optManager.menuItemSelected(item.getItemId(), true)) return true;
     return super.onContextItemSelected(item);
   }
+
+  boolean visible = false;
+
+  @Override
+  public void onStart() {
+    visible = true;
+    super.onStart();
+    startTracking();
+  }
+
+  @Override
+  public void onStop() {
+    visible = false;
+    if (Log.DEBUG) Log.v("SmsPopupActivty.onStop()");
+    super.onStop();
+    startTracking(false);
+
+  }
+
+  private void startTracking() {
+    startTracking(message != null);
+  }
+
+  private boolean trackingActive = false;
+
+  /**
+   * Start location tracking if OSM mapping option is selected, just in case we need it
+   * @param start true if tracking should be started, false if it should be stopped
+   */
+  private void startTracking(boolean start) {
+
+    // If OSM mapping is  not selected, we always turn this off
+    if (start) {
+      String mapOption = ManagePreferences.appMapOption();
+      if (!mapOption.equals("OsmAnd")) start = false;
+    }
+
+    // enable or disable location tracking as required
+    if (start && ! trackingActive) {
+      trackingActive = true;
+      LocationTracker.instance().start(requireActivity(), 10, 10, this);
+    }
+    else if (!start && trackingActive) {
+      trackingActive = false;
+      LocationTracker.instance().stop(requireActivity(), this);
+    }
+  }
+
+  @Override
+  public void locationChange(Location location) {
+    // We do not actually do anything with the location.  Just need to keep tracking active
+  }
+
 }

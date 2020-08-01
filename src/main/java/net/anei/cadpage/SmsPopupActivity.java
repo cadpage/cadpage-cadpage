@@ -2,9 +2,6 @@ package net.anei.cadpage;
 
 
 import android.app.Activity;
-import android.app.KeyguardManager;
-import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -14,10 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.WindowManager;
 
-
-public class SmsPopupActivity extends AppCompatActivity implements LocationTracker.LocationChangeListener {
+public class SmsPopupActivity extends AppCompatActivity {
   
   private static final String EXTRAS_MSG_ID = "SmsPopupActivity.MSG_ID";
   
@@ -36,27 +31,12 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
     }
     setContentView(R.layout.sms_popup);
 
-    // Force screen on and override lock screen
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-      setShowWhenLocked(true);
-      setTurnScreenOn(true);
-      KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-      km.requestDismissKeyguard(this, null);
-    } else {
-      int flags = WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-              | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-              | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
-      getWindow().addFlags(flags);
-    }
-
     ActionBar actionBar = getSupportActionBar();
     assert actionBar != null;
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setTitle(R.string.cadpage_alert);
 
     ManagePreferences.setPermissionManager(permMgr);
-
-    getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
     fragment = new SmsPopupFragment();
     getSupportFragmentManager()
@@ -144,41 +124,6 @@ public class SmsPopupActivity extends AppCompatActivity implements LocationTrack
       SmsMmsMessage message = fragment.getMessage();
       if (message != null) message.acknowledge(this);
     }
-  }
-
-  private boolean trackingActive = false;
-
-  @Override
-  protected void onStart() {
-    if (Log.DEBUG) Log.v("SmsPopupActivty.onStart()");
-    super.onStart();
-
-    // If we are using the OSM mapping option, turn on GPS tracking whenever this window is active
-    // just in case the user requests a map display
-    String mapOption = ManagePreferences.appMapOption();
-
-    if (mapOption.equals("OsmAnd")) {
-      trackingActive = true;
-      LocationTracker.instance().start(this, 10, 10, this);
-    }
-  }
-
-
-  @Override
-  protected void onStop() {
-    if (Log.DEBUG) Log.v("SmsPopupActivty.onStop()");
-    super.onStop();
-
-    // If we turned on GPS tracking, turn it off now
-    if (trackingActive) {
-      trackingActive = false;
-      LocationTracker.instance().stop(this, this);
-    }
-  }
-
-  @Override
-  public void locationChange(Location location) {
-    // We do not actually do anything with the location.  Just need to keep tracking active
   }
 
   /**

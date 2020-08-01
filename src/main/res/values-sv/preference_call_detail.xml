@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_popup_enabled_title">Visa Popup</string>
-    <string name="pref_popup_enabled_summaryon">Larm visar popup-fönster</string>
-    <string name="pref_popup_enabled_summaryoff">Larm visar inte popup-fönster</string>
+    <string name="pref_popup_mode_title">Alert display mode</string> <!-- Translate -->
+    <string name="pref_popup_mode_summary">%%s</string>
+    <string-array name="pref_popup_mode_text"> <!-- Translate -->
+        <item>Split Screen (Landscape only)</item>
+        <item>Full Screen</item>
+        <item>Popoup Window</item>
+    </string-array>
 
-    <string name="pref_noShowInCall_title">Begränsa i Larm-popup</string>
-    <string name="pref_noShowInCall_summaryon">Larm-popup kommer inte att visas under pågående samtal.</string>
-    <string name="pref_noShowInCall_summaryoff">Larm-popup kommer att visas under pågående samtal</string>
+    <string name="pref_popup_enabled_title">Show Alert Details</string> <!-- Translate -->
+    <string name="pref_popup_enabled_summaryon">Alarm will display alert details</string> <!-- Translate -->
+    <string name="pref_popup_enabled_summaryoff">Alarm will not display alert details</string> <!-- Translate -->
+
+    <string name="pref_noShowInCall_title">Restrict In Call Alert Details</string> <!-- Translate -->
+    <string name="pref_noShowInCall_summaryon">Alert details will not show when call in progress</string> <!-- Translate -->
+    <string name="pref_noShowInCall_summaryoff">Alert details will show when call in progress</string> <!-- Translate -->
 
     <string name="pref_show_source_title">Visa källan till larm</string>
     <string name="pref_show_source_summaryon">Kommer att visa källan till larm</string>

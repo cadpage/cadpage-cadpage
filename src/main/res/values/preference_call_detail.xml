@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="pref_popup_enabled_title">Show Popup</string>
-    <string name="pref_popup_enabled_summaryon">Alarm will display popup window</string>
-    <string name="pref_popup_enabled_summaryoff">Alarm will not display popup window</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="pref_noShowInCall_title">Restrict In Call Popup</string>
-    <string name="pref_noShowInCall_summaryon">Popup window will not show when call in progress</string>
-    <string name="pref_noShowInCall_summaryoff">Popup window will show when call in progress</string>
+    <string name="pref_popup_mode_title">Alert display mode</string>
+    <string name="pref_popup_mode_summary">%%s</string>
+    <string-array name="pref_popup_mode_values" tools:ignore="MissingTranslation">
+        <item>S</item>
+        <item>F</item>
+        <item>P</item>
+    </string-array>
+    <string-array name="pref_popup_mode_text">
+        <item>Split Screen (Landscape only)</item>
+        <item>Full Screen</item>
+        <item>Popoup Window</item>
+    </string-array>
+    <string name="pref_popup_mode_default" tools:ignore="MissingTranslation">S</string>
+
+    <string name="pref_popup_enabled_title">Show Alert Details</string>
+    <string name="pref_popup_enabled_summaryon">Alarm will display alert details</string>
+    <string name="pref_popup_enabled_summaryoff">Alarm will not display alert details</string>
+
+    <string name="pref_noShowInCall_title">Restrict In Call Alert Details</string>
+    <string name="pref_noShowInCall_summaryon">Alert details will not show when call in progress</string>
+    <string name="pref_noShowInCall_summaryoff">Alert details will show when call in progress</string>
 
     <string name="pref_show_source_title">Show page source</string>
     <string name="pref_show_source_summaryon">Will display source of alert</string>

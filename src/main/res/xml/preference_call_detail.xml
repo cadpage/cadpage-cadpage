@@ -3,6 +3,15 @@
 <PreferenceScreen
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
+  <net.anei.cadpage.preferences.ListPreference
+    app:key="@string/pref_popup_mode_key"
+    app:title="@string/pref_popup_mode_title"
+    app:summary="@string/pref_popup_mode_summary"
+    app:entries="@array/pref_popup_mode_text"
+    app:entryValues="@array/pref_popup_mode_values"
+    app:dialogTitle="@string/pref_popup_mode_title"
+    app:defaultValue="@string/pref_popup_mode_default"/>
+
   <SwitchPreference
     app:key="@string/pref_popup_enabled_key"
     app:title="@string/pref_popup_enabled_title"

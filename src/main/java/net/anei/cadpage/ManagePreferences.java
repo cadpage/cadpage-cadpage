@@ -46,7 +46,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 51;
+  private static final int PREFERENCE_VERSION = 52;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -747,7 +747,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static boolean popupEnabled() {
     return prefs.getBoolean(R.string.pref_popup_enabled_key);
   }
-  
+
+  public static String popupMode() {
+    return prefs.getString(R.string.pref_popup_mode_key);
+  }
+
   public static void setPopupEnabled(boolean newVal) {
     prefs.putBoolean(R.string.pref_popup_enabled_key, newVal);
   }
@@ -2714,6 +2718,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           R.string.pref_show_history_address_key,
           R.string.pref_textsize_key,
 
+          R.string.pref_popup_mode_key,
           R.string.pref_popup_enabled_key,
           R.string.pref_noShowInCall_key,
           R.string.pref_show_source_key,

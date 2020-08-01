@@ -12,22 +12,25 @@ import net.anei.cadpage.donation.VendorEvent;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class CadPageActivity extends AppCompatActivity {
@@ -74,6 +77,25 @@ public class CadPageActivity extends AppCompatActivity {
     ManagePreferences.setScreenSize(""+width+"X"+height);
 
     setContentView(R.layout.cadpage);
+
+    // Force screen on and override lock screen
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+      setShowWhenLocked(true);
+      setTurnScreenOn(true);
+      KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+      km.requestDismissKeyguard(this, null);
+    } else {
+      int flags = WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+              | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+              | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
+      getWindow().addFlags(flags);
+    }
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction ft = fragmentManager.beginTransaction();
+    Fragment fragment = new CallHistoryFragment();
+    ft.add(R.id.cadpage_content, fragment);
+    ft.commit();
 
     startup();
   }
@@ -195,12 +217,9 @@ public class CadPageActivity extends AppCompatActivity {
       }
 
       // OK, go ahead and open the call display window
-      // Delay by 100 msecs in attempt to avoid a nasty badtokenException.
-      final Activity context = this;
-      msgId = msg.getMsgId();
-      if (!context.isFinishing()) {
-        if (Log.DEBUG) Log.v("CadPageActivity Auto launch SmsPopup for " + msgId);
-        SmsPopupActivity.launchActivity(context, msgId);
+      if (!isFinishing()) {
+        if (Log.DEBUG) Log.v("CadPageActivity Auto launch SmsPopup for " + msg.getMsgId());
+        showAlert(msg);
       }
     }
 
@@ -228,7 +247,7 @@ public class CadPageActivity extends AppCompatActivity {
 
   public static class ReleaseDialogFragment extends DialogFragment {
 
-    private Activity activity;
+    private final Activity activity;
 
     public ReleaseDialogFragment(Activity activity) {
       this.activity = activity;
@@ -249,70 +268,6 @@ public class CadPageActivity extends AppCompatActivity {
       .setView(view)
       .setPositiveButton(android.R.string.ok, null)
       .create();
-    }
-  }
-
-  /* (non-Javadoc)
-   * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-   */
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    super.onCreateOptionsMenu(menu);
-    
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.history_menu, menu);
-    
-    return true;
-  }
-
-  /* (non-Javadoc)
-   * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-   */
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    
-    // Handle item selection
-	  SmsMessageQueue msgQueue = SmsMessageQueue.getInstance();
-    switch (item.getItemId()) {
-    
-    case R.id.settings_item:
-      SmsPopupConfigActivity.launchSettings(this);
-      return true;
-      
-    case R.id.markallopened_item:
-      msgQueue.markAllRead();
-      return true;
-      
-    case R.id.clearall_item:
-      new DeleteAllDialogFragment(this).show(getSupportFragmentManager(), "delete-all");
-      return true;
-    	
-    case R.id.exit_item:
-      this.finish();
-      return true;
-
-    default:
-      return super.onOptionsItemSelected(item);
-    }
-  }
-
-  public static class DeleteAllDialogFragment extends DialogFragment {
-
-    private Activity activity;
-
-    public DeleteAllDialogFragment(Activity activity) {
-      this.activity = activity;
-    }
-    @Override
-    @NonNull public Dialog onCreateDialog(Bundle bundle) {
-      return new AlertDialog.Builder(activity)
-              .setIcon(R.drawable.ic_launcher)
-              .setTitle(R.string.confirm_delete_all_title)
-              .setMessage(R.string.confirm_delete_all_text)
-              .setPositiveButton(R.string.yes, (dialog, which) -> SmsMessageQueue.getInstance().clearAll())
-              .setNegativeButton(R.string.no, null)
-              .create();
-
     }
   }
 
@@ -386,6 +341,24 @@ public class CadPageActivity extends AppCompatActivity {
   protected void onDestroy() {
     ManagePreferences.releasePermissionManager(permMgr);
     super.onDestroy();
+  }
+
+  public void showAlert(SmsMmsMessage message) {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    SmsPopupFragment fragment = new SmsPopupFragment();
+    fragment.setMessage(message);
+
+    String mode = ManagePreferences.popupMode();
+    if (mode.equals("P")) {
+      fragment.show(fragmentManager, "sms_popup");
+    } else {
+      FragmentTransaction ft = fragmentManager.beginTransaction();
+      ft.replace(R.id.cadpage_content, fragment).addToBackStack(null).commit();
+    }
+  }
+
+  public void closeApp() {
+    finish();
   }
 
   /**

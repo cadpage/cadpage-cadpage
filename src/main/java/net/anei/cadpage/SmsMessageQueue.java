@@ -284,9 +284,11 @@ public class SmsMessageQueue implements Serializable {
    private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private final FragmentWithContextMenu fragment;
+    private final CadPageActivity activity;
 
     Adapter(FragmentWithContextMenu fragment) {
       this.fragment = fragment;
+      this.activity = (CadPageActivity)fragment.getActivity();
       setHasStableIds(true);
     }
 
@@ -337,7 +339,7 @@ public class SmsMessageQueue implements Serializable {
           // display message popup
           if (mMessage.updateParseInfo()) SmsMessageQueue.getInstance().notifyDataChange();
 
-          SmsPopupActivity.launchActivity(fragment.getActivity(), mMessage);
+          activity.showAlert(mMessage);
         });
       }
 
@@ -349,7 +351,7 @@ public class SmsMessageQueue implements Serializable {
       @Override
       public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         if (mMessage == null) return;
-        MsgOptionManager optMgr = new MsgOptionManager(fragment.getActivity(), mMessage);
+        MsgOptionManager optMgr = new MsgOptionManager(activity, mMessage);
         optMgr.createMenu(menu, null,false);
       }
 
@@ -357,7 +359,7 @@ public class SmsMessageQueue implements Serializable {
       public boolean onContextItemSelected(MenuItem item) {
 
         if (mMessage == null) return false;
-        MsgOptionManager optMgr = new MsgOptionManager(fragment.getActivity(), mMessage);
+        MsgOptionManager optMgr = new MsgOptionManager(activity, mMessage);
         return optMgr.menuItemSelected(item.getItemId(), false);
       }
     }

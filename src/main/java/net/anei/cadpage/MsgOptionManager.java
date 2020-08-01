@@ -10,7 +10,6 @@ import net.anei.cadpage.parsers.MsgParser.MapPageStatus;
 import net.anei.cadpage.vendors.VendorManager;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +29,7 @@ import android.widget.Button;
  */
 public class MsgOptionManager {
   
-  private final Activity activity;
+  private final CadPageActivity activity;
   private final SmsMmsMessage message;
   
   // View group and list of button handlers associated with response menu buttons
@@ -44,7 +43,7 @@ public class MsgOptionManager {
   // Broadcast receiver logging results of text send messages
   private ResponseSender responseSender = null;
   
-  public MsgOptionManager(Activity activity, SmsMmsMessage message) {
+  public MsgOptionManager(CadPageActivity activity, SmsMmsMessage message) {
     this.activity = activity;
     this.message = message;
   }
@@ -613,8 +612,8 @@ public class MsgOptionManager {
       return true;
       
     case R.id.open_item:
-      if (Log.DEBUG) Log.v("MsgOptionManager User launch SmsPopup for " + message.getMsgId()); 
-      SmsPopupActivity.launchActivity(activity, message);
+      if (Log.DEBUG) Log.v("MsgOptionManager User launch SmsPopup for " + message.getMsgId());
+      activity.showAlert(message);
       return true;
       
     case R.id.map_addr_item:
@@ -643,8 +642,7 @@ public class MsgOptionManager {
       return true;
       
     case R.id.close_app_item:
-      activity.setResult(CadPageActivity.RESULT_SHUTDOWN);
-      activity.finish();
+      activity.closeApp();
       return true;
       
     case R.id.email_item:
