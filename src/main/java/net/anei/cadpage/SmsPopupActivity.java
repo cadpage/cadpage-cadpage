@@ -105,28 +105,6 @@ public class SmsPopupActivity extends AppCompatActivity {
   }
 
   /**
-   * Back key pressed
-   */
-  @Override
-  public void onBackPressed() {
-
-    // Suppress back activity if response button menu is visible
-    if (ManageNotification.isActiveNotice()) return;
-
-    // Otherwise carry on with back function
-    super.onBackPressed();
-
-    // Clear any active notification and wake locks
-    ClearAllReceiver.clearAll(this);
-
-    // Flag message acknowledgment
-    if (fragment != null) {
-      SmsMmsMessage message = fragment.getMessage();
-      if (message != null) message.acknowledge(this);
-    }
-  }
-
-  /**
    * Launch call display popup activity
    * @param activity parent activity
    * @param message message to be displayed

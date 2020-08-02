@@ -35,8 +35,6 @@ import android.widget.TextView;
 
 public class CadPageActivity extends AppCompatActivity {
 
-  public static final int RESULT_SHUTDOWN = Activity.RESULT_FIRST_USER;
-
   private static final String EXTRA_NOTIFY = "net.anei.cadpage.CadPageActivity.NOTIFY";
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
@@ -94,7 +92,7 @@ public class CadPageActivity extends AppCompatActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction ft = fragmentManager.beginTransaction();
     Fragment fragment = new CallHistoryFragment();
-    ft.add(R.id.cadpage_content, fragment);
+    ft.replace(R.id.cadpage_content, fragment);
     ft.commit();
 
     startup();
@@ -331,34 +329,50 @@ public class CadPageActivity extends AppCompatActivity {
   }
 
   @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    Log.v("CadPageActivity.onActivityResult() - result:" + resultCode);
-    super.onActivityResult(requestCode, resultCode, data);
-    if (resultCode == RESULT_SHUTDOWN) finish();
-  }
-
-  @Override
   protected void onDestroy() {
     ManagePreferences.releasePermissionManager(permMgr);
     super.onDestroy();
   }
 
-  public void showAlert(SmsMmsMessage message) {
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    SmsPopupFragment fragment = new SmsPopupFragment();
-    fragment.setMessage(message);
+  SmsPopupFragment popupFragment = null;
+  /**
+   * Back key pressed
+   */
+  @Override
+  public void onBackPressed() {
 
-    String mode = ManagePreferences.popupMode();
-    if (mode.equals("P")) {
-      fragment.show(fragmentManager, "sms_popup");
-    } else {
-      FragmentTransaction ft = fragmentManager.beginTransaction();
-      ft.replace(R.id.cadpage_content, fragment).addToBackStack(null).commit();
+    // Suppress back activity if response button menu is visible
+    if (ManageNotification.isActiveNotice()) return;
+
+    // Otherwise carry on with back function
+    super.onBackPressed();
+
+    // Clear any active notification and wake locks
+    ClearAllReceiver.clearAll(this);
+
+    // Flag message acknowledgment
+    if (popupFragment != null) {
+      SmsMmsMessage message = popupFragment.getMessage();
+      if (message != null) message.acknowledge(this);
+      popupFragment = null;
     }
   }
 
-  public void closeApp() {
-    finish();
+  public void showAlert(SmsMmsMessage message) {
+
+    if (popupFragment ==  null) popupFragment = new SmsPopupFragment();
+    popupFragment.setMessage(message);
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction ft = fragmentManager.beginTransaction();
+    ft.addToBackStack(null);
+
+    String mode = ManagePreferences.popupMode();
+    if (mode.equals("P")) {
+      popupFragment.show(ft, "sms_popup");
+    } else {
+      ft.replace(R.id.cadpage_content, popupFragment).commit();
+    }
   }
 
   /**

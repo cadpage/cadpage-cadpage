@@ -1,5 +1,7 @@
 package net.anei.cadpage;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -26,7 +28,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
 
   private static final String SAVED_MSG_ID = "MSG_ID";
 
-  private boolean initialized = false;
+  private View mainView = null;
   private ImageView fromImage;
   private TextView fromTV;
   private TextView messageReceivedTV;
@@ -81,30 +83,37 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
 
-    initialized = true;
-    View view = inflater.inflate(R.layout.popup, container, false);
+    mainView = inflater.inflate(R.layout.popup, container, false);
 
     // Find the main textviews
-    fromImage = view.findViewById(R.id.FromImageView);
-    fromTV = view.findViewById(R.id.FromTextView);
-    messageTV = view.findViewById(R.id.MessageTextView);
+    fromImage = mainView.findViewById(R.id.FromImageView);
+    fromTV = mainView.findViewById(R.id.FromTextView);
+    messageTV = mainView.findViewById(R.id.MessageTextView);
     messageTV.setAutoLinkMask(Linkify.WEB_URLS);
-    messageReceivedTV = view.findViewById(R.id.HeaderTextView);
+    messageReceivedTV = mainView.findViewById(R.id.HeaderTextView);
 
-    donateStatusBtn = view.findViewById(R.id.donate_status_button);
-    respBtnLayout = view.findViewById(R.id.RespButtonLayout);
-    mainBtnLayout = view.findViewById(R.id.RegButtonLayout);
+    donateStatusBtn = mainView.findViewById(R.id.donate_status_button);
+    respBtnLayout = mainView.findViewById(R.id.RespButtonLayout);
+    mainBtnLayout = mainView.findViewById(R.id.RegButtonLayout);
 
     // Enable long-press context menu
-    View mainLL = view.findViewById(R.id.MainLinearLayout);
+    View mainLL = mainView.findViewById(R.id.MainLinearLayout);
     registerForContextMenu(mainLL);
+
+    Dialog dialog = getDialog();
+    if (dialog != null)  dialog.setCanceledOnTouchOutside(false);
 
     // Populate display fields
     if (message != null) populateViews();
 
-    return view;
+    return mainView;
   }
 
+  @Override
+  public void onAttach(@NonNull Context context) {
+    super.onAttach(context);
+    if (message != null) populateViews();
+  }
 
   /*
    * Populate all the main SMS/MMS views with content from the actual
@@ -112,9 +121,17 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
    */
   private void populateViews() {
 
-    if (!initialized) return;
+    if (mainView == null) return;
+    CadPageActivity activity = (CadPageActivity)getActivity();
+    if (activity ==  null) return;
 
-    if (message != null) {
+    if (message == null) {
+      mainView.setVisibility(View.INVISIBLE);
+    }
+
+    else {
+
+      mainView.setVisibility(View.VISIBLE);
 
       // Flag message read
       if (!message.isRead()) {
@@ -123,7 +140,6 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
       }
 
       // Set up regular button list
-      CadPageActivity activity = (CadPageActivity)getActivity();
       optManager = new MsgOptionManager(activity, message);
       optManager.setupButtons(respBtnLayout, mainBtnLayout);
 
@@ -247,17 +263,6 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
       }
       messageReceivedTV.setText(headerText);
       messageTV.setText(detailText);
-    }
-
-    //  No selected message
-    else {
-      fromImage.setVisibility(View.INVISIBLE);
-      fromTV.setText("");
-      messageReceivedTV.setText("");
-      messageTV.setText("");
-      donateStatusBtn.setVisibility(View.GONE);
-      respBtnLayout.removeAllViews();
-      mainBtnLayout.removeAllViews();
     }
   }
 

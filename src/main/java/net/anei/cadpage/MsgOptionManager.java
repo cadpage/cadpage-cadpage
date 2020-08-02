@@ -634,15 +634,15 @@ public class MsgOptionManager {
       
     case R.id.delete_item:
       SmsMessageQueue.getInstance().deleteMessage(message);
-      if (display) activity.finish();
+      if (display) activity.getSupportFragmentManager().popBackStack();
       return true;
       
     case R.id.close_item:
-      activity.finish();
+      activity.getSupportFragmentManager().popBackStack();
       return true;
       
     case R.id.close_app_item:
-      activity.closeApp();
+      activity.finish();
       return true;
       
     case R.id.email_item:
