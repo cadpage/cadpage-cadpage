@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,6 +80,31 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
     return message;
   }
 
+  // This is a workaround for a probably bug in the latest support library.  It does a great job
+  // of populating and display the context menu, but the never calls our onContextItemSelected()
+  // method.  Instead it calls the dialog onMenuItemSelected() method which always returns false.
+  // We get around that by creating our own Dialog subclass that transfers these calls to the
+  // correct fragment method
+
+  @NonNull
+  @Override
+  public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    return new PopupDialog();
+  }
+
+  private class PopupDialog extends Dialog {
+
+    public PopupDialog() {
+      super(requireContext(), getTheme());
+      setCanceledOnTouchOutside(false);
+    }
+    @Override
+    public boolean onMenuItemSelected(int featureId, @NonNull MenuItem item) {
+      if (featureId != Window.FEATURE_CONTEXT_MENU) return false;
+      return SmsPopupFragment.this.onContextItemSelected(item);
+    }
+  }
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
@@ -97,11 +123,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
     mainBtnLayout = mainView.findViewById(R.id.RegButtonLayout);
 
     // Enable long-press context menu
-    View mainLL = mainView.findViewById(R.id.MainLinearLayout);
-    registerForContextMenu(mainLL);
-
-    Dialog dialog = getDialog();
-    if (dialog != null)  dialog.setCanceledOnTouchOutside(false);
+    registerForContextMenu(mainView);
 
     // Populate display fields
     if (message != null) populateViews();
