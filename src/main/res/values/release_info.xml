@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07282020</string>
+  <string name="release_date">08042020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.01-05\n
+    New Locations:\n
+    Gulf County, FL\n
+    Williams County, OH\n
+    Curry County, OR\n
+    Williamsburg County, SC\n
+    \n
+    Location Fixes:\n
+    Oldham County, KY\n
+    Middlesex County, NJ\n
+    Deschuttes County, OR\n
+    Calhoun County, SC\n
+    Hays County, TX\n
+    \n
     v2.2.01-04\n
     New Locations:\n
     Idaho County, ID\n
@@ -56,16 +70,6 @@
     Caldwell County, MO\n
     Erie County, PA\n
     Montgomery County, VA\n
-    Mason County, WV\n
-    \n
-    v2.1.11-26\n
-    Location Fixes:\n
-    Conejos County, CO\n
-    Neosho County, KS\n
-    Leelanau County, MI\n
-    Ulster County, NY\n
-    Greene County, NC\n
-    Marion County, OR\n
-    Whitman County, WA
+    Mason County, WV
   </string>
 </resources>
