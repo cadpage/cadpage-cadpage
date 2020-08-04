@@ -335,6 +335,7 @@ public class CadPageActivity extends AppCompatActivity {
   }
 
   SmsPopupFragment popupFragment = null;
+
   /**
    * Back key pressed
    */
@@ -354,9 +355,10 @@ public class CadPageActivity extends AppCompatActivity {
     if (popupFragment != null) {
       SmsMmsMessage message = popupFragment.getMessage();
       if (message != null) message.acknowledge(this);
-      popupFragment = null;
     }
   }
+
+  private static final String ALERT_TAG = "CALL_ALERT";
 
   public void showAlert(SmsMmsMessage message) {
 
@@ -364,14 +366,16 @@ public class CadPageActivity extends AppCompatActivity {
     popupFragment.setMessage(message);
 
     FragmentManager fragmentManager = getSupportFragmentManager();
+    if (fragmentManager.findFragmentByTag(ALERT_TAG) != null) return;
+
     FragmentTransaction ft = fragmentManager.beginTransaction();
     ft.addToBackStack(null);
 
     String mode = ManagePreferences.popupMode();
     if (mode.equals("P")) {
-      popupFragment.show(ft, "sms_popup");
+      popupFragment.show(ft, ALERT_TAG);
     } else {
-      ft.replace(R.id.cadpage_content, popupFragment).commit();
+      ft.replace(R.id.cadpage_content, popupFragment, ALERT_TAG).commit();
     }
   }
 
