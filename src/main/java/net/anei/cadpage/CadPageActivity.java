@@ -16,12 +16,12 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -39,7 +39,13 @@ public class CadPageActivity extends AppCompatActivity {
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
 
+  private static final String CALL_ALERT_TAG = "CALL_ALERT_TAG";
+
   private final PermissionManager permMgr = new PermissionManager(this);
+
+  private CallHistoryFragment historyFragment = null;
+  private SmsPopupFragment popupFragment = null;
+
 
   private static boolean initializing = false;
 
@@ -72,9 +78,22 @@ public class CadPageActivity extends AppCompatActivity {
     getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
     int height = displaymetrics.heightPixels;
     int width = displaymetrics.widthPixels;
-    ManagePreferences.setScreenSize(""+width+"X"+height);
+    ManagePreferences.setScreenSize("" + width + "X" + height);
 
-    setContentView(R.layout.cadpage);
+    int layout = R.layout.cadpage;
+    String mode = ManagePreferences.popupMode();
+    if (mode.equals("S")) {
+      Log.v("Orientation:" + getResources().getConfiguration().orientation);
+      if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        layout = R.layout.cadpage_split;
+      }
+    }
+    Log.v("Main Layout:" + layout);
+    setContentView(layout);
+
+    FragmentManager fm = getSupportFragmentManager();
+    historyFragment = (CallHistoryFragment)fm.findFragmentById(R.id.call_history_frag);
+    popupFragment = (SmsPopupFragment)fm.findFragmentByTag(CALL_ALERT_TAG);
 
     // Force screen on and override lock screen
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
@@ -89,11 +108,11 @@ public class CadPageActivity extends AppCompatActivity {
       getWindow().addFlags(flags);
     }
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction ft = fragmentManager.beginTransaction();
-    Fragment fragment = new CallHistoryFragment();
-    ft.replace(R.id.cadpage_content, fragment);
-    ft.commit();
+//    FragmentManager fragmentManager = getSupportFragmentManager();
+//    FragmentTransaction ft = fragmentManager.beginTransaction();
+//    Fragment fragment = new CallHistoryFragment();
+//    ft.replace(R.id.cadpage_content, fragment);
+//    ft.commit();
 
     startup();
   }
@@ -334,8 +353,6 @@ public class CadPageActivity extends AppCompatActivity {
     super.onDestroy();
   }
 
-  SmsPopupFragment popupFragment = null;
-
   /**
    * Back key pressed
    */
@@ -358,24 +375,22 @@ public class CadPageActivity extends AppCompatActivity {
     }
   }
 
-  private static final String ALERT_TAG = "CALL_ALERT";
-
   public void showAlert(SmsMmsMessage message) {
 
-    if (popupFragment ==  null) popupFragment = new SmsPopupFragment();
+    if (popupFragment == null) popupFragment = new SmsPopupFragment();
     popupFragment.setMessage(message);
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    if (fragmentManager.findFragmentByTag(ALERT_TAG) != null) return;
+    if (fragmentManager.findFragmentByTag(CALL_ALERT_TAG) != null) return;
 
     FragmentTransaction ft = fragmentManager.beginTransaction();
     ft.addToBackStack(null);
 
     String mode = ManagePreferences.popupMode();
     if (mode.equals("P")) {
-      popupFragment.show(ft, ALERT_TAG);
+      popupFragment.show(ft, CALL_ALERT_TAG);
     } else {
-      ft.replace(R.id.cadpage_content, popupFragment, ALERT_TAG).commit();
+      ft.replace(R.id.call_history_frag, popupFragment, CALL_ALERT_TAG).commit();
     }
   }
 

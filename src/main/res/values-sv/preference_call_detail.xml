@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_popup_mode_title">Alert display mode</string> <!-- Translate -->
+    <string name="pref_popup_mode_title">Larmdisplay mode</string>
     <string name="pref_popup_mode_summary">%%s</string>
-    <string-array name="pref_popup_mode_text"> <!-- Translate -->
-        <item>Split Screen (Landscape only)</item>
-        <item>Full Screen</item>
-        <item>Popoup Window</item>
+    <string-array name="pref_popup_mode_text">
+        <item>Delad skärm (Endast landsskapsläge)</item>
+        <item>Helskärm</item>
+        <item>Popup-fönster</item>
     </string-array>
 
-    <string name="pref_popup_enabled_title">Show Alert Details</string> <!-- Translate -->
-    <string name="pref_popup_enabled_summaryon">Alarm will display alert details</string> <!-- Translate -->
-    <string name="pref_popup_enabled_summaryoff">Alarm will not display alert details</string> <!-- Translate -->
+    <string name="pref_popup_enabled_title">Visa larmdetaljer</string>
+    <string name="pref_popup_enabled_summaryon">Larmdetaljer kommer att visas</string>
+    <string name="pref_popup_enabled_summaryoff">Larmdetaljer kommer inte att visas</string>
 
-    <string name="pref_noShowInCall_title">Restrict In Call Alert Details</string> <!-- Translate -->
-    <string name="pref_noShowInCall_summaryon">Alert details will not show when call in progress</string> <!-- Translate -->
-    <string name="pref_noShowInCall_summaryoff">Alert details will show when call in progress</string> <!-- Translate -->
+    <string name="pref_noShowInCall_title">Begränsa detaljer i inkommande larm</string>
+    <string name="pref_noShowInCall_summaryon">Larmdeteljer kommer inte att visas när larmet behandlas</string>
+    <string name="pref_noShowInCall_summaryoff">Larmdetaljer kommer att visas när larmet behandlas </string>
 
     <string name="pref_show_source_title">Visa källan till larm</string>
     <string name="pref_show_source_summaryon">Kommer att visa källan till larm</string>

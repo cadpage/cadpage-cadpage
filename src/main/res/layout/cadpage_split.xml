@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cadpage_content_split"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:name="net.anei.cadpage.CallHistoryFragment"
+        android:id="@+id/call_history_frag"
+        android:layout_weight="1"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        tools:context=".CallHistoryFragment" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:name="net.anei.cadpage.SmsPopupFragment"
+        android:id="@+id/sms_popup_frag"
+        android:tag="CALL_ALERT_TAG"
+        android:layout_weight="1"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        tools:context=".SmsPopupFragment" />
+
+</LinearLayout>

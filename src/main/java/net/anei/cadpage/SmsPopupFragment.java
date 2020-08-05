@@ -126,7 +126,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
     registerForContextMenu(mainView);
 
     // Populate display fields
-    if (message != null) populateViews();
+    populateViews();
 
     return mainView;
   }
@@ -134,7 +134,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
   @Override
   public void onAttach(@NonNull Context context) {
     super.onAttach(context);
-    if (message != null) populateViews();
+    populateViews();
   }
 
   /*
