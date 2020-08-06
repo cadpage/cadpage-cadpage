@@ -53,6 +53,8 @@ public class CadPageActivity extends AppCompatActivity {
 
   private boolean needSupportApp;
 
+  private boolean splitScreen;
+
   /* (non-Javadoc)
    * @see android.app.Activity#onCreate(android.os.Bundle)
    */
@@ -80,20 +82,24 @@ public class CadPageActivity extends AppCompatActivity {
     int width = displaymetrics.widthPixels;
     ManagePreferences.setScreenSize("" + width + "X" + height);
 
-    int layout = R.layout.cadpage;
-    String mode = ManagePreferences.popupMode();
-    if (mode.equals("S")) {
-      Log.v("Orientation:" + getResources().getConfiguration().orientation);
-      if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        layout = R.layout.cadpage_split;
-      }
-    }
-    Log.v("Main Layout:" + layout);
-    setContentView(layout);
+    splitScreen = isSplitScreenConfig();
+    setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
 
     FragmentManager fm = getSupportFragmentManager();
     historyFragment = (CallHistoryFragment)fm.findFragmentById(R.id.call_history_frag);
     popupFragment = (SmsPopupFragment)fm.findFragmentByTag(CALL_ALERT_TAG);
+
+    // We are not supposed to have a popup fragment in split screen mode.  But it can happen
+    // if we have recently transitioned from split screen mode to another mode.  This is
+    // survivable in full screen mode, but fatal in popup mode because attempting to show
+    // the popup fragment as a dialog will abort because we cannot add the fragment to the
+    // fragment manager twice :(
+
+    // So, if we are not in split screen mode, the popupFragment has to go!
+    if (!splitScreen && popupFragment != null) {
+      fm.beginTransaction().remove(popupFragment).commit();
+      popupFragment = null;
+    }
 
     // Force screen on and override lock screen
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
@@ -108,13 +114,23 @@ public class CadPageActivity extends AppCompatActivity {
       getWindow().addFlags(flags);
     }
 
-//    FragmentManager fragmentManager = getSupportFragmentManager();
-//    FragmentTransaction ft = fragmentManager.beginTransaction();
-//    Fragment fragment = new CallHistoryFragment();
-//    ft.replace(R.id.cadpage_content, fragment);
-//    ft.commit();
-
     startup();
+  }
+
+  /**
+   * @return true if we should use the split screen display
+   */
+  private boolean isSplitScreenConfig() {
+    String mode = ManagePreferences.popupMode();
+    return (mode.equals("S") &&
+            getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
+  }
+
+  /**
+   * @return true if we are currently showing the split screen
+   */
+  public boolean isSplitScreen() {
+    return splitScreen;
   }
 
   /* (non-Javadoc)
@@ -305,8 +321,8 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onResume() { 
     if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
-    super.onResume(); 
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    super.onResume();
+
     activityActive = true;
 
     // If we **REALLY** need the support app, and we asked the user
@@ -315,8 +331,11 @@ public class CadPageActivity extends AppCompatActivity {
     if (!BuildConfig.MSG_ALLOWED && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
     }
-  } 
-  
+
+    // If user switched to/from split screen mode, recreate this activity
+    if (splitScreen != isSplitScreenConfig()) recreate();
+  }
+
   protected void onPause() {
     if (Log.DEBUG) Log.v("CadPageActivity: onPause()");
     super.onPause(); 

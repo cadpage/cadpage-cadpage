@@ -201,7 +201,6 @@ public class VendorManager {
   public boolean infoButtonOptional(String vendorCode) {
     Vendor vendor = findVendor(vendorCode);
     if (vendor != null) return vendor.infoButtonOptional();
-    // TODO Auto-generated method stub
     return false;
   }
 

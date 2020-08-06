@@ -63,6 +63,7 @@ public class MsgOptionManager {
     
     if (display) {
       menu.removeItem(R.id.open_item);
+      if (activity.isSplitScreen()) menu.removeItem(R.id.close_item);
     } else {
       menu.removeItem(R.id.resp_menu_item);
       menu.removeItem(R.id.close_item);
@@ -156,14 +157,14 @@ public class MsgOptionManager {
     for (int btn = 1; btn <= ManagePreferences.POPUP_BUTTON_CNT; btn++) {
       int itemNdx = ManagePreferences.popupButton(btn);
       if (itemNdx <= 0 || itemNdx >= ITEM_ID_LIST.length) continue;
-      if (itemNdx == 9) hasMoreInfo = true;
+      if (itemNdx == 8) hasMoreInfo = true;
       addRegularButton(itemNdx, mainButtonList, mainButtonGroup);
     }
     
     // If user doesn't have a More info button configured, add it at the end
     // Unless the paging vendor specifically requests otherwise
     if (!hasMoreInfo && !(message != null && message.infoButtonOptional())) {
-      addRegularButton(9, mainButtonList, mainButtonGroup);
+      addRegularButton(8, mainButtonList, mainButtonGroup);
     }
   }
 
@@ -174,6 +175,9 @@ public class MsgOptionManager {
    * @param buttonGroup view group
    */
   private void addRegularButton(int itemNdx, List<ButtonHandler> buttonList, ViewGroup buttonGroup) {
+
+    // Close button is non-functional in split scrreen mode
+    if (itemNdx == 5 && activity.isSplitScreen()) return;
     
     // The map button can expand to multiple buttons
     if (itemNdx == 2) {
