@@ -244,7 +244,7 @@ public class CadPageActivity extends AppCompatActivity {
         if (!release.equals(oldRelease)) {
           ManagePreferences.setRelease(release);
           if (!trimRelease(release).equals(trimRelease(oldRelease))) {
-            new ReleaseDialogFragment(this).show(getSupportFragmentManager(), "release");
+            new ReleaseDialogFragment().show(getSupportFragmentManager(), "release");
           }
         }
 
@@ -302,14 +302,10 @@ public class CadPageActivity extends AppCompatActivity {
 
   public static class ReleaseDialogFragment extends DialogFragment {
 
-    private final Activity activity;
-
-    public ReleaseDialogFragment(Activity activity) {
-      this.activity = activity;
-    }
-
     @Override
     @NonNull public Dialog onCreateDialog(Bundle bundle) {
+      Activity activity = getActivity();
+
       int releaseId = (DonationManager.instance().isFreeVersion() ? R.string.free_release_text : R.string.release_text);
       final SpannableString s = new SpannableString(getText(releaseId));
       Linkify.addLinks(s, Linkify.WEB_URLS);
