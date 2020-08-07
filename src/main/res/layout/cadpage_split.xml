@@ -15,6 +15,11 @@
         android:layout_height="match_parent"
         tools:context=".CallHistoryFragment" />
 
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="2dp"
+        android:background="@android:color/white" />
+
     <androidx.fragment.app.FragmentContainerView
         android:name="net.anei.cadpage.SmsPopupFragment"
         android:id="@+id/sms_popup_frag"
