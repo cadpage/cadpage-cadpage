@@ -63,7 +63,6 @@ public class MsgOptionManager {
     
     if (display) {
       menu.removeItem(R.id.open_item);
-      if (activity.isSplitScreen()) menu.removeItem(R.id.close_item);
     } else {
       menu.removeItem(R.id.resp_menu_item);
       menu.removeItem(R.id.close_item);
@@ -176,9 +175,6 @@ public class MsgOptionManager {
    */
   private void addRegularButton(int itemNdx, List<ButtonHandler> buttonList, ViewGroup buttonGroup) {
 
-    // Close button is non-functional in split scrreen mode
-    if (itemNdx == 5 && activity.isSplitScreen()) return;
-    
     // The map button can expand to multiple buttons
     if (itemNdx == 2) {
       //  First step is to see which map buttons are active
@@ -637,12 +633,11 @@ public class MsgOptionManager {
       return true;
       
     case R.id.delete_item:
-      SmsMessageQueue.getInstance().deleteMessage(message);
-      if (display) activity.getSupportFragmentManager().popBackStack();
+      activity.deleteMsg(message);
       return true;
       
     case R.id.close_item:
-      activity.getSupportFragmentManager().popBackStack();
+      activity.closeAlertDetail();
       return true;
       
     case R.id.close_app_item:

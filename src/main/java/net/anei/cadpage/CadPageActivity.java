@@ -15,13 +15,13 @@ import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -33,11 +33,15 @@ import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class CadPageActivity extends AppCompatActivity {
 
   private static final String EXTRA_NOTIFY = "net.anei.cadpage.CadPageActivity.NOTIFY";
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
+
+  private static final String SAVED_SPLIT_SCREEN = "SPLIT_SCREEN";
 
   private static final String CALL_ALERT_TAG = "CALL_ALERT_TAG";
 
@@ -62,6 +66,11 @@ public class CadPageActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     if (Log.DEBUG) Log.v("CadPageActivity: onCreate()");
     super.onCreate(savedInstanceState);
+
+    if (savedInstanceState != null) {
+      splitScreen = savedInstanceState.getBoolean(SAVED_SPLIT_SCREEN, false);
+    }
+
     if (!CadPageApplication.initialize(this)) {
       finish();
       return;
@@ -82,23 +91,37 @@ public class CadPageActivity extends AppCompatActivity {
     int width = displaymetrics.widthPixels;
     ManagePreferences.setScreenSize("" + width + "X" + height);
 
-    splitScreen = isSplitScreenConfig();
-    setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
-
+    // See if we are running in split screen mode, and save the previous status
+    // so we can tell if it changed
     FragmentManager fm = getSupportFragmentManager();
-    historyFragment = (CallHistoryFragment)fm.findFragmentById(R.id.call_history_frag);
-    popupFragment = (SmsPopupFragment)fm.findFragmentByTag(CALL_ALERT_TAG);
+    boolean oldSplitScreen = splitScreen;
+    splitScreen = isSplitScreenConfig();
 
-    // We are not supposed to have a popup fragment in split screen mode.  But it can happen
-    // if we have recently transitioned from split screen mode to another mode.  This is
-    // survivable in full screen mode, but fatal in popup mode because attempting to show
-    // the popup fragment as a dialog will abort because we cannot add the fragment to the
-    // fragment manager twice :(
+    // If we are switching between split screen and non-split screen modes, backstack entries and
+    // fragments left over from a previous orientation or mode cause all kinds of problems
+    // Better to just get rid of all of them first
+    if (splitScreen != oldSplitScreen) {
+      Log.v("Resetting Fragment Manager");
+      while (fm.getBackStackEntryCount() > 0) fm.popBackStackImmediate();
+      List<Fragment> fragList = fm.getFragments();
+      if (!fragList.isEmpty()) {
+        FragmentTransaction ft = fm.beginTransaction();
+        for (Fragment frag : fragList) ft.remove(frag);
+        ft.commit();
+        fm.executePendingTransactions();
+      }
+    }
 
-    // So, if we are not in split screen mode, the popupFragment has to go!
-    if (!splitScreen && popupFragment != null) {
-      fm.beginTransaction().remove(popupFragment).commit();
-      popupFragment = null;
+    setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
+    Log.v("Final frag count:" + fm.getFragments().size());
+    historyFragment = null;
+    popupFragment = null;
+    for (Fragment frag : fm.getFragments()) {
+      if (frag instanceof CallHistoryFragment) {
+        historyFragment = (CallHistoryFragment) frag;
+      } else {
+        popupFragment = (SmsPopupFragment) frag;
+      }
     }
 
     // Force screen on and override lock screen
@@ -117,6 +140,12 @@ public class CadPageActivity extends AppCompatActivity {
     startup();
   }
 
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putBoolean(SAVED_SPLIT_SCREEN, splitScreen);
+  }
+
   /**
    * @return true if we should use the split screen display
    */
@@ -124,13 +153,6 @@ public class CadPageActivity extends AppCompatActivity {
     String mode = ManagePreferences.popupMode();
     return (mode.equals("S") &&
             getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
-  }
-
-  /**
-   * @return true if we are currently showing the split screen
-   */
-  public boolean isSplitScreen() {
-    return splitScreen;
   }
 
   /* (non-Javadoc)
@@ -353,14 +375,7 @@ public class CadPageActivity extends AppCompatActivity {
     if (!activityActive) return false;
     return super.onKeyDown(keyCode, event);
   }
-  
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
 
-    outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
-    super.onSaveInstanceState(outState);
-  }
-  
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
@@ -394,6 +409,10 @@ public class CadPageActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Display call details for selected message
+   * @param message
+   */
   public void showAlert(SmsMmsMessage message) {
 
     if (popupFragment == null) popupFragment = new SmsPopupFragment();
@@ -410,6 +429,32 @@ public class CadPageActivity extends AppCompatActivity {
       popupFragment.show(ft, CALL_ALERT_TAG);
     } else {
       ft.replace(R.id.call_history_frag, popupFragment, CALL_ALERT_TAG).commit();
+    }
+  }
+
+  /**
+   * Close the alert detail display
+   */
+  public void closeAlertDetail() {
+    if (splitScreen) {
+      popupFragment.setMessage(null);
+    } else {
+      getSupportFragmentManager().popBackStack();
+    }
+  }
+
+  /**
+   * Delete requested message
+   * @param msg message to be deleted
+   */
+  public void deleteMsg(@NonNull SmsMmsMessage msg) {
+
+    //  Delete message from message queue
+    SmsMessageQueue.getInstance().deleteMessage(msg);
+
+    // If it happens to be the currently displayed message, close the message detail display
+    if (popupFragment != null) {
+      if (msg == popupFragment.getMessage()) closeAlertDetail();
     }
   }
 
