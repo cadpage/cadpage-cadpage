@@ -98,10 +98,28 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
       super(requireContext(), getTheme());
       setCanceledOnTouchOutside(false);
     }
+
     @Override
     public boolean onMenuItemSelected(int featureId, @NonNull MenuItem item) {
       if (featureId != Window.FEATURE_CONTEXT_MENU) return false;
       return SmsPopupFragment.this.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+      // Suppress back activity if response button menu is visible
+      if (ManageNotification.isActiveNotice()) return;
+
+      // Otherwise carry on with back function
+      super.onBackPressed();
+
+      // Clear any active notification and wake locks
+      ClearAllReceiver.clearAll(getContext());
+
+      // Flag message acknowledgment
+      SmsMmsMessage message = getMessage();
+      if (message != null) message.acknowledge(getContext());
     }
   }
 
