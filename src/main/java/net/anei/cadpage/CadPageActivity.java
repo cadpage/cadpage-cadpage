@@ -42,12 +42,12 @@ public class CadPageActivity extends AppCompatActivity {
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
 
   private static final String SAVED_SPLIT_SCREEN = "SPLIT_SCREEN";
+  private static final String SAVED_MSG_ID = "MSG_ID";
 
   private static final String CALL_ALERT_TAG = "CALL_ALERT_TAG";
 
   private final PermissionManager permMgr = new PermissionManager(this);
 
-  private CallHistoryFragment historyFragment = null;
   private SmsPopupFragment popupFragment = null;
 
 
@@ -67,8 +67,10 @@ public class CadPageActivity extends AppCompatActivity {
     if (Log.DEBUG) Log.v("CadPageActivity: onCreate()");
     super.onCreate(savedInstanceState);
 
+    int startMsgId = -1;
     if (savedInstanceState != null) {
       splitScreen = savedInstanceState.getBoolean(SAVED_SPLIT_SCREEN, false);
+      startMsgId = savedInstanceState.getInt(SAVED_MSG_ID, -1);
     }
 
     if (!CadPageApplication.initialize(this)) {
@@ -114,12 +116,8 @@ public class CadPageActivity extends AppCompatActivity {
 
     setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
     Log.v("Final frag count:" + fm.getFragments().size());
-    historyFragment = null;
-    popupFragment = null;
     for (Fragment frag : fm.getFragments()) {
-      if (frag instanceof CallHistoryFragment) {
-        historyFragment = (CallHistoryFragment) frag;
-      } else {
+      if (frag instanceof SmsPopupFragment) {
         popupFragment = (SmsPopupFragment) frag;
       }
     }
@@ -138,12 +136,19 @@ public class CadPageActivity extends AppCompatActivity {
     }
 
     startup();
+
+    if (startMsgId >= 0) showAlert(startMsgId);
   }
 
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putBoolean(SAVED_SPLIT_SCREEN, splitScreen);
+
+    if (popupFragment != null && popupFragment.isVisible()) {
+      int msgId = popupFragment.getMsgId();
+      outState.putInt(SAVED_MSG_ID, msgId);
+    }
   }
 
   /**
@@ -406,8 +411,17 @@ public class CadPageActivity extends AppCompatActivity {
   }
 
   /**
+   * Display call alert for selected msg ID
+   * @param msgId selected msg ID.
+   */
+  private void showAlert(int msgId) {
+    SmsMmsMessage msg = SmsMessageQueue.getInstance().getMessage(msgId);
+    if (msg != null) showAlert(msg);
+  }
+
+  /**
    * Display call details for selected message
-   * @param message
+   * @param message message to be displayed
    */
   public void showAlert(SmsMmsMessage message) {
 

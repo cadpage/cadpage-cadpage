@@ -27,8 +27,6 @@ import net.anei.cadpage.vendors.VendorManager;
 
 public class SmsPopupFragment extends DialogFragment implements LocationTracker.LocationChangeListener {
 
-  private static final String SAVED_MSG_ID = "MSG_ID";
-
   private View mainView = null;
   private ImageView fromImage;
   private TextView fromTV;
@@ -46,18 +44,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    if (savedInstanceState != null) {
-      int msgId = savedInstanceState.getInt(SAVED_MSG_ID, -1);
-      setMsgId(msgId);
-    }
-
     setHasOptionsMenu(true);
-  }
-
-  @Override
-  public void onSaveInstanceState(@NonNull Bundle outState) {
-    super.onSaveInstanceState(outState);
-    outState.putInt(SAVED_MSG_ID, getMsgId());
   }
 
   public int getMsgId() {
