@@ -10,9 +10,8 @@ allprojects {
 android {
     defaultConfig {
         applicationId 'net.anei.cadpage'
-        versionName project.versionName_beta
-        versionCode project.versionCode_beta
-        archivesBaseName = "cadpage-beta"
+        versionName project.versionName
+        versionCode project.versionCode
         targetSdkVersion 29
         minSdkVersion 16
         multiDexEnabled true
