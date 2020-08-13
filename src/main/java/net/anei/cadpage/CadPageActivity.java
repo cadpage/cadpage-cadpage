@@ -53,8 +53,6 @@ public class CadPageActivity extends AppCompatActivity {
 
   private static boolean initializing = false;
 
-  private static int lockMsgId = -1;
-
   private boolean needSupportApp;
 
   private boolean splitScreen;
@@ -115,7 +113,6 @@ public class CadPageActivity extends AppCompatActivity {
     }
 
     setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
-    Log.v("Final frag count:" + fm.getFragments().size());
     for (Fragment frag : fm.getFragments()) {
       if (frag instanceof SmsPopupFragment) {
         popupFragment = (SmsPopupFragment) frag;
@@ -135,9 +132,14 @@ public class CadPageActivity extends AppCompatActivity {
       getWindow().addFlags(flags);
     }
 
-    startup();
-
-    if (startMsgId >= 0) showAlert(startMsgId);
+    // If this activity is being recreated from a previous instance, all we need to do
+    // is display the previously displayed alert.  Otherwise go through the normal
+    // startup sequence
+    if (savedInstanceState != null) {
+      if (startMsgId >= 0) showAlert(startMsgId);
+    } else {
+      startup();
+    }
   }
 
   @Override
@@ -182,31 +184,14 @@ public class CadPageActivity extends AppCompatActivity {
     Log.v("CadPageActivity.startup()");
     ContentQuery.dumpIntent(intent);
     
-    // We have an occasional problem when an old intent is sent with the
-    // intent of restoring the Cadpage display.  But has several unfortunate
-    // side effects like immediately cancelling the wake lock
-    // Solution - when were were started with the intent of displaying a new
-    // message, ignore all extraneous intents until we find the one that
-    // displays the new page
     int msgId = intent.getIntExtra(EXTRA_MSG_ID, -1);
-    if (msgId > 0 && msgId != lockMsgId) {
-      Log.v("Discarding spurious intent");
-      return;
-    }
-    lockMsgId = -1;
 
     // See if this request is going to pop up an alert window
     SmsMmsMessage msg;
-    boolean force = ManagePreferences.forcePopup();
-    if (force) ManagePreferences.setForcePopup(false);
-    if (!force &&
-        Intent.ACTION_MAIN.equals(intent.getAction()) &&
-        intent.hasCategory(Intent.CATEGORY_LAUNCHER)) {
-      msg = null;
-    } else if (msgId >= 0) {
+    if (msgId >= 0) {
       msg = SmsMessageQueue.getInstance().getMessage(msgId);
     } else {
-      if (!force) force = intent.getBooleanExtra(EXTRA_POPUP, false);
+      boolean force = intent.getBooleanExtra(EXTRA_POPUP, false);
       msg = SmsMessageQueue.getInstance().getDisplayMessage(force);
     }
 
@@ -511,10 +496,7 @@ public class CadPageActivity extends AppCompatActivity {
     intent.setFlags(flags);
     if (force) intent.putExtra(EXTRA_POPUP, true);
     if (notify) intent.putExtra(EXTRA_NOTIFY, true);
-    if (msg != null) {
-      lockMsgId = msg.getMsgId();
-      intent.putExtra(EXTRA_MSG_ID, lockMsgId);
-    }
+    if (msg != null) intent.putExtra(EXTRA_MSG_ID, msg.getMsgId());
     return intent;
   }
 

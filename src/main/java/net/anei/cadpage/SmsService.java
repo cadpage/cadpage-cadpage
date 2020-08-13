@@ -218,7 +218,6 @@ public class SmsService extends IntentService {
       // a full screen notification, and launch Radio Scanner if requested
       if (CadPageApplication.restrictBackgroundActivity()) {
         Log.v("Launching full screen notification");
-        ManagePreferences.setForcePopup(true);
         ManageNotification.show(context, message, true, true);
         launchScanner(context);
       }
