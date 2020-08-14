@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08122020</string>
+  <string name="release_date">08142020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.02-07\n
+    Location Fixes:\n
+    Antrim County, MI\n
+    Leelanau County, MI\n
+    Desoto County, MS\n
+    Cumberland County, PA\n
+    Grant County, WV\n
+    \n
+    General Fixes:\n
+    Cadpage would occasionally open the wrong alert when a call was received\n
+    Rare crash handling incorrect button configuration\n
+    \n
     v2.2.02-06\n
     Complete rewrite of the settings menu to hopefully make it more logical.\n
     \n
@@ -49,19 +61,6 @@
     Warren County, PA\n
     Dorchester County, SC\n
     Pennington County, SD\n
-    Harrison County, WV\n
-    \n
-    v2.2.01-03\n
-    Location Fixes:\n
-    Harris County, KY\n
-    Erie County, PA\n
-    \n
-    v2.2.01-02\n
-    Location Fixes:\n
-    Franklin County, GA\n
-    Erie County, PA\n
-    \n
-    General Fixes:\n
-    Button configuration labels for "MORE INFO" and "CLOSE APP" were swapped.
+    Harrison County, WV
   </string>
 </resources>
