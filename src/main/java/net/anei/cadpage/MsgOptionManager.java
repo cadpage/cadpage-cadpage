@@ -370,7 +370,7 @@ public class MsgOptionManager {
   private void setupExtraButtons() {
     for (int btn = 1; btn <= ManagePreferences.EXTRA_BUTTON_CNT; btn++) {
       int itemNdx = ManagePreferences.extraButton(btn);
-      if (itemNdx == 0) continue;
+      if (itemNdx <= 0 || itemNdx >= ITEM_ID_LIST.length) continue;
       addRegularButton(itemNdx, respButtonList, respButtonGroup);
     }
   }
