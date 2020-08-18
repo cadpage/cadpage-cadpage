@@ -28,10 +28,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.preference.TwoStatePreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
 import androidx.core.content.ContextCompat;
 
 import androidx.work.Constraints;
