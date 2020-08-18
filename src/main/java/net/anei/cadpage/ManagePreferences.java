@@ -46,7 +46,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 52;
+  private static final int PREFERENCE_VERSION = 53;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -105,6 +105,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // are not performed for new cadpage installs.
     if (oldVersion > 0 && oldVersion < PREFERENCE_VERSION) {
 
+      // If old version < 53, we may have to fix the button configuration
+      if (oldVersion < 53) fixButtonConfig();
+
       // If old version < 50, reverse the override volume control setting
       if (oldVersion < 50) {
         boolean value = prefs.getBoolean(R.string.pref_notif_override_volume_key);
@@ -113,7 +116,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
       // If old version < 49 use is upgrading to a version that requires explicit permission to
       // use their email account information
-      //noinspection ConstantConditions
       if (oldVersion < 49) prefs.putBoolean(R.string.pref_account_security_upgrade, true);
       
       // If old version < 45 convert old lock_google option to new app_map_option option
@@ -278,6 +280,64 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // We run into problems if the change listeners are called during this setup process
     // so we don't arm them until now
     prefs.armListeners();
+  }
+
+  /**
+   * Fix button configuration if necessary
+   */
+  private static void fixButtonConfig() {
+
+    // We didn't catch this problem until it was out in production for a couple weeks.  Which means we
+    // should make some attempt to determine if the user has already gone in and fixed things up :(
+    if (!fixButtonConfigNeeded()) return;
+
+    // Yep, we have a problem.  So go fix everything
+    for (int[] btnArry :  FIX_BUTTON_IDS) {
+      for (int btnId : btnArry) {
+        String btnString = prefs.getString(btnId ,"");
+        if (btnString.length() == 0) continue;
+        int btnValue = Integer.parseInt(btnString);
+        if (btnValue < 7) continue;
+        int newBtnValue = (btnValue == 7 || btnValue > 11) ? 0 : btnValue-1;
+        prefs.putString(btnId, Integer.toString(newBtnValue));
+      }
+    }
+  }
+
+  /**
+   * Tries to figure out if user has already manually fixed the button configuration problem, rendering
+   * the conversion fix unnecessary
+   * @return true if button config conversion needs to be performed.
+   */
+  private static boolean fixButtonConfigNeeded() {
+
+    // Start by scanning all of the regular popup buttons and determining which ones are used.
+
+    // Button 11 no longer exists, so if it is specified, we definately need the conversion.
+    // Otherwise, conversion is only skipped if the new MORE INFO (8) is specifed, but the old
+    // MORE INFO (9) button is not
+    boolean btn8 = false;
+    boolean btn9 = false;
+    for (int[] btnArry :  FIX_BUTTON_IDS) {
+      for (int btnId : btnArry) {
+        String btnString = prefs.getString(btnId, "");
+        if (btnString.length() == 0) continue;
+        switch (Integer.parseInt(btnString)) {
+          case 8:
+            btn8 = true;
+            break;
+
+          case 9:
+            btn9 =  true;
+            break;
+
+          case 11:
+            return true;
+        }
+      }
+    }
+
+    return !btn8 || btn9;
   }
 
   public static void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
@@ -909,7 +969,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     R.string.pref_xtra_resp_button2_key,
     R.string.pref_xtra_resp_button3_key
   };
-  
+
+  // Fixing the button configuration requires scanning through both sets of regular buttons.  This
+  // makes that easier
+  private static final int[][] FIX_BUTTON_IDS = new int[][]{ POPUP_BUTTON_IDS, EXTRA_BUTTON_IDS };
+
   public static boolean altMapButton() {
     return prefs.getBoolean(R.string.pref_alt_map_button_key);
   }
