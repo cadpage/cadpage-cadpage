@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08182020</string>
+  <string name="release_date">08252020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    This release fixes a problem with the button configuration settings introduced in the Cadpage
-    release published on 8/12/2020.  If you have not changed your button settings since that date,
-    this release will fix everything.  But if you have manually fixed the button configuration
-    problems introduced with that release, this release may break them again.  In which case you
-    will need to fix them again.\n
+    v2.2.03-02\n
+    New Locations:\n
+    Muhlenberg County, KY (alt)\n
+    Chester County, TN\n
+    Harris County, TX\n
+    Polk County, TX\n
+    \n
+    Location Fixes:\n
+    Bullett County, KY\n
+    Christian County, MO\n
+    Summit County, OH\n
     \n
     v2.2.03-01\n
     New Locations:\n
