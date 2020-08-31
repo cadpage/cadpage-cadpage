@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08252020</string>
+  <string name="release_date">08312020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-03\n
+    New Locations:\n
+    Elliott County, KY\n
+    \n
+    Location Fixes:\n
+    Boulder County, CO\n
+    Parke County, IN\n
+    Daviess County, KY\n
+    Washington County, OR\n
+    Williamson County, TX\n
+    Grant County, WV\n
+    \n
     v2.2.03-02\n
     New Locations:\n
     Muhlenberg County, KY (alt)\n
@@ -54,20 +66,6 @@
     Location Fixes:\n
     Kent County, MD\n
     Davie County, NC\n
-    Lackawanna County, PA\n
-    \n
-    v2.2.02-05\n
-    New Locations:\n
-    Gulf County, FL\n
-    Williams County, OH\n
-    Curry County, OR\n
-    Williamsburg County, SC\n
-    \n
-    Location Fixes:\n
-    Oldham County, KY\n
-    Middlesex County, NJ\n
-    Deschuttes County, OR\n
-    Calhoun County, SC\n
-    Hays County, TX
+    Lackawanna County, PA
   </string>
 </resources>
