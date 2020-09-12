@@ -45,7 +45,7 @@ android {
             full {
                 dimension "type"
                 versionNameSuffix "M"
-                versionCode 1
+                versionCode 2
                 buildConfigField "boolean", "MSG_ALLOWED", "true"
             }
 
@@ -61,7 +61,7 @@ android {
     applicationVariants.all { variant ->
         def storeVersion = variant.productFlavors.get(0).versionCode
         def typeVersion = variant.productFlavors.get(1).versionCode
-        def version = typeVersion * 100000000 + defaultConfig.versionCode + storeVersion
+        def version = defaultConfig.versionCode + typeVersion
         variant.outputs.each { output ->
             output.versionCodeOverride = version
         }
