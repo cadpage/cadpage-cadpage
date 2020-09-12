@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08312020</string>
+  <string name="release_date">09112020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.04-04\n
+    New Locations:\n
+    Auglaize County, OH (alt)\n
+    \n
+    Location Fixes:\n
+    Butte County, CA\n
+    Litchfield County, CT\n
+    Alcona County, MI\n
+    Warren County, OH\n
+    Washington County, OH\n
+    Van Alstyne, TX\n
+    Surry County, VA\n
+    King County, WA\n
+    \n
     v2.2.03-03\n
     New Locations:\n
     Elliott County, KY\n
@@ -49,23 +63,6 @@
     \n
     General Fixes:\n
     Cadpage would occasionally open the wrong alert when a call was received\n
-    Rare crash handling incorrect button configuration\n
-    \n
-    v2.2.02-06\n
-    Complete rewrite of the settings menu to hopefully make it more logical.\n
-    \n
-    There is a new "Alert Display Mode" in Call Detail Settings that determines how alert details
-    are displayed.  The default "Split Screen" will display call history and call details in a
-    split screen in the landscape orientation.  "Popup" is close to the classic Cadpage alert
-    display.  "Full Screen" is what the original beta release did.\n
-    \n
-    New Locations:\n
-    Dubuque County, IA\n
-    Wayne County, MI\n
-    \n
-    Location Fixes:\n
-    Kent County, MD\n
-    Davie County, NC\n
-    Lackawanna County, PA
+    Rare crash handling incorrect button configuration
   </string>
 </resources>
