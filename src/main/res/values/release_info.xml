@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09112020</string>
+  <string name="release_date">09202020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-05\n
+    New Locations:\n
+    Magoffin County, KY\n
+    \n
+    Location Fixes:\n
+    Hoover, AL\n
+    Hayward, CA\n
+    Larimer County, CO\n
+    Washington County, OH\n
+    Calloway County, KY\n
+    
+    Cumberland County, PA\n
+    Travis County, TX\n
+    \n
     v2.2.03-04\n
     New Locations:\n
     Auglaize County, OH (alt)\n
@@ -51,18 +65,6 @@
     Antrim County,  MI\n
     \n
     General Fixes:\n
-    Fixed problem with button configuration introduced in recent releases\n
-    \n
-    v2.2.02-07\n
-    Location Fixes:\n
-    Antrim County, MI\n
-    Leelanau County, MI\n
-    Desoto County, MS\n
-    Cumberland County, PA\n
-    Grant County, WV\n
-    \n
-    General Fixes:\n
-    Cadpage would occasionally open the wrong alert when a call was received\n
-    Rare crash handling incorrect button configuration
+    Fixed problem with button configuration introduced in recent releases
   </string>
 </resources>
