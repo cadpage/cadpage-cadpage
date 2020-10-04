@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09242020</string>
+  <string name="release_date">10042020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-07\n
+    New Locations:\n
+    Clay County, MO (alt)\n
+    Liberty County, TX\n
+    \n
+    Location Fixes:\n
+    Shelby County, AL\n
+    Peake County, IN\n
+    Knox County, KY\n
+    Jefferson County, MO\n
+    Salt Lake County, UT\n
+    \n
     v2.2.03-06\n
     New Locations:\n
     Magoffin County, KY\n
@@ -57,17 +69,6 @@
     Location Fixes:\n
     Bullett County, KY\n
     Christian County, MO\n
-    Summit County, OH\n
-    \n
-    v2.2.03-01\n
-    New Locations:\n
-    Buckingham County, VA\n
-    \n
-    Location Fixes:\n
-    Lamar County, GA\n
-    Antrim County,  MI\n
-    \n
-    General Fixes:\n
-    Fixed problem with button configuration introduced in recent releases
+    Summit County, OH
   </string>
 </resources>
