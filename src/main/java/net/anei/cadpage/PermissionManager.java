@@ -12,6 +12,7 @@ public class PermissionManager {
 
   // "Dangerous" permissions that must be granted at run time
   public static final String READ_PHONE_STATE = "android.permission.READ_PHONE_STATE";
+  public static final String READ_PHONE_NUMBERS = "android.permission.READ_PHONE_NUMBERS";
   public static final String READ_SMS = "android.permission.READ_SMS";
   public static final String GET_ACCOUNTS = "android.permission.GET_ACCOUNTS";
   public static final String ACCESS_FINE_LOCATION = "android.permission.ACCESS_FINE_LOCATION";
@@ -263,6 +264,7 @@ public class PermissionManager {
     DISABLE_KEYGUARD,
     VIBRATE,
     READ_PHONE_STATE,
+    READ_PHONE_NUMBERS,
     GET_ACCOUNTS,
     BILLING,
     RECEIVE_C2DM,

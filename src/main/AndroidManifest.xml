@@ -18,6 +18,7 @@
   <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -48,6 +49,17 @@
   android:required="false"/>
 
   <supports-screens android:xlargeScreens="true"/>
+
+  <queries>
+    <package android:name="net.anei.cadpagesupport"/>
+    <package android:name="com.active911.app"/>
+    <package android:name="com.esri.navigator"/>
+    <package android:name="com.waze"/>
+    <package android:name="net.osmand.plus"/>
+    <package android:name="net.osmand"/>
+    <package android:name="com.scannerradio_pro"/>
+    <package android:name="com.scannerradio"/>
+  </queries>
 
   <application
   android:name=".CadPageApplication"

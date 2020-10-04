@@ -78,8 +78,8 @@ public class UserAcctManager {
       assert tMgr != null;
 
       // Which permission is required to call getLine1Number() is inconsistent.  Nexus systems require READ_SMS
-      // permission, Sprint phones require READ_PHONE_STATE.  Rather than try to figure out which one is
-      // require, we will just call it can catch any thrown exceptions.
+      // permission, Sprint phones require READ_PHONE_STATE.  And Android 11 requires READ_PHONE_NUMBERS.
+      // Rather than try to figure out which one is require, we will just call it can catch any thrown exceptions.
       try {
         phoneNumber = tMgr.getLine1Number();
       } catch (Exception ignored) {

@@ -12,7 +12,7 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
         versionCode project.versionCode
-        targetSdkVersion 29
+        targetSdkVersion 30
         minSdkVersion 16
         multiDexEnabled true
     }
@@ -74,7 +74,7 @@ android {
         }
     }
 
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -86,11 +86,11 @@ android {
 dependencies {
     implementation project(':cadpage-parsers')
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.firebase:firebase-core:17.4.4'
+    implementation 'com.google.firebase:firebase-core:17.5.0'
     implementation 'com.google.firebase:firebase-iid:20.2.4'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'androidx.work:work-runtime:2.4.0'

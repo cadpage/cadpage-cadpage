@@ -2318,6 +2318,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     protected void checkPermission() {
       // checkRequestPermission(PermissionManager.READ_SMS, explainId);
       checkRequestPermission(PermissionManager.READ_PHONE_STATE, explainId);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        checkRequestPermission(PermissionManager.READ_PHONE_NUMBERS, explainId);
+      }
     }
 
     @Override
@@ -2617,6 +2620,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
   @Override
   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    if (key == null) return;
     notifyListeners(key);
   }
 
