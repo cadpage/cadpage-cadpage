@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10042020</string>
+  <string name="release_date">10122020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-08\n
+    New Locations:\n
+    Bedford County, PA\n
+    \n
+    Location Fixes:\n
+    Mendocino County, CA\n
+    DuPage County, IL\n
+    Logan County, KY\n
+    Webster County, MO\n
+    Canadian County, OK\n
+    York County, SC\n
+    Rhea County, TN\n
+    \n
     v2.2.03-07\n
     New Locations:\n
     Clay County, MO (alt)\n
@@ -57,18 +70,6 @@
     Daviess County, KY\n
     Washington County, OR\n
     Williamson County, TX\n
-    Grant County, WV\n
-    \n
-    v2.2.03-02\n
-    New Locations:\n
-    Muhlenberg County, KY (alt)\n
-    Chester County, TN\n
-    Harris County, TX\n
-    Polk County, TX\n
-    \n
-    Location Fixes:\n
-    Bullett County, KY\n
-    Christian County, MO\n
-    Summit County, OH
+    Grant County, WV
   </string>
 </resources>
