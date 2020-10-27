@@ -109,10 +109,13 @@
   <string name="scanner_not_installed">Den här funktionen förutsätter att du har vissa scannerapplikationer installerade.  Vill du installera dessa nu?</string>
   <string name="scanner_not_current">Den här funktionen förutsätter att du har en uppdaterad version av en scanner-applikation. Vill du installera den nu?
   </string>
-  <string name="tracking_title">Cadpage positionsspårare aktiv</string>
-  <string name="stop_tracking_text">Sluta spåra position</string>
-  <string name="tracking_prompt_title">Koppla till positionsspårning</string>
-  <string name="tracking_prompt_text">Vill du att Cadpage ska rapportera din position till andra enheter i realtid?</string>
+
+  <string name="tracking_title">Cadpage location tracking active</string> <!-- Translate -->
+  <string name="stop_tracking_text">Stop location tracking</string> <!-- Translate -->
+
+  <string name="tracking_prompt_title">Enable Location Tracking</string> <!-- Translate -->
+  <string name="tracking_prompt_text">Would you like Cadpage to report your real time location to other responders?</string> <!-- Translate -->
+
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="remember_text">Komma ihåg ditt val?</string>

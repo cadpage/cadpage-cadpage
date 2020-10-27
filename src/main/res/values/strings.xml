@@ -134,11 +134,11 @@
     This feature requires a current version of the Scanner Radio application.  Would you like to install it now?
   </string>
   
-  <string name="tracking_title">Cadpage position tracking active</string>
-  <string name="stop_tracking_text">Stop position tracking</string>
+  <string name="tracking_title">Cadpage location tracking active</string>
+  <string name="stop_tracking_text">Stop location tracking</string>
 
-  <string name="tracking_prompt_title">Enable Position Tracking</string>
-  <string name="tracking_prompt_text">Would you like Cadpage to report your real time position to other responders?</string>
+  <string name="tracking_prompt_title">Enable Location Tracking</string>
+  <string name="tracking_prompt_text">Would you like Cadpage to report your real time location to other responders?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="remember_text">Remember this decision?</string>
