@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10252020</string>
+  <string name="release_date">10312020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-12\n
+    New Locations:\n
+    Winston County, MS\n
+    \n
+    Location Fixes:\n
+    Marion County, AL\n
+    Weld County, CO\n
+    Baltimore County, MD\n
+    Hoke County, NC\n
+    Mahoning County, OH\n
+    Williams County, OH\n
+    Fayette County, PA\n
+    Franklin County, PA\n
+    Lewis County, WA\n
+    \n
     v2.2.03-11\n
     New Locations:\n
     Kings County, CA\n
@@ -50,18 +65,6 @@
     Webster County, MO\n
     Canadian County, OK\n
     York County, SC\n
-    Rhea County, TN\n
-    \n
-    v2.2.03-07\n
-    New Locations:\n
-    Clay County, MO (alt)\n
-    Liberty County, TX\n
-    \n
-    Location Fixes:\n
-    Shelby County, AL\n
-    Peake County, IN\n
-    Knox County, KY\n
-    Jefferson County, MO\n
-    Salt Lake County, UT
+    Rhea County, TN
   </string>
 </resources>
