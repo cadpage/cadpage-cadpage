@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10312020</string>
+  <string name="release_date">11102020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-13\n
+    New Locations:\n
+    Hendricks County, IN\n
+    Harrison County, MS (alt)\n
+    Laclede County, MO\n
+    Oklahoma County, OK (alt)\n
+    \n
+    Location Fixes:\n
+    Shelby County, AL\n
+    Madison County, IN\n
+    Morgan County, IN\n
+    Wayne County, IN\n
+    Bethlehem, NY\n
+    Lincoln County, NC\n
+    Juniata County, PA\n
+    Washington County, TN\n
+    Grays County, WA\n
+    \n
     v2.2.03-12\n
     New Locations:\n
     Winston County, MS\n
@@ -53,18 +71,5 @@
     Franklin County, PA\n
     York County, SC\n
     Rhea County, TN\n
-    \n
-    v2.2.03-08\n
-    New Locations:\n
-    Bedford County, PA\n
-    \n
-    Location Fixes:\n
-    Mendocino County, CA\n
-    DuPage County, IL\n
-    Logan County, KY\n
-    Webster County, MO\n
-    Canadian County, OK\n
-    York County, SC\n
-    Rhea County, TN
   </string>
 </resources>
