@@ -80,6 +80,11 @@
     this, we will need to identify your Google email accounts.
   </string>
 
+  <string name="perm_vendor_location">
+    Active911 would like to report your real time location to other responders.  Since the navigation
+    app may be running on top of Cadpage, this also requires background location access.
+  </string>
+
 <!-- Menu Strings -->
 
    <string name="settings">Settings</string>   

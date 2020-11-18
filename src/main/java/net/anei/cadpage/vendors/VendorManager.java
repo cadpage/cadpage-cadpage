@@ -543,6 +543,11 @@ public class VendorManager {
     if (vendor != null) vendor.updateLastContactTime(msg);
   }
 
+  public boolean isActive911Active() {
+    Vendor vendor = findVendor("Active911");
+    return vendor.isEnabled();
+  }
+
   public boolean isWarnActive911() {
     Vendor vendor = findVendor("Active911");
     return  vendor.isWarnActive911();
