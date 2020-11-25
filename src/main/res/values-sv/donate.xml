@@ -185,38 +185,6 @@
     Informationen i det här larmet kommer inte från Cadpage. Det här larmet kommer från Active911 och dess lokalanpassningssystem eftersom de jobbar på att resätta Cadpages system. Vi jobbar tillsammans med dem för att få det att fungera.  
   </string>
 
-  <string name="active911_warn_title">Active911 uppdateringsvarning</string>
-  <string name="active911_warn_text">
-    Du har installerat en version av Active911-appen som gör att Active911-larm inte processas av Cadpage första gången den körs. Om du fortsättningsvis vill använda Cadpage måste du göra detta
-  </string>
-
-  <string name="active911_warn_2_title">Vad ska jag göra?</string>
-  <string name="active911_warn_2_text">
-    Första steget är att köra Active911-appen för att försäkra dig om att du har gjort det bytet.\n
-    \n
-    Välj kör Active911-knappen, använd sedan tillbakaknappen för att komma tillbaka till den här skärmen för att gå vidare till nästa steg.
-  </string>
-
-  <string name="active911_warn_A911_title">Kör Active911-appen</string>
-
-  <string name="active911_warn_3_title">Nästa</string>
-  <string name="active911_warn_3_text">
-    Härnäst behöver du återregistrera Cadpage med Active911-server genom att trycka på knappen nedan. Du behöver skriva in din Active911-kod igen som är \n
-    %s\n
-    Det är en bra idé att skriva ner den så att du inte behöver hoppa tillbaka till den här skärmen för att återfå den.
-  </string>
-
-  <string name="active911_warn_reregister_title">Återregistrera med Active911</string>
-
-  <string name="active911_warn_4_title">Nästa</string>
-  <string name="active911_warn_4_text">
-    OK,det där borde fixa det för nu. Sannolikt kommer det att hända igen så fort Active911 släpper en ny version av deras Android-app såvida vi inte kan övertyga dom att fixa det. Om du vill så kan du trycka på \"Eposta Active911 Support\"-knappen nedan för att skriva ett artigt brev och be dom att fixa detta. Om inte, tryck på \"Färdig\" för att hoppa tillbaka till CadPage
-  </string>
-
-  <string name="active911_warn_email_active911_support_title">Contact Active911 Support</string>
-
-  <string name="active911_warn_all_done_title">All Done</string>
-
   <string name="vendor_title">Registrera med %s</string>
   <string name="vendor_text">
     Du verkar få textmeddelanden från %s. Du kan regista dig på deras meddelandetjänst så får du dina larm från dem. På så sätt slipper du en del problem förknippade med textmeddelanden.  

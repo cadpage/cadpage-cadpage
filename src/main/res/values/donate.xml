@@ -317,47 +317,6 @@
     restore Cadpage parsing services.  
   </string>
 
-  <string name="active911_warn_title">Active911 upgrade warning</string>
-  <string name="active911_warn_text">
-    You have installed a version of the Active911 app that will switch delivery of Active911 alerts
-    away from Cadpage to itself the first time it is run.  If you wish to continue processing these
-    alerts with Cadpage, some corrective action is required.
-  </string>
-
-  <string name="active911_warn_2_title">What do I do?</string>
-  <string name="active911_warn_2_text">
-    The first step is to run the Active911 app to make sure that it has performed that switchover.\n
-    \n
-    Select the Launch Active911 button, then use the back button to return to this screen and
-    proceed to the next step.
-  </string>
-
-  <string name="active911_warn_A911_title">Launch Active911 app</string>
-
-  <string name="active911_warn_3_title">Next</string>
-  <string name="active911_warn_3_text">
-    Next you need to reregister Cadpage with the Active911 service, which you can do by pressing
-    the button below.  You will need to enter your Active911 device registration code which is\n
-    %s\n
-    It would be a good idea to write it down so you do not have to jump back to this screen
-    to retrieve it.
-  </string>
-
-  <string name="active911_warn_reregister_title">Reregister with Active911</string>
-
-  <string name="active911_warn_4_title">Next</string>
-  <string name="active911_warn_4_text">
-    OK, that should take care of things for now.  But this is probably going to happen again
-    every time Active911 releases a new version of their Android app unless we can convince them
-    to fix it.  If you like, you can press the \"Email Active911 Support\" button below to generate a polite
-    email to Active911 support asking them to fix this problem.  If not, click \"All Done\" to exit
-    back to Cadpage.
-  </string>
-
-  <string name="active911_warn_email_active911_support_title">Contact Active911 Support</string>
-
-  <string name="active911_warn_all_done_title">All Done</string>
-
   <string name="vendor_title">Register with %s</string>
   <string name="vendor_text">
     You appear to be getting text pages from %s.  You can register to get direct pages from

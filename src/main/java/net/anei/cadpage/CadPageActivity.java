@@ -1,7 +1,7 @@
 package net.anei.cadpage;
 
 import net.anei.cadpage.billing.BillingManager;
-import net.anei.cadpage.donation.Active911WarnEvent;
+import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonationManager;
@@ -226,7 +226,7 @@ public class CadPageActivity extends AppCompatActivity {
         if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
 
         // If a new Active911 client may be highjacking alerts, warn user
-        if (Active911WarnEvent.instance().launch(CadPageActivity.this)) return;
+        if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return;
 
         // Otherwise, launch the release info dialog if it hasn't already been displayed
         String oldRelease = ManagePreferences.release();

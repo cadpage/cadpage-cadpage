@@ -44,7 +44,7 @@ public class VendorManager {
    * Set up Vendor configuration preference screen
    * @param context current context
    * @param pref preference to be set up with vendor config menu
-   * @returns number of vendor preferences added
+   * @return number of vendor preferences added
    */
   public int setupPreference(final Context context, PreferenceScreen pref) {
     
@@ -548,20 +548,10 @@ public class VendorManager {
     return vendor.isEnabled();
   }
 
-  public boolean isWarnActive911() {
-    Vendor vendor = findVendor("Active911");
-    return  vendor.isWarnActive911();
-  }
-
   public String getActive911Code() {
     Vendor vendor = findVendor("Active911");
     if (!vendor.isEnabled()) return null;
     return  vendor.getCode();
-  }
-
-  public boolean forceActive911Registration(Context context) {
-    Vendor vendor = findVendor("Active911");
-    return vendor.forceRegister(context);
   }
 
   public void forceActive911Reregister(Context context) {
