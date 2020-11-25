@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11192020</string>
+  <string name="release_date">11252020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.2.04-14\n
+    v2.2.03-15\n
+    New Locations:\n
+    Mono County, CA\n
+    Grundy County, MO\n
+    \n
+    Location Fixes:\n
+    Allen County, OH\n
+    \n
+    General Fixes:\n
+    Problem registering Cadpage with Active911\n
+    \n
+    v2.2.03-14\n
     New Locations:\n
     Coosa County, AL\n
     Costilla County, CO\n
@@ -63,16 +74,6 @@
     Acadian Ambulance, LA\n
     Wake County, NC\n
     Athens County, OH\n
-    Boone County, WV\n
-    \n
-    v2.2.03-10\n
-    New Locations:\n
-    Tulare County, CA (alt)\n
-    Tolland County, CT (alt)\n
-    Plaquemines Parish, LA\n
-    Nicholas County, WV\n
-    \n
-    Location Fixes:\n
-    Howell County, MO
+    Boone County, WV
   </string>
 </resources>
