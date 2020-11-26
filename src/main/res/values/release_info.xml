@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11252020</string>
+  <string name="release_date">11262020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-16\n
+    New Location:\n
+    Clear Creek County, CO\n
+    Hickman County, KY\n
+    \n
+    Location Fixes:\n
+    Mower County, MN\n
+    Stanly County, NC\n
+    \n
     v2.2.03-15\n
     New Locations:\n
     Mono County, CA\n
@@ -61,19 +70,6 @@
     Williams County, OH\n
     Fayette County, PA\n
     Franklin County, PA\n
-    Lewis County, WA\n
-    \n
-    v2.2.03-11\n
-    New Locations:\n
-    Kings County, CA\n
-    Nicholas County, KY\n
-    McDowell County, WV\n
-    Canmore, AB Canada (alt)\n
-    \n
-    Location Fixes:\n
-    Acadian Ambulance, LA\n
-    Wake County, NC\n
-    Athens County, OH\n
-    Boone County, WV
+    Lewis County, WA
   </string>
 </resources>
