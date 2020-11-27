@@ -14,7 +14,7 @@ import net.anei.cadpage.parsers.MsgParser;
 
 class Active911Vendor extends Vendor {
 
-  private static final Uri WEB_URI = Uri.parse("https://www.active911.com/cadpage_registration");
+  private static final Uri WEB_URI = Uri.parse("https://console.active911.com/cadpage_registration");
   private static final Uri ACCESS_URI = Uri.parse("https://access.active911.com/interface/cadpage_api.php");
   
   Active911Vendor() {
