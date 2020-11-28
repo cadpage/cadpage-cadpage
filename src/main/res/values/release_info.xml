@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11262020</string>
+  <string name="release_date">11282020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-17\n
+    Fixed crash processing some old Stanly County, NC alerts\n
+    \n
     v2.2.03-16\n
     New Location:\n
     Clear Creek County, CO\n
@@ -56,20 +59,5 @@
     Juniata County, PA\n
     Washington County, TN\n
     Grays County, WA\n
-    \n
-    v2.2.03-12\n
-    New Locations:\n
-    Winston County, MS\n
-    \n
-    Location Fixes:\n
-    Marion County, AL\n
-    Weld County, CO\n
-    Baltimore County, MD\n
-    Hoke County, NC\n
-    Mahoning County, OH\n
-    Williams County, OH\n
-    Fayette County, PA\n
-    Franklin County, PA\n
-    Lewis County, WA
   </string>
 </resources>
