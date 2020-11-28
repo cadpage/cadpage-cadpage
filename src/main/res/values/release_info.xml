@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11102020</string>
+  <string name="release_date">11282020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-17\n
+    Fixed crash processing some old Stanly County, NC alerts\n
+    \n
+    v2.2.03-16\n
+    New Location:\n
+    Clear Creek County, CO\n
+    Hickman County, KY\n
+    \n
+    Location Fixes:\n
+    Mower County, MN\n
+    Stanly County, NC\n
+    \n
+    v2.2.03-15\n
+    New Locations:\n
+    Mono County, CA\n
+    Grundy County, MO\n
+    \n
+    Location Fixes:\n
+    Allen County, OH\n
+    \n
+    General Fixes:\n
+    Problem registering Cadpage with Active911\n
+    \n
+    v2.2.03-14\n
+    New Locations:\n
+    Coosa County, AL\n
+    Costilla County, CO\n
+    Elbert County, GA\n
+    Montgomery County, KY\n
+    Logan County, OH (alt)\n
+    Carter County, OK (alt)\n
+    Smith County, TN\n
+    Madison County, VA\n
+    \n
+    Location Fixes:\n
+    Madison County, ID\n
+    Northampton County, NC\n
+    \n
     v2.2.03-13\n
     New Locations:\n
     Hendricks County, IN\n
@@ -21,55 +59,5 @@
     Juniata County, PA\n
     Washington County, TN\n
     Grays County, WA\n
-    \n
-    v2.2.03-12\n
-    New Locations:\n
-    Winston County, MS\n
-    \n
-    Location Fixes:\n
-    Marion County, AL\n
-    Weld County, CO\n
-    Baltimore County, MD\n
-    Hoke County, NC\n
-    Mahoning County, OH\n
-    Williams County, OH\n
-    Fayette County, PA\n
-    Franklin County, PA\n
-    Lewis County, WA\n
-    \n
-    v2.2.03-11\n
-    New Locations:\n
-    Kings County, CA\n
-    Nicholas County, KY\n
-    McDowell County, WV\n
-    Canmore, AB Canada (alt)\n
-    \n
-    Location Fixes:\n
-    Acadian Ambulance, LA\n
-    Wake County, NC\n
-    Athens County, OH\n
-    Boone County, WV\n
-    \n
-    v2.2.03-10\n
-    New Locations:\n
-    Tulare County, CA (alt)\n
-    Tolland County, CT (alt)\n
-    Plaquemines Parish, LA\n
-    Nicholas County, WV\n
-    \n
-    Location Fixes:\n
-    Howell County, MO\n
-    \n
-    v2.2.03-09\n
-    New Locations:\n
-    Craig County, VA\n
-    \n
-    Location Fixes:\n
-    Pulaski County, AR\n
-    Shasta County, CA\n
-    Webster County, MO\n
-    Franklin County, PA\n
-    York County, SC\n
-    Rhea County, TN\n
   </string>
 </resources>
