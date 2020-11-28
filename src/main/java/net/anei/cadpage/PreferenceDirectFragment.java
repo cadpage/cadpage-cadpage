@@ -2,6 +2,7 @@ package net.anei.cadpage;
 
 import android.os.Bundle;
 
+import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.vendors.VendorManager;
 
@@ -41,9 +42,13 @@ public class PreferenceDirectFragment extends PreferenceFragment implements Loca
     Preference locPreference = findPreference(getString(R.string.pref_category_location_key));
     assert locPreference != null;
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
+  }
 
-    Preference pref = findPreference(getString(R.string.pref_report_position_key));
-    assert pref != null;
-    pref.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkReportPosition((ListPreference) preference, (String) newValue));
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    // Launch location tracking permission enable event if required
+    LocationTrackingEvent.instance().launch(getActivity());
   }
 }

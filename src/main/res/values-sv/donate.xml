@@ -399,6 +399,10 @@
     Jag behöver inte att Cadpage hanterar SMS
   </string>
 
+  <string name="donate_fix_msg_support_title"> <!-- Translate -->
+    Fix Cadpage settings
+  </string>
+
   <string name="check_popup_title">
     Popup konfigurationsproblem
   </string>

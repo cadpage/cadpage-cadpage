@@ -1505,20 +1505,18 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   private static final int PERM_REQ_INITIAL = 1;
   private static final int PERM_REQ_SMS_MMS = 2;
-  private static final int PERM_REQ_REPORT_POSITION = 3;
-  private static final int PERM_REQ_RESP_TYPE_BTN1 = 5;
-//  private static final int PERM_REQ_RESP_TYPE_BTN2 = 6;
-//  private static final int PERM_REQ_RESP_TYPE_BTN3 = 7;
-//  private static final int PERM_REQ_RESP_TYPE_BTN4 = 8;
-//  private static final int PERM_REQ_RESP_TYPE_BTN5 = 9;
-//  private static final int PERM_REQ_RESP_TYPE_BTN6 = 10;
-  private static final int PERM_REQ_NO_SHOW_IN_CALL = 11;
-  private static final int PERM_REQ_PHONE_INFO = 12;
-  private static final int PERM_REQ_LOCATION_TRACKING = 13;
-  private static final int PERM_REQ_USER_ALERT_SOUND = 14;
-  private static final int PERM_REQ_NOTIFY_ABORT = 15;
-  private static final int PERM_APP_MAP_OPTION = 16;
-  private static final int PERM_REQ_LIMIT = 16;
+  private static final int PERM_REQ_RESP_TYPE_BTN1 = 3;
+//  private static final int PERM_REQ_RESP_TYPE_BTN2 = 4;
+//  private static final int PERM_REQ_RESP_TYPE_BTN3 = 5;
+//  private static final int PERM_REQ_RESP_TYPE_BTN4 = 6;
+//  private static final int PERM_REQ_RESP_TYPE_BTN5 = 7;
+//  private static final int PERM_REQ_RESP_TYPE_BTN6 = 8;
+  private static final int PERM_REQ_NO_SHOW_IN_CALL = 9;
+  private static final int PERM_REQ_PHONE_INFO = 11;
+  private static final int PERM_REQ_USER_ALERT_SOUND = 12;
+  private static final int PERM_REQ_NOTIFY_ABORT = 13;
+  private static final int PERM_APP_MAP_OPTION = 14;
+  private static final int PERM_REQ_LIMIT = 14;
   
   private static final PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
@@ -1807,39 +1805,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       return value;
     }
   }
-  
-  /********************************************************************
-   * Permission checking the report position preference
-   ********************************************************************/
-  public static boolean checkReportPosition(ListPreference pref, String value) {
-    return reportPositionChecker.check(pref, value);
-  }
-  
-  private static final ReportPositionChecker reportPositionChecker = new ReportPositionChecker();
-  
-  @SuppressWarnings("WeakerAccess")
-  private static class ReportPositionChecker extends ListPermissionChecker {
-    
-    public ReportPositionChecker() {
-      super(PERM_REQ_REPORT_POSITION, R.string.pref_report_position_key);
-    }
 
-    @Override
-    protected String checkPermission(String value) {
-      
-      // A Y (always) value required the ACCESS_FINE_LOCATION permission
-      // A A (ask) value will request the permission only when the users requests location tracking
-      if (value.equals("N")) return null;
-      if (value.equals("A") && !VendorManager.instance().isActive911Active()) return null;
-
-      // We need to check two permissions, and cannot use the && shortcut because the checkRequestPermission
-      // method has necessary side effects requiring that both calls be made
-      boolean good1 = checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
-      boolean good2 = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
-      return good1 && good2 ? null : "N";
-    }
-  }
-  
   /********************************************************************
    * Permission checking the response button type preference
    ********************************************************************/
@@ -2264,33 +2230,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      */
     protected abstract V checkPermission(V value);
   }
-  
-  /*************************************************************************
-   * Permission checking when user requests run time location tracking
-   ************************************************************************/
-  public static boolean checkPermLocationTracking(PermissionAction action) {
-    return locationTrackingChecker.check(action);
-  }
-  
-  private static final LocationTrackingChecker locationTrackingChecker = new LocationTrackingChecker();
-  
-  private static class LocationTrackingChecker extends ActionPermissionChecker {
-    
-    public LocationTrackingChecker() {
-      super(PERM_REQ_LOCATION_TRACKING);
-    }
-    
-    public boolean check(PermissionAction action) {
-      return super.check(action, true);
-    }
 
-    @Override
-    protected void checkPermission() {
-      checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
-      checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
-    }
-  }
-  
   /*************************************************************************
    * Permission checking for all actions that require phone information
    ************************************************************************/

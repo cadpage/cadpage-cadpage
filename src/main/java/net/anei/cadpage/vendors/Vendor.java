@@ -15,6 +15,7 @@ import net.anei.cadpage.HttpService.HttpRequest;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.donation.PagingProfileEvent;
 import net.anei.cadpage.donation.UserAcctManager;
@@ -792,6 +793,10 @@ abstract class Vendor {
     this.token = token;
     this.emailAddress = emailAddress;
     saveStatus();
+
+    // If Active911 was just enabled, see if we need to ask for the permissions needed to
+    // support location tracking
+    if (enabled) LocationTrackingEvent.instance().launch(context);
 
     boolean showProfile = (enabled && changeEmail); 
     if (showProfile) PagingProfileEvent.instance().open(context);

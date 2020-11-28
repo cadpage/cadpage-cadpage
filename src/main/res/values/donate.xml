@@ -567,6 +567,36 @@
     Fix Cadpage settings
   </string>
 
+  <string name="location_tracking_title">
+    Location Tracking Alert
+  </string>
+
+  <string name="location_tracking_text">
+    When you respond to an Active911 alert, Cadpage can report your current real time location so
+    it can be displayed on the Active911 map display.  Enabling this feature will require changing
+    you location tracking permissions.
+  </string>
+
+  <string name="location_tracking_on_title">
+    Enable location tracking permissions
+  </string>
+
+  <string name="location_tracking_on_text">
+    For this to work properly, you must allow location access all of the time.\n
+    \n
+    Cadpage will collect location data to support this feature even when Cadpage is closed or not
+    visible because the map/navigation app is running.  Location data will never be collected for
+    longer than 20 min after the alert is received.
+  </string>
+
+  <string name="location_tracking_on2_title">
+    Really enable location tracking permissions
+  </string>
+
+  <string name="location_tracking_off_title">
+    Turn off location tracking
+  </string>
+
   <string name="check_popup_title">
     Popup Configuration Problem
   </string>

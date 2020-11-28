@@ -56,16 +56,9 @@ public class TrackingPromptActivity extends Safe40Activity {
     button.setOnClickListener(new OnClickListener(){
       @Override
       public void onClick(View view) {
-        ManagePreferences.checkPermLocationTracking(new ManagePreferences.PermissionAction(){
-          @Override
-          public void run(boolean ok, String[] permissions, int[] granted) {
-            if (ok) {
-              if (rememberBox.isChecked()) ManagePreferences.setReportPosition("Y");
-              TrackingService.addLocationRequest(TrackingPromptActivity.this, url, duration, minDist, minTime);
-              finish();
-            }
-          }
-        });
+        if (rememberBox.isChecked()) ManagePreferences.setReportPosition("Y");
+        TrackingService.addLocationRequest(TrackingPromptActivity.this, url, duration, minDist, minTime);
+        finish();
       }
     });
     
@@ -90,10 +83,17 @@ public class TrackingPromptActivity extends Safe40Activity {
    */
   static public void addLocationRequest(Context context, String url, int duration, int minDist, int minTime) {
     if (url == null) return;
+
     String opt = ManagePreferences.reportPosition();
+    if (opt.equals("N")) return;
+
+    // Shouldn't be possible to get here without enabling the fine location permission,
+    // but we had better check
+    if (! ManagePreferences.getPermissionManager().isGranted(context, PermissionManager.ACCESS_FINE_LOCATION)) return;
+
     if (opt.equals("Y")) {
       TrackingService.addLocationRequest(context, url, duration, minDist, minTime);
-    } else if (!opt.equals("N")) {
+    } else  {
       Intent intent = new Intent(context, TrackingPromptActivity.class);
       intent.putExtra(EXTRA_URL, url);
       intent.putExtra(EXTRA_DURATION, duration);
