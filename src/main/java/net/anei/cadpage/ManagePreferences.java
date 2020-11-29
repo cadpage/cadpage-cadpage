@@ -16,6 +16,7 @@ import java.util.Stack;
 import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.parsers.ManageParsers;
@@ -2552,6 +2553,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     });
 
     registerListener(R.string.pref_show_history_address_key, (String key, Object newVal) -> SmsMessageQueue.getInstance().notifyDataChange());
+
+    registerListener(R.string.pref_report_position_key, (String key, Object newVal) -> {
+      if (newVal instanceof String && ! "N".equals(newVal)) {
+        LocationTrackingEvent.instance().launch(CadPageApplication.getContext());
+      }
+    });
   }
 
   @Override

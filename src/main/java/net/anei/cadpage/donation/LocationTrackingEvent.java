@@ -37,7 +37,7 @@ public class LocationTrackingEvent extends DonateScreenEvent {
            ! (PermissionManager.isGranted(context, PermissionManager.ACCESS_FINE_LOCATION) &&
               (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || PermissionManager.isGranted(context, PermissionManager.ACCESS_BACKGROUND_LOCATION)));
   }
-  
+
   private static final LocationTrackingEvent instance = new LocationTrackingEvent();
   
   public static LocationTrackingEvent instance() {

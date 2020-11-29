@@ -1,5 +1,9 @@
 package net.anei.cadpage.donation;
 
+import android.content.Context;
+import android.os.Build;
+
+import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.R;
 
 /**
@@ -22,6 +26,20 @@ public class LocationTrackingOnEvent extends DonateScreenEvent {
   @Override
   protected boolean overrideWindowTitle() {
     return true;
+  }
+
+  @Override
+  protected Object[] getTextParms(int type) {
+    if (type == PARM_TEXT) {
+      Context context = CadPageApplication.getContext();
+      String parm = context.getText(R.string.location_tracking_on_base_text).toString();
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        int resId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ? R.string.location_tracking_on_A11_text : R.string.location_tracking_on_A10_text;
+        parm = context.getText(resId).toString() + "\n\n" + parm;
+      }
+      return new Object[]{parm};
+    }
+    return null;
   }
 
   @Override

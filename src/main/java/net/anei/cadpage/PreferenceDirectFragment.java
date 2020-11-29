@@ -43,12 +43,4 @@ public class PreferenceDirectFragment extends PreferenceFragment implements Loca
     assert locPreference != null;
     locPreference.setSummaryProvider(locMgr.getSummaryProvider());
   }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-
-    // Launch location tracking permission enable event if required
-    LocationTrackingEvent.instance().launch(getActivity());
-  }
 }
