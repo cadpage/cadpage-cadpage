@@ -1,6 +1,8 @@
 package net.anei.cadpage.donation;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 
 import net.anei.cadpage.CadPageApplication;
@@ -40,11 +42,6 @@ public class LocationTrackingOnEvent extends DonateScreenEvent {
       return new Object[]{parm};
     }
     return null;
-  }
-
-  @Override
-  public void onRestart(DonateActivity activity) {
-    if (!LocationTrackingEvent.instance().isEnabled()) closeEvents(activity);
   }
 
   private static final LocationTrackingOnEvent instance = new LocationTrackingOnEvent();

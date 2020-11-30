@@ -1517,7 +1517,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   private static final int PERM_REQ_USER_ALERT_SOUND = 12;
   private static final int PERM_REQ_NOTIFY_ABORT = 13;
   private static final int PERM_APP_MAP_OPTION = 14;
-  private static final int PERM_REQ_LIMIT = 14;
+  private static final int PERM_REQ_LOCATION_TRACKING =  15;
+  private static final int PERM_REQ_LIMIT = 15;
   
   private static final PermissionChecker[] checkers = new PermissionChecker[PERM_REQ_LIMIT];
 
@@ -1956,6 +1957,33 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
   }
 
+  /*************************************************************************
+   * Permission checking when user requests run time location tracking
+   ************************************************************************/
+  public static boolean checkPermLocationTracking(PermissionAction action) {
+    return locationTrackingChecker.check(action);
+  }
+
+  private static final LocationTrackingChecker locationTrackingChecker = new LocationTrackingChecker();
+
+  private static class LocationTrackingChecker extends ActionPermissionChecker {
+
+    public LocationTrackingChecker() {
+      super(PERM_REQ_LOCATION_TRACKING);
+    }
+
+    public boolean check(PermissionAction action) {
+      return super.check(action, true);
+    }
+
+    @Override
+    protected void checkPermission() {
+      checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
+        checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
+      }
+    }
+  }
 
   /********************************************************************************
    * Generic permission checker used to handle ListPreference preference values
