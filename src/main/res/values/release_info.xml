@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11282020</string>
+  <string name="release_date">12052020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-19\n
+    General Fixes:\n
+    Fixed problem with additional info request not working for Active911 alerts.\n
+    \n
+    v2.2.03-18\n
+    New Locations:\n
+    San Luis Obispo County, CA (alt)\n
+    Hawkins County, TN\n
+    \n
+    Location Fixes:\n
+    Douglas County, CO\n
+    Hartford County, CT\n
+    Litchfield County, CT\n
+    New Haven County, CT\n
+    Windham County, CT\n
+    Lancaster County, PA\n
+    Lebanon County, PA\n
+    Franklin County, TX\n
+    \n
     v2.2.03-17\n
     Fixed crash processing some old Stanly County, NC alerts\n
     \n
@@ -25,39 +44,6 @@
     Allen County, OH\n
     \n
     General Fixes:\n
-    Problem registering Cadpage with Active911\n
-    \n
-    v2.2.03-14\n
-    New Locations:\n
-    Coosa County, AL\n
-    Costilla County, CO\n
-    Elbert County, GA\n
-    Montgomery County, KY\n
-    Logan County, OH (alt)\n
-    Carter County, OK (alt)\n
-    Smith County, TN\n
-    Madison County, VA\n
-    \n
-    Location Fixes:\n
-    Madison County, ID\n
-    Northampton County, NC\n
-    \n
-    v2.2.03-13\n
-    New Locations:\n
-    Hendricks County, IN\n
-    Harrison County, MS (alt)\n
-    Laclede County, MO\n
-    Oklahoma County, OK (alt)\n
-    \n
-    Location Fixes:\n
-    Shelby County, AL\n
-    Madison County, IN\n
-    Morgan County, IN\n
-    Wayne County, IN\n
-    Bethlehem, NY\n
-    Lincoln County, NC\n
-    Juniata County, PA\n
-    Washington County, TN\n
-    Grays County, WA\n
+    Problem registering Cadpage with Active911
   </string>
 </resources>

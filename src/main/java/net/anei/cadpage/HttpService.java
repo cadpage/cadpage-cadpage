@@ -6,23 +6,14 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
 import net.anei.cadpage.TopExceptionHandler.TopExceptionThread;
 
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
-import android.app.Notification;
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -110,63 +101,58 @@ public class HttpService extends Service {
         } catch (MalformedURLException ex) {
           Log.e(ex.getMessage());
         }
-        
-        // If we have a URL, connnect to it
-        if (url == null) {
-          Log.i("Sending:" + uri.toString());
-          status = 400;
-          result = "Bad request:" + uri.toString();
-        } else {
-          Log.i("Sending:" + url.toString());
-          HttpURLConnection connect = null;
-          InputStream is = null;
-          try {
-            connect = (HttpURLConnection)url.openConnection();
-            connect.setConnectTimeout(connectTimeout);
-            connect.setReadTimeout(readTimeout);
-            Log.v("ConnectTimeout:" + connect.getConnectTimeout());
-            Log.v("ReadTimeout:" + connect.getReadTimeout());
-            connect.connect();
-            status = connect.getResponseCode();
-            result = connect.getResponseMessage();
-            
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            is = connect.getInputStream();
-            int b;
-            while ((b = is.read()) >= 0) os.write(b);
-            content = os.toString();
-          } 
-          
-          catch (IOException ex) {
-            status = 408;
-            result = "IO Error";
-          }
-          catch (SecurityException ex) {
-            status = 408;
-            result = "Security Exception";
-          }
-          finally {
-            if (is != null)
-              try { is.close(); } catch (IOException ex) {}
-            if (connect != null) connect.disconnect();
-          }
-          Log.i("Result:" + status + ": " + result + '\n' + content);
+      }
+
+      // If we have a URL, connect to it
+      if (url == null) {
+        Log.i("Sending:" + uri.toString());
+        status = 400;
+        result = "Bad request:" + uri.toString();
+      } else {
+        Log.i("Sending:" + url.toString());
+        HttpURLConnection connect = null;
+        InputStream is = null;
+        try {
+          connect = (HttpURLConnection)url.openConnection();
+          connect.setConnectTimeout(connectTimeout);
+          connect.setReadTimeout(readTimeout);
+          Log.v("ConnectTimeout:" + connect.getConnectTimeout());
+          Log.v("ReadTimeout:" + connect.getReadTimeout());
+          connect.connect();
+          status = connect.getResponseCode();
+          result = connect.getResponseMessage();
+
+          ByteArrayOutputStream os = new ByteArrayOutputStream();
+          is = connect.getInputStream();
+          int b;
+          while ((b = is.read()) >= 0) os.write(b);
+          content = os.toString();
         }
-        
-        // If ansync result requested, run the result status on our worker thread
-        if (! uiResult) {
-          process();
+
+        catch (IOException ex) {
+          status = 408;
+          result = "IO Error";
         }
-        
-        // Otherwise, run result processing on the UI thread
-        else {
-          CadPageApplication.runOnMainThread(new Runnable(){
-            @Override
-            public void run() {
-              process();
-            }
-          });
+        catch (SecurityException ex) {
+          status = 408;
+          result = "Security Exception";
         }
+        finally {
+          if (is != null)
+            try { is.close(); } catch (IOException ignored) {}
+          if (connect != null) connect.disconnect();
+        }
+        Log.i("Result:" + status + ": " + result + '\n' + content);
+      }
+
+      // If async result requested, run the result status on our worker thread
+      if (! uiResult) {
+        process();
+      }
+
+      // Otherwise, run result processing on the UI thread
+      else {
+        CadPageApplication.runOnMainThread(this::process);
       }
     }
     
@@ -207,7 +193,7 @@ public class HttpService extends Service {
   private static PowerManager.WakeLock sWakeLock = null;
   
   // Master request queue
-  private static final Queue<HttpRequest> reqQueue =new LinkedList<HttpRequest>();
+  private static final Queue<HttpRequest> reqQueue = new LinkedList<>();
 
   @Override
   public void onCreate() {
@@ -306,6 +292,7 @@ public class HttpService extends Service {
     }
   }
 
+  @SuppressLint("InvalidWakeLockTag")
   private static void holdPowerLock(Context context) {
     synchronized (HttpService.class) {
       if (sWakeLock == null) {
@@ -313,7 +300,7 @@ public class HttpService extends Service {
         sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".HttpService");
         sWakeLock.setReferenceCounted(false);
       }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
+      if(!sWakeLock.isHeld()) sWakeLock.acquire(10*60*1000L /*10 minutes*/);
     }
   }
 
