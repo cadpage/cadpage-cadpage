@@ -9,6 +9,7 @@ import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.donation.UserAcctManager;
 import android.content.Context;
@@ -541,6 +542,15 @@ public class VendorManager {
   public void updateLastContactTime(String vendorCode, String msg) {
     Vendor vendor = findVendor(vendorCode);
     if (vendor != null) vendor.updateLastContactTime(msg);
+  }
+
+  /**
+   * @return developer test message or null if none
+   */
+  public SmsMmsMessage getTestMessage(String vendorCode, String msg) {
+    Vendor vendor = findVendor(vendorCode);
+    if (vendor == null) return null;
+    return vendor.getTestMessage(msg);
   }
 
   public boolean isActive911Active() {

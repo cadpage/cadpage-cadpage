@@ -10,10 +10,12 @@ import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.NoticeActivity;
+import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.HttpService.HttpRequest;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.donation.DeveloperToolsManager;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.MainDonateEvent;
@@ -406,6 +408,16 @@ abstract class Vendor {
    */
   protected boolean isTestMsg(String msg) {
     return false;
+  }
+
+  /**
+   * Returns test message to be processed instead of the generic test message
+   * @param msg message text content
+   * @return developer test message to be processed, or null if none
+   */
+  protected SmsMmsMessage getTestMessage(String msg) {
+    if (!isTestMsg(msg)) return null;
+    return DeveloperToolsManager.getTestMessage();
   }
   
   void updateLastContactTime(String msg) {
