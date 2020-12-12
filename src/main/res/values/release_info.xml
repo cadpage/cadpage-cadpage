@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12082020</string>
+  <string name="release_date">12112020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.03-21\n
+    Location Fixes:\n
+    Teller County, CO\n
+    Carter County, KY\n
+    Carroll County, MD\n
+    Warren County, MO\n
+    Cambria County, PA\n
+    \n
     v2.2.03-20\n
     New Locations:\n
     Schoolcraft County, MI\n
@@ -34,15 +42,6 @@
     Franklin County, TX\n
     \n
     v2.2.03-17\n
-    Fixed crash processing some old Stanly County, NC alerts\n
-    \n
-    v2.2.03-16\n
-    New Location:\n
-    Clear Creek County, CO\n
-    Hickman County, KY\n
-    \n
-    Location Fixes:\n
-    Mower County, MN\n
-    Stanly County, NC
+    Fixed crash processing some old Stanly County, NC alerts
   </string>
 </resources>
