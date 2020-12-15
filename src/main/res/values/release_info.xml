@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12112020</string>
+  <string name="release_date">12152020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.04-01\n
+    For Active911 users, this version looses the ability to reliably report your location to
+    other Active911 users.  Terribly sorry, but that is the price we have to pay to get this
+    distributed in Google Play Store.  Still working on finding a better solution.\n
+    \n
     v2.2.03-21\n
     Location Fixes:\n
     Teller County, CO\n
