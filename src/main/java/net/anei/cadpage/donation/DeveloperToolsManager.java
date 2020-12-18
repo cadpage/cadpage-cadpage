@@ -325,15 +325,15 @@ public class DeveloperToolsManager {
     return new SmsMmsMessage(
         "GCM",
         "",
-        "CAR FIRE;;HWY 20/KINGS VALLEY HWY;;;PHILOMATH;3394;;PFD2;ODFS,PHILO,W232;Radio Channel: MP  [10/26/20 09:24:34 THOMPSONA]\n;;5304011002;10/26/2020 09:24:00;2020168077;",
+        "SMALL MISC FIRE;;HWY 20/MP 41;;;PHILOMATH;2986;;BLF;BLDGT,ODFS,PHILO;Radio Channel: MP  [12/06/20 09:06:36 JONESM]\n;;4152462121;12/06/2020 09:05:16;2020190749;",
         System.currentTimeMillis(),
         "US/OR/Benton,Utility/General/Default",
         "Active911",
         "AL30/8/10[Not Responding;Response201=201;Response202=202;Response203=203;ResponseAck=Ack;ResponseUnvl=Unvl]",
-        "https://access.active911.com/interface/cadpage_api.php?q=a3",
+        "https://access.active911.com/interface/cadpage_api.php?q=a13QeG3",
         "-1",
         null,
-        "http://active911.com/a3");
+        "http://active911.com/a13QeG3");
 
   }
 
