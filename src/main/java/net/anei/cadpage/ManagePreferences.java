@@ -1834,8 +1834,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // We need to check two permissions, and cannot use the && shortcut because the checkRequestPermission
       // method has necessary side effects requiring that both calls be made
       boolean good1 = checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
-//      boolean good2 = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
-      return good1 ? null : "A";
+      boolean good2 = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
+      return good1 && good2 ? null : "A";
     }
   }
   
@@ -2286,7 +2286,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     protected void checkPermission() {
       checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
-//      checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
+      checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);
     }
   }
   

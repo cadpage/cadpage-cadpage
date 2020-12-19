@@ -15,7 +15,7 @@ public class PermissionManager {
   public static final String READ_SMS = "android.permission.READ_SMS";
   public static final String GET_ACCOUNTS = "android.permission.GET_ACCOUNTS";
   public static final String ACCESS_FINE_LOCATION = "android.permission.ACCESS_FINE_LOCATION";
-  // public static final String ACCESS_BACKGROUND_LOCATION = "android.permission.ACCESS_BACKGROUND_LOCATION";
+  public static final String ACCESS_BACKGROUND_LOCATION = "android.permission.ACCESS_BACKGROUND_LOCATION";
   public static final String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
   public static final String WRITE_EXTERNAL_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
   public static final String RECEIVE_SMS = "android.permission.RECEIVE_SMS";
@@ -271,7 +271,7 @@ public class PermissionManager {
     CALL_PHONE,
     READ_LOGS,
     ACCESS_FINE_LOCATION,
-//    ACCESS_BACKGROUND_LOCATION,
+    ACCESS_BACKGROUND_LOCATION,
     READ_EXTERNAL_STORAGE,
     WRITE_EXTERNAL_STORAGE,
     MODIFY_AUDIO_SETTINGS,
