@@ -53,6 +53,8 @@ public class CadPageActivity extends AppCompatActivity {
 
   private static boolean initializing = false;
 
+  private static boolean startup = false;
+
   private boolean needSupportApp;
 
   private boolean splitScreen;
@@ -207,6 +209,7 @@ public class CadPageActivity extends AppCompatActivity {
       // it in a Runnable object to be executed when the initial permission checking is complete
       final boolean init = initializing;
       ManagePreferences.checkInitialPermissions(() -> {
+        startup = true;
         needSupportApp = SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0;
         if (needSupportApp) return;
 
@@ -335,13 +338,17 @@ public class CadPageActivity extends AppCompatActivity {
 
     // If we **REALLY** need the support app, and we asked the user
     // to install it, make sure that it has been installed and opened and
-    // everything is OK.
-    if (!BuildConfig.MSG_ALLOWED && needSupportApp) {
+    // everything is OK.  However, we do not want to call this when we are
+    // initialiazing because that will duplicate the call previousily made in
+    // startup()
+    if (!BuildConfig.MSG_ALLOWED && !startup && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
     }
 
     // If user switched to/from split screen mode, recreate this activity
     if (splitScreen != isSplitScreenConfig()) recreate();
+
+    startup = false;
   }
 
   protected void onPause() {
