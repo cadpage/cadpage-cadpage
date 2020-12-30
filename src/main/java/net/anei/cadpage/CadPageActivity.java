@@ -169,6 +169,7 @@ public class CadPageActivity extends AppCompatActivity {
    */
   @Override
   protected void onNewIntent(Intent intent) {
+    Log.v("CadPageActivity.onNewIntent()");
     super.onNewIntent(intent);
     setIntent(intent);
     
