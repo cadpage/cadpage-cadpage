@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12152020</string>
+  <string name="release_date">12302020</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.04-03\n
+    Location Fixes:\n
+    Escambia County, FL\n
+    Avoyelles Parish, LA\n
+    Atlantic County, NJ\n
+    Charleston County, SC\n
+    Pierce County, WA\n
+    \n
     v2.2.04-02\n
     Ability to report Active911 user locations has been restored, at least for now\n
     \n
@@ -44,21 +52,6 @@
     \n
     v2.2.03-19\n
     General Fixes:\n
-    Fixed problem with additional info request not working for Active911 alerts.\n
-    \n
-    v2.2.03-18\n
-    New Locations:\n
-    San Luis Obispo County, CA (alt)\n
-    Hawkins County, TN\n
-    \n
-    Location Fixes:\n
-    Douglas County, CO\n
-    Hartford County, CT\n
-    Litchfield County, CT\n
-    New Haven County, CT\n
-    Windham County, CT\n
-    Lancaster County, PA\n
-    Lebanon County, PA\n
-    Franklin County, TX
+    Fixed problem with additional info request not working for Active911 alerts.
   </string>
 </resources>
