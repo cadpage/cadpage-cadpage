@@ -92,7 +92,7 @@ class Active911Vendor extends Vendor {
         sb.append(loc);
       }
     }
-    return new String[]{sb.toString(), missingParsers.toString()};
+    return new String[]{sb.toString(), missingParsers == null ? null : missingParsers.toString()};
   }
 
   @Override
