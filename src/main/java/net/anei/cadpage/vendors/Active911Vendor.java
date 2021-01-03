@@ -7,14 +7,13 @@ import java.util.Set;
 
 import android.net.Uri;
 
-import net.anei.cadpage.Log;
 import net.anei.cadpage.R;
 import net.anei.cadpage.parsers.Active911ParserTable;
 import net.anei.cadpage.parsers.MsgParser;
 
 class Active911Vendor extends Vendor {
 
-  private static final Uri WEB_URI = Uri.parse("https://www.active911.com/cadpage_registration");
+  private static final Uri WEB_URI = Uri.parse("https://console.active911.com/cadpage_registration");
   private static final Uri ACCESS_URI = Uri.parse("https://access.active911.com/interface/cadpage_api.php");
   
   Active911Vendor() {
@@ -40,13 +39,10 @@ class Active911Vendor extends Vendor {
   
   @Override
   String getResponseMenu(int index) {
-    switch (index) {
-    case 1:
+    if (index == 1) {
       return "R=Respond;A=Arrive;Y=Available;N=Unavailable;C=Cancel";
-    
-    default:
-      return null;
     }
+    return null;
   }
 
   @Override
@@ -72,9 +68,9 @@ class Active911Vendor extends Vendor {
   
   @Override
   String[] convertLocationCode(String location) {
-    String missingParsers = null;
+    StringBuilder missingParsers = null;
     StringBuilder sb = new StringBuilder();
-    Set<String> parserSet = new HashSet<String>();
+    Set<String> parserSet = new HashSet<>();
     
     for (String loc : location.split(",")){
       loc = loc.trim();
@@ -82,9 +78,9 @@ class Active911Vendor extends Vendor {
         String newLoc = Active911ParserTable.convert(loc);
         if (newLoc == null) {
           if (missingParsers == null) {
-            missingParsers = loc;
+            missingParsers = new StringBuilder(loc);
           } else {
-            missingParsers = missingParsers + ',' + loc;
+            missingParsers.append(',').append(loc);
           }
           newLoc = "General";
         }
@@ -96,23 +92,12 @@ class Active911Vendor extends Vendor {
         sb.append(loc);
       }
     }
-    return new String[]{sb.toString(), missingParsers};
+    return new String[]{sb.toString(), missingParsers == null ? null : missingParsers.toString()};
   }
 
   @Override
   protected boolean isTestMsg(String msg) {
     return msg.equals("This is a test message from Active911");
-  }
-
-  @Override
-  protected String getBadPackageName() {
-    return "com.active911.app";
-  }
-
-  @Override
-  protected boolean isBadPackageVersion(int version) {
-    Log.v("Active911 version:" + version);
-    return false;
   }
 
   @Override
@@ -149,55 +134,55 @@ class Active911Vendor extends Vendor {
 
 
 
-  private static final Set<String> PHONE_SET = new HashSet<String>(Arrays.asList(
-      "15123376259",
-      "19145173586",
-      "17272191279",
-      "15417047704",
-      "18434800223",
-      "17172203767",
-      "13364058803",
-      "17783836218",
-      "12027690862",
-      "12032083335",
-      "12052010901",
-      "12072093315",
-      "12706810905",
-      "12765240572",
-      "13046587002",
-      "13072222635",
-      "13134010041",
-      "13172967331",
-      "13603424100",
-      "14012973063",
-      "14029881004",
-      "14046926092",
-      "14052534266",
-      "14062244055",
-      "14242208369",
-      "14433202484",
-      "14805356958",
-      "15013131847",
-      "15046621719",
-      "15052065036",
-      "15132024579",
-      "15744008669",
-      "16013452163",
-      "16052207124",
-      "16086207759",
-      "16093087467",
-      "16122000004",
-      "16156252978",
-      "16363233043",
-      "16418470032",
-      "16783903000",
-      "17012044024",
-      "17196025911",
-      "17572062724",
-      "17736146018",
-      "17752307392",
-      "18019006459",
-      "18022304149",
-      "19134989068",
-      "19783931289"));
+  private static final Set<String> PHONE_SET = new HashSet<>(Arrays.asList(
+          "15123376259",
+          "19145173586",
+          "17272191279",
+          "15417047704",
+          "18434800223",
+          "17172203767",
+          "13364058803",
+          "17783836218",
+          "12027690862",
+          "12032083335",
+          "12052010901",
+          "12072093315",
+          "12706810905",
+          "12765240572",
+          "13046587002",
+          "13072222635",
+          "13134010041",
+          "13172967331",
+          "13603424100",
+          "14012973063",
+          "14029881004",
+          "14046926092",
+          "14052534266",
+          "14062244055",
+          "14242208369",
+          "14433202484",
+          "14805356958",
+          "15013131847",
+          "15046621719",
+          "15052065036",
+          "15132024579",
+          "15744008669",
+          "16013452163",
+          "16052207124",
+          "16086207759",
+          "16093087467",
+          "16122000004",
+          "16156252978",
+          "16363233043",
+          "16418470032",
+          "16783903000",
+          "17012044024",
+          "17196025911",
+          "17572062724",
+          "17736146018",
+          "17752307392",
+          "18019006459",
+          "18022304149",
+          "19134989068",
+          "19783931289"));
 }

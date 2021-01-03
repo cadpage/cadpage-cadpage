@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceManager;
 
 /**
  * Base class for preference fragment classes that need to delete unneeded

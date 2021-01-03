@@ -1,73 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09242020</string>
+  <string name="release_date">01022021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.2.03-06\n
+    v2.2.04-04\n
     New Locations:\n
-    Magoffin County, KY\n
-    St Louis County, MO (alt)\n
-    Canadian County, OK (alt)\n
+    Telfair County, GA\n
+    Woods County, OK\n
     \n
     Location Fixes:\n
-    Hoover, AL\n
-    Hayward, CA\n
-    Larimer County, CO\n
-    Anne Arundel County, MD\n
-    Catawba County, NC\n
-    Washington County, OH\n
-    Calloway County, KY\n
-    Cumberland County, PA\n
-    Travis County, TX\n
-    \n
-    v2.2.03-04\n
-    New Locations:\n
-    Auglaize County, OH (alt)\n
-    \n
-    Location Fixes:\n
-    Butte County, CA\n
-    Litchfield County, CT\n
-    Alcona County, MI\n
-    Warren County, OH\n
-    Washington County, OH\n
-    Van Alstyne, TX\n
-    Surry County, VA\n
-    King County, WA\n
-    \n
-    v2.2.03-03\n
-    New Locations:\n
-    Elliott County, KY\n
-    \n
-    Location Fixes:\n
-    Boulder County, CO\n
-    Parke County, IN\n
-    Daviess County, KY\n
-    Washington County, OR\n
-    Williamson County, TX\n
-    Grant County, WV\n
-    \n
-    v2.2.03-02\n
-    New Locations:\n
-    Muhlenberg County, KY (alt)\n
-    Chester County, TN\n
-    Harris County, TX\n
-    Polk County, TX\n
-    \n
-    Location Fixes:\n
-    Bullett County, KY\n
-    Christian County, MO\n
-    Summit County, OH\n
-    \n
-    v2.2.03-01\n
-    New Locations:\n
-    Buckingham County, VA\n
-    \n
-    Location Fixes:\n
-    Lamar County, GA\n
-    Antrim County,  MI\n
+    Clermont County, OH\n
     \n
     General Fixes:\n
-    Fixed problem with button configuration introduced in recent releases
+    Changes to make the Active911 location reporting more reliable when Cadpage is hidden by
+    mapping app\n
+    \n
+    v2.2.04-03\n
+    Location Fixes:\n
+    Escambia County, FL\n
+    Avoyelles Parish, LA\n
+    Atlantic County, NJ\n
+    Charleston County, SC\n
+    Pierce County, WA\n
+    \n
+    v2.2.04-02\n
+    Ability to report Active911 user locations has been restored, at least for now\n
+    \n
+    New Locations:\n
+    DeKalb Couty, AL\n
+    Harrison County, TX\n
+    \n
+    Location Fixes:\n
+    Escambia County, FL\n
+    Prince Georges County, MD\n
+    Newton County, MO\n
+    Moniteau County, OK\n
+    Morgan County, OK\n
+    Charleston County, SC\n
+    \n
+    v2.2.04-01\n
+    For Active911 users, this version looses the ability to reliably report your location to
+    other Active911 users.  Terribly sorry, but that is the price we have to pay to get this
+    distributed in Google Play Store.  Still working on finding a better solution.\n
+    \n
+    v2.2.03-21\n
+    Location Fixes:\n
+    Teller County, CO\n
+    Carter County, KY\n
+    Carroll County, MD\n
+    Warren County, MO\n
+    Cambria County, PA\n
+    \n
+    v2.2.03-20\n
+    New Locations:\n
+    Schoolcraft County, MI\n
+    Gasconade County, MO (alt)\n
+    \n
+    Location Fixes:\n
+    Ray County, MO\n
+    Merrimack County, NH\n
+    Shelby County, OH
   </string>
 </resources>

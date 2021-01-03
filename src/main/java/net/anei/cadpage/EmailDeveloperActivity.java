@@ -35,7 +35,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
 
   public enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER,
                           MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR,
-                          ACTIVE911_SUPPORT, NEED_HELP, REQUEST_REFUND }
+                          NEED_HELP, REQUEST_REFUND }
 
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
@@ -48,7 +48,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
   private final static long LOG_SNAPSHOT_MAX_AGE = 30L*24*60*60*1000;
 
   // Max length of message we will try to send to developer
-  // The actual maxium transaction buffer size is 1M, but that is shared with
+  // The actual maximum transaction buffer size is 1M, but that is shared with
   // all other apps making IPC calls, so we will restrict ourselves to half of that
   private final static int MAX_EMAIL_SIZE = 524428;
   
@@ -191,15 +191,9 @@ public class EmailDeveloperActivity extends Safe40Activity {
                                       final boolean includeMsg, final int msgId,
                                       final boolean includeCfg) {
     if (includeCfg) {
-      ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
-        @SuppressWarnings("ConstantConditions")
-        @Override
-        public void run(boolean ok, String[] permissions, int[] granted) {
-          sendEmailRequest2(context, type, includeMsg, msgId, includeCfg);
-        }
-      }, R.string.perm_phone_info_for_email);
+      ManagePreferences.checkPermPhoneInfo((ok, permissions, granted) -> sendEmailRequest2(context, type, includeMsg, msgId, true), R.string.perm_phone_info_for_email);
     } else {
-      sendEmailRequest2(context, type, includeMsg, msgId, includeCfg);
+      sendEmailRequest2(context, type, includeMsg, msgId, false);
     }
   }
 
@@ -207,70 +201,61 @@ public class EmailDeveloperActivity extends Safe40Activity {
                                         final boolean includeMsg, final int msgId,
                                         final boolean includeCfg) {
 
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId(){
-      @Override
-      public void run(String registrationId) {
-        // Build the message text
-        StringBuilder body = new StringBuilder();
+    FCMMessageService.getRegistrationId(registrationId -> {
+      // Build the message text
+      StringBuilder body = new StringBuilder();
 
-        // If this is a crash report, include a recorded stack trace
-        if (type == EmailType.CRASH || type == EmailType.INIT_FAILURE) {
-          TopExceptionHandler.addCrashReport(context, body);
-        }
+      // If this is a crash report, include a recorded stack trace
+      if (type == EmailType.CRASH || type == EmailType.INIT_FAILURE) {
+        TopExceptionHandler.addCrashReport(context, body);
+      }
 
-        // For Active911 support, build message text
-        String vendorEmail = null;
-        if (type == EmailType.ACTIVE911_SUPPORT) {
-          vendorEmail = "support@active911.com";
-          body.append(context.getString(R.string.active911_support_text));
-        }
-
-        // If message info requested, add that
-        if (includeMsg) {
-          SmsMmsMessage message;
-          if (type == EmailType.MESSAGE) {
-            message = SmsMessageQueue.getInstance().getMessage(msgId);
-            if (message != null) {
-              message.addMessageInfo(context, body);
-              vendorEmail = VendorManager.instance().getSupportEmail(message.getVendorCode());
-            }
-          } else {
-            SmsMsgLogBuffer lb = SmsMsgLogBuffer.getInstance();
-            if (lb != null) lb.addMessageInfo(context, body);
+      // If message info requested, add that
+      String vendorEmail = null;
+      if (includeMsg) {
+        SmsMmsMessage message;
+        if (type == EmailType.MESSAGE) {
+          message = SmsMessageQueue.getInstance().getMessage(msgId);
+          if (message != null) {
+            message.addMessageInfo(context, body);
+            vendorEmail = VendorManager.instance().getSupportEmail(message.getVendorCode());
           }
-        }
-
-        // If configuration info requested, add that as well
-        if (includeCfg) {
-          ManagePreferences.addConfigInfo(context, body);
-          UserAcctManager acctMgr = UserAcctManager.instance();
-          if (acctMgr != null) acctMgr.addAccountInfo(body);
-        }
-
-        // Add FCM registration ID
-        body.append("\n\nRegistration ID:");
-        body.append(registrationId);
-
-        // See if there is any snapshot information to append
-        getSnapshotInfo(context, body);
-
-        final String message = body.toString();
-
-        // If config info was requested, include any Cadpage log information
-        if (includeCfg) {
-          final String vendorEmail2 = vendorEmail;
-          new LogCollector("time", null, "CadPage:V"){
-            @Override
-            void collectLog(String logBuffer) {
-              sendEmailRequest(context, type, vendorEmail2,
-                  message +
-                      "\n**************************************************************************************\n" +
-                      logBuffer);
-            }
-          };
         } else {
-          sendEmailRequest(context, type, vendorEmail, message);
+          SmsMsgLogBuffer lb = SmsMsgLogBuffer.getInstance();
+          if (lb != null) lb.addMessageInfo(context, body);
         }
+      }
+
+      // If configuration info requested, add that as well
+      if (includeCfg) {
+        ManagePreferences.addConfigInfo(context, body);
+        UserAcctManager acctMgr = UserAcctManager.instance();
+        if (acctMgr != null) acctMgr.addAccountInfo(body);
+      }
+
+      // Add FCM registration ID
+      body.append("\n\nRegistration ID:");
+      body.append(registrationId);
+
+      // See if there is any snapshot information to append
+      getSnapshotInfo(context, body);
+
+      final String message = body.toString();
+
+      // If config info was requested, include any Cadpage log information
+      if (includeCfg) {
+        final String vendorEmail2 = vendorEmail;
+        new LogCollector("time", null, "CadPage:V"){
+          @Override
+          void collectLog(String logBuffer) {
+            sendEmailRequest(context, type, vendorEmail2,
+                message +
+                    "\n**************************************************************************************\n" +
+                    logBuffer);
+          }
+        };
+      } else {
+        sendEmailRequest(context, type, vendorEmail, message);
       }
     });
   }
@@ -446,13 +431,6 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // This one sends a request directly to the email client, without
     // bring up a request screen first.
     sendEmailRequest(context, EmailType.INACTIVE_SPONSOR, false, 0, true);
-  }
-
-  public static void sendActive911SupportEmail(Context context) {
-
-    // Also sends a request directly to the email client, without
-    // bring up a request screen first.
-    sendEmailRequest(context, EmailType.ACTIVE911_SUPPORT, false, 0, false);
   }
 
   public static void sendNeedHelpEmail(Context context) {

@@ -1,7 +1,7 @@
 package net.anei.cadpage;
 
 import net.anei.cadpage.billing.BillingManager;
-import net.anei.cadpage.donation.Active911WarnEvent;
+import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
 import net.anei.cadpage.donation.DonationManager;
@@ -53,12 +53,14 @@ public class CadPageActivity extends AppCompatActivity {
 
   private static boolean initializing = false;
 
+  private static boolean startup = false;
+
   private boolean needSupportApp;
 
   private boolean splitScreen;
 
   /* (non-Javadoc)
-   * @see android.app.Activity#onCreate(android.os.Bundle)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
    */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +169,7 @@ public class CadPageActivity extends AppCompatActivity {
    */
   @Override
   protected void onNewIntent(Intent intent) {
+    Log.v("CadPageActivity.onNewIntent()");
     super.onNewIntent(intent);
     setIntent(intent);
     
@@ -207,6 +210,7 @@ public class CadPageActivity extends AppCompatActivity {
       // it in a Runnable object to be executed when the initial permission checking is complete
       final boolean init = initializing;
       ManagePreferences.checkInitialPermissions(() -> {
+        startup = true;
         needSupportApp = SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0;
         if (needSupportApp) return;
 
@@ -226,7 +230,7 @@ public class CadPageActivity extends AppCompatActivity {
         if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
 
         // If a new Active911 client may be highjacking alerts, warn user
-        if (Active911WarnEvent.instance().launch(CadPageActivity.this)) return;
+        if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return;
 
         // Otherwise, launch the release info dialog if it hasn't already been displayed
         String oldRelease = ManagePreferences.release();
@@ -335,13 +339,17 @@ public class CadPageActivity extends AppCompatActivity {
 
     // If we **REALLY** need the support app, and we asked the user
     // to install it, make sure that it has been installed and opened and
-    // everything is OK.
-    if (!BuildConfig.MSG_ALLOWED && needSupportApp) {
+    // everything is OK.  However, we do not want to call this when we are
+    // initialiazing because that will duplicate the call previousily made in
+    // startup()
+    if (!BuildConfig.MSG_ALLOWED && !startup && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
     }
 
     // If user switched to/from split screen mode, recreate this activity
     if (splitScreen != isSplitScreenConfig()) recreate();
+
+    startup = false;
   }
 
   protected void onPause() {

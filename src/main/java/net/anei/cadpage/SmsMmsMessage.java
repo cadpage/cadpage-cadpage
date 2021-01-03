@@ -1094,6 +1094,10 @@ public class SmsMmsMessage implements Serializable {
   public void showMoreInfo(Context context) {
     String url = getInfoURL();
     if (url == null) return;
+
+    // Fix Active911 subdomain change
+    if (url.startsWith("http://active911.com")) url = "http://console.active911.com" + url.substring(20);
+    Log.v("More info URL request: " + url);
     
     if (! SmsPopupUtils.haveNet(context)) return;
     
