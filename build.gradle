@@ -62,7 +62,7 @@ android {
     applicationVariants.all { variant ->
         def storeVersion = variant.productFlavors.get(0).versionCode
         def typeVersion = variant.productFlavors.get(1).versionCode
-        def version = defaultConfig.versionCode + typeVersion * 10000000
+        def version = defaultConfig.versionCode + typeVersion * 10000000 + 1
         variant.outputs.each { output ->
             output.versionCodeOverride = version
         }
@@ -75,7 +75,7 @@ android {
         }
     }
 
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

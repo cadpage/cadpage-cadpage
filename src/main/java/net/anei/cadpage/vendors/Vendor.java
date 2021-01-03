@@ -10,11 +10,14 @@ import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.HttpService;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.NoticeActivity;
+import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.HttpService.HttpRequest;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.donation.DeveloperToolsManager;
 import net.anei.cadpage.donation.DonationManager;
+import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.donation.PagingProfileEvent;
 import net.anei.cadpage.donation.UserAcctManager;
@@ -25,8 +28,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.widget.Toast;
 
@@ -266,22 +267,19 @@ abstract class Vendor {
    * @param context current context
    */
   void resetEmailReq(final Context context) {
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
-      @Override
-      public void run(String registrationId) {
-        Uri uri = buildRequestUri("reset", registrationId);
-        HttpService.addHttpRequest(context, new HttpRequest(uri){
+    FCMMessageService.getRegistrationId(registrationId -> {
+      Uri uri = buildRequestUri("reset", registrationId);
+      HttpService.addHttpRequest(context, new HttpRequest(uri){
 
-          @Override
-          protected void processBody(String content) {
-            if (content.startsWith("200 ")) {
-              emailAddress = content.substring(4).trim();
-              saveStatus();
-              PagingProfileEvent.instance().open(CadPageApplication.getContext());
-            }
+        @Override
+        protected void processBody(String content) {
+          if (content.startsWith("200 ")) {
+            emailAddress = content.substring(4).trim();
+            saveStatus();
+            PagingProfileEvent.instance().open(CadPageApplication.getContext());
           }
-        });
-      }
+        }
+      });
     });
   }
 
@@ -355,45 +353,7 @@ abstract class Vendor {
           }
         }
       }
-
-      // Some Active911 client versions forcibly wrest alert delivery away from Cadpage
-      // Get package name of problem app and see if it is installed
-      String badPackageName = getBadPackageName();
-      if (badPackageName != null) {
-        PackageManager pm = context.getPackageManager();
-        PackageInfo pinfo = null;
-        try {
-          pinfo = pm.getPackageInfo(badPackageName, 0);
-        } catch (PackageManager.NameNotFoundException ignored) {}
-        if (pinfo != null) {
-
-          // OK, app is installed, now check to see if it is a version known to cause problems
-          if (isBadPackageVersion(pinfo.versionCode)) {
-
-            // If user has registered Cadpage since the bad app was updated, assume
-            // that problem has been resolved
-            long tmp = prefs.getLong("lastRegisterTime", 0);
-            if (tmp < Math.max(pinfo.firstInstallTime, pinfo.lastUpdateTime)) {
-
-              // Otherwise, we have a problem
-              warnActive911 = true;
-            }
-          }
-        }
-      }
     }
-  }
-
-  protected String getBadPackageName() {
-    return null;
-  }
-
-  protected boolean isBadPackageVersion(int version) {
-    return false;
-  }
-
-  public boolean isWarnActive911() {
-    return warnActive911;
   }
 
   /**
@@ -449,6 +409,16 @@ abstract class Vendor {
   protected boolean isTestMsg(String msg) {
     return false;
   }
+
+  /**
+   * Returns test message to be processed instead of the generic test message
+   * @param msg message text content
+   * @return developer test message to be processed, or null if none
+   */
+  protected SmsMmsMessage getTestMessage(String msg) {
+    if (!isTestMsg(msg)) return null;
+    return DeveloperToolsManager.getTestMessage();
+  }
   
   void updateLastContactTime(String msg) {
     
@@ -497,7 +467,7 @@ abstract class Vendor {
     SharedPreferences.Editor editor = prefs.edit();
     if (textPage) {
       textPage = false;
-      editor.putBoolean("textPage", textPage);
+      editor.putBoolean("textPage", false);
     }
     editor.putBoolean("disableTextPageCheck", disableTextPageCheck);
     editor.apply();
@@ -596,28 +566,10 @@ abstract class Vendor {
 
     if (!SmsPopupUtils.haveNet(context)) return;
 
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
-      @Override
-      public void run(String registrationId) {
-        Uri uri = buildRequestUri("profile", registrationId);
-        viewPage(context, uri);
-      }
+    FCMMessageService.getRegistrationId(registrationId -> {
+      Uri uri = buildRequestUri("profile", registrationId);
+      viewPage(context, uri);
     });
-  }
-
-  /**
-   * Force new registration request, even if service is already enabled
-   * @param context current context
-   */
-  boolean forceRegister(Context context) {
-
-    // Make sure we have network connectivity
-    if (!SmsPopupUtils.haveNet(context)) return false;
-
-    // Turn off enabled flag and make a normal registration request
-    enabled = false;
-    registerReq(context);
-    return true;
   }
 
   /**
@@ -625,12 +577,7 @@ abstract class Vendor {
    * @param context current context
    */
   void forceReregister(final Context context) {
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
-      @Override
-      public void run(String registrationId) {
-        sendReregister(context, registrationId, false);
-      }
-    });
+    FCMMessageService.getRegistrationId(registrationId -> sendReregister(context, registrationId, false));
   }
 
   /**
@@ -641,12 +588,9 @@ abstract class Vendor {
     final boolean required = isAcctInfoRequired();
     int expId = required ? R.string.perm_acct_info_for_register_direct_req :  R.string.perm_acct_info_for_register_direct_opt;
 
-    ManagePreferences.checkPermPhoneInfo(new ManagePreferences.PermissionAction(){
-      @Override
-      public void run(boolean ok, String[] permissions, int[] granted) {
-        if (ok || !required) {
-          registerReq(context);
-        }
+    ManagePreferences.checkPermPhoneInfo((ok, permissions, granted) -> {
+      if (ok || !required) {
+        registerReq(context);
       }
     }, expId);
   }
@@ -670,25 +614,22 @@ abstract class Vendor {
     if (!SmsPopupUtils.haveNet(context)) return;
 
     // We need the registration ID before we can do anything
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
-      @Override
-      public void run(String registrationId) {
+    FCMMessageService.getRegistrationId(registrationId -> {
 
-        // If already enabled, we don't have to do anything
-        if (enabled) {
-          sendReregister(context, registrationId, true);
-          return;
-        }
-
-        // Set registration in progress flag
-        // and save the discovery URI
-        inProgress = true;
-        discoverUri = uri;
-
-        // See if we already have a registration ID, if we do, use it to send
-        // registration request to vendor server
-        reconnect(context, registrationId, true, "N");
+      // If already enabled, we don't have to do anything
+      if (enabled) {
+        sendReregister(context, registrationId, true);
+        return;
       }
+
+      // Set registration in progress flag
+      // and save the discovery URI
+      inProgress = true;
+      discoverUri = uri;
+
+      // See if we already have a registration ID, if we do, use it to send
+      // registration request to vendor server
+      reconnect(context, registrationId, true, "N");
     });
   }
 
@@ -707,24 +648,21 @@ abstract class Vendor {
     saveStatus();
     reportStatusChange();
 
-    FCMMessageService.getRegistrationId(new FCMMessageService.ProcessRegistrationId() {
-      @Override
-      public void run(String registrationId) {
-        // Send an unregister request to the vendor server
-        // we really don't care how it responds
-        Uri uri = buildRequestUri("unregister", registrationId, true);
-        HttpService.addHttpRequest(context, new HttpRequest(uri){});
+    FCMMessageService.getRegistrationId(registrationId -> {
+      // Send an unregister request to the vendor server
+      // we really don't care how it responds
+      Uri uri = buildRequestUri("unregister", registrationId, true);
+      HttpService.addHttpRequest(context, new HttpRequest(uri){});
 
-        // Finally unregister from Google C2DM service.  If there are other vendor
-        // services that are still active, they will request a new registration ID
-        FCMMessageService.resetInstanceId();
+      // Finally unregister from Google C2DM service.  If there are other vendor
+      // services that are still active, they will request a new registration ID
+      FCMMessageService.resetInstanceId();
 
-        // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
-        if (isSponsored()) {
-          ManagePreferences.setAuthRunDays(0);
-          DonationManager.instance().reset();
-          MainDonateEvent.instance().refreshStatus();
-        }
+      // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
+      if (isSponsored()) {
+        ManagePreferences.setAuthRunDays(0);
+        DonationManager.instance().reset();
+        MainDonateEvent.instance().refreshStatus();
       }
     });
   }
@@ -868,6 +806,10 @@ abstract class Vendor {
     this.emailAddress = emailAddress;
     saveStatus();
 
+    // If Active911 was just enabled, see if we need to ask for the permissions needed to
+    // support location tracking
+    if (enabled) LocationTrackingEvent.instance().launch(context);
+
     boolean showProfile = (enabled && changeEmail); 
     if (showProfile) PagingProfileEvent.instance().open(context);
     if (change) {
@@ -922,16 +864,13 @@ abstract class Vendor {
    * Report enabled status change to all interested parties
    */
   private void reportStatusChange() {
-    CadPageApplication.runOnMainThread(new Runnable(){
-      @Override
-      public void run() {
-        DonationManager.instance().reset();
-        MainDonateEvent.instance().refreshStatus();
-        
-        if (preference != null) preference.update();
-        if (activity != null) activity.update();
-     }
-    });
+    CadPageApplication.runOnMainThread(() -> {
+      DonationManager.instance().reset();
+      MainDonateEvent.instance().refreshStatus();
+      
+      if (preference != null) preference.update();
+      if (activity != null) activity.update();
+   });
   }
 
   /**

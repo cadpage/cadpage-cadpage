@@ -209,34 +209,7 @@ public class DeveloperToolsManager {
           break;
 
         case 14:    // Build test message
-          SmsMmsMessage message =
-            new SmsMmsMessage(
-              "<Larmserver@kallareetuna.se>",
-              "",
-              "Presentationsgrupp : ETUNA AUTOMATLARM\n" +
-                  "Talgrupp           : E-tunaIns\n" +
-                  "Objektinfo         : objektsinfo\n" +
-                  "Notering           :\n" +
-                  "Notering\n" +
-                  "Fritext            :\n" +
-                  "Fritext\n" +
-                  "Namn               : Torshälla teststationen\n" +
-                  "Nyckel             : Nyckel\n" +
-                  "Adress\n" +
-                  "            : Testgatan\n" +
-                  "Adressbeskriv.     : Vänster vid torget\n" +
-                  "Plats              : Brandstationen\n" +
-                  "Samhälle           :\n" +
-                  "Torshälla\n" +
-                  "Position WGS84     : La = 59° 25,265'N    Lo = 016° 28,357'E\n",
-              System.currentTimeMillis(),
-              "SE/Kumla/Nerikesbrandkar,Vendor/Sweden/Zenit,Utility/General/Default",
-              "Active911",
-              "AL30/8/10[=Not Responding;ResponseKvitt=Kvitt;ResponseFra=Fra;ResponseKlar=Klar;ResponseHem=Hem;ResponseIndisp=Indisp",
-              "https://access.active911.com/interface/cadpage_api.php?q=aHDlyd18YM",
-              "-1",
-              null,
-              "http://active911.com/amZPVy71TB");
+          SmsMmsMessage message = getTestMessage();
 
           // Add to log buffer
           if (!SmsMsgLogBuffer.getInstance().add(message)) return true;
@@ -346,7 +319,24 @@ public class DeveloperToolsManager {
       ManagePreferences.setPaidYear(2, 0);
     }
   }
-  
+
+  public static SmsMmsMessage getTestMessage() {
+    if (!UserAcctManager.instance().isDeveloper()) return null;
+    return new SmsMmsMessage(
+        "GCM",
+        "",
+        "SMALL MISC FIRE;;HWY 20/MP 41;;;PHILOMATH;2986;;BLF;BLDGT,ODFS,PHILO;Radio Channel: MP  [12/06/20 09:06:36 JONESM]\n;;4152462121;12/06/2020 09:05:16;2020190749;",
+        System.currentTimeMillis(),
+        "US/OR/Benton,Utility/General/Default",
+        "Active911",
+        "AL30/8/10[Not Responding;Response201=201;Response202=202;Response203=203;ResponseAck=Ack;ResponseUnvl=Unvl]",
+        "https://access.active911.com/interface/cadpage_api.php?q=a13QeG3",
+        "-1",
+        null,
+        "http://active911.com/a13QeG3");
+
+  }
+
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   @SuppressWarnings("SameParameterValue")
   private Date buildDate(String dateStr) {

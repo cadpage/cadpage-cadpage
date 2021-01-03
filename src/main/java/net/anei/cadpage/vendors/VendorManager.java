@@ -9,6 +9,7 @@ import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.donation.UserAcctManager;
 import android.content.Context;
@@ -44,7 +45,7 @@ public class VendorManager {
    * Set up Vendor configuration preference screen
    * @param context current context
    * @param pref preference to be set up with vendor config menu
-   * @returns number of vendor preferences added
+   * @return number of vendor preferences added
    */
   public int setupPreference(final Context context, PreferenceScreen pref) {
     
@@ -543,20 +544,24 @@ public class VendorManager {
     if (vendor != null) vendor.updateLastContactTime(msg);
   }
 
-  public boolean isWarnActive911() {
+  /**
+   * @return developer test message or null if none
+   */
+  public SmsMmsMessage getTestMessage(String vendorCode, String msg) {
+    Vendor vendor = findVendor(vendorCode);
+    if (vendor == null) return null;
+    return vendor.getTestMessage(msg);
+  }
+
+  public boolean isActive911Active() {
     Vendor vendor = findVendor("Active911");
-    return  vendor.isWarnActive911();
+    return vendor.isEnabled();
   }
 
   public String getActive911Code() {
     Vendor vendor = findVendor("Active911");
     if (!vendor.isEnabled()) return null;
     return  vendor.getCode();
-  }
-
-  public boolean forceActive911Registration(Context context) {
-    Vendor vendor = findVendor("Active911");
-    return vendor.forceRegister(context);
   }
 
   public void forceActive911Reregister(Context context) {

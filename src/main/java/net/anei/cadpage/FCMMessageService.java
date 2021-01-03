@@ -175,7 +175,8 @@ public class FCMMessageService extends FirebaseMessagingService {
     // agency code = data.get("agency_code");
     String infoUrl = data.get("info_url");
 
-    final SmsMmsMessage message =
+    SmsMmsMessage msg = VendorManager.instance().getTestMessage(vendorCode, content);
+    final SmsMmsMessage message = msg != null ? msg :
         new SmsMmsMessage(from, subject, content, timestamp,
                           location, vendorCode, ackReq, ackURL,
                           callId, serverTime, infoUrl);

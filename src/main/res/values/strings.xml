@@ -80,6 +80,11 @@
     this, we will need to identify your Google email accounts.
   </string>
 
+  <string name="perm_vendor_location">
+    Active911 would like to report your real time location to other responders.  Since the navigation
+    app may be running on top of Cadpage, this also requires background location access.
+  </string>
+
 <!-- Menu Strings -->
 
    <string name="settings">Settings</string>   
@@ -213,16 +218,8 @@
   <!-- Permission explanations -->
   <string name="need_permission_title">Cadpage needs the following permissions to perform this operation.</string>
 
-  <string name="active911_support_text">
-    Active911 stoped sending dispatch alerts to Cadpage when I upgraded to the latest version of the Active911 Android app.
-    This is a known problem, identified in support ticket #2017050710000311.  Could you please
-    fix things so that this does not happen in future releases of the Active911 Android app.
-  </string>
-
   <string name="reconnect">Reconnect with %s</string>
 
   <string name="auto">Auto</string>
   <string name="manual">Manual</string>
-
-  <string name="not_selected">&lt;Not Selected&gt;</string>
 </resources>
