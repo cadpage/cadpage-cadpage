@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01022021</string>
+  <string name="release_date">01092021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.04-05\n
+    New Locations:\n
+    Sawyer County, WI\n
+    \n
+    Location Fixes:\n
+    Chilton County, AL\n
+    Dallas County, MO\n
+    Pamlico County, NC\n
+    Trumbull County, OH\n
+    \n
     v2.2.04-04\n
     New Locations:\n
     Telfair County, GA\n
@@ -42,24 +52,6 @@
     v2.2.04-01\n
     For Active911 users, this version looses the ability to reliably report your location to
     other Active911 users.  Terribly sorry, but that is the price we have to pay to get this
-    distributed in Google Play Store.  Still working on finding a better solution.\n
-    \n
-    v2.2.03-21\n
-    Location Fixes:\n
-    Teller County, CO\n
-    Carter County, KY\n
-    Carroll County, MD\n
-    Warren County, MO\n
-    Cambria County, PA\n
-    \n
-    v2.2.03-20\n
-    New Locations:\n
-    Schoolcraft County, MI\n
-    Gasconade County, MO (alt)\n
-    \n
-    Location Fixes:\n
-    Ray County, MO\n
-    Merrimack County, NH\n
-    Shelby County, OH
+    distributed in Google Play Store.  Still working on finding a better solution.
   </string>
 </resources>
