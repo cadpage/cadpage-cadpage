@@ -1835,7 +1835,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     protected String checkPermission(String value) {
 
       // If we are not allowed to initiate phone calls, there is nothing to check
-      if (!BuildConfig.MSG_ALLOWED) return null;
+      if (!BuildConfig.SEND_ALLOWED) return null;
 
       // A value of P requires CALL_PHONE permission
       // A value of T requires SMS_SEND permission

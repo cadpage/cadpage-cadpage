@@ -64,8 +64,6 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
 
     Log.v("Initialization startup");
 
-    Log.v("Message access " + (BuildConfig.MSG_ALLOWED ? "allowed" : "restricted"));
-
     context = callingContext.getApplicationContext();
     mainThread = Thread.currentThread();
     mainHandler = new Handler();

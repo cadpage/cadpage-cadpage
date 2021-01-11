@@ -26,7 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
 
-        flavorDimensions "store", "type"
+        flavorDimensions "store", "receive", "send"
         productFlavors {
 
             google {
@@ -43,18 +43,32 @@ android {
                 buildConfigField "boolean", "APTOIDE", "true"
             }
 
-            full {
-                dimension "type"
+            rec {
+                dimension "receive"
                 versionNameSuffix "M"
                 versionCode 2
                 buildConfigField "boolean", "MSG_ALLOWED", "true"
             }
 
-            restrict {
-                dimension "type"
+            norec {
+                dimension "receive"
                 versionNameSuffix "R"
                 versionCode 0
                 buildConfigField "boolean", "MSG_ALLOWED", "false"
+            }
+
+            send {
+                dimension "send"
+                versionNameSuffix "S"
+                versionCode 2
+                buildConfigField "boolean", "SEND_ALLOWED", "true"
+            }
+
+            nosend {
+                dimension "send"
+                versionNameSuffix ""
+                versionCode 2
+                buildConfigField "boolean", "SEND_ALLOWED", "false"
             }
         }
     }
@@ -70,7 +84,8 @@ android {
 
     variantFilter { variant ->
         def names = variant.flavors*.name
-        if (names.contains("aptoide") && !names.contains("full")) {
+        if (names.contains("aptoide") && (names.contains("norec") || names.contains("nosend")) ||
+            names.contains("send") && names.contains("norec")) {
             setIgnore(true)
         }
     }

@@ -342,7 +342,7 @@ public class CadPageActivity extends AppCompatActivity {
     // everything is OK.  However, we do not want to call this when we are
     // initialiazing because that will duplicate the call previousily made in
     // startup()
-    if (!BuildConfig.MSG_ALLOWED && !startup && needSupportApp) {
+    if (!(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED) && !startup && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
     }
 

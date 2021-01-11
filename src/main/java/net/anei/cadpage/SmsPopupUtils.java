@@ -225,7 +225,7 @@ public class SmsPopupUtils {
 
     // If not installed at all, turn off all text message processing
     boolean fixed = false;
-    if (version <= 0) {
+    if (!BuildConfig.MSG_ALLOWED && version <= 0) {
       if (!ManagePreferences.enableMsgType().equals("C")) {
         ManagePreferences.setEnableMsgType("C");
         fixed = true;
@@ -254,7 +254,7 @@ public class SmsPopupUtils {
   }
 
   private static boolean isSupportAppAvailable() {
-    return !BuildConfig.MSG_ALLOWED;
+    return !(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED);
   }
 
   /**
