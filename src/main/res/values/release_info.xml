@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01142021</string>
+  <string name="release_date">01212021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-03\n
+    New Locations:\n
+    Franklin County, KS\n
+    East Baton Rouge Parish, LA\n
+    Scott County, MO (alt)\n
+    \n
+    Location Fixes:\n
+    Escambia County, FL\n
+    Walker County, GA\n
+    Bowling Green, KY\n
+    Baltimore County, MD\n
+    Pearl River County, MS\n
+    Salem County, NJ\n
+    Johnston County, NC\n
+    Petersburg, VA\n
+    \n
     v2.2.05-02\n
     Location Fixes:\n
     Lancaster County, SC\n
@@ -32,14 +48,6 @@
     \n
     General Fixes:\n
     Changes to make the Active911 location reporting more reliable when Cadpage is hidden by
-    mapping app\n
-    \n
-    v2.2.04-03\n
-    Location Fixes:\n
-    Escambia County, FL\n
-    Avoyelles Parish, LA\n
-    Atlantic County, NJ\n
-    Charleston County, SC\n
-    Pierce County, WA
+    mapping app
   </string>
 </resources>
