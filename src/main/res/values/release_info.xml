@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01212021</string>
+  <string name="release_date">01222021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-04\n
+    Location Fixes:\n
+    Garland County, AR\n
+    Walker County, GA\n
+    \n
     v2.2.05-03\n
     New Locations:\n
     Franklin County, KS\n
@@ -36,18 +41,6 @@
     Chilton County, AL\n
     Dallas County, MO\n
     Pamlico County, NC\n
-    Trumbull County, OH\n
-    \n
-    v2.2.04-04\n
-    New Locations:\n
-    Telfair County, GA\n
-    Woods County, OK\n
-    \n
-    Location Fixes:\n
-    Clermont County, OH\n
-    \n
-    General Fixes:\n
-    Changes to make the Active911 location reporting more reliable when Cadpage is hidden by
-    mapping app
+    Trumbull County, OH
   </string>
 </resources>
