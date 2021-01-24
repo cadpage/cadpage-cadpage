@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01222021</string>
+  <string name="release_date">01232021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-05\n
+    Location Fixes:\n
+    Lauderdale County, AL\n
+    St Tammany Parish, LA\n
+    Pearl River County, MS\n
+    Montgomery County, NC\n
+    \n
     v2.2.05-04\n
     Location Fixes:\n
     Garland County, AR\n
@@ -31,16 +38,6 @@
     York County, SC\n
     \n
     v2.2.05-01\n
-    Updated to be compatible with Android 11\n
-    \n
-    v2.2.04-05\n
-    New Locations:\n
-    Sawyer County, WI\n
-    \n
-    Location Fixes:\n
-    Chilton County, AL\n
-    Dallas County, MO\n
-    Pamlico County, NC\n
-    Trumbull County, OH
+    Updated to be compatible with Android 11
   </string>
 </resources>
