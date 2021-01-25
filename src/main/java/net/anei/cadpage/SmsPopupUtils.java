@@ -158,14 +158,16 @@ public class SmsPopupUtils {
     int version;
     String callbackType = ManagePreferences.callbackTypeSummary();
     boolean callbackPhone = callbackType.contains("P");
-    if (!ManagePreferences.useOldMMS()) {
+    if (!BuildConfig.MSG_ALLOWED && !ManagePreferences.useOldMMS()) {
       version = CADPAGE_SUPPORT_VERSION4;
     } else if (callbackPhone) {
       version = CADPAGE_SUPPORT_VERSION3;
     } else if (callbackType.contains("T")) {
       version = CADPAGE_SUPPORT_VERSION2;
-    } else {
+    } else if (!BuildConfig.MSG_ALLOWED){
       version = CADPAGE_SUPPORT_VERSION;
+    } else {
+      return -1;
     }
 
     // Get the installed support app version and see if it meets are needs
