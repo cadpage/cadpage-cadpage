@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01312021</string>
+  <string name="release_date">02022021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-07\n
+    Location Fixes:\n
+    Escambia County, FL\n
+    \n
     v2.2.05-06\n
     Location Fixes:\n
     Clear Creek County, CO\n
