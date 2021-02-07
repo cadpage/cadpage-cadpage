@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01232021</string>
+  <string name="release_date">02022021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-07\n
+    Location Fixes:\n
+    Escambia County, FL\n
+    \n
+    v2.2.05-06\n
+    Location Fixes:\n
+    Clear Creek County, CO\n
+    Arcadian Ambulance, LA\n
+    St Tammany Parish, LA\n
+    Hartford County, MD\n
+    Montgomery County, MD\n
+    Salem County, NJ\n
+    \n
     v2.2.05-05\n
     Location Fixes:\n
     Lauderdale County, AL\n
@@ -35,9 +48,6 @@
     v2.2.05-02\n
     Location Fixes:\n
     Lancaster County, SC\n
-    York County, SC\n
-    \n
-    v2.2.05-01\n
-    Updated to be compatible with Android 11
+    York County, SC
   </string>
 </resources>
