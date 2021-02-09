@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02022021</string>
+  <string name="release_date">02082021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-08\n
+    New Locations:\n
+    Estill County, KY\n
+    Grimes County, TX\n
+    Wichita County, TX\n
+    \n
+    Location Fixes:\n
+    Middletown, CT\n
+    Gulf County, FL\n
+    Allen County, KY\n
+    Ionia County, MI\n
+    Cumberland County, PA\n
+    \n
     v2.2.05-07\n
     Location Fixes:\n
     Escambia County, FL\n
@@ -27,27 +40,6 @@
     v2.2.05-04\n
     Location Fixes:\n
     Garland County, AR\n
-    Walker County, GA\n
-    \n
-    v2.2.05-03\n
-    New Locations:\n
-    Franklin County, KS\n
-    East Baton Rouge Parish, LA\n
-    Scott County, MO (alt)\n
-    \n
-    Location Fixes:\n
-    Escambia County, FL\n
-    Walker County, GA\n
-    Bowling Green, KY\n
-    Baltimore County, MD\n
-    Pearl River County, MS\n
-    Salem County, NJ\n
-    Johnston County, NC\n
-    Petersburg, VA\n
-    \n
-    v2.2.05-02\n
-    Location Fixes:\n
-    Lancaster County, SC\n
-    York County, SC
+    Walker County, GA
   </string>
 </resources>
