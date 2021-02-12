@@ -13,6 +13,7 @@ import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import net.anei.cadpage.donation.NeedCadpageSupportApp2Event;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
 
@@ -177,7 +178,11 @@ public class SmsPopupUtils {
     if (installedVersion < version) {
       if (prompt) {
         if (installedVersion <= 0) {
-          NeedCadpageSupportAppEvent.instance().launch(context);
+          if (!BuildConfig.MSG_ALLOWED) {
+            NeedCadpageSupportAppEvent.instance().launch(context);
+          } else {
+            NeedCadpageSupportApp2Event.instance().launch(context);
+          }
           Log.v("Requesting Cadpage Message Support app install");
         } else {
           UpdateCadpageSupportAppEvent.instance().launch(context);

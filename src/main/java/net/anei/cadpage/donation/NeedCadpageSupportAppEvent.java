@@ -8,7 +8,7 @@ import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsPopupUtils;
 
 /*
-    Install Cadpage mesasge support app
+    Install Cadpage message support app
 
     The Cadpage app is or will soon be prohibited from processing incoming
     text messages.  If you need this functionality to continue, you need to

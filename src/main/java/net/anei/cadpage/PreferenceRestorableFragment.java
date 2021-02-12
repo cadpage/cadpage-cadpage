@@ -3,6 +3,8 @@ package net.anei.cadpage;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -45,7 +47,9 @@ abstract public class PreferenceRestorableFragment extends PreferenceFragment {
     if (pref instanceof ListPreference) {
       ((ListPreference)pref).setValue(prefs.getString(curPrefKey, ""));
     } else if (pref instanceof TwoStatePreference) {
-      ((TwoStatePreference)pref).setChecked(prefs.getBoolean(curPrefKey, false));
+      ((TwoStatePreference) pref).setChecked(prefs.getBoolean(curPrefKey, false));
+    } else if (pref instanceof EditTextPreference) {
+      ((EditTextPreference) pref).setText("");
     } else {
       throw new RuntimeException("showPreferenceValue() not supported for " + curPrefKey + ':' + pref.getClass().getName());
     }

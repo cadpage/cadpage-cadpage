@@ -383,6 +383,10 @@
   <string name="donate_need_cadpage_support_app_text">
     Cadpage har eller kommer att förhindras att hantera inkommande textmeddelanden. Om du behöver den funktionaliteten fortsättningsvis så behöver du installera Cadpages meddelande-support app.
   </string>
+  <string name="donate_need_cadpage_support_app2_text"> <!-- Translate -->
+    This version of Cadpage is not allowed to send text messages or initiate phone calls.
+    If you need this functionality, you will need to install the Cadpage message support app.
+  </string>
 
   <string name="donate_update_cadpage_support_app_title">
     Uppdatera Cadpages meddelande-app
