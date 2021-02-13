@@ -399,48 +399,45 @@
     Jag behöver inte att Cadpage hanterar SMS
   </string>
 
-  <string name="donate_fix_msg_support_title"> <!-- Translate -->
-    Fix Cadpage settings
+  <string name="donate_fix_msg_support_title">
+    Fixa Cadpageinställningar
   </string>
 
-  <string name="location_tracking_title"> <!-- Translate -->
-    Location Tracking Alert
+  <string name="location_tracking_title">
+    Location Tracking Alert Larm för positions-spårning
   </string>
 
-  <string name="location_tracking_text"> <!-- Translate -->
-    When you respond to an Active911 alert, Cadpage can report your current real time location so
-    it can be displayed on the Active911 map display.  Enabling this feature will require changing
-    your location tracking permissions.
+  <string name="location_tracking_text">
+    När du svarar på ett larm från Active911 så kan Cadpage rapportera din realtidsposition så att den kan visas på Active911 på en karta. Om du slår på den funktionen så kommer det att krävas att du ändrar på dina inställningar för positionsspårning.
   </string>
 
-  <string name="location_tracking_on_title"> <!-- Translate -->
-    Enable location tracking permissions
+  <string name="location_tracking_on_title">
+   Slå på positionsspårning
   </string>
 
-  <string name="location_tracking_on_text"> <!-- Translate -->
+  <string name="location_tracking_on_text">
     %s
   </string>
 
-  <string name = "location_tracking_on_A10_text"> <!-- Translate -->
-    For this to work properly, you must allow location access all of the time.
+  <string name = "location_tracking_on_A10_text">
+    För att det här ska fungera bra så måste du tillåta att enheten har tillgång till plats hela tiden.
   </string>
 
-  <string name = "location_tracking_on_A11_text"> <!-- Translate -->
-    For this to work properly, you must click \"Allow in settings\" and allow location access
-    all of the time.
+  <string name = "location_tracking_on_A11_text">
+    För att det här ska funger bra så måste du klicka på \"Tillåt i inställningar\" och tillåta att enheten har tillgång till plats hela tiden.
   </string>
 
-  <string name="location_tracking_on_base_text"> <!-- Translate -->
-    Cadpage will collect location data to support this feature even when Cadpage is closed or not
-    visible.  Location data will never be collected for longer than 20 min after the alert is received.
+  <string name="location_tracking_on_base_text">
+    Cadpage kommer att samla data för att ha den här funktionen även när Cadpage är avstängt och inte synligt.
+    Positionsdata kommer aldrig att sparas längre tid än 20 minuter efter att larmet tagits emot.
   </string>
 
-  <string name="location_tracking_on2_title"> <!-- Translate -->
-    Really enable location tracking permissions
+  <string name="location_tracking_on2_title">
+    Verkligen slå på positionsspårning
   </string>
 
-  <string name="location_tracking_off_title"> <!-- Translate -->
-    Turn off location tracking
+  <string name="location_tracking_off_title">
+    Slå av positionsspårning
   </string>
 
   <string name="check_popup_title">
