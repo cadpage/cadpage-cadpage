@@ -67,9 +67,9 @@
     Du ber Cadpage komma åt din information om ditt epost-konto. För att göra det så behöver vi identifiera ditt Google-konto.
   </string>
 
-  <string name="perm_vendor_location"> <!-- Translate -->
-    Active911 would like to report your real time location to other responders.  Since the navigation
-    app may be running on top of Cadpage, this also requires background location access.
+  <string name="perm_vendor_location">
+    Active911 skulle vilja rapportera din realtidsposition till andra som åker på larmet. Eftersom att navigeringsappen kan köras över Cadpage så behöver den ha tillgång till positionsangivelse i bakgrunden.
+    
   </string>
 
   <!-- Menu Strings -->
