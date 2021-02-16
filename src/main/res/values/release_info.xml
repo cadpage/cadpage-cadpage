@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02082021</string>
+  <string name="release_date">02162021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-09\n
+    New Locations:\n
+    Sutter County, CA\n
+    Guernsey County, OH\n
+    Edgewood County, SC\n
+    Saluda County, SC\n
+    Cooke County, TX (alt)\n
+    Greeley County, KS\n
+    Mountain View County, AB\n
+    \n
+    Location Fixes:\n
+    Garland County, AR\n
+    Middletown, CT\n
+    Kingman County, KS\n
+    Acadian Ambulance, LA\n
+    Prince Georges County, MD\n
+    Barry County, MI\n
+    Buckingham County, VA\n
+    \n
     v2.2.05-08\n
     New Locations:\n
     Estill County, KY\n
@@ -35,11 +54,6 @@
     Lauderdale County, AL\n
     St Tammany Parish, LA\n
     Pearl River County, MS\n
-    Montgomery County, NC\n
-    \n
-    v2.2.05-04\n
-    Location Fixes:\n
-    Garland County, AR\n
-    Walker County, GA
+    Montgomery County, NC
   </string>
 </resources>
