@@ -195,20 +195,18 @@ public class SmsPopupUtils {
     // Fire off an intent to launch the support app.  If it installed and configured
     // correctly, it will quietly die without doing anything.  There should not be any way that
     // this can fail, but if it does, we will log an error and continue
-    if (prompt) {
-      Intent intent = new Intent(Intent.ACTION_MAIN);
-      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      intent.addCategory(Intent.CATEGORY_LAUNCHER);
-      intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
-      intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
-      if (callbackPhone) intent.putExtra(EXTRA_CADPAGE_PHONE, true);
+    Intent intent = new Intent(Intent.ACTION_MAIN);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+    intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
+    intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);
+    if (callbackPhone) intent.putExtra(EXTRA_CADPAGE_PHONE, true);
 
-      try {
-        context.startActivity(intent);
-        Log.v("Cadpage support app installed and current");
-      } catch (Exception ex) {
-        Log.e(ex);
-      }
+    try {
+      context.startActivity(intent);
+      Log.v("Cadpage support app installed and current w/phone:" + callbackPhone);
+    } catch (Exception ex) {
+      Log.e(ex);
     }
     return 0;
   }

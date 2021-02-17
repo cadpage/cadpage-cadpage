@@ -23,7 +23,10 @@ public class InstallCadpageSupportAppEvent extends DonateEvent {
     } catch (ActivityNotFoundException ex) {
       Log.e(ex);
     }
-    closeEvents(activity);
+
+    // We do not close the event tree here because the user might not go through with the install.
+    // Instead all callers recheck the support app status when they are restarted, and close the
+    // event tree if all is well.
   }
 
   private static final InstallCadpageSupportAppEvent instance = new InstallCadpageSupportAppEvent();
