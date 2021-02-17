@@ -416,7 +416,11 @@ public class CadPageActivity extends AppCompatActivity {
    * Display call details for selected message
    * @param message message to be displayed
    */
-  public void showAlert(SmsMmsMessage message) {
+  public synchronized void showAlert(SmsMmsMessage message) {
+
+    // Synchronization shouuld not be necessary since all calls have to be on the UI thread.
+    // But we are getting occasional crashes that can seemingly only be explained by
+    // concurrent calls to this method.  So, we will add the synchronization check
 
     if (popupFragment == null) popupFragment = new SmsPopupFragment();
     popupFragment.setMessage(message);
