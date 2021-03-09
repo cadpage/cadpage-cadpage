@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03052021</string>
+  <string name="release_date">03092021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-12\n
+    New Locations:\n
+    Fredericton, NB, Canada\n
+    \n
+    Location Fixes:\n
+    El Paso County, CO\n
+    Clackamas County, OR\n
+    Bradly County, TN\n
+    Sevier County, TN\n
+    Sweden\n
+    \n
     v2.2.05-11\n
     Location Fixes:\n
     Oldham County, KY\n
@@ -59,10 +70,6 @@
     Gulf County, FL\n
     Allen County, KY\n
     Ionia County, MI\n
-    Cumberland County, PA\n
-    \n
-    v2.2.05-07\n
-    Location Fixes:\n
-    Escambia County, FL
+    Cumberland County, PA
   </string>
 </resources>
