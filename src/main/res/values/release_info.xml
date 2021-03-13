@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03092021</string>
+  <string name="release_date">03132021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-13\n
+    New Locations:\n
+    Woodson County, KS\n
+    Grainger County, TN\n
+    El Paso County, TX\n
+    \n
+    Location Fixes:\n
+    Cullman County, AL\n
+    Carroll County, KY\n
+    Rocky Mount, NC\n
+    Williams County, OH\n
+    Sevier County, TN\n
+    Denton County, TX\n
+    Hampshire County, WV\n
+    \n
     v2.2.05-12\n
     New Locations:\n
     Fredericton, NB, Canada\n
@@ -57,19 +72,6 @@
     Acadian Ambulance, LA\n
     Prince Georges County, MD\n
     Barry County, MI\n
-    Buckingham County, VA\n
-    \n
-    v2.2.05-08\n
-    New Locations:\n
-    Estill County, KY\n
-    Grimes County, TX\n
-    Wichita County, TX\n
-    \n
-    Location Fixes:\n
-    Middletown, CT\n
-    Gulf County, FL\n
-    Allen County, KY\n
-    Ionia County, MI\n
-    Cumberland County, PA
+    Buckingham County, VA
   </string>
 </resources>
