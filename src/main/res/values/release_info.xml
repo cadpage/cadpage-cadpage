@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03132021</string>
+  <string name="release_date">03152021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-14\n
+    New Locations:\n
+    Benton County, AR (alt)\n
+    Multnomah County, OR (alt)\n
+    \n
+    Location Fixes:\n
+    Denton County, TX\n
+    \n
     v2.2.05-13\n
     New Locations:\n
     Woodson County, KS\n
@@ -53,25 +61,6 @@
     Prince Georges County, MD\n
     Summit County, OH\n
     Bryan County, OK\n
-    Clackamas County, OR\n
-    \n
-    v2.2.05-09\n
-    New Locations:\n
-    Sutter County, CA\n
-    Guernsey County, OH\n
-    Edgewood County, SC\n
-    Saluda County, SC\n
-    Cooke County, TX (alt)\n
-    Greeley County, KS\n
-    Mountain View County, AB\n
-    \n
-    Location Fixes:\n
-    Garland County, AR\n
-    Middletown, CT\n
-    Kingman County, KS\n
-    Acadian Ambulance, LA\n
-    Prince Georges County, MD\n
-    Barry County, MI\n
-    Buckingham County, VA
+    Clackamas County, OR
   </string>
 </resources>
