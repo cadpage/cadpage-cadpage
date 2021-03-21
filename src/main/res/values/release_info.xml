@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03152021</string>
+  <string name="release_date">03212021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-15\n
+    New Location:\n
+    Tama County, IA\n
+    \n
+    Location Fixes:\n
+    Clay County, KY\n
+    Jackson County, MO\n
+    Scott County, MO\n
+    Ashland County, OH\n
+    Delaware County, OH\n
+    \n
     v2.2.05-14\n
     New Locations:\n
     Benton County, AR (alt)\n
@@ -42,25 +53,6 @@
     Location Fixes:\n
     Oldham County, KY\n
     Acadian Ambulance, LA\n
-    Sweden\n
-    \n
-    v2.2.05-10\n
-    New Locations:\n
-    Skagway, AK\n
-    San Bernaardino County, CA (alt)\n
-    Chatham County, GA (alt)
-    Washingon County, GA (alt)\n
-    Lyon County, IA\n
-    Casey County, KY\n
-    Houston County, TX\n
-    Lewis County, WV\n
-    \n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    Middletown, CT\n
-    Prince Georges County, MD\n
-    Summit County, OH\n
-    Bryan County, OK\n
-    Clackamas County, OR
+    Sweden
   </string>
 </resources>
