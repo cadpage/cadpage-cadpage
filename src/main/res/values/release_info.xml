@@ -4,6 +4,13 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-16\n
+    New Location:\n
+    PECC, SK Canada\n
+    \n
+    Location Fixes:\n
+    Delaware County, OH\n
+    \n
     v2.2.05-15\n
     New Location:\n
     Tama County, IA\n
@@ -47,12 +54,6 @@
     Clackamas County, OR\n
     Bradly County, TN\n
     Sevier County, TN\n
-    Sweden\n
-    \n
-    v2.2.05-11\n
-    Location Fixes:\n
-    Oldham County, KY\n
-    Acadian Ambulance, LA\n
     Sweden
   </string>
 </resources>
