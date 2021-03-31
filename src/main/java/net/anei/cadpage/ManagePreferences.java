@@ -583,6 +583,9 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     public boolean subjectColonField() {
       return false;
     }
+
+    @Override
+    public boolean insConditionalBreak() { return false; }
   }
 
   /**
