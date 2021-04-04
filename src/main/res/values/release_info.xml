@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03302021</string>
+  <string name="release_date">04042021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-18\n
+    New Locations:\n
+    Evangeline Parish, LA\n
+    St Joseph County, MI\n
+    \n
+    Location Fixes:\n
+    Fresno, CA\n
+    Warren County, NJ\n
+    Harneett County, NC\n
+    \n
     v2.2.05-17\n
     Location Fixes:\n
     Floyd County, GA\n
@@ -37,21 +47,6 @@
     Multnomah County, OR (alt)\n
     \n
     Location Fixes:\n
-    Denton County, TX\n
-    \n
-    v2.2.05-13\n
-    New Locations:\n
-    Woodson County, KS\n
-    Grainger County, TN\n
-    El Paso County, TX\n
-    \n
-    Location Fixes:\n
-    Cullman County, AL\n
-    Carroll County, KY\n
-    Rocky Mount, NC\n
-    Williams County, OH\n
-    Sevier County, TN\n
-    Denton County, TX\n
-    Hampshire County, WV
+    Denton County, TX
   </string>
 </resources>
