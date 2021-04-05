@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04042021</string>
+  <string name="release_date">04052021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-19\n
+    Location Fixes:\n
+    Hoke County, NC\n
+    \n
     v2.2.05-18\n
     New Locations:\n
     Evangeline Parish, LA\n
@@ -39,14 +43,6 @@
     Jackson County, MO\n
     Scott County, MO\n
     Ashland County, OH\n
-    Delaware County, OH\n
-    \n
-    v2.2.05-14\n
-    New Locations:\n
-    Benton County, AR (alt)\n
-    Multnomah County, OR (alt)\n
-    \n
-    Location Fixes:\n
-    Denton County, TX
+    Delaware County, OH
   </string>
 </resources>
