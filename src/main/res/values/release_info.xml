@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04052021</string>
+  <string name="release_date">04102021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-20\n
+    Location Fixes:\n
+    Jackson County, GA\n
+    Blaine County, ID\n
+    Carlisle County, KY\n
+    Monmouth County, NJ\n
+    Swain County, NC\n
+    \n
     v2.2.05-19\n
     Location Fixes:\n
     Hoke County, NC\n
@@ -32,17 +40,6 @@
     PECC, SK Canada\n
     \n
     Location Fixes:\n
-    Delaware County, OH\n
-    \n
-    v2.2.05-15\n
-    New Location:\n
-    Tama County, IA\n
-    \n
-    Location Fixes:\n
-    Clay County, KY\n
-    Jackson County, MO\n
-    Scott County, MO\n
-    Ashland County, OH\n
     Delaware County, OH
   </string>
 </resources>
