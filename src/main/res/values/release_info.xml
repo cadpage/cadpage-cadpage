@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04102021</string>
+  <string name="release_date">04172021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-21\n
+    New Locations:\n
+    Grant County, MN\n
+    Van Buren County, TN\n
+    \n
+    Location Fixes\n
+    Oconee County, GA\n
+    Des Moines County, IA\n
+    Edmonson County, KY\n
+    Lake County, MI\n
+    Ottawa County, MI\n
+    Davie County, NC\n
+    Wake County, NC\n
+    Licking County, OH\n
+    Tillamook County, OR\n
+    Rockingham County, VA\n
+    \n
     v2.2.05-20\n
     Location Fixes:\n
     Jackson County, GA\n
@@ -33,13 +50,6 @@
     Charles County, MD\n
     Person County, NC\n
     Washington County, OH\n
-    Chester County, PA\n
-    \n
-    v2.2.05-16\n
-    New Location:\n
-    PECC, SK Canada\n
-    \n
-    Location Fixes:\n
-    Delaware County, OH
+    Chester County, PA
   </string>
 </resources>
