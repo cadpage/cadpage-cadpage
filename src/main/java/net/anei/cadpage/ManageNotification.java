@@ -22,6 +22,8 @@ import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 /*
@@ -31,6 +33,8 @@ import androidx.core.app.NotificationCompat;
 public class ManageNotification {
 
   public static final String ALERT_CHANNEL_ID = "net.anei.cadpage.ALERT_CHANNEL_ID";
+
+  public static final String AUDIO_OVERRIDE_CHANNEL_ID = "net.anei.cadpage.AUDIO_OVERRIDE_CHANNEL_ID";
 
   public static final String TRACKING_CHANNEL_ID = "net.anei.cadpage.TRACKING_CHANNEL_ID";
 
@@ -82,19 +86,34 @@ public class ManageNotification {
       long[] vibratePattern = getVibratePattern(context);
       if (vibratePattern != null) channel.setVibrationPattern(vibratePattern);
 
-      if (!ManagePreferences.notifyOverride()) {
-        Uri uri = Uri.parse(ManagePreferences.notifySound());
-        AudioAttributes aa = new AudioAttributes.Builder()
-            .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
-            .build();
-        channel.setSound(uri, aa);
-      } else {
-        channel.setSound(null, null);
-      }
+      Uri uri = Uri.parse(ManagePreferences.notifySound());
+      AudioAttributes aa = new AudioAttributes.Builder()
+          .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+          .build();
+      channel.setSound(uri, aa);
 
       nm.createNotificationChannel(channel);
     }
     Log.v("Current Notification Channel info:" + channel.toString());
+
+    NotificationChannel channel2 = nm.getNotificationChannel(AUDIO_OVERRIDE_CHANNEL_ID);
+    if (channel2 == null) {
+      channel2 = new NotificationChannel(AUDIO_OVERRIDE_CHANNEL_ID, context.getString(R.string.audio_override_title), NotificationManager.IMPORTANCE_HIGH);
+      channel2.setDescription(context.getString(R.string.audio_override_text));
+      channel2.setBypassDnd(channel.canBypassDnd());
+      channel2.setLockscreenVisibility(channel.getLockscreenVisibility());
+
+      channel2.enableLights(channel.shouldShowLights());
+      channel2.setLightColor(channel.getLightColor());
+
+      channel2.enableVibration(channel.shouldVibrate());
+      channel2.setVibrationPattern(channel.getVibrationPattern());
+
+      channel2.setSound(null, null);
+
+      nm.createNotificationChannel(channel2);
+    }
+    Log.v("Current Audio Override Channel info:" + channel2.toString());
 
      // See if the alert is going to play an audio alert
     boolean audioAlert = channel.getImportance() >= NotificationManager.IMPORTANCE_DEFAULT &&
@@ -159,10 +178,10 @@ public class ManageNotification {
     String soundURI = ManagePreferences.notifySound();
     if (soundURI == null) return false;
 
-    // Check to see if System is generating audio alerts
+    // Check to see if System is generating audio alerts on the audio override channel
     NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     assert nm != null;
-    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+    NotificationChannel channel = nm.getNotificationChannel(AUDIO_OVERRIDE_CHANNEL_ID);
     if (channel == null) return false;
     if (channel.getImportance() < NotificationManager.IMPORTANCE_DEFAULT) return false;
     Uri soundURI2 = channel.getSound();
@@ -180,10 +199,28 @@ public class ManageNotification {
     if (!ManagePreferences.popupEnabled()) return false;
 
     // And the regular dispatch notification chanel importance is less than high
+    NotificationChannel channel = getAlertChannel(context);
+    return channel.getImportance() < NotificationManager.IMPORTANCE_HIGH;
+  }
+
+  /**
+   * Return the notificaton channel ID we should be using
+   * @return notification channel ID
+   */
+  public static String getAlertChannelId() {
+    return ManagePreferences.notifyOverride() ? AUDIO_OVERRIDE_CHANNEL_ID : ALERT_CHANNEL_ID;
+  }
+
+  /**
+   * Return the notification channel that we should be using
+   * @param context current context
+   * @return notification channel
+   */
+  @RequiresApi(api = Build.VERSION_CODES.O)
+  private static NotificationChannel getAlertChannel(Context context) {
     NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     assert nm != null;
-    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
-    return channel.getImportance() < NotificationManager.IMPORTANCE_HIGH;
+    return nm.getNotificationChannel(getAlertChannelId());
   }
 
   /**
@@ -197,9 +234,7 @@ public class ManageNotification {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
     if (!ManagePreferences.notifyEnabled()) return false;
 
-    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    assert nm != null;
-    NotificationChannel channel = nm.getNotificationChannel(ALERT_CHANNEL_ID);
+    NotificationChannel channel = getAlertChannel(context);
     if (channel == null) return false;
     if (channel.getImportance() < NotificationManager.IMPORTANCE_DEFAULT) return false;
     return channel.shouldVibrate();
@@ -319,7 +354,7 @@ public class ManageNotification {
     // pop up a detail screen starting with Android 10.  In which case we do not want the regular
     // audio and vibrate options and should use the quiet background notification channel rather
     // than the regular alert channel.
-    String channelId = ManagePreferences.notifyEnabled() ? ALERT_CHANNEL_ID : NOTIFY_CHANNEL_ID;
+    String channelId = ManagePreferences.notifyEnabled() ? getAlertChannelId() : NOTIFY_CHANNEL_ID;
     nbuild = new NotificationCompat.Builder(context, channelId);
 
     // Set auto-cancel flag

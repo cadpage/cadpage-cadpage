@@ -127,17 +127,12 @@
 
   <!-- Duplicate notification audio warning dialog -->
   <string name="notify_override_prompt_title">Varning för dubbla ljudlarm</string>
-  <string name="notify_override_prompt_text">
-    Du har konfigurerat Cadpage så att ljudet både använder den vanliga larmljudskontrollen och att Cadpage ska ligga över den kontrollen när ett larm kommer. Det är förmodligen inte vad du vill göra.
+  <string name="notify_override_prompt_text"> <!-- translate -->
+    You have turned on an audio alert for the notification category that Cadpage uses when
+    it is doing it\'s own audio alerts.  This will result and duplicate audio alerts which is
+    not what you want.
   </string>
-  <string name="notify_override_prompt_extra8_text">
-    \nWarning: Att bara stänga av det vanliga larmet är inte att rekommendera eftersom det också kommer att stänga av vibrationerna. Istället bör du ändra notifikationsinställningarna för ljud till "Inget"
-  </string>
-  <string name="notify_override_prompt_extra9_text">
-    \nWarning: Att bara stänga av det vanliga larmet är inte att rekommendera eftersom det också kommer att stänga av vibrationerna.Öppna istället de avancerade notifikationsinställningarna och ställ in notifikationsljudet \"None\"
-  </string>
-  <string name="notify_override_cancel_regular">Låt mig tysta den vanliga varningen</string>
-  <string name="notify_override_cancel_override">Låt mig avbryta att det ligger över det vanliga larmet</string>
+  <string name="notify_override_cancel_regular">Let me fix the notification category configuration</string> <!-- Translate -->
   <string name="notify_override_good">Låt det vara</string>
 
   <!-- change vibrate setting dialog -->

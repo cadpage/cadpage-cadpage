@@ -28,18 +28,6 @@ public class NotifyOverridePromptActivity extends Safe40Activity {
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.notify_override_prompt);
 
-    // Extra text should only be displayed is vibrate setting is currently enabled
-    View view8 = findViewById(R.id.NotifyOverrideExtra8Text);
-    View view9 = findViewById(R.id.NotifyOverrideExtra9Text);
-    if (ManageNotification.isVibrateEnabled(this)) {
-      boolean v9 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
-      view8.setVisibility(v9 ? View.GONE : View.VISIBLE);
-      view9.setVisibility(v9 ? View.VISIBLE : View.GONE);
-    } else {
-      view8.setVisibility(View.GONE);
-      view9.setVisibility(View.GONE);
-    }
-
     // Cancel regular notification button
     // Opens chanel settings preferences so user can cancel the audio alert
     // We will check if this was actually done when we are resumed
@@ -48,17 +36,6 @@ public class NotifyOverridePromptActivity extends Safe40Activity {
       @Override
       public void onClick(View view) {
         PreferenceNotificationFragment.launchChannelConfig(NotifyOverridePromptActivity.this);
-      }
-    });
-
-    // Cancel override alert button
-    // Just turn of notify override preference and exit
-    button = findViewById(R.id.NotifyOverrideCancelOverrideBtn);
-    button.setOnClickListener(new OnClickListener(){
-      @Override
-      public void onClick(View view) {
-        ManagePreferences.setNotifyOverride(false);
-        finish();
       }
     });
 

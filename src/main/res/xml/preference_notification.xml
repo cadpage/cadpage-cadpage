@@ -12,6 +12,12 @@
     app:defaultValue="true" />
 
   <Preference
+    app:key="@string/pref_notif_override_category_key"
+    app:fragment="net.anei.cadpage.PreferenceNotificationOverrideFragment"
+    app:title="@string/pref_notif_override_title"
+    app:dependency="@string/pref_notif_enabled_key" />
+
+  <Preference
     app:key="@string/pref_notif_config_key"
     app:title="@string/pref_notif_config_title"
     app:summary="@string/pref_notif_config_summary"
@@ -31,12 +37,6 @@
     app:summaryOn="@string/pref_notif_override_do_not_disturb_summaryon"
     app:summaryOff="@string/pref_notif_override_do_not_disturb_summaryoff"
     app:defaultValue="false"
-    app:dependency="@string/pref_notif_enabled_key" />
-
-  <Preference
-    app:key="@string/pref_notif_override_category_key"
-    app:fragment="net.anei.cadpage.PreferenceNotificationOverrideFragment"
-    app:title="@string/pref_notif_override_title"
     app:dependency="@string/pref_notif_enabled_key" />
 
   <net.anei.cadpage.preferences.ListPreference

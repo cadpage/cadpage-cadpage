@@ -151,20 +151,11 @@
   <!-- Duplicate notification audio warning dialog -->
   <string name="notify_override_prompt_title">Double audio alert warning</string>
   <string name="notify_override_prompt_text">
-    You have configured Cadpage to sound both the regular alert and a override alert when a
-    call is received.  This is probably not what you want to do.
+    You have turned on an audio alert for the notification category that Cadpage uses when
+    it is doing it\'s own audio alerts.  This will result and duplicate audio alerts which is
+    not what you want.
   </string>
-  <string name="notify_override_prompt_extra8_text">
-    \nWarning: Simply turning off the regular alerts is not advised since it will also suppress
-    the vibrate notification.  Instead, you should change the notification sound to "None"
-  </string>
-  <string name="notify_override_prompt_extra9_text">
-    \nWarning: Simply turning off the regular alerts is not advised since it will also suppress
-    the vibrate notification.  Instead, you should open the advanced notification settings and
-    set the notification sound to \"None\"
-  </string>
-  <string name="notify_override_cancel_regular">Let me silence the regular alert</string>
-  <string name="notify_override_cancel_override">Cancel the override alert</string>
+  <string name="notify_override_cancel_regular">Let me fix the notification category configuration</string>
   <string name="notify_override_good">Let it ride</string>
 
   <!-- change vibrate setting dialog -->

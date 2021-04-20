@@ -53,7 +53,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment {
       Preference pref = findPreference(getString(R.string.pref_notif_config_key));
       assert pref != null;
       pref.setOnPreferenceClickListener(preference -> {
-        launchChannelConfig(Objects.requireNonNull(getActivity()));
+        launchChannelConfig(requireActivity());
         return true;
       });
 
@@ -119,7 +119,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment {
   public static void launchChannelConfig(Context context) {
     Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
     intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
-    intent.putExtra(Settings.EXTRA_CHANNEL_ID, ManageNotification.ALERT_CHANNEL_ID);
+    intent.putExtra(Settings.EXTRA_CHANNEL_ID, ManageNotification.getAlertChannelId());
     context.startActivity(intent);
   }
 }

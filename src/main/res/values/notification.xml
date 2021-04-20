@@ -2,6 +2,11 @@
 <resources>
   <string name="regular_alert_title">Regular Dispatch Alerts</string>
   <string name="regular_alert_text">Regular dispatch alert</string>
+  <string name="audio_override_title">Audio Override Alert</string>
+  <string name="audio_override_text">
+    Alert used when Cadpage is overriding the audio alert.  The Sound configuration should always
+    be "None" or duplicate alert sounds will result.
+  </string>
   <string name="gen_alert_title">General Alerts</string>
   <string name="gen_alert_text">General Alert</string>
   <string name="run_report_title">Run Reports</string>
