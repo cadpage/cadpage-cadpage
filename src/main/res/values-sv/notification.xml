@@ -2,10 +2,9 @@
 <resources>
   <string name="regular_alert_title">Vanliga larm</string>
   <string name="regular_alert_text">Vanliga larm</string>
-  <string name="audio_override_title">Audio Override Alert</string> <!-- Translate -->
-  <string name="audio_override_text"> <!-- Translate -->
-    Alert used when Cadpage is overriding the audio alert.  The Sound configuration should always
-    be "None" or duplicate alert sounds will result.
+  <string name="audio_override_title">Kör över ljud-varning</string>
+  <string name="audio_override_text">
+    Larmet Cadpage använder ljuder över ljudlarmet. Ljudkonfigurationen skall alltid ställas in på Inget eller också kommer du få dubbla larmljud.
   </string>
   <string name="gen_alert_title">Generella larm</string>
   <string name="gen_alert_text">Generellt larm</string>

@@ -127,12 +127,10 @@
 
   <!-- Duplicate notification audio warning dialog -->
   <string name="notify_override_prompt_title">Varning för dubbla ljudlarm</string>
-  <string name="notify_override_prompt_text"> <!-- translate -->
-    You have turned on an audio alert for the notification category that Cadpage uses when
-    it is doing it\'s own audio alerts.  This will result and duplicate audio alerts which is
-    not what you want.
+  <string name="notify_override_prompt_text">
+    Du har satt på ett ljudlarm för notifieringskategorin som Cadpage använder för att skicka ut sina egna ljudlarm. Det kommer att resultera i att du duplicerar larmet vilket inte är vad du vill göra.
   </string>
-  <string name="notify_override_cancel_regular">Let me fix the notification category configuration</string> <!-- Translate -->
+  <string name="notify_override_cancel_regular">Låt mig fixa konfigurationen i notifikationsinställningarna</string>
   <string name="notify_override_good">Låt det vara</string>
 
   <!-- change vibrate setting dialog -->
