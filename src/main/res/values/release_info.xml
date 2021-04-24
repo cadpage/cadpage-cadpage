@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04172021</string>
+  <string name="release_date">04232021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-22\n
+    Location Fixes:\n
+    Fresno County, CA\n
+    Collier County, FL\n
+    Blaine County, ID\n
+    Tazewell County, IL\n
+    Jackson County, MO\n
+    Tioga County, PA\n
+    Rockingham County, VA\n
+    \n
+    General Fixes:\n
+    Modified the audio notification override feature to make it easier to switch back and forth
+    between standard and override notifications.\n
+    \n
     v2.2.05-21\n
     New Locations:\n
     Grant County, MN\n
