@@ -333,7 +333,19 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onResume() { 
     if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
-    super.onResume();
+
+    // This has been throwing a sporadic IllegalStateException for reasons are still not clear, but
+    // apparently happen when we get simulataneous popup requesta and queue two attempts to add
+    // the popup display fragment.  I think we have that fixed, but just in case, we will catch and
+    // discard the exception if it gets thrown again
+    try {
+      super.onResume();
+    } catch (IllegalStateException ex) {
+      Log.e("Exception discarded");
+      Log.e(ex);
+    }
+
+    addFragmentInProgress = false;
 
     activityActive = true;
 
@@ -412,15 +424,13 @@ public class CadPageActivity extends AppCompatActivity {
     if (msg != null) showAlert(msg);
   }
 
+  private boolean addFragmentInProgress = false;
+
   /**
    * Display call details for selected message
    * @param message message to be displayed
    */
-  public synchronized void showAlert(SmsMmsMessage message) {
-
-    // Synchronization shouuld not be necessary since all calls have to be on the UI thread.
-    // But we are getting occasional crashes that can seemingly only be explained by
-    // concurrent calls to this method.  So, we will add the synchronization check
+  public void showAlert(SmsMmsMessage message) {
 
     if (popupFragment == null) popupFragment = new SmsPopupFragment();
     popupFragment.setMessage(message);
@@ -430,6 +440,11 @@ public class CadPageActivity extends AppCompatActivity {
 
     FragmentTransaction ft = fragmentManager.beginTransaction();
     ft.addToBackStack(null);
+
+    // Somehow, two new simultateous requests to add this fragment still get through here.  So
+    // we add an additional check to catch them.  This flag gets cleared in onResume()
+    if (addFragmentInProgress) return;
+    addFragmentInProgress = true;
 
     String mode = ManagePreferences.popupMode();
     if (mode.equals("P")) {
