@@ -205,6 +205,7 @@ public class DonationManager {
     // ((Use install date if there is no purchase date))
     Date subExpDate = null;
     usedPurchaseDate = false;
+    paidSubscriber = false;
     overpaidDays = 0;
     int daysTillSubExpire = -99999;
     daysSincePurchase = -99999;
