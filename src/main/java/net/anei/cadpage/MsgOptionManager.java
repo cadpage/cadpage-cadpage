@@ -907,6 +907,37 @@ public class MsgOptionManager {
   }
 
   /**
+   * Prelaunch Active911 app if appropriate
+   * @param context current context
+   * @return true if Active911 app was launched
+   */
+  public static boolean preLaunchActive911(Context context) {
+
+    // Prelaunch proceeds only if one of the main button is configured to launch Active911
+    boolean found = false;
+    for (int btn = 1; btn <= ManagePreferences.POPUP_BUTTON_CNT; btn++) {
+      int itemNdx = ManagePreferences.popupButton(btn);
+      if (itemNdx == 10) {
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      for (int btn = 1; btn <= ManagePreferences.EXTRA_BUTTON_CNT; btn++) {
+        int itemNdx = ManagePreferences.extraButton(btn);
+        if (itemNdx == 10) {
+          found = true;
+          break;
+        }
+      }
+    }
+    if (!found) return false;
+
+    return launchActive911(context, true);
+  }
+
+  /**
    * Launch Active911 app if it is installed
    * @param context current context
    * @param launch true to really launch the app. false to just test to see if it is installed 
@@ -932,7 +963,7 @@ public class MsgOptionManager {
 
     // The active911 app sometimes switches the page type to itself.  Just in case this happens,
     // we will trigger our own register request 10 seconds after launching Active911
-    if (active911Code != null) FCMMessageService.registerActive911(10000L);
+    if (active911Code != null) FCMMessageService.registerActive911(context, 10000L);
     return true;
   }
 }
