@@ -2458,6 +2458,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * to be provided
      */
     protected void requestPermission(String reqPerm, int explainId) {
+
+      // Android 11 and up does not allow us to request location permission and background location permission
+      // in the same call, forcing us to display a additional explanation spelling out just what Cadpage
+      // is going to do with this background location tracking
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && reqPerm.equals(PermissionManager.ACCESS_BACKGROUND_LOCATION) ) {
+        if (reqPermissions.contains(PermissionManager.ACCESS_FINE_LOCATION)) return;
+      }
+
       if (reqPermissions != null) {
         int ndx = reqPermissions.indexOf(reqPerm);
         if (ndx >= 0) {

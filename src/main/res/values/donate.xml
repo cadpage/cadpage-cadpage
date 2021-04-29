@@ -585,17 +585,12 @@
     Enable location tracking permissions
   </string>
 
-  <string name="location_tracking_on_text">
+  <string name="location_tracking_on1_text">
     %s
   </string>
 
-  <string name = "location_tracking_on_A10_text">
+  <string name = "location_tracking_on1_A10_text">
     For this to work properly, you must allow location access all of the time.
-  </string>
-
-  <string name = "location_tracking_on_A11_text">
-    For this to work properly, you must click \"Allow in settings\" and allow location access
-    all of the time.
   </string>
 
   <string name="location_tracking_on_base_text">
@@ -604,7 +599,7 @@
   </string>
 
   <string name="location_tracking_on2_title">
-    Really enable location tracking permissions
+    Enable backgroun location tracking
   </string>
 
   <string name="location_tracking_off_title">

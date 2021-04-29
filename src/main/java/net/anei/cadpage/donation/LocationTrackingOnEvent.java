@@ -1,47 +1,33 @@
 package net.anei.cadpage.donation;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 
-import net.anei.cadpage.CadPageApplication;
+import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.PermissionManager;
 import net.anei.cadpage.R;
 
 /**
- Enable location tracking permissions
-
- For this to work properly, you must allow location access all of the time.\n
- \n
- Cadpage will collect location data to support this feature even when Cadpage is closed or not
- visible because the map/navigation app is running.  Location data will never be collected for
- longer than 20 min after the alert is received.
+ Really enable location tracking permissions
  */
-public class LocationTrackingOnEvent extends DonateScreenEvent {
+
+public class LocationTrackingOnEvent extends DonateEvent {
 
   public LocationTrackingOnEvent() {
-    super(null, R.string.location_tracking_on_title, R.string.location_tracking_on_text,
-          LocationTrackingOn2Event.instance(),
-          LocationTrackingOffEvent.instance());
-  }
-  
-  @Override
-  protected boolean overrideWindowTitle() {
-    return true;
+    super(null, R.string.location_tracking_on_title);
   }
 
   @Override
-  protected Object[] getTextParms(int type) {
-    if (type == PARM_TEXT) {
-      Context context = CadPageApplication.getContext();
-      String parm = context.getText(R.string.location_tracking_on_base_text).toString();
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        int resId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ? R.string.location_tracking_on_A11_text : R.string.location_tracking_on_A10_text;
-        parm = context.getText(resId).toString() + "\n\n" + parm;
+  protected void doEvent(Activity activity) {
+    ManagePreferences.checkPermLocationTracking((ok, permissions, granted) -> {
+      if (ok) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !PermissionManager.isGranted(activity, PermissionManager.ACCESS_BACKGROUND_LOCATION)) {
+          ((DonateActivity) activity).switchEvent(LocationTrackingOn1Event.instance(), null);
+        } else {
+          closeEvents(activity);
+        }
       }
-      return new Object[]{parm};
-    }
-    return null;
+    });
   }
 
   private static final LocationTrackingOnEvent instance = new LocationTrackingOnEvent();

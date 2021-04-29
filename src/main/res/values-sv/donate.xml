@@ -419,16 +419,12 @@
    Slå på positionsspårning
   </string>
 
-  <string name="location_tracking_on_text">
+  <string name="location_tracking_on1_text">
     %s
   </string>
 
-  <string name = "location_tracking_on_A10_text">
+  <string name = "location_tracking_on1_A10_text">
     För att det här ska fungera bra så måste du tillåta att enheten har tillgång till plats hela tiden.
-  </string>
-
-  <string name = "location_tracking_on_A11_text">
-    För att det här ska funger bra så måste du klicka på \"Tillåt i inställningar\" och tillåta att enheten har tillgång till plats hela tiden.
   </string>
 
   <string name="location_tracking_on_base_text">
@@ -436,8 +432,8 @@
     Positionsdata kommer aldrig att sparas längre tid än 20 minuter efter att larmet tagits emot.
   </string>
 
-  <string name="location_tracking_on2_title">
-    Verkligen slå på positionsspårning
+  <string name="location_tracking_on2_title"> <!-- Translate -->
+    Enable backgroun location tracking
   </string>
 
   <string name="location_tracking_off_title">
