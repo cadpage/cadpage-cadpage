@@ -432,8 +432,8 @@
     Positionsdata kommer aldrig att sparas längre tid än 20 minuter efter att larmet tagits emot.
   </string>
 
-  <string name="location_tracking_on2_title"> <!-- Translate -->
-    Enable background location tracking
+  <string name="location_tracking_on2_title">
+    Slå på positionsspårning i bakgrunden
   </string>
 
   <string name="location_tracking_off_title">
