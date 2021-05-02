@@ -430,18 +430,26 @@ public class ManageNotification {
 
     // The default intent when the notification is clicked (Inbox)
     Intent smsIntent = CadPageActivity.getLaunchIntent(context, true, false, message);
-    Log.v("Notification launch intent");
-    ContentQuery.dumpIntent(smsIntent);
 
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, smsIntent,
                                                           PendingIntent.FLAG_CANCEL_CURRENT);
     nbuild.setContentIntent(notifIntent);
+    Log.v("Notification launch intent");
     if (fullScreen) {
+      if (message != null && "Active911".equals(message.getVendorCode())) {
+        Intent active911Intent = MsgOptionManager.getActive911PrelaunchIntent(context);
+        if (active911Intent != null) {
+          ContentQuery.dumpIntent(active911Intent);
+          Intent[] intents = new Intent[]{active911Intent, smsIntent};
+          notifIntent = PendingIntent.getActivities(context, 10001, intents, PendingIntent.FLAG_CANCEL_CURRENT);
+        }
+      }
       nbuild.setFullScreenIntent(notifIntent, true);
       nbuild.setPriority(NotificationCompat.PRIORITY_MAX);
       nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
       nbuild.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
     }
+    ContentQuery.dumpIntent(smsIntent);
 
     // Set intent to execute if the "clear all" notifications button is pressed -
     // basically stop any future reminders.

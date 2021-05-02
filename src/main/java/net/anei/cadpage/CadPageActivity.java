@@ -10,9 +10,11 @@ import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
 import net.anei.cadpage.donation.VendorEvent;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -25,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.SystemClock;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -40,7 +43,7 @@ public class CadPageActivity extends AppCompatActivity {
   private static final String EXTRA_NOTIFY = "net.anei.cadpage.CadPageActivity.NOTIFY";
   private static final String EXTRA_POPUP = "net.anei.cadpage.CadPageActivity.POPUP";
   private static final String EXTRA_MSG_ID = "net.anei.cadpage.CadPageActivity.MSG_ID";
-  private static final String EXTRA_NO_ACTIVE911 = "net.anei.cadpage.CadpageActivity.NO_ACTIVE911";
+  private static final String EXTRA_ACTIVE911_PRELAUNCH = "net.anei.cadpage.CadpageActivity.ACTIVE911_PRELAUNCH";
 
   private static final String SAVED_SPLIT_SCREEN = "SPLIT_SCREEN";
   private static final String SAVED_MSG_ID = "MSG_ID";
@@ -189,7 +192,6 @@ public class CadPageActivity extends AppCompatActivity {
     ContentQuery.dumpIntent(intent);
     
     int msgId = intent.getIntExtra(EXTRA_MSG_ID, -1);
-    boolean noActive911Launch = intent.getBooleanExtra(EXTRA_NO_ACTIVE911, false);
 
     // See if this request is going to pop up an alert window
     SmsMmsMessage msg;
@@ -198,18 +200,6 @@ public class CadPageActivity extends AppCompatActivity {
     } else {
       boolean force = intent.getBooleanExtra(EXTRA_POPUP, false);
       msg = SmsMessageQueue.getInstance().getDisplayMessage(force);
-    }
-
-    // If we are supposed to prelaunch Active911, this is where we do it
-    // After which we launch ourselves with the ETRXA_NO_ACTIVE911 flag set so we not do this
-    // on the second time around
-    if (!noActive911Launch && msg != null && "Activity".equals(msg.getVendorCode())) {
-      if (MsgOptionManager.preLaunchActive911(this)) {
-        Log.v("Active911 prelaunch - restart CadpageActivity");
-        intent.getExtras().putBoolean(EXTRA_NO_ACTIVE911, true);
-        startActivity(intent);
-        finish();
-      }
     }
 
     // If there is no message popup display and we were started by some kind of

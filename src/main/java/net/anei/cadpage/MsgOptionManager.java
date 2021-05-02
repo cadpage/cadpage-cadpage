@@ -907,11 +907,38 @@ public class MsgOptionManager {
   }
 
   /**
+   * Launch Active911 app if it is installed
+   * @param context current context
+   * @param launch true to really launch the app. false to just test to see if it is installed 
+   * @return true if Active911 app is installed, false otherwise
+   */
+  private static boolean launchActive911(Context context, boolean launch) {
+
+    Intent intent = getActive911LaunchIntent(context);
+    if (intent == null) return false;
+    if (!launch) return true;
+
+    Log.w("Launching Active911");
+    ContentQuery.dumpIntent(intent);
+    try {
+      context.startActivity(intent);
+    } catch (Exception ex) {
+      Log.e(ex);
+      return true;
+    }
+
+    // The active911 app sometimes switches the page type to itself.  Just in case this happens,
+    // we will trigger our own register request 10 seconds after launching Active911
+    FCMMessageService.registerActive911(context, 10000L);
+    return true;
+  }
+
+  /**
    * Prelaunch Active911 app if appropriate
    * @param context current context
    * @return true if Active911 app was launched
    */
-  public static boolean preLaunchActive911(Context context) {
+  public static Intent getActive911PrelaunchIntent(Context context) {
 
     // Prelaunch proceeds only if one of the main button is configured to launch Active911
     boolean found = false;
@@ -932,38 +959,23 @@ public class MsgOptionManager {
         }
       }
     }
-    if (!found) return false;
+    if (!found) return null;
 
-    return launchActive911(context, true);
+    return getActive911LaunchIntent(context);
   }
 
   /**
-   * Launch Active911 app if it is installed
+   * Return intent to launch Active911 app
    * @param context current context
-   * @param launch true to really launch the app. false to just test to see if it is installed 
-   * @return true if Active911 app is installed, false otherwise
+   * @return intent to launch Active911 if installed, null otherwise
    */
-  public static boolean launchActive911(Context context, boolean launch) {
+  private static Intent getActive911LaunchIntent(Context context) {
     PackageManager pm = context.getPackageManager();
     Intent intent = pm.getLaunchIntentForPackage("com.active911.app");
-    if (intent == null) return false;
-
-    if (!launch) return true;
-    Log.w("Launching Active911");
+    if (intent == null) return null;
     String active911Code = VendorManager.instance().getActive911Code();
     if (active911Code != null) intent.putExtra("CadpageAccount", active911Code);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    ContentQuery.dumpIntent(intent);
-    try {
-      context.startActivity(intent);
-    } catch (Exception ex) {
-      Log.e(ex);
-      return true;
-    }
-
-    // The active911 app sometimes switches the page type to itself.  Just in case this happens,
-    // we will trigger our own register request 10 seconds after launching Active911
-    if (active911Code != null) FCMMessageService.registerActive911(context, 10000L);
-    return true;
+    return intent;
   }
 }
