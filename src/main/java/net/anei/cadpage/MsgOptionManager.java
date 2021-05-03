@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -939,6 +940,9 @@ public class MsgOptionManager {
    * @return true if Active911 app was launched
    */
   public static Intent getActive911PrelaunchIntent(Context context) {
+
+    // Not currently supported for android versions before lollipop
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return null;
 
     // Prelaunch proceeds only if one of the main button is configured to launch Active911
     boolean found = false;

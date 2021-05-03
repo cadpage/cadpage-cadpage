@@ -429,7 +429,7 @@ public class ManageNotification {
     }
 
     // The default intent when the notification is clicked (Inbox)
-    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true, false, message);
+    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true, false, false, message);
 
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, smsIntent,
                                                           PendingIntent.FLAG_CANCEL_CURRENT);
@@ -437,6 +437,7 @@ public class ManageNotification {
     Log.v("Notification launch intent");
     if (fullScreen) {
       if (message != null && "Active911".equals(message.getVendorCode())) {
+        smsIntent = CadPageActivity.getLaunchIntent(context, true, false, true, message);
         Intent active911Intent = MsgOptionManager.getActive911PrelaunchIntent(context);
         if (active911Intent != null) {
           ContentQuery.dumpIntent(active911Intent);

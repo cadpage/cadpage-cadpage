@@ -10,6 +10,7 @@ import net.anei.cadpage.donation.NeedAcctPermissionUpgradeEvent;
 import net.anei.cadpage.donation.VendorEvent;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -192,6 +193,32 @@ public class CadPageActivity extends AppCompatActivity {
     ContentQuery.dumpIntent(intent);
     
     int msgId = intent.getIntExtra(EXTRA_MSG_ID, -1);
+
+    // If Active911 was prelaunched at the same time we were, some cleanup is required
+    if (intent.getBooleanExtra(EXTRA_ACTIVE911_PRELAUNCH, false)) {
+
+      // First, the Active911 app is pretty persistent about coming up in foreground, probably
+      // because we launch a splash screen that launches the actual app.  We need to schedule
+      // an event to push us on top of the task stack.  ( Sadly, this logic only works under
+      // Lollipop or higher, we make the version check here to keep lint happy, but the
+      // real restriction is elsewhere )
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        CadPageApplication.runScheduledEvent(new Runnable() {
+          @Override
+          public void run() {
+            ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+            assert am != null;
+            for (ActivityManager.AppTask task : am.getAppTasks()) task.moveToFront();
+          }
+        }, 500L);
+      }
+
+      // Second, we need to schedule an event to reregister ourselves with the Active911 service.
+      // Just in case the Active911 app redirected alerts to itself
+      FCMMessageService.registerActive911(this, 10000L);
+    }
+
+
 
     // See if this request is going to pop up an alert window
     SmsMmsMessage msg;
@@ -516,9 +543,22 @@ public class CadPageActivity extends AppCompatActivity {
    * Build intent to launch this activity
    * @param context current context
    * @param force force detail popup window
+   * @param notify display alert notification
    * @return Intent that will launch Cadpage
    */
   public static Intent getLaunchIntent(Context context, boolean force, boolean notify, SmsMmsMessage msg) {
+    return getLaunchIntent(context, force, notify, false, msg);
+  }
+
+  /**
+   * Build intent to launch this activity
+   * @param context current context
+   * @param force force detail popup window
+   * @param notify display alert notification
+   * @param active911 deal with consequences of active911 prelaunch
+   * @return Intent that will launch Cadpage
+   */
+  public static Intent getLaunchIntent(Context context, boolean force, boolean notify, boolean active911, SmsMmsMessage msg) {
     Intent intent = new Intent(context, CadPageActivity.class);
     int flags =
             Intent.FLAG_ACTIVITY_NEW_TASK
@@ -527,6 +567,7 @@ public class CadPageActivity extends AppCompatActivity {
     intent.setFlags(flags);
     if (force) intent.putExtra(EXTRA_POPUP, true);
     if (notify) intent.putExtra(EXTRA_NOTIFY, true);
+    if (notify) intent.putExtra(EXTRA_ACTIVE911_PRELAUNCH, true);
     if (msg != null) intent.putExtra(EXTRA_MSG_ID, msg.getMsgId());
     return intent;
   }
