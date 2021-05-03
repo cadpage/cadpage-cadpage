@@ -204,7 +204,7 @@ public class ManageNotification {
   }
 
   /**
-   * Return the notificaton channel ID we should be using
+   * Return the notification channel ID we should be using
    * @return notification channel ID
    */
   public static String getAlertChannelId() {
@@ -512,7 +512,7 @@ public class ManageNotification {
 
 
   /**
-   * Start up Media player to playoverride alert sound
+   * Start up Media player to play override alert sound
    * @param context current context
    */
   private synchronized static void startMediaPlayer(Context context, int startCnt) {
@@ -552,10 +552,8 @@ public class ManageNotification {
         mMediaPlayer.prepare();
         if (loop) mMediaPlayer.setLooping(true);
         listener.arm();
-        mMediaPlayer.start();
-      } else {
-        mMediaPlayer.start();
       }
+      mMediaPlayer.start();
       Log.v("Playback start successful");
     } catch (IOException ex) {
       
@@ -845,7 +843,7 @@ public class ManageNotification {
    */
   public static long[] parseVibratePattern(String stringPattern) {
     ArrayList<Long> arrayListPattern = new ArrayList<>();
-    Long l;
+    long l;
 
     if (stringPattern == null) return null;
 

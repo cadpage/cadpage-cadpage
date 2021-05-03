@@ -316,7 +316,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
    */
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    if (optManager != null && optManager.menuItemSelected(item.getItemId(), true)) return true;
+    if (optManager != null && optManager.menuItemSelected(item.getItemId())) return true;
     return super.onOptionsItemSelected(item);
   }
 
@@ -334,7 +334,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
    */
   @Override
   public boolean onContextItemSelected(MenuItem item) {
-    if (optManager.menuItemSelected(item.getItemId(), true)) return true;
+    if (optManager.menuItemSelected(item.getItemId())) return true;
     return super.onContextItemSelected(item);
   }
 

@@ -499,7 +499,7 @@ public class MsgOptionManager {
     public void onClick(View v) {
       
       // Perform the requested action
-      menuItemSelected(itemId, true, respCode);
+      menuItemSelected(itemId, respCode);
       
       // Reset button status in case anything has changed
       prepareButtons();
@@ -583,17 +583,16 @@ public class MsgOptionManager {
   /**
    * Handle a menu selection concerning this message
    * @param itemId Selected Menu ID
-   * @param display true if called from message display dialog
    * @return true if menu item processed, false otherwise
    */
-  public boolean menuItemSelected(int itemId, boolean display) {
-    return menuItemSelected(itemId, display, null);
+  public boolean menuItemSelected(int itemId) {
+    return menuItemSelected(itemId, null);
   }
   
   private static final Pattern PHONE_TEXT_PTN = Pattern.compile("(\\d+)/ *(.*)");
   
   @SuppressLint("MissingPermission")
-  private boolean menuItemSelected(int itemId, boolean display, String respCode) {
+  private boolean menuItemSelected(int itemId, String respCode) {
     
     // If parent activity is no longer valid, disregard
     if (activity.isFinishing()) return false;
@@ -910,12 +909,32 @@ public class MsgOptionManager {
   /**
    * Launch Active911 app if it is installed
    * @param context current context
-   * @param launch true to really launch the app. false to just test to see if it is installed 
+   * @param launch true to really launch the app. false to just test to see if it is installed
    * @return true if Active911 app is installed, false otherwise
    */
   private static boolean launchActive911(Context context, boolean launch) {
+    return launchActive911(context, launch, false);
+  }
 
-    Intent intent = getActive911LaunchIntent(context);
+  /**
+   * Prelaunch Active911 app if appropriate
+   * @param context current context
+   * @return true if Active911 was prelaunched, false otherwise
+   */
+  public static boolean prelaunchActive911(Context context) {
+    return launchActive911(context, true, true);
+  }
+
+  /**
+   * Launch Active911 app if it is installed
+   * @param context current context
+   * @param launch true to really launch the app. false to just test to see if it is installed
+   * @param prelaunch true if this is a prelaunch request, false otherwise
+   * @return true if Active911 app is installed, false otherwise
+   */
+  private static boolean launchActive911(Context context, boolean launch, boolean prelaunch) {
+
+    Intent intent = prelaunch ? getActive911PrelaunchIntent(context) : getActive911LaunchIntent(context);
     if (intent == null) return false;
     if (!launch) return true;
 
@@ -935,9 +954,9 @@ public class MsgOptionManager {
   }
 
   /**
-   * Prelaunch Active911 app if appropriate
+   * get Intent to prelaunch Active911 app if appropriate
    * @param context current context
-   * @return true if Active911 app was launched
+   * @return intent to launch Active911 app if appropriate, null otherwise
    */
   public static Intent getActive911PrelaunchIntent(Context context) {
 

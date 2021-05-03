@@ -11,11 +11,9 @@ import net.anei.cadpage.donation.VendorEvent;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -28,7 +26,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.SystemClock;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -203,14 +200,11 @@ public class CadPageActivity extends AppCompatActivity {
       // Lollipop or higher, we make the version check here to keep lint happy, but the
       // real restriction is elsewhere )
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        CadPageApplication.runScheduledEvent(new Runnable() {
-          @Override
-          public void run() {
-            ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-            assert am != null;
-            for (ActivityManager.AppTask task : am.getAppTasks()) task.moveToFront();
-          }
-        }, 500L);
+        CadPageApplication.runScheduledEvent(() -> {
+          ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+          assert am != null;
+          for (ActivityManager.AppTask task : am.getAppTasks()) task.moveToFront();
+        }, 2000L);
       }
 
       // Second, we need to schedule an event to reregister ourselves with the Active911 service.
@@ -260,7 +254,7 @@ public class CadPageActivity extends AppCompatActivity {
         // Check call popup window configuration
         if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
 
-        // If a new Active911 client may be highjacking alerts, warn user
+        // If a new Active911 client may be hijacking alerts, warn user
         if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return;
 
         // Otherwise, launch the release info dialog if it hasn't already been displayed
@@ -366,7 +360,7 @@ public class CadPageActivity extends AppCompatActivity {
     if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
 
     // This has been throwing a sporadic IllegalStateException for reasons are still not clear, but
-    // apparently happen when we get simulataneous popup requesta and queue two attempts to add
+    // apparently happen when we get simultaneous popup requests and queue two attempts to add
     // the popup display fragment.  I think we have that fixed, but just in case, we will catch and
     // discard the exception if it gets thrown again
     try {
@@ -383,7 +377,7 @@ public class CadPageActivity extends AppCompatActivity {
     // If we **REALLY** need the support app, and we asked the user
     // to install it, make sure that it has been installed and opened and
     // everything is OK.  However, we do not want to call this when we are
-    // initialiazing because that will duplicate the call previousily made in
+    // initializing because that will duplicate the call previously made in
     // startup()
     if (!(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED) && !startup && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
@@ -472,7 +466,7 @@ public class CadPageActivity extends AppCompatActivity {
     FragmentTransaction ft = fragmentManager.beginTransaction();
     ft.addToBackStack(null);
 
-    // Somehow, two new simultateous requests to add this fragment still get through here.  So
+    // Somehow, two new simultaneous requests to add this fragment still get through here.  So
     // we add an additional check to catch them.  This flag gets cleared in onResume()
     if (addFragmentInProgress) return;
     addFragmentInProgress = true;
@@ -514,8 +508,8 @@ public class CadPageActivity extends AppCompatActivity {
   /**
    * Launch activity
    */
-  public static void launchActivity(Context context, boolean notify, SmsMmsMessage msg) {
-    Intent intent = getLaunchIntent(context, true, notify, msg);
+  public static void launchActivity(Context context, boolean notify, boolean prelaunch, SmsMmsMessage msg) {
+    Intent intent = getLaunchIntent(context, true, notify, prelaunch, msg);
     intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
     context.startActivity(intent);
   }
@@ -567,7 +561,7 @@ public class CadPageActivity extends AppCompatActivity {
     intent.setFlags(flags);
     if (force) intent.putExtra(EXTRA_POPUP, true);
     if (notify) intent.putExtra(EXTRA_NOTIFY, true);
-    if (notify) intent.putExtra(EXTRA_ACTIVE911_PRELAUNCH, true);
+    if (active911) intent.putExtra(EXTRA_ACTIVE911_PRELAUNCH, true);
     if (msg != null) intent.putExtra(EXTRA_MSG_ID, msg.getMsgId());
     return intent;
   }
