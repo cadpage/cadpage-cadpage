@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04302021</string>
+  <string name="release_date">05042021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-24\n
+    Location Fixes:\n
+    Morgan County, AL\n
+    \n
+    General Fixes:\n
+    Recently introduced problem with calls not opening until Cadpage is restarted.\n
+    \n
     v2.2.05-23\n
     New Locations:\n
     Gem County, ID\n
@@ -57,29 +64,6 @@
     Blaine County, ID\n
     Carlisle County, KY\n
     Monmouth County, NJ\n
-    Swain County, NC\n
-    \n
-    v2.2.05-19\n
-    Location Fixes:\n
-    Hoke County, NC\n
-    \n
-    v2.2.05-18\n
-    New Locations:\n
-    Evangeline Parish, LA\n
-    St Joseph County, MI\n
-    \n
-    Location Fixes:\n
-    Fresno, CA\n
-    Warren County, NJ\n
-    Harneett County, NC\n
-    \n
-    v2.2.05-17\n
-    Location Fixes:\n
-    Floyd County, GA\n
-    Blaine County, ID\n
-    Charles County, MD\n
-    Person County, NC\n
-    Washington County, OH\n
-    Chester County, PA
+    Swain County, NC
   </string>
 </resources>
