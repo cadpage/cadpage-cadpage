@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -66,6 +67,12 @@ public class CadPageActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     if (Log.DEBUG) Log.v("CadPageActivity: onCreate()");
     super.onCreate(savedInstanceState);
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    fragmentManager.addOnBackStackChangedListener(() -> {
+      Log.v("Cleared addFragmentInProgress flag");
+      addFragmentInProgress = false;
+    });
 
     int startMsgId = -1;
     if (savedInstanceState != null) {
@@ -442,8 +449,10 @@ public class CadPageActivity extends AppCompatActivity {
     ft.addToBackStack(null);
 
     // Somehow, two new simultateous requests to add this fragment still get through here.  So
-    // we add an additional check to catch them.  This flag gets cleared in onResume()
+    // we add an additional check to catch them.  This flag gets cleared when the SmsPopupFragment
+    // starts
     if (addFragmentInProgress) return;
+    Log.v("Setting addFragmentInProgress flag");
     addFragmentInProgress = true;
 
     String mode = ManagePreferences.popupMode();
