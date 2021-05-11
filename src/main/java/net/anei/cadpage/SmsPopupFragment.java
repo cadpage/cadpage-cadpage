@@ -39,7 +39,7 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
 
   private SmsMmsMessage message = null;
   private MsgOptionManager optManager = null;
-
+  
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

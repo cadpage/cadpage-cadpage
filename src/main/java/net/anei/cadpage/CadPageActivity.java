@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -359,18 +360,7 @@ public class CadPageActivity extends AppCompatActivity {
   protected void onResume() { 
     if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
 
-    // This has been throwing a sporadic IllegalStateException for reasons are still not clear, but
-    // apparently happen when we get simultaneous popup requests and queue two attempts to add
-    // the popup display fragment.  I think we have that fixed, but just in case, we will catch and
-    // discard the exception if it gets thrown again
-    try {
-      super.onResume();
-    } catch (IllegalStateException ex) {
-      Log.e("Exception discarded");
-      Log.e(ex);
-    }
-
-    addFragmentInProgress = false;
+    super.onResume();
 
     activityActive = true;
 
@@ -449,8 +439,6 @@ public class CadPageActivity extends AppCompatActivity {
     if (msg != null) showAlert(msg);
   }
 
-  private boolean addFragmentInProgress = false;
-
   /**
    * Display call details for selected message
    * @param message message to be displayed
@@ -461,15 +449,11 @@ public class CadPageActivity extends AppCompatActivity {
     popupFragment.setMessage(message);
 
     FragmentManager fragmentManager = getSupportFragmentManager();
+    fragmentManager.executePendingTransactions();
     if (fragmentManager.findFragmentByTag(CALL_ALERT_TAG) != null) return;
 
     FragmentTransaction ft = fragmentManager.beginTransaction();
     ft.addToBackStack(null);
-
-    // Somehow, two new simultaneous requests to add this fragment still get through here.  So
-    // we add an additional check to catch them.  This flag gets cleared in onResume()
-    if (addFragmentInProgress) return;
-    addFragmentInProgress = true;
 
     String mode = ManagePreferences.popupMode();
     if (mode.equals("P")) {
