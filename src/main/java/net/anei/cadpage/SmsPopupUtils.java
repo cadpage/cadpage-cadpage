@@ -3,7 +3,9 @@ package net.anei.cadpage;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 import net.anei.cadpage.donation.NeedCadpageSupportApp2Event;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
@@ -298,4 +301,22 @@ public class SmsPopupUtils {
       return false;
     }
   }
+
+  /**
+   * Set alarm to trigger at exact real time
+   * @param context current context
+   * @param time time alarm should trigger
+   * @param pendingIntent intent to launch at trigger time
+   */
+  public static void setExactTime(Context context, long time, PendingIntent pendingIntent) {
+    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      myAM.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+    } else {
+      myAM.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+    }
+
+  }
+
+
 }

@@ -11,6 +11,7 @@ import android.os.Build;
 import net.anei.cadpage.CadPageActivity;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.vendors.VendorManager;
 
 /**
@@ -43,13 +44,13 @@ public class ClearDataEvent extends DonateEvent {
       VendorManager.instance().clearAll();
 
       // Set up an intent to relaunch Cadpage in 1 second
-      AlarmManager myAM = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+
       Intent intent = CadPageActivity.getLaunchIntent(activity);
       PendingIntent pendIntent =
               PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
       long triggerTime = System.currentTimeMillis() + 1000L;
-      myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, pendIntent);
+      SmsPopupUtils.setExactTime(activity, triggerTime, pendIntent);
 
       // Kill off this process and let it relaunch
       System.exit(2);

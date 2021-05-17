@@ -61,8 +61,6 @@ public class ReminderReceiver extends BroadcastReceiver {
   }
   
   private static void scheduleReminder(Context context, SmsMmsMessage message, boolean start, long interval) {
-    
-    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
     Intent reminderIntent = new Intent(context, ReminderReceiver.class);
     reminderIntent.setAction(ACTION_REMIND);
@@ -75,7 +73,7 @@ public class ReminderReceiver extends BroadcastReceiver {
     long triggerTime = System.currentTimeMillis() + interval;
     if (Log.DEBUG) Log.v("ReminderReceiver: scheduled reminder notification in " + interval
         + " seconds");
-    myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, reminderPendingIntent);
+    SmsPopupUtils.setExactTime(context, triggerTime, reminderPendingIntent);
   }
 
   /*

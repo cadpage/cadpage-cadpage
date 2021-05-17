@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 /*
  * This class provides an easy way to clear held WakeLocks and re-enable the
@@ -52,8 +53,7 @@ public class ClearAllReceiver extends BroadcastReceiver {
   public static synchronized void setCancel(Context context, int timeout, ClearType type) {
     if (Log.DEBUG) Log.v("ClearAllReceiver: setCancel() " + type + " for " + timeout + " seconds");
     AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    myAM.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (timeout * 1000),
-        getPendingIntent(context, type));
+    SmsPopupUtils.setExactTime(context, System.currentTimeMillis() + (timeout * 1000), getPendingIntent(context, type));
   }
 
   /*
