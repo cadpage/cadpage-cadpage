@@ -39,7 +39,15 @@ public class SmsPopupFragment extends DialogFragment implements LocationTracker.
 
   private SmsMmsMessage message = null;
   private MsgOptionManager optManager = null;
-  
+
+  /**
+   * Mandatory empty constructor for the fragment manager to instantiate the
+   * fragment (e.g. upon screen orientation changes).
+   */
+  public SmsPopupFragment() {
+    super();
+  }
+
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

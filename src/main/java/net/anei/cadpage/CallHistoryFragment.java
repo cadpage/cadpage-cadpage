@@ -27,6 +27,7 @@ public class CallHistoryFragment extends FragmentWithContextMenu {
    * fragment (e.g. upon screen orientation changes).
    */
   public CallHistoryFragment() {
+    super();
   }
 
   @Override
