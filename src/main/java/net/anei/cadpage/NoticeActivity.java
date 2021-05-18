@@ -48,24 +48,45 @@ public class NoticeActivity extends AppCompatActivity {
     if (extras == null) return;
     String[] parms = intent.getStringArrayExtra(EXTRAS_PARMS);
 
-    new NoticeDialogFragment(this, type, parms).show(getSupportFragmentManager(),  "notice");
+    new NoticeDialogFragment(type, parms).show(getSupportFragmentManager(),  "notice");
   }
 
   public static class NoticeDialogFragment extends DialogFragment {
 
-    private final Activity activity;
-    private final int type;
-    private final String[] parms;
+    private int type;
+    private String[] parms;
 
-    public NoticeDialogFragment(Activity activity, int type, String[] parms) {
-      this.activity = activity;
+    public NoticeDialogFragment() {
+      super();
+    }
+
+    public NoticeDialogFragment(int type, String[] parms) {
       this.type = type;
       this.parms = parms;
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+      super.onSaveInstanceState(outState);
+      outState.putInt(EXTRAS_TYPE, type);
+      outState.putStringArray(EXTRAS_PARMS, parms);
+    }
+
+    @Override
+    public void onCreate(Bundle inState) {
+      super.onCreate(inState);
+      if (inState != null) {
+        type = inState.getInt(EXTRAS_TYPE);
+        parms = inState.getStringArray(EXTRAS_PARMS);
+      }
+    }
+
+      @Override
     @NonNull
     public Dialog onCreateDialog(Bundle bundle) {
+
+      Activity activity = getActivity();
+      assert(activity != null);
 
       switch (type) {
 
