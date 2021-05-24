@@ -156,10 +156,9 @@ public class SmsMsgAccumulator {
     if (cancel) {
       if (pendIntent != null) pendIntent.cancel();
     } else {
-      AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
       int msgTimeout = ManagePreferences.partMsgTimeout();
       long triggerTime = System.currentTimeMillis() + (msgTimeout * 1000);
-      myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, pendIntent);
+      SmsPopupUtils.setExactTime(context, triggerTime, pendIntent);
     }
   }
 

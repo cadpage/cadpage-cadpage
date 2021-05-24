@@ -322,6 +322,11 @@ public class CadPageActivity extends AppCompatActivity {
 
   public static class ReleaseDialogFragment extends DialogFragment {
 
+    // This should be implied, but just in case!
+    public ReleaseDialogFragment() {
+      super();
+    }
+
     @Override
     @NonNull public Dialog onCreateDialog(Bundle bundle) {
       Activity activity = getActivity();

@@ -370,13 +370,12 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // Launching an intent before throwing a final exception doesn't work
     // Lets schedule an intent launch in 1 second.
     
-    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     Intent intent = buildIntent(context, EmailType.CRASH, 0);
     PendingIntent pendIntent =
       PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
     long triggerTime = System.currentTimeMillis() + 1000L;
-    myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, pendIntent);
+    SmsPopupUtils.setExactTime(context, triggerTime, pendIntent);
   }
 
   /**
