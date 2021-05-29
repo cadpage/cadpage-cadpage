@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05222021</string>
+  <string name="release_date">05292021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-28\n
+    New Locations:\n
+    Laurel County, KY\n
+    \n
+    Location Fixes:\n
+    Costilla County, CO\n
+    Wastenaw County,  MI\n
+    \n
     v2.2.05-27\n
     New Locations:\n
     Morrison County, MN\n
@@ -48,22 +56,6 @@
     Morgan County, AL\n
     \n
     General Fixes:\n
-    Recently introduced problem with calls not opening until Cadpage is restarted.\n
-    \n
-    v2.2.05-23\n
-    New Locations:\n
-    Gem County, ID\n
-    \n
-    Location Fixes:\n
-    Warren County, MS\n
-    Pasquotank County, NC\n
-    Allen County, OH\n
-    Ellis County, TX\n
-    Wythe County, VA\n
-    \n
-    General Fixes:\n
-    CodeMessaging users should be allowed to set up a Cadpage Service subscription
-    without a paid subscription.\n
-    Problem setting up location permissions for Active911 under Android 11.
+    Recently introduced problem with calls not opening until Cadpage is restarted.
   </string>
 </resources>
