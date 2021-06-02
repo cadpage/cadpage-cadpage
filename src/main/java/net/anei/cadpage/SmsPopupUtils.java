@@ -29,6 +29,7 @@ public class SmsPopupUtils {
   private static final int CADPAGE_SUPPORT_VERSION2 = 15;
   private static final int CADPAGE_SUPPORT_VERSION3 = 16;
   private static final int CADPAGE_SUPPORT_VERSION4 = 17;
+  private static final int CADPAGE_SUPPORT_VERSION5 = 18;
   private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
   private static final String EXTRA_CADPAGE_PHONE = "net.anei.cadpage.CALL_PHONE";
 
@@ -158,14 +159,18 @@ public class SmsPopupUtils {
     // See which version we need.  The basic version that was distributed earlier can handle
     // receiving SMS and MMS messages.  But sending text messages requires a newer version that
     // is only available from the download page and calling phone numbers requires and even newer
-    // version
+    // version.
+
+    // Latest developments.  Since Android 10, the phone callback has not worked reliably.  To fix
+    // this, phone callbacks now require an even newer version of the support app.
     int version;
     String callbackType = ManagePreferences.callbackTypeSummary();
     boolean callbackPhone = callbackType.contains("P");
-    if (!BuildConfig.MSG_ALLOWED && !ManagePreferences.useOldMMS()) {
+
+    if (callbackPhone) {
+      version = CADPAGE_SUPPORT_VERSION5;
+    } else if (!BuildConfig.MSG_ALLOWED && !ManagePreferences.useOldMMS()) {
       version = CADPAGE_SUPPORT_VERSION4;
-    } else if (callbackPhone) {
-      version = CADPAGE_SUPPORT_VERSION3;
     } else if (callbackType.contains("T")) {
       version = CADPAGE_SUPPORT_VERSION2;
     } else if (!BuildConfig.MSG_ALLOWED){

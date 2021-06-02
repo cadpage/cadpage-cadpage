@@ -51,6 +51,7 @@ public class CadPageActivity extends AppCompatActivity {
 
   private SmsPopupFragment popupFragment = null;
 
+  private static ResponseSender responseSender;
 
   private static boolean initializing = false;
 
@@ -67,6 +68,8 @@ public class CadPageActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     if (Log.DEBUG) Log.v("CadPageActivity: onCreate()");
     super.onCreate(savedInstanceState);
+
+    responseSender = new ResponseSender(this);
 
     int startMsgId = -1;
     if (savedInstanceState != null) {
@@ -385,6 +388,7 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     ManagePreferences.releasePermissionManager(permMgr);
+    responseSender = null;
     super.onDestroy();
   }
 
@@ -518,5 +522,9 @@ public class CadPageActivity extends AppCompatActivity {
 
   public static boolean isInitializing() {
     return initializing;
+  }
+
+  public static ResponseSender getResponseSender() {
+    return responseSender;
   }
 }

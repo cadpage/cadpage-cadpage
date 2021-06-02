@@ -105,6 +105,8 @@ public class ResponseSender {
       String urlPhone = "tel:" + phone;
       Intent intent = new Intent(Intent.ACTION_CALL);
       intent.setData(Uri.parse(urlPhone));
+      Log.v("Initiating phone call");
+      ContentQuery.dumpIntent(intent);
       activity.startActivity(intent);
     } catch (Exception e) {
       Log.v("SMSPopupActivity: Phone call failed" + e.getMessage());

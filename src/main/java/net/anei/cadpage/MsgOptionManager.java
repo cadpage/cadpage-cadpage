@@ -39,10 +39,7 @@ public class MsgOptionManager {
   // View group and list of button handlers associated with main menu buttons
   private ViewGroup mainButtonGroup = null;
   private final List<ButtonHandler> mainButtonList = new ArrayList<>();
-  
-  // Broadcast receiver logging results of text send messages
-  private ResponseSender responseSender = null;
-  
+
   public MsgOptionManager(CadPageActivity activity, SmsMmsMessage message) {
     this.activity = activity;
     this.message = message;
@@ -674,6 +671,7 @@ public class MsgOptionManager {
       String phone = respCode;
       Matcher match = PHONE_TEXT_PTN.matcher(respCode);
       if (match.matches()) phone = match.group(1);
+      ResponseSender responseSender = CadPageActivity.getResponseSender();
       if (responseSender == null) responseSender = new ResponseSender(activity);
       responseSender.callPhone(phone);
       return true;
@@ -901,7 +899,8 @@ public class MsgOptionManager {
    */
   private void sendSMS(String target, String message){ 
     Log.v("Sending text response to " + target + " : " + message);
-    
+
+    ResponseSender responseSender = CadPageActivity.getResponseSender();
     if (responseSender == null) responseSender = new ResponseSender(activity);
     responseSender.sendSMS(target, message);
   }

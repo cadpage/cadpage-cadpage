@@ -1,9 +1,17 @@
 package net.anei.cadpage;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.IBinder;
+import android.os.RemoteException;
+
+import net.anei.cadpagesupport.IContentService;
+import net.anei.cadpagesupport.IResponseSenderService;
 
 import java.util.List;
 
@@ -11,8 +19,31 @@ public class ResponseSender {
 
   private final Activity activity;
 
+  private IResponseSenderService mResponseSenderService = null;
+  private ServiceConnection mServiceConnect = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+      Log.v("ResponseSenderService connected");
+      mResponseSenderService = IResponseSenderService.Stub.asInterface(service);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+      Log.v("ResponseSenderService disconnected");
+      mResponseSenderService = null;
+    }
+  };
+
   public ResponseSender(Activity activity) {
     this.activity = activity;
+
+    Intent intent = new Intent();
+    intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ResponseSenderService");
+    if (activity.bindService(intent, mServiceConnect, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
+      Log.v("ResponseSenderService binding succeeded");
+    } else {
+      Log.v("ResponseSenderService binding failed");
+    };
   }
 
   /**
@@ -22,7 +53,18 @@ public class ResponseSender {
    */
   public void sendSMS(String target, String message){
 
-    // Send intent to support app which does the real work
+    // First try invoking ResponseSenderService in the message support app
+    if (mResponseSenderService != null) {
+      try {
+        Log.v("Send SMS Msg 1");
+        mResponseSenderService.sendSMS(target, message);
+        return;
+      } catch (RemoteException ex) {
+        Log.e(ex);
+      }
+    }
+
+    // No go.  Try sending the request and to the broadcast receiver
     Intent intent = new Intent("net.anei.cadpagesupport.SendSMS");
     intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ResponseSender");
     intent.putExtra("target", target);
@@ -31,6 +73,7 @@ public class ResponseSender {
     List<ResolveInfo> rcvrs =
         activity.getPackageManager().queryBroadcastReceivers(intent, 0);
     if (rcvrs != null && ! rcvrs.isEmpty()) {
+      Log.v("Send SMS Msg 2");
       activity.sendBroadcast(intent);
     }
 
@@ -38,7 +81,7 @@ public class ResponseSender {
 
       // Either support app is not installed, or they do not have the latest version
       // Fallback is to request the message app send the text message
-      Log.v("Support app failed to process text request");
+      Log.v("Send SMS Msg 3");
       intent = new Intent(Intent.ACTION_SENDTO);
       intent.setData(Uri.parse("smsto:" + target));
       intent.putExtra("sms_body", message);
@@ -58,7 +101,18 @@ public class ResponseSender {
    */
   public void callPhone(String phone) {
 
-    // Send intent to support app which does the real work
+    // First try invoking ResponseSenderService in the message support app
+    if (mResponseSenderService != null) {
+      try {
+        Log.v("Initiate response call 1");
+        mResponseSenderService.callPhone(phone);
+        return;
+      } catch (RemoteException ex) {
+        Log.e(ex);
+      }
+    }
+
+    // No go.  Try sending the request and to the broadcast receiver
     Intent intent = new Intent("net.anei.cadpagesupport.CALL_PHONE");
     intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ResponseSender");
     intent.putExtra("phone", phone);
@@ -66,12 +120,15 @@ public class ResponseSender {
     List<ResolveInfo> rcvrs =
         activity.getPackageManager().queryBroadcastReceivers(intent, 0);
     if (rcvrs != null && ! rcvrs.isEmpty()) {
+      Log.v("Initiate response call 2");
       activity.sendBroadcast(intent);
     }
 
     else {
       // Fallback is to ask dialer to prompt user to make the call
       try {
+        Log.v("Initiate response call 3");
+
         String urlPhone = "tel:" + phone;
         intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse(urlPhone));
