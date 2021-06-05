@@ -671,7 +671,7 @@ public class MsgOptionManager {
       String phone = respCode;
       Matcher match = PHONE_TEXT_PTN.matcher(respCode);
       if (match.matches()) phone = match.group(1);
-      ResponseSender responseSender = CadPageActivity.getResponseSender();
+      ResponseSender responseSender = ResponseSender.instance();
       if (responseSender == null) responseSender = new ResponseSender(activity);
       responseSender.callPhone(phone);
       return true;
@@ -900,7 +900,7 @@ public class MsgOptionManager {
   private void sendSMS(String target, String message){ 
     Log.v("Sending text response to " + target + " : " + message);
 
-    ResponseSender responseSender = CadPageActivity.getResponseSender();
+    ResponseSender responseSender = ResponseSender.instance();
     if (responseSender == null) responseSender = new ResponseSender(activity);
     responseSender.sendSMS(target, message);
   }

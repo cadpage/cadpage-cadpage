@@ -138,4 +138,17 @@ public class ResponseSender {
       }
     }
   }
+
+  private static ResponseSender instance = null;
+
+  public static void setInstance() {
+    if (instance == null) {
+      Activity activity = CadPageActivity.getCadPageActivity();
+      if (activity != null) instance = new ResponseSender(activity);
+    }
+  }
+
+  public static ResponseSender instance() {
+    return instance;
+  }
 }

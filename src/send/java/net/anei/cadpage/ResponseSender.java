@@ -112,4 +112,17 @@ public class ResponseSender {
       Log.v("SMSPopupActivity: Phone call failed" + e.getMessage());
     }
   }
+
+  private static ResponseSender instance = null;
+
+  public static void setInstance() {
+    if (instance == null) {
+      Activity activity = CadPageActivity.getCadPageActivity();
+      if (activity != null) instance = new ResponseSender(activity);
+    }
+  }
+
+  public static ResponseSender instance() {
+    return instance;
+  }
 }

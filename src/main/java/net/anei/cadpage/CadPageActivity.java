@@ -51,7 +51,7 @@ public class CadPageActivity extends AppCompatActivity {
 
   private SmsPopupFragment popupFragment = null;
 
-  private static ResponseSender responseSender;
+  private static CadPageActivity cadpageActivity = null;
 
   private static boolean initializing = false;
 
@@ -67,9 +67,8 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     if (Log.DEBUG) Log.v("CadPageActivity: onCreate()");
+    cadpageActivity = this;
     super.onCreate(savedInstanceState);
-
-    responseSender = new ResponseSender(this);
 
     int startMsgId = -1;
     if (savedInstanceState != null) {
@@ -81,6 +80,10 @@ public class CadPageActivity extends AppCompatActivity {
       finish();
       return;
     }
+
+    // Make an initial call to checkMsgSupport with no prompt and ignoringn the results.
+    // This has the critical side effect of initializing ResponseSender.instance()
+    SmsPopupUtils.checkMsgSupport(this, false);
 
     ManagePreferences.setPermissionManager(permMgr);
 
@@ -388,7 +391,7 @@ public class CadPageActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     ManagePreferences.releasePermissionManager(permMgr);
-    responseSender = null;
+    cadpageActivity = null;
     super.onDestroy();
   }
 
@@ -524,7 +527,7 @@ public class CadPageActivity extends AppCompatActivity {
     return initializing;
   }
 
-  public static ResponseSender getResponseSender() {
-    return responseSender;
+  public static CadPageActivity getCadPageActivity() {
+    return cadpageActivity;
   }
 }

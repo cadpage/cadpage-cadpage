@@ -179,10 +179,13 @@ public class SmsPopupUtils {
       return -1;
     }
 
-    // Get the installed support app version and see if it meets are needs
-    // If it does not, issue user prompt if requested.  In any case, return 1
+    // Get the installed support app version.  If latest versions, set ResponseSender instance
     int installedVersion = getSupportAppVersion(context);
     Log.v("Installed support version:" + installedVersion);
+    if (installedVersion >= CADPAGE_SUPPORT_VERSION5) ResponseSender.setInstance();
+
+    // See if the installed support app version meets are needs
+    // If it does not, issue user prompt if requested.  In any case, return 1
     if (installedVersion < version) {
       if (prompt) {
         if (installedVersion <= 0) {
@@ -234,7 +237,7 @@ public class SmsPopupUtils {
     // Get the installed support app version.  If it is the latest version
     // nothing needs to be done
     int version = getSupportAppVersion(context);
-    if (version == CADPAGE_SUPPORT_VERSION4) return;
+    if (version == CADPAGE_SUPPORT_VERSION5) return;
 
     // If not installed at all, turn off all text message processing
     boolean fixed = false;
