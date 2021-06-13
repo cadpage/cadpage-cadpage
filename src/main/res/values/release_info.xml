@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05292021</string>
+  <string name="release_date">06122021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.05-29\n
+    New Locations:\n
+    Cocke County, TN (alt)\n
+    Austin County, TX\n
+    \n
+    Location Fixes:\n
+    Lake County, IN\n
+    Kiowa County, KS\n
+    LaRue County, KY\n
+    Moniteau County, MO\n
+    Jefferson County, NY\n
+    Nassau County, NY\n
+    Alamance County, NC\n
+    Benton County, OR\n
+    Armstrong County, PA\n
+    \n
     v2.2.05-28\n
     New Locations:\n
     Laurel County, KY\n
@@ -49,13 +65,6 @@
     Kane County, UT\n
     \n
     Location Fixes:\n
-    Morgan County, AL\n
-    \n
-    v2.2.05-24\n
-    Location Fixes:\n
-    Morgan County, AL\n
-    \n
-    General Fixes:\n
-    Recently introduced problem with calls not opening until Cadpage is restarted.
+    Morgan County, AL
   </string>
 </resources>
