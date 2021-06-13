@@ -174,42 +174,42 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
     if (!purchase.isAcknowledged()) {
       if (Log.DEBUG) Log.v("Acknowledging purchase");
       AcknowledgePurchaseParams acknowledgePurchaseParams =
-          AcknowledgePurchaseParams.newBuilder()
-              .setPurchaseToken(purchase.getPurchaseToken())
-              .build();
+              AcknowledgePurchaseParams.newBuilder()
+                      .setPurchaseToken(purchase.getPurchaseToken())
+                      .build();
       mBillingClient.acknowledgePurchase(acknowledgePurchaseParams, billingResult -> Log.v("Purchase acknowledged: " + billingResult.getDebugMessage()));
     }
 
     // Get the purchase Sku code and confirm that it starts with Cadpage
-    String itemId = purchase.getSku();
-    if (!itemId.startsWith("cadpage_")) return;
+    for (String itemId : purchase.getSkus()) {
+      if (!itemId.startsWith("cadpage_")) continue;
 
-    // Subscriptions start with sub.  Purchase date will be the actual
-    // purchase date.  The fact that a subscription is being reported means that it
-    // should be honored, so adjust the year to make the subscription current
-    String year = itemId.substring(8);
-    String purchaseDate;
-    int subStatus;
-    if (year.startsWith("sub")) {
-      purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
-      Calendar cal = new GregorianCalendar();
-      cal.setTimeInMillis(System.currentTimeMillis());
-      int iYear = cal.get(Calendar.YEAR);
-      int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
-      if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
-      year = Integer.toString(iYear);
-      subStatus = purchase.isAutoRenewing() ? 2 : 1;
-      Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
-    }
+      // Subscriptions start with sub.  Purchase date will be the actual
+      // purchase date.  The fact that a subscription is being reported means that it
+      // should be honored, so adjust the year to make the subscription current
+      String year = itemId.substring(8);
+      String purchaseDate;
+      int subStatus;
+      if (year.startsWith("sub")) {
+        purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
+        Calendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        int iYear = cal.get(Calendar.YEAR);
+        int curMonthDay = (cal.get(Calendar.MONTH) + 1) * 100 + cal.get(Calendar.DAY_OF_MONTH);
+        if (curMonthDay < Integer.parseInt(purchaseDate.substring(0, 4))) iYear--;
+        year = Integer.toString(iYear);
+        subStatus = purchase.isAutoRenewing() ? 2 : 1;
+        Log.v("curMonthDay=" + curMonthDay + "  - " + purchaseDate.substring(0, 4) + "  iYear=" + iYear);
+      }
 
-    // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
-    // that anymore, but still need to support to old purchases.  Year is derived from name of
-    // the purchased product.  Purchase date was stored in developerPayload field
-    else {
-      purchaseDate = purchase.getDeveloperPayload();
-      subStatus = 0;
+      // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
+      // that anymore, but still need to support to old purchases.  Year is derived from name of
+      // the purchased product.  Purchase date was stored in developerPayload field
+      else {
+        purchaseDate = purchase.getDeveloperPayload();
+        subStatus = 0;
+      }
+      calc.subscription(year, purchaseDate, null, subStatus);
     }
-    calc.subscription(year, purchaseDate, null, subStatus);
   }
-
 }

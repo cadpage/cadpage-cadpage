@@ -4,6 +4,12 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.06-01\n
+    Fixed problem with the option to initiate a phone call to report your response status not
+    working reliable since Android 10.  If you have Cadpage configured to use this option, you
+    will be requested to install a new version of the Cadpage message support app to make this
+    work.\n
+    \n
     v2.2.05-29\n
     New Locations:\n
     Cocke County, TN (alt)\n
@@ -56,15 +62,6 @@
     Montgomery County, MD\n
     Allegan County, MI\n
     Summit County, OH\n
-    Anderson County, SC\n
-    \n
-    v2.2.05-25\n
-    New Locations:\n
-    Edmunds County, SD\n
-    Kiowa County, SD\n
-    Kane County, UT\n
-    \n
-    Location Fixes:\n
-    Morgan County, AL
+    Anderson County, SC
   </string>
 </resources>
