@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06122021</string>
+  <string name="release_date">06162021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.06-02\n
+    Location Fixes:\n
+    New Haven County, CT\n
+    Travis County, TX\n
+    \n
     v2.2.06-01\n
     Fixed problem with the option to initiate a phone call to report your response status not
     working reliable since Android 10.  If you have Cadpage configured to use this option, you
@@ -46,22 +51,6 @@
     Anderson County, SC\n
     Harris County ESD1, TX\n
     Stockton, CA merged into San Joaquin County, CA\n
-    Jasper County, IN\n
-    \n
-    General Fixes:\n
-    Notification timeout was not working reliably\n
-    \n
-    v2.2.05-26\n
-    New Locations:\n
-    Benewah County, ID\n
-    UTHealth East Texas, TX\n
-    \n
-    Location Fixes:\n
-    Cerro Gordo County, IA\n
-    Boyd County, KY\n
-    Montgomery County, MD\n
-    Allegan County, MI\n
-    Summit County, OH\n
-    Anderson County, SC
+    Jasper County, IN
   </string>
 </resources>
