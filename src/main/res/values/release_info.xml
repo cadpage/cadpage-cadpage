@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06162021</string>
+  <string name="release_date">06182021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.06-03\n
+    New Locations:\n
+    Holt County, MO\n
+    Dewey County, SD\n
+    Hill County, TX\n
+    \n
+    Location Fixes:\n
+    San Diego County, CA\n
+    Cumberland County, NJ\n
+    \n
     v2.2.06-02\n
     Location Fixes:\n
     New Haven County, CT\n
@@ -37,20 +47,6 @@
     \n
     Location Fixes:\n
     Costilla County, CO\n
-    Wastenaw County,  MI\n
-    \n
-    v2.2.05-27\n
-    New Locations:\n
-    Morrison County, MN\n
-    \n
-    Location Fixes:\n
-    Johnson County, KS\n
-    Carroll County, MD\n
-    Warren County, MS\n
-    Ocean County, NJ\n
-    Anderson County, SC\n
-    Harris County ESD1, TX\n
-    Stockton, CA merged into San Joaquin County, CA\n
-    Jasper County, IN
+    Wastenaw County,  MI
   </string>
 </resources>
