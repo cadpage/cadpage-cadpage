@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06182021</string>
+  <string name="release_date">07022021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.06-04\n
+    Location Fixes:\n
+    Baldwin County, AL\n
+    Laclede County, MO\n
+    Flathead County, MT\n
+    Sullivan County, NY\n
+    Wilson County, NC\n
+    Orangeburg County, SC\n
+    St Charles County, SC\n
+    Collin County,  TX\n
+    \n
     v2.2.06-03\n
     New Locations:\n
     Holt County, MO\n
@@ -39,14 +50,6 @@
     Nassau County, NY\n
     Alamance County, NC\n
     Benton County, OR\n
-    Armstrong County, PA\n
-    \n
-    v2.2.05-28\n
-    New Locations:\n
-    Laurel County, KY\n
-    \n
-    Location Fixes:\n
-    Costilla County, CO\n
-    Wastenaw County,  MI
+    Armstrong County, PA
   </string>
 </resources>
