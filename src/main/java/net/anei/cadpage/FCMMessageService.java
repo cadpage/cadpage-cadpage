@@ -337,7 +337,7 @@ public class FCMMessageService extends FirebaseMessagingService {
     VendorManager.instance().reconnect(context, false);
   }
 
-  public static void registerActive911(long initDelay) {
+  public static void registerActive911(Context context, long initDelay) {
 
     Log.v("Scheduling Active911 refresh " + initDelay + " msecs");
 
@@ -346,7 +346,7 @@ public class FCMMessageService extends FirebaseMessagingService {
             .setInitialDelay(initDelay, TimeUnit.MILLISECONDS)
             .setConstraints(ManagePreferences.networkConstraint())
             .build();
-    WorkManager mgr = WorkManager.getInstance();
+    WorkManager mgr = WorkManager.getInstance(context);
     mgr.beginUniqueWork(ACTION_ACTIVE911_REFRESH_ID, ExistingWorkPolicy.REPLACE, req).enqueue();
   }
 

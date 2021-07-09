@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -495,7 +496,7 @@ public class MsgOptionManager {
     public void onClick(View v) {
       
       // Perform the requested action
-      menuItemSelected(itemId, true, respCode);
+      menuItemSelected(itemId, respCode);
       
       // Reset button status in case anything has changed
       prepareButtons();
@@ -579,17 +580,16 @@ public class MsgOptionManager {
   /**
    * Handle a menu selection concerning this message
    * @param itemId Selected Menu ID
-   * @param display true if called from message display dialog
    * @return true if menu item processed, false otherwise
    */
-  public boolean menuItemSelected(int itemId, boolean display) {
-    return menuItemSelected(itemId, display, null);
+  public boolean menuItemSelected(int itemId) {
+    return menuItemSelected(itemId, null);
   }
   
   private static final Pattern PHONE_TEXT_PTN = Pattern.compile("(\\d+)/ *(.*)");
   
   @SuppressLint("MissingPermission")
-  private boolean menuItemSelected(int itemId, boolean display, String respCode) {
+  private boolean menuItemSelected(int itemId, String respCode) {
     
     // If parent activity is no longer valid, disregard
     if (activity.isFinishing()) return false;
@@ -908,19 +908,36 @@ public class MsgOptionManager {
   /**
    * Launch Active911 app if it is installed
    * @param context current context
-   * @param launch true to really launch the app. false to just test to see if it is installed 
+   * @param launch true to really launch the app. false to just test to see if it is installed
    * @return true if Active911 app is installed, false otherwise
    */
-  public static boolean launchActive911(Context context, boolean launch) {
-    PackageManager pm = context.getPackageManager();
-    Intent intent = pm.getLaunchIntentForPackage("com.active911.app");
-    if (intent == null) return false;
+  private static boolean launchActive911(Context context, boolean launch) {
+    return launchActive911(context, launch, false);
+  }
 
+  /**
+   * Prelaunch Active911 app if appropriate
+   * @param context current context
+   * @return true if Active911 was prelaunched, false otherwise
+   */
+  public static boolean prelaunchActive911(Context context) {
+    return launchActive911(context, true, true);
+  }
+
+  /**
+   * Launch Active911 app if it is installed
+   * @param context current context
+   * @param launch true to really launch the app. false to just test to see if it is installed
+   * @param prelaunch true if this is a prelaunch request, false otherwise
+   * @return true if Active911 app is installed, false otherwise
+   */
+  private static boolean launchActive911(Context context, boolean launch, boolean prelaunch) {
+
+    Intent intent = prelaunch ? getActive911PrelaunchIntent(context) : getActive911LaunchIntent(context);
+    if (intent == null) return false;
     if (!launch) return true;
+
     Log.w("Launching Active911");
-    String active911Code = VendorManager.instance().getActive911Code();
-    if (active911Code != null) intent.putExtra("CadpageAccount", active911Code);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     ContentQuery.dumpIntent(intent);
     try {
       context.startActivity(intent);
@@ -931,7 +948,56 @@ public class MsgOptionManager {
 
     // The active911 app sometimes switches the page type to itself.  Just in case this happens,
     // we will trigger our own register request 10 seconds after launching Active911
-    if (active911Code != null) FCMMessageService.registerActive911(10000L);
+    FCMMessageService.registerActive911(context, 10000L);
     return true;
+  }
+
+  /**
+   * get Intent to prelaunch Active911 app if appropriate
+   * @param context current context
+   * @return intent to launch Active911 app if appropriate, null otherwise
+   */
+  public static Intent getActive911PrelaunchIntent(Context context) {
+
+    // Not currently supported for android versions before lollipop
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return null;
+
+    // Prelaunch proceeds only if one of the main button is configured to launch Active911
+    boolean found = false;
+    for (int btn = 1; btn <= ManagePreferences.POPUP_BUTTON_CNT; btn++) {
+      int itemNdx = ManagePreferences.popupButton(btn);
+      if (itemNdx == 10) {
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      for (int btn = 1; btn <= ManagePreferences.EXTRA_BUTTON_CNT; btn++) {
+        int itemNdx = ManagePreferences.extraButton(btn);
+        if (itemNdx == 10) {
+          found = true;
+          break;
+        }
+      }
+    }
+    if (!found) return null;
+
+    return getActive911LaunchIntent(context);
+  }
+
+  /**
+   * Return intent to launch Active911 app
+   * @param context current context
+   * @return intent to launch Active911 if installed, null otherwise
+   */
+  private static Intent getActive911LaunchIntent(Context context) {
+    PackageManager pm = context.getPackageManager();
+    Intent intent = pm.getLaunchIntentForPackage("com.active911.app");
+    if (intent == null) return null;
+    String active911Code = VendorManager.instance().getActive911Code();
+    if (active911Code != null) intent.putExtra("CadpageAccount", active911Code);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    return intent;
   }
 }

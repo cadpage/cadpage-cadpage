@@ -204,7 +204,7 @@ public class ManageNotification {
   }
 
   /**
-   * Return the notificaton channel ID we should be using
+   * Return the notification channel ID we should be using
    * @return notification channel ID
    */
   public static String getAlertChannelId() {
@@ -429,19 +429,28 @@ public class ManageNotification {
     }
 
     // The default intent when the notification is clicked (Inbox)
-    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true, false, message);
-    Log.v("Notification launch intent");
-    ContentQuery.dumpIntent(smsIntent);
+    Intent smsIntent = CadPageActivity.getLaunchIntent(context, true, false, false, message);
 
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, smsIntent,
                                                           PendingIntent.FLAG_CANCEL_CURRENT);
     nbuild.setContentIntent(notifIntent);
+    Log.v("Notification launch intent");
     if (fullScreen) {
+      if (message != null && "Active911".equals(message.getVendorCode())) {
+        smsIntent = CadPageActivity.getLaunchIntent(context, true, false, true, message);
+        Intent active911Intent = MsgOptionManager.getActive911PrelaunchIntent(context);
+        if (active911Intent != null) {
+          ContentQuery.dumpIntent(active911Intent);
+          Intent[] intents = new Intent[]{active911Intent, smsIntent};
+          notifIntent = PendingIntent.getActivities(context, 10001, intents, PendingIntent.FLAG_CANCEL_CURRENT);
+        }
+      }
       nbuild.setFullScreenIntent(notifIntent, true);
       nbuild.setPriority(NotificationCompat.PRIORITY_MAX);
       nbuild.setCategory(NotificationCompat.CATEGORY_CALL);
       nbuild.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
     }
+    ContentQuery.dumpIntent(smsIntent);
 
     // Set intent to execute if the "clear all" notifications button is pressed -
     // basically stop any future reminders.
@@ -503,7 +512,7 @@ public class ManageNotification {
 
 
   /**
-   * Start up Media player to playoverride alert sound
+   * Start up Media player to play override alert sound
    * @param context current context
    */
   private synchronized static void startMediaPlayer(Context context, int startCnt) {
@@ -543,10 +552,8 @@ public class ManageNotification {
         mMediaPlayer.prepare();
         if (loop) mMediaPlayer.setLooping(true);
         listener.arm();
-        mMediaPlayer.start();
-      } else {
-        mMediaPlayer.start();
       }
+      mMediaPlayer.start();
       Log.v("Playback start successful");
     } catch (IOException ex) {
       
@@ -836,7 +843,7 @@ public class ManageNotification {
    */
   public static long[] parseVibratePattern(String stringPattern) {
     ArrayList<Long> arrayListPattern = new ArrayList<>();
-    Long l;
+    long l;
 
     if (stringPattern == null) return null;
 
