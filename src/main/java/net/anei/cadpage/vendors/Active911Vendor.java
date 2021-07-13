@@ -5,7 +5,11 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import android.content.Context;
 import android.net.Uri;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.anei.cadpage.R;
 import net.anei.cadpage.parsers.Active911ParserTable;
@@ -46,12 +50,35 @@ class Active911Vendor extends Vendor {
   }
 
   @Override
-  Uri getBaseURI(String req) {
-    if (req.equals("register") || req.equals("info") || req.equals("profile")) {
-      return WEB_URI;
-    } else {
-      return ACCESS_URI;
+  Uri getBaseURI(String req, String token) {
+    Uri uri = req.equals("register") || req.equals("info") || req.equals("profile") ? WEB_URI : ACCESS_URI;
+    uri = fixServer(uri, token);
+    return uri;
+  }
+
+  @Override
+  Uri fixServer(Uri uri, String token) {
+    if (token ==  null || token.length() != 6) return uri;
+    String prefix;
+    switch (token.substring(4).toLowerCase()) {
+      case "eu":
+        prefix = "eu-";
+        break;
+
+      case "es":
+        prefix = "spanish-";
+        break;
+
+      default:
+        return uri;
     }
+
+    String server = uri.getAuthority();
+    if (!server.startsWith(prefix)) {
+      server = prefix + server;
+      uri = uri.buildUpon().encodedAuthority(server).build();
+    }
+    return uri;
   }
 
   @Override
@@ -62,10 +89,20 @@ class Active911Vendor extends Vendor {
 
   @Override
   boolean isVendorAddress(String address) {
-    if (address.startsWith("+")) address =address.substring(1);
+    if (address.startsWith("+")) address = address.substring(1);
     return PHONE_SET.contains(address);
   }
-  
+
+  @Override
+  void sendRegisterReq(Context context, String registrationId) {
+    if (context instanceof FragmentActivity) {
+      FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+              Active911RegisterDialogFragment.newInstance(registrationId).show(fm, "Active911Registration");
+    } else {
+      super.sendRegisterReq(context, registrationId);
+    }
+  }
+
   @Override
   String[] convertLocationCode(String location) {
     StringBuilder missingParsers = null;

@@ -167,6 +167,7 @@ public class VendorActivity extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
+    super.onRequestPermissionsResult(requestCode, permissions, granted);
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 

@@ -1100,8 +1100,13 @@ public class SmsMmsMessage implements Serializable {
     Log.v("More info URL request: " + url);
     
     if (! SmsPopupUtils.haveNet(context)) return;
+
+    Uri uri = Uri.parse(url);
+    if (vendorCode != null) {
+      uri = VendorManager.instance().fixServer(vendorCode, uri);
+    }
     
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     
     try {

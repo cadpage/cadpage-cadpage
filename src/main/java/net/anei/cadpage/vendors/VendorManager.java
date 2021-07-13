@@ -544,6 +544,12 @@ public class VendorManager {
     if (vendor != null) vendor.updateLastContactTime(msg);
   }
 
+  public Uri fixServer(String vendorCode, Uri uri) {
+    Vendor vendor = findVendor("Active911");
+    if (vendor != null) uri = vendor.fixServer(uri);
+    return uri;
+  }
+
   /**
    * @return developer test message or null if none
    */

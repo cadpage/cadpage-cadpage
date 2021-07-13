@@ -42,10 +42,6 @@
    <string name="perm_acct_info_for_manual_recalc">
    Vi berhöver veta vem du är så vi kan hitta prenumerationsinformation som vi har kopplat till dig.
    </string>
-   
-   <string name="perm_acct_info_for_register_direct_opt">
-   Den tjänst du försöker registrera dig med kan behöva information om vem du är för att identifera dig i deras system.
-   </string>
 
   <string name="perm_acct_info_for_register_direct_req">
    Den service som du försöker registrera hos kräver ytterligare information för att identiviera ditt konto i deras system.

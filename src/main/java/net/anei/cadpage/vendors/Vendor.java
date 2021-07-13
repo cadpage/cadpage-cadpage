@@ -152,13 +152,17 @@ abstract class Vendor {
   String getVendorCode() {
     return vendorCode;
   }
+
+  Uri getBaseURI(String req, String token) {
+    return getBaseURI();
+  }
   
   /**
    * @param req type of request this will be used for
    * @return base vendor URI that we use to communicate with this vendor
    */
   Uri getBaseURI(String req) {
-    return getBaseURI();
+    return getBaseURI(req, token);
   }
   
   /**
@@ -180,6 +184,19 @@ abstract class Vendor {
    */
   public String getCode() {
     return account + '-' + token;
+  }
+
+  /**
+   * Set temporary account/token combination.
+   * This is requested by the Activce911RegisterDialogFragment before it requests that a
+   * reregister be sent to the Active911 servers.  If the request is successful, a subsequent
+   * call to setEnabled() will lock these values down
+   * @param account acccount value
+   * @param token token value
+   */
+  void setAccountToken(String account, String token) {
+    this.account = account;
+    this.token = token;
   }
 
   /**
@@ -229,7 +246,7 @@ abstract class Vendor {
   boolean isAvailable() {
     return false;
   }
-  
+
   /**
    * @return interface version id - generally used to determine which response menus are available
    */
@@ -515,6 +532,17 @@ abstract class Vendor {
   boolean isEnabled() {
     return enabled;
   }
+
+  /**
+   * Set enabled status
+   * @param enabled new enabled status
+   */
+  void setEnabled(boolean enabled) {
+    if (enabled == this.enabled) return;
+    this.enabled = enabled;
+    saveStatus();
+    reportStatusChange();
+  }
   
   /**
    * @return inactive status of vendor
@@ -586,13 +614,18 @@ abstract class Vendor {
    */
   void userRegisterReq(final Context context) {
     final boolean required = isAcctInfoRequired();
-    int expId = required ? R.string.perm_acct_info_for_register_direct_req :  R.string.perm_acct_info_for_register_direct_opt;
 
-    ManagePreferences.checkPermPhoneInfo((ok, permissions, granted) -> {
-      if (ok || !required) {
-        registerReq(context);
-      }
-    }, expId);
+    if (required) {
+      ManagePreferences.checkPermPhoneInfo((ok, permissions, granted) -> {
+        if (ok) {
+          registerReq(context);
+        }
+      }, R.string.perm_acct_info_for_register_direct_req);
+    }
+
+    else {
+      registerReq(context);
+    }
   }
 
   /**
@@ -891,7 +924,7 @@ abstract class Vendor {
    * vendor is not currently registered
    * @return request URI
    */
-  private Uri buildRequestUri(String req, String registrationId, boolean force) {
+  Uri buildRequestUri(String req, String registrationId, boolean force) {
 
     String phone = UserAcctManager.instance().getPhoneNumber();
     Uri.Builder builder = getBaseURI(req).buildUpon();
@@ -918,13 +951,32 @@ abstract class Vendor {
     if (token != null) builder = builder.appendQueryParameter("token", token);
     return builder;
   }
+
+  /**
+   * Fix the server part of a URI
+   * @param uri base URI
+   * @return adjusted URI
+   */
+  Uri fixServer(Uri uri) {
+    return fixServer(uri, token);
+  }
+
+  /**
+   * Fix the server part of a URI
+   * @param uri base URI
+   * @param token token value
+   * @return adjusted URI
+   */
+  Uri fixServer(Uri uri, String token) {
+    return uri;
+  }
   
   /**
    * Display direct paging notification to user
    * @param context current context
    * @param msgId message resource ID
    */
-  private void showNotice(Context context, int msgId, String extra) {
+  void showNotice(Context context, int msgId, String extra) {
     String title = context.getString(titleId);
     String message = context.getString(msgId, title, extra);
     NoticeActivity.showVendorNotice(context, message);

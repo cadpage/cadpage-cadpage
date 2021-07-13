@@ -263,9 +263,12 @@ public class FCMMessageService extends FirebaseMessagingService {
     // Add version code
     bld.appendQueryParameter("version", vm.getClientVersion(vendorCode));
 
+    // Fix the server name if neccessary
+    Uri uri = bld.build();
+    uri = vm.fixServer(vendorCode, uri);
 
     // Send the request
-    HttpService.addHttpRequest(context, new HttpService.HttpRequest(bld.build()));
+    HttpService.addHttpRequest(context, new HttpService.HttpRequest(uri));
   }
   private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
 

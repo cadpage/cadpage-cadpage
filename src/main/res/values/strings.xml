@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- App Strings -->
-   <string name="cadpage_alert">Cadpage Alert!</string>
-   <string name="notify_mms_alert">Incoming multi-media message</string>
-   <string name="notify_sms_alert">Incoming text message</string>
-   <string name="notify_http_request">Sending internet request</string>
-   <string name="app_name">Cadpage</string>   
-   <string name="call_history">Call History:</string>   
-   <string name="new_text_at">New Call Received at %s</string>
-   <string name="src_text_at">%1$s call at %2$s</string>
-   <string name="mms_subject">Subject:</string>
-   <string name="apt_label">Apt:</string>
-   <string name="cross_label">"X:</string>
-   <string name="map_label">Map:</string>
-   <string name="box_label">Box:</string>
-   <string name="units_label">Units:</string>
-   <string name="name_label">Name:</string>
-   <string name="phone_label">Phone:</string>
-   <string name="channel_label">Channel:</string>
-   <!-- string name="info_label">Info:</string -->
-   <string name="call_id_label">CID:</string>
-   
-<!--  Permission strings -->
-   <string name="cadperm_title">Receive CAD pages</string>
-   <string name="cadperm_desc">
+  <!-- App Strings -->
+  <string name="cadpage_alert">Cadpage Alert!</string>
+  <string name="notify_mms_alert">Incoming multi-media message</string>
+  <string name="notify_sms_alert">Incoming text message</string>
+  <string name="notify_http_request">Sending internet request</string>
+  <string name="app_name">Cadpage</string>
+  <string name="call_history">Call History:</string>
+  <string name="new_text_at">New Call Received at %s</string>
+  <string name="src_text_at">%1$s call at %2$s</string>
+  <string name="mms_subject">Subject:</string>
+  <string name="apt_label">Apt:</string>
+  <string name="cross_label">"X:</string>
+  <string name="map_label">Map:</string>
+  <string name="box_label">Box:</string>
+  <string name="units_label">Units:</string>
+  <string name="name_label">Name:</string>
+  <string name="phone_label">Phone:</string>
+  <string name="channel_label">Channel:</string>
+  <!-- string name="info_label">Info:</string -->
+  <string name="call_id_label">CID:</string>
+
+  <!--  Permission strings -->
+  <string name="cadperm_title">Receive CAD pages</string>
+  <string name="cadperm_desc">
    Allows application to receive CAD Pages containing information about 
    emergency response calls.  Malicious applications could use this to 
    access personal information connected with these calls</string>
-   
-   <string name="perm_phone_info_for_email">
+
+  <string name="perm_phone_info_for_email">
    If we know your phone number, we can better identify subscription problems
    or problems with direct paging vendors.  Granting this permission is not required.
    If you do not do it, we will do the best we can without this information.    
    </string>
-   
-   <string name="perm_acct_info_for_auto_recalc">
+
+  <string name="perm_acct_info_for_auto_recalc">
    We are about to perform an automatic recalculation of your subscription status.  We
    need to know who you are so can find any subscription information we have associated
    with you.
@@ -45,15 +45,10 @@
     your device serial number so we can determine if the backup was made from the same or a
     different device.
   </string>
-   
-   <string name="perm_acct_info_for_manual_recalc">
+
+  <string name="perm_acct_info_for_manual_recalc">
    We need to know who you are so can find any subscription information we have associated
    with you.
-   </string>
-   
-   <string name="perm_acct_info_for_register_direct_opt">
-   The vendor you are trying to register with may need information about who you are to
-   help identify your account on their system.
    </string>
 
   <string name="perm_acct_info_for_register_direct_req">
@@ -61,12 +56,12 @@
    help identify your account on their system.
    </string>
 
-   <string name="perm_user_sound_override">
+  <string name="perm_user_sound_override">
    You are asking Cadpage to use a user selectable ringtone, which may be located on your
    external SD card.
    </string>
 
-   <string name="perm_notify_abort">
+  <string name="perm_notify_abort">
      For unknown reasons, the Android system will not show Cadpage notification
      alerts until you grant data storage permission.
    </string>
@@ -85,21 +80,21 @@
     app may be running on top of Cadpage, this also requires background location access.
   </string>
 
-<!-- Menu Strings -->
+  <!-- Menu Strings -->
 
-   <string name="settings">Settings</string>   
-   
-<!-- Network error strings -->
-   <string name="network_err_title">Network Error</string>
-   <string name="network_err_not_connected">This action requires network access</string>
-   <string name="network_err_roaming">This action is not advised on roaming network</string>   
+  <string name="settings">Settings</string>
 
-<!-- Notification Strings -->
-   <string name="button_view">View</string>
-   <string name="button_view_mms">View MMS</string>
-   <string name="button_close">Close</string>
+  <!-- Network error strings -->
+  <string name="network_err_title">Network Error</string>
+  <string name="network_err_not_connected">This action requires network access</string>
+  <string name="network_err_roaming">This action is not advised on roaming network</string>
 
-<!-- Text-To-Speech and Voice Transcription Strings -->
+  <!-- Notification Strings -->
+  <string name="button_view">View</string>
+  <string name="button_view_mms">View MMS</string>
+  <string name="button_close">Close</string>
+
+  <!-- Text-To-Speech and Voice Transcription Strings -->
   <string name="error_message">Error</string>
 
   <!-- Other new prefs -->
@@ -115,7 +110,7 @@
   <!-- Message menu items -->
 
   <string name="response_check_text">Response Check</string>
-  
+
   <!--  Response message menu items  -->
   <string name="responding_text">Responding</string>
   <string name="not_responding_text">Not Responding</string>
@@ -127,7 +122,7 @@
   <!--  Donation settings -->
   <string name="release_title">What"'"s new in Cadpage?</string>
   <string name="widget_config_name">Cadpage Config 1x4</string>
-     
+
   <string name="notification_msg_acc_title">Cadpage</string>
   <string name="notification_msg_acc_text">Processing incoming alert</string>
 
@@ -138,7 +133,7 @@
   <string name="scanner_not_current">
     This feature requires a current version of the Scanner Radio application.  Would you like to install it now?
   </string>
-  
+
   <string name="tracking_title">Cadpage location tracking active</string>
   <string name="stop_tracking_text">Stop location tracking</string>
 
@@ -205,7 +200,7 @@
       %1$s is required to view these map pages.  Would you like to install %1$s now.
   </string>
   <string name="missing_map_page_reader_adobe">Adobe Reader</string>
-  
+
   <!-- Permission explanations -->
   <string name="need_permission_title">Cadpage needs the following permissions to perform this operation.</string>
 
@@ -213,4 +208,6 @@
 
   <string name="auto">Auto</string>
   <string name="manual">Manual</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
