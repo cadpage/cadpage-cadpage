@@ -43,17 +43,17 @@ Det här kommer att blockera att din meddelandeservice skickar larm till dig. Ä
     Meddelandeservice från %1$s har kopplats ner\n
     Servern svarar: %2$s
   </string>
-  <string name="vendor_register_fail_msg"> <!-- Translate -->
-    %1$s has rejected connect request\n
-    Server response: %2$s
+  <string name="vendor_register_fail_msg">
+    %1$s har avslagit anslutningsförfrågan\n
+    Serverns svar: %2$s
   </string>
 
   <string name="vendor_no_web_viewer_error">
     Systemet avslår begäran att titta på en websida. Det verkar vara som att du inte har någon webläsare installerad.
   </string>
 
-  <string name="active911_register_prompt"> <!-- Translate -->
-    Enter your Active911 device registration code
+  <string name="active911_register_prompt">
+    Fyll i din registreringskod från Active911
   </string>
 
 </resources>
