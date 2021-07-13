@@ -1,9 +1,10 @@
 package net.anei.cadpage.billing;
 
 import android.content.Intent;
-import net.anei.cadpage.Safe40Activity;
 
-public abstract class BillingActivity extends Safe40Activity {
+import androidx.fragment.app.FragmentActivity;
+
+public abstract class BillingActivity extends FragmentActivity {
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
