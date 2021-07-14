@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07022021</string>
+  <string name="release_date">07142021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.07-01\n
+    The Active911 registration process has been changed so that will now work with the European server.
+    If you are using Cadpage with Active911 in Europe, you will need to unregister from Active911,
+    the re-register appending "EU" to the end of your old activation code.\n
+    \n
+    New Locations:\n
+    Cochise County, AZ\n
+    Boone County, KY (alt)\n
+    Otsego County, MI\n
+    Burlington County, NJ (alt)\n
+    Caldedonia County, VT (alt)\n
+    \n
+    Location Fixes:\n
+    Kane County, IL\n
+    Parke County, IN\n
+    Johnson County, KS\n
+    Allegen County, MI\n
+    Nassau County, NY\n
+    Onslow County, NC\n
+    Summit County, OH\n
+    Josephine County, OR\n
+    Walworth County, WI\n
+    Vancouver Island, BC Canada\n
+    \n
     v2.2.06-04\n
     Location Fixes:\n
     Baldwin County, AL\n
@@ -34,22 +58,6 @@
     Fixed problem with the option to initiate a phone call to report your response status not
     working reliable since Android 10.  If you have Cadpage configured to use this option, you
     will be requested to install a new version of the Cadpage message support app to make this
-    work.\n
-    \n
-    v2.2.05-29\n
-    New Locations:\n
-    Cocke County, TN (alt)\n
-    Austin County, TX\n
-    \n
-    Location Fixes:\n
-    Lake County, IN\n
-    Kiowa County, KS\n
-    LaRue County, KY\n
-    Moniteau County, MO\n
-    Jefferson County, NY\n
-    Nassau County, NY\n
-    Alamance County, NC\n
-    Benton County, OR\n
-    Armstrong County, PA
+    work.
   </string>
 </resources>
