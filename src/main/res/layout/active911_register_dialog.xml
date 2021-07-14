@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  android:minWidth="310dp"
-  android:layout_width="match_parent">
-  <TextView
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:paddingRight="10dp"
-    android:paddingLeft="10dp"
-    android:text="@string/active911_register_prompt" />
+    android:orientation="vertical"
+    android:minWidth="310dp"
+    android:layout_width="match_parent">
+  <TextView
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:paddingRight="10dp"
+      android:paddingLeft="10dp"
+      android:textSize="30sp"
+      android:text="@string/active911_register_prompt" />
   <EditText
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
+      android:inputType="textCapCharacters"
+      android:textSize="30sp"
       android:id="@+id/activation_code"/>
 </LinearLayout>
