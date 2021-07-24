@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07212021</string>
+  <string name="release_date">07212421</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.07-03\n
+    Location Fixes:\n
+    Isabella County, MI\n
+    Burlington County, NJ\n
+    Spartanburg County, SC\n
+    Cocke County, TN\n
+    Walker County, TX\n
+    Clallam County, WA\n
+    \n
     v2.2.07-02\n
     Location Fixes:\n
     Madara County, CA\n
@@ -60,11 +69,6 @@
     \n
     Location Fixes:\n
     San Diego County, CA\n
-    Cumberland County, NJ\n
-    \n
-    v2.2.06-02\n
-    Location Fixes:\n
-    New Haven County, CT\n
-    Travis County, TX\n
+    Cumberland County, NJ
   </string>
 </resources>
