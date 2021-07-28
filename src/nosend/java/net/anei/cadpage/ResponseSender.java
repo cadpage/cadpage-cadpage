@@ -39,11 +39,16 @@ public class ResponseSender {
 
     Intent intent = new Intent();
     intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ResponseSenderService");
-    if (activity.bindService(intent, mServiceConnect, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
-      Log.v("ResponseSenderService binding succeeded");
-    } else {
-      Log.v("ResponseSenderService binding failed");
-    };
+    try {
+      if (activity.bindService(intent, mServiceConnect, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
+        Log.v("ResponseSenderService binding succeeded");
+      } else {
+        Log.v("ResponseSenderService binding failed");
+      }
+      ;
+    } catch (SecurityException ex) {
+      Log.e(ex);
+    }
   }
 
   /**

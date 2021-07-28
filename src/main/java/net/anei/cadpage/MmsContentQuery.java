@@ -57,12 +57,16 @@ public class MmsContentQuery {
     // the support app that will do our content queries
     else {
       Intent intent = new Intent();
-      intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ContentService");
-      if (context.bindService(intent, mServiceConnect, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
-        Log.v("MmsContentQuery binding succeeded");
-      } else {
-        Log.v("MsgContentQuery binding failed");
-      };
+      try {
+        intent.setClassName("net.anei.cadpagesupport", "net.anei.cadpagesupport.ContentService");
+        if (context.bindService(intent, mServiceConnect, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
+          Log.v("MmsContentQuery binding succeeded");
+        } else {
+          Log.v("MsgContentQuery binding failed");
+        }
+      } catch (SecurityException ex) {
+        Log.e(ex);
+      }
     }
   }
 
