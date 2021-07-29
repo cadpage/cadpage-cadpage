@@ -29,7 +29,7 @@ public class SmsPopupUtils {
   private static final int CADPAGE_SUPPORT_VERSION2 = 15;
   private static final int CADPAGE_SUPPORT_VERSION3 = 16;
   private static final int CADPAGE_SUPPORT_VERSION4 = 17;
-  private static final int CADPAGE_SUPPORT_VERSION5 = 18;
+  private static final int CADPAGE_SUPPORT_VERSION5 = 19;
   private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
   private static final String EXTRA_CADPAGE_PHONE = "net.anei.cadpage.CALL_PHONE";
 
