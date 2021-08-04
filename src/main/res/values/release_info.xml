@@ -4,6 +4,16 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-01\n
+    If this version is installed, Google has decided to allow Cadpage to process incoming text
+    messages directly.  Which means it is no longer necessary to install the Cadpage support app
+    for normal operations.  I will be (was) necessary to grant Cadpage permission to access text messages
+    when this version was installed.\n
+    \n
+    The support app will still be required for users that have configured response buttons
+    generate phone calls or text messages to report their response status.  Sorry, but I did not
+    want to try and make the case that that feature was essential to Cadpage operation.\n
+    \n
     v2.2.07-04\n
     New Locations:\n
     Mineral County, CO\n
