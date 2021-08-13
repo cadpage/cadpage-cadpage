@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08042021</string>
+  <string name="release_date">08122021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.2.08-03\n
-    This version is correcting a failed attempt to publish a functional version of Cadpage that
-    no longer needs the support app.  Stay tuned for further developments\n
+    v2.2.08-04\n
+    Releases since v2.2.07-03 have been blocked by Google.  Hopefully this one will get out.\n
+    \n
+    New Locations:\n
+    Denton County, TX\n
+    \n
+    Location Fixes:\n
+    St Mary\'s County, MD\n
+    Allegheny County, PA\n
+    Collin County, TX\n
+    Isle of Wight County, VA\n
+    Clallam County, WA\n
     \n
     v2.2.07-04\n
     New Locations:\n
@@ -64,17 +73,6 @@
     Summit County, OH\n
     Josephine County, OR\n
     Walworth County, WI\n
-    Vancouver Island, BC Canada\n
-    \n
-    v2.2.06-04\n
-    Location Fixes:\n
-    Baldwin County, AL\n
-    Laclede County, MO\n
-    Flathead County, MT\n
-    Sullivan County, NY\n
-    Wilson County, NC\n
-    Orangeburg County, SC\n
-    St Charles County, SC\n
-    Collin County,  TX\n
+    Vancouver Island, BC Canada
   </string>
 </resources>
