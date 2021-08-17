@@ -4,6 +4,20 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-05\n
+    New Locations:\n
+    Miami County, KS (alt)\n
+    Jackson County, KY\n
+    Monmouth County, NJ\n
+    Lexington County, SC (alt)\n
+    Madison County, TN\n
+    Nelson County, VA\n
+    \n
+    Location Fixes:\n
+    Caroline County, MD\n
+    Edgecombe County, NC\n
+    Medina County, OH\n
+    \n
     v2.2.08-04\n
     Releases since v2.2.07-03 have been blocked by Google.  Hopefully this one will get out.\n
     \n
@@ -49,30 +63,6 @@
     Onslow County, NC\n
     Licking County, OH\n
     Roanoke County, VA\n
-    Morgan County, WV\n
-    \n
-    v2.2.07-01\n
-    The Active911 registration process has been changed so that will now work with the European server.
-    If you are using Cadpage with Active911 in Europe, you will need to unregister from Active911,
-    the re-register appending "EU" to the end of your old activation code.\n
-    \n
-    New Locations:\n
-    Cochise County, AZ\n
-    Boone County, KY (alt)\n
-    Otsego County, MI\n
-    Burlington County, NJ (alt)\n
-    Caldedonia County, VT (alt)\n
-    \n
-    Location Fixes:\n
-    Kane County, IL\n
-    Parke County, IN\n
-    Johnson County, KS\n
-    Allegen County, MI\n
-    Nassau County, NY\n
-    Onslow County, NC\n
-    Summit County, OH\n
-    Josephine County, OR\n
-    Walworth County, WI\n
-    Vancouver Island, BC Canada
+    Morgan County, WV
   </string>
 </resources>
