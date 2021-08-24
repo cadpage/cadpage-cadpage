@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08122021</string>
+  <string name="release_date">08232021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-06\n
+    Location Fixes:\n
+    Dauphin County, PA\n
+    Isle of Wight County, VA\n
+    \n
     v2.2.08-05\n
     New Locations:\n
     Miami County, KS (alt)\n
@@ -50,19 +55,6 @@
     Spartanburg County, SC\n
     Cocke County, TN\n
     Walker County, TX\n
-    Clallam County, WA\n
-    \n
-    v2.2.07-02\n
-    Location Fixes:\n
-    Madara County, CA\n
-    Cass County, IN\n
-    Fulton County, KY\n
-    Dorchester County, MD\n
-    Albany County, NY\n
-    Herbert County, NC\n
-    Onslow County, NC\n
-    Licking County, OH\n
-    Roanoke County, VA\n
-    Morgan County, WV
+    Clallam County, WA
   </string>
 </resources>
