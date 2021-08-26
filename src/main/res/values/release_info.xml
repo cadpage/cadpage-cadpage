@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08232021</string>
+  <string name="release_date">08262021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-07\n
+    Location Fixes:\n
+    Centre County, PA\n
+    \n
     v2.2.08-06\n
     Location Fixes:\n
     Dauphin County, PA\n
@@ -46,15 +50,6 @@
     Litchhfield County, CT\n
     Christian County, IL\n
     Edmonson County, KY\n
-    Clatsop County, OR\n
-    \n
-    v2.2.07-03\n
-    Location Fixes:\n
-    Isabella County, MI\n
-    Burlington County, NJ\n
-    Spartanburg County, SC\n
-    Cocke County, TN\n
-    Walker County, TX\n
-    Clallam County, WA
+    Clatsop County, OR
   </string>
 </resources>
