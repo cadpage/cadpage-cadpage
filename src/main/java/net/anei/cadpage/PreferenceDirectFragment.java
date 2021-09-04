@@ -2,12 +2,10 @@ package net.anei.cadpage;
 
 import android.os.Bundle;
 
-import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.preferences.LocationManager;
 import net.anei.cadpage.vendors.VendorManager;
 
 import androidx.fragment.app.Fragment;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 public class PreferenceDirectFragment extends PreferenceFragment implements LocationManager.Provider {
