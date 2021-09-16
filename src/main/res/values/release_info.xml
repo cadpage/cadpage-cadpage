@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09092021</string>
+  <string name="release_date">09152021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-10\n
+    New Locations:\n
+    Blackford County, IN\n
+    \n
+    Location Fixes:\n
+    St Joseph County, IN\n
+    Bell County, TX\n
+    Prince Edward County, VA\n
+    \n
     v2.2.08-09\n
     New Locations:\n
     Walton County, FL\n
@@ -36,20 +45,6 @@
     v2.2.08-06\n
     Location Fixes:\n
     Dauphin County, PA\n
-    Isle of Wight County, VA\n
-    \n
-    v2.2.08-05\n
-    New Locations:\n
-    Miami County, KS (alt)\n
-    Jackson County, KY\n
-    Monmouth County, NJ\n
-    Lexington County, SC (alt)\n
-    Madison County, TN\n
-    Nelson County, VA\n
-    \n
-    Location Fixes:\n
-    Caroline County, MD\n
-    Edgecombe County, NC\n
-    Medina County, OH
+    Isle of Wight County, VA
   </string>
 </resources>
