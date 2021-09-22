@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09202021</string>
+  <string name="release_date">09222021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-12\n
+    New Locations:\n
+    Blanco County, TX\n
+    \n
+    Location Fixes:\n
+    Caroline County, MD\n
+    Harris County ESD1, TX\n
+    \n
     v2.2.08-11\n
     New Locations:\n
     Wilson County, KS\n
@@ -43,10 +51,6 @@
     Douglas County, CO\n
     Hanover, NH\n
     MICOM, NJ\n
-    Jasper County, SC\n
-    \n
-    v2.2.08-07\n
-    Location Fixes:\n
-    Centre County, PA
+    Jasper County, SC
   </string>
 </resources>
