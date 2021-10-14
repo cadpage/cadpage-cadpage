@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09282021</string>
+  <string name="release_date">10132021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-14\n
+    New Locations:\n
+    Mohave County, AZ\n
+    Warren County, IN\n
+    Cherokee County, IA\n
+    Mason County, KY\n
+    Crockett County, TN\n
+    Orange County, VT (alt)\n
+    Logan County, WV\n
+    \n
+    Location Fixes:\n
+    Cherokee County, AL\n
+    Pike County, PA\n
+    Darlington County, SC\n
+    Caroline County, VA\n
+    \n
     v2.2.08-13\n
     Location Fixes:\n
     Lake County, CA\n
@@ -36,20 +52,6 @@
     Location Fixes:\n
     St Joseph County, IN\n
     Bell County, TX\n
-    Prince Edward County, VA\n
-    \n
-    v2.2.08-09\n
-    New Locations:\n
-    Walton County, FL\n
-    Carter County, KY (alt)\n
-    Sullivan County, NH\n
-    \n
-    Location Fixes:\n
-    Story County, IA\n
-    Rutherford County, NC\n
-    Delaware County, OH\n
-    Benton County, OR\n
-    Bedford County, PA\n
-    Cherokee County, TX
+    Prince Edward County, VA
   </string>
 </resources>
