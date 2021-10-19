@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10132021</string>
+  <string name="release_date">10192021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-15\n
+    New Locations:\n
+    Howard County, IN (alt)\n
+    Wabaunsee County, KS\n
+    Krittenden County, KY\n
+    Fort Bend County, TX (alt)\n
+    Grayson County, TX\n
+    McLennan County, TX (alt)\n
+    \n
+    Location Fixes:\n
+    Fresno County, CA\n
+    Allen County, KY\n
+    Columbiana County, OH\n
+    Amrstrong County, PA\n
+    Hartford, VT\n
+    Orange County, VA\n
+    \n
     v2.2.08-14\n
     New Locations:\n
     Mohave County, AZ\n
@@ -43,15 +60,6 @@
     Wilson County, KS\n
     \n
     Location Fixes:\n
-    Bell County, TX\n
-    \n
-    v2.2.08-10\n
-    New Locations:\n
-    Blackford County, IN\n
-    \n
-    Location Fixes:\n
-    St Joseph County, IN\n
-    Bell County, TX\n
-    Prince Edward County, VA
+    Bell County, TX
   </string>
 </resources>
