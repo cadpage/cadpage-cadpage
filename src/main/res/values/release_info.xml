@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10192021</string>
+  <string name="release_date">10272021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-16\n
+    New Locations:\n
+    Etowah County, AL (alt)\n
+    Howard County, IN (alt)\n
+    \n
+    Location Fixes:\n
+    West Feliciana Parish, LA\n
+    Onodaga County, NY\n
+    Bucks County, PA\n
+    \n
     v2.2.08-15\n
     New Locations:\n
     Howard County, IN (alt)\n
@@ -53,13 +63,6 @@
     \n
     Location Fixes:\n
     Caroline County, MD\n
-    Harris County ESD1, TX\n
-    \n
-    v2.2.08-11\n
-    New Locations:\n
-    Wilson County, KS\n
-    \n
-    Location Fixes:\n
-    Bell County, TX
+    Harris County ESD1, TX
   </string>
 </resources>
