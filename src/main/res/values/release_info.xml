@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11032021</string>
+  <string name="release_date">11042021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-18\n
+    Location Fixes:\n
+    Lancaster County, PA\n
+    Minnehaha County, SD\n
+    \n
     v2.2.08-17\n
     New Locations:\n
     Las Animas County, CO\n
@@ -57,16 +62,6 @@
     Cherokee County, AL\n
     Pike County, PA\n
     Darlington County, SC\n
-    Caroline County, VA\n
-    \n
-    v2.2.08-13\n
-    Location Fixes:\n
-    Lake County, CA\n
-    El Paso County, CO\n
-    Washington County, GA\n
-    Adams County, IL\n
-    Knox County, OH\n
-    Denton County, TX\n
-    Somervell County, TX
+    Caroline County, VA
   </string>
 </resources>
