@@ -69,11 +69,12 @@ public class SmsService extends IntentService {
     holdPowerLock(context);
     intent.setClass(context, SmsService.class);
     if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      Log.v("Foreground SmsService Launch");
       context.startForegroundService(intent);
     } else {
+      Log.v("Regular SmsService Launch");
       context.startService(intent);
     }
-
   }
 
   @SuppressLint("InvalidWakeLockTag")

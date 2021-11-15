@@ -1471,8 +1471,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * @param sb StringBuilder object where message is constructed
    */
   public static void addConfigInfo(Context context, StringBuilder sb) {
-    sb.append(String.format("\n\n----------\nSysinfo: %s\nModel: %s\nStatus: %s%s\n\n",
-        Build.FINGERPRINT, Build.MODEL, 
+    sb.append(String.format("\n\n----------\nSysinfo: %s(%d)\nModel: %s\nStatus: %s%s\n\n",
+        Build.FINGERPRINT, Build.VERSION.SDK_INT, Build.MODEL,
         DonationManager.instance().status().toString(),
         DonationManager.instance().isPaidSubscriber()?"/Paid":""));
     
