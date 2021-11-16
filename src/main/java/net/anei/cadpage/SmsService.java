@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Context;
@@ -77,7 +76,6 @@ public class SmsService extends IntentService {
     }
   }
 
-  @SuppressLint("InvalidWakeLockTag")
   private static void holdPowerLock(Context context) {
     synchronized (SmsService.class) {
       if (sWakeLock == null) {
@@ -179,7 +177,12 @@ public class SmsService extends IntentService {
 
     // We can be called on different working threads and need to find a
     // context and get back on the working thread.
-    CadPageApplication.runOnMainThread(() -> processCadPage(CadPageApplication.getContext(), message));
+    CadPageApplication.runOnMainThread(new Runnable(){
+      @Override
+      public void run() {
+        processCadPage(CadPageApplication.getContext(), message);
+      }
+    });
   }
 
   /**
@@ -222,8 +225,7 @@ public class SmsService extends IntentService {
 
       // Otherwise launch the main activity normally
       else {
-        boolean prelaunchActive911 = MsgOptionManager.prelaunchActive911(context);
-        CadPageActivity.launchActivity(context, notify, prelaunchActive911, message);
+        CadPageActivity.launchActivity(context, notify, message);
       }
     }
 
