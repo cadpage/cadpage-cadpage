@@ -39,13 +39,15 @@ public class SmsPopupConfigActivity extends AppCompatActivity
 
     setContentView(R.layout.settings);
 
-    boolean selectLocation = getIntent().getBooleanExtra(EXTRA_SELECT_LOCATION, false);
-    PreferenceFragment fragment = selectLocation ? new PreferenceLocationMenuFragment() : new PreferenceMainFragment();
-    fragment.setTitle(getString(selectLocation ? R.string.pref_location_title : R.string.settings));
-    getSupportFragmentManager()
-      .beginTransaction()
-      .replace(R.id.settings_content, fragment)
-      .commit();
+    if (savedInstanceState ==  null) {
+      boolean selectLocation = getIntent().getBooleanExtra(EXTRA_SELECT_LOCATION, false);
+      PreferenceFragment fragment = selectLocation ? new PreferenceLocationMenuFragment() : new PreferenceMainFragment();
+      fragment.setTitle(getString(selectLocation ? R.string.pref_location_title : R.string.settings));
+      getSupportFragmentManager()
+              .beginTransaction()
+              .replace(R.id.settings_content, fragment)
+              .commit();
+    }
   }
 
   @Override
