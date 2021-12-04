@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11262021</string>
+  <string name="release_date">12032021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-22\n
+    New Locations:\n
+    Adams County, NE\n
+    \n
+    Location Fixes:\n
+    Middlesex County, CT\n
+    Daviess County, KY\n
+    Rutherford County, NC\n
+    Knox County, OH\n
+    Greenville County, SC\n
+    White County, TN\n
+    McDowell County, WV\n
+    \n
     v2.2.08-21\n
     New Locations:\n
     Coos County, OR (Alt)\n
@@ -31,28 +44,6 @@
     v2.2.08-18\n
     Location Fixes:\n
     Lancaster County, PA\n
-    Minnehaha County, SD\n
-    \n
-    v2.2.08-17\n
-    New Locations:\n
-    Las Animas County, CO\n
-    Carroll County, IN\n
-    \n
-    Location Fixes:\n
-    Shelby County, IL\n
-    Jefferson County, MO\n
-    Lincoln County, NC\n
-    Charleston County, SC\n
-    Bell County, TX\n
-    \n
-    v2.2.08-16\n
-    New Locations:\n
-    Etowah County, AL (alt)\n
-    Howard County, IN (alt)\n
-    \n
-    Location Fixes:\n
-    West Feliciana Parish, LA\n
-    Onodaga County, NY\n
-    Bucks County, PA
+    Minnehaha County, SD
   </string>
 </resources>
