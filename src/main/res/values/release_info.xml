@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12032021</string>
+  <string name="release_date">12122021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-23\n
+    New Locations:\n
+    Ohio County, KY\n
+    Perkins County, SD\n
+    \n
+    Location Fixes:\n
+    Lincoln County, NC\n
+    Cocke County, TN\n
+    Moore County, TN\n
+    Greenbrier County, WV\n
+    \n
     v2.2.08-22\n
     New Locations:\n
     Adams County, NE\n
@@ -39,11 +50,6 @@
     St Louis County, MO\n
     Minnehaha County, SD\n
     Cy Creek Comm Center, TX\n
-    Guadalupe County, TX\n
-    \n
-    v2.2.08-18\n
-    Location Fixes:\n
-    Lancaster County, PA\n
-    Minnehaha County, SD
+    Guadalupe County, TX
   </string>
 </resources>
