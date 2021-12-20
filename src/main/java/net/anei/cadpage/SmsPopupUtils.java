@@ -2,10 +2,13 @@ package net.anei.cadpage;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -15,10 +18,13 @@ import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.PowerManager;
 
 import net.anei.cadpage.donation.NeedCadpageSupportApp2Event;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
+
+import static android.content.Context.POWER_SERVICE;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class SmsPopupUtils {
@@ -269,6 +275,7 @@ public class SmsPopupUtils {
     }
   }
 
+  @SuppressWarnings("ConstantConditions")
   private static boolean isSupportAppAvailable() {
     return !(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED);
   }
@@ -323,8 +330,55 @@ public class SmsPopupUtils {
     } else {
       myAM.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     }
-
   }
 
+  private static boolean foregroundServiceLaunch = false;
 
+  /**
+   * Start new background service
+   * context - current context
+   * intent - intent used to launch service
+   */
+  @SuppressLint("NewApi")
+  public static void startService(Context context, Intent intent) {
+    foregroundServiceLaunch = !allowBackgroundService(context);
+    if (foregroundServiceLaunch) {
+      Log.v("startForegroundService()");
+      context.startForegroundService(intent);
+    } else {
+      context.startService(intent);
+    }
+  }
+
+  /**
+   * Switch new service to foreground mode if necessary
+   * @param service new service
+   * @param id Notification ID
+   * @param nf Notification
+   */
+  public static void startForeground(Service service, int id, Notification nf) {
+    if (foregroundServiceLaunch) {
+      service.startForeground(id, nf);
+    }
+  }
+
+  /**
+   * Determine if we are allowed to start a background service
+   * @param context current context
+   * @return true if background service launches are permitted
+   */
+  private  static boolean allowBackgroundService(Context context) {
+
+    // If we are not running the crippled version of Cadpage, then the system knows
+    // we are responding to an incoming text message and background starts are acceptable
+    if (BuildConfig.MSG_ALLOWED) return true;
+
+    // The background start provisions started with Oreo.  Anything before that and we are good
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return true;
+
+    // And if the user has followed our advice and turned off battery optimization for Cadpage,
+    // we are good to go
+    PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+    return pm.isIgnoringBatteryOptimizations(context.getPackageName());
+  }
 }

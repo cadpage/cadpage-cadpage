@@ -23,12 +23,16 @@ import net.anei.cadpage.parsers.ManageParsers;
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.SplitMsgOptions;
 import net.anei.cadpage.vendors.VendorManager;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+
 import androidx.core.content.ContextCompat;
 
 import androidx.preference.ListPreference;
@@ -38,7 +42,7 @@ import androidx.preference.TwoStatePreference;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
 
-@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement", "unused"})
+@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement", "unused", "DanglingJavadoc"})
 public class ManagePreferences implements SharedPreferences.OnSharedPreferenceChangeListener {
   
   // Preference version.  This needs to be incremented every time a new
@@ -739,7 +743,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   public static String vibratePatternCustom() {
-    if ( prefs.getString(R.string.pref_vibrate_pattern_custom_key) == null){
+    if ( prefs.getString(R.string.pref_vibrate_pattern_custom_key).isEmpty()){
       return prefs.getString(R.string.pref_vibrate_pattern_key);
     }
     return prefs.getString(R.string.pref_vibrate_pattern_custom_key);
@@ -758,7 +762,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   public static String flashLEDColorCustom() {
-    if (prefs.getString(R.string.pref_flashled_color_custom_key)==null){
+    if (prefs.getString(R.string.pref_flashled_color_custom_key).isEmpty()){
       return prefs.getString(R.string.pref_flashled_color_key);
     }
     return prefs.getString(R.string.pref_flashled_color_custom_key);
@@ -769,7 +773,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
   
   public static String flashLEDPatternCustom() {
-    if (prefs.getString(R.string.pref_flashled_pattern_custom_key)==null){
+    if (prefs.getString(R.string.pref_flashled_pattern_custom_key).isEmpty()){
       return prefs.getString(R.string.pref_flashled_pattern_key);
     }
     return prefs.getString(R.string.pref_flashled_pattern_custom_key);
@@ -1412,6 +1416,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putBoolean(R.string.pref_use_old_mms_key, newVal);
   }
 
+  @SuppressLint("ApplySharedPref")
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
     settings.clear();
@@ -1471,10 +1476,12 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
    * @param sb StringBuilder object where message is constructed
    */
   public static void addConfigInfo(Context context, StringBuilder sb) {
-    sb.append(String.format("\n\n----------\nSysinfo: %s(%d)\nModel: %s\nStatus: %s%s\n\n",
+    sb.append(String.format("\n\n----------\nSysinfo: %s(%d)\nModel: %s\nStatus: %s%s\nBattery Optimization Suppressed:%s\n\n",
         Build.FINGERPRINT, Build.VERSION.SDK_INT, Build.MODEL,
         DonationManager.instance().status().toString(),
-        DonationManager.instance().isPaidSubscriber()?"/Paid":""));
+        DonationManager.instance().isPaidSubscriber()?"/Paid":"",
+        batteryOptimizationDisplay(context))
+    );
     
     sb.append("Preference_Configuration:\n");
 
@@ -1483,7 +1490,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     for (int key : PREFERENCE_KEYS) {
       String keyName = context.getString(key);
       Object value = map.get(keyName);
-      if (key == R.string.pref_last_gcm_event_time_key){
+      if (key == R.string.pref_last_gcm_event_time_key && value != null){
         try {
           long time = (Long)value;
           if (time > 0) {
@@ -1506,7 +1513,15 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // Add Vendor config info
     VendorManager.instance().addStatusInfo(sb);
   }
-  
+
+  private static String batteryOptimizationDisplay(Context context) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return "N/A";
+    PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+    String r1 = pm.isIgnoringBatteryOptimizations("net.anei.cadpage") ? "Y" : "N";
+    String r2 = pm.isIgnoringBatteryOptimizations("net.anei.cadpagesupport") ? "Y" : "N";
+    return r1+'/'+r2;
+  }
+
   private static final int PERM_REQ_INITIAL = 1;
   private static final int PERM_REQ_SMS_MMS = 2;
   private static final int PERM_REQ_RESP_TYPE_BTN1 = 3;
@@ -1675,22 +1690,19 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
             final boolean checkTransferStatus2 = checkTransferStatus;
             final String oldMeid2 = oldMeid;
             PhoneInfoChecker aChecker = (PhoneInfoChecker)checker;
-            if (!aChecker.check(new PermissionAction(){
-              @Override
-              public void run(boolean ok, String[] permissions, int[] granted) {
+            if (!aChecker.check((ok, permissions, granted) -> {
 
-                // Somewhat surprising, we do not care whether it was granted or not
-                // If we needed to resolve the transfer status, do so and send it to the vendors
-                if (checkTransferStatus2) {
-                  setTransferStatus(isNewDevice(oldMeid2) ? "Y" : "R");
-                  VendorManager.instance().reconnect(CadPageApplication.getContext(), false);
-                }
+              // Somewhat surprising, we do not care whether it was granted or not
+              // If we needed to resolve the transfer status, do so and send it to the vendors
+              if (checkTransferStatus2) {
+                setTransferStatus(isNewDevice(oldMeid2) ? "Y" : "R");
+                VendorManager.instance().reconnect(CadPageApplication.getContext(), false);
+              }
 
-                // and if a payment status recalcluation is pending, go do it
-                if (checkPaymentStatus) {
-                  BillingManager.instance().restoreTransactions(context);
-                  ManagePreferences.setAuthLastCheckTime();
-                }
+              // and if a payment status recalcluation is pending, go do it
+              if (checkPaymentStatus) {
+                BillingManager.instance().restoreTransactions(context);
+                ManagePreferences.setAuthLastCheckTime();
               }
             }, explainId, false)) {
               failedCheckers.add(aChecker);
@@ -1748,7 +1760,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           Log.e(checker.toString() + "returned null permission list");
           continue;
         }
-        String[] perms = permList.toArray(new String[permList.size()]);
+        String[] perms = permList.toArray(new String[0]);
         int[] stats = new int[perms.length];
         for (int ndx = 0; ndx<perms.length; ndx++) {
           String perm = perms[ndx];
@@ -1907,11 +1919,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     }
   }
 
-  /********************************************************************
-   * Permission checking when the system will not play override sound without external storage permission
-   * This not a user adjustable setting, it gets set when the Android system throws a security exception
-   * when we try to show a notification.  It is only checked during the initialization permision check
-   ********************************************************************/
+  /*******************************************************************
+   Permission checking when the system will not play override sound without external storage permission
+   This not a user adjustable setting, it gets set when the Android system throws a security exception
+   when we try to show a notification.  It is only checked during the initialization permision check
+   *******************************************************************/
 
   static {
     new NotifyAbortChecker();
@@ -2481,7 +2493,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
      * Issue the system call to actually request any required permissions from the end user
      */
     private void requestPermissions() {
-      String[] perms = reqPermissions.toArray(new String[reqPermissions.size()]);
+      String[] perms = reqPermissions.toArray(new String[0]);
       int[] expIds = new int[reqExplainIds.size()];
       for (int j = 0; j<expIds.length; j++) expIds[j] = reqExplainIds.get(j);
       permMgr.request(permReq, perms, expIds);

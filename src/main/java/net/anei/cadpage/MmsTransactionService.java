@@ -110,9 +110,7 @@ public class MmsTransactionService extends Service {
     if (intent == null) return START_NOT_STICKY;
     ContentQuery.dumpIntent(intent);
 
-    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_mms_alert));
-    }
+    SmsPopupUtils.startForeground(this, 1, ManageNotification.getMiscNotification(this, R.string.notify_mms_alert));
 
     if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
 
@@ -141,7 +139,7 @@ public class MmsTransactionService extends Service {
   }
 
   // 
-  private class MmsMsgEntry {
+  private static class MmsMsgEntry {
     SmsMmsMessage message = null;  // Message we are working on
   }
 
@@ -452,6 +450,7 @@ public class MmsTransactionService extends Service {
      * @param entry entry to be checked
      * @return true if entry processing is complete and entry should be deleted
      */
+    @SuppressLint("SwitchIntDef")
     private boolean mmsDataChange(MmsMsgEntry entry) {
 
       final SmsMmsMessage message = entry.message;
@@ -581,11 +580,6 @@ public class MmsTransactionService extends Service {
 
     // Pass intent on the MmsTransactionService
     intent.setClass(context, MmsTransactionService.class);
-    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      context.startForegroundService(intent);
-    } else {
-      context.startService(intent);
-    }
-
+    SmsPopupUtils.startService(context, intent);
   }
 }

@@ -1,10 +1,10 @@
 package net.anei.cadpage;
 
+import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.PowerManager;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
@@ -22,9 +22,7 @@ public class SmsService extends IntentService {
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
 
-    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_sms_alert));
-    }
+    SmsPopupUtils.startForeground(this, 1, ManageNotification.getMiscNotification(this, R.string.notify_sms_alert));
 
     if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
     if (flags != 0) holdPowerLock(this);
@@ -61,21 +59,17 @@ public class SmsService extends IntentService {
    * etc. in background threads, with a wake lock, while keeping the service
    * alive.
    */
+  @SuppressLint("NewApi")
   static void runIntentInService(Context context, Intent intent) {
 
     // Otherwise, hold a power lock for the duration and
     // start the service to handle the intent
     holdPowerLock(context);
     intent.setClass(context, SmsService.class);
-    if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      Log.v("Foreground SmsService Launch");
-      context.startForegroundService(intent);
-    } else {
-      Log.v("Regular SmsService Launch");
-      context.startService(intent);
-    }
+    SmsPopupUtils.startService(context, intent);
   }
 
+  @SuppressLint("InvalidWakeLockTag")
   private static void holdPowerLock(Context context) {
     synchronized (SmsService.class) {
       if (sWakeLock == null) {
@@ -83,7 +77,7 @@ public class SmsService extends IntentService {
         sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".C2DMService");
         sWakeLock.setReferenceCounted(false);
       }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
+      if(!sWakeLock.isHeld()) sWakeLock.acquire(10*1000L /*10 seconds*/);
     }
   }
 
@@ -177,12 +171,7 @@ public class SmsService extends IntentService {
 
     // We can be called on different working threads and need to find a
     // context and get back on the working thread.
-    CadPageApplication.runOnMainThread(new Runnable(){
-      @Override
-      public void run() {
-        processCadPage(CadPageApplication.getContext(), message);
-      }
-    });
+    CadPageApplication.runOnMainThread(() -> processCadPage(CadPageApplication.getContext(), message));
   }
 
   /**

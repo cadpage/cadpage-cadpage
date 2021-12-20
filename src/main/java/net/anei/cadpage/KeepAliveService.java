@@ -42,11 +42,7 @@ public class KeepAliveService extends Service {
       intent.putExtra("ICON", icon);
       intent.putExtra("TITLE", title);
       intent.putExtra("TEXT", text);
-      if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        context.startForegroundService(intent);
-      } else {
-        context.startService(intent);
-      }
+      SmsPopupUtils.startService(context, intent);
     }
   }
   

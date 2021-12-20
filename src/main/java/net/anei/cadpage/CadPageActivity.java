@@ -16,6 +16,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -235,6 +238,18 @@ public class CadPageActivity extends AppCompatActivity {
 
         // Check call popup window configuration
         if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
+
+        // What does happen when we request supproession of batter optimization?
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+          String packageName = getPackageName();
+          if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            Intent newIntent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + packageName));
+            ContentQuery.dumpIntent(newIntent);
+            startActivity(newIntent);
+          }
+        }
+
 
         // If a new Active911 client may be highjacking alerts, warn user
         if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return;
