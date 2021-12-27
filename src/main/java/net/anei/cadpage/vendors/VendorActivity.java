@@ -63,33 +63,49 @@ public class VendorActivity extends AppCompatActivity {
     registerButton.setOnClickListener(v -> vendor.userRegisterReq(VendorActivity.this));
     
     unregisterButton = findViewById(R.id.unregister_button);
-    unregisterButton.setOnClickListener(v -> new ConfirmUnregisterDialogFragment(VendorActivity.this, vendor).show(getSupportFragmentManager(), "unregister_dialog"));
+    unregisterButton.setOnClickListener(v -> new ConfirmUnregisterDialogFragment(vendor).show(getSupportFragmentManager(), "unregister_dialog"));
     
     Button btn = findViewById(R.id.cancel_button);
     btn.setOnClickListener(v -> VendorActivity.this.finish());
   }
 
+  private static final String VENDOR_CODE = "vendor_code";
+
   public static class ConfirmUnregisterDialogFragment extends DialogFragment {
 
-    private final Activity activity;
-    private final Vendor vendor;
+    private Vendor vendor;
 
-    ConfirmUnregisterDialogFragment(Activity activity, Vendor vendor) {
-      this.activity = activity;
+    ConfirmUnregisterDialogFragment() {
+      super();
+    }
+
+    ConfirmUnregisterDialogFragment(Vendor vendor) {
       this.vendor = vendor;
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+      super.onSaveInstanceState(outState);
+      outState.putString(VENDOR_CODE, vendor.getCode());
+    }
+
+    @Override
     @NonNull public Dialog onCreateDialog(Bundle bundle) {
-        return new AlertDialog.Builder(activity)
-        .setMessage(R.string.vendor_confirm_unregister)
-        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-          if (SmsPopupUtils.haveNet(activity)) {
-            vendor.unregisterReq(activity);
-          }
-        })
-        .setNegativeButton(android.R.string.no, null)
-        .create();
+
+      if (bundle != null) {
+        vendor = VendorManager.instance().findVendor(bundle.getString(VENDOR_CODE));
+      }
+
+      Activity activity = getActivity();
+      return new AlertDialog.Builder(activity)
+      .setMessage(R.string.vendor_confirm_unregister)
+      .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+        if (SmsPopupUtils.haveNet(activity)) {
+          vendor.unregisterReq(activity);
+        }
+      })
+      .setNegativeButton(android.R.string.no, null)
+      .create();
     }
   }
 
