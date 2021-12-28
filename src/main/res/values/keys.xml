@@ -172,4 +172,5 @@
     <string name="pref_transfer_status_key">transfer_status</string>
     <string name="pref_no_map_gps_label">no_map_gps_label</string>
     <string name="pref_category_screen_control_key">category_screen_control</string>
+    <string name="pref_keep_battery_optimization">keep_battery_optimization</string>
 </resources>

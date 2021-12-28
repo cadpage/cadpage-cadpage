@@ -622,4 +622,22 @@
   <string name="disable_cadpage_popup_title">
     Disable Cadpage show alarm popup option
   </string>
-</resources>
+
+  <string name="battery_optimization_title">
+    Disable Battery Optimization for Cadpage
+  </string>
+
+  <string name="battery_optimization_text">
+    We have found Cadpage works much better if you disable battery optimization.  This will have
+    little or no effect on actual battery consumption
+  </string>
+
+  <string name="battery_optimization_yes_title">
+    Turn off Cadpage battery optimization
+  </string>
+
+  <string name="battery_optimization_no_title">
+    I\'ll take my chances
+  </string>
+
+  </resources>

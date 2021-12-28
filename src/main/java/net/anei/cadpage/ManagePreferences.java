@@ -51,7 +51,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 53;
+  private static final int PREFERENCE_VERSION = 54;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -1414,6 +1414,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
   public static void setUseOldMMS(boolean newVal) {
     prefs.putBoolean(R.string.pref_use_old_mms_key, newVal);
+  }
+
+  public static boolean keepBatteryOptimization() {
+    return prefs.getBoolean(R.string.pref_keep_battery_optimization);
+  }
+
+  public static void setKeepBatteryOptimization(boolean newVal) {
+    prefs.putBoolean(R.string.pref_keep_battery_optimization, newVal);
   }
 
   @SuppressLint("ApplySharedPref")
@@ -2884,6 +2892,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           R.string.pref_transfer_status_key,
 
           R.string.pref_no_map_gps_label,
+          R.string.pref_keep_battery_optimization,
 
           R.string.pref_billing_account_key,
   };

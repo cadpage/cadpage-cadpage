@@ -239,7 +239,7 @@ public class CadPageActivity extends AppCompatActivity {
         // Check call popup window configuration
         if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
 
-        // What does happen when we request supproession of batter optimization?
+        // What does happen when we request suppression of batter optimization?
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
           PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
           String packageName = getPackageName();
