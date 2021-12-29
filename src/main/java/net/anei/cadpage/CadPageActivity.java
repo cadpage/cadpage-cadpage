@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import net.anei.cadpage.billing.BillingManager;
+import net.anei.cadpage.donation.BatteryOptimizationEvent;
 import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
@@ -16,7 +17,6 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -26,9 +26,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
-import android.os.PowerManager;
-import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -84,7 +81,7 @@ public class CadPageActivity extends AppCompatActivity {
       return;
     }
 
-    // Make an initial call to checkMsgSupport with no prompt and ignoringn the results.
+    // Make an initial call to checkMsgSupport with no prompt and ignoring the results.
     // This has the critical side effect of initializing ResponseSender.instance()
     SmsPopupUtils.checkMsgSupport(this, false);
 
@@ -239,19 +236,10 @@ public class CadPageActivity extends AppCompatActivity {
         // Check call popup window configuration
         if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
 
-        // What does happen when we request suppression of batter optimization?
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-          PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-          String packageName = getPackageName();
-          if (!pm.isIgnoringBatteryOptimizations(packageName)) {
-            Intent newIntent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + packageName));
-            ContentQuery.dumpIntent(newIntent);
-            startActivity(newIntent);
-          }
-        }
+        // Ask user to disable battery optimization for Cadpage
+        if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return;
 
-
-        // If a new Active911 client may be highjacking alerts, warn user
+        // Make sure location tracking permission are enabled
         if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return;
 
         // Otherwise, launch the release info dialog if it hasn't already been displayed
@@ -368,7 +356,7 @@ public class CadPageActivity extends AppCompatActivity {
     // If we **REALLY** need the support app, and we asked the user
     // to install it, make sure that it has been installed and opened and
     // everything is OK.  However, we do not want to call this when we are
-    // initialiazing because that will duplicate the call previousily made in
+    // initializing because that will duplicate the call previously made in
     // startup()
     if (!(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED) && !startup && needSupportApp) {
       needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
@@ -400,6 +388,7 @@ public class CadPageActivity extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
+    super.onRequestPermissionsResult(requestCode, permissions, granted);
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 

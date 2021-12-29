@@ -48,8 +48,8 @@ public class DonateActivity extends BillingActivity {
   }
 
   @Override
-  protected void onRestart() {
-    super.onRestart();
+  protected void onResume() {
+    super.onResume();
     event.onRestart(this);
   }
 
@@ -83,6 +83,7 @@ public class DonateActivity extends BillingActivity {
 
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
+    super.onRequestPermissionsResult(requestCode, permissions, granted);
     ManagePreferences.onRequestPermissionsResult(requestCode, permissions, granted);
   }
 

@@ -21,7 +21,7 @@ public class BatteryOptimizationEvent extends DonateScreenEvent {
   public BatteryOptimizationEvent() {
     super(null, R.string.battery_optimization_title, R.string.battery_optimization_text,
           BatteryOptimizationYesEvent.instance(),
-          SuppressBatteryOptimizationNo.instance());
+          BatteryOptimizationNoEvent.instance());
   }
   
   @Override

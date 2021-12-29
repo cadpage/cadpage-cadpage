@@ -1,5 +1,6 @@
 package net.anei.cadpage.donation;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,7 +18,7 @@ public class BatteryOptimizationYesEvent extends DonateEvent {
     @Override
     protected void doEvent(Activity activity) {
         String packageName = activity.getPackageName();
-        Intent newIntent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + packageName));
+        @SuppressLint({"InlinedApi", "BatteryLife"}) Intent newIntent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + packageName));
         ContentQuery.dumpIntent(newIntent);
         activity.startActivity(newIntent);
     }
