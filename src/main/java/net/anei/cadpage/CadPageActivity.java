@@ -182,6 +182,8 @@ public class CadPageActivity extends AppCompatActivity {
     
     startup();
   }
+
+  private boolean setupInProgress = false;
   
   /**
    * Perform initial intent processing logic
@@ -218,44 +220,7 @@ public class CadPageActivity extends AppCompatActivity {
       final boolean init = initializing;
       ManagePreferences.checkInitialPermissions(() -> {
         startup = true;
-        needSupportApp = SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0;
-        if (needSupportApp) return;
-
-        // If user upgraded to the release that implements improved email account security, and
-        // we suspect that really need to give us that email account access, let them know now.
-        if (NeedAcctPermissionUpgradeEvent.instance().launch(CadPageActivity.this)) return;
-
-        // If Cadpage is not functional with current settings, start up the new user sequence
-        HelpWelcomeEvent event;
-        if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
-          event.setIntializing(init);
-          DonateActivity.launchActivity(CadPageActivity.this, event, null);
-          return;
-        }
-
-        // Check call popup window configuration
-        if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return;
-
-        // Ask user to disable battery optimization for Cadpage
-        if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return;
-
-        // Make sure location tracking permission are enabled
-        if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return;
-
-        // Otherwise, launch the release info dialog if it hasn't already been displayed
-        String oldRelease = ManagePreferences.release();
-        String release = CadPageApplication.getVersion();
-        if (!release.equals(oldRelease)) {
-          ManagePreferences.setRelease(release);
-          if (!trimRelease(release).equals(trimRelease(oldRelease))) {
-            new ReleaseDialogFragment().show(getSupportFragmentManager(), "release");
-          }
-        }
-
-        // If not, see if we have discovered a direct page vendor sending us text pages
-        else {
-          VendorEvent.instance(1).launch(CadPageActivity.this);
-        }
+        setupInProgress = userSetup(init);
       });
     }
     
@@ -283,6 +248,53 @@ public class CadPageActivity extends AppCompatActivity {
     }
 
     initializing = false;
+  }
+
+  /**
+   * Perform one time Cadpage user setup procesing
+   * @param init - true if Cadpage is being run for the very first time
+   * @return - true if we found something the user has to fix
+   */
+  private boolean userSetup(boolean init) {
+    if (SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0) return true;
+
+    // If user upgraded to the release that implements improved email account security, and
+    // we suspect that really need to give us that email account access, let them know now.
+    if (NeedAcctPermissionUpgradeEvent.instance().launch(CadPageActivity.this)) return true;
+
+    // If Cadpage is not functional with current settings, start up the new user sequence
+    HelpWelcomeEvent event;
+    if ((event = HelpWelcomeEvent.instance()).isEnabled()) {
+      event.setIntializing(init);
+      DonateActivity.launchActivity(CadPageActivity.this, event, null);
+      return true;
+    }
+
+    // Check call popup window configuration
+    if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return true;
+
+    // Ask user to disable battery optimization for Cadpage
+    if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return true;
+
+    // Make sure location tracking permission are enabled
+    if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return true;
+
+    // Otherwise, launch the release info dialog if it hasn't already been displayed
+    String oldRelease = ManagePreferences.release();
+    String release = CadPageApplication.getVersion();
+    if (!release.equals(oldRelease)) {
+      ManagePreferences.setRelease(release);
+      if (!trimRelease(release).equals(trimRelease(oldRelease))) {
+        new ReleaseDialogFragment().show(getSupportFragmentManager(), "release");
+      }
+    }
+
+    // If not, see if we have discovered a direct page vendor sending us text pages
+    else {
+      VendorEvent.instance(1).launch(CadPageActivity.this);
+    }
+
+    return false;
   }
 
   /**
@@ -353,13 +365,11 @@ public class CadPageActivity extends AppCompatActivity {
 
     activityActive = true;
 
-    // If we **REALLY** need the support app, and we asked the user
-    // to install it, make sure that it has been installed and opened and
-    // everything is OK.  However, we do not want to call this when we are
-    // initializing because that will duplicate the call previously made in
-    // startup()
-    if (!(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED) && !startup && needSupportApp) {
-      needSupportApp = SmsPopupUtils.checkMsgSupport(this) > 0;
+    // If we are going through the user setup process, check here to see if there is still more
+    // to do.  We only want to execute this after the user has been prompted to fix something
+    // and do not want to duplicate the call already made in startup()
+    if (!startup && setupInProgress) {
+      setupInProgress = userSetup(false);
     }
 
     // If user switched to/from split screen mode, recreate this activity

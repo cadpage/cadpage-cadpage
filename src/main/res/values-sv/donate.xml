@@ -456,21 +456,21 @@
     Avaktivera Cadpages visa alarmpopups alternativ
   </string>
 
-  <string name="battery_optimization_title">  <!-- Translate -->
-    Disable Battery Optimization for Cadpage
+  <string name="battery_optimization_title">
+    Avaktivera batterioptimering
   </string>
 
-  <string name="battery_optimization_text">  <!-- Translate -->
-    We have found Cadpage works much better if you disable battery optimization.  This will have
-    little or no effect on actual battery consumption
+  <string name="battery_optimization_text">
+    Vi har kommit fram till att Cadpage fungerar mycket bättre om du stänger av batterioptimering.  Det kommer att ha obetydlig effekt på den faktiska batteriförbrukningen.
+
   </string>
 
-  <string name="battery_optimization_yes_title">  <!-- Translate -->
-    Turn off Cadpage battery optimization
+  <string name="battery_optimization_yes_title">
+    Stäng av Cadpages batterioptimering
   </string>
 
-  <string name="battery_optimization_no_title">  <!-- Translate -->
-    I\'ll take my chances
+  <string name="battery_optimization_no_title">
+    Jag chansar
   </string>
 
 </resources>
