@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01162021</string>
+  <string name="release_date">01242021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.08-27\n
+    Location Fixes:\n
+    Lauderdale County, AL\n
+    Satellite Beach, FL\n
+    Hamilton County, OH\n
+    \n
     v2.2.08-26\n
     Location Fixes:\n
     El Paso County, CO\n
@@ -48,19 +54,6 @@
     Lincoln County, NC\n
     Cocke County, TN\n
     Moore County, TN\n
-    Greenbrier County, WV\n
-    \n
-    v2.2.08-22\n
-    New Locations:\n
-    Adams County, NE\n
-    \n
-    Location Fixes:\n
-    Middlesex County, CT\n
-    Daviess County, KY\n
-    Rutherford County, NC\n
-    Knox County, OH\n
-    Greenville County, SC\n
-    White County, TN\n
-    McDowell County, WV
+    Greenbrier County, WV
   </string>
 </resources>
