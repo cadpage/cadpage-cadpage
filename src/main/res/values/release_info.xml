@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01242021</string>
+  <string name="release_date">02032021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.09-03\n
+    Location Fixes:\n
+    Morgan County, AL\n
+    Tolland County, CT\n
+    Madison County, IN\n
+    Anoka County, MN\n
+    Gasaconade County, MO\n
+    Henry County, MO\n
+    Osage County, MO\n
+    Armstrong County, PA\n
+    Bradley County, TN\n
+    Addison County, VT\n
+    Chittenden County, VT\n
+    Grand Isle County, VT\n
+    \n
     v2.2.09-02\n
     Cadpage now recommends that you disable battery optimization for Cadpage, which we hope will
     simplify processing and get Cadpage working on two obstinate Samsung devices.  This will not
@@ -30,64 +45,6 @@
     Location Fixes:\n
     Lauderdale County, AL\n
     Madison County, AL\n
-    Mercer County, OH\n
-    \n
-    v2.2.08-24\n
-    New Locations:\n
-    Corson County, SD\n
-    Campbell County, SD\n
-    McPherson County, SD\n
-    Potter County, SD\n
-    Campbell County, TN\n
-    Comal County, TX\n
-    Central Okanagan, BC\n
-    \n
-    Location Fixes:\n
-    Tolland County, CT\n
-    Satellite Beach, FL\n
-    Floyd County, GA\n
-    Washtenaw County, MI\n
-    Caswell County, NC\n
-    Williamsburg County, SC\n
-    Kings County, WA\n
-    \n
-    v2.2.08-23\n
-    New Locations:\n
-    Ohio County, KY\n
-    Perkins County, SD\n
-    \n
-    Location Fixes:\n
-    Lincoln County, NC\n
-    Cocke County, TN\n
-    Moore County, TN\n
-    Greenbrier County, WV\n
-    \n
-    v2.2.08-22\n
-    New Locations:\n
-    Adams County, NE\n
-    \n
-    Location Fixes:\n
-    Middlesex County, CT\n
-    Daviess County, KY\n
-    Rutherford County, NC\n
-    Knox County, OH\n
-    Greenville County, SC\n
-    White County, TN\n
-    McDowell County, WV\n
-    \n
-    v2.2.08-21\n
-    New Locations:\n
-    Coos County, OR (Alt)\n
-    \n
-    Location Fixes:\n
-    Butte County, CA\n
-    Middlesex County, CT\n
-    Lincoln County, NC\n
-    Rutherford County, NC\n
-    Delaware County, OH\n
-    Red Deer County, AB\n
-=======
-    Greenbrier County, WV
->>>>>>> main
+    Mercer County, OH
   </string>
 </resources>
