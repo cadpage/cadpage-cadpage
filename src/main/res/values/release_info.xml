@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02032021</string>
+  <string name="release_date">02082021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.09-04\n
+    New Locations:\n
+    Russell County, KY\n
+    \n
+    Location Fixes:\n
+    Arapahoe County, CO\n
+    Greene County, OH\n
+    Adams County, PA\n
+    Bucks County, PA\n
+    Chester County, TN\n
+    Bedford County, VA\n
+    Fairfax County, VA\n
+    \n
     v2.2.09-03\n
     Location Fixes:\n
     Morgan County, AL\n
@@ -36,15 +49,6 @@
     El Paso County, CO\n
     Caroline County, MD\n
     Hudson, OH merged into Summmit County, OH\n
-    Windsor County, VT\n
-    \n
-    v2.2.08-25\n
-    New Locations:\n
-    Washington County, AL\n
-    \n
-    Location Fixes:\n
-    Lauderdale County, AL\n
-    Madison County, AL\n
-    Mercer County, OH
+    Windsor County, VT
   </string>
 </resources>
