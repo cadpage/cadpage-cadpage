@@ -415,6 +415,10 @@
     När du svarar på ett larm från Active911 så kan Cadpage rapportera din realtidsposition så att den kan visas på Active911 på en karta. Om du slår på den funktionen så kommer det att krävas att du ändrar på dina inställningar för positionsspårning.
   </string>
 
+  <string name="location_tracking_text2"> <!-- Translate -->
+    Active911 real time location tracking requires precise location permission
+  </string>
+
   <string name="location_tracking_on_title">
    Slå på positionsspårning
   </string>

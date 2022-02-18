@@ -581,6 +581,10 @@
     your location tracking permissions.
   </string>
 
+  <string name="location_tracking_text2">
+    Active911 real time location tracking requires precise location permission
+  </string>
+
   <string name="location_tracking_on_title">
     Enable location tracking permissions
   </string>

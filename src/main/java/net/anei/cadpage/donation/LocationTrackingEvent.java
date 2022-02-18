@@ -15,6 +15,10 @@ import net.anei.cadpage.vendors.VendorManager;
  When you respond to an Active911 alert, Cadpage can report your current real time location so
  it can be displayed on the Active911 map display.  Enabling this feature will require changing
  you location tracking permissions.
+
+ or
+
+ Active911 real time location tracking requires precise location permission
  */
 public class LocationTrackingEvent extends DonateScreenEvent {
 
@@ -36,6 +40,17 @@ public class LocationTrackingEvent extends DonateScreenEvent {
            !ManagePreferences.reportPosition().equals("N") &&
            ! (PermissionManager.isGranted(context, PermissionManager.ACCESS_FINE_LOCATION) &&
               (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || PermissionManager.isGranted(context, PermissionManager.ACCESS_BACKGROUND_LOCATION)));
+  }
+
+  @Override
+  public void onRestart(DonateActivity activity) {
+    setTextId(getTextId(activity));
+  }
+
+  private static int getTextId(Context context) {
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+           PermissionManager.isGranted(context, PermissionManager.ACCESS_COARSE_LOCATION)
+            ? R.string.location_tracking_text2 : R.string.location_tracking_text;
   }
 
   private static final LocationTrackingEvent instance = new LocationTrackingEvent();

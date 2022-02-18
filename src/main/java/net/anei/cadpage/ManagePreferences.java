@@ -2001,6 +2001,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     @Override
     protected void checkPermission() {
+      checkRequestPermission(PermissionManager.ACCESS_COARSE_LOCATION);
       checkRequestPermission(PermissionManager.ACCESS_FINE_LOCATION);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
         checkRequestPermission(PermissionManager.ACCESS_BACKGROUND_LOCATION);

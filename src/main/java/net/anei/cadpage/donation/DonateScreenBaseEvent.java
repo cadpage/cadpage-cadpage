@@ -18,8 +18,10 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
 
   private final int titleId;
   private final int winTitleId;
-  private final int textId;
+  private int textId;
   private final int layout;
+  private TextView textView;
+  private Activity activity;
 
   protected DonateScreenBaseEvent(AlertStatus alertStatus, int titleId, int textId,
                                   int layout) {
@@ -50,6 +52,8 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * @param msg message associated with this event
    */
   public void create(final Activity activity, SmsMmsMessage msg) {
+
+    this.activity = activity;
     
     // Double check that event is still enabled.
     // It isn't that we really worry about showing an inappropriate display
@@ -71,12 +75,17 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     
     // Set up main box text and color
     try {
-      view = activity.findViewById(R.id.DonateTextView);
-      view.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
-      setTextColor(view);
+      textView = activity.findViewById(R.id.DonateTextView);
+      textView.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
+      setTextColor(textView);
     } catch (RuntimeException ex) {
       throw new RuntimeException(this.getClass().getName(), ex);
     }
+  }
+
+  public void setTextId(int textId) {
+    this.textId = textId;
+    textView.setText(activity.getString(textId, getTextParms(activity, PARM_TEXT)));
   }
 
   @Override

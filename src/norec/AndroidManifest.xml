@@ -8,13 +8,15 @@
   <uses-permission android:name="net.anei.cadpagesupport.permission.CONTENT_QUERY"/>
 
   <application>
-    <receiver android:name=".SmsReceiver">
+    <receiver android:name=".SmsReceiver"
+     android:exported="true">
       <intent-filter>
         <action android:name="net.anei.cadpage.Telephony.SMS_RECEIVED"/>
       </intent-filter>
     </receiver>
 
-    <receiver android:name=".PushReceiver">
+    <receiver android:name=".PushReceiver"
+     android:exported="true">
       <intent-filter>
         <action android:name="net.anei.cadpage.Telephony.WAP_PUSH_RECEIVED"/>
         <data android:mimeType="application/vnd.wap.mms-message"/>
