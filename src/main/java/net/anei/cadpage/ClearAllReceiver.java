@@ -1,11 +1,11 @@
 package net.anei.cadpage;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 /*
  * This class provides an easy way to clear held WakeLocks and re-enable the
@@ -83,9 +83,10 @@ public class ClearAllReceiver extends BroadcastReceiver {
   /*
    * Gets the PendingIntent for a Broadcast to this class
    */
+  @SuppressLint("WrongConstant")
   private static PendingIntent getPendingIntent(Context context, ClearType type) {
     Intent intent = getClearIntent(context, type);
-    return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
   }
 
   /**

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -433,8 +434,9 @@ public class ManageNotification {
     Log.v("Notification launch intent");
     ContentQuery.dumpIntent(smsIntent);
 
+    @SuppressLint("WrongConstant")
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, smsIntent,
-                                                          PendingIntent.FLAG_CANCEL_CURRENT);
+                                                          PendingIntent.FLAG_CANCEL_CURRENT | CadPageApplication.FLAG_IMMUTABLE));
     nbuild.setContentIntent(notifIntent);
     if (fullScreen) {
       nbuild.setFullScreenIntent(notifIntent, true);
@@ -447,7 +449,8 @@ public class ManageNotification {
     // basically stop any future reminders.
     Intent deleteIntent = new Intent(new Intent(context, ReminderReceiver.class));
     deleteIntent.setAction(Intent.ACTION_DELETE);
-    PendingIntent pendingDeleteIntent = PendingIntent.getBroadcast(context, 0, deleteIntent, 0);
+    @SuppressLint("WrongConstant")
+    PendingIntent pendingDeleteIntent = PendingIntent.getBroadcast(context, 0, deleteIntent, CadPageApplication.FLAG_IMMUTABLE));
     nbuild.setDeleteIntent(pendingDeleteIntent);
 
     return nbuild.build();
@@ -1006,8 +1009,9 @@ public class ManageNotification {
     nbuild.setContentTitle(title);
     nbuild.setContentText(text);
 
+    @SuppressLint("WrongConstant")
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10009, intent,
-        PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent.FLAG_CANCEL_CURRENT | CadPageApplication.FLAG_IMMUTABLE));
     nbuild.setContentIntent(notifIntent);
     nbuild.setFullScreenIntent(notifIntent, true);
     nbuild.setPriority(NotificationCompat.PRIORITY_MAX);

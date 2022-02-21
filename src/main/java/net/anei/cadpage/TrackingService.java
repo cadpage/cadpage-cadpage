@@ -92,7 +92,8 @@ public class TrackingService extends Service implements LocationTracker.Location
 
     // Put ourselves in foreground mode, also notifying user that tracking has been activated
     Intent intent = new Intent(ACTION_SHUTDOWN, null, this, TrackingService.class);
-    PendingIntent pint = PendingIntent.getService(this, 0, intent, 0);
+    @SuppressLint("WrongConstant")
+    PendingIntent pint = PendingIntent.getService(this, 0, intent, CadPageApplication.FLAG_IMMUTABLE);
     NotificationCompat.Builder nb = new NotificationCompat.Builder(this, ManageNotification.TRACKING_CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_stat_notify)
         .setWhen(System.currentTimeMillis())

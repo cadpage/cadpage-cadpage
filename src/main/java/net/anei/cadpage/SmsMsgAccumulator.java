@@ -6,6 +6,8 @@ import java.util.List;
 
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.SplitMsgOptions;
+
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -151,7 +153,8 @@ public class SmsMsgAccumulator {
     // We don't really use it, but it keeps the alarm intents functionally distinct
     intent.setData(Uri.parse("Cadpage://" + id));
 
-    int flags = (cancel ? PendingIntent.FLAG_NO_CREATE : PendingIntent.FLAG_ONE_SHOT);
+    int flags = (cancel ? PendingIntent.FLAG_NO_CREATE : PendingIntent.FLAG_ONE_SHOT) | CadPageApplication.FLAG_IMMUTABLE;
+    @SuppressLint("WrongConstant")
     PendingIntent pendIntent = PendingIntent.getService(context, 0, intent, flags);
     if (cancel) {
       if (pendIntent != null) pendIntent.cancel();

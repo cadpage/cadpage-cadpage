@@ -327,9 +327,10 @@ public class MmsTransactionService extends Service {
       intent.setClass(MmsTransactionService.this, MmsTransactionService.class);
       intent.putExtra(EXTRA_TRANSACTION_ID, transactionId);
       intent.putExtra(EXTRA_URI, downloadUri.toString());
+      @SuppressLint("WrongConstant")
       PendingIntent pIntent =
           PendingIntent.getService(MmsTransactionService.this, 1, intent,
-              PendingIntent.FLAG_ONE_SHOT);
+              PendingIntent.FLAG_ONE_SHOT | CadPageApplication.FLAG_IMMUTABLE);
 
       if (!MMSDownloader.downloadMMS(MmsTransactionService.this, smsManager, contentLoc,
                                       downloadUri, pIntent)) {

@@ -2,6 +2,7 @@ package net.anei.cadpage;
 
 import java.util.HashMap;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -147,7 +148,8 @@ public class ManageUsb {
       if (!mgr.hasPermission(device)) {
         Intent intent = new Intent(ACTION_USB_PERMISSION);
         intent.setClass(context, UsbReceiver.class);
-        PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        @SuppressLint("WrongConstant")
+        PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, intent, CadPageApplication.FLAG_IMMUTABLE);
         mgr.requestPermission(device, pIntent);
         return;
       }

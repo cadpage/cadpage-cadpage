@@ -16,6 +16,7 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -371,8 +372,10 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // Lets schedule an intent launch in 1 second.
     
     Intent intent = buildIntent(context, EmailType.CRASH, 0);
+    @SuppressLint("WrongConstant")
     PendingIntent pendIntent =
-      PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+      PendingIntent.getActivity(context, 0, intent,
+                                PendingIntent.FLAG_ONE_SHOT | CadPageApplication.FLAG_IMMUTABLE);
 
     long triggerTime = System.currentTimeMillis() + 1000L;
     SmsPopupUtils.setExactTime(context, triggerTime, pendIntent);

@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import net.anei.cadpage.billing.BillingManager;
+import net.anei.cadpage.donation.BatteryOptimization12Event;
 import net.anei.cadpage.donation.BatteryOptimizationEvent;
 import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
@@ -273,7 +274,10 @@ public class CadPageActivity extends AppCompatActivity {
     // Check call popup window configuration
     if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return true;
 
-    // Ask user to disable battery optimization for Cadpage
+    // If we are running Android 12 or better, user has to disable battery optimization
+    if (BatteryOptimization12Event.instance().launch(CadPageActivity.this)) return true;
+
+    // Otherwise batteriy optimization is strongly advised, but not required
     if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return true;
 
     // Make sure location tracking permission are enabled

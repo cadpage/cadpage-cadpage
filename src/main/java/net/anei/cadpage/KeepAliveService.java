@@ -85,7 +85,8 @@ public class KeepAliveService extends Service {
       // it.  That should be sufficient to keep Cadpage alive until we are finished
       // doing whatever we are doing
       else {
-        PendingIntent pint = PendingIntent.getActivity(this, 0, CadPageActivity.getLaunchIntent(this), 0);
+        @SuppressLint("WrongConstant")
+        PendingIntent pint = PendingIntent.getActivity(this, 0, CadPageActivity.getLaunchIntent(this), CadPageApplication.FLAG_IMMUTABLE);
         Notification nf = new NotificationCompat.Builder(this, ManageNotification.MISC_CHANNEL_ID)
                           .setSmallIcon(intent.getIntExtra("ICON", 0))
                           .setWhen(System.currentTimeMillis())

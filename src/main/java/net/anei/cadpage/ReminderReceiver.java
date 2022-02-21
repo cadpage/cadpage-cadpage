@@ -1,5 +1,6 @@
 package net.anei.cadpage;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -67,8 +68,9 @@ public class ReminderReceiver extends BroadcastReceiver {
     reminderIntent.putExtra(EXTRA_MSG_ID, message.getMsgId());
     reminderIntent.putExtra(EXTRA_START, start);
 
+    @SuppressLint("WrongConstant")
     PendingIntent reminderPendingIntent =
-      PendingIntent.getBroadcast(context, 0, reminderIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+      PendingIntent.getBroadcast(context, 0, reminderIntent, PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
 
     long triggerTime = System.currentTimeMillis() + interval;
     if (Log.DEBUG) Log.v("ReminderReceiver: scheduled reminder notification in " + interval

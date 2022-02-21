@@ -1,5 +1,6 @@
 package net.anei.cadpage;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -38,25 +39,33 @@ public class CadPageWidget extends AppWidgetProvider {
     //First Button (Enable/Disable Cadpage)
     Intent aEnabledIntent = new Intent(context, CadPageWidget.class);
     aEnabledIntent.setAction(ACTION_CADPAGE_ENABLED);
-    PendingIntent actionPendingIntent = PendingIntent.getBroadcast(context, 0, aEnabledIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    @SuppressLint("WrongConstant")
+    PendingIntent actionPendingIntent = PendingIntent.getBroadcast(context, 0, aEnabledIntent,
+                                                             PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
     views.setOnClickPendingIntent(R.id.widget_button_cadpage, actionPendingIntent);
 
     
     //Second Button (Enable/Disable Alerts)
     Intent bEnabledIntent = new Intent(context, CadPageWidget.class);
     bEnabledIntent.setAction(ACTION_NOTIFICATION);
-    PendingIntent notificationPendingIntent = PendingIntent.getBroadcast(context, 0, bEnabledIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    @SuppressLint("WrongConstant")
+    PendingIntent notificationPendingIntent = PendingIntent.getBroadcast(context, 0, bEnabledIntent,
+                                                                         PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
     views.setOnClickPendingIntent(R.id.widget_button_notification, notificationPendingIntent);
     
     //Third Button (Enable/Disable PopUps)
     Intent cEnabledIntent = new Intent(context, CadPageWidget.class);
     cEnabledIntent.setAction(ACTION_POPUP);
-    PendingIntent popupPendingIntent = PendingIntent.getBroadcast(context, 0, cEnabledIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    @SuppressLint("WrongConstant")
+    PendingIntent popupPendingIntent = PendingIntent.getBroadcast(context, 0, cEnabledIntent,
+                                                             PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
     views.setOnClickPendingIntent(R.id.widget_button_popup, popupPendingIntent);
     
    //Fourth Button (Show Unread Calls. Click to go into History)
     Intent dEnabledIntent = CadPageActivity.getLaunchIntent(context, true);
-    PendingIntent callsPendingIntent = PendingIntent.getActivity(context, 0, dEnabledIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    @SuppressLint("WrongConstant")
+    PendingIntent callsPendingIntent = PendingIntent.getActivity(context, 0, dEnabledIntent,
+                                                           PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
     views.setOnClickPendingIntent(R.id.widget_text_newcalls, callsPendingIntent);
 
     if (ManagePreferences.enabled()){

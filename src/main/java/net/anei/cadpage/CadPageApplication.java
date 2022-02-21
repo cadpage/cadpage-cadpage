@@ -9,6 +9,8 @@ import android.annotation.SuppressLint;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ProcessLifecycleOwner;
+
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -168,4 +170,14 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !appVisible;
   }
 
+  public static final int FLAG_IMMUTABLE;
+  public static final int FLAG_MUTABLE;
+  static {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      FLAG_IMMUTABLE = PendingIntent.FLAG_IMMUTABLE;
+      FLAG_MUTABLE = PendingIntent.FLAG_MUTABLE;
+    } else {
+      FLAG_IMMUTABLE = FLAG_MUTABLE = 0;
+    }
+  }
 }
