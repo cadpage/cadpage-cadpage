@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02162021</string>
+  <string name="release_date">02222021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.09-06\n
+    New Locations:\n
+    Harrison County, MS (alt)\n
+    \n
+    Location Fixes:\n
+    Benton County, AR\n
+    Greenup County, KY\n
+    Carolin County, MD\n
+    Butler County, OH\n
+    Carter County, OK\n
+    Brazos County, TX\n
+    Mercer County, WV\n
+    \n
     v2.2.09-05\n
     New Locations:\n
     Garland County, AR (alt)\n
@@ -40,18 +53,6 @@
     Bradley County, TN\n
     Addison County, VT\n
     Chittenden County, VT\n
-    Grand Isle County, VT\n
-    \n
-    v2.2.09-02\n
-    Cadpage now recommends that you disable battery optimization for Cadpage, which we hope will
-    simplify processing and get Cadpage working on two obstinate Samsung devices.  This will not
-    actually increase battery consumption.  Future versions of Cadpage will probably require this
-    action when you are running on Android 12 or better.\n
-    \n
-    v2.2.08-27\n
-    Location Fixes:\n
-    Lauderdale County, AL\n
-    Satellite Beach, FL\n
-    Hamilton County, OH
+    Grand Isle County, VT
   </string>
 </resources>
