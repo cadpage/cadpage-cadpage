@@ -5,7 +5,10 @@
   <string name="notify_mms_alert">Inkommande multi-mediameddelande</string>
   <string name="notify_sms_alert">Inkommande textmeddelande</string>
   <string name="notify_http_request">Skickar internetförfrågan</string>
-  <string name="notify_need_fix">Something needs to be fixed with Cadpage settings</string> <!-- Translate -->
+  <string name="notify_need_fix_title">Please open Cadpage</string> <!-- Translate -->
+  <string name="notify_need_fix_text">  <!-- Translate -->
+    Something needs to be changed in Cadpge settings before it will work properly
+  </string>
   <string name="app_name">Cadpage</string>
   <string name="call_history">Larmhistorik:</string>
   <string name="new_text_at">Nytt larm mottaget %s</string>
@@ -22,15 +25,10 @@
   <!-- string name="info_label">Info:</string -->
   <string name="call_id_label">Ärendenr:</string>
   <!--  Permission strings -->
-  <string name="cadperm_title">Ta emot ärenden med CADpage</string>
-  <string name="cadperm_desc">
-   Tillåt att applikationen tar emot information från nödsamtal. Illasinnad programvara skulle kunna använda denna information för att komma åt personlig information från dessa samtal.
-  </string>
-   
    <string name="perm_phone_info_for_email">
    Om vi känner till ditt telefonnummer så kan vi enklare hitta problem med abonnemang eller meddelandeservice. Det är inte avgörande att vi får detta. Om vi inte får det så gör vi så gott vi kan utan den informationen.
    </string>
-   
+
    <string name="perm_acct_info_for_auto_recalc">
    Vi håller på att införa en automatisk omberäkningsfunktion av din prenumerationsstatus.Vi
    behöver veta vem du är så vi kan hitta prenumerationsinformation som vi har kopplat till dig.

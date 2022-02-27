@@ -5,7 +5,10 @@
   <string name="notify_mms_alert">Incoming multi-media message</string>
   <string name="notify_sms_alert">Incoming text message</string>
   <string name="notify_http_request">Sending internet request</string>
-  <string name="notify_need_fix">Something needs to be fixed with Cadpage settings</string>
+  <string name="notify_need_fix_title">Please open Cadpage</string>
+  <string name="notify_need_fix_text">
+    Something needs to be changed in Cadpage settings before it will work properly
+  </string>
   <string name="app_name">Cadpage</string>
   <string name="call_history">Call History:</string>
   <string name="new_text_at">New Call Received at %s</string>
@@ -23,12 +26,6 @@
   <string name="call_id_label">CID:</string>
 
   <!--  Permission strings -->
-  <string name="cadperm_title">Receive CAD pages</string>
-  <string name="cadperm_desc">
-   Allows application to receive CAD Pages containing information about 
-   emergency response calls.  Malicious applications could use this to 
-   access personal information connected with these calls</string>
-
   <string name="perm_phone_info_for_email">
    If we know your phone number, we can better identify subscription problems
    or problems with direct paging vendors.  Granting this permission is not required.

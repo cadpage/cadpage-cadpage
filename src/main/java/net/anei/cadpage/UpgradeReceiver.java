@@ -53,6 +53,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
     // Corrective action is to launch Cadpage, which will check for and prompt user to correct
     // any of these situations
     Intent launchIntent = CadPageActivity.getLaunchIntent(context);
+    ContentQuery.dumpIntent(launchIntent);
 
     // Prior to Android 10, we could just launch cadpage ourselves
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
@@ -64,10 +65,11 @@ public class UpgradeReceiver extends BroadcastReceiver {
       NotificationCompat.Builder nbuild = new NotificationCompat.Builder(context, ManageNotification.NOTIFY_CHANNEL_ID);
       nbuild.setAutoCancel(true);
       nbuild.setSmallIcon(R.drawable.ic_stat_notify);
-      nbuild.setContentTitle(context.getString(R.string.notify_need_fix));
+      nbuild.setContentTitle(context.getString(R.string.notify_need_fix_title));
+      nbuild.setContentText(context.getString(R.string.notify_need_fix_text));
 
       @SuppressLint("WrongConstant")
-      PendingIntent notifIntent = PendingIntent.getActivity(context, 10001, launchIntent, CadPageApplication.FLAG_IMMUTABLE);
+      PendingIntent notifIntent = PendingIntent.getActivity(context, 12776, launchIntent, CadPageApplication.FLAG_IMMUTABLE);
 
       nbuild.setContentIntent(notifIntent);
       nbuild.setFullScreenIntent(notifIntent, true);

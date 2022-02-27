@@ -4,12 +4,6 @@
           package="net.anei.cadpage">
 
   <permission
-  android:name="net.anei.cadpage.RECEIVE_CADPAGE"
-  android:description="@string/cadperm_desc"
-  android:label="@string/cadperm_title"
-  android:permissionGroup="android.permission-group.MESSAGES"
-  android:protectionLevel="dangerous"/>
-  <permission
   android:name="net.anei.cadpage.permission.C2D_MESSAGE"
   android:protectionLevel="signature"/>
 

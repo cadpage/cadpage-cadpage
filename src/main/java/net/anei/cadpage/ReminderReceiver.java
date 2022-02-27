@@ -86,8 +86,9 @@ public class ReminderReceiver extends BroadcastReceiver {
 
     Intent reminderIntent = new Intent(context, ReminderReceiver.class);
     reminderIntent.setAction(ACTION_REMIND);
+    @SuppressLint("WrongConstant")
     PendingIntent reminderPendingIntent =
-      PendingIntent.getBroadcast(context, 0, reminderIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+      PendingIntent.getBroadcast(context, 0, reminderIntent, PendingIntent.FLAG_UPDATE_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
     reminderPendingIntent.cancel();
     if (Log.DEBUG) Log.v("ReminderReceiver: cancelReminder()");
   }
