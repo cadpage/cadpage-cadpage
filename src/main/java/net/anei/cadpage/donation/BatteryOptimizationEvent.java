@@ -42,8 +42,12 @@ public class BatteryOptimizationEvent extends DonateScreenEvent {
 
   private boolean isActive() {
 
-    // The background start provisions started with Oreo.  Before that, this is no relevant
+    // The background start provisions started with Oreo.  Before that, this is not relevant
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
+
+    // Starting with Android 12, disabling battery optimization is no longer optional
+    // we have another event that handles this condition
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) return false;
 
     // If user had decided to disregard our advice, so be it
     // At least for now.  Future versions that target SDK 30 will not be so charitable.

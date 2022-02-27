@@ -5,6 +5,7 @@
   <string name="notify_mms_alert">Incoming multi-media message</string>
   <string name="notify_sms_alert">Incoming text message</string>
   <string name="notify_http_request">Sending internet request</string>
+  <string name="notify_need_fix">Something needs to be fixed with Cadpage settings</string>
   <string name="app_name">Cadpage</string>
   <string name="call_history">Call History:</string>
   <string name="new_text_at">New Call Received at %s</string>
