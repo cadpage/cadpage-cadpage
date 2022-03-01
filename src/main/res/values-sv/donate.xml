@@ -468,7 +468,8 @@
     Vi har kommit fram till att Cadpage fungerar mycket bättre om du stänger av batterioptimering.  Det kommer att ha obetydlig effekt på den faktiska batteriförbrukningen.
   </string>
 
-  <string name="battery_optimization12_text"> <!-- Translate -->
+  <string name="battery_optimization12_text">
+    <!-- Translate -->
     Starting with Android 12, Cadpage just will not work unless you disable battery optimization.
     This will have little or no effect on actual battery consumption
   </string>
