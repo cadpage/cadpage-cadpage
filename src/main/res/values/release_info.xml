@@ -4,6 +4,19 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.09-07\n
+    New Locations:\n
+    Jessamine County, KY\n
+    Lewis County, KY\n
+    Archer County, TX\n
+    \n
+    Location Fixes:\n
+    Putnam County, FL\n
+    Fountain County, IN\n
+    Marshall County, KY\n
+    Oktibbeha County, MS\n
+    Gibson County, TN\n
+    \n
     v2.2.09-06\n
     New Locations:\n
     Harrison County, MS (alt)\n
@@ -38,21 +51,6 @@
     Bucks County, PA\n
     Chester County, TN\n
     Bedford County, VA\n
-    Fairfax County, VA\n
-    \n
-    v2.2.09-03\n
-    Location Fixes:\n
-    Morgan County, AL\n
-    Tolland County, CT\n
-    Madison County, IN\n
-    Anoka County, MN\n
-    Gasaconade County, MO\n
-    Henry County, MO\n
-    Osage County, MO\n
-    Armstrong County, PA\n
-    Bradley County, TN\n
-    Addison County, VT\n
-    Chittenden County, VT\n
-    Grand Isle County, VT
+    Fairfax County, VA
   </string>
 </resources>
