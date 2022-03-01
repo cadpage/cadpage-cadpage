@@ -5,7 +5,7 @@
   <string name="notify_mms_alert">Inkommande multi-mediameddelande</string>
   <string name="notify_sms_alert">Inkommande textmeddelande</string>
   <string name="notify_http_request">Skickar internetförfrågan</string>
-  <string name="notify_need_fix_title">Please open Cadpage</string> <!-- Translate -->
+  <string name="notify_need_fix_title">Vänligen öppna Cadpage</string>
   <string name="notify_need_fix_text">  <!-- Translate -->
     Something needs to be changed in Cadpge settings before it will work properly
   </string>
