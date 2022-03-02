@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03012021</string>
+  <string name="release_date">03022021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-01\n
+    Updated to be fully compatible with Android 12.\n
+    \n
+    Disabling battery optimization is now mandatory under Android 12.  Actually battery consumption
+    should be unaffected.\n
+    \n
     v2.2.09-07\n
     New Locations:\n
     Jessamine County, KY\n
@@ -38,19 +44,6 @@
     Location Fixes:\n
     Berrien County, MI\n
     Summit County, OH\n
-    Hidalgo County, TX\n
-    \n
-    v2.2.09-04\n
-    New Locations:\n
-    Russell County, KY\n
-    \n
-    Location Fixes:\n
-    Arapahoe County, CO\n
-    Greene County, OH\n
-    Adams County, PA\n
-    Bucks County, PA\n
-    Chester County, TN\n
-    Bedford County, VA\n
-    Fairfax County, VA
+    Hidalgo County, TX
   </string>
 </resources>
