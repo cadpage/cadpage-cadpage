@@ -7,8 +7,7 @@
   <string name="notify_http_request">Skickar internetförfrågan</string>
   <string name="notify_need_fix_title">Vänligen öppna Cadpage</string>
   <string name="notify_need_fix_text">
-    <!-- Translate -->
-    Something needs to be changed in Cadpge settings before it will work properly
+    Någonting behöver ändras i Cadpages inställningar för innan programmet kommer att fungera korrekt.
   </string>
   <string name="app_name">Cadpage</string>
   <string name="call_history">Larmhistorik:</string>
