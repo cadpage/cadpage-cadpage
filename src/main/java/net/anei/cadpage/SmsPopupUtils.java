@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.ForegroundServiceStartNotAllowedException;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -346,7 +347,18 @@ public class SmsPopupUtils {
       Log.v("startForegroundService()");
       context.startForegroundService(intent);
     } else {
-      context.startService(intent);
+      try {
+        context.startService(intent);
+      }
+
+      // On most devices, the fact that we have batter optimization disabled is enough to allow
+      // a normal foreground start.  But exceptions are still being thrown on some Samsung devices
+      // so we catch them and revert to the old foreground service launch
+      catch (ForegroundServiceStartNotAllowedException ex) {
+        Log.v("startForegroundService() call after startService() failure");
+        foregroundServiceLaunch = true;
+        context.startForegroundService(intent);
+      }
     }
   }
 
