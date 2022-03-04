@@ -344,21 +344,17 @@ public class SmsPopupUtils {
   public static void startService(Context context, Intent intent) {
     foregroundServiceLaunch = !allowBackgroundService(context);
     if (foregroundServiceLaunch) {
-      Log.v("startForegroundService()");
-      context.startForegroundService(intent);
-    } else {
-      try {
-        context.startService(intent);
-      }
 
-      // On most devices, the fact that we have batter optimization disabled is enough to allow
-      // a normal foreground start.  But exceptions are still being thrown on some Samsung devices
-      // so we catch them and revert to the old foreground service launch
-      catch (ForegroundServiceStartNotAllowedException ex) {
-        Log.v("startForegroundService() call after startService() failure");
-        foregroundServiceLaunch = true;
+      // Foreground service launches are flatly prohibited in Android 12.  If the user has
+      // disregarded all of our warnings that battery optimization needs to be disabled, all
+      // we can do is generate another warning and give up
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        UpgradeReceiver.fixSettingProblem(context);
+      } else {
         context.startForegroundService(intent);
       }
+    } else {
+      context.startService(intent);
     }
   }
 

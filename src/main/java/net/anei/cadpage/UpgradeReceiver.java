@@ -52,12 +52,20 @@ public class UpgradeReceiver extends BroadcastReceiver {
 
     // Corrective action is to launch Cadpage, which will check for and prompt user to correct
     // any of these situations
+    fixSettingProblem(context);
+  }
+
+  /**
+   * Notify user of potentially fatal Cadpage settings issue
+   * @param context current context
+   */
+  public static void fixSettingProblem(Context context) {
     Intent launchIntent = CadPageActivity.getLaunchIntent(context);
     ContentQuery.dumpIntent(launchIntent);
 
     // Prior to Android 10, we could just launch cadpage ourselves
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-      context.startActivity(intent);
+      context.startActivity(launchIntent);
     }
 
     // Since Android 10 we have to use a full screen notification to do this
