@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03042021</string>
+  <string name="release_date">03072021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-04\n
+    New Locations:\n
+    Martin County, FL\n
+    Webster County, KY\n
+    Bexar County, TX (alt)\n
+    \n
+    Location Fixes:\n
+    Park County, CO\n
+    Fairfield County, OH\n
+    \n
     v2.2.10-03\n
     Added additional warning to avoid Cadpage crashes when users disregard our warning that
     battery optimization really needs to be disabled\n
