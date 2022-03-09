@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03072021</string>
+  <string name="release_date">03092021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.09-09\n
+    Location Fixes:\n
+    Portage County, OH\n
+    Adams County, PA\n
+    Sweden\n
+    \n
     v2.2.09-08\n
     New Locations:\n
     Martin County, FL\n
@@ -48,19 +54,6 @@
     Location Fixes:\n
     Berrien County, MI\n
     Summit County, OH\n
-    Hidalgo County, TX\n
-    \n
-    v2.2.09-04\n
-    New Locations:\n
-    Russell County, KY\n
-    \n
-    Location Fixes:\n
-    Arapahoe County, CO\n
-    Greene County, OH\n
-    Adams County, PA\n
-    Bucks County, PA\n
-    Chester County, TN\n
-    Bedford County, VA\n
-    Fairfax County, VA
+    Hidalgo County, TX
   </string>
 </resources>
