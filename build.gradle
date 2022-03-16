@@ -117,7 +117,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-core:19.0.2'   // Upgrade requires increaing minimum SDK to 19 dropping 11 users
+    implementation 'com.google.firebase:firebase-core:19.0.2'   // Upgrade requires increaing minimum SDK to 19 dropping 9 users
     implementation 'com.google.firebase:firebase-iid:21.1.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'  //  Ditto...
     implementation 'androidx.work:work-runtime:2.7.1'
