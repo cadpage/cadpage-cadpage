@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03152021</string>
+  <string name="release_date">03172021</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-06\n
+    Fixed crash running under Android 12.\n
+    \n
+    Location Fixes:\n
+    Suffolk County, NY\n
+    \n
     v2.2.10-05\n
     Updated to be fully compatible with Android 12.\n
     \n
@@ -58,16 +64,6 @@
     Butler County, OH\n
     Carter County, OK\n
     Brazos County, TX\n
-    Mercer County, WV\n
-    \n
-    v2.2.09-05\n
-    New Locations:\n
-    Garland County, AR (alt)\n
-    Ripley County, IN\n
-    \n
-    Location Fixes:\n
-    Berrien County, MI\n
-    Summit County, OH\n
-    Hidalgo County, TX
+    Mercer County, WV
   </string>
 </resources>

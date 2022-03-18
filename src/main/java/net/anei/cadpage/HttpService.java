@@ -198,9 +198,7 @@ public class HttpService extends Service {
   @Override
   public void onCreate() {
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_http_request));
-    }
+    SmsPopupUtils.startForeground(this,1, ManageNotification.getMiscNotification(this, R.string.notify_http_request));
 
     super.onCreate();
     if (!CadPageApplication.initialize(this)) return;
@@ -218,9 +216,7 @@ public class HttpService extends Service {
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      startForeground(1, ManageNotification.getMiscNotification(this, R.string.notify_http_request));
-    }
+    SmsPopupUtils.startForeground(this,1, ManageNotification.getMiscNotification(this, R.string.notify_http_request));
 
     if (flags != 0) holdPowerLock(this);
     super.onStartCommand(intent, flags, startId);
@@ -283,11 +279,7 @@ public class HttpService extends Service {
       reqQueue.add(request);
       if (startService) {
         Intent intent = new Intent(context, HttpService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-          context.startForegroundService(intent);
-        } else {
-          context.startService(intent);
-        }
+        SmsPopupUtils.startService(context, intent);
       }
     }
   }
