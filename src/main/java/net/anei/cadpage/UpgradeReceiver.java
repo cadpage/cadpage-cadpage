@@ -102,7 +102,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
     // An upgrade to SDK level 31 requires that battery optimization be disabled for Cadpage
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
-      return !pm.isIgnoringBatteryOptimizations(context.getPackageName());
+      if (!pm.isIgnoringBatteryOptimizations(context.getPackageName())) return true;
     }
 
 
@@ -122,7 +122,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
     // the app has been upgraded, check for the missing permission situation, and if detected,
     // launch this activity to fix things.  Once fixed, we shut down and no one is any wiser
 
-    if (ManagePreferences.enableMsgType().contains("M") &&
+    if (ManagePreferences.enableMsgType().contains("M") && BuildConfig.MSG_ALLOWED &&
             !PermissionManager.isGranted(context, PermissionManager.READ_SMS)) return true;
 
     // Something else to check.  If user has upgraded to a message restricted version of
