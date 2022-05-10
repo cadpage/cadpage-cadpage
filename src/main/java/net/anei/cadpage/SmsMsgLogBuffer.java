@@ -48,12 +48,19 @@ public class SmsMsgLogBuffer {
    */
   public boolean checkDuplicateNotice(SmsMmsMessage msg) {
     String contentLoc = msg.getContentLoc();
-    if (contentLoc != null) {
+    String msgId = msg.getMmsMsgId();
+    if (contentLoc != null || msgId != null) {
       for (SmsMmsMessage msg2 : msgQueue) {
-        if (contentLoc.equals(msg2.getContentLoc())) return true;
+        if (match(contentLoc, msg2.getContentLoc()) && match(msgId, msg2.getMmsMsgId())) return true;
       }
     }
     return false;
+  }
+
+  private boolean match(String s1, String s2) {
+    if (s1 == null && s2 == null) return true;
+    if (s1 == null || s2 == null) return false;
+    return s1.equals(s2);
   }
 
   /**
