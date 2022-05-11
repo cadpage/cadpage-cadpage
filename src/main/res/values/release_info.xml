@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05042022</string>
+  <string name="release_date">05112022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-16\n
+    Fixed problem sporadically dropping MMS alerts\n
+    \n
+    New Locations:\n
+    Polk County, GA\n
+    \n
+    Location Fixes:\n
+    Gooding County, ID\n
+    Twin Falls County, ID\n
+    Johnson County, KS\n
+    Garrett County, MD\n
+    Scott County, MO\n
+    Rockland County, NY\n
+    Greenville County, SC\n
+    \n
     v2.2.10-15\n
     New Locations:\n
     Tippecanoe County, IN\n
@@ -36,15 +51,6 @@
     v2.2.10-13\n
     Location Fixes:\n
     Tazwell County, IL\n
-    MICOM, NJ\n
-    \n
-    v2.2.10-12\n
-    Fixed crash process alerts for Queen Anne\'s County, MD\n
-    \n
-    v2.2.10-11\n
-    Location Fixes:\n
-    Fresno County, CA\n
-    Queen Annes County, MD\n
-    Haywood County, NC
+    MICOM, NJ
   </string>
 </resources>
