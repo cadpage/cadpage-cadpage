@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05112022</string>
+  <string name="release_date">05132022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-17\n
+    Location Fixes:\n
+    Howard County, MD\n
+    \n
     v2.2.10-16\n
     Fixed problem sporadically dropping MMS alerts\n
     \n
@@ -46,11 +50,6 @@
     Madison County, ID\n
     Queen Annes County, MD\n
     Woods County, OK\n
-    Tioga County, PA\n
-    \n
-    v2.2.10-13\n
-    Location Fixes:\n
-    Tazwell County, IL\n
-    MICOM, NJ
+    Tioga County, PA
   </string>
 </resources>
