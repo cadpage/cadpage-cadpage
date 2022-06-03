@@ -3,6 +3,8 @@ package net.anei.cadpage.billing;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.billingclient.api.AcknowledgePurchaseParams;
@@ -10,16 +12,18 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryPurchasesParams;
 
 import net.anei.cadpage.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -66,7 +70,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
     mBillingClient.startConnection(new BillingClientStateListener() {
       @SuppressLint("SwitchIntDef")
       @Override
-      public void onBillingSetupFinished(BillingResult billingResponseCode) {
+      public void onBillingSetupFinished(@NonNull BillingResult billingResponseCode) {
         Log.v("Google billing connection complete. Response code: " + billingResponseCode.getDebugMessage());
 
         switch (billingResponseCode.getResponseCode()) {
@@ -95,50 +99,51 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
   void doRestoreTransactions(Context context) {
     Log.v("Google Restore Billing Transactions");
     DonationCalculator calc = new DonationCalculator(1);
-    collectResults(calc, BillingClient.SkuType.SUBS);
-    collectResults(calc, BillingClient.SkuType.INAPP);
+    collectResults(calc, BillingClient.ProductType.SUBS);
+    collectResults(calc, BillingClient.ProductType.INAPP);
     calc.save();
   }
 
   private void collectResults(DonationCalculator calc, String skuType) {
-    Purchase.PurchasesResult result = mBillingClient.queryPurchases(skuType);
-    if (result.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-      List<Purchase> list = result.getPurchasesList();
-      if (list != null) {
+    QueryPurchasesParams parms = QueryPurchasesParams.newBuilder().setProductType(skuType).build();
+    mBillingClient.queryPurchasesAsync(parms, (result, list) -> {
+      if (result.getResponseCode() == BillingClient.BillingResponseCode.OK) {
         for (Purchase purchase : list) {
           registerPurchaseState(purchase, calc);
         }
+      } else {
+        Log.e("Error retrieving " + skuType + " purchases:" + result.getDebugMessage());
       }
-    } else {
-      Log.e("Error retrieving " + skuType + " purchases:" + result.getResponseCode());
-    }
+
+    });
   }
 
   @Override
   void doStartPurchase(BillingActivity activity) {
 
-    List<String> skuList = new ArrayList<> ();
-    skuList.add("cadpage_sub");
-    SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder()
-        .setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
-    mBillingClient.querySkuDetailsAsync(params.build(),
-        (billingResult, skuDetailsList) -> {
+    QueryProductDetailsParams.Product product = QueryProductDetailsParams.Product.newBuilder().setProductType(BillingClient.ProductType.SUBS).setProductId("cadpage_sub").build();
+    QueryProductDetailsParams queryProductDetailParms = QueryProductDetailsParams.newBuilder().setProductList(Collections.singletonList(product)).build();
+    mBillingClient.queryProductDetailsAsync(queryProductDetailParms, (billingResult, list) -> {
+      if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+        if (!list.isEmpty()) {
+          ProductDetails productDetails = list.get(0);
+          BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails).build();
+          BillingFlowParams flowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(Collections.singletonList(productDetailsParams)).build();
+          billingResult = mBillingClient.launchBillingFlow(activity, flowParams);
           if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
-            Log.e("Error retrieving SKU details: " + billingResult.getDebugMessage());
-          } else if (skuDetailsList == null || skuDetailsList.size() == 0) {
-            Log.e("No SKU details found");
-          } else {
-            mBillingClient.launchBillingFlow(activity,
-                BillingFlowParams.newBuilder()
-                    .setSkuDetails(skuDetailsList.get(0))
-                    .build());
+            Log.e("launchBillingFlow error result:" + billingResult.getDebugMessage());
           }
-        });
-
+        } else {
+          Log.e("queryProductDetailsAsync return no products");
+        }
+      }
+      else Log.e("queryProductDetailsAsync failure result:" + billingResult.getDebugMessage());
+    });
   }
 
   @Override
-  public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
+
+  public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
 
     if (Log.DEBUG) Log.v("Purchase result:" + billingResult.getDebugMessage());
     if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
@@ -181,7 +186,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
     }
 
     // Get the purchase Sku code and confirm that it starts with Cadpage
-    for (String itemId : purchase.getSkus()) {
+    for (String itemId : purchase.getProducts()) {
       if (!itemId.startsWith("cadpage_")) continue;
 
       // Subscriptions start with sub.  Purchase date will be the actual
