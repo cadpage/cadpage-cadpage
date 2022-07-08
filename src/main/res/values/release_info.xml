@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05232022</string>
+  <string name="release_date">06292022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-20\n
+    New Locations:\n
+    Howard County, TX\n
+    Rappahannock County, VA\n
+    \n
+    Location Fixes:\n
+    Etowah County, AL\n
+    Chugiak, AK\n
+    Dalas County, AR\n
+    Teller County, CO\n
+    Pike County, GA\n
+    Bingham County, ID\n
+    Delaware County, IN\n
+    Howard County, MD\n
+    Washtenaw County, MI\n
+    Grafton County, NH\n
+    Wylie, TX\n
+    \n
+    v2.2.10-19\n
+    New Locations:\n
+    Grand County, CO (alt)\n
+    Monroe County, GA\n
+    Neshoba County, MS\n
+    Middlesex County, NJ (alt)\n
+    Stark County, OH (alt)\n
+    Dillon County, SC\n
+    Union County, TN (alt)\n
+    Jefferson County, TX\n
+    \n
+    Location Fixes:\n
+    Sacramento County, CA\n
+    Clay County, MO\n
+    Camden County, NJ\n
+    Morrow County, OH\n
+    Warren County, TN\n
+    Buckingham County, VA\n
+    Goochland County, VA\
+    \n
     v2.2.10-18\n
     New Locations:\n
     Clay County, MO (alt)\n
@@ -34,35 +72,6 @@
     Garrett County, MD\n
     Scott County, MO\n
     Rockland County, NY\n
-    Greenville County, SC\n
-    \n
-    v2.2.10-15\n
-    New Locations:\n
-    Tippecanoe County, IN\n
-    Rockland County, NY\n
-    Pleasants County, WV\n
-    \n
-    Location Fixes:\n
-    Queen Annes County, MD\n
-    Missoula County, MT\n
-    MICOM, NJ\n
-    Cambria County, PA\n
-    Tioga County, PA\n
-    Bradly County, TN\n
-    Rusk County, TX\n
-    \n
-    v2.2.10-14\n
-    Fixed the spurious warnings that Cadpage settings need to be changed\n
-    \n
-    New Locations:\n
-    Crisp County, GA\n
-    \n
-    Location Fixes:\n
-    Monterey County, CA\n
-    Bethel, CT\n
-    Madison County, ID\n
-    Queen Annes County, MD\n
-    Woods County, OK\n
-    Tioga County, PA
+    Greenville County, SC
   </string>
 </resources>
