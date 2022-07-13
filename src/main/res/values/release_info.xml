@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06292022</string>
+  <string name="release_date">07132022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-21\n
+    New Location:\n
+    Madera County, CA\n
+    Morgan County, KY (alt)\n
+    Worth County, MO\n
+    Richmond County, NC\n
+    Reeves County, TX\n
+    Wise County, TX\n
+    \n
+    Location Fixes:\n
+    Manatee County, FL\n
+    Chatham County, GA\n
+    Kent County, MI\n
+    Washtenaw County, MI\n
+    Harrison County, MS\n
+    Bingham County, NJ\n
+    Bedford County, PA\n
+    Monroeville, PA\n
+    Tarrant County, TX\n
+    Cowlitz County, WA\n
+    \n
     v2.2.10-20\n
     New Locations:\n
     Howard County, TX\n
@@ -58,20 +79,5 @@
     v2.2.10-17\n
     Location Fixes:\n
     Howard County, MD\n
-    \n
-    v2.2.10-16\n
-    Fixed problem sporadically dropping MMS alerts\n
-    \n
-    New Locations:\n
-    Polk County, GA\n
-    \n
-    Location Fixes:\n
-    Gooding County, ID\n
-    Twin Falls County, ID\n
-    Johnson County, KS\n
-    Garrett County, MD\n
-    Scott County, MO\n
-    Rockland County, NY\n
-    Greenville County, SC
   </string>
 </resources>
