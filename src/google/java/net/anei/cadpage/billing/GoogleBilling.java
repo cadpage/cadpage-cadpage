@@ -126,6 +126,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
     mBillingClient.queryProductDetailsAsync(queryProductDetailParms, (billingResult, list) -> {
       if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
         if (!list.isEmpty()) {
+          Log.v("Launching Google billing flow");
           ProductDetails productDetails = list.get(0);
           BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails).build();
           BillingFlowParams flowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(Collections.singletonList(productDetailsParams)).build();
