@@ -18,6 +18,7 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
 import com.android.billingclient.api.QueryPurchasesParams;
 
+import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.Log;
 
 import java.text.DateFormat;
@@ -33,7 +34,9 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
 
   // private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwirww3C/PjZeoU9xe49Z24nhKpw2nml2bhyRtp2hZysWnxskv+DpqBDXPW4o8CLnHzIld4aq6tSZhecoHRtjmpMsh+eYr76VoITEa8F/7JN5+niOspLoM7n8CpFxCDtQ4ILKXLTm5GKsfbEl7D2um0WnwVIaw3sBWKh99YAeXKp7tB/Oj8h9p9L7BLFbI00jVXzmg+4920hJ2mA0EeGM1sSdJxyh0V0k7jLEZwe8mo0nL21Ss+NbA9IVf6j4nIf4A0NUbOrTtPEBIaN1HpsKUyqdpwUYX9RIRybKE5nW0SJ3VNBBa+0ld5Yg4c5uikUznJeEVk+9KE9gV8NcNJzNLQIDAQAB";
 
-  private BillingClient mBillingClient;
+  private BillingClient mBillingClient = null;
+
+  private ProductDetails cadpageSubProductDetails = null;
 
   @Override
   public void initialize(Context context) {
@@ -76,6 +79,20 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
         switch (billingResponseCode.getResponseCode()) {
           case BillingClient.BillingResponseCode.OK:
             setStatus(BillingStatus.OK);
+
+            QueryProductDetailsParams.Product product = QueryProductDetailsParams.Product.newBuilder().setProductType(BillingClient.ProductType.SUBS).setProductId("cadpage_sub").build();
+            QueryProductDetailsParams queryProductDetailParms = QueryProductDetailsParams.newBuilder().setProductList(Collections.singletonList(product)).build();
+            mBillingClient.queryProductDetailsAsync(queryProductDetailParms, (billingResult, list) -> {
+              if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                if (!list.isEmpty()) {
+                  cadpageSubProductDetails = list.get(0);
+                  Log.v("Retrived subscription product:" + cadpageSubProductDetails.toString());
+                } else {
+                  Log.e("queryProductDetailsAsync return no products");
+                }
+              }
+              else Log.e("queryProductDetailsAsync failure result:" + billingResult.getDebugMessage());
+            });
             return;
 
           case BillingClient.BillingResponseCode.SERVICE_DISCONNECTED:
@@ -98,13 +115,17 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
   @Override
   void doRestoreTransactions(Context context) {
     Log.v("Google Restore Billing Transactions");
-    DonationCalculator calc = new DonationCalculator(1);
-    collectResults(calc, BillingClient.ProductType.SUBS);
-    collectResults(calc, BillingClient.ProductType.INAPP);
-    calc.save();
+    final DonationCalculator calc = new DonationCalculator(1);
+    collectResults(calc, BillingClient.ProductType.SUBS, () -> {
+      collectResults(calc, BillingClient.ProductType.INAPP, () -> {
+        CadPageApplication.runOnMainThread(() -> {
+          calc.save();
+        });
+      });
+    });
   }
 
-  private void collectResults(DonationCalculator calc, String skuType) {
+  private void collectResults(DonationCalculator calc, String skuType, Runnable run) {
     QueryPurchasesParams parms = QueryPurchasesParams.newBuilder().setProductType(skuType).build();
     mBillingClient.queryPurchasesAsync(parms, (result, list) -> {
       if (result.getResponseCode() == BillingClient.BillingResponseCode.OK) {
@@ -114,32 +135,28 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
       } else {
         Log.e("Error retrieving " + skuType + " purchases:" + result.getDebugMessage());
       }
-
+      run.run();
     });
   }
 
   @Override
   void doStartPurchase(BillingActivity activity) {
-
-    QueryProductDetailsParams.Product product = QueryProductDetailsParams.Product.newBuilder().setProductType(BillingClient.ProductType.SUBS).setProductId("cadpage_sub").build();
-    QueryProductDetailsParams queryProductDetailParms = QueryProductDetailsParams.newBuilder().setProductList(Collections.singletonList(product)).build();
-    mBillingClient.queryProductDetailsAsync(queryProductDetailParms, (billingResult, list) -> {
-      if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-        if (!list.isEmpty()) {
-          Log.v("Launching Google billing flow");
-          ProductDetails productDetails = list.get(0);
-          BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails).build();
-          BillingFlowParams flowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(Collections.singletonList(productDetailsParams)).build();
-          billingResult = mBillingClient.launchBillingFlow(activity, flowParams);
-          if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
-            Log.e("launchBillingFlow error result:" + billingResult.getDebugMessage());
-          }
-        } else {
-          Log.e("queryProductDetailsAsync return no products");
-        }
-      }
-      else Log.e("queryProductDetailsAsync failure result:" + billingResult.getDebugMessage());
-    });
+    Log.v("Launching Google billing flow");
+    if (cadpageSubProductDetails == null) {
+      Log.e("No subscription product defined");
+      return;
+    }
+    List<ProductDetails.SubscriptionOfferDetails> list = cadpageSubProductDetails.getSubscriptionOfferDetails();
+    if (list == null || list.isEmpty()) {
+      Log.e("No subscription offers are available");
+      return;
+    }
+    BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(cadpageSubProductDetails).setOfferToken(list.get(0).getOfferToken()).build();
+    BillingFlowParams flowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(Collections.singletonList(productDetailsParams)).build();
+    BillingResult billingResult = mBillingClient.launchBillingFlow(activity, flowParams);
+    if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+      Log.e("launchBillingFlow error result:" + billingResult.getDebugMessage());
+    }
   }
 
   @Override
