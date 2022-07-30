@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.ForegroundServiceStartNotAllowedException;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -276,7 +275,6 @@ public class SmsPopupUtils {
     }
   }
 
-  @SuppressWarnings("ConstantConditions")
   private static boolean isSupportAppAvailable() {
     return !(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED);
   }
@@ -326,11 +324,34 @@ public class SmsPopupUtils {
    */
   public static void setExactTime(Context context, long time, PendingIntent pendingIntent) {
     AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      myAM.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+    if (useExactAlarm(context)) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {   // Needed to keep lint happy :(
+        myAM.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+      }
     } else {
       myAM.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     }
+  }
+
+  /**
+   * @return true if we should use the exact time alarm instead of the normal status alarm
+   * @param context Current context
+   */
+  private static boolean useExactAlarm(Context context) {
+
+    // The exact time API is not available prior to KitKat
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return false;
+
+    // For anything up to Android 12 we are good to go
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return true;
+
+    // Starting with Android 12 we either need SCHEDULE_EXACT_ALARM permission or to have
+    // suppressed battery optimization.  Suppressing battery optimization is required for other
+    // reasons, and Google is about to start restricting SCHEDULE_EXACT_ALARM permission.  So
+    // we quit declaring it and will double check that the user really did turn off battery
+    // optimization
+    PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+    return pm.isIgnoringBatteryOptimizations(context.getPackageName());
   }
 
   private static boolean foregroundServiceLaunch = false;
