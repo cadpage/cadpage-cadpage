@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07212022</string>
+  <string name="release_date">08022022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-23\n
+    New Locations:\n
+    New Castle County, DE (alt)\n
+    Ida County, IA\n
+    Dearborn County, IN\n
+    Belknap County, NH\n
+    Lewis County, NY (alt)\n
+    Lincoln County, OR (alt)\n
+    \n
+    Location Fixes:\n
+    Pearl River County, MS\n
+    Anderson County, SC\n
+    Campbell County, TN\n
+    \n
     v2.2.10-22\n
     New Locations:\n
     Rockland County, NY (alt)\n
@@ -74,19 +88,6 @@
     Morrow County, OH\n
     Warren County, TN\n
     Buckingham County, VA\n
-    Goochland County, VA\
-    \n
-    v2.2.10-18\n
-    New Locations:\n
-    Clay County, MO (alt)\n
-    Mercer County, MO\n
-    \n
-    Location Fixes:\n
-    San Juan County, CO\n
-    Livingston Parish, LA\n
-    Washington County, NC\n
-    Northamption County, PA\n
-    Greenville County, SC\n
-    Buckingham County, VA
+    Goochland County, VA
   </string>
 </resources>
