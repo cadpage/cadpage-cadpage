@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-24 (beta)\n
+    Updated to use latest version of Google billing library and remove a permission that will be
+    restricted in November.\n
+    \n
     v2.2.10-23\n
     New Locations:\n
     New Castle County, DE (alt)\n
@@ -68,26 +72,6 @@
     Howard County, MD\n
     Washtenaw County, MI\n
     Grafton County, NH\n
-    Wylie, TX\n
-    \n
-    v2.2.10-19\n
-    New Locations:\n
-    Grand County, CO (alt)\n
-    Monroe County, GA\n
-    Neshoba County, MS\n
-    Middlesex County, NJ (alt)\n
-    Stark County, OH (alt)\n
-    Dillon County, SC\n
-    Union County, TN (alt)\n
-    Jefferson County, TX\n
-    \n
-    Location Fixes:\n
-    Sacramento County, CA\n
-    Clay County, MO\n
-    Camden County, NJ\n
-    Morrow County, OH\n
-    Warren County, TN\n
-    Buckingham County, VA\n
-    Goochland County, VA
+    Wylie, TX
   </string>
 </resources>
