@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08022022</string>
+  <string name="release_date">08202022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-25\n
+    Dropped support for the 5 users running Android versions older than 4.4.
+    Sorry folks, but it has been out for 9 years, time to get a new phone.\n
+    \n
+    New Locations:\n
+    Rio Blanco County, CO\n
+    \n
+    Location Fixes:\n
+    Winston County, AL\n
+    Pope County, AR\n
+    Calaveras County, CA\n
+    Lake County, FL\n
+    Iorn County, MO\n
+    Mercer County, NJ\n
+    Columbia County, NY\n
+    Anson County, NC\n
+    Bradford County, PA\n
+    Richland County, SC\n
+    Dyer County, TN\n
+    Johnson County, TX\n
+    Frederick County, VA\n
+    \n
     v2.2.10-24 (beta)\n
     Updated to use latest version of Google billing library and remove a permission that will be
     restricted in November.\n
