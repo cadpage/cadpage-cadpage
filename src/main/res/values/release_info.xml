@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08202022</string>
+  <string name="release_date">08302022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-26\n
+    New Locations:\n
+    Reno, NV\n
+    Ellis County, TX (alt)\n
+    \n
+    Location Fixes:\n
+    Adams County, CO\n
+    Marshall County, KY\n
+    Montgomery County, NY\n
+    Benton County, OR\n
+    Chesterfield County, SC\n
+    Ozaukee County, WI\n
+    \n
     v2.2.10-25\n
     Dropped support for the 5 users running Android versions older than 4.4.
     Sorry folks, but it has been out for 9 years, time to get a new phone.\n
@@ -55,45 +68,6 @@
     Manatee County, FL\n
     St Tammany Parish, LA\n
     Pittsylvania County, VA\n
-    Kenosha County, WI\n
-    \n
-    v2.2.10-21\n
-    New Locations:\n
-    Madera County, CA\n
-    Morgan County, KY (alt)\n
-    Worth County, MO\n
-    Richmond County, NC\n
-    Reeves County, TX\n
-    Wise County, TX\n
-    \n
-    Location Fixes:\n
-    Manatee County, FL\n
-    Chatham County, GA\n
-    Kent County, MI\n
-    Washtenaw County, MI\n
-    Harrison County, MS\n
-    Bingham County, NJ\n
-    Bedford County, PA\n
-    Monroeville, PA\n
-    Tarrant County, TX\n
-    Cowlitz County, WA\n
-    \n
-    v2.2.10-20\n
-    New Locations:\n
-    Howard County, TX\n
-    Rappahannock County, VA\n
-    \n
-    Location Fixes:\n
-    Etowah County, AL\n
-    Chugiak, AK\n
-    Dalas County, AR\n
-    Teller County, CO\n
-    Pike County, GA\n
-    Bingham County, ID\n
-    Delaware County, IN\n
-    Howard County, MD\n
-    Washtenaw County, MI\n
-    Grafton County, NH\n
-    Wylie, TX
+    Kenosha County, WI
   </string>
 </resources>
