@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08302022</string>
+  <string name="release_date">09122022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-27\n
+    New Locations:\n
+    Gray County, TX\n
+    \n
+    Location Fixes:\n
+    Adams County, CO\n
+    Madison County, ID\n
+    Woodbury County, IA\n
+    Suffolk County, NY\n
+    Mecklenburg County, NC\n
+    Warren County, OH\n
+    Tioga County, PA\n
+    Greenville County, SC\n
+    Fauquier County, VA\n
+    \n
     v2.2.10-26\n
     New Locations:\n
     Reno, NV\n
@@ -55,19 +70,6 @@
     Location Fixes:\n
     Pearl River County, MS\n
     Anderson County, SC\n
-    Campbell County, TN\n
-    \n
-    v2.2.10-22\n
-    New Locations:\n
-    Rockland County, NY (alt)\n
-    Chambers County, TX\n
-    \n
-    Location Fixes:\n
-    Etowah County, AL\n
-    Randolph County, AL\n
-    Manatee County, FL\n
-    St Tammany Parish, LA\n
-    Pittsylvania County, VA\n
-    Kenosha County, WI
+    Campbell County, TN
   </string>
 </resources>
