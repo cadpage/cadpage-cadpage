@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09192022</string>
+  <string name="release_date">09252022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-29\n
+    Location Fixes:\n
+    Madison County, ID\n
+    Burlington County, NJ\n
+    Northampton County, NC\n
+    Pasquotank County, NC\n
+    \n
     v2.2.10-28\n
     New Locations:\n
     Dale County, AL\n
@@ -64,10 +71,6 @@
     Richland County, SC\n
     Dyer County, TN\n
     Johnson County, TX\n
-    Frederick County, VA\n
-    \n
-    v2.2.10-24 (beta)\n
-    Updated to use latest version of Google billing library and remove a permission that will be
-    restricted in November.
+    Frederick County, VA
   </string>
 </resources>
