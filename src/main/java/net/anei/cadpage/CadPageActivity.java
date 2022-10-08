@@ -257,6 +257,13 @@ public class CadPageActivity extends AppCompatActivity {
    * @return - true if we found something the user has to fix
    */
   private boolean userSetup(boolean init) {
+
+    // If we are running Android 12 or better, user has to disable battery optimization
+    if (BatteryOptimization12Event.instance().launch(CadPageActivity.this)) return true;
+
+    // Otherwise batteriy optimization is strongly advised, but not required
+    if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return true;
+
     if (SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0) return true;
 
     // If user upgraded to the release that implements improved email account security, and
@@ -273,12 +280,6 @@ public class CadPageActivity extends AppCompatActivity {
 
     // Check call popup window configuration
     if (CheckPopupEvent.instance().launch(CadPageActivity.this)) return true;
-
-    // If we are running Android 12 or better, user has to disable battery optimization
-    if (BatteryOptimization12Event.instance().launch(CadPageActivity.this)) return true;
-
-    // Otherwise batteriy optimization is strongly advised, but not required
-    if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return true;
 
     // Make sure location tracking permission are enabled
     if (LocationTrackingEvent.instance().launch(CadPageActivity.this)) return true;
