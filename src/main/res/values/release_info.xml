@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10132022</string>
+  <string name="release_date">10202022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-32\n
+    New Locations:\n
+    Grady County, OK\n
+    \n
+    Location Fixes:\n
+    Bay County, MI\n
+    Northampton County, NC\n
+    Robeson County, NC\n
+    Frederick County, VA\n
+    Warren County, VA\n
+    \n
     v2.2.10-31\n
     New Locations:\n
     Talladega County, AL\n
@@ -55,21 +66,6 @@
     Location Fixes:\n
     Pulaski County, AR\n
     Cattaraugus County, NY\n
-    La Porte, TX\n
-    \n
-    v2.2.10-27\n
-    New Locations:\n
-    Gray County, TX\n
-    \n
-    Location Fixes:\n
-    Adams County, CO\n
-    Madison County, ID\n
-    Woodbury County, IA\n
-    Suffolk County, NY\n
-    Mecklenburg County, NC\n
-    Warren County, OH\n
-    Tioga County, PA\n
-    Greenville County, SC\n
-    Fauquier County, VA
+    La Porte, TX
   </string>
 </resources>
