@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10252022</string>
+  <string name="release_date">10272022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-35 (beta)\n
+    Location Fixes:\n
+    Wilson County, NC\n
+    \n
     v2.2.10-34\n
     New Locations:\n
     Lawrence County, AL\n
@@ -55,21 +59,6 @@
     \n
     General Fixes:\n
     Fixed problem with Startup help subsystem now properly prompting users for new Cadpage
-    installations under Android 12.\n
-    \n
-    v2.2.10-30\n
-    New Locations:\n
-    Okaloosa County, FL (alt)\n
-    Scott County, IN\n
-    Ness County, KS\n
-    Philips County, KS\n
-    Forest County, MS\n
-    Wichita County, TX\n
-    \n
-    Location Fixes:\n
-    Juneau, AK\n
-    Ogemaw County, MI\n
-    St Louis County, MO\n
-    Tillamook County, OR
+    installations under Android 12.
   </string>
 </resources>
