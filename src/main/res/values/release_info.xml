@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10272022</string>
+  <string name="release_date">11012022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-36\n
+    New Locations:\n
+    Potter County, PA\n
+    \n
+    Location Fixes:\n
+    Rio Grande County, CO\n
+    Henry County, IN\n
+    Billings County, ND\n
+    Divide County, ND\n
+    Kidder County, ND\n
+    Dallas County, TX\n
+    \n
     v2.2.10-35 (beta)\n
     Location Fixes:\n
     Wilson County, NC\n
@@ -40,25 +52,6 @@
     Northampton County, NC\n
     Robeson County, NC\n
     Frederick County, VA\n
-    Warren County, VA\n
-    \n
-    v2.2.10-31\n
-    New Locations:\n
-    Talladega County, AL\n
-    Ohio County, KY\n
-    Saginaw County, MI\n
-    Hamblen County, TN\n
-    \n
-    Location Fixes:\n
-    San Bernardino County, CA\n
-    Crittenden County, KY\n
-    Hennepin County, MN\n
-    Lumberton County, NC\n
-    Frederick County, VA\n
-    Giles County, VA\n
-    \n
-    General Fixes:\n
-    Fixed problem with Startup help subsystem now properly prompting users for new Cadpage
-    installations under Android 12.
+    Warren County, VA
   </string>
 </resources>
