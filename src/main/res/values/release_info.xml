@@ -4,6 +4,11 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-37 (beta)\n
+    Location Fixes:\n
+    Weld County, CO\n
+    Cambria County, PA\n
+    \n
     v2.2.10-36\n
     New Locations:\n
     Potter County, PA\n
@@ -41,17 +46,6 @@
     Chaffee County, CO\n
     Chatham County, GA\n
     UT Health East Texas, TX\n
-    Jefferson County, WA\n
-    \n
-    v2.2.10-32\n
-    New Locations:\n
-    Grady County, OK\n
-    \n
-    Location Fixes:\n
-    Bay County, MI\n
-    Northampton County, NC\n
-    Robeson County, NC\n
-    Frederick County, VA\n
-    Warren County, VA
+    Jefferson County, WA
   </string>
 </resources>
