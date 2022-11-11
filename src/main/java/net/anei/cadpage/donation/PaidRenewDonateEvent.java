@@ -19,6 +19,7 @@ public class PaidRenewDonateEvent extends DonateScreenEvent {
           AndroidDonateEvent.instance(),
           DonateAndroidSuppressedEvent.instance(),
           PaypalDonateEvent.instance(),
+          CancelSubscriptionEvent.instance(),
           RequestRefundDonateEvent.instance(),
           MagicWordEvent.instance(),
           DonateResetMarketEvent.instance());

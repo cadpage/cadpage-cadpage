@@ -187,6 +187,8 @@
     Clicking the button below will send us an email requesting your purchase refund.
   </string>
 
+  <string name="donate_cancel_subscription_title">"Please cancel my Cadpage subscription"</string>
+
   <string name="donate_inactive_sponsor_title">"I am registered with %s"</string>
   <string name="donate_inactive_sponsor_text">
     You have not received an alert from %s for more than 60 days, leading us to believe
