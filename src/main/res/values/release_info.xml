@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11152022</string>
+  <string name="release_date">11162022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-40\n
+    Location Fixes:\n
+    Clallam County, WA\n
+    \n
     v2.2.10-39\n
     New Locations:\n
     Baxter County, AR\n
@@ -45,10 +49,6 @@
     Billings County, ND\n
     Divide County, ND\n
     Kidder County, ND\n
-    Dallas County, TX\n
-    \n
-    v2.2.10-35 (beta)\n
-    Location Fixes:\n
-    Wilson County, NC
+    Dallas County, TX
   </string>
 </resources>
