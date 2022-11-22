@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-41\n
+    Location Fixes:\n
+    Litchfield County, CT (A)\n
+    \n
     v2.2.10-40\n
     Location Fixes:\n
     Clallam County, WA\n
@@ -37,18 +41,6 @@
     v2.2.10-37 (beta)\n
     Location Fixes:\n
     Weld County, CO\n
-    Cambria County, PA\n
-    \n
-    v2.2.10-36\n
-    New Locations:\n
-    Potter County, PA\n
-    \n
-    Location Fixes:\n
-    Rio Grande County, CO\n
-    Henry County, IN\n
-    Billings County, ND\n
-    Divide County, ND\n
-    Kidder County, ND\n
-    Dallas County, TX
+    Cambria County, PA
   </string>
 </resources>
