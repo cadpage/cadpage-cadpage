@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11082022</string>
+  <string name="release_date">11162022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-41\n
+    Location Fixes:\n
+    Litchfield County, CT (A)\n
+    \n
+    v2.2.10-40\n
+    Location Fixes:\n
+    Clallam County, WA\n
+    \n
+    v2.2.10-39\n
+    New Locations:\n
+    Baxter County, AR\n
+    Dooly County, GA (alt)\n
+    Douglas County, MO\n
+    Scotland County, NC\n
+    Brazoria County, TX (alt)\n
+    Wythe County, VA (alt)\n
+    \n
+    Location Fixes:\n
+    Weld County, CO\n
+    Logan County, OH\n
+    Royse County, TX\n
+    \n
     v2.2.10-38\n
     New Locations:\n
     Daviess County, MO\n
@@ -19,35 +41,6 @@
     v2.2.10-37 (beta)\n
     Location Fixes:\n
     Weld County, CO\n
-    Cambria County, PA\n
-    \n
-    v2.2.10-36\n
-    New Locations:\n
-    Potter County, PA\n
-    \n
-    Location Fixes:\n
-    Rio Grande County, CO\n
-    Henry County, IN\n
-    Billings County, ND\n
-    Divide County, ND\n
-    Kidder County, ND\n
-    Dallas County, TX\n
-    \n
-    v2.2.10-35 (beta)\n
-    Location Fixes:\n
-    Wilson County, NC\n
-    \n
-    v2.2.10-34\n
-    New Locations:\n
-    Lawrence County, AL\n
-    La Plata County, CO (alt)\n
-    Baraga County, MI\n
-    Ontonagon County, MI\n
-    Warren County, MO\n
-    \n
-    Location Fixes:\n
-    Cook County, IL\n
-    Transylvania County, NC\n
-    UT Health East Texas, TX
+    Cambria County, PA
   </string>
 </resources>
