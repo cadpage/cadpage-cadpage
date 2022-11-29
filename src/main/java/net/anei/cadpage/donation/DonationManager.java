@@ -1,8 +1,10 @@
 package net.anei.cadpage.donation;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -46,6 +48,10 @@ public class DonationManager {
       return status;
     }
   }
+
+  public interface DonationStatusListener {
+    public void DonationStatusChanged(DonationStatus oldStatus, DonationStatus status);
+  }
   
   // Cached calculated values are only valid until this time
   private long validLimitTime = 0L;
@@ -83,6 +89,16 @@ public class DonationManager {
   // flag indicating we should warn user about
   // loosing subscription days if the renew their subscription now
   private boolean earlyRenewalWarning;
+
+  private List<DonationStatusListener> donationStatusListeners = new ArrayList<>();
+
+  public void registerDonationStatusListener(DonationStatusListener listener) {
+    donationStatusListeners.add(listener);
+  }
+
+  public void unregisterDonationStatusListener(DonationStatusListener listener) {
+    donationStatusListeners.remove(listener);
+  }
 
   /**
    * @param context current context
@@ -147,6 +163,9 @@ public class DonationManager {
     // If the current day hasn't changed, we can use the cached values
     long curTime = System.currentTimeMillis();
     if (curTime < validLimitTime) return;
+
+    // Save old status in case we have to report a status change
+    DonationStatus oldStatus = status;
     
     // Save the previous hold status so we can tell if it has been cleared
     boolean oldAlert = (status != null && status.getStatus() == Status.BLOCK);
@@ -362,6 +381,13 @@ public class DonationManager {
       Date extraDate = ManagePreferences.authExtraDate();
       if (extraDate != null && new JulianDate(extraDate).equals(curJDate)) enabled = true;
     }
+
+    // Report any status changes to any registered listeners
+    if (status != oldStatus) {
+      for (DonationStatusListener listener : donationStatusListeners) {
+        listener.DonationStatusChanged(oldStatus, status);
+      }
+    }
   }
 
   /**
@@ -400,6 +426,9 @@ public class DonationManager {
    */
   public void reset() {
     validLimitTime = 0;
+
+    // If we have any status listeners, recalculate the donation status now
+    if (!donationStatusListeners.isEmpty()) calculate();
   }
   
   /**

@@ -185,6 +185,12 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
   public void onRestart(DonateActivity activity) {}
 
   /**
+   * Called to clean up things when activity is destroyed
+   * @param activity current activity
+   */
+  public void onDestroy(DonateActivity activity) {}
+
+  /**
    * Check to see if we need to display the check popup config warning
    * and display it if needed
    * @param context current context

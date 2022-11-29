@@ -2,6 +2,7 @@ package net.anei.cadpage.donation;
 
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.billing.BillingManager;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -49,11 +50,31 @@ public class PaidRenewDonateEvent extends DonateScreenEvent {
       return null;
     }
   }
-  
+
+  private DonationManager.DonationStatusListener listener = null;
+
+  @Override
+  public void onRestart(DonateActivity activity) {
+    BillingManager.instance().restoreTransactions(activity);
+    if (listener == null) {
+      listener = (oldStatus, status) -> {
+        if (!isEnabled()) closeEvents(activity);
+      };
+      DonationManager.instance().registerDonationStatusListener(listener);
+    }
+  }
+
+  @Override
+  public void onDestroy(DonateActivity activity) {
+    if (listener != null) {
+      DonationManager.instance().unregisterDonationStatusListener(listener);
+      listener = null;
+    }
+  }
+
   private static final PaidRenewDonateEvent instance = new PaidRenewDonateEvent();
   
   public static PaidRenewDonateEvent instance() {
     return instance;
   }
-
 }

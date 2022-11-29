@@ -89,6 +89,7 @@ public class DonateActivity extends BillingActivity {
 
   @Override
   protected void onDestroy() {
+    if (event != null) event.onDestroy(this);
     ManagePreferences.releasePermissionManager(permMgr);
     super.onDestroy();
   }
