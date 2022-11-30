@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11162022</string>
+  <string name="release_date">11292022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-42\n
+    New Locations:\n
+    Butler County, AL\n
+    Lowndes County, GA\n
+    Westchester County, NY (alt)\n
+    Waller County, TX\n
+    \n
+    Location Fixes:\n
+    El Paso County, CO\n
+    Van Buren County, MI\n
+    Maries County, MO\n
+    Somerset County, PA\n
+    Collin County, TX\n
+    Dallas County, TX\n
+    \n
     v2.2.10-41\n
     Location Fixes:\n
     Litchfield County, CT (A)\n
@@ -36,11 +51,6 @@
     Sacramento County, CA\n
     Litchfield County, CT\n
     Biloxi County, MS\n
-    Marion County, WV\n
-    \n
-    v2.2.10-37 (beta)\n
-    Location Fixes:\n
-    Weld County, CO\n
-    Cambria County, PA
+    Marion County, WV
   </string>
 </resources>
