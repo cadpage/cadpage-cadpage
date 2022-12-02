@@ -149,7 +149,7 @@ public class ManageNotification {
 
     if (audioAlert && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       if (! ManagePreferences.notifyCheckAbort() &&
-          ! PermissionManager.isGranted(context, PermissionManager.CADPAGE_READ_AUDIO) {
+          ! PermissionManager.isGranted(context, PermissionManager.CADPAGE_READ_AUDIO)) {
         Log.v("Checking Notification Security");
         ManagePreferences.setNotifyCheckAbort(true);
         ManageNotification.show(context, null, false, false);
