@@ -1922,7 +1922,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // false value requires READ_EXTERNAL_STORAGE permission
       // because it may need to read audio alert files on external storage
       if (value) return null;
-      if (checkRequestPermission(PermissionManager.READ_EXTERNAL_STORAGE, R.string.perm_user_sound_override)) return null;
+      if (checkRequestPermission(PermissionManager.CADPAGE_READ_AUDIO, R.string.perm_user_sound_override)) return null;
       return true;
     }
   }
@@ -1951,7 +1951,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // true value requires READ_EXTERNAL_STORAGE permission
       // because it may need to read audio alert files on external storage
       if (!value) return null;
-      if (checkRequestPermission(PermissionManager.READ_EXTERNAL_STORAGE, R.string.perm_notify_abort)) return null;
+      if (checkRequestPermission(PermissionManager.CADPAGE_READ_AUDIO, R.string.perm_notify_abort)) return null;
       return false;
     }
   }

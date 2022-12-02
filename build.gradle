@@ -19,7 +19,7 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
         versionCode project.versionCode
-        targetSdkVersion 31
+        targetSdkVersion 33
         minSdkVersion 19
         multiDexEnabled true
     }
@@ -98,7 +98,7 @@ android {
         }
     }
 
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

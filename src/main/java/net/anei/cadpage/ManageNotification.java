@@ -149,7 +149,7 @@ public class ManageNotification {
 
     if (audioAlert && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       if (! ManagePreferences.notifyCheckAbort() &&
-          ! PermissionManager.isGranted(context, PermissionManager.READ_EXTERNAL_STORAGE)) {
+          ! PermissionManager.isGranted(context, PermissionManager.CADPAGE_READ_AUDIO) {
         Log.v("Checking Notification Security");
         ManagePreferences.setNotifyCheckAbort(true);
         ManageNotification.show(context, null, false, false);
@@ -663,7 +663,7 @@ public class ManageNotification {
    */
   private static Uri getRingtoneUriFromPath(Context context, String path) {
     
-    if (!PermissionManager.isGranted(context, PermissionManager.READ_EXTERNAL_STORAGE)) return null;
+    if (!PermissionManager.isGranted(context, PermissionManager.CADPAGE_READ_AUDIO)) return null;
     
     try {
       Uri ringtonesUri = MediaStore.Audio.Media.getContentUriForPath(path);
