@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11292022</string>
+  <string name="release_date">12062022</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-43\n
+    New Locations:
+    McMinn County, TN\n
+    Eastland County, TX\n
+    \n
+    Location Fixes:\n
+    Harrison County, IN\n
+    Stanly County, NC\n
+    Rockland County, NY\n
+    Union County, OH\n
+    \n
     v2.2.10-42\n
     New Locations:\n
     Butler County, AL\n
@@ -39,18 +50,6 @@
     Location Fixes:\n
     Weld County, CO\n
     Logan County, OH\n
-    Royse County, TX\n
-    \n
-    v2.2.10-38\n
-    New Locations:\n
-    Daviess County, MO\n
-    Golden Valley County, ND\n
-    Friendswood, TX\n
-    \n
-    Location Fixes:\n
-    Sacramento County, CA\n
-    Litchfield County, CT\n
-    Biloxi County, MS\n
-    Marion County, WV
+    Royse County, TX
   </string>
 </resources>
