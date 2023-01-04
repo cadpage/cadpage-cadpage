@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12202022</string>
+  <string name="release_date">01042023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-45\n
+    New Locations:\n
+    Custer County, CO\n
+    Cooper County, MO\n
+    \n
+    Location Fixes:\n
+    Queen Annes County, MD\n
+    \n
     v2.2.10-44\n
     New Locations:\n
     Tuscaloosa County, AL\n
@@ -54,10 +62,6 @@
     \n
     v2.2.10-41\n
     Location Fixes:\n
-    Litchfield County, CT (A)\n
-    \n
-    v2.2.10-40\n
-    Location Fixes:\n
-    Clallam County, WA
+    Litchfield County, CT
   </string>
 </resources>
