@@ -111,7 +111,7 @@
     Inga problem. Vår policy är att återbetala alla som vill ha tillbaka sina pengar inom 3 månader. Om du klickar på knappen nedan så kommer du att skicka oss ett email där du begär din återbetalning.
   </string>
 
-  <string name="donate_cancel_subscription_title">"Please cancel my Cadpage subscription"</string> <!-- Translate -->
+  <string name="donate_cancel_subscription_title">"Vänligen avsluta min prenumeration på Cadpage"</string>
 
   <string name="donate_inactive_sponsor_title">"Jag är registrerad hos %s"</string>
   <string name="donate_inactive_sponsor_text">
