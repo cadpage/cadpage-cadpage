@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-48\n
+    Location Fixes:\n
+    San Diego County, CA\n
+    \n
     v2.2.10-47\n
     New Locations:\n
     Choctaw County, AL\n
@@ -17,7 +21,7 @@
     \n
     Location Fixes:\n
     Baldwin County, AL\n
-    Lenawee County, MI\n
+    Lenawee County, MI\nRele
     Lawrence County, OH\n
     Dyer County, TN\n
     Tarrant County, TX\n
@@ -72,17 +76,6 @@
     Washington County, OH\n
     Allegheny County, PA\n
     Payne County, OK\n
-    Fairfield County, SC\n
-    \n
-    v2.2.10-43\n
-    New Locations:\n
-    McMinn County, TN\n
-    Eastland County, TX\n
-    \n
-    Location Fixes:\n
-    Harrison County, IN\n
-    Stanly County, NC\n
-    Rockland County, NY\n
-    Union County, OH
+    Fairfield County, SC
   </string>
 </resources>
