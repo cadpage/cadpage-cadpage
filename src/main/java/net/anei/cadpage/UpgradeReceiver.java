@@ -111,7 +111,8 @@ public class UpgradeReceiver extends BroadcastReceiver {
     // permission has not been granted.  We already checked for this condition
     // during notification initialization which would have set the notifyAbort()
     // setting.  We just need to check that.
-    if (ManagePreferences.notifyAbort()) return true;
+    if (ManagePreferences.notifyAbort() && ManagePreferences.notifyEnabled() &&
+        !PermissionManager.isGranted(context, PermissionManager.CADPAGE_READ_AUDIO)) return true;
 
     // Since we bumped the target SDK level to 27, reading MMS messages requires SMS_READ permission
     // which was not needed before.  New logic checks for this situation and corrects it when the

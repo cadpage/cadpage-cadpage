@@ -312,6 +312,7 @@ public class ManageNotification {
     // exception if we do not have data storage permission
     try {
       myNM.notify(NOTIFICATION_ALERT, n);
+      ManagePreferences.setNotifyAbort(false);
     } catch (SecurityException ex) {
       Log.e(ex);
       ManagePreferences.setNotifyAbort(true);
