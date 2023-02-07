@@ -4,6 +4,16 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-49\n
+    New Locations:\n
+    Pope County, AR (alt)\n
+    Alameda County, CA\n
+    \n
+    Location Fixes:\n
+    Baldwin County, AL\n
+    San Diegao County, CA\n
+    Clermont County, OH\n
+    \n
     v2.2.10-48\n
     Location Fixes:\n
     San Diego County, CA\n
@@ -54,28 +64,6 @@
     Cooper County, MO\n
     \n
     Location Fixes:\n
-    Queen Annes County, MD\n
-    \n
-    v2.2.10-44\n
-    New Locations:\n
-    Tuscaloosa County, AL\n
-    Aiken County, SC\n
-    Fentress County, TN\n
-    Caldwell County, TX\n
-    Houston County, TX (alt)\n
-    Douglas County, OR (alt)\n
-    Sturgeon County, AB\n
-    \n
-    Location Fixes:\n
-    San Bernardino County, CA\n
-    South Lake Tahoe, CA\n
-    Edina, MN\n
-    Elko County, NV\n
-    Portage County, OH\n
-    Union County, OH\n
-    Washington County, OH\n
-    Allegheny County, PA\n
-    Payne County, OK\n
-    Fairfield County, SC
+    Queen Annes County, MD
   </string>
 </resources>
