@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -84,7 +83,7 @@ public class CallHistoryFragment extends FragmentWithContextMenu {
         return true;
 
       case R.id.clearall_item:
-        new DeleteAllDialogFragment(getActivity()).show(getParentFragmentManager(), "delete-all");
+        new DeleteAllDialogFragment().show(getParentFragmentManager(), "delete-all");
         return true;
 
       case R.id.exit_item:
@@ -98,15 +97,10 @@ public class CallHistoryFragment extends FragmentWithContextMenu {
 
   public static class DeleteAllDialogFragment extends DialogFragment {
 
-    private final Activity activity;
-
-    public DeleteAllDialogFragment(Activity activity) {
-      this.activity = activity;
-    }
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle bundle) {
-      return new AlertDialog.Builder(activity)
+      return new AlertDialog.Builder(getActivity())
               .setIcon(R.drawable.ic_launcher)
               .setTitle(R.string.confirm_delete_all_title)
               .setMessage(R.string.confirm_delete_all_text)
