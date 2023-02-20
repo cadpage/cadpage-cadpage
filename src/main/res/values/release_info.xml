@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01312023</string>
+  <string name="release_date">02192023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-50\n
+    Location Fixes:\n
+    Weld County, CO\n
+    Whitley County, IN\n
+    Johnston County, NC\n
+    Hopewell, VA\n
+    \n
     v2.2.10-49\n
     New Locations:\n
     Pope County, AR (alt)\n
@@ -56,14 +63,6 @@
     Dare County, NC\n
     Sussex County, NJ\n
     Wyoming County, PA\n
-    Giles County, VA\n
-    \n
-    v2.2.10-45\n
-    New Locations:\n
-    Custer County, CO\n
-    Cooper County, MO\n
-    \n
-    Location Fixes:\n
-    Queen Annes County, MD
+    Giles County, VA
   </string>
 </resources>
