@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02192023</string>
+  <string name="release_date">02282023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-51\n
+    New Locations:\n
+    Franklin County, MA\n
+    Hickory County, MO\n
+    Renolds County, MO\n
+    Boone County, WV (alt)\n
+    \n
+    Location Fixes:\n
+    Clay County, AL\n
+    Marshall County, AL\n
+    Camden County, GA\n
+    Cole County, MO\n
+    Wayne County, NC\n
+    Lehigh County, PA\n
+    Bexar County, TX\n
+    Collin County, TX\n
+    Cooke County, TX\n
+    \n
     v2.2.10-50\n
     Location Fixes:\n
     Weld County, CO\n
@@ -41,28 +59,6 @@
     Lenawee County, MI\nRele
     Lawrence County, OH\n
     Dyer County, TN\n
-    Tarrant County, TX\n
-    \n
-    v2.2.10-46\n
-    New Locations:\n
-    Yuba County, CA (alt)\n
-    Mitchell County, GA\n
-    Newton County, GA\n
-    Unicoi County, TN\n
-    Logan County, OK\n
-    Major County, OK\n
-    Calhoun County, WV\n
-    \n
-    Location Fixes:\n
-    Wyandotte County, KS\n
-    Adams County, OH\n
-    Lake County, MI\n
-    Edina, MN\n
-    Franklin County, MO\n
-    St Charles County, MO\n
-    Dare County, NC\n
-    Sussex County, NJ\n
-    Wyoming County, PA\n
-    Giles County, VA
+    Tarrant County, TX
   </string>
 </resources>
