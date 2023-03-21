@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">003092023</string>
+  <string name="release_date">03212023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-53\n
+    New Locations:\n
+    Jefferson County, AL\n
+    Tallapoosa County, AL (alt)\n
+    Coconino County, AZ\n
+    Cleburne County, AR\n
+    Chattooga County, GA\n
+    McIntosh County, GA\n
+    Thomas County, GA\n
+    Beckinridge County, KY\n
+    Pettis County, MO (alt)\n
+    Jackson County, TN\n
+    Grayson County, TX (alt)\n
+    Robertson County, TX\n
+    \n
+    Location Fixes:\n
+    San Luis Obispo County, CA\n
+    Pike County, AL\n
+    Louisville, KY\n
+    Garrrett County, MD\n
+    Kalamazoo County, MI\n
+    Stanly County, NC\n
+    Wayne County, NC\n
+    \n
     v2.2.10-52\n
     New Locations:\n
     Harris County ESD#1, TX (alt)\n
@@ -48,10 +72,6 @@
     Location Fixes:\n
     Baldwin County, AL\n
     San Diegao County, CA\n
-    Clermont County, OH\n
-    \n
-    v2.2.10-48\n
-    Location Fixes:\n
-    San Diego County, CA
+    Clermont County, OH
   </string>
 </resources>
