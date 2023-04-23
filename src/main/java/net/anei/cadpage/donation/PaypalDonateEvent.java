@@ -13,7 +13,7 @@ Donate through PayPal
  */
 public class PaypalDonateEvent extends AccountScreenEvent {
   
-  private static final String TARGET_URL = "http://www.cadpage.org/financial-support/paypal-payments";
+  private static final String TARGET_URL = "https://www.cadpage.org/financial-support/paypal-or-check-payments";
   
   public PaypalDonateEvent() {
     super(AlertStatus.GREEN, R.string.donate_paypal_title, new AllowAcctPermissionAction() {

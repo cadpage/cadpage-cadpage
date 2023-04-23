@@ -13,7 +13,7 @@ import net.anei.cadpage.SmsPopupUtils;
  */
 public class Active911ParseInfoDonateEvent extends DonateEvent {
   
-  private static final String TARGET_URL = "http://www.cadpage.org/faq/cadpage-and-active911-issue";
+  private static final String TARGET_URL = "https://www.cadpage.org/faq/cadpage-and-active911";
   
   public Active911ParseInfoDonateEvent() {
     super(AlertStatus.YELLOW, R.string.donate_active911_parse_info_title);

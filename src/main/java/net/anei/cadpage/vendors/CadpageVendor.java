@@ -48,7 +48,7 @@ class CadpageVendor extends Vendor {
 
   @Override
   Uri getBaseURI(String req) {
-    if (req.equals("info")) return Uri.parse("http://www.cadpage.org/paging-service");
+    if (req.equals("info")) return Uri.parse("https://www.cadpage.org/cadpage-paging-service");
     return super.getBaseURI(req);
   }
 
