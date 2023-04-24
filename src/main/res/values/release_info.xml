@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04202023</string>
+  <string name="release_date">04242023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-58\n
+    New Locations:\n
+    Bullock County, AL\n
+    Elmore County, AL\n
+    Haynes Ambulance, AL\n
+    Macon County, AL\n
+    Montgomery County, AL\n
+    Los Angeles County, CA (alt)\n
+    \n
+    Location Fixes:\n
+    Sedgewick County, KS\n
+    Montgomery County, MD\n
+    Dorchester County, SC\n
+    \n
     v2.2.10-57\n
     Location Fixes:\n
     Weld County, CO\n
@@ -45,30 +59,6 @@
     Location Fixes:\n
     Fixed problems mapping state highway addresses in MI and NC\n
     Monterey County, CA\n
-    Delaware County, OH\n
-    \n
-    v2.2.10-53\n
-    New Locations:\n
-    Jefferson County, AL\n
-    Tallapoosa County, AL (alt)\n
-    Coconino County, AZ\n
-    Cleburne County, AR\n
-    Chattooga County, GA\n
-    McIntosh County, GA\n
-    Thomas County, GA\n
-    Beckinridge County, KY\n
-    Pettis County, MO (alt)\n
-    Jackson County, TN\n
-    Grayson County, TX (alt)\n
-    Robertson County, TX\n
-    \n
-    Location Fixes:\n
-    San Luis Obispo County, CA\n
-    Pike County, AL\n
-    Louisville, KY\n
-    Garrrett County, MD\n
-    Kalamazoo County, MI\n
-    Stanly County, NC\n
-    Wayne County, NC
+    Delaware County, OH
   </string>
 </resources>
