@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url "https://maven.google.com" }
         maven { url "https://dl.bintray.com/blockchainds/bds" }
     }
@@ -22,10 +22,6 @@ android {
         targetSdkVersion 33
         minSdkVersion 19
         multiDexEnabled true
-    }
-    dexOptions {
-        javaMaxHeapSize "4G"
-        jumboMode = true
     }
     buildTypes {
         release {
@@ -127,7 +123,7 @@ dependencies {
         exclude group: 'com.squareup.okhttp', module: 'okhttp'
         exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
     }
-    googleImplementation 'com.android.billingclient:billing:5.1.0'
+    googleImplementation 'com.android.billingclient:billing:5.2.0'
 //    aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:appcoins-contract-proxy:0.5.1.32b'
