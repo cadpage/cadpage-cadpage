@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04242023</string>
+  <string name="release_date">04282023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-59\n
+    Location Fixes:\n
+    Muskegon County, MI\n
+    \n
     v2.2.10-58\n
     New Locations:\n
     Bullock County, AL\n
@@ -45,20 +49,6 @@
     Chatham County, GA\n
     Minneapolis/St Paul, MN\n
     Surry County, NC\n
-    Harrison County, WV\n
-    \n
-    v2.2.10-54\n
-    New Locations:\n
-    Alamosa County, CO\n
-    Morgan County, IL\n
-    Baltimore County, MD\n
-    Avery County, NC\n
-    Beaufort County, SC\n
-    Hardin County, TX\n
-    \n
-    Location Fixes:\n
-    Fixed problems mapping state highway addresses in MI and NC\n
-    Monterey County, CA\n
-    Delaware County, OH
+    Harrison County, WV
   </string>
 </resources>
