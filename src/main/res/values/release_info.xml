@@ -4,6 +4,13 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-61\n
+    Location Fixes:\n
+    Geneva County, AL\n
+    Clark County, NV\n
+    Cabarrus County, NC\n
+    Union County, NC\n
+    \n
     v2.2.10-60\n
     New Locations:\n
     Shasta County, CA (alt)\n
@@ -44,18 +51,6 @@
     v2.2.10-57\n
     Location Fixes:\n
     Weld County, CO\n
-    Lafayette Parish, LA\n
-    \n
-    v2.2.10-56\n
-    New Locations:\n
-    Winnebago County, IL\n
-    McCracken County, KY\n
-    Atchison County, MO\n
-    Greensville County, VA\n
-    Whitman County, WA (alt)\n
-    \n
-    Location Fixes:\n
-    Chatham County, GA\n
-    Murray County, GA
+    Lafayette Parish, LA
   </string>
 </resources>
