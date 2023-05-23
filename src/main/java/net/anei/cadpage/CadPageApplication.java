@@ -93,9 +93,7 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
       }
 
       // If a FCM registration was not forced normally, see if one is overdue
-      else {
-        FCMMessageService.checkOverdueRefresh(context);
-      }
+      FCMMessageService.checkOverdueRefresh(context);
 
     } catch (Exception ex) {
       TopExceptionHandler.initializationFailure(context, ex);

@@ -110,19 +110,6 @@ public class UserAcctManager {
     return phoneNumber;
   }
 
-  @SuppressLint("HardwareIds")
-  public String getMEID() {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-      //noinspection deprecation
-      return android.os.Build.SERIAL;
-    }
-    try {
-      return Build.getSerial();
-    } catch (SecurityException ex) {
-      return "unknown";
-    }
-  }
-  
   /**
    * Append account information to support message under construction
    * @param sb String builder holding message being constructed
@@ -139,8 +126,6 @@ public class UserAcctManager {
     sb.append('\n');
     sb.append("Phone:");
     sb.append(getPhoneNumber());
-    sb.append("\nMEID:");
-    sb.append(getMEID());
     int overpaidDays = DonationManager.instance().getOverpaidDays();
     if (overpaidDays > 0) {
       sb.append("\nOverpaid:");

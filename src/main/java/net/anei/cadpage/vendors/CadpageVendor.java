@@ -67,9 +67,6 @@ class CadpageVendor extends Vendor {
     String phone = UserAcctManager.instance().getPhoneNumber(context);
     if (phone != null) builder.appendQueryParameter("phone", phone);
     
-    String meid = UserAcctManager.instance().getMEID();
-    if (meid != null) builder.appendQueryParameter("MEID",meid);
-    
     String expireDate = calcExpireDate();
     if (expireDate != null) builder.appendQueryParameter("expDate", expireDate);
     

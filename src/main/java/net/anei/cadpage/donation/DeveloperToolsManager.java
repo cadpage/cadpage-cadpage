@@ -72,13 +72,13 @@ public class DeveloperToolsManager {
       "Do Not Disturb",
       "DND granted",
       "Recheck notify abort",
-
-      "Set notify abort"
+      "Set notify abort",
+      "Emulate factory reset"
   };
   
   private static final String[] valueList = new String[]{
     "100", "101", "102",
-    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24"
+    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24", "25"
   };
   
   @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
@@ -270,6 +270,10 @@ public class DeveloperToolsManager {
           ManagePreferences.setNotifyAbort(true);
           break;
 
+        case 25:  // emulate factory reset recovery
+          ManagePreferences.resetCheckFile();
+          break;
+
         case 33:    // FCM: Report
           FCMMessageService.emailRegistrationId(context);
           break;
@@ -346,13 +350,10 @@ public class DeveloperToolsManager {
       throw new RuntimeException(ex);
     }
   }
-  
-  
-  
+
   private static final DeveloperToolsManager instance = new DeveloperToolsManager();
   
   public static DeveloperToolsManager instance() {
     return instance;
   }
-
 }

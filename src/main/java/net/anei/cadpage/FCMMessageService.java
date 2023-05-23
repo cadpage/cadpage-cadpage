@@ -53,6 +53,7 @@ public class FCMMessageService extends FirebaseMessagingService {
   public void onNewToken(String token) {
 
     Log.v("FCMMessageService:onNewToken()");
+    resetRefreshIDTimer("new ID");
     VendorManager.instance().reconnect(getApplicationContext(), token,false);
   }
 
@@ -317,24 +318,30 @@ public class FCMMessageService extends FirebaseMessagingService {
    */
   public static void checkOverdueRefresh(Context context) {
 
-    // This only happens if at least one direct paging vendor is enabled
-    if (!VendorManager.instance().isRegistered()) return;
+    // Refresh is forced we have been transfered to a new or reinitialized device
+    boolean refresh = !ManagePreferences.transferStatus().equals("N");
 
-    // If we have gone past the time the last refresh event was scheduled, do it now
+    // This only happens if at least one direct paging vendor is enabled
+    // If there aren't any, clear any pending transfer status
+    if (!VendorManager.instance().isRegistered())  {
+      if (refresh) ManagePreferences.resetTransferStatus();
+      return;
+    }
+
+    // Or if we have gone past the time the last refresh event was scheduled, do it now
     long eventTime = ManagePreferences.lastGcmEventTime() + REFRESH_ID_TIMEOUT;
     if (System.currentTimeMillis() > eventTime) {
       Log.v("Perform overdue GCM refresh");
-      refreshID(context);
+      refresh = true;
     }
+    if (refresh) refreshID(context);
   }
 
   private static void refreshID(final Context context) {
+    Log.v("FMCMessageService.refreshID()");
 
     // Reset the refresh timer
     resetRefreshIDTimer("REFRESH");
-
-    // There doesn't seem to be a way to do this anymore.  But if we ever figure it out
-    // this is where it goes
 
     // But we do want to reconnect with each direct paging vendor
     VendorManager.instance().reconnect(context, false);

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.CadPageApplication;
+import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
@@ -252,8 +253,21 @@ public class VendorManager {
    * @param userReq User requested reconnect
    */
   public void reconnect(final Context context, final boolean userReq) {
+    Log.v("VendorManager.reconnect1()");
+
+    // Haven't got a smoking gun, but there are indications that the getRegistrationId call
+    // sometimes results in a new token assignment which results in call to
+    // FCMMessageService.onNewToken() which calls us again.  So we check for that.
+    if (reconnectRentry) {
+      Log.v("VenderManager.reconnect1 reentry ignored");
+      return;
+    }
+    reconnectRentry = true;
     FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq));
+    reconnectRentry = false;
   }
+
+  private boolean reconnectRentry = false;
 
   /**
    * Reconnect all enabled vendors
@@ -262,17 +276,21 @@ public class VendorManager {
    * @param userReq User requested reconnect
    */
   public void reconnect(Context context, String registrationId, boolean userReq) {
+    Log.v("VendorManager.reconnect2()");
 
     // If we do not have a registration ID, we cannot proceed
     if (registrationId == null) return;
 
-    // Get transfer status.  An X value means we are waiting for READ_PHONE_STATE permission
-    // so we can determine if this is the same device or not.  Which means we cannot proceed
+    // Get transfer status.
     String transfer = ManagePreferences.transferStatus();
-    if (transfer.equals("X")) return;
 
     // Any value other than "N" needs to be reset
-    if (!transfer.equals("N")) ManagePreferences.resetTransferStatus();
+    // We never set this to anything other than Y or N, but older versions would set an X value
+    // that we convert to Y.
+    if (!transfer.equals("N")) {
+      ManagePreferences.resetTransferStatus();
+      transfer = "Y";
+    }
 
     // Pass new reg ID and transfer status to all vendors
     for (Vendor vendor : vendorList) {
