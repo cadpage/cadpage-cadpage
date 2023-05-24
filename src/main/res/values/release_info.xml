@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05092023</string>
+  <string name="release_date">05242023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-62\n
+    New Locations:\n
+    Coosa County, AL\n
+    Okaloosa County, FL (alt)\n
+    Marion County, IL\n
+    \n
+    Location Fixes:\n
+    Calaveras County, CA\n
+    Tuolumne County, CA\n
+    Lincoln County, OR\n
+    Marion County, OR\n
+    Polk County, OR\n
+    Boone County, WV\n
+    \n
     v2.2.10-61\n
     Location Fixes:\n
     Geneva County, AL\n
@@ -47,10 +61,5 @@
     Sedgewick County, KS\n
     Montgomery County, MD\n
     Dorchester County, SC\n
-    \n
-    v2.2.10-57\n
-    Location Fixes:\n
-    Weld County, CO\n
-    Lafayette Parish, LA
   </string>
 </resources>
