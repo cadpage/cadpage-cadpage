@@ -247,6 +247,8 @@ public class VendorManager {
     if (vendor != null) VendorActivity.launchActivity(context, vendor);
   }
 
+  private boolean reconnectInProgress = false;
+
   /**
    * Reconnect all enabled vendors
    * @param context current context
@@ -254,20 +256,24 @@ public class VendorManager {
    */
   public void reconnect(final Context context, final boolean userReq) {
     Log.v("VendorManager.reconnect1()");
-
-    // Haven't got a smoking gun, but there are indications that the getRegistrationId call
-    // sometimes results in a new token assignment which results in call to
-    // FCMMessageService.onNewToken() which calls us again.  So we check for that.
-    if (reconnectRentry) {
-      Log.v("VenderManager.reconnect1 reentry ignored");
-      return;
-    }
-    reconnectRentry = true;
+    reconnectInProgress = true;
     FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq));
-    reconnectRentry = false;
+    reconnectInProgress = false;
   }
 
-  private boolean reconnectRentry = false;
+  /**
+   * Process new registration ID assignment
+   * @param context current context
+   * @param registrationId new registration ID
+   */
+  public void onNewToken(Context context, String registrationId) {
+
+    if (reconnectInProgress) {
+      Log.v("VenderManager.onNewToken reentry ignored");
+      return;
+    }
+    reconnect(context, registrationId,false);
+  }
 
   /**
    * Reconnect all enabled vendors
@@ -275,7 +281,7 @@ public class VendorManager {
    * @param registrationId current GCM registration token
    * @param userReq User requested reconnect
    */
-  public void reconnect(Context context, String registrationId, boolean userReq) {
+  private void reconnect(Context context, String registrationId, boolean userReq) {
     Log.v("VendorManager.reconnect2()");
 
     // If we do not have a registration ID, we cannot proceed

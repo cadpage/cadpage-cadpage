@@ -54,7 +54,7 @@ public class FCMMessageService extends FirebaseMessagingService {
 
     Log.v("FCMMessageService:onNewToken()");
     resetRefreshIDTimer("new ID");
-    VendorManager.instance().reconnect(getApplicationContext(), token,false);
+    VendorManager.instance().onNewToken(getApplicationContext(), token);
   }
 
   @Override
