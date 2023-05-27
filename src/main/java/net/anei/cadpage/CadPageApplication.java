@@ -74,7 +74,7 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
 
       UserAcctManager.setup(context);
       BillingManager.instance().initialize(context);
-      ManagePreferences.setupPreferences(context);
+      int fcmFlags = ManagePreferences.setupPreferences(context);
       ManageNotification.setup(context);
       VendorManager.instance().setup(context);
       UserAcctManager.instance().reset();
@@ -93,7 +93,7 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
       }
 
       // If a FCM registration was not forced normally, see if one is overdue
-      FCMMessageService.checkOverdueRefresh(context);
+      FCMMessageService.initialize(context, fcmFlags);
 
     } catch (Exception ex) {
       TopExceptionHandler.initializationFailure(context, ex);

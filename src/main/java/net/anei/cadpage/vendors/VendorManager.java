@@ -53,7 +53,7 @@ public class VendorManager {
     Preference reconnectPref = pref.findPreference(context.getString(R.string.pref_reconnect_key));
     assert reconnectPref != null;
     reconnectPref.setOnPreferenceClickListener(preference -> {
-      if (SmsPopupUtils.haveNet(context)) reconnect(context,true);
+      if (SmsPopupUtils.haveNet(context)) reconnect(context,true, false);
       return true;
     });
     
@@ -254,10 +254,10 @@ public class VendorManager {
    * @param context current context
    * @param userReq User requested reconnect
    */
-  public void reconnect(final Context context, final boolean userReq) {
+  public void reconnect(final Context context, final boolean userReq, final boolean transfer) {
     Log.v("VendorManager.reconnect1()");
     reconnectInProgress = true;
-    FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq));
+    FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq, transfer));
     reconnectInProgress = false;
   }
 
@@ -272,7 +272,7 @@ public class VendorManager {
       Log.v("VenderManager.onNewToken reentry ignored");
       return;
     }
-    reconnect(context, registrationId,false);
+    reconnect(context, registrationId,false, false);
   }
 
   /**
@@ -281,22 +281,11 @@ public class VendorManager {
    * @param registrationId current GCM registration token
    * @param userReq User requested reconnect
    */
-  private void reconnect(Context context, String registrationId, boolean userReq) {
+  private void reconnect(Context context, String registrationId, boolean userReq, boolean transfer) {
     Log.v("VendorManager.reconnect2()");
 
     // If we do not have a registration ID, we cannot proceed
     if (registrationId == null) return;
-
-    // Get transfer status.
-    String transfer = ManagePreferences.transferStatus();
-
-    // Any value other than "N" needs to be reset
-    // We never set this to anything other than Y or N, but older versions would set an X value
-    // that we convert to Y.
-    if (!transfer.equals("N")) {
-      ManagePreferences.resetTransferStatus();
-      transfer = "Y";
-    }
 
     // Pass new reg ID and transfer status to all vendors
     for (Vendor vendor : vendorList) {

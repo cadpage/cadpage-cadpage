@@ -79,8 +79,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   /**
    * Initialize the ManagePreferences class
    * @param context current context
+   * @return flags to be passed to FCMMessageService.initialize()
    */
-  public static void setupPreferences(Context context) {
+  public static int setupPreferences(Context context) {
+
+    int result = 0;
 
     // Initialize the preference object
     prefs = new ManagePreferences(context);
@@ -268,8 +271,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
         // If this is not an initial startup, we need to request a new registration ID
         if (oldVersion > 0) {
-          FCMMessageService.resetInstanceId();
-          setTransferStatus("Y");
+          result |= FCMMessageService.FCM_INIT_TRANSFER;
         }
       }
     } catch (IOException ex) {
@@ -291,6 +293,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // We run into problems if the change listeners are called during this setup process
     // so we don't arm them until now
     prefs.armListeners();
+
+    return result;
   }
 
   /**
@@ -1384,18 +1388,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   
   public static void setRestoreMode(int newVal) {
     prefs.putInt(R.string.pref_restore_mode, newVal);
-  }
-
-  public static String transferStatus() {
-    return prefs.getString(R.string.pref_transfer_status_key, "N");
-  }
-
-  public static void resetTransferStatus() {
-    setTransferStatus("N");
-  }
-
-  public static void setTransferStatus(String newVal) {
-    prefs.putString(R.string.pref_transfer_status_key, newVal);
   }
 
   public static boolean noMapGpsLabel() {
@@ -2827,8 +2819,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           R.string.pref_last_gcm_event_type_key,
           R.string.pref_last_gcm_event_time_key,
           R.string.pref_restore_vol,
-
-          R.string.pref_transfer_status_key,
 
           R.string.pref_no_map_gps_label,
           R.string.pref_keep_battery_optimization,

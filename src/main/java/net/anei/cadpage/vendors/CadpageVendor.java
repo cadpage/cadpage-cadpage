@@ -106,7 +106,7 @@ class CadpageVendor extends Vendor {
    * @return true if we actually did anything
    */
   @Override
-  boolean reconnect(final Context context, String registrationId, boolean userReq, String transfer) {
+  boolean reconnect(final Context context, String registrationId, boolean userReq, boolean transfer) {
     if (!super.reconnect(context, registrationId, userReq, transfer)) return false;
     updateCadpageStatus(context);
     return true;
@@ -140,7 +140,7 @@ class CadpageVendor extends Vendor {
       // we can pretty reliably break the connection is by unregistering the
       // current registration ID and getting a new one
       else {
-        FCMMessageService.resetInstanceId();
+        FCMMessageService.resetInstanceId(context);
         return false;
       }
     }

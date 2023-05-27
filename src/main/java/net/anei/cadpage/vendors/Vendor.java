@@ -662,7 +662,7 @@ abstract class Vendor {
 
       // See if we already have a registration ID, if we do, use it to send
       // registration request to vendor server
-      reconnect(context, registrationId, true, "N");
+      reconnect(context, registrationId, true, false);
     });
   }
 
@@ -689,7 +689,7 @@ abstract class Vendor {
 
       // Finally unregister from Google C2DM service.  If there are other vendor
       // services that are still active, they will request a new registration ID
-      FCMMessageService.resetInstanceId();
+      FCMMessageService.resetInstanceId(context);
 
       // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
       if (isSponsored()) {
@@ -708,7 +708,7 @@ abstract class Vendor {
    * @param transfer restore status to report to vendors
    * @return true if we actually did anything
    */
-  boolean reconnect(final Context context, String registrationId, boolean userReq, String transfer) {
+  boolean reconnect(final Context context, String registrationId, boolean userReq, boolean transfer) {
 
     // If we are in process of registering with server, send the web registration request
     if (inProgress) {
@@ -772,7 +772,7 @@ abstract class Vendor {
    * @param userReq true if user requested this action
    */
   private void sendReregister(final Context context, String registrationId, boolean userReq) {
-    sendReregister(context, registrationId, userReq, "N");
+    sendReregister(context, registrationId, userReq, false);
   }
 
   /**
@@ -782,11 +782,11 @@ abstract class Vendor {
    * @param userReq true if user requested this action
    * @param transfer restore status to report to vendors
    */
-  private void sendReregister(final Context context, String registrationId, boolean userReq, String transfer) {
+  private void sendReregister(final Context context, String registrationId, boolean userReq, boolean transfer) {
     Uri uri = buildRequestUri("reregister", registrationId, userReq);
     Uri.Builder b = uri.buildUpon();
     b.appendQueryParameter("userReq", (userReq ? "Y" : "N"));
-    if (!transfer.equals("N")) b.appendQueryParameter("transfer", transfer);
+    if (transfer) b.appendQueryParameter("transfer", "Y");
     uri = b.build();
     HttpService.addHttpRequest(context, new HttpService.HttpRequest(uri){
       
@@ -803,7 +803,7 @@ abstract class Vendor {
         
         // A 299 response indicates that the server has been having trouble with our registration ID
         // and we should request another one.
-        if (status == 299) FCMMessageService.resetInstanceId();
+        if (status == 299) FCMMessageService.resetInstanceId(context);
         
         // A 400 request indicates that the device we have tried to register is no longer valid
         if (status == 400) {
@@ -853,7 +853,7 @@ abstract class Vendor {
         updateLastRegisterTime();
       }
       else {
-        FCMMessageService.resetInstanceId();
+        FCMMessageService.resetInstanceId(context);
         ManagePreferences.setAuthRunDays(0);
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
