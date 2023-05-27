@@ -247,8 +247,6 @@ public class VendorManager {
     if (vendor != null) VendorActivity.launchActivity(context, vendor);
   }
 
-  private boolean reconnectInProgress = false;
-
   /**
    * Reconnect all enabled vendors
    * @param context current context
@@ -256,9 +254,7 @@ public class VendorManager {
    */
   public void reconnect(final Context context, final boolean userReq, final boolean transfer) {
     Log.v("VendorManager.reconnect1()");
-    reconnectInProgress = true;
     FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq, transfer));
-    reconnectInProgress = false;
   }
 
   /**
@@ -267,13 +263,11 @@ public class VendorManager {
    * @param registrationId new registration ID
    */
   public void onNewToken(Context context, String registrationId) {
-
-    if (reconnectInProgress) {
-      Log.v("VenderManager.onNewToken reentry ignored");
-      return;
-    }
     reconnect(context, registrationId,false, false);
   }
+
+  private long lastReconnectTime = 0;
+  private String lastRegistrationId = "";
 
   /**
    * Reconnect all enabled vendors
@@ -286,6 +280,19 @@ public class VendorManager {
 
     // If we do not have a registration ID, we cannot proceed
     if (registrationId == null) return;
+
+    // We sometimes get two back to back reconnect requests for the same registration ID.  When
+    // this happens, suppress one of them.
+
+    long curTime = System.currentTimeMillis();
+    if (registrationId.equals(lastRegistrationId)) {
+      if (curTime - lastReconnectTime < 1000L) {
+        Log.v("Duplicate reconnect request suppressed");
+        return;
+      }
+    }
+    lastReconnectTime = curTime;
+    lastRegistrationId = registrationId;
 
     // Pass new reg ID and transfer status to all vendors
     for (Vendor vendor : vendorList) {
