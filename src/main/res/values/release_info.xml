@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05312023</string>
+  <string name="release_date">06132023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-64\n
+    New Locations:\n
+    Ketchikan, AK\n
+    Rockbridge County, VA (alt)\n
+    \n
+    Location Fixes:\n
+    Isabella County, MI\n
+    Monroe County, PA\n
+    Westmoreland County, PA\n
+    Van Buren County, TN\n
+    \n
     v2.2.10-63\n
     New Locations:\n
     White County, AR\n
@@ -55,9 +66,5 @@
     Blackhawk County, IA\n
     Leon County, TX\n
     Rusk County, TX\n
-    \n
-    v2.2.10-59\n
-    Location Fixes:\n
-    Muskegon County, MI
   </string>
 </resources>
