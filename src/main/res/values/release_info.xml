@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06132023</string>
+  <string name="release_date">06212023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-65\n
+    Location Fixes:\n
+    Rockland County, NY\n
+    Deschutes County, OR\n
+    Josephine County, OR\n
+    Lamoille County, VT\n
+    \n
     v2.2.10-64\n
     New Locations:\n
     Ketchikan, AK\n
@@ -46,25 +53,6 @@
     Geneva County, AL\n
     Clark County, NV\n
     Cabarrus County, NC\n
-    Union County, NC\n
-    \n
-    v2.2.10-60\n
-    New Locations:\n
-    Shasta County, CA (alt)\n
-    Hart County, GA\n
-    Panola County, MS (alt)\n
-    Sumner County, TN (alt)\n
-    Bastrop County, TX\n
-    Dallas County, TX (alt)\n
-    Greene County, VA (alt)\n
-    \n
-    Location Fixes:\n
-    Delores County, CO\n
-    Fremont County, CO\n
-    Murray County, GA\n
-    Adams County, IN\n
-    Blackhawk County, IA\n
-    Leon County, TX\n
-    Rusk County, TX\n
+    Union County, NC
   </string>
 </resources>
