@@ -13,6 +13,7 @@ import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.ParserServiceManager;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsMsgLogBuffer;
 import net.anei.cadpage.ManageUsb;
@@ -244,7 +245,10 @@ public class DeveloperToolsManager {
           break;
 
         case 20:    // Throw exception to test crash reporting
-          throw new RuntimeException("Test Exception Handling");
+//          throw new RuntimeException("Test Exception Handling");
+          ParserServiceManager.crash();
+          break;
+
 
         case 21:    // Do not disturb
           if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
