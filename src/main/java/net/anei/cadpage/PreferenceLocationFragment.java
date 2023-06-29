@@ -48,28 +48,4 @@ public class PreferenceLocationFragment extends PreferenceRestorableFragment imp
       });
     }
   }
-
-  // If location code changes during this session, force a rebuild of
-  // the call history data on the off chance that a general format message
-  // can use the new location code.
-  private String oldLocation = null;
-
-  @Override
-  public void onStart() {
-
-    // Save the setting that might be important if they change
-    oldLocation = ManagePreferences.location();
-
-    super.onStart();
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-
-    String location = ManagePreferences.location();
-    if (!location.equals(oldLocation)) {
-      SmsMessageQueue.getInstance().reparseGeneral();
-    }
-  }
 }

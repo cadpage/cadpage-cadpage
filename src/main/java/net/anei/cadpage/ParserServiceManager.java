@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import android.content.Context;
 import android.os.Process;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -20,16 +19,13 @@ public class ParserServiceManager {
   private ParserServiceManager() {
     threadPool = new ThreadPoolExecutor(0, 1,
                                         0L, TimeUnit.SECONDS,
-                                         new LinkedBlockingQueue<Runnable>(),
-                                         new ThreadFactory() {
-                                           @Override
-                                           public Thread newThread(Runnable r) {
-                                             Thread t = new Thread(r, "ParserService");
-                                             t.setDaemon(true);
-                                             t.setPriority(Process.THREAD_PRIORITY_BACKGROUND);
-                                             return t;
-                                           }
-                                         });
+                                         new LinkedBlockingQueue<>(),
+                                          r -> {
+                                            Thread t = new Thread(r, "ParserService");
+                                            t.setDaemon(true);
+                                            t.setPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                                            return t;
+                                          });
                                   }
 
   private enum RequestType {STARTUP, REPARSE_GENERAL, REPARSE_SPLIT_MSG, CRASH}
