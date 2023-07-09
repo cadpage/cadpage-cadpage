@@ -1,6 +1,9 @@
 package net.anei.cadpage;
 
 import android.os.Bundle;
+import android.text.InputType;
+
+import androidx.preference.EditTextPreference;
 
 import net.anei.cadpage.parsers.SplitMsgOptions;
 
@@ -11,6 +14,13 @@ public class PreferenceSplitMergeOptionsFragment extends PreferenceRestorableFra
 
     // Load the preferences from an XML resource
     setPreferencesFromResource(R.xml.preference_split_merge_options, rootKey);
+
+    EditTextPreference timeoutPref = findPreference(getString(R.string.pref_msgtimeout_key));
+    if (timeoutPref != null) {
+      timeoutPref.setOnBindEditTextListener((editText) -> {
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+      });
+    }
   }
 
   private boolean oldSplitBlank = false;

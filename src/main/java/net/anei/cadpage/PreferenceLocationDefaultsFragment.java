@@ -1,6 +1,7 @@
 package net.anei.cadpage;
 
 import android.os.Bundle;
+import android.text.InputType;
 
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.preferences.EditTextPreference;
@@ -34,6 +35,13 @@ public class PreferenceLocationDefaultsFragment extends PreferenceRestorableFrag
     final String parserDefState = parser.getDefaultState();
 
     assert overrideDefaultPref != null && defCityPref != null && defStatePref != null;
+    defCityPref.setOnBindEditTextListener((editText) -> {
+      editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+    });
+    defStatePref.setOnBindEditTextListener((editText) -> {
+      editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+    });
+
     overrideDefaultPref.setOnPreferenceChangeListener((preference, newValue) -> {
       boolean value = (Boolean) newValue;
       if (! value) {
