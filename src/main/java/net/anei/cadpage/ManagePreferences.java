@@ -58,6 +58,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   // Name of file we build on a nobackup directory.  It's absence indicates that
   // Cadpage is starting up after an auto-restore
   private static final String CHECK_FILENAME = "HERE_I_AM";
+  private static File checkFile;
   
   private static ManagePreferences prefs;
   private static String freeSubType;
@@ -68,10 +69,21 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   /**
+   * Delete check file - simulating a restore after factory reset
+   *
+   */
+  public static void resetCheckFile() {
+    checkFile.delete();
+  }
+
+  /**
    * Initialize the ManagePreferences class
    * @param context current context
+   * @return flags to be passed to FCMMessageService.initialize()
    */
-  public static void setupPreferences(Context context) {
+  public static int setupPreferences(Context context) {
+
+    int result = 0;
 
     // Initialize the preference object
     prefs = new ManagePreferences(context);
@@ -94,7 +106,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
     // While we have a context, create the file that will be used to check for
     // the autoreload status
-    File checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
+    checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
 
     // There are a lot of specialized preference fixes we have to make when
     // user upgrades from an earlier version of Cadpage.  Defaulting the use old MMS logic is
@@ -259,11 +271,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 
         // If this is not an initial startup, we need to request a new registration ID
         if (oldVersion > 0) {
-          FCMMessageService.resetInstanceId();
-
-          // And set transfer status to "X" pending access to the current MEID value.
-          // We will figure out latter whether we are running on a new device or not
-          setTransferStatus("X");
+          result |= FCMMessageService.FCM_INIT_TRANSFER;
         }
       }
     } catch (IOException ex) {
@@ -285,6 +293,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // We run into problems if the change listeners are called during this setup process
     // so we don't arm them until now
     prefs.armListeners();
+
+    return result;
   }
 
   /**
@@ -1380,18 +1390,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     prefs.putInt(R.string.pref_restore_mode, newVal);
   }
 
-  public static String transferStatus() {
-    return prefs.getString(R.string.pref_transfer_status_key, "N");
-  }
-
-  public static void resetTransferStatus() {
-    setTransferStatus("N");
-  }
-
-  public static void setTransferStatus(String newVal) {
-    prefs.putString(R.string.pref_transfer_status_key, newVal);
-  }
-
   public static boolean noMapGpsLabel() {
     return prefs.getBoolean(R.string.pref_no_map_gps_label);
   }
@@ -1647,72 +1645,18 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
         }
         
         // OK, we are also interested in the account permissions, which has to handle
-        // two specific situations
+        // automatic payment status recalculations
         else if (checker instanceof PhoneInfoChecker) {
           final Context context = CadPageApplication.getContext();
-
-          // First, if Cadpage has been restored from a backup, we need READ_PHONE_STATE permission
-          // to retrieve the MEID number so we can tell if we have been restored to a different
-          // device
-          boolean checkTransferStatus = false;
-          int explainId = 0;
-          String oldMeid = null;
-          String transferStatus = transferStatus();
-          if (transferStatus.equals("X")) {
-
-            // If we are not registered with a direct paging vendor, just turn the transfer status off
-            if (!VendorManager.instance().isRegistered()) {
-              setTransferStatus("N");
-            } else {
-
-              // If we do not have an old MEID to compare things to, we cannot tell if the MEID
-              // has changed, so just assume that it has
-              oldMeid = prefs.getString(R.string.pref_prev_meid_key, null);
-              if (!isValidMEID(oldMeid))  {
-                setTransferStatus("Y");
-              }
-
-              // Otherwise we will have to wait until READ_PHONE_STATE permission has been requested
-              else {
-                checkTransferStatus = true;
-                explainId = R.string.perm_acct_info_for_restore;
-              }
-
-              // If we resolved the ambiguous transfer status, send it to the direct paging vendors
-              if (!checkTransferStatus) {
-                VendorManager.instance().reconnect(CadPageApplication.getContext(), false);
-              }
-            }
-          }
-
-          // If we have decided that we do not need to check the transfer status, we can reset
-          // the old MEID value now
-          if (!checkTransferStatus) isNewDevice(oldMeid);
-
-          // The second case is if we are about to perform an automatic payment status recalculation
           final boolean checkPaymentStatus = DonationManager.instance().checkPaymentStatus(context);
-          if (checkPaymentStatus) explainId = R.string.perm_acct_info_for_auto_recalc;
 
           // OK, If we determined that we need the READ_PHONE_STATE permission, let's ask for it
-          if (checkTransferStatus || checkPaymentStatus) {
-            final boolean checkTransferStatus2 = checkTransferStatus;
-            final String oldMeid2 = oldMeid;
+          if (checkPaymentStatus) {
             PhoneInfoChecker aChecker = (PhoneInfoChecker)checker;
             if (!aChecker.check((ok, permissions, granted) -> {
-
-              // Somewhat surprising, we do not care whether it was granted or not
-              // If we needed to resolve the transfer status, do so and send it to the vendors
-              if (checkTransferStatus2) {
-                setTransferStatus(isNewDevice(oldMeid2) ? "Y" : "R");
-                VendorManager.instance().reconnect(CadPageApplication.getContext(), false);
-              }
-
-              // and if a payment status recalcluation is pending, go do it
-              if (checkPaymentStatus) {
-                BillingManager.instance().restoreTransactions(context);
-                ManagePreferences.setAuthLastCheckTime();
-              }
-            }, explainId, false)) {
+              BillingManager.instance().restoreTransactions(context);
+              ManagePreferences.setAuthLastCheckTime();
+            }, R.string.perm_acct_info_for_auto_recalc, false)) {
               failedCheckers.add(aChecker);
             }
           }
@@ -1735,19 +1679,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           requestPermission(reqPerms.get(ndx), reqExpIds.get(ndx));
         }
       }
-    }
-
-    private boolean isNewDevice(String oldMeid) {
-      String meid = UserAcctManager.instance().getMEID();
-      if (!isValidMEID(meid)) return true;
-      boolean newDevice = !meid.equals(oldMeid);
-      if (newDevice) prefs.putString(R.string.pref_prev_meid_key, meid);
-      return newDevice;
-    }
-
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    private boolean isValidMEID(String meid) {
-      return meid != null && meid.length() > 0 && !meid.equalsIgnoreCase("unknown");
     }
 
     @Override
@@ -2888,9 +2819,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           R.string.pref_last_gcm_event_type_key,
           R.string.pref_last_gcm_event_time_key,
           R.string.pref_restore_vol,
-
-          R.string.pref_prev_meid_key,
-          R.string.pref_transfer_status_key,
 
           R.string.pref_no_map_gps_label,
           R.string.pref_keep_battery_optimization,

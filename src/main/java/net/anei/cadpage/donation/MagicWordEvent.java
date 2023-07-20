@@ -27,7 +27,7 @@ public class MagicWordEvent extends DonateQueryEvent {
     
     // Special word that nobody knows about that will reset the C2DM registration code
     if (input.equalsIgnoreCase("ZAPIT")) {
-      FCMMessageService.resetInstanceId();
+      FCMMessageService.resetInstanceId(activity);
       return true;
     }
 

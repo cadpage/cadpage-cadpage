@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.TransactionTooLargeException;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -51,6 +52,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
   // The actual maximum transaction buffer size is 1M, but that is shared with
   // all other apps making IPC calls, so we will restrict ourselves to half of that
   private final static int MAX_EMAIL_SIZE = 524428;
+  private final static int REDUCE_EMAIL_SIZE = 52428;
   
   
   private TextView textView;
@@ -287,7 +289,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
 
   private static void sendEmailRequest(Context context, EmailType type,
                                        String vendorEmail, String message) {
-    
+
     // If user is a developer, log the message contents.  This helps get
     // the info on emulators where no email clients are available
     // But, we have to surround this with start and end log markers so the log
@@ -299,7 +301,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
     if (UserAcctManager.instance().isDeveloper()) {
       String msg = message;
       int pt = msg.indexOf("\n********");
-      if (pt >= 0) msg = msg.substring(0,pt);
+      if (pt >= 0) msg = msg.substring(0, pt);
       Log.w(LogCollector.START_MARKER);
       for (String line : msg.split("\n"))
         if (line.length() == 0) Log.w(" ");
@@ -307,25 +309,42 @@ public class EmailDeveloperActivity extends Safe40Activity {
       Log.w(LogCollector.END_MARKER);
     }
 
-    if (message.length() > MAX_EMAIL_SIZE) message = message.substring(0,MAX_EMAIL_SIZE);
-    
+    if (message.length() > MAX_EMAIL_SIZE) message = message.substring(0, MAX_EMAIL_SIZE);
+
     // Build send email intent and launch it
-    Intent intent = new Intent(Intent.ACTION_SEND);
-    String[] emailAddr = context.getResources().getStringArray(R.array.email_devel_addr);
-    if (vendorEmail != null) {
-      List<String> list = new ArrayList<>();
-      list.addAll(Arrays.asList(vendorEmail.split(";")));
-      list.addAll(Arrays.asList(emailAddr));
-      emailAddr = list.toArray(new String[0]);
+    // We do this in a loop because, despite our precautions, TransactionTooLargeExceptions are
+    // still thrown.  When that happens we will further reduce the size of the message and try
+    // again
+    while (true) {
+      Intent intent = new Intent(Intent.ACTION_SEND);
+      String[] emailAddr = context.getResources().getStringArray(R.array.email_devel_addr);
+      if (vendorEmail != null) {
+        List<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList(vendorEmail.split(";")));
+        list.addAll(Arrays.asList(emailAddr));
+        emailAddr = list.toArray(new String[0]);
+      }
+      intent.putExtra(Intent.EXTRA_EMAIL, emailAddr);
+      String emailSubject = CadPageApplication.getNameVersion() + " " +
+              context.getResources().getStringArray(R.array.email_devel_subject)[type.ordinal()];
+      intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+      intent.putExtra(Intent.EXTRA_TEXT, message);
+      intent.setType("message/rfc822");
+      try {
+        context.startActivity(Intent.createChooser(
+                intent, context.getString(R.string.pref_email_title)));
+        break;
+      } catch (Exception ex) {
+        Throwable ex2 = ex;
+        while (ex2 != null && !(ex2 instanceof TransactionTooLargeException)) {
+          ex2 = ex2.getCause();
+        }
+        if (ex2 == null) throw ex;
+        int newLen = message.length() - REDUCE_EMAIL_SIZE;
+        if (newLen < 600) throw ex;
+        message = message.substring(0, newLen);
+      }
     }
-    intent.putExtra(Intent.EXTRA_EMAIL, emailAddr);
-    String emailSubject = CadPageApplication.getNameVersion() + " " +
-        context.getResources().getStringArray(R.array.email_devel_subject)[type.ordinal()];
-    intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
-    intent.putExtra(Intent.EXTRA_TEXT, message);
-    intent.setType("message/rfc822");
-    context.startActivity(Intent.createChooser(
-        intent, context.getString(R.string.pref_email_title)));
   }
   
   

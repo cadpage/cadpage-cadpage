@@ -13,6 +13,7 @@ import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.ManageBluetooth;
 import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.ParserServiceManager;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.SmsMsgLogBuffer;
 import net.anei.cadpage.ManageUsb;
@@ -74,14 +75,14 @@ public class DeveloperToolsManager {
       "Do Not Disturb",
       "DND granted",
       "Recheck notify abort",
-
-      "Set notify abort"
+      "Set notify abort",
+      "Emulate factory reset"
   };
   
   private static final String[] valueList = new String[]{
     "200", "201",
     "100", "101", "102",
-    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24"
+    "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24", "25"
   };
   
   @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
@@ -247,7 +248,10 @@ public class DeveloperToolsManager {
           break;
 
         case 20:    // Throw exception to test crash reporting
-          throw new RuntimeException("Test Exception Handling");
+//          throw new RuntimeException("Test Exception Handling");
+          ParserServiceManager.crash();
+          break;
+
 
         case 21:    // Do not disturb
           if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -271,6 +275,10 @@ public class DeveloperToolsManager {
 
         case 24:    // Set notify abort
           ManagePreferences.setNotifyAbort(true);
+          break;
+
+        case 25:  // emulate factory reset recovery
+          ManagePreferences.resetCheckFile();
           break;
 
         case 33:    // FCM: Report
@@ -349,13 +357,10 @@ public class DeveloperToolsManager {
       throw new RuntimeException(ex);
     }
   }
-  
-  
-  
+
   private static final DeveloperToolsManager instance = new DeveloperToolsManager();
   
   public static DeveloperToolsManager instance() {
     return instance;
   }
-
 }

@@ -123,7 +123,7 @@ dependencies {
         exclude group: 'com.squareup.okhttp', module: 'okhttp'
         exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
     }
-    googleImplementation 'com.android.billingclient:billing:5.2.0'
+    googleImplementation 'com.android.billingclient:billing:6.0.1'
 //    aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:appcoins-contract-proxy:0.5.1.32b'

@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -17,7 +15,6 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -30,6 +27,8 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 public class FCMMessageService extends FirebaseMessagingService {
+
+  public static final int FCM_INIT_TRANSFER = 1;
 
   private static final int REFRESH_ID_TIMEOUT = 24*60*60*1000; // 1 day
   private static final String ACTION_REFRESH_ID = "net.anei.cadpage.FCMMessageService.REFRESH_ID";
@@ -46,14 +45,15 @@ public class FCMMessageService extends FirebaseMessagingService {
     super.onCreate();
 
     // Make sure everything is initialized
-    if (!CadPageApplication.initialize(this)) return;
+    CadPageApplication.initialize(this);
   }
 
   @Override
-  public void onNewToken(String token) {
+  public void onNewToken(@NonNull String token) {
 
     Log.v("FCMMessageService:onNewToken()");
-    VendorManager.instance().reconnect(getApplicationContext(), token,false);
+    resetRefreshIDTimer(this,"new ID");
+    VendorManager.instance().onNewToken(getApplicationContext(), token);
   }
 
   @Override
@@ -67,7 +67,6 @@ public class FCMMessageService extends FirebaseMessagingService {
 
 
     final Map<String, String> data = remoteMessage.getData();
-    if (data == null) return;
 
     Log.v("Message data payload:" + data);
 
@@ -87,7 +86,7 @@ public class FCMMessageService extends FirebaseMessagingService {
     if (type.equals("PING")) {
       sendAutoAck(ackURL, vendorCode);
       VendorManager.instance().checkVendorStatus(this, vendorCode);
-      resetRefreshIDTimer("PING");
+      resetRefreshIDTimer(this,"PING");
       return;
     }
 
@@ -99,14 +98,9 @@ public class FCMMessageService extends FirebaseMessagingService {
       final String account = data.get("account");
       final String token = data.get("token");
       final String dispatchEmail = data.get("dispatchEmail");
-      CadPageApplication.runOnMainThread(new Runnable(){
-        @Override
-        public void run() {
-          VendorManager.instance().vendorRequest(FCMMessageService.this, type2, vendorCode2, account, token, dispatchEmail);
-        }
-      });
+      CadPageApplication.runOnMainThread(() -> VendorManager.instance().vendorRequest(FCMMessageService.this, type2, vendorCode2, account, token, dispatchEmail));
       sendAutoAck(ackURL, vendorCode);
-      resetRefreshIDTimer("VENDOR_" + type);
+      resetRefreshIDTimer(this,"VENDOR_" + type);
       return;
     }
 
@@ -139,7 +133,7 @@ public class FCMMessageService extends FirebaseMessagingService {
 
   private void processContent(Map<String, String> data, String content, long timestamp) {
 
-    resetRefreshIDTimer("PAGE");
+    resetRefreshIDTimer(this,"PAGE");
 
     // Reconstruct message from data from intent fields
     String from = data.get("sender");
@@ -278,7 +272,7 @@ public class FCMMessageService extends FirebaseMessagingService {
    * until REFRESH_ID_TIMEOUT msecs in the future
    * @param eventType Event type responsible for reset request
    */
-  private static void resetRefreshIDTimer(String eventType) {
+  private static void resetRefreshIDTimer(Context context, String eventType) {
 
     long curTime = System.currentTimeMillis();
     ManagePreferences.setLastGcmEventType(eventType);
@@ -290,7 +284,7 @@ public class FCMMessageService extends FirebaseMessagingService {
               .setInitialDelay(REFRESH_ID_TIMEOUT, TimeUnit.MILLISECONDS)
               .setConstraints(ManagePreferences.networkConstraint())
               .build();
-    WorkManager mgr = WorkManager.getInstance();
+    WorkManager mgr = WorkManager.getInstance(context);
     mgr.beginUniqueWork(ACTION_REFRESH_ID, ExistingWorkPolicy.REPLACE, req).enqueue();
   }
 
@@ -304,7 +298,7 @@ public class FCMMessageService extends FirebaseMessagingService {
     @NonNull
     public Result doWork() {
       Log.v("Refresh Direct Paging Registration");
-      refreshID(getApplicationContext());
+      refreshID(getApplicationContext(), false);
       return Result.success();
     }
   }
@@ -314,33 +308,38 @@ public class FCMMessageService extends FirebaseMessagingService {
    * should never happen.  But it has at least once, possibly because Cadpage was being updated
    * just when the timer event should have triggered.
    * @param context current context
+   * @param flags initialization flags passed from ManagePreferences.setupPreferences()
    */
-  public static void checkOverdueRefresh(Context context) {
+  public static void initialize(Context context, int flags) {
 
-    // This only happens if at least one direct paging vendor is enabled
-    if (!VendorManager.instance().isRegistered()) return;
+    // Refresh is forced we have been transfered to a new or reinitialized device
+    boolean refresh = false;
+    boolean transfer = (flags & FCM_INIT_TRANSFER) != 0;
+    if (transfer) {
+      Log.v("GCM refresh forced by transfer");
+      refresh = true;
+    }
 
-    // If we have gone past the time the last refresh event was scheduled, do it now
+    // Or if we have gone past the time the last refresh event was scheduled, do it now
     long eventTime = ManagePreferences.lastGcmEventTime() + REFRESH_ID_TIMEOUT;
     if (System.currentTimeMillis() > eventTime) {
       Log.v("Perform overdue GCM refresh");
-      refreshID(context);
+      refresh = true;
     }
+    if (refresh) refreshID(context, true);
   }
 
-  private static void refreshID(final Context context) {
+  private static void refreshID(final Context context, boolean transfer) {
+    Log.v("FMCMessageService.refreshID()");
 
     // Reset the refresh timer
-    resetRefreshIDTimer("REFRESH");
-
-    // There doesn't seem to be a way to do this anymore.  But if we ever figure it out
-    // this is where it goes
+    resetRefreshIDTimer(context, "REFRESH");
 
     // But we do want to reconnect with each direct paging vendor
-    VendorManager.instance().reconnect(context, false);
+    VendorManager.instance().reconnect(context, false, transfer);
   }
 
-  public static void registerActive911(long initDelay) {
+  public static void registerActive911(Context context, long initDelay) {
 
     Log.v("Scheduling Active911 refresh " + initDelay + " msecs");
 
@@ -349,7 +348,7 @@ public class FCMMessageService extends FirebaseMessagingService {
             .setInitialDelay(initDelay, TimeUnit.MILLISECONDS)
             .setConstraints(ManagePreferences.networkConstraint())
             .build();
-    WorkManager mgr = WorkManager.getInstance();
+    WorkManager mgr = WorkManager.getInstance(context);
     mgr.beginUniqueWork(ACTION_ACTIVE911_REFRESH_ID, ExistingWorkPolicy.REPLACE, req).enqueue();
   }
 
@@ -368,9 +367,9 @@ public class FCMMessageService extends FirebaseMessagingService {
     }
   }
 
-  public static void resetInstanceId() {
+  public static void resetInstanceId(Context context) {
     OneTimeWorkRequest req = new OneTimeWorkRequest.Builder(ResetIdWorker.class).build();
-    WorkManager.getInstance().enqueue(req);
+    WorkManager.getInstance(context).enqueue(req);
   }
 
   @SuppressWarnings("WeakerAccess")  // CAN NOT BE PRIVATE!!!!
@@ -383,15 +382,9 @@ public class FCMMessageService extends FirebaseMessagingService {
     @NonNull
     public Result doWork() {
       Log.v("Reset FCM instance ID");
-      try {
-        FirebaseInstanceId.getInstance().deleteInstanceId();
-        Log.v("deleteInstanceId succeeded");
-        return Result.success();
-      } catch (IOException ex) {
-        Log.e("DeleteInstanceId failed");
-        Log.e(ex);
-        return Result.failure();
-      }
+      FirebaseMessaging.getInstance().deleteToken();
+      Log.v("deleteInstanceId succeeded");
+      return Result.success();
     }
   }
 
@@ -402,46 +395,38 @@ public class FCMMessageService extends FirebaseMessagingService {
    */
   public static void emailRegistrationId(final Context context) {
 
-    getRegistrationId(new ProcessRegistrationId(){
-      @Override
-      public void run(String registrationId) {
+    getRegistrationId(registrationId -> {
 
-        // Build send email intent and launch it
-        String type = "GCM";
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        String emailSubject = CadPageApplication.getNameVersion() + " " + type + " registration ID";
-        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
-        intent.putExtra(Intent.EXTRA_TEXT, "My " + type + " registration ID is " + registrationId);
-        intent.setType("message/rfc822");
-        try {
-          context.startActivity(Intent.createChooser(intent, context.getString(R.string.pref_email_title)));
-        } catch (ActivityNotFoundException ex) {
-          Log.e(ex);
-        }
-
+      // Build send email intent and launch it
+      String type = "GCM";
+      Intent intent = new Intent(Intent.ACTION_SEND);
+      String emailSubject = CadPageApplication.getNameVersion() + " " + type + " registration ID";
+      intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+      intent.putExtra(Intent.EXTRA_TEXT, "My " + type + " registration ID is " + registrationId);
+      intent.setType("message/rfc822");
+      try {
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.pref_email_title)));
+      } catch (ActivityNotFoundException ex) {
+        Log.e(ex);
       }
+
     });
   }
 
   public interface ProcessRegistrationId {
-    public void run(String registrationId);
+    void run(String registrationId);
   }
 
   public static void getRegistrationId(final ProcessRegistrationId regIdTask) {
-    FirebaseInstanceId.getInstance().getInstanceId()
-        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-          @Override
-          public void onComplete(@NonNull Task<InstanceIdResult> task) {
-            if (!task.isSuccessful()) {
-              Log.e("getInstanceId failed", task.getException());
-              return;
-            }
+    FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+      if (!task.isSuccessful()) {
+        Log.e("getRegistrationId failed", task.getException());
+        return;
+      }
 
-            // Get new Instance ID token
-            String registrationId = task.getResult().getToken();
-            regIdTask.run(registrationId);
-          }
-        });
+      // Get new Instance ID token
+      String registrationId = task.getResult();
+      regIdTask.run(registrationId);
+    });
   }
-
 }

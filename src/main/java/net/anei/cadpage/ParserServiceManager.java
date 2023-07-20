@@ -1,6 +1,5 @@
 package net.anei.cadpage;
 
-import android.content.Context;
 import android.os.Process;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -20,36 +19,33 @@ public class ParserServiceManager {
   private ParserServiceManager() {
     threadPool = new ThreadPoolExecutor(0, 1,
                                         0L, TimeUnit.SECONDS,
-                                         new LinkedBlockingQueue<Runnable>(),
-                                         new ThreadFactory() {
-                                           @Override
-                                           public Thread newThread(Runnable r) {
-                                             Thread t = new Thread(r, "ParserService");
-                                             t.setDaemon(true);
-                                             t.setPriority(Process.THREAD_PRIORITY_BACKGROUND);
-                                             return t;
-                                           }
-                                         });
+                                         new LinkedBlockingQueue<>(),
+                                          r -> {
+                                            Thread t = new Thread(r, "ParserService");
+                                            t.setDaemon(true);
+                                            t.setPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                                            return t;
+                                          });
                                   }
 
-  private enum RequestType {STARTUP, REPARSE_GENERAL, REPARSE_SPLIT_MSG}
+  private enum RequestType {STARTUP, REPARSE_GENERAL, REPARSE_SPLIT_MSG, CRASH}
 
   private static class ParserTask implements Runnable {
 
     private final RequestType request;
     private final int changeCode;
-    private final Exception ex;
 
-    private ParserTask(RequestType request, int changeCode, Exception ex) {
+    private ParserTask(RequestType request, int changeCode) {
       this.request = request;
       this.changeCode = changeCode;
-      this.ex = ex;
     }
 
     @Override
     public void run() {
 
       try {
+
+        Log.v("ParserService:" + request.toString());
 
         // I can find no way that this can possibly return a null value.  But in some mysterious
         // way it is, very sporadically, but several times a day.
@@ -70,6 +66,9 @@ public class ParserServiceManager {
             case REPARSE_SPLIT_MSG:
               update = msg.splitOptionChange(changeCode);
               break;
+
+            case CRASH:
+              throw new RuntimeException("Test Crash");
           }
 
           if (update) {
@@ -88,7 +87,6 @@ public class ParserServiceManager {
 
       // Any exceptions that get thrown should be rethrown on the dispatch thread
       catch (final Exception ex) {
-        ex.initCause(this.ex);
         TopExceptionHandler.reportException(ex);
       }
     }
@@ -99,7 +97,7 @@ public class ParserServiceManager {
   }
 
   private void request(RequestType request, int changeCode) {
-    threadPool.execute(new ParserTask(request, changeCode, new RuntimeException()));
+    threadPool.execute(new ParserTask(request, changeCode));
   }
 
   private static final ParserServiceManager instance = new ParserServiceManager();
@@ -110,6 +108,10 @@ public class ParserServiceManager {
 
   public static void reparseGeneral() {
     instance.request(RequestType.REPARSE_GENERAL);
+  }
+
+  public static void crash() {
+    instance.request(RequestType.CRASH);
   }
 
   public static void reparseSplitMsg(int changeCode) {

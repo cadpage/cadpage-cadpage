@@ -33,6 +33,8 @@ import androidx.core.app.NotificationCompat;
 
 import static android.content.Context.POWER_SERVICE;
 
+import net.anei.cadpage.vendors.VendorManager;
+
 /**
  * Receives Intent.ACTION_MY_PACKAGE_REPLACED and BOOT_COMPLETED intents.  Checks for any
  * new conditions related to a Cadpage or Android system update that would cause Cadpage to fail

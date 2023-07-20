@@ -9,6 +9,7 @@ import java.util.Map;
 import androidx.preference.Preference;
 
 import net.anei.cadpage.ManagePreferences;
+import net.anei.cadpage.SmsMessageQueue;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.ManageParsers;
@@ -189,6 +190,9 @@ s   */
     // And recalculate payment status
     DonationManager.instance().reset();
     MainDonateEvent.instance().refreshStatus();
+
+    // Reparse any general alerts in call history
+    SmsMessageQueue.getInstance().reparseGeneral();
   }
 
   public MsgParser getParser() {

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.CadPageApplication;
+import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
@@ -52,7 +53,7 @@ public class VendorManager {
     Preference reconnectPref = pref.findPreference(context.getString(R.string.pref_reconnect_key));
     assert reconnectPref != null;
     reconnectPref.setOnPreferenceClickListener(preference -> {
-      if (SmsPopupUtils.haveNet(context)) reconnect(context,true);
+      if (SmsPopupUtils.haveNet(context)) reconnect(context,true, false);
       return true;
     });
     
@@ -251,9 +252,22 @@ public class VendorManager {
    * @param context current context
    * @param userReq User requested reconnect
    */
-  public void reconnect(final Context context, final boolean userReq) {
-    FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq));
+  public void reconnect(final Context context, final boolean userReq, final boolean transfer) {
+    Log.v("VendorManager.reconnect1()");
+    FCMMessageService.getRegistrationId(registrationId -> reconnect(context, registrationId, userReq, transfer));
   }
+
+  /**
+   * Process new registration ID assignment
+   * @param context current context
+   * @param registrationId new registration ID
+   */
+  public void onNewToken(Context context, String registrationId) {
+    reconnect(context, registrationId,false, false);
+  }
+
+  private long lastReconnectTime = 0;
+  private String lastRegistrationId = "";
 
   /**
    * Reconnect all enabled vendors
@@ -261,18 +275,24 @@ public class VendorManager {
    * @param registrationId current GCM registration token
    * @param userReq User requested reconnect
    */
-  public void reconnect(Context context, String registrationId, boolean userReq) {
+  private void reconnect(Context context, String registrationId, boolean userReq, boolean transfer) {
+    Log.v("VendorManager.reconnect2()");
 
     // If we do not have a registration ID, we cannot proceed
     if (registrationId == null) return;
 
-    // Get transfer status.  An X value means we are waiting for READ_PHONE_STATE permission
-    // so we can determine if this is the same device or not.  Which means we cannot proceed
-    String transfer = ManagePreferences.transferStatus();
-    if (transfer.equals("X")) return;
+    // We sometimes get two back to back reconnect requests for the same registration ID.  When
+    // this happens, suppress one of them.
 
-    // Any value other than "N" needs to be reset
-    if (!transfer.equals("N")) ManagePreferences.resetTransferStatus();
+    long curTime = System.currentTimeMillis();
+    if (registrationId.equals(lastRegistrationId)) {
+      if (curTime - lastReconnectTime < 1000L) {
+        Log.v("Duplicate reconnect request suppressed");
+        return;
+      }
+    }
+    lastReconnectTime = curTime;
+    lastRegistrationId = registrationId;
 
     // Pass new reg ID and transfer status to all vendors
     for (Vendor vendor : vendorList) {
