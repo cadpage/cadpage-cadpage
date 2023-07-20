@@ -20,6 +20,7 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
   <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -113,6 +114,11 @@
     android:name=".vendors.VendorActivity"
     android:screenOrientation="user"
     android:theme="@style/AppTheme"/>
+
+    <activity android:name=".donation.InstallSupportAppActivity"
+      android:launchMode="singleTop"
+      android:screenOrientation="user"
+      android:theme="@style/Cadpage_Case"/>
 
     <activity android:name=".NoticeActivity"/>
 

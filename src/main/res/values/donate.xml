@@ -30,11 +30,17 @@
     then switch to this version.
   </string>
 
+  <string name="donate_btn_problem">Report Problem</string>
   <string name="donate_btn_cancel">Cancel</string>
   <string name="donate_btn_done">Done</string>
   <string name="donate_btn_OK">OK</string>
   <string name="donate_btn_yes">Yes</string>
   <string name="donate_btn_no">No</string>
+  <string name="donate_btn_try_again">Try Again</string>
+  <string name="donate_downloading">Downloading</string>
+  <string name="donate_installing">Installing</string>
+  <string name="donate_complete">Complete</string>
+  <string name="donate_failed">Failed</string>
   
   <string name="donate_free_title" tools:ignore="MissingTranslation">This is the free version of Cadpage</string>
   <string name="donate_free_text" tools:ignore="MissingTranslation">
@@ -650,5 +656,7 @@
   <string name="battery_optimization_no_title">
     I\'ll take my chances
   </string>
+
+  <string name="support_app">Cadpage Support App</string>
 
   </resources>

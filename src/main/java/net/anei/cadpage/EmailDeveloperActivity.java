@@ -17,7 +17,6 @@ import net.anei.cadpage.donation.UserAcctManager;
 import net.anei.cadpage.vendors.VendorManager;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +35,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
 
   public enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER,
                           MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR,
-                          NEED_HELP, REQUEST_REFUND }
+                          NEED_HELP, REQUEST_REFUND, SUPPORT_APP_PROBLEM }
 
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
@@ -449,6 +448,13 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // Also sends a request directly to the email client, without
     // bring up a request screen first.
     sendEmailRequest2(context, EmailType.REQUEST_REFUND, false, 0, true);
+  }
+
+  public static void sendSupportAppProblemEmail(Context context) {
+
+    // Also sends a request directly to the email client, without
+    // bring up a request screen first.
+    sendEmailRequest2(context, EmailType.SUPPORT_APP_PROBLEM, false, 0, true);
   }
 
   /**

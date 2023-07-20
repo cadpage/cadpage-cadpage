@@ -12,6 +12,7 @@
     <item>Inaktivt sponsorkonto</item>
     <item>Jag behöver hjälp</item>
     <item>Vänligen återbetala mitt senaste abonnemangsinköp</item>
+    <item>Problem installing support app</item> <!-- Translate -->
   </string-array>
   <string-array name="email_devel_text">
     <item>Vill du skicka ett email till utvecklarna av CadPage gällande generella fel eller kommentarer?</item>

@@ -44,6 +44,8 @@ public class DeveloperToolsManager {
   
   
   private static final String[] entryList = new String[]{
+      "Download Support App",
+      "Install Support App",
       "Probe USB",
       "Discover Bluetooth",
       "Probe Bluetooth",
@@ -77,6 +79,7 @@ public class DeveloperToolsManager {
   };
   
   private static final String[] valueList = new String[]{
+    "200", "201",
     "100", "101", "102",
     "33", "1", "2", "3", "4", "5", "6", "7", "8", "9", "91", "92", "93", "10", "11", "12", "13", "14", "15", "16", "19", "20", "21", "22", "23", "24"
   };
