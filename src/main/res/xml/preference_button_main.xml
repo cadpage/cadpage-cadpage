@@ -68,5 +68,5 @@
     app:title="@string/pref_enable_return_call_title"
     app:summaryOn="@string/pref_enable_return_call_summaryon"
     app:summaryOff="@string/pref_enable_return_call_summaryoff"
-    app:defaultValue="true" />
+    app:defaultValue="false" />
 </PreferenceScreen>

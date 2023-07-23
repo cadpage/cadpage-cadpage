@@ -37,9 +37,13 @@
   <string name="pref_alt_map_button_summaryon">Alternativ kartsökningsknapp kommer att inkluderas</string>
   <string name="pref_alt_map_button_summaryoff">Alternativ kartsökningsknapp kommer inte att inkluderas</string>
 
-  <string name="pref_map_page_button_title">Inkludera kartsökningsknapp</string>
-  <string name="pref_map_page_button_summaryon">Kartsökningsknapp kommer att inkluderas</string>
-  <string name="pref_map_page_button_summaryoff">Kartsökningsknapp kommer inte att inkluderas</string>
+  <string name="pref_map_page_button_title">Inkludera kartsökningsknapp</string>       <!-- Transalate -->
+  <string name="pref_map_page_button_summaryon">Kartsökningsknapp kommer att inkluderas</string>       <!-- Transalate -->
+  <string name="pref_map_page_button_summaryoff">Kartsökningsknapp kommer inte att inkluderas</string>       <!-- Transalate -->
+
+  <string name="pref_enable_return_call_title">Enable return call feature</string>
+  <string name="pref_enable_return_call_summaryon">Return call feature enabled</string>
+  <string name="pref_enable_return_call_summaryoff">Return call feature disabled</string>
 
   <string name="button_disabled">Frånkopplad</string>
 
@@ -59,6 +63,7 @@
   <string name="more_info_item_text">Mer info</string>
   <string name="start_radio_item_text">Starta Radio</string>
   <string name="active911_item_text">Active911</string>
+  <string name="return_call_item_text">Return Call</string>  <!-- Translate -->
 
   <string-array name="pref_resp_type_text">
     <item>Ingenting</item>
