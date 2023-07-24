@@ -30,7 +30,6 @@ import net.anei.cadpage.R;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -118,14 +117,14 @@ public class InstallSupportAppActivity extends AppCompatActivity {
     request.setDescription(SUPPORT_FILENAME);
     request.setTitle(getString(R.string.support_app));
     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-    request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, SUPPORT_FILENAME);
+    request.setDestinationUri(Uri.fromFile(supportAppFile));
 
     //noinspection ResultOfMethodCallIgnored
     supportAppFile.delete();
     DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
     lastDownload = manager.enqueue(request);
 
-    handler.postDelayed(timerTick, 1000L);
+    handler.postDelayed(timerTick, 100L);
   }
 
   private final Runnable timerTick = new Runnable(){
@@ -149,7 +148,7 @@ public class InstallSupportAppActivity extends AppCompatActivity {
 
   private final BroadcastReceiver onComplete=new BroadcastReceiver() {
     public void onReceive(Context context, Intent intent) {
-      Log.v("Support app install completed");
+      Log.v("Support app download completed");
       ContentQuery.dumpIntent(intent);
       if (intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) != lastDownload) return;
       downloadDone = false;
@@ -160,9 +159,8 @@ public class InstallSupportAppActivity extends AppCompatActivity {
         downloadDone = status == DownloadManager.STATUS_SUCCESSFUL;
         Log.v("Download result:" + downloadDone + " Status:" + status);
       }
-      dlMgr.remove(lastDownload);
-      lastDownload = -1;
 
+      lastDownload = -1;
       textBuilder.setLength(textMarker);
       textBuilder.append(getString(downloadDone ? R.string.donate_complete : R.string.donate_failed));
       textView.setText(textBuilder);
@@ -261,14 +259,14 @@ public class InstallSupportAppActivity extends AppCompatActivity {
 
       // Commit the session (this will start the installation workflow).
       session.commit(pendingIntent.getIntentSender());
-    } catch (IOException ex) {
-      throw new RuntimeException("Couldn't install package", ex);
-    } catch (RuntimeException ex) {
+    } catch (Exception ex) {
+      Log.e("Support app install failed");
+      Log.e(ex);
       if (session != null) {
         session.abandon();
         session = null;
       }
-      throw ex;
+      finishInstallApp(false, null);
     }
     return true;
   }
