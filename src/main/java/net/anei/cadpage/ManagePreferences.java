@@ -999,6 +999,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static boolean mapPageButton() {
     return prefs.getBoolean(R.string.pref_map_page_button_key);
   }
+
+  public static boolean enableReturnCall() {
+    return prefs.getBoolean(R.string.pref_enable_return_call_key);
+  }
   
   public static final int EXTRA_BUTTON_CNT = EXTRA_BUTTON_IDS.length;
   public static int extraButton(int button) {

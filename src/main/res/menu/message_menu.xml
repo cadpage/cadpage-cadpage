@@ -14,4 +14,5 @@
   <item android:id="@+id/more_info_item" android:title="@string/more_info_item_text" />
   <item android:id="@+id/start_radio_item" android:title="@string/start_radio_item_text" />
   <item android:id="@+id/active911_item" android:title="@string/active911_item_text" />
+  <item android:id="@+id/return_call_item" android:title="@string/return_call_item_text" />
 </menu>

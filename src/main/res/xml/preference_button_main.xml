@@ -63,4 +63,10 @@
     app:summaryOn="@string/pref_map_page_button_summaryon"
     app:summaryOff="@string/pref_map_page_button_summaryoff"
     app:defaultValue="true" />
+  <SwitchPreference
+    app:key="@string/pref_enable_return_call_key"
+    app:title="@string/pref_enable_return_call_title"
+    app:summaryOn="@string/pref_enable_return_call_summaryon"
+    app:summaryOff="@string/pref_enable_return_call_summaryoff"
+    app:defaultValue="false" />
 </PreferenceScreen>

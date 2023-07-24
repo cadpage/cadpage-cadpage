@@ -1,5 +1,6 @@
 package net.anei.cadpage;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -114,7 +115,8 @@ public class MsgOptionManager {
     R.id.close_app_item,
     R.id.more_info_item,
     R.id.start_radio_item,
-    R.id.active911_item
+    R.id.active911_item,
+    R.id.return_call_item
   };
   
   // List of item title resources associated with each button index
@@ -129,7 +131,8 @@ public class MsgOptionManager {
     R.string.close_app_item_text,
     R.string.more_info_item_text,
     R.string.start_radio_item_text,
-    R.string.active911_item_text
+    R.string.active911_item_text,
+    R.string.return_call_item_text
   };
   
   public void setupButtons(ViewGroup respButtonGroup, ViewGroup mainButtonGroup) {
@@ -572,7 +575,13 @@ public class MsgOptionManager {
       boolean enabled = vendor != null && vendor.equals("Active911") && launchActive911(activity, false);
       item.setEnabled(enabled);
       return enabled;
+
+    case R.id.return_call_item:
+      item.setVisible(ManagePreferences.enableReturnCall());
+      item.setEnabled(!message.getInfo().getPhone().isEmpty());
+      break;
     }
+
     return false;
   }
 
@@ -587,6 +596,7 @@ public class MsgOptionManager {
   }
   
   private static final Pattern PHONE_TEXT_PTN = Pattern.compile("(\\d+)/ *(.*)");
+  private static final Pattern CLEAN_PHONE_PTN = Pattern.compile("\\D");
   
   @SuppressLint("MissingPermission")
   private boolean menuItemSelected(int itemId, boolean display, String respCode) {
@@ -661,6 +671,15 @@ public class MsgOptionManager {
     case R.id.active911_item:
       launchActive911(activity, true);
       return true;
+
+    case R.id.return_call_item:
+      String phone2 = message.getInfo().getPhone();
+      phone2 = CLEAN_PHONE_PTN.matcher(phone2).replaceAll("");
+      if (!phone2.isEmpty()) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone2));
+        activity.startActivity(intent);
+      }
+      return true;
       
     case R.id.ack_item:
       message.setResponseMenuVisible(false);
@@ -668,12 +687,12 @@ public class MsgOptionManager {
       
     case R.id.resp_call_item:
       message.setResponseMenuVisible(false);
-      String phone = respCode;
+      String phone1 = respCode;
       Matcher match = PHONE_TEXT_PTN.matcher(respCode);
-      if (match.matches()) phone = match.group(1);
+      if (match.matches()) phone1 = match.group(1);
       ResponseSender responseSender = ResponseSender.instance();
       if (responseSender == null) responseSender = new ResponseSender(activity);
-      responseSender.callPhone(phone);
+      responseSender.callPhone(phone1);
       return true;
       
     case R.id.resp_text_item:
