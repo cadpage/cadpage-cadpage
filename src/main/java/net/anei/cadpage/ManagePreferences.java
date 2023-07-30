@@ -1742,15 +1742,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     protected String checkPermission(String value) {
 
-      // If this variant of Cadpage is not allowed to access messages, there is no
-      // requirement that the permission be granted here
-      if (!BuildConfig.MSG_ALLOWED) return value;
-      
       // This gets tricky because one or both permissions may be needed
       // if the values contains an S, we need RECEIVE_SMS permission
       // if the value contains an M, we need RECEIVE_MMS and READ_SMS permission
-      value = check(value, "S", PermissionManager.RECEIVE_SMS);
-      value = check(value, "M", PermissionManager.READ_SMS, PermissionManager.RECEIVE_MMS);
+      // In either case, if this version of Cadpage is not allowed to access the incomming
+      // messages, we don't need to associated permission
+      if (BuildConfig.REC_SMS_ALLOWED) value = check(value, "S", PermissionManager.RECEIVE_SMS);
+      if (BuildConfig.REC_MMS_ALLOWED) value = check(value, "M", PermissionManager.READ_SMS, PermissionManager.RECEIVE_MMS);
       return value;
     }
     

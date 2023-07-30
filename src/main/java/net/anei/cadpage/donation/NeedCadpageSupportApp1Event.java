@@ -9,10 +9,10 @@ import net.anei.cadpage.SmsPopupUtils;
     This version of Cadpage is not allowed to process incoming MMS messages.
     If you need this functionality, you will need to install the Cadpage message support app.
  */
-public class NeedCadpageSupportApp2Event extends DonateScreenEvent {
+public class NeedCadpageSupportApp1Event extends DonateScreenEvent {
 
-  private NeedCadpageSupportApp2Event() {
-    super(AlertStatus.RED, R.string.donate_need_cadpage_support_app_title, R.string.donate_need_cadpage_support_app2_text,
+  private NeedCadpageSupportApp1Event() {
+    super(AlertStatus.RED, R.string.donate_need_cadpage_support_app_title, R.string.donate_need_cadpage_support_app1_text,
           InstallCadpageSupportAppEvent.instance(),
           FixMsgSupportEvent.instance());
   }
@@ -29,8 +29,8 @@ public class NeedCadpageSupportApp2Event extends DonateScreenEvent {
     }
   }
 
-  private static final NeedCadpageSupportApp2Event instance = new NeedCadpageSupportApp2Event();
-  public static NeedCadpageSupportApp2Event instance() {
+  private static final NeedCadpageSupportApp1Event instance = new NeedCadpageSupportApp1Event();
+  public static NeedCadpageSupportApp1Event instance() {
     return instance;
   }
 

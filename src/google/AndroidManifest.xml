@@ -3,6 +3,4 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="net.anei.cadpage">
 
-  <uses-permission android:name="com.android.vending.BILLING"/>
-
 </manifest>

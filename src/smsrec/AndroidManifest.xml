@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="net.anei.cadpage">
+
+  <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+
+  <!-- We are not allowed to use the real SMS permissions, but we need permission
+       to access our own private support utility that does the real SMS stuff -->
+  <uses-permission android:name="net.anei.cadpagesupport.permission.CONTENT_QUERY"/>
+
+  <application>
+    <receiver android:name=".SmsReceiver"
+        android:exported="true">
+      <intent-filter android:priority="2147483647">
+        <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+      </intent-filter>
+    </receiver>
+
+    <receiver android:name=".PushReceiver"
+     android:exported="true">
+      <intent-filter>
+        <action android:name="net.anei.cadpage.Telephony.WAP_PUSH_RECEIVED"/>
+        <data android:mimeType="application/vnd.wap.mms-message"/>
+      </intent-filter>
+    </receiver>
+  </application>
+
+</manifest>

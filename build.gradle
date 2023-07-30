@@ -51,14 +51,24 @@ android {
                 dimension "receive"
                 versionNameSuffix "M"
                 versionCode 2
-                buildConfigField "boolean", "MSG_ALLOWED", "true"
+                buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
+                buildConfigField "boolean", "REC_MMS_ALLOWED", "true"
+            }
+
+            smsrec {
+                dimension "receive"
+                versionNameSuffix "S"
+                versionCode 1
+                buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
+                buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
             }
 
             norec {
                 dimension "receive"
                 versionNameSuffix "R"
                 versionCode 0
-                buildConfigField "boolean", "MSG_ALLOWED", "false"
+                buildConfigField "boolean", "REC_SMS_ALLOWED", "false"
+                buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
             }
 
             send {
@@ -88,8 +98,8 @@ android {
 
     variantFilter { variant ->
         def names = variant.flavors*.name
-        if (names.contains("aptoide") && (names.contains("norec") || names.contains("nosend")) ||
-            names.contains("send") && names.contains("norec")) {
+        if (names.contains("aptoide") ||
+            names.contains("send") && !names.contains("rec")) {
             setIgnore(true)
         }
     }

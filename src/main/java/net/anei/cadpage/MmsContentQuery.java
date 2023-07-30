@@ -49,7 +49,7 @@ public class MmsContentQuery {
     }
 
     // If message access is allowed, we can use a normal content resolver
-    if (BuildConfig.MSG_ALLOWED) {
+    if (BuildConfig.REC_MMS_ALLOWED) {
       qr = context.getContentResolver();
     }
 

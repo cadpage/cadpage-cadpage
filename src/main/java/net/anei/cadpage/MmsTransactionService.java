@@ -568,7 +568,7 @@ public class MmsTransactionService extends Service {
         if (Log.DEBUG) Log.v("MmsTransactionService shutdown");
         qr.unregisterContentObserver(observer);
         CadPageApplication.runOnMainThread(() -> {
-          if (!BuildConfig.MSG_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          if (!BuildConfig.REC_MMS_ALLOWED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             stopForeground(true);
           }
           stopSelf();

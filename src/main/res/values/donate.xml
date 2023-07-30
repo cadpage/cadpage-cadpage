@@ -543,8 +543,13 @@
     Install Cadpage mesasge support app
   </string>
   <string name="donate_need_cadpage_support_app_text">
-    The Cadpage app is or will soon be prohibited from processing incoming
-    text messages.  If you need this functionality to continue, you need to
+    This version of the Cadpage app is not allowed to process incoming
+    text messages.  If you need this functionality, you will need to
+    install the Cadpage message support app.
+  </string>
+  <string name="donate_need_cadpage_support_app1_text">
+    This version of the Cadpage app is not allowed to process incoming
+    MMS messages.  If you need this functionality, you will need to
     install the Cadpage message support app.
   </string>
   <string name="donate_need_cadpage_support_app2_text">

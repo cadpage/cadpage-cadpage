@@ -20,6 +20,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.PowerManager;
 
+import net.anei.cadpage.donation.NeedCadpageSupportApp1Event;
 import net.anei.cadpage.donation.NeedCadpageSupportApp2Event;
 import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
 import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
@@ -157,7 +158,8 @@ public class SmsPopupUtils {
   public static int checkMsgSupport(Context context, boolean prompt) {
 
     // If we are not processing SMS or MMS messages, there is no need for the support app
-    if (!ManagePreferences.reqMsgSupport()) return -1;
+    String msgType = ManagePreferences.enableMsgType();
+    if (!msgType.contains("S") && !msgType.contains("M")) return -1;
 
     // If support app is not available, I guess we are not going to need it
     if (!isSupportAppAvailable()) return -1;
@@ -172,14 +174,16 @@ public class SmsPopupUtils {
     int version;
     String callbackType = ManagePreferences.callbackTypeSummary();
     boolean callbackPhone = callbackType.contains("P");
+    boolean needSMSSupport = !BuildConfig.REC_SMS_ALLOWED && msgType.contains("S");
+    boolean needMMSSupport = !BuildConfig.REC_MMS_ALLOWED && msgType.contains("M");
 
     if (callbackPhone) {
       version = CADPAGE_SUPPORT_VERSION5;
-    } else if (!BuildConfig.MSG_ALLOWED && !ManagePreferences.useOldMMS()) {
+    } else if (needMMSSupport && !ManagePreferences.useOldMMS()) {
       version = CADPAGE_SUPPORT_VERSION4;
     } else if (callbackType.contains("T")) {
       version = CADPAGE_SUPPORT_VERSION2;
-    } else if (!BuildConfig.MSG_ALLOWED){
+    } else if (needSMSSupport || needMMSSupport){
       version = CADPAGE_SUPPORT_VERSION;
     } else {
       return -1;
@@ -195,8 +199,10 @@ public class SmsPopupUtils {
     if (installedVersion < version) {
       if (prompt) {
         if (installedVersion <= 0) {
-          if (!BuildConfig.MSG_ALLOWED) {
+          if (needSMSSupport) {
             NeedCadpageSupportAppEvent.instance().launch(context);
+          } else if (needMMSSupport) {
+            NeedCadpageSupportApp1Event.instance().launch(context);
           } else {
             NeedCadpageSupportApp2Event.instance().launch(context);
           }
@@ -235,7 +241,8 @@ public class SmsPopupUtils {
   public static void fixMsgSupport(Context context) {
 
     // If we are not processing SMS or MMS messages, nothing needs to be  done
-    if (!ManagePreferences.reqMsgSupport()) return;
+    String msgType = ManagePreferences.enableMsgType();
+    if (!msgType.contains("S") && !msgType.contains("M")) return;
 
     // If support app is not needed, nothing needs to be done
     if (!isSupportAppAvailable()) return;
@@ -245,28 +252,29 @@ public class SmsPopupUtils {
     int version = getSupportAppVersion(context);
     if (version == CADPAGE_SUPPORT_VERSION5) return;
 
-    // If not installed at all, turn off all text message processing
+    // If not installed at all, turn off unsupported message processing
     boolean fixed = false;
-    if (!BuildConfig.MSG_ALLOWED && version <= 0) {
-      if (!ManagePreferences.enableMsgType().equals("C")) {
-        ManagePreferences.setEnableMsgType("C");
+    if (version <= 0) {
+      String newMsgType = msgType;
+      if (!BuildConfig.REC_SMS_ALLOWED) newMsgType = newMsgType.replace("S", "");
+      if (!BuildConfig.REC_MMS_ALLOWED) newMsgType = newMsgType.replace("M", "");
+      if (!newMsgType.equals(msgType)) {
+        msgType = newMsgType;
+        ManagePreferences.setEnableMsgType(msgType);
         fixed = true;
       }
     }
 
-    else {
+    // We know that MMS downloads are not supported, so request the old MMS logic
+    if (msgType.contains("M") && !ManagePreferences.useOldMMS()) {
+      ManagePreferences.setUseOldMMS(true);
+      fixed = true;
+    }
 
-      // We know that MMS downloads are not supported, so request the old MMS logic
-      if (!ManagePreferences.useOldMMS()) {
-        ManagePreferences.setUseOldMMS(true);
-        fixed = true;
-      }
-
-      // Remove any callback codes that are not supported by the current support app
-      if (version < CADPAGE_SUPPORT_VERSION3) {
-        String removeCode = version < CADPAGE_SUPPORT_VERSION2 ? "TP" : "P";
-        if (ManagePreferences.removeCallbackCode(removeCode)) fixed = true;
-      }
+    // Remove any callback codes that are not supported by the current support app
+    if (!msgType.equals("C") && version < CADPAGE_SUPPORT_VERSION3) {
+      String removeCode = version < CADPAGE_SUPPORT_VERSION2 ? "TP" : "P";
+      if (ManagePreferences.removeCallbackCode(removeCode)) fixed = true;
     }
 
     // If we fixed anything, see if we need to restore a visible preference
@@ -276,7 +284,7 @@ public class SmsPopupUtils {
   }
 
   private static boolean isSupportAppAvailable() {
-    return !(BuildConfig.MSG_ALLOWED && BuildConfig.SEND_ALLOWED);
+    return !(BuildConfig.REC_MMS_ALLOWED && BuildConfig.SEND_ALLOWED);
   }
 
   /**
@@ -325,9 +333,7 @@ public class SmsPopupUtils {
   public static void setExactTime(Context context, long time, PendingIntent pendingIntent) {
     AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     if (useExactAlarm(context)) {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {   // Needed to keep lint happy :(
-        myAM.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-      }
+      myAM.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     } else {
       myAM.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
     }
@@ -400,7 +406,7 @@ public class SmsPopupUtils {
 
     // If we are not running the crippled version of Cadpage, then the system knows
     // we are responding to an incoming text message and background starts are acceptable
-    if (BuildConfig.MSG_ALLOWED) return true;
+    if (BuildConfig.REC_SMS_ALLOWED) return true;
 
     // The background start provisions started with Oreo.  Anything before that and we are good
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return true;

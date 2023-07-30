@@ -10,8 +10,8 @@ import net.anei.cadpage.SmsPopupUtils;
 /*
     Install Cadpage message support app
 
-    The Cadpage app is or will soon be prohibited from processing incoming
-    text messages.  If you need this functionality to continue, you need to
+    This version of the Cadpage app is not allowed to process incoming
+    text messages.  If you need this functionality to, you will need to
     install the Cadpage message support app.
  */
 public class NeedCadpageSupportAppEvent extends DonateScreenEvent {

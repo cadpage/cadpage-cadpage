@@ -125,12 +125,13 @@ public class UpgradeReceiver extends BroadcastReceiver {
     // the app has been upgraded, check for the missing permission situation, and if detected,
     // launch this activity to fix things.  Once fixed, we shut down and no one is any wiser
 
-    if (ManagePreferences.enableMsgType().contains("M") && BuildConfig.MSG_ALLOWED &&
+    if (ManagePreferences.enableMsgType().contains("M") && BuildConfig.REC_MMS_ALLOWED &&
             !PermissionManager.isGranted(context, PermissionManager.READ_SMS)) return true;
 
     // Something else to check.  If user has upgraded to a message restricted version of
     // Cadpage, check to make sure the message support app is installed
-    if (!BuildConfig.MSG_ALLOWED && SmsPopupUtils.checkMsgSupport(context, false) > 0) return true;
+    if ((!BuildConfig.REC_SMS_ALLOWED || !BuildConfig.REC_MMS_ALLOWED) &&
+        SmsPopupUtils.checkMsgSupport(context, false) > 0) return true;
 
     return false;
   }

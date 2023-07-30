@@ -15,7 +15,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-public class PreferenceMainFragment extends PreferenceFragment implements LocationManager.Provider{
+public class PreferenceMainFragment extends PreferenceRestorableFragment implements LocationManager.Provider{
 
   private TwoStatePreference mEnabledPreference;
   private Preference locPreference;

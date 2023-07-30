@@ -381,8 +381,15 @@
   <string name="donate_need_cadpage_support_app_title">
     Installera Cadpages meddelande-support app
   </string>
-  <string name="donate_need_cadpage_support_app_text">
-    Cadpage har eller kommer att förhindras att hantera inkommande textmeddelanden. Om du behöver den funktionaliteten fortsättningsvis så behöver du installera Cadpages meddelande-support app.
+    <string name="donate_need_cadpage_support_app_text"> <!-- Translate -->
+    This version of the Cadpage app is not allowed to process incoming
+    text messages.  If you need this functionality, you will need to
+    install the Cadpage message support app.
+  </string>
+    <string name="donate_need_cadpage_support_app1_text"> <!-- Translate -->
+    This version of the Cadpage app is not allowed to process incoming
+    MMS messages.  If you need this functionality, you will need to
+    install the Cadpage message support app.
   </string>
   <string name="donate_need_cadpage_support_app2_text">
     Den här versionen av Cadpage är inte tillåten att skicka SMS eller ringa telefonsamta.
