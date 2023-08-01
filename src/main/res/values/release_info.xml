@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07122023</string>
+  <string name="release_date">08012023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-70\n
+    Added "Return Call" response feature\n
+    \n
+    New Locations:\n
+    Ottawa County, KS\n
+    Kent County, MI (alt)\n
+    Jackson County, OH (alt)\n
+    \n
+    Location Fixes:\n
+    Jackson County, AL\n
+    Tallapoosa County, AL\n
+    Chaffee County, CO\n
+    Blackford County, IN\n
+    St Tammany Parish, IN\n
+    Carroll County, NH\n
+    Grafton County, NH\n
+    Anderson County, SC\n
+    Greensville County, VA\n
+    \n
     v2.2.10-69\n
     New Locations:\n
     Tallapoosa County, AL (alt)\n
@@ -35,13 +54,6 @@
     \n
     v2.2.10-66\n
     Location Fixes:\n
-    Sumner County, TN\n
-    \n
-    v2.2.10-65\n
-    Location Fixes:\n
-    Rockland County, NY\n
-    Deschutes County, OR\n
-    Josephine County, OR\n
-    Lamoille County, VT
+    Sumner County, TN
   </string>
 </resources>
