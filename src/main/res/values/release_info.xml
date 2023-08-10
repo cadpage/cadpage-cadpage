@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08012023</string>
+  <string name="release_date">08092023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-71\n
+    New Locations:\n
+    Allen County, IN\n
+    Floyd County, KY\n
+    Horry County, SC\n
+    \n
+    Location Fixes:\n
+    Baldwin County, AL\n
+    Mesa County, CO\n
+    Lenawee County, MI\n
+    Suffolk County, NY\n
+    Cy Creek Comm Center, TX\n
+    \n
     v2.2.10-70\n
     Added "Return Call" response feature\n
     \n
@@ -51,9 +64,5 @@
     v2.2.10-67\n
     Logging improvements to help identify why Cadpage is crashing multiple
     times per day for one unidentified user.\n
-    \n
-    v2.2.10-66\n
-    Location Fixes:\n
-    Sumner County, TN
   </string>
 </resources>
