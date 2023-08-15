@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08092023</string>
+  <string name="release_date">08152023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-72\n
+    New Locations:\n
+    Cobb County, GA\n
+    \n
+    Location Fixes:\n
+    Calhoun County, AL\n
+    Napa County, CA\n
+    Lake County, IN\n
+    Rockland County, NY\n
+    Anderson County, SC\n
+    \n
     v2.2.10-71\n
     New Locations:\n
     Allen County, IN\n
@@ -59,10 +70,6 @@
     Grayson County, TX\n
     \n
     Misc Fixes:\n
-    Fixed crash running Cadpage in Sweden under Android 6.\n
-    \n
-    v2.2.10-67\n
-    Logging improvements to help identify why Cadpage is crashing multiple
-    times per day for one unidentified user.\n
+    Fixed crash running Cadpage in Sweden under Android 6.
   </string>
 </resources>
