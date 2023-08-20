@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08152023</string>
+  <string name="release_date">08202023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-73\n
+    Location Fixes:\n
+    Carroll County, MD\n
+    \n
     v2.2.10-72\n
     New Locations:\n
     Cobb County, GA\n
@@ -54,22 +58,6 @@
     McNairy County, TN\n
     \n
     Location Fixes:\n
-    Jackson County, OR\n
-    \n
-    v2.2.10-68\n
-    New Locations:\n
-    Cameron County, TX\n
-    Marshall County, WV\n
-    \n
-    Location Fixes:\n
-    Delta County, CO\n
-    Marshall County, KY\n
-    West Feliciana Parish, LA\n
-    Onondaga County, NY\n
-    Jefferson County, OR\n
-    Grayson County, TX\n
-    \n
-    Misc Fixes:\n
-    Fixed crash running Cadpage in Sweden under Android 6.
+    Jackson County, OR
   </string>
 </resources>
