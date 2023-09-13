@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08312023</string>
+  <string name="release_date">09122023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-76\n
+    New Locations:\n
+    Cherokee County, GA (alt)\n
+    \n
+    Location Fixes:\n
+    Washington County, FL\n
+    Grayson County, KY\n
+    Dunklin County, MO\n
+    Audrain County, MO\n
+    Fulton County, PA\n
+    Brazoria County, TX\n
+    Kaufman County, TX\n
+    \n
     v2.2.10-75\n
     New Location:\n
     Alcorn County, MS\n
@@ -38,19 +51,6 @@
     Napa County, CA\n
     Lake County, IN\n
     Rockland County, NY\n
-    Anderson County, SC\n
-    \n
-    v2.2.10-71\n
-    New Locations:\n
-    Allen County, IN\n
-    Floyd County, KY\n
-    Horry County, SC\n
-    \n
-    Location Fixes:\n
-    Baldwin County, AL\n
-    Mesa County, CO\n
-    Lenawee County, MI\n
-    Suffolk County, NY\n
-    Cy Creek Comm Center, TX
+    Anderson County, SC
   </string>
 </resources>

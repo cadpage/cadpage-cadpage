@@ -127,8 +127,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-iid:21.1.0'
     implementation 'com.google.firebase:firebase-messaging:23.2.1'
     implementation 'androidx.work:work-runtime:2.8.1'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.1'  // upgrade to 2.6.1 fails
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation ('com.klinkerapps:android-smsmms:5.2.5') {
         exclude group: 'com.squareup.okhttp', module: 'okhttp'
         exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
