@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09132023</string>
+  <string name="release_date">09282023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-78\n
+    New Locations:\n
+    Osage County, KS\n
+    Lackawanna County, PA (alt)\n
+    Brazoria County, TX (alt)\n
+    McLennan County, TX (alt)\n
+    \n
+    Location Fixes:\n
+    Navajo County, AZ\n
+    Windham County, CT\n
+    White County, GA\n
+    Leavanworth County, KS\n
+    Clinton County, IL\n
+    Scott County, MO\n
+    Genesee County, NY\n
+    Fulton County, OH\n
+    Beaver County, PA\n
+    Chittenden County, VT\n
+    \n
     v2.2.10-77\n
     Location Fixes:\n
     Rockland County, NY\n
@@ -40,21 +59,6 @@
     Jones County, NC\n
     Lenoir County, NC\n
     Orangeburg County, SC\n
-    Denton County, TX\n
-    \n
-    v2.2.10-73\n
-    Location Fixes:\n
-    Carroll County, MD\n
-    \n
-    v2.2.10-72\n
-    New Locations:\n
-    Cobb County, GA\n
-    \n
-    Location Fixes:\n
-    Calhoun County, AL\n
-    Napa County, CA\n
-    Lake County, IN\n
-    Rockland County, NY\n
-    Anderson County, SC
+    Denton County, TX
   </string>
 </resources>
