@@ -1,13 +1,9 @@
 package net.anei.cadpage.donation;
 
-import android.content.Context;
-import android.os.Build;
-
 import net.anei.cadpage.CadPageApplication;
 import net.anei.cadpage.ManageNotification;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
-import net.anei.cadpage.vendors.VendorManager;
 
 /**
  Popup Configuration Problem
