@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09282023</string>
+  <string name="release_date">10242023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-80\n
+    New Locations:\n
+    Yalobusha County, MS\n
+    \n
+    Location Fixes:\n
+    East Feliciana Parish, LA\n
+    Gallatin County, MT\n
+    Douglas County, OR\n
+    Blair County, PA\n
+    Kaufman County, TX\n
+    Brown County, WI\n
+    \n
+    v2.2.10-79\n
+    New Locations:\n
+    Benton County, AR (alt)\n
+    Springdale, AR\n
+    Park County, CO\n
+    Durham County, NC (alt)\n
+    Chreokee County, OK (alt)\n
+    Montgomery County, PA (alt)\n
+    \n
+    Location Fixes:\n
+    Bonner County, ID\n
+    St Marys County, MD\n
+    Bergen County, NJ\n
+    Butler County, OH\n
+    Franklin County, PA\n
+    Calhoun County, SC\n
+    Misouri City, TX\n
+    Nanaimo, BC\n
+    \n
     v2.2.10-78\n
     New Locations:\n
     Osage County, KS\n
@@ -38,27 +69,6 @@
     Audrain County, MO\n
     Fulton County, PA\n
     Brazoria County, TX\n
-    Kaufman County, TX\n
-    \n
-    v2.2.10-75\n
-    New Location:\n
-    Alcorn County, MS\n
-    \n
-    Location Fixes:\n
-    Carroll County, MD\n
-    Stoddard County, MO\n
-    Martin County, NC\n
-    Cy Creek Comm Center, TX\n
-    \n
-    v2.2.10-74\n
-    New Locations:\n
-    Crawford County, IN\n
-    \n
-    Location Fixes:\n
-    Hennepin County, MN\n
-    Jones County, NC\n
-    Lenoir County, NC\n
-    Orangeburg County, SC\n
-    Denton County, TX
+    Kaufman County, TX
   </string>
 </resources>
