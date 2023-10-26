@@ -26,6 +26,7 @@ public class PermissionManager {
   public static final String RECEIVE_MMS = "android.permission.RECEIVE_MMS";
   public static final String CALL_PHONE = "android.permission.CALL_PHONE";
   public static final String SEND_SMS = "android.permission.SEND_SMS";
+  public static final String USE_FULL_SCREEN_INTENT = "android.permission.USE_FULL_SCREEN_INTENT";
   
   // Permissions considered Dangerous, but Cadpage seems to function just fine
   // even when they have not been granted?
@@ -43,9 +44,7 @@ public class PermissionManager {
   private static final String ACCESS_NETWORK_STATE = "android.permission.ACCESS_NETWORK_STATE";
   private static final String RECEIVE_C2DM = "com.google.android.c2dm.permission.RECEIVE";
   private static final String MODIFY_AUDIO_SETTINGS = "android.permission.MODIFY_AUDIO_SETTINGS";
-  private static final String USE_FULL_SCREEN_INTENT = "android.permission.USE_FULL_SCREEN_INTENT";
-  
-  
+
   private final Context context;
   private final Activity activity;
   

@@ -1540,7 +1540,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
 //  private static final int PERM_REQ_RESP_TYPE_BTN4 = 6;
 //  private static final int PERM_REQ_RESP_TYPE_BTN5 = 7;
 //  private static final int PERM_REQ_RESP_TYPE_BTN6 = 8;
-  private static final int PERM_REQ_NO_SHOW_IN_CALL = 9;
+  private static final int PERM_REQ_POPUP_ENABLED = 9;
+  private static final int PERM_REQ_NO_SHOW_IN_CALL = 10;
   private static final int PERM_REQ_PHONE_INFO = 11;
   private static final int PERM_REQ_USER_ALERT_SOUND = 12;
   private static final int PERM_REQ_NOTIFY_ABORT = 13;
@@ -1801,7 +1802,32 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       return checkRequestPermission(reqPerm) ? null : "";
     }
   }
-  
+
+  /********************************************************************
+   * Permission checking the popup enabled preference
+   ********************************************************************/
+  public static boolean checkPopupEnabled(TwoStatePreference pref, boolean value) {
+    return popupEnabledChecker.check(pref, value);
+  }
+
+  private static final PopupEnabledChecker popupEnabledChecker = new PopupEnabledChecker();
+
+  private static class PopupEnabledChecker extends CheckBoxPermissionChecker {
+
+    public PopupEnabledChecker() {
+      super(PERM_REQ_POPUP_ENABLED, R.string.pref_popup_enabled_key);
+    }
+
+    @Override
+    protected Boolean checkPermission(Boolean value) {
+
+      // true value requires READ_PHONE_STATE permission
+      if (!value) return null;
+      if (checkRequestPermission(PermissionManager.USE_FULL_SCREEN_INTENT)) return null;
+      return false;
+    }
+  }
+
   /********************************************************************
    * Permission checking the no show in call preference
    ********************************************************************/

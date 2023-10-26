@@ -18,6 +18,7 @@ public class PreferenceCallDetailFragment extends PreferenceFragment {
 
     // Save specific preferences we might need later
     mPopupEnabledPreference = findPreference(getString(R.string.pref_popup_enabled_key));
+    mPopupEnabledPreference.setOnPreferenceChangeListener((preference, newValue) -> ManagePreferences.checkPopupEnabled((TwoStatePreference) preference, (Boolean) newValue));
 
     // The no show in call preference has no meaning in Android 10
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
