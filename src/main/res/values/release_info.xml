@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10242023</string>
+  <string name="release_date">11072023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.10-81\n
+    New Locations:\n
+    Dougherty County, GA\n
+    Wabash County, IL\n
+    Brazoria County, TX\n
+    \n
+    Location Fixes:\n
+    Benton County, AR\n
+    Chatham County, GA\n
+    Douglas County, MO\n
+    St Louis County, MO\n
+    Hubbard County, MN\n
+    Grafton County, NH\n
+    Robertson County, TX\n
+    \n
     v2.2.10-80\n
     New Locations:\n
     Yalobusha County, MS\n
@@ -56,19 +71,6 @@
     \n
     v2.2.10-77\n
     Location Fixes:\n
-    Rockland County, NY\n
-    \n
-    v2.2.10-76\n
-    New Locations:\n
-    Cherokee County, GA (alt)\n
-    \n
-    Location Fixes:\n
-    Washington County, FL\n
-    Grayson County, KY\n
-    Dunklin County, MO\n
-    Audrain County, MO\n
-    Fulton County, PA\n
-    Brazoria County, TX\n
-    Kaufman County, TX
+    Rockland County, NY
   </string>
 </resources>
