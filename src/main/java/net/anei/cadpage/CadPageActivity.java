@@ -3,6 +3,8 @@ package net.anei.cadpage;
 import net.anei.cadpage.billing.BillingManager;
 import net.anei.cadpage.donation.BatteryOptimization12Event;
 import net.anei.cadpage.donation.BatteryOptimizationEvent;
+import net.anei.cadpage.donation.CheckNotificationEnabledEvent;
+import net.anei.cadpage.donation.CheckPopupAuthorizedEvent;
 import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
@@ -57,8 +59,6 @@ public class CadPageActivity extends AppCompatActivity {
   private static boolean initializing = false;
 
   private static boolean startup = false;
-
-  private boolean needSupportApp;
 
   private boolean splitScreen;
 
@@ -252,7 +252,7 @@ public class CadPageActivity extends AppCompatActivity {
   }
 
   /**
-   * Perform one time Cadpage user setup procesing
+   * Perform one time Cadpage user setup processing
    * @param init - true if Cadpage is being run for the very first time
    * @return - true if we found something the user has to fix
    */
@@ -261,8 +261,14 @@ public class CadPageActivity extends AppCompatActivity {
     // If we are running Android 12 or better, user has to disable battery optimization
     if (BatteryOptimization12Event.instance().launch(CadPageActivity.this)) return true;
 
-    // Otherwise batteriy optimization is strongly advised, but not required
+    // Otherwise battery optimization is strongly advised, but not required
     if (BatteryOptimizationEvent.instance().launch(CadPageActivity.this)) return true;
+
+    // Make sure that Notifications are authorized
+    if (CheckNotificationEnabledEvent.instance().launch(CadPageActivity.this)) return true;
+
+    // And that full screen notifications are authorized
+    if (CheckPopupAuthorizedEvent.instance().launch(CadPageActivity.this)) return true;
 
     if (SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0) return true;
 

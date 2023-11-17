@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Stack;
 
 import net.anei.cadpage.billing.BillingManager;
+import net.anei.cadpage.donation.CheckNotificationEnabledEvent;
+import net.anei.cadpage.donation.CheckPopupAuthorizedEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.LocationTrackingEvent;
@@ -2567,10 +2569,14 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       registerListener(CALLBACK_CODE_IDS[btn], msgSupportListener);
     }
 
-    registerListener(R.string.pref_notif_enabled_key, (String key, Object newVal) -> CadPageWidget.update(context));
+    registerListener(R.string.pref_notif_enabled_key, (String key, Object newVal) -> {
+      CadPageWidget.update(context);
+      CheckNotificationEnabledEvent.instance().launch(context);
+    });
 
     registerListener(R.string.pref_popup_enabled_key, (String key, Object newVal) -> {
       CadPageWidget.update(context);
+      CheckPopupAuthorizedEvent.instance().launch(context);
       CheckPopupEvent.instance().launch(context);
     });
 

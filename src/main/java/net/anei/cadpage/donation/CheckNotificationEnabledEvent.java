@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Build;
 
 import net.anei.cadpage.CadPageApplication;
-import net.anei.cadpage.ManageNotification;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 
@@ -19,8 +18,8 @@ public class CheckNotificationEnabledEvent extends DonateScreenEvent {
 
   public CheckNotificationEnabledEvent() {
     super(null, R.string.check_notifications_title, R.string.check_notifications_text,
-          EnableNotifyPopupEvent.instance(),
-          DisableCadpagePopupEvent.instance());
+          EnableNotificationsEvent.instance(),
+          DisableCadpageNotificationsEvent.instance());
   }
   
   @Override
@@ -30,11 +29,11 @@ public class CheckNotificationEnabledEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return false;
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
     if (!ManagePreferences.notifyEnabled()) return false;
     NotificationManager nm = (NotificationManager)
         CadPageApplication.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-    return nm.areNotificationsEnabled();
+    return !nm.areNotificationsEnabled();
   }
 
   @Override

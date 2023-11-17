@@ -617,6 +617,10 @@
     Turn off location tracking
   </string>
 
+  <string name="check_popup_title">
+    Popup Configuration Problem
+  </string>
+
   <string name="check_popup_text">
     As of Android 10, the Cadpage show alarm popup window option requires that the \"Pop on screen\"
     option be enabled for the regular dispatch notification category
@@ -639,15 +643,23 @@
   </string>
 
   <string name="enable_notifications_title">
-    Enable Cadpage app  notifications
+    Enable Cadpage app notifications
   </string>
 
-  <string name="disable_notification_title">
+  <string name="disable_notifications_title">
     Turn off Cadpage notifications
   </string>
 
-  <string name="check_popup_title">
-    Popup Configuration Problem
+  <string name="check_popup_authorized_title">
+    Full screen notifications are not enabled
+  </string>
+
+  <string name="check_popup_authorized_text">
+    Full screen notifications must be enabled to support Cadpage popup alerts.
+  </string>
+
+  <string name="enable_popup_authorization_title">
+    Enable full screen notifications
   </string>
 
   <string name="battery_optimization_title">

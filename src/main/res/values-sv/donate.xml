@@ -468,6 +468,34 @@
     Avaktivera Cadpages visa alarmpopups alternativ
   </string>
 
+  <string name="check_notifications_title">  <!-- Translate -->
+    App notifications are not enabled
+  </string>
+
+  <string name="check_notifications_text">  <!-- Translate -->
+    Cadpage is configured to generate alert notifications, but system app  notifications are disabled
+  </string>
+
+  <string name="enable_notifications_title">  <!-- Translate -->
+    Enable Cadpage app notifications
+  </string>
+
+  <string name="disable_notifications_title">  <!-- Translate -->
+    Turn off Cadpage notifications
+  </string>
+
+  <string name="check_popup_authorized_title">  <!-- Translate -->
+    Full screen notifications are not enabled
+  </string>
+
+  <string name="check_popup_authorized_text">  <!-- Translate -->
+    Full screen notifications must be enabled to support Cadpage popup alerts.
+  </string>
+
+  <string name="enable_popup_authorization_title">  <!-- Translate -->
+    Enable full screen notifications
+  </string>
+
   <string name="battery_optimization_title">
     Avaktivera batterioptimering
   </string>
