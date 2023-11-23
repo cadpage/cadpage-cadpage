@@ -4,6 +4,9 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-01\n
+    Compatibility changes for Android 14\n
+    \n
     v2.2.10-82\n
     New Locations:\n
     Walker County, GA\n
