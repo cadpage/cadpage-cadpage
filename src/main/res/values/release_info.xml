@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11222023</string>
+  <string name="release_date">11272023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-02\n
+    Reversed previous Android 14 changes
+    \n
     v2.2.11-01\n
     Compatibility changes for Android 14\n
     \n
@@ -64,25 +67,6 @@
     Franklin County, PA\n
     Calhoun County, SC\n
     Misouri City, TX\n
-    Nanaimo, BC\n
-    \n
-    v2.2.10-78\n
-    New Locations:\n
-    Osage County, KS\n
-    Lackawanna County, PA (alt)\n
-    Brazoria County, TX (alt)\n
-    McLennan County, TX (alt)\n
-    \n
-    Location Fixes:\n
-    Navajo County, AZ\n
-    Windham County, CT\n
-    White County, GA\n
-    Leavanworth County, KS\n
-    Clinton County, IL\n
-    Scott County, MO\n
-    Genesee County, NY\n
-    Fulton County, OH\n
-    Beaver County, PA\n
-    Chittenden County, VT
+    Nanaimo, BC
   </string>
 </resources>
