@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11272023</string>
+  <string name="release_date">12072023</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-03\n
+    New Locations:\n
+    Polk County, FL\n
+    Seminole County, FL\n
+    Wayne County, GA\n
+    Lincoln County, WV\n
+    \n
+    Location Fixes:\n
+    Mobile County, AL\n
+    Toland County, CT\n
+    Clay County, MO\n
+    Perry County, PA\n
+    \n
     v2.2.11-02\n
     Reversed previous Android 14 changes
     \n
@@ -48,25 +61,6 @@
     Douglas County, OR\n
     Blair County, PA\n
     Kaufman County, TX\n
-    Brown County, WI\n
-    \n
-    v2.2.10-79\n
-    New Locations:\n
-    Benton County, AR (alt)\n
-    Springdale, AR\n
-    Park County, CO\n
-    Durham County, NC (alt)\n
-    Chreokee County, OK (alt)\n
-    Montgomery County, PA (alt)\n
-    \n
-    Location Fixes:\n
-    Bonner County, ID\n
-    St Marys County, MD\n
-    Bergen County, NJ\n
-    Butler County, OH\n
-    Franklin County, PA\n
-    Calhoun County, SC\n
-    Misouri City, TX\n
-    Nanaimo, BC
+    Brown County, WI
   </string>
 </resources>
