@@ -9,6 +9,7 @@ import net.anei.cadpage.Log;
 import net.anei.cadpage.R;
 
 public class InstallCadpageSupportAppEvent extends DonateEvent {
+  private static final Uri DOWNLOAD_URL =       Uri.parse("https://drive.google.com/file/d/1iNRe4sW2_iG0iG4nffMyK5fToooJ_WmH/view?usp=drive_web");
 
   protected InstallCadpageSupportAppEvent() {
     super(null, R.string.donate_install_cadpage_support_app_title);
@@ -16,7 +17,7 @@ public class InstallCadpageSupportAppEvent extends DonateEvent {
 
   @Override
   protected void doEvent(Activity activity) {
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cadpage.org/download-cadpage"));
+    Intent intent = new Intent(Intent.ACTION_VIEW, DOWNLOAD_URL);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     try {
       activity.startActivity(intent);
