@@ -81,54 +81,42 @@ public class SmsService extends IntentService {
     }
   }
 
-  public static boolean processIntent(Context context, Intent intent) {
+  public static void processIntent(Context context, Intent intent) {
 
     // Not sure how a null intent gets in here, but it happened to one user
     // so now we check for it
-    if (intent == null) return false;
+    if (intent == null) return;
 
     // Otherwise convert Intent into an SMS/MSS message
     SmsMmsMessage message = null;
     if (SmsReceiver.ACTION_SMS_RECEIVED.equals(intent.getAction())) {
       SmsMessage[] messages = getMessagesFromIntent(intent);
-      if (messages == null) return false;
+      if (messages == null) return;
       message = new SmsMmsMessage( messages,System.currentTimeMillis());
-      if (message.getMessageBody().length() == 0) return false;
+      if (message.getMessageBody().length() == 0) return;
 
       // See if this is a vendor discovery query.  If it is, make it go away
-      if (message.isDiscoveryQuery(context)) return true;
+      if (message.isDiscoveryQuery(context)) return;
 
       // Save message for future test or error reporting use
       // If message is rejected as duplicate, don't do anything except call
       // abortbroadcast to keep it from going to anyone else
-      if (! SmsMsgLogBuffer.getInstance().add(message)) {
-        return (! ManagePreferences.smspassthru());
-      }
+      if (! SmsMsgLogBuffer.getInstance().add(message)) return;
     }
 
     // If we didn't get a message, bail out
-    if (message == null) return false;
+    if (message == null) return;
 
     // If this was an incomplete MMS message picked up by the process last
     // message option, bail out
-    if (message.getMessageBody() == null) return false;
+    if (message.getMessageBody() == null) return;
 
     // Class 0 SMS, let the system handle this
     if (message.getMessageType() == SmsMmsMessage.MESSAGE_TYPE_SMS &&
-      message.getMessageClass() == SmsMessage.MessageClass.CLASS_0) return false;
+      message.getMessageClass() == SmsMessage.MessageClass.CLASS_0) return;
 
     // Pass message to accumulator
-    // If the accumulator accepted it, and we aren't passing messages to the
-    // default messaging app, abort broadcast to any further receivers
-    boolean grabbed = SmsMsgAccumulator.instance().addMsg(context, message);
-    if (grabbed) {
-      FilterOptions options = message.getFilterOptions();
-      return options.blockTextMsgEnabled();
-    }
-
-    // That is all we have to do.  SmsMsgAccumulator passes complete
-    // messages to processCadPage when it has them
-    return false;
+    SmsMsgAccumulator.instance().addMsg(context, message);
   }
 
   /**

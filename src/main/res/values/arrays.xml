@@ -39,10 +39,8 @@
     <item>@string/pref_alert_option_no_popup</item>
     <item>@string/pref_alert_option_no_notice_popup</item>
     <item>@string/pref_alert_option_ignore</item>
-    <item>@string/pref_alert_option_discard</item>
   </string-array>
   <!-- alert option values contain character codes that block specific oprations perations 
-       B - do not block alert from message app
        H - do not accept in call history
        N - do not notify user
        P - do not display popup window -->
@@ -51,7 +49,6 @@
     <item>N</item>
     <item>P</item>
     <item>NP</item>
-    <item>BHNP</item>
     <item>HNP</item>
     </string-array>
 </resources>

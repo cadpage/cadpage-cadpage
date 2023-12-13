@@ -840,16 +840,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     return prefs.getBoolean(R.string.pref_noShowInCall_key);
   }
 
-  public static boolean smspassthru() {
-    // This feature just doesn't work since Android 4.4
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) return true;
-
-    // If donation status is disabled, we never block messages from falling
-    // through to regular processor.
-    if (!DonationManager.instance().isEnabled()) return true;
-    return prefs.getBoolean(R.string.pref_passthrusms_key);
-  }
-  
   public static boolean screenOn() {
     return prefs.getBoolean(R.string.pref_screen_on_key);
   }
@@ -2778,7 +2768,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
           R.string.pref_use_old_mms_key,
           R.string.pref_mms_timeout_key,
           R.string.pref_suppress_dup_msg_key,
-          R.string.pref_passthrusms_key,
 
           R.string.pref_override_active911_split_key,
           R.string.pref_split_direct_page_key,

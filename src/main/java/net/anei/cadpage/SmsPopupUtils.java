@@ -345,9 +345,6 @@ public class SmsPopupUtils {
    */
   private static boolean useExactAlarm(Context context) {
 
-    // The exact time API is not available prior to KitKat
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return false;
-
     // For anything up to Android 12 we are good to go
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return true;
 

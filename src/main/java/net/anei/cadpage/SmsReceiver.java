@@ -19,16 +19,9 @@ public class SmsReceiver extends BroadcastReceiver {
     // Anything except an SMS received request should be ignored
     if (!ACTION_SMS_RECEIVED.equals(intent.getAction())) return;
 
-    // We have a lot of CPU cycles to crunch through these alerts.  Ideally, we want to pass
-    // everything to the SmsService where it can be run off of the the main thread.  But if are
-    // running on an old version of Android that still supports blocking alerts from getting
-    // to the default message app, and the user has not suppressed that behavior, then we have
-    // no choice but do all of the work on the main thread :(
-    if (!ManagePreferences.smspassthru()) {
-      if (SmsService.processIntent(context, intent)) abortBroadcast();
-    } else {
-      SmsService.runIntentInService(context, intent);
-    }
+    // We have a lot of CPU cycles to crunch through these alerts.  We want to pass
+    // everything to the SmsService where it can be run off of the the main thread.
+    SmsService.runIntentInService(context, intent);
   }
 }
 

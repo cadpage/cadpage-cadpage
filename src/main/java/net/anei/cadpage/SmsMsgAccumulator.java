@@ -29,11 +29,9 @@ public class SmsMsgAccumulator {
   /**
    * Add new text message to message accumulator
    * @param newMsg message to be added
-   * @return true if message was accepted, which means receiver should abort
-   * the message broadcast unless configured to not do so.
    */
-  public synchronized boolean addMsg(Context context, SmsMmsMessage newMsg) {
-    return addMsg(context, newMsg, false);
+  public synchronized void addMsg(Context context, SmsMmsMessage newMsg) {
+    addMsg(context, newMsg, false);
   }
   
   /**
@@ -41,10 +39,8 @@ public class SmsMsgAccumulator {
    * @param context current context
    * @param newMsg message to be added
    * @param force true to force processing of msg (like for GCM messages)
-   * @return true if message was accepted, which means receiver should abort
-   * the message broadcast unless configured to not do so.
    */
-  public synchronized boolean addMsg(Context context, SmsMmsMessage newMsg, boolean force) {
+  public synchronized void addMsg(Context context, SmsMmsMessage newMsg, boolean force) {
     
     // See if this is a recognizable page or general alert.
     // This only fails if this is not a forced call and does not
@@ -53,7 +49,7 @@ public class SmsMsgAccumulator {
     // run report status.
     int flags = (force ? SmsMmsMessage.PARSE_FLG_FORCE : 0);
     boolean isPage = newMsg.isPageMsg(flags);
-    if (!isPage) return false;
+    if (!isPage) return;
     
     // First step is to see if this msg matches any of the currently 
     // accumulating messages
@@ -83,9 +79,9 @@ public class SmsMsgAccumulator {
         if (msgQueue.isEmpty())
           unregisterKeepAlive(context);
       }
-      
+
       // In any case, this message has been accepted
-      return true;
+      return;
     }
     
     // If the message contains counters indicating that there is more to follow
@@ -100,12 +96,11 @@ public class SmsMsgAccumulator {
       MessageList list = new MessageList(newMsg);
       msgQueue.add(list);
       setReminder(context, list.getTimeoutId(), false);
-      return true;
+      return;
     }
     
     // Otherwise simply pass this message into the output queue
     processCadPage(newMsg);
-    return true;
   }
   
   protected void  processCadPage(SmsMmsMessage newMsg) {

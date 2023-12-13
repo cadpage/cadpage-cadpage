@@ -12,8 +12,4 @@
     <string name="pref_suppress_dup_msg_summaryon">Dubbla larm kommer att ignoreras</string>
     <string name="pref_suppress_dup_msg_summaryoff">Dubbla larm kommer att processas</string>
 
-    <string name="pref_passthrusms_title">Släpp igenom larm till SMS-klienten</string>
-    <string name="pref_passthrusms_summaryoff">Släpp inte igenom larm till SMS-klienten</string>
-    <string name="pref_passthrusms_summaryon">Släpper igenom larm till SMS-klienten</string>
-
 </resources>

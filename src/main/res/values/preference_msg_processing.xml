@@ -19,8 +19,4 @@
     <string name="pref_suppress_dup_msg_summaryon">Duplicate calls will be suppressed</string>
     <string name="pref_suppress_dup_msg_summaryoff">Duplicate calls will be processed</string>
 
-    <string name="pref_passthrusms_title">Pass Calls through to SMS Client</string>
-    <string name="pref_passthrusms_summaryoff">Do not pass Cadpage calls to SMS Client</string>
-    <string name="pref_passthrusms_summaryon">Pass all calls through to default SMS Client</string>
-
 </resources>

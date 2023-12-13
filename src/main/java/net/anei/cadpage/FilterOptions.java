@@ -26,9 +26,4 @@ public class FilterOptions {
   public boolean historyEnabled() {
     return !options.contains("H");
   }
-  
-  public boolean  blockTextMsgEnabled() {
-    return  !(ManagePreferences.smspassthru() || options.contains("B"));
-  }
-
 }
