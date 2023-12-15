@@ -47,9 +47,16 @@ public class SmsService extends IntentService {
   }
 
   @Override
+  public void onTimeout(int startId) {
+    Log.e("SmsService: >>>>>>>>>>>>>>>>>>>>Short Service Timeout<<<<<<<<<<<<<<<<<<");
+    stopSelf();
+  }
+
+  @Override
   public void onDestroy() {
     Log.v("Shutting down SmsService");
     if (sWakeLock != null) sWakeLock.release();
+    super.onDestroy();
   }
 
   /**

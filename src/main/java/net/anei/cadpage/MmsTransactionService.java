@@ -126,11 +126,18 @@ public class MmsTransactionService extends Service {
     return Service.START_STICKY;
   }
 
+  @Override
+  public void onTimeout(int startId) {
+    Log.e("MmsTransactionService: >>>>>>>>>>>>>>>>>>>>Short Service Timeout<<<<<<<<<<<<<<<<<<");
+    stopSelf();
+  }
+
 
   @Override
   public void onDestroy() {
     mWakeLock.release();
     mServiceHandler.sendEmptyMessage(EventType.QUIT.ordinal());
+    super.onDestroy();
   }
 
   @Override

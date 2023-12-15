@@ -23,6 +23,7 @@
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
   <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
   <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
@@ -167,11 +168,11 @@
     <receiver android:name=".ClearAllReceiver"/>
     <receiver android:name=".ReminderReceiver"/>
 
-    <service android:name=".SmsService"/>
-    <service android:name=".MmsTransactionService"/>
-    <service android:name=".KeepAliveService"/>
-    <service android:name=".HttpService"/>
-    <service android:name=".TrackingService"/>
+    <service android:name=".SmsService" android:foregroundServiceType="shortService"/>
+    <service android:name=".MmsTransactionService" android:foregroundServiceType="shortService"/>
+    <service android:name=".KeepAliveService" android:foregroundServiceType="shortService"/>
+    <service android:name=".HttpService" android:foregroundServiceType="shortService"/>
+    <service android:name=".TrackingService" android:foregroundServiceType="location"/>
     <service android:name=".SmsMsgAccumulatorService"/>
 
     <service android:name=".FCMMessageService"

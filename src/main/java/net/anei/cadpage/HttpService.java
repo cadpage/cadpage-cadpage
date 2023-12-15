@@ -30,8 +30,8 @@ public class HttpService extends Service {
     private Uri uri = null;
     private URL url = null;
     
-    private int connectTimeout = 60000;
-    private int readTimeout = 30000;
+    private int connectTimeout = 30000;
+    private int readTimeout = 15000;
     
     private final boolean uiResult;
     
@@ -222,7 +222,13 @@ public class HttpService extends Service {
     super.onStartCommand(intent, flags, startId);
     return Service.START_REDELIVER_INTENT;
   }
-  
+
+  @Override
+  public void onTimeout(int startId) {
+    Log.e("HttpService: >>>>>>>>>>>>>>>>>>>>Short Service Timeout<<<<<<<<<<<<<<<<<<");
+    stopSelf();
+  }
+
   @Override
   public void onDestroy() {
     Log.v("Shutting down HttpService");

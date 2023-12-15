@@ -45,6 +45,12 @@ public class KeepAliveService extends Service {
       SmsPopupUtils.startService(context, intent);
     }
   }
+
+  @Override
+  public void onTimeout(int id) {
+    Log.e("KeepALiveService: >>>>>>>>>>> Short Service Timeout <<<<<<<<<<<<");
+    stopSelf();
+  }
   
   /**
    * unregister shutdown listener
