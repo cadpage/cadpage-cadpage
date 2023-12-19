@@ -147,6 +147,8 @@ public class DonationCalculator {
         }
 
         ManagePreferences.setSubStatus(subStatus);
+
+        Log.v("Saved subscription status: year:"+year+" purchase date:"+purchaseDateStr+" sponsor:"+sponsor+"Substatus:"+subStatus);
       }
       
       // Subcomponent status are saved normally
