@@ -381,15 +381,11 @@
   <string name="donate_need_cadpage_support_app_title">
     Installera Cadpages meddelande-support app
   </string>
-    <string name="donate_need_cadpage_support_app_text"> <!-- Translate -->
-    This version of the Cadpage app is not allowed to process incoming
-    text messages.  If you need this functionality, you will need to
-    install the Cadpage message support app.
+    <string name="donate_need_cadpage_support_app_text">
+    Den här versionen av Cadpage har inte godkänts för att hantera inkommande textmeddelanden. Om du behöver den funktionaliteten så behöver du installera Cadpages stödapp för meddelanden.
   </string>
-    <string name="donate_need_cadpage_support_app1_text"> <!-- Translate -->
-    This version of the Cadpage app is not allowed to process incoming
-    MMS messages.  If you need this functionality, you will need to
-    install the Cadpage message support app.
+    <string name="donate_need_cadpage_support_app1_text">
+    Den här versionen av Cadpage har inte godkänts för att hantera inkommande MMS-meddelanden. Om du behöver den funktionaliteten så behöver du installera Cadpages stödapp för meddelanden.
   </string>
   <string name="donate_need_cadpage_support_app2_text">
     Den här versionen av Cadpage är inte tillåten att skicka SMS eller ringa telefonsamta.
@@ -468,32 +464,32 @@
     Avaktivera Cadpages visa alarmpopups alternativ
   </string>
 
-  <string name="check_notifications_title">  <!-- Translate -->
-    App notifications are not enabled
+  <string name="check_notifications_title">
+    Appnotifikationer är inte aktiverade
   </string>
 
-  <string name="check_notifications_text">  <!-- Translate -->
-    Cadpage is configured to generate alert notifications, but system app  notifications are disabled
+  <string name="check_notifications_text">
+    Cadpage är konfigurerad för att generera larmnotifikationer, men systemets appnotifikationer är avaktiverade.
   </string>
 
-  <string name="enable_notifications_title">  <!-- Translate -->
-    Enable Cadpage app notifications
+  <string name="enable_notifications_title">
+    Aktivera Cadpages appnotifikationer
   </string>
 
-  <string name="disable_notifications_title">  <!-- Translate -->
-    Turn off Cadpage notifications
+  <string name="disable_notifications_title">
+    Avaktivera Cadpages appnotifikationer
   </string>
 
-  <string name="check_popup_authorized_title">  <!-- Translate -->
-    Full screen notifications are not enabled
+  <string name="check_popup_authorized_title">
+    Helskärmsnotifikationer är inte aktiverade
   </string>
 
-  <string name="check_popup_authorized_text">  <!-- Translate -->
-    Full screen notifications must be enabled to support Cadpage popup alerts.
+  <string name="check_popup_authorized_text">
+    Helskärmsnotifikationer måste vara aktiverade för att stödja Cadpages larmmeddelanden.
   </string>
 
-  <string name="enable_popup_authorization_title">  <!-- Translate -->
-    Enable full screen notifications
+  <string name="enable_popup_authorization_title">
+    Aktivera heskärmsnotifikationer
   </string>
 
   <string name="battery_optimization_title">
