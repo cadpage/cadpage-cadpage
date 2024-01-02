@@ -509,6 +509,18 @@
     Stäng av Cadpages batterioptimering
   </string>
 
+  <string name="battery_optimization_support_title">  <!-- Translate -->
+    Disable Battery Optimization for Support App
+  </string>
+
+  <string name="battery_optimization_support_text">  <!-- Translate -->
+    Cadpage cannot initiate phone calls unless battery optimization is disabled for support app
+  </string>
+
+  <string name="battery_optimization_support_yes_title">  <!-- Translate -->
+    Turn off Cadpage support battery optimization
+  </string>
+
   <string name="battery_optimization_no_title">
     Jag chansar
   </string>

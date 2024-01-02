@@ -540,7 +540,7 @@
   </string>
 
   <string name="donate_need_cadpage_support_app_title">
-    Install Cadpage mesasge support app
+    Install Cadpage message support app
   </string>
   <string name="donate_need_cadpage_support_app_text">
     This version of the Cadpage app is not allowed to process incoming
@@ -558,7 +558,7 @@
   </string>
 
   <string name="donate_update_cadpage_support_app_title">
-    Update Cadpage mesasge support app
+    Update Cadpage message support app
   </string>
   <string name="donate_update_cadpage_support_app_text">
     The Cadpage message support app you have installed is outdated and will
@@ -678,6 +678,18 @@
 
   <string name="battery_optimization_yes_title">
     Turn off Cadpage battery optimization
+  </string>
+
+  <string name="battery_optimization_support_title">
+    Disable Battery Optimization for Support App
+  </string>
+
+  <string name="battery_optimization_support_text">
+    Cadpage cannot initiate phone calls unless battery optimization is disabled for support app
+  </string>
+
+  <string name="battery_optimization_support_yes_title">
+    Turn off Cadpage support battery optimization
   </string>
 
   <string name="battery_optimization_no_title">

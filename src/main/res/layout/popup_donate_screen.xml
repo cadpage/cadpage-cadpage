@@ -18,12 +18,11 @@
       android:layout_margin="8dp" />
     <TextView
       android:layout_width="fill_parent"
-      android:gravity="center_vertical"
+      android:gravity="center"
       android:textAppearance="?android:attr/textAppearanceLarge"
-      android:maxLines="1"
-      android:layout_height="wrap_content"
+      android:maxLines="2"
+      android:layout_height="fill_parent"
       android:text="@string/pref_payment_status_title"
-      android:layout_margin="8dp"
       android:id="@+id/DonateStatusView"
       />
   </LinearLayout >  
