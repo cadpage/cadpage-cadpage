@@ -145,6 +145,7 @@ public class SmsPopupUtils {
    * @return -1 if message support is not needed
    *          0 if message support is needed and installed and up to date
    *          1 if user was prompted to install or update message support
+   *          2 if user was/will be prompted to suppress support app battery optimization
    */
   public static int checkMsgSupport(Context context) {
     return checkMsgSupport(context, true);
@@ -157,8 +158,25 @@ public class SmsPopupUtils {
    * @return -1 if message support is not needed
    *          0 if message support is needed and installed and up to date
    *          1 if user was/will be prompted to install or update message support
+   *          2 if user was/will be prompted to suppress support app battery optimization
    */
   public static int checkMsgSupport(Context context, boolean prompt) {
+    return checkMsgSupport(context, prompt, 0);
+  }
+
+  /**
+   * Check to see if the message support app is needed and/or installed
+   * @param context current context
+   * @param prompt true to actually prompt user to install message app
+   * @param reqCode 0 - check everything
+   *                1 - check support app installed version
+   *                2 - check support app battery optimization
+   * @return -1 if message support is not needed
+   *          0 if message support is needed and installed and up to date
+   *          1 if user was/will be prompted to install or update message support
+   *          2 if user was/will be prompted to suppress support app battery optimization
+   */
+  public static int checkMsgSupport(Context context, boolean prompt, int reqCode) {
 
     // If we are not processing SMS or MMS messages, there is no need for the support app
     String msgType = ManagePreferences.enableMsgType();
@@ -195,49 +213,54 @@ public class SmsPopupUtils {
       return -1;
     }
 
-    // Get the installed support app version.  If latest versions, set ResponseSender instance
-    int installedVersion = getSupportAppVersion(context);
-    Log.v("Installed support version:" + installedVersion);
-    if (installedVersion >= CADPAGE_SUPPORT_VERSION5) ResponseSender.setInstance();
+    if (reqCode != 2) {
 
-    // See if the installed support app version meets are needs
-    // If it does not, issue user prompt if requested.  In any case, return 1
-    if (installedVersion < version) {
-      if (prompt) {
-        if (installedVersion <= 0) {
-          if (needSMSSupport) {
-            NeedCadpageSupportAppEvent.instance().launch(context);
-          } else if (needMMSSupport) {
-            NeedCadpageSupportApp1Event.instance().launch(context);
+      // Get the installed support app version.  If latest versions, set ResponseSender instance
+      int installedVersion = getSupportAppVersion(context);
+      Log.v("Installed support version:" + installedVersion);
+      if (installedVersion >= CADPAGE_SUPPORT_VERSION5) ResponseSender.setInstance();
+
+      // See if the installed support app version meets are needs
+      // If it does not, issue user prompt if requested.  In any case, return 1
+      if (installedVersion < version) {
+        if (prompt) {
+          if (installedVersion <= 0) {
+            if (needSMSSupport) {
+              NeedCadpageSupportAppEvent.instance().launch(context);
+            } else if (needMMSSupport) {
+              NeedCadpageSupportApp1Event.instance().launch(context);
+            } else {
+              NeedCadpageSupportApp2Event.instance().launch(context);
+            }
+            Log.v("Requesting Cadpage Message Support app install");
           } else {
-            NeedCadpageSupportApp2Event.instance().launch(context);
+            UpdateCadpageSupportAppEvent.instance().launch(context);
+            Log.v("Requesting Cadpage Message Support app upgrade");
           }
-          Log.v("Requesting Cadpage Message Support app install");
-        } else {
-          UpdateCadpageSupportAppEvent.instance().launch(context);
-          Log.v("Requesting Cadpage Message Support app upgrade");
         }
+        return 1;
       }
-      return 1;
+
+      // Fire off an intent to launch the support app.  If it installed and configured
+      // correctly, it will quietly die without doing anything.  There should not be any way that
+      // this can fail, but if it does, we will log an error and continue
+      launchSupportApp(context, callbackPhone, false);
     }
 
     // One last check.  If response button can initiate phone call, battery optimization for the
     // support app must be disabled
-    if (BatteryOptimizationSupportEvent.instance().isEnabled()) {
-      if (prompt) BatteryOptimizationSupportEvent.instance().launch(context);
-      return 1;
+    if (reqCode != 1) {
+      if (BatteryOptimizationSupportEvent.instance().isEnabled()) {
+        if (prompt) BatteryOptimizationSupportEvent.instance().launch(context);
+        return 2;
+      }
     }
-
-    // Fire off an intent to launch the support app.  If it installed and configured
-    // correctly, it will quietly die without doing anything.  There should not be any way that
-    // this can fail, but if it does, we will log an error and continue
-    launchSupportApp(context, callbackPhone, false);
     return 0;
   }
 
   public static void launchSupportApp(Context context, boolean callbackPhone, boolean suppressBatteryOpt) {
     Intent intent = new Intent(Intent.ACTION_MAIN);
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.addCategory(Intent.CATEGORY_LAUNCHER);
     intent.setClassName(CADPAGE_SUPPORT_PKG, CADPAGE_SUPPORT_CLASS);
     intent.putExtra(EXTRA_CADPAGE_LAUNCH, true);

@@ -25,8 +25,12 @@ public class UpdateCadpageSupportAppEvent extends DonateScreenEvent {
 
   @Override
   public void onRestart(DonateActivity activity) {
-    if (SmsPopupUtils.checkMsgSupport(activity, false) != 1) {
-      closeEvents(activity);
+    if (SmsPopupUtils.checkMsgSupport(activity, false, 1) != 1) {
+      if (BatteryOptimizationSupportEvent.instance().isEnabled()) {
+        activity.switchEvent(BatteryOptimizationSupportEvent.instance(), null);
+      } else {
+        closeEvents(activity);
+      }
     }
   }
 

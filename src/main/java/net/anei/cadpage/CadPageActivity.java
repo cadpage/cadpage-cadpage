@@ -84,7 +84,7 @@ public class CadPageActivity extends AppCompatActivity {
 
     // Make an initial call to checkMsgSupport with no prompt and ignoring the results.
     // This has the critical side effect of initializing ResponseSender.instance()
-    SmsPopupUtils.checkMsgSupport(this, false);
+    SmsPopupUtils.checkMsgSupport(this, false, 1);
 
     ManagePreferences.setPermissionManager(permMgr);
 
@@ -270,6 +270,7 @@ public class CadPageActivity extends AppCompatActivity {
     // And that full screen notifications are authorized
     if (CheckPopupAuthorizedEvent.instance().launch(CadPageActivity.this)) return true;
 
+    // Check the support app is installed if needed
     if (SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0) return true;
 
     // If user upgraded to the release that implements improved email account security, and

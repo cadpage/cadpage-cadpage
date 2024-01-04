@@ -2530,7 +2530,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   PreferenceChangeListener msgSupportListener = (key, newVal) -> {
-    if (SmsPopupUtils.checkMsgSupport(context) == 1) {
+    if (SmsPopupUtils.checkMsgSupport(context) > 0) {
       PreferenceRestorableFragment.setPreferenceKey(key);
     }
   };
