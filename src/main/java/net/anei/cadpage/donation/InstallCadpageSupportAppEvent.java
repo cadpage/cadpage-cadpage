@@ -9,7 +9,9 @@ import net.anei.cadpage.Log;
 import net.anei.cadpage.R;
 
 public class InstallCadpageSupportAppEvent extends DonateEvent {
-  private static final Uri DOWNLOAD_URL =       Uri.parse("https://drive.google.com/file/d/1iNRe4sW2_iG0iG4nffMyK5fToooJ_WmH/view?usp=drive_web");
+  // private static final Uri DOWNLOAD_URL =       Uri.parse("https://drive.google.com/file/d/1iNRe4sW2_iG0iG4nffMyK5fToooJ_WmH/view?usp=drive_web");
+
+  private static final Uri DOWNLOAD_URL =       Uri.parse("https://github.com/cadpage/CadpageMsgSupport/raw/master/app/release/cadpage-support.apk");
 
   protected InstallCadpageSupportAppEvent() {
     super(null, R.string.donate_install_cadpage_support_app_title);
