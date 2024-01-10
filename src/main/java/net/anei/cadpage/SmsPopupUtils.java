@@ -38,7 +38,8 @@ public class SmsPopupUtils {
   private static final int CADPAGE_SUPPORT_VERSION3 = 16;
   private static final int CADPAGE_SUPPORT_VERSION4 = 17;
   private static final int CADPAGE_SUPPORT_VERSION5 = 19;
-  private static final int CADPAGE_SUPPORT_VERSION6 = 20;
+  private static final int CADPAGE_SUPPORT_BAD_VERSION6 = 20;
+  private static final int CADPAGE_SUPPORT_VERSION6 = 21;
   private static final String EXTRA_CADPAGE_LAUNCH = "net.anei.cadpage.LAUNCH";
   private static final String EXTRA_CADPAGE_PHONE = "net.anei.cadpage.CALL_PHONE";
   private static final String EXTRA_SUPPRESS_BATTERY_OPT = "new.anei.cadpage.SUPPRESS_BATTERY_OPT";
@@ -219,6 +220,13 @@ public class SmsPopupUtils {
       int installedVersion = getSupportAppVersion(context);
       Log.v("Installed support version:" + installedVersion);
       if (installedVersion >= CADPAGE_SUPPORT_VERSION5) ResponseSender.setInstance();
+
+      // There was a published version of the support app  that would support phone calls, but not
+      // text messages.  It is highly unlikely that this was actually installed,  But we will check to see
+      // if that is going to cause a problem
+      if (installedVersion == CADPAGE_SUPPORT_BAD_VERSION6 && callbackType.contains("T")) {
+        version = CADPAGE_SUPPORT_VERSION6;
+      }
 
       // See if the installed support app version meets are needs
       // If it does not, issue user prompt if requested.  In any case, return 1

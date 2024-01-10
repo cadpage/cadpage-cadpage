@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01092024</string>
+  <string name="release_date">01102024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-07\n
+    Second attempt to fully support Android 14\n
+    \n
+    Fixed problem with not reliably initiating phone calls to report response status\n
+    \n
     v2.2.11-06\n
     New Locations:\n
     Shelby County, AL\n
