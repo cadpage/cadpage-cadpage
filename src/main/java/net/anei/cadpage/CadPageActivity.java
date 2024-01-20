@@ -5,6 +5,8 @@ import net.anei.cadpage.donation.BatteryOptimization12Event;
 import net.anei.cadpage.donation.BatteryOptimizationEvent;
 import net.anei.cadpage.donation.CheckNotificationEnabledEvent;
 import net.anei.cadpage.donation.CheckPopupAuthorizedEvent;
+import net.anei.cadpage.donation.DonateEvent;
+import net.anei.cadpage.donation.DoneDonateEvent;
 import net.anei.cadpage.donation.LocationTrackingEvent;
 import net.anei.cadpage.donation.CheckPopupEvent;
 import net.anei.cadpage.donation.DonateActivity;
@@ -258,6 +260,8 @@ public class CadPageActivity extends AppCompatActivity {
    */
   private boolean userSetup(boolean init) {
 
+    DoneDonateEvent.clearDone();
+
     // If we are running Android 12 or better, user has to disable battery optimization
     if (BatteryOptimization12Event.instance().launch(CadPageActivity.this)) return true;
 
@@ -370,7 +374,7 @@ public class CadPageActivity extends AppCompatActivity {
   }
 
   @Override
-  protected void onResume() { 
+  protected void onResume() {
     if (Log.DEBUG) Log.v("CadPageActivity: onResume()");
 
     super.onResume();
@@ -380,7 +384,7 @@ public class CadPageActivity extends AppCompatActivity {
     // If we are going through the user setup process, check here to see if there is still more
     // to do.  We only want to execute this after the user has been prompted to fix something
     // and do not want to duplicate the call already made in startup()
-    if (!startup && setupInProgress) {
+    if (!startup && setupInProgress && !DoneDonateEvent.isDone()) {
       setupInProgress = userSetup(false);
     }
 
