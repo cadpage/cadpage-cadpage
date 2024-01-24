@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01212024</string>
+  <string name="release_date">01242024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-10\n
+    New Locations:\n
+    St Mary Parish, LA\n
+    \n
+    Location Fixes:\n
+    Lake County, MT\n
+    Putnam County, NY\n
+    Preble County, OH\n
+    Carbon County, UT\n
+    \n
     v2.2.11-09\n
     Location Fixes:\n
     Putnam County, NY\n
@@ -41,20 +51,6 @@
     Caldwell County, NC\n
     Umatilla County, OR\n
     Hunt County, TX\n
-    Parker County, TX\n
-    \n
-    v2.2.11-05\n
-    New Locations:\n
-    Albany County, WY\n
-    \n
-    Location Fixes:\n
-    Pulaski County, AR\n
-    White County, GA\n
-    Allen County, OH\n
-    Meigs County, OH\n
-    \n
-    v2.2.11-04\n
-    Location Fixes:\n
-    Baltimore County, MD
+    Parker County, TX
   </string>
 </resources>
