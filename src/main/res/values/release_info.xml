@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01302024</string>
+  <string name="release_date">02162024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-12\n
+    Location Fixes:\n
+    Gulf County, FL\n
+    Saint Marys County, MD\n
+    Harnett County, NC\n
+    Orange County, NC\n
+    Petersburg, VA\n
+    \n
     v2.2.11-11\n
     Location Fixes:\n
     Roscommon County, MI\n
@@ -34,11 +42,6 @@
     Teton County, ID\n
     Dallas County, IA\n
     Warren County, IA\n
-    Putnam County, NY\n
-    \n
-    v2.2.11-07\n
-    Second attempt to fully support Android 14\n
-    \n
-    Fixed problem with not reliably initiating phone calls to report response status
+    Putnam County, NY
   </string>
 </resources>
