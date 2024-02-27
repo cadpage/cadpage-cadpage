@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02162024</string>
+  <string name="release_date">02272024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-13\n
+    Location Fixes:\n
+    Hermnando County, FL\n
+    Massac County, IL\n
+    St Marys County, MD\n
+    Berrien County, MI\n
+    Hubbard County, MN\n
+    Johnson County, KS\n
+    Gates County, NC\n
+    Orange County, NC\n
+    Lima County, OH\n
+    Blair County, PA\n
+    Cambria County, PA\n
+    Charleston County, SC\n
+    Overton County, TN\n
+    \n
     v2.2.11-12\n
     Location Fixes:\n
     Gulf County, FL\n
@@ -32,16 +48,6 @@
     \n
     v2.2.11-09\n
     Location Fixes:\n
-    Putnam County, NY\n
-    \n
-    v2.2.11-08\n
-    New Locations:\n
-    Tiskaming District, ON, Canada\n
-    \n
-    Location Fixes:\n
-    Teton County, ID\n
-    Dallas County, IA\n
-    Warren County, IA\n
     Putnam County, NY
   </string>
 </resources>
