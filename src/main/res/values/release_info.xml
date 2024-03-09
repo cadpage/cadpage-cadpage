@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02272024</string>
+  <string name="release_date">03092024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-14\n
+    New Locations:\n
+    Taylor County, FL\n
+    Wake County, NC\n
+    Sullivan County, TN\n
+    Bosque County, TX\n
+    \n
+    Location Fixes:\n
+    Weld County, CO\n
+    Reno County, KS\n
+    Soerset County, NJ\n
+    Fulton County, PA\n
+    \n
     v2.2.11-13\n
     Location Fixes:\n
     Hermnando County, FL\n
@@ -45,9 +58,5 @@
     Putnam County, NY\n
     Preble County, OH\n
     Carbon County, UT\n
-    \n
-    v2.2.11-09\n
-    Location Fixes:\n
-    Putnam County, NY
   </string>
 </resources>
