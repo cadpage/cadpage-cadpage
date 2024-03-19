@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03092024</string>
+  <string name="release_date">03192024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-15\n
+    New Locations:\n
+    Boulder County, CO\n
+    Geary County, KS\n
+    Clark County, SD\n
+    Gregg County, TX\n
+    Whatcom County, WA\n
+    Smithers, BC (Canada)\n
+    \n
+    Location Fixes:\n
+    Maricopa County, AZ\n
+    El Paso County, CO\n
+    Hardin County, KY\n
+    Hartford County, MD\n
+    Watanwan County, MN\n
+    Warren County, NC\n
+    Merimack County, NH\n
+    Adams County, PA\n
+    Armstrong County, PA\n
+    Centre County, PA\n
+    \n
     v2.2.11-14\n
     New Locations:\n
     Taylor County, FL\n
@@ -47,16 +68,6 @@
     Lackawanna County, PA\n
     Darlington County, SC\n
     Clay County, TN\n
-    Ellis County, TX\n
-    \n
-    v2.2.11-10\n
-    New Locations:\n
-    St Mary Parish, LA\n
-    \n
-    Location Fixes:\n
-    Lake County, MT\n
-    Putnam County, NY\n
-    Preble County, OH\n
-    Carbon County, UT\n
+    Ellis County, TX
   </string>
 </resources>
