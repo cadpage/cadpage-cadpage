@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03192024</string>
+  <string name="release_date">04022024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-16\n
+    New Locations:\n
+    Pinal County, AZ\n
+    Yavapai County, AZ\n
+    Highlands County, FL\n
+    Jefferson County, KS\n
+    Creek County, OK\n
+    Caldwell County, TX\n
+    Summers County, WV\n
+    \n
+    Location Fixes:\n
+    Garfield County, AR\n
+    Worth County, IA\n
+    Archuleta County, CO\n
+    El Paso County, CO\n
+    Allegany County, MD\n
+    Stark County, OH\n
+    Wayne County, OH\n
+    Douglas County, OR\n
+    Franklin County, PA\n
+    Orangeburg County, SC\n
+    \n
     v2.2.11-15\n
     New Locations:\n
     Boulder County, CO\n
@@ -60,14 +82,6 @@
     Saint Marys County, MD\n
     Harnett County, NC\n
     Orange County, NC\n
-    Petersburg, VA\n
-    \n
-    v2.2.11-11\n
-    Location Fixes:\n
-    Roscommon County, MI\n
-    Lackawanna County, PA\n
-    Darlington County, SC\n
-    Clay County, TN\n
-    Ellis County, TX
+    Petersburg, VA
   </string>
 </resources>
