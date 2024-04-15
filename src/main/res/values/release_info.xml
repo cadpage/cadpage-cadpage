@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04022024</string>
+  <string name="release_date">04152024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-17\n
+    New Locations:\n
+    Solano County, CA\n
+    \n
+    Location Fixes:\n
+    Weld County, CO\n
+    Taylor County, GA\n
+    Lake County, IL\n
+    Oldham County, KY\n
+    Frederick County, MD\n
+    Barry County, MI\n
+    Centerville, OH\n
+    Adams County, PA\n
+    \n
     v2.2.11-16\n
     New Locations:\n
     Pinal County, AZ\n
@@ -74,14 +88,6 @@
     Blair County, PA\n
     Cambria County, PA\n
     Charleston County, SC\n
-    Overton County, TN\n
-    \n
-    v2.2.11-12\n
-    Location Fixes:\n
-    Gulf County, FL\n
-    Saint Marys County, MD\n
-    Harnett County, NC\n
-    Orange County, NC\n
-    Petersburg, VA
+    Overton County, TN
   </string>
 </resources>
