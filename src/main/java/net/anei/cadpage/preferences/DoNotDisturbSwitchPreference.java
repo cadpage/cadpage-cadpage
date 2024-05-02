@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 @TargetApi(Build.VERSION_CODES.O_MR1)
 public class DoNotDisturbSwitchPreference extends SwitchPreference {
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public DoNotDisturbSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
   }
