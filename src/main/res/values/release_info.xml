@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04152024</string>
+  <string name="release_date">05022024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-18\n
+    New Locations:\n
+    Monroe County, AL\n
+    Choctaw County, AL\n
+    Canyon County, ID\n
+    Letcher County, KY\n
+    Macomb County, MI\n
+    McKean County, PA\n
+    Colleton County, SC\n
+    Cochran County, TX\n
+    \n
+    Location Fixes:\n
+    Lake County, IL\n
+    Clay County, MO\n
+    Fairfield County, OH\n
+    Bucks County, PA\n
+    Parker County, TX\n
+    Whitman County, WA\n
+    Wylie, TX\n
+    \n
     v2.2.11-17\n
     New Locations:\n
     Solano County, CA\n
@@ -72,22 +92,6 @@
     Weld County, CO\n
     Reno County, KS\n
     Soerset County, NJ\n
-    Fulton County, PA\n
-    \n
-    v2.2.11-13\n
-    Location Fixes:\n
-    Hermnando County, FL\n
-    Massac County, IL\n
-    St Marys County, MD\n
-    Berrien County, MI\n
-    Hubbard County, MN\n
-    Johnson County, KS\n
-    Gates County, NC\n
-    Orange County, NC\n
-    Lima County, OH\n
-    Blair County, PA\n
-    Cambria County, PA\n
-    Charleston County, SC\n
-    Overton County, TN
+    Fulton County, PA
   </string>
 </resources>
