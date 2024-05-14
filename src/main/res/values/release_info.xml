@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05022024</string>
+  <string name="release_date">05142024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-19\n
+    Dropped support for Android 4\n
+    \n
+    New Locations:\n
+    Suffolk County, NY\n
+    Wichita County, TX\n
+    \n
+    Location Fixes:\n
+    Arapahoe County, CO\n
+    Douglas County, CO\n
+    Fremont County, CO\n
+    Lake County, IL\n
+    Cuyahoga County, OH\n
+    Richland County, OH\n
+    Garfield County, OK\n
+    Centre County, PA\n
+    Bedford County, TN\n
+    \n
     v2.2.11-18\n
     New Locations:\n
     Monroe County, AL\n
@@ -79,19 +97,6 @@
     Merimack County, NH\n
     Adams County, PA\n
     Armstrong County, PA\n
-    Centre County, PA\n
-    \n
-    v2.2.11-14\n
-    New Locations:\n
-    Taylor County, FL\n
-    Wake County, NC\n
-    Sullivan County, TN\n
-    Bosque County, TX\n
-    \n
-    Location Fixes:\n
-    Weld County, CO\n
-    Reno County, KS\n
-    Soerset County, NJ\n
-    Fulton County, PA
+    Centre County, PA
   </string>
 </resources>
