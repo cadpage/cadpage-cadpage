@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05142024</string>
+  <string name="release_date">05162024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-20\n
+    Location Fixes:\n
+    Dougherty County, GA\n
+    \n
     v2.2.11-19\n
     Dropped support for Android 4\n
     \n
@@ -76,27 +80,6 @@
     Wayne County, OH\n
     Douglas County, OR\n
     Franklin County, PA\n
-    Orangeburg County, SC\n
-    \n
-    v2.2.11-15\n
-    New Locations:\n
-    Boulder County, CO\n
-    Geary County, KS\n
-    Clark County, SD\n
-    Gregg County, TX\n
-    Whatcom County, WA\n
-    Smithers, BC (Canada)\n
-    \n
-    Location Fixes:\n
-    Maricopa County, AZ\n
-    El Paso County, CO\n
-    Hardin County, KY\n
-    Hartford County, MD\n
-    Watanwan County, MN\n
-    Warren County, NC\n
-    Merimack County, NH\n
-    Adams County, PA\n
-    Armstrong County, PA\n
-    Centre County, PA
+    Orangeburg County, SC
   </string>
 </resources>
