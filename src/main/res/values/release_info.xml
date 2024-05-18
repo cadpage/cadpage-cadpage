@@ -4,6 +4,10 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-21\n
+    Location Fixes:\n
+    Dougherty County, GA\n
+    \n
     v2.2.11-20\n
     Location Fixes:\n
     Dougherty County, GA\n
@@ -58,28 +62,6 @@
     Frederick County, MD\n
     Barry County, MI\n
     Centerville, OH\n
-    Adams County, PA\n
-    \n
-    v2.2.11-16\n
-    New Locations:\n
-    Pinal County, AZ\n
-    Yavapai County, AZ\n
-    Highlands County, FL\n
-    Jefferson County, KS\n
-    Creek County, OK\n
-    Caldwell County, TX\n
-    Summers County, WV\n
-    \n
-    Location Fixes:\n
-    Garfield County, AR\n
-    Worth County, IA\n
-    Archuleta County, CO\n
-    El Paso County, CO\n
-    Allegany County, MD\n
-    Stark County, OH\n
-    Wayne County, OH\n
-    Douglas County, OR\n
-    Franklin County, PA\n
-    Orangeburg County, SC
+    Adams County, PA
   </string>
 </resources>
