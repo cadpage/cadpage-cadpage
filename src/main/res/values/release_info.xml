@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05162024</string>
+  <string name="release_date">05292024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-22\n
+    New Locations:\n
+    Pulaski County, AR\n
+    Gilmer County, GA\n
+    Mahoning County, OH\n
+    Mingo County, WV\n
+    \n
+    Location Fixes:\n
+    Rio Blanco County, CA\n
+    Jasper County, GA\n
+    Atchisonn County, KS\n
+    Salem County, NJ\n
+    Union County, OH\n
+    Beaufort County, SC\n
+    Bedford County, VA\n
+    \n
     v2.2.11-21\n
     Location Fixes:\n
     Dougherty County, GA\n
@@ -48,20 +64,6 @@
     Bucks County, PA\n
     Parker County, TX\n
     Whitman County, WA\n
-    Wylie, TX\n
-    \n
-    v2.2.11-17\n
-    New Locations:\n
-    Solano County, CA\n
-    \n
-    Location Fixes:\n
-    Weld County, CO\n
-    Taylor County, GA\n
-    Lake County, IL\n
-    Oldham County, KY\n
-    Frederick County, MD\n
-    Barry County, MI\n
-    Centerville, OH\n
-    Adams County, PA
+    Wylie, TX
   </string>
 </resources>
