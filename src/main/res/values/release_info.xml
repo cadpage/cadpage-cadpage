@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05312024</string>
+  <string name="release_date">06212024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-24\n
+    New Locations:\n
+    Steward County, TN\n
+    \n
+    Location Fixes:\n
+    Chilton County, AL\n
+    Washington County, AR\n
+    New London County, CT\n
+    Chatooga County, GA\n
+    Fountain County, IN\n
+    Warren County, IN\n
+    Rock Island County, IL\n
+    Muhlenberg County, KY\n
+    Crawford County, MO\n
+    Gallia County, OH\n
+    Mahoning County, OH\n
+    Claiborne County, TN\n
+    Bastrop County, TX\n
+    Campbell County, VA\n
+    \n
     v2.2.11-23\n
     Location Fixes:\n
     Suffolk County, NY\n
