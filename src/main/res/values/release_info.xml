@@ -4,6 +4,9 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-25\n
+    Dropped target Android version back to Android 13 in an attempt to satisfy new Google restrictions.\n
+    \n
     v2.2.11-24\n
     New Locations:\n
     Steward County, TN\n
