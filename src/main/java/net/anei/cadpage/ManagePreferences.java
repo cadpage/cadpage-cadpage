@@ -1813,7 +1813,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     @Override
     protected Boolean checkPermission(Boolean value) {
 
-      // true value requires READ_PHONE_STATE permission
+      // true value requires USE_FULL_SCREEN_INTENT permission
       if (!value) return null;
       if (checkRequestPermission(PermissionManager.USE_FULL_SCREEN_INTENT)) return null;
       return false;
