@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07012024</string>
+  <string name="release_date">07172024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-27\n
+    New Locations:\n
+    Fairfield County, CT\n
+    Caribou County, ID\n
+    Essex County, NJ\n
+    Rockland County, NY\n
+    Harrison County, OH\n
+    Middletown, OH\n
+    Sandusky County, OH\n
+    Ellis County, TX\n
+    \n
+    Location Fixes:\n
+    Winnebago County, IL\n
+    Greene County, OH\n
+    Portage County, OH\n
+    Wood County, WV\n
+    \n
     v2.2.11-26\n
     Restored support for Android 14\n
     \n
@@ -46,29 +63,5 @@
     v2.2.11-23\n
     Location Fixes:\n
     Suffolk County, NY\n
-    \n
-    v2.2.11-22\n
-    New Locations:\n
-    Pulaski County, AR\n
-    Gilmer County, GA\n
-    Mahoning County, OH\n
-    Mingo County, WV\n
-    \n
-    Location Fixes:\n
-    Rio Blanco County, CA\n
-    Jasper County, GA\n
-    Atchisonn County, KS\n
-    Salem County, NJ\n
-    Union County, OH\n
-    Beaufort County, SC\n
-    Bedford County, VA\n
-    \n
-    v2.2.11-21\n
-    Location Fixes:\n
-    Dougherty County, GA\n
-    \n
-    v2.2.11-20\n
-    Location Fixes:\n
-    Dougherty County, GA
   </string>
 </resources>
