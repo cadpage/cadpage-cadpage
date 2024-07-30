@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07172024</string>
+  <string name="release_date">07302024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-28\n
+    New Locations:\n
+    Lamar County, AL\n
+    Mercer County, KY\n
+    Stephens County, OK\n
+    \n
+    Location Fixes:\n
+    Orange County, CA\n
+    Story County, IA\n
+    Gaston County, NC\n
+    Lake County, OH\n
+    Bishop County, TX\n
+    \n
     v2.2.11-27\n
     New Locations:\n
     Fairfield County, CT\n
@@ -59,9 +72,5 @@
     Claiborne County, TN\n
     Bastrop County, TX\n
     Campbell County, VA\n
-    \n
-    v2.2.11-23\n
-    Location Fixes:\n
-    Suffolk County, NY\n
   </string>
 </resources>
