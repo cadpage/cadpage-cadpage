@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08052024</string>
+  <string name="release_date">08112024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-30\n
+    New Locations:\n
+    Pasco County, FL\n
+    \n
+    Location Fixes:\n
+    Kenosha County, WI\n
+    \n
     v2.2.11-29\n
     Location Fixes:\n
     Harford County, MD\n
@@ -52,9 +59,6 @@
     \n
     Location Fixes:\n
     Forsyth County, NC\n
-    Fond du Lac County, WI\n
-    \n
-    v2.2.11-25\n
-    Dropped target Android version back to Android 13 in an attempt to satisfy new Google restrictions.\n
+    Fond du Lac County, WI
   </string>
 </resources>
