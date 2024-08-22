@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08112024</string>
+  <string name="release_date">08222024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-31\n
+    New Locations:\n
+    Harrison County, MS\n
+    Montague County, TX\n
+    La Crosse County, WI\n
+    \n
+    Location Fixes:\n
+    Clinton County, OH\n
+    Red Deer County, AB\n
+    \n
     v2.2.11-30\n
     New Locations:\n
     Pasco County, FL\n
@@ -43,22 +53,6 @@
     Winnebago County, IL\n
     Greene County, OH\n
     Portage County, OH\n
-    Wood County, WV\n
-    \n
-    v2.2.11-26\n
-    Restored support for Android 14\n
-    \n
-    New Locations:\n
-    Clark County, IN\n
-    Green County, KY\n
-    Lincoln County, MT\n
-    Burlington County, NJ\n
-    Surry County, NC\n
-    Richland County, SC\n
-    Aurora County, SD\n
-    \n
-    Location Fixes:\n
-    Forsyth County, NC\n
-    Fond du Lac County, WI
+    Wood County, WV
   </string>
 </resources>
