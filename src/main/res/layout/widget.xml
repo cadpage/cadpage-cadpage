@@ -3,34 +3,36 @@
                 android:orientation="horizontal"
                 android:background="@drawable/cadpage_widget_bkg"
                 android:layout_gravity="center"
-                android:layout_width="wrap_content" android:layout_height="wrap_content">
+                android:padding="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
     <ImageView android:id="@+id/widget_button_cadpage"
-               android:layout_height="wrap_content"  
-               android:layout_width="wrap_content" 
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_width="0dp"
                android:clickable="true"
-               android:cropToPadding="true" 
                android:src="@drawable/cadpage_widget_logo"/>
-    <ImageView android:id="@+id/widget_button_notification"
-               android:layout_height="wrap_content"  
-               android:layout_width="wrap_content" 
-               android:clickable="true"
-               android:cropToPadding="true" 
-               android:src="@drawable/cadpage_widget_bell"/>
-    <ImageView android:layout_height="wrap_content" 
-               android:layout_width="wrap_content" 
-               android:cropToPadding="true"
-               android:src="@drawable/cadpage_widget_talk" 
-               android:clickable="true" 
-               android:id="@+id/widget_button_popup" />
+    <ImageView  android:id="@+id/widget_button_notification"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:clickable="true"
+                android:src="@drawable/cadpage_widget_bell"/>
+    <ImageView
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:src="@drawable/cadpage_widget_talk"
+                android:clickable="true"
+                android:id="@+id/widget_button_popup" />
 
     <Button
         android:id="@+id/widget_text_newcalls"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_margin="14dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:clickable="true"
-        android:cropToPadding="true"
-        android:minHeight="0dip"
-        android:minWidth="060dip" />
+        android:clickable="true" />
 
 </LinearLayout>
