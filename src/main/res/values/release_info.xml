@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09252024</string>
+  <string name="release_date">10072024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-34\n
+    New Locations:\n
+    Hale County, AL\n
+    Montgomery County, AL\n
+    Shelby County, KY\n
+    McCook County, SD\n
+    \n
+    Location Fixes:\n
+    Jefferson County, AL\n
+    St Clair County, AL\n
+    Walker County, AL\n
+    Siskiyou County, CA\n
+    Walton County, FL\n
+    Jackson County, GA\n
+    Roseau County, MN\n
+    Lincoln County, MO\n
+    Beaver County, PA\n
+    Berks County, PA\n
+    Lackawanna County, PA\n
+    Kingsport, TN\n
+    \n
     v2.2.11-33\n
     Fixed widget display issues\n
     \n
@@ -58,10 +79,6 @@
     Pasco County, FL\n
     \n
     Location Fixes:\n
-    Kenosha County, WI\n
-    \n
-    v2.2.11-29\n
-    Location Fixes:\n
-    Harford County, MD
+    Kenosha County, WI
   </string>
 </resources>
