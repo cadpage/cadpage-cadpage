@@ -125,7 +125,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.firebase:firebase-iid:21.1.0'
-    implementation 'com.google.firebase:firebase-messaging:24.0.2'
+    implementation 'com.google.firebase:firebase-messaging:24.0.3'
     implementation 'androidx.work:work-runtime:2.9.1'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.7.0'  // Upgraade to 2.8.6 fails
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

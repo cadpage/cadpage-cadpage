@@ -155,10 +155,10 @@
   <string name="donate_billing_account_text">
     Your current billing account is %s.\n\n
 
-    This account information is considered private user information use without your explicit
-    permission.  For the most part, Cadpage will work just fine without it.  It is only required
-    if you are requesting a free Cadpage subscription, or using a check or Paypal to purchase a
-    Cadpage subscription, or reporting some kind of billing problem.\n\n
+    This account information is considered private user information which Cadpage cannot use
+    without your explicit permission.  For the most part, Cadpage will work just fine without it.
+    It is only required if you are requesting a free Cadpage subscription, or using a check or
+    Paypal to purchase a Cadpage subscription, or reporting some kind of billing problem.\n\n
 
     The account information may be included in emails sent to Cadpage support
     and used to update your payment status.  It will also be used to query your payment

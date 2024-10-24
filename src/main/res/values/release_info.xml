@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10072024</string>
+  <string name="release_date">10232024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-35\n
+    New Locations:\n
+    Fayette County, AL\n
+    Fulton County, GA\n
+    Caldwell County, KY\n
+    Nobles County, MN\n
+    Logan County, ND\n
+    McKenzie County, ND\n
+    \n
+    Location Fixes:\n
+    Morgan County, AL\n
+    Cass County, IN\n
+    Saint Marys County, MD\n
+    Stanly County, NC\n
+    Muskingum County, OH\n
+    Aransas County, TX\n
+    Brazoria County, TX\n
+    Rockwall County, TX\n
+    \n
     v2.2.11-34\n
     New Locations:\n
     Hale County, AL\n
@@ -72,13 +91,6 @@
     \n
     Location Fixes:\n
     Clinton County, OH\n
-    Red Deer County, AB\n
-    \n
-    v2.2.11-30\n
-    New Locations:\n
-    Pasco County, FL\n
-    \n
-    Location Fixes:\n
-    Kenosha County, WI
+    Red Deer County, AB
   </string>
 </resources>
