@@ -22,7 +22,7 @@ public class DonationCalculator {
    * @param type 0 - overall donation status<br>
    *             1 - Google Play Store donation status
    *             2 - Authorization server donation status
-   *             3 - Aptoide Play Store donation status
+   *             3 - Aptoide Play Store donation status (no longer used)
    */
   public DonationCalculator(int type) {
     this.type = type;

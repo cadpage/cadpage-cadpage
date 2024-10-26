@@ -24,8 +24,7 @@ import android.widget.TextView;
 public abstract class DonateEvent {
 
   // Title to be used when making in-app purchases
-  static int DONATE_ANDROID_TITLE =
-      BuildConfig.APTOIDE ? R.string.donate_android_aptoide_title : R.string.donate_android_google_title;
+  static int DONATE_ANDROID_TITLE = R.string.donate_android_google_title;
 
 
   // Different alert status codes

@@ -510,7 +510,7 @@ public class DonationManager {
 
   public boolean isEarlyRenewalWarning() {
     calculate();
-    return earlyRenewalWarning && !BuildConfig.APTOIDE;
+    return earlyRenewalWarning;
   }
 
   public boolean isRefundPrompt() {

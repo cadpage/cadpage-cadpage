@@ -19,6 +19,7 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
         versionCode project.versionCode
+        compileSdkVersion 34
         targetSdkVersion 34
         minSdkVersion 21
         multiDexEnabled true
@@ -30,22 +31,8 @@ android {
             signingConfig signingConfigs.release
         }
 
-        flavorDimensions "store", "receive", "send"
+        flavorDimensions "receive", "send"
         productFlavors {
-
-            google {
-                dimension "store"
-                versionNameSuffix "G"
-                versionCode 1
-                buildConfigField "boolean", "APTOIDE", "false"
-            }
-
-            aptoide {
-                dimension "store"
-                versionNameSuffix "A"
-                versionCode 1
-                buildConfigField "boolean", "APTOIDE", "true"
-            }
 
             rec {
                 dimension "receive"
@@ -88,7 +75,6 @@ android {
     }
 
     applicationVariants.all { variant ->
-        def storeVersion = variant.productFlavors.get(0).versionCode
         def typeVersion = variant.productFlavors.get(1).versionCode
         def version = defaultConfig.versionCode + typeVersion // * 10000000
         variant.outputs.each { output ->
@@ -104,7 +90,7 @@ android {
         }
     }
 
-    compileSdk 34
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

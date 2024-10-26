@@ -14,11 +14,10 @@ public class BillingManager {
   private static final Billing[] billingClients = new Billing[]{
     new GoogleBilling(),
     new AuthServerBilling(),
-    new AptoideBilling()
   };
 
   @SuppressLint("StaticFieldLeak")
-  private static final Billing purchaseClient = billingClients[BuildConfig.APTOIDE ? 2 : 0];
+  private static final Billing purchaseClient = billingClients[0];
 
   /**
    * Initialize billing manager
@@ -52,7 +51,7 @@ public class BillingManager {
    * @return true if in-app billing should be permanently suppressed
    */
   public boolean isSuppressed() {
-    return BuildConfig.APTOIDE;
+    return false;
   }
 
   /**
