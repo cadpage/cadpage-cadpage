@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10232024</string>
+  <string name="release_date">11132024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-36\n
+    New Locations:\n
+    Jefferson County, CO\n
+    Lee County, FL\n
+    Lucas County, IA\n
+    Muskingum County, OH\n
+    \n
+    Location Fixes:\n
+    Stamford, CT\n
+    Jefferson County, IN\n
+    Hickman County, KY\n
+    East Feliciana Parish, LA\n
+    Pennington County, MN\n
+    Orange County, NY\n
+    McKean County, PA\n
+    Henderson County, TX\n
+    Lubbock County, TX\n
+    Reeves County, TX\n
+    Rockbridge County, VA\n
+    Whitman County, WA\n
+    \n
     v2.2.11-35\n
     New Locations:\n
     Fayette County, AL\n
@@ -81,16 +102,6 @@
     Williamson County, TX\n
     Caledonia County, VT\n
     Brunswick County, VA\n
-    Fredricksburg, VA\n
-    \n
-    v2.2.11-31\n
-    New Locations:\n
-    Harrison County, MS\n
-    Montague County, TX\n
-    La Crosse County, WI\n
-    \n
-    Location Fixes:\n
-    Clinton County, OH\n
-    Red Deer County, AB
+    Fredricksburg, VA
   </string>
 </resources>
