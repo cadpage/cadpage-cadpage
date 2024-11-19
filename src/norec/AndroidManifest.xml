@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="net.anei.cadpage">
+          xmlns:tools="http://schemas.android.com/tools">
 
   <!-- We are not allowed to use the real SMS permissions, but we need permission
        to access our own private support utility that does the real SMS stuff -->

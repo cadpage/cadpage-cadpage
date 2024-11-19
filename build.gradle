@@ -29,61 +29,65 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt')
             signingConfig signingConfigs.release
         }
+    }
 
-        flavorDimensions "store", "receive", "send"
-        productFlavors {
+    lintOptions {
+        abortOnError false
+    }
 
-            google {
-                dimension "store"
-                versionNameSuffix "G"
-                versionCode 1
-                buildConfigField "boolean", "APTOIDE", "false"
-            }
+    flavorDimensions = ["store", "receive", "send"]
+    productFlavors {
 
-            aptoide {
-                dimension "store"
-                versionNameSuffix "A"
-                versionCode 1
-                buildConfigField "boolean", "APTOIDE", "true"
-            }
+        google {
+            dimension "store"
+            versionNameSuffix "G"
+            versionCode 1
+            buildConfigField "boolean", "APTOIDE", "false"
+        }
 
-            rec {
-                dimension "receive"
-                versionNameSuffix "M"
-                versionCode 2
-                buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
-                buildConfigField "boolean", "REC_MMS_ALLOWED", "true"
-            }
+        aptoide {
+            dimension "store"
+            versionNameSuffix "A"
+            versionCode 1
+            buildConfigField "boolean", "APTOIDE", "true"
+        }
 
-            smsrec {
-                dimension "receive"
-                versionNameSuffix "S"
-                versionCode 1
-                buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
-                buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
-            }
+        rec {
+            dimension "receive"
+            versionNameSuffix "M"
+            versionCode 2
+            buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
+            buildConfigField "boolean", "REC_MMS_ALLOWED", "true"
+        }
 
-            norec {
-                dimension "receive"
-                versionNameSuffix "R"
-                versionCode 0
-                buildConfigField "boolean", "REC_SMS_ALLOWED", "false"
-                buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
-            }
+        smsrec {
+            dimension "receive"
+            versionNameSuffix "S"
+            versionCode 1
+            buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
+            buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
+        }
 
-            send {
-                dimension "send"
-                versionNameSuffix "S"
-                versionCode 2
-                buildConfigField "boolean", "SEND_ALLOWED", "true"
-            }
+        norec {
+            dimension "receive"
+            versionNameSuffix "R"
+            versionCode 0
+            buildConfigField "boolean", "REC_SMS_ALLOWED", "false"
+            buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
+        }
 
-            nosend {
-                dimension "send"
-                versionNameSuffix ""
-                versionCode 2
-                buildConfigField "boolean", "SEND_ALLOWED", "false"
-            }
+        send {
+            dimension "send"
+            versionNameSuffix "S"
+            versionCode 2
+            buildConfigField "boolean", "SEND_ALLOWED", "true"
+        }
+
+        nosend {
+            dimension "send"
+            versionNameSuffix ""
+            versionCode 2
+            buildConfigField "boolean", "SEND_ALLOWED", "false"
         }
     }
 
@@ -110,6 +114,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        aidl true
+    }
+    namespace 'net.anei.cadpage'
 
 //    buildToolsVersion '28.0.3'
 }
