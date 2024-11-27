@@ -31,9 +31,6 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-    }
 
     flavorDimensions = ["store", "receive", "send"]
     productFlavors {
@@ -118,6 +115,9 @@ android {
         aidl true
     }
     namespace 'net.anei.cadpage'
+    lint {
+        abortOnError false
+    }
 
 //    buildToolsVersion '28.0.3'
 }
@@ -126,7 +126,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.6.0')
     implementation project(':cadpage-parsers')
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.appcompat:appcompat:1.7.0'   // Upgrade to 1.7.0 fails
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
