@@ -1,5 +1,6 @@
 package net.anei.cadpage;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -7,7 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.Build;
 import android.telephony.SmsManager;
+
+import static android.content.Context.RECEIVER_EXPORTED;
 
 public class ResponseSender {
 
@@ -23,20 +27,27 @@ public class ResponseSender {
    * @param target target phone number or address
    * @param message message to be sent
    */
+  @SuppressLint("UnspecifiedRegisterReceiverFlag")
   public void sendSMS(String target, String message){
 
     if (receiver == null) {
       receiver = new SendSMSReceiver();
-      activity.registerReceiver(receiver, new IntentFilter(SMS_SENT));
-      activity.registerReceiver(receiver, new IntentFilter(SMS_DELIVERED));
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        activity.registerReceiver(receiver, new IntentFilter(SMS_SENT), RECEIVER_EXPORTED);
+        activity.registerReceiver(receiver, new IntentFilter(SMS_DELIVERED), RECEIVER_EXPORTED);
+      } else {
+        activity.registerReceiver(receiver, new IntentFilter(SMS_SENT));
+        activity.registerReceiver(receiver, new IntentFilter(SMS_DELIVERED));
+
+      }
     }
 
     Intent sendIntent = new Intent(SMS_SENT);
     sendIntent.setFlags(Intent.FLAG_DEBUG_LOG_RESOLUTION);
-    PendingIntent sentPI = PendingIntent.getBroadcast(activity, 0, sendIntent, 0);
+    PendingIntent sentPI = PendingIntent.getBroadcast(activity, 0, sendIntent, PendingIntent.FLAG_IMMUTABLE);
     Intent deliverIntent = new Intent(SMS_DELIVERED);
     deliverIntent.setFlags(Intent.FLAG_DEBUG_LOG_RESOLUTION);
-    PendingIntent deliveredPI = PendingIntent.getBroadcast(activity, 0, deliverIntent, 0);
+    PendingIntent deliveredPI = PendingIntent.getBroadcast(activity, 0, deliverIntent, PendingIntent.FLAG_IMMUTABLE);
 
     // The send logic apparently isn't as bulletproof as we like.  It sometimes
     // throws a null pointer exception on the other side of an RPC.  We can't

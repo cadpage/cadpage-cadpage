@@ -19,7 +19,7 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
         versionCode project.versionCode
-        targetSdkVersion 34
+        targetSdkVersion 35
         minSdkVersion 21
         multiDexEnabled true
     }
@@ -88,7 +88,7 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         def storeVersion = variant.productFlavors.get(0).versionCode
         def typeVersion = variant.productFlavors.get(1).versionCode
         def version = defaultConfig.versionCode + typeVersion // * 10000000
@@ -108,10 +108,11 @@ android {
     compileSdk 35
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     buildFeatures {
+        buildConfig true
         aidl true
     }
     namespace 'net.anei.cadpage'
