@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12022024</string>
+  <string name="release_date">12172024</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-39\n
+    New Locations:\n
+    Floyd County, IN\n
+    Wayne County, KY\n
+    Caddo Parish, LA\n
+    Tate County, MS\n
+    Miller County, MO\n
+    Tyrrell County, NC\n
+    Columbiana County, OH\n
+    Polk County, TN\n
+    Brooke County, WV\n
+    \n
+    Location Fixes:\n
+    Jackson County, IL\n
+    Ocean County, NJ\n
+    Mitchell County, NC\n
+    Park County, WY\n
+    \n
     v2.2.11-38\n
     Location Fixes:\n
     Moniteau County, MO\n
@@ -69,27 +87,6 @@
     Muskingum County, OH\n
     Aransas County, TX\n
     Brazoria County, TX\n
-    Rockwall County, TX\n
-    \n
-    v2.2.11-34\n
-    New Locations:\n
-    Hale County, AL\n
-    Montgomery County, AL\n
-    Shelby County, KY\n
-    McCook County, SD\n
-    \n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    St Clair County, AL\n
-    Walker County, AL\n
-    Siskiyou County, CA\n
-    Walton County, FL\n
-    Jackson County, GA\n
-    Roseau County, MN\n
-    Lincoln County, MO\n
-    Beaver County, PA\n
-    Berks County, PA\n
-    Lackawanna County, PA\n
-    Kingsport, TN
+    Rockwall County, TX
   </string>
 </resources>
