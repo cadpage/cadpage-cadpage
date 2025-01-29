@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01082025</string>
+  <string name="release_date">01292025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-42\n
+    New Locations:\n
+    Merced County, CA\n
+    Kiowa County, CO\n
+    Banks County, GA\n
+    Gray County, KS\n
+    Alpena County, MI\n
+    Multnomah County, OH\n
+    Randall County, TX\n
+    \n
+    Location Fixes:\n
+    Hancock County, IN\n
+    Kosciusko County, IN\n
+    Perry County, MO\n
+    Lewis County, NY\n
+    Forsyth County, NC\n
+    Cherokee County, OK\n
+    Lebanon County, PA\n
+    Lehigh County, PA\n
+    Tioga County, PA\n
+    Cherokee County, SC\n
+    Clay County, TN\n
+    Hays County, TX\n
+    Johnson County, TX\n
+    Cabell County, WV\n
+    Clearwater County, AB\n
+    \n
     v2.2.11-41\n
     Location Fixes:\n
     Carroll County, MD\n
@@ -41,27 +68,6 @@
     Location Fixes:\n
     Moniteau County, MO\n
     Beaurford County, NC\n
-    Yamhill County, OR\n
-    \n
-    v2.2.11-37\n
-    New Locations:\n
-    Clarke County, AL\n
-    Benton County, AR\n
-    Dickinson County, KS\n
-    Milam County, TX\n
-    \n
-    Location Fixes:\n
-    Jefferson County, AL\n
-    Teller County, CO\n
-    Murray County, GA\n
-    Becker County, MN\n
-    Union County, OH\n
-    Lane County, OR\n
-    Edgefield County, SC\n
-    Kingsport, TN\n
-    Brazoria County, TX\n
-    Augusta County, VA\n
-    Marinette County, WI\n
-    Lacombe County, AB
+    Yamhill County, OR
   </string>
 </resources>
