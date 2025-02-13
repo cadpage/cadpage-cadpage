@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01292025</string>
+  <string name="release_date">002132025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-43\n
+    New Locations:\n
+    Conway County, AR\n
+    Macon County, GA\n
+    Palo Pinto County, TX\n
+    \n
+    Location Fixes:\n
+    Washington County, AR\n
+    Hardee County, FL\n
+    Bourbon County, KY\n
+    Oldham County, KY\n
+    Wabash County, IN\n
+    Morris County, NJ\n
+    Dauphin County, PA\n
+    Lancaster County, PA\n
+    \n
     v2.2.11-42\n
     New Locations:\n
     Merced County, CA\n
@@ -62,12 +78,6 @@
     Jackson County, IL\n
     Ocean County, NJ\n
     Mitchell County, NC\n
-    Park County, WY\n
-    \n
-    v2.2.11-38\n
-    Location Fixes:\n
-    Moniteau County, MO\n
-    Beaurford County, NC\n
-    Yamhill County, OR
+    Park County, WY
   </string>
 </resources>
