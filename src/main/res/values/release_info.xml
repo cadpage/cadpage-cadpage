@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">002132025</string>
+  <string name="release_date">02252025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-44\n
+    New Locations:\n
+    Brazos County, TX\n
+    \n
+    Location Fixes:\n
+    Cleburne County, AR\n
+    Augusta, GA\n
+    Ionia County, MI\n
+    Mercer County, MO\n
+    Putnam County, NY\n
+    Chatham County, NC\n
+    Iredell County, NC\n
+    Muskingum County, OH\n
+    Archer County, TX\n
+    \n
     v2.2.11-43\n
     New Locations:\n
     Conway County, AR\n
@@ -60,24 +75,6 @@
     Florence County, SC\n
     Greene County, VA\n
     Cabell County, WV\n
-    Nicholas County, WV\n
-    \n
-    v2.2.11-39\n
-    New Locations:\n
-    Floyd County, IN\n
-    Wayne County, KY\n
-    Caddo Parish, LA\n
-    Tate County, MS\n
-    Miller County, MO\n
-    Tyrrell County, NC\n
-    Columbiana County, OH\n
-    Polk County, TN\n
-    Brooke County, WV\n
-    \n
-    Location Fixes:\n
-    Jackson County, IL\n
-    Ocean County, NJ\n
-    Mitchell County, NC\n
-    Park County, WY
+    Nicholas County, WV
   </string>
 </resources>
