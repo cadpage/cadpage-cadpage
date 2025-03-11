@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02252025</string>
+  <string name="release_date">03112025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-45\n
+    New Locations:\n
+    Power County, ID\n
+    Logan County, IL\n
+    Cloud County, KS\n
+    Hamilton County, OH\n
+    \n
+    Location Fixes:\n
+    St Tammany Parish, LA\n
+    Harrison County, MS\n
+    Clark County, NV\n
+    Putnam County, NY\n
+    Lima, OH\n
+    Danville, VA\n
+    \n
     v2.2.11-44\n
     New Locations:\n
     Brazos County, TX\n
@@ -65,16 +80,6 @@
     v2.2.11-41\n
     Location Fixes:\n
     Carroll County, MD\n
-    Stanly County, NC\n
-    \n
-    v2.2.11-40\n
-    Location Fixes:\n
-    Story County, IA\n
-    Warren County, MO\n
-    Clay County, NC\n
-    Florence County, SC\n
-    Greene County, VA\n
-    Cabell County, WV\n
-    Nicholas County, WV
+    Stanly County, NC
   </string>
 </resources>
