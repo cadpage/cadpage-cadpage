@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">03112025</string>
+  <string name="release_date">03202025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-46\n
+    New Location:\n
+    Summit County, CO\n
+    Pierce County, GA\n
+    Mills County, IA\n
+    Nemaha County, KS\n
+    \n
+    Location Fixes:\n
+    Seabrook, TX\n
+    \n
     v2.2.11-45\n
     New Locations:\n
     Power County, ID\n
@@ -75,11 +85,6 @@
     Hays County, TX\n
     Johnson County, TX\n
     Cabell County, WV\n
-    Clearwater County, AB\n
-    \n
-    v2.2.11-41\n
-    Location Fixes:\n
-    Carroll County, MD\n
-    Stanly County, NC
+    Clearwater County, AB
   </string>
 </resources>
