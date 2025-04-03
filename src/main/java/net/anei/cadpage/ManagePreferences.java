@@ -569,7 +569,11 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     public boolean splitKeepLeadBreak() {
       return prefs.getBoolean(R.string.pref_split_keep_lead_break_key);
     }
-    
+    @Override
+    public boolean splitKeepTrailBreak() {
+      return true;
+    }
+
     @Override
     public boolean revMsgOrder() {
       return prefs.getBoolean(R.string.pref_rev_msg_order_key);
