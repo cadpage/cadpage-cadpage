@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04032025</string>
+  <string name="release_date">04162025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-48\n
+    New Locations:\n
+    Waren County, IN\n
+    St Louis County, MN\n
+    Barton County, MO\n
+    Jackson County, MS\n
+    Hidalgo County, TX\n
+    Snohomish County, WA\n
+    Yellowhead County, AB\n
+    \n
+    Location Fixes:\n
+    Yavapai County, AZ\n
+    Conway County, AR\n
+    Banks County, GA\n
+    Baltimore County, MD\n
+    Shiawassee County, MI\n
+    Renolds County, MO\n
+    Lafayette County, MS\n
+    Amstrong County, PA\n
+    Dauphin County, PA\n
+    Brazoria County, TX\n
+    Denton County, TX\n
+    \n
     v2.2.11-47\n
     New Locations:\n
     Perry County, KY\n
@@ -64,16 +87,6 @@
     New Locations:\n
     Conway County, AR\n
     Macon County, GA\n
-    Palo Pinto County, TX\n
-    \n
-    Location Fixes:\n
-    Washington County, AR\n
-    Hardee County, FL\n
-    Bourbon County, KY\n
-    Oldham County, KY\n
-    Wabash County, IN\n
-    Morris County, NJ\n
-    Dauphin County, PA\n
-    Lancaster County, PA
+    Palo Pinto County, TX
   </string>
 </resources>
