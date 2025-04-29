@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04162025</string>
+  <string name="release_date">04292025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-49\n
+    New Locations:\n
+    Putnam County, IN\n
+    Coffee County, KS\n
+    Catawba County, NC\n
+    Harney County, OR\n
+    Kershaw County, SC\n
+    Colorado County, TX\n
+    Hill County, TX\n
+    Park County, WY\n
+    \n
+    Location Fixes:\n
+    Okaloosa County, FL\n
+    Jackson County, MI\n
+    Hillsdale County, MI\n
+    Jackson County, MO\n
+    Hennepin County, MN\n
+    Lewis and Clark County, MT\n
+    Beaver County, PA\n
+    \n
     v2.2.11-48\n
     New Locations:\n
     Waren County, IN\n
@@ -66,27 +86,6 @@
     Clark County, NV\n
     Putnam County, NY\n
     Lima, OH\n
-    Danville, VA\n
-    \n
-    v2.2.11-44\n
-    New Locations:\n
-    Brazos County, TX\n
-    \n
-    Location Fixes:\n
-    Cleburne County, AR\n
-    Augusta, GA\n
-    Ionia County, MI\n
-    Mercer County, MO\n
-    Putnam County, NY\n
-    Chatham County, NC\n
-    Iredell County, NC\n
-    Muskingum County, OH\n
-    Archer County, TX\n
-    \n
-    v2.2.11-43\n
-    New Locations:\n
-    Conway County, AR\n
-    Macon County, GA\n
-    Palo Pinto County, TX
+    Danville, VA
   </string>
 </resources>
