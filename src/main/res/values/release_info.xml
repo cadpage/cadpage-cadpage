@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04292025</string>
+  <string name="release_date">05192025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-50\n
+    New Locations:\n
+    Rocky County Rescue, CO\n
+    San Juan County, NM\n
+    Ocean County, NJ\n
+    \n
+    Location Fixes:\n
+    Chaffee County, CO\n
+    Saginaw County, MI\n
+    Carroll County, MO\n
+    Wright County, MO\n
+    Cumberland County, NC\n
+    Cherokee County, SC\n
+    Halifax County, VA\n
+    \n
     v2.2.11-49\n
     New Locations:\n
     Putnam County, IN\n
@@ -71,21 +86,6 @@
     Nemaha County, KS\n
     \n
     Location Fixes:\n
-    Seabrook, TX\n
-    \n
-    v2.2.11-45\n
-    New Locations:\n
-    Power County, ID\n
-    Logan County, IL\n
-    Cloud County, KS\n
-    Hamilton County, OH\n
-    \n
-    Location Fixes:\n
-    St Tammany Parish, LA\n
-    Harrison County, MS\n
-    Clark County, NV\n
-    Putnam County, NY\n
-    Lima, OH\n
-    Danville, VA
+    Seabrook, TX
   </string>
 </resources>
