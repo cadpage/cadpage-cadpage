@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05192025</string>
+  <string name="release_date">06032025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-51\n
+    New Locations:\n
+    Faulkner County, AR\n
+    Jones County, GA\n
+    West Carroll Parish, LA\n
+    Austin County, TX\n
+    \n
+    Location Fixes:\n
+    Tolland County, CT\n
+    Miami County, KS\n
+    Alpena County, MI\n
+    Montgomery County, MO\n
+    Grafton County, NH\n
+    Cumberland County, NC\n
+    Chester County, PA\n
+    Rockwall County, TX\n
+    Culpeper County, VA\n
+    \n
     v2.2.11-50\n
     New Locations:\n
     Rocky County Rescue, CO\n
@@ -76,16 +94,6 @@
     Cape Girardeau County,  MO\n
     Lewis and Clark County, MT\n
     Lake County, OH\n
-    Klamath County, OR\n
-    \n
-    v2.2.11-46\n
-    New Location:\n
-    Summit County, CO\n
-    Pierce County, GA\n
-    Mills County, IA\n
-    Nemaha County, KS\n
-    \n
-    Location Fixes:\n
-    Seabrook, TX
+    Klamath County, OR
   </string>
 </resources>
