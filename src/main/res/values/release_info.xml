@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06032025</string>
+  <string name="release_date">06172025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-52\n
+    New Locations:\n
+    Carson City, NV\n
+    Tulsa, OK\n
+    Montgomery County, PA\n
+    Aransas Pass, TX\n
+    Fort Bend County, TX\n
+    Freestone County, TX\n
+    Hidalgo County, TX\n
+    \n
+    Location Fixes:\n
+    Fayette County, AL\n
+    Benton County, AR\n
+    St Charles Parish, LA\n
+    Sampson County, NC\n
+    Washington County, PA\n
+    \n
     v2.2.11-51\n
     New Locations:\n
     Faulkner County, AR\n
@@ -78,22 +95,6 @@
     Amstrong County, PA\n
     Dauphin County, PA\n
     Brazoria County, TX\n
-    Denton County, TX\n
-    \n
-    v2.2.11-47\n
-    New Locations:\n
-    Perry County, KY\n
-    Dade County, MO\n
-    Custer County, NE\n
-    Coshocton County, OH\n
-    Wise County, TX\n
-    \n
-    Location Fixes:\n
-    Prince Georges County, MD\n
-    Isanti County, MN\n
-    Cape Girardeau County,  MO\n
-    Lewis and Clark County, MT\n
-    Lake County, OH\n
-    Klamath County, OR
+    Denton County, TX
   </string>
 </resources>
