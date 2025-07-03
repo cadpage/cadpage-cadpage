@@ -12,6 +12,7 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
@@ -42,7 +43,11 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
   public void initialize(Context context) {
 
     if (Log.DEBUG) Log.v("Starting Google billing setup.");
-    mBillingClient = BillingClient.newBuilder(context).enablePendingPurchases().setListener(this).build();
+    mBillingClient =
+        BillingClient.newBuilder(context)
+//              .enableAutoServiceReconnection()
+              .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+              .setListener(this).build();
 
     restoreTransactions(context);
   }
@@ -70,6 +75,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
 
   @Override
   void doConnect() {
+    Log.v("Connect Google Billing");
     mBillingClient.startConnection(new BillingClientStateListener() {
       @SuppressLint("SwitchIntDef")
       @Override
@@ -82,8 +88,9 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
 
             QueryProductDetailsParams.Product product = QueryProductDetailsParams.Product.newBuilder().setProductType(BillingClient.ProductType.SUBS).setProductId("cadpage_sub").build();
             QueryProductDetailsParams queryProductDetailParms = QueryProductDetailsParams.newBuilder().setProductList(Collections.singletonList(product)).build();
-            mBillingClient.queryProductDetailsAsync(queryProductDetailParms, (billingResult, list) -> {
+            mBillingClient.queryProductDetailsAsync(queryProductDetailParms, (billingResult, productDetailsResult) -> {
               if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                List<ProductDetails> list = productDetailsResult.getProductDetailsList();
                 if (!list.isEmpty()) {
                   cadpageSubProductDetails = list.get(0);
                   Log.v("Retrived subscription product:" + cadpageSubProductDetails.toString());
@@ -107,6 +114,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
 
       @Override
       public void onBillingServiceDisconnected() {
+        Log.v("Google billing disconnected");
         setStatus(BillingStatus.NOT_CONNECTED);
       }
     });
