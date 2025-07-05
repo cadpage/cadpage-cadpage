@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07012025</string>
+  <string name="release_date">07052025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-54\n
+    Location Fixes:\n
+    Haynes Ambulance, AL\n
+    \n
     v2.2.11-53\n
     New Locations:\n
     McCreary County, KY\n
@@ -67,26 +71,6 @@
     Wright County, MO\n
     Cumberland County, NC\n
     Cherokee County, SC\n
-    Halifax County, VA\n
-    \n
-    v2.2.11-49\n
-    New Locations:\n
-    Putnam County, IN\n
-    Coffee County, KS\n
-    Catawba County, NC\n
-    Harney County, OR\n
-    Kershaw County, SC\n
-    Colorado County, TX\n
-    Hill County, TX\n
-    Park County, WY\n
-    \n
-    Location Fixes:\n
-    Okaloosa County, FL\n
-    Jackson County, MI\n
-    Hillsdale County, MI\n
-    Jackson County, MO\n
-    Hennepin County, MN\n
-    Lewis and Clark County, MT\n
-    Beaver County, PA
+    Halifax County, VA
   </string>
 </resources>
