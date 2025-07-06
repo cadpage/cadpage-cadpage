@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -124,6 +125,7 @@ public class CadPageActivity extends AppCompatActivity {
       }
     }
 
+//    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
     for (Fragment frag : fm.getFragments()) {
       if (frag instanceof SmsPopupFragment) {

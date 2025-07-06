@@ -105,7 +105,7 @@ android {
         }
     }
 
-    compileSdk 35
+    compileSdk 36
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21
@@ -143,6 +143,7 @@ dependencies {
         exclude group: 'com.squareup.okhttp', module: 'okhttp'
         exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
     }
+    implementation 'androidx.core:core:1.16.0'
     googleImplementation 'com.android.billingclient:billing:8.0.0'
 //    aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
