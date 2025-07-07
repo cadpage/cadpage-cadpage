@@ -125,7 +125,7 @@ public class CadPageActivity extends AppCompatActivity {
       }
     }
 
-//    WindowCompat.enableEdgeToEdge(getWindow());
+    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
     for (Fragment frag : fm.getFragments()) {
       if (frag instanceof SmsPopupFragment) {
