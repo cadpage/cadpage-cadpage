@@ -26,7 +26,11 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -37,6 +41,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -102,7 +107,7 @@ public class CadPageActivity extends AppCompatActivity {
     getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
     int height = displaymetrics.heightPixels;
     int width = displaymetrics.widthPixels;
-    ManagePreferences.setScreenSize("" + width + "X" + height);
+    ManagePreferences.setScreenSize(width + "X" + height);
 
     // See if we are running in split screen mode, and save the previous status
     // so we can tell if it changed
@@ -127,6 +132,14 @@ public class CadPageActivity extends AppCompatActivity {
 
     WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(splitScreen ? R.layout.cadpage_split : R.layout.cadpage);
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
+
     for (Fragment frag : fm.getFragments()) {
       if (frag instanceof SmsPopupFragment) {
         popupFragment = (SmsPopupFragment) frag;
