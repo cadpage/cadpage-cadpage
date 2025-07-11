@@ -20,7 +20,6 @@ public class CadpageDonateEvent extends DonateScreenEvent {
            VendorEvent.instance(2),
            AndroidDonateEvent.instance(),
            DonateAndroidSuppressedEvent.instance(),
-           PaypalDonateEvent.instance(),
            MagicWordEvent.instance(),
            DonateResetMarketEvent.instance());
   }

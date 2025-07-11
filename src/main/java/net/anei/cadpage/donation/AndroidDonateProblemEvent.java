@@ -14,8 +14,7 @@ public class AndroidDonateProblemEvent extends DonateScreenEvent {
     super(AlertStatus.YELLOW, R.string.donate_android_problem_title, 
            R.string.donate_android_problem_text,
            DonateResetMarketEvent.instance(),
-           EmailMarketProblemEvent.instance(),
-           PaypalDonateEvent.instance());
+           EmailMarketProblemEvent.instance());
   }
 
   private static final AndroidDonateProblemEvent instance = new AndroidDonateProblemEvent();
