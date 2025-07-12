@@ -20,6 +20,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 
 public class VendorActivity extends AppCompatActivity {
@@ -47,8 +51,16 @@ public class VendorActivity extends AppCompatActivity {
     ManagePreferences.setPermissionManager(permMgr);
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
+    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(R.layout.vendor_popup);
-    
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
+
     // We can't do the cool stuff until we get a Vendor code
     // But can set up the button handlers here
     moreInfoButton = findViewById(R.id.more_info_button);

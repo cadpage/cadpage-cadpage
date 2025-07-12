@@ -14,6 +14,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import android.view.View;
 import android.view.Window;
 
 public class DonateActivity extends BillingActivity {
@@ -40,6 +46,20 @@ public class DonateActivity extends BillingActivity {
     int msgId = getIntent().getIntExtra(EXTRA_MSG_ID, -1);
     SmsMmsMessage msg = msgId<0 ? null : SmsMessageQueue.getInstance().getMessage(msgId);
     event.create(this, msg);
+  }
+
+  @Override
+  public void setContentView(int layoutResID) {
+
+    WindowCompat.enableEdgeToEdge(getWindow());
+    super.setContentView(layoutResID);
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
   }
 
   public void switchEvent(DonateScreenBaseEvent event, SmsMmsMessage msg) {

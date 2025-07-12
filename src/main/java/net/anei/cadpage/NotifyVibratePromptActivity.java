@@ -5,6 +5,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.RequiresApi;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -29,7 +34,15 @@ public class NotifyVibratePromptActivity extends Safe40Activity {
     };
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
+    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(R.layout.notify_vibrate_prompt);
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
 
     // Save the current vibrate status
     vibrateStatus = ManageNotification.isVibrateEnabled(this);

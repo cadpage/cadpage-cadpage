@@ -30,6 +30,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 /**
  * Class handles the dialog popup requesting information be sent to developers
  */
@@ -75,9 +80,18 @@ public class EmailDeveloperActivity extends Safe40Activity {
 
     CadPageApplication.initialize(this);
 
+
     requestWindowFeature(Window.FEATURE_NO_TITLE);
+    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(R.layout.popup_email);
-    
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
+
     // Find the main textview widget
     textView = findViewById(R.id.EmailTextView);
     

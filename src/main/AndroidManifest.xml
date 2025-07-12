@@ -98,12 +98,14 @@
     <activity
     android:name=".NotifyOverridePromptActivity"
     android:screenOrientation="user"
-    android:theme="@style/Cadpage_Dialog"/>
+    android:theme="@style/Cadpage_Dialog"
+    tools:targetApi="26" />
 
     <activity
     android:name=".NotifyVibratePromptActivity"
     android:screenOrientation="user"
-    android:theme="@style/Cadpage_Dialog"/>
+    android:theme="@style/Cadpage_Dialog"
+    tools:targetApi="26" />
 
     <activity
     android:name=".donation.DonateActivity"

@@ -7,12 +7,17 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.annotation.NonNull;
 import android.view.KeyEvent;
+import android.view.View;
 
 @SuppressWarnings("SimplifiableIfStatement")
 public class SmsPopupConfigActivity extends AppCompatActivity
@@ -37,7 +42,15 @@ public class SmsPopupConfigActivity extends AppCompatActivity
 
     ManagePreferences.setPermissionManager(permMgr);
 
+    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(R.layout.settings);
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
 
     if (savedInstanceState ==  null) {
       boolean selectLocation = getIntent().getBooleanExtra(EXTRA_SELECT_LOCATION, false);

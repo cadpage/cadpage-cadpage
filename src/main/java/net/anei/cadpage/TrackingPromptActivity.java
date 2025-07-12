@@ -9,6 +9,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 /**
  * Class handles the dialog popup requesting information be sent to developers
  */
@@ -37,8 +42,16 @@ public class TrackingPromptActivity extends Safe40Activity {
     }
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
+    WindowCompat.enableEdgeToEdge(getWindow());
     setContentView(R.layout.tracking_prompt);
-    
+
+    View view = findViewById(android.R.id.content);
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      Insets ins = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+      v.setPadding(ins.left, ins.top, ins.right, ins.bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
+
     Intent intent = getIntent();
     url = intent.getStringExtra(EXTRA_URL);
     if (url == null) {
