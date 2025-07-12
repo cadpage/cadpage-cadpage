@@ -120,7 +120,6 @@
 
   <string name="donate_android_google_title">Köpt genom Google play butik</string>
   <string name="donate_android_aptoide_title">Köpt genom Aptoide Store</string>
-  <string name="donate_paypal_title">Köpt genom PayPal</string>
   <string name="donate_whats_up_title">Vad handlar det här om?</string>
   <string name="donate_active911_parse_info_title">Berätta mer</string>
   <string name="donate_email_title">Skicka email</string>
@@ -139,7 +138,7 @@
   </string>
 
   <string name="donate_android_suppressed_text">
-    Tyvärr så fungerar inte betalningarna från Aptoide Store och Aptoids support har varit ohjälpsam. Tills det är löst så är Paypal-betalningar ditt enda alternativ.
+    Tyvärr så fungerar inte betalningarna från Aptoide Store och Aptoids support har varit ohjälpsam
    
   </string>
 

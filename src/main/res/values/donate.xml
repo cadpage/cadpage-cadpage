@@ -157,8 +157,7 @@
 
     This account information is considered private user information which Cadpage cannot use
     without your explicit permission.  For the most part, Cadpage will work just fine without it.
-    It is only required if you are requesting a free Cadpage subscription, or using a check or
-    Paypal to purchase a Cadpage subscription, or reporting some kind of billing problem.\n\n
+    It is only required if you are requesting a free Cadpage subscription or reporting some kind of billing problem.\n\n
 
     The account information may be included in emails sent to Cadpage support
     and used to update your payment status.  It will also be used to query your payment
@@ -193,15 +192,14 @@
   <string name="donate_inactive_sponsor_text">
     You have not received an alert from %s for more than 60 days, leading us to believe
     that your account with them is no longer active.  If we are wrong about this, use the
-    "Send Email" button to contact us and we will get this fixed.
+    "Send Us an Email" button to contact us and we will get this fixed.
   </string>
   
   <string name="donate_android_google_title">Purchase through Google Play Store</string>
   <string name="donate_android_aptoide_title">Purchase through Aptoide Store</string>
-  <string name="donate_paypal_title">Purchase through PayPal</string>
   <string name="donate_whats_up_title">What\'s this all about??</string>
   <string name="donate_active911_parse_info_title">Tell me more</string>
-  <string name="donate_email_title">Send Email</string>
+  <string name="donate_email_title">Send Us an Email</string>
 
   <string name="donate_android_confirm_text">
     Your existing subscription expires on %1$s.  And if you renew your Cadpage subscription now it
@@ -220,7 +218,6 @@
 
   <string name="donate_android_suppressed_text">
     Sadly, Aptoide Store payments are not working and Aptoide support has been unhelpful.
-    Until this is resolved, Paypal payments are your only option.
   </string>
 
   <string name="donate_magic_word_title">I have an authorization code</string>

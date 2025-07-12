@@ -12,8 +12,7 @@ public class LifeDonateEvent extends DonateScreenEvent {
   
   public LifeDonateEvent() {
     super(AlertStatus.GREEN, R.string.donate_life_title, R.string.donate_life_text,
-           PaypalDonateEvent.instance(),
-           MagicWordEvent.instance());
+            MagicWordEvent.instance());
   }
   
   @Override
