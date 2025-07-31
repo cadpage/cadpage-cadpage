@@ -167,7 +167,7 @@ public class MmsTransactionService extends Service {
       @Override
       public void onChange(boolean selfChange, Uri uri) {
         if (Log.DEBUG) Log.v("Mms Data Change  uri:" + uri);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) return;
+        if (!ManagePreferences.useOldMMS()) return;
         mmsDataChange();
         cleanup();
       }
@@ -296,7 +296,7 @@ public class MmsTransactionService extends Service {
       mServiceHandler.sendMessageDelayed(msg, mmsTimeout);
 
       // And figure out which message processor to use from here
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !ManagePreferences.useOldMMS()) {
+      if (!ManagePreferences.useOldMMS()) {
         int subscriptionId = intent.getIntExtra("subscription", -1);
         newMmsMessage(message, subscriptionId);
       } else {
@@ -308,7 +308,6 @@ public class MmsTransactionService extends Service {
      * @param message message to be processed
      * @param subscriptionId subscription ID
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     private void newMmsMessage(SmsMmsMessage message, int subscriptionId) {
 
       String contentLoc = message.getContentLoc();

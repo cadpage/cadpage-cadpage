@@ -8,73 +8,20 @@ import android.os.Build;
 
 /**
  * This class handles permissions requests that must be handled
- * differently below SDK level 23
+ * differently below SDK level 23 which never happens now that level 23 is our minimum support
  */
 public class Permissions {
-  
-  public interface Worker {
-    public boolean isGranted(Context context, String permissioin);
-    public boolean shouldShowRequestPermissionRationale(Activity activity, String permission);
-    public void requestPermissions(Activity activity, String[] permissions, int requestId);
-  }
-  
-  static final Worker worker;
-  static {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-      worker = new Regular();
-    } else {
-      try {
-        worker = (Worker)Class.forName("net.anei.cadpage.Permissions$Api23").newInstance();
-      } catch (Exception ex) {
-        throw new RuntimeException(ex);
-      }
-    }
-  }
-  
-  @TargetApi(23)
-  static class Api23 implements Worker {
-    
-    public boolean isGranted(Context context, String permission) {
-      return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
-    }
 
-    public boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
-      return activity.shouldShowRequestPermissionRationale(permission);
-    }
-
-    public void requestPermissions(Activity activity, String[] permissions, int requestId) {
-      activity.requestPermissions(permissions, requestId);
-    }
-  }
-
-  private static class Regular implements Worker {
-  
-    @Override
-    public boolean isGranted(Context context, String permissioin) {
-      return true;
-    }
-  
-    @Override
-    public boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
-      return false;
-    }
-  
-    @Override
-    public void requestPermissions(Activity activity, String[] permissions, int requestId) {
-    }
-  }
-
-  
   public static boolean isGranted(Context context, String permission) {
-    return worker.isGranted(context,  permission);
+    return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
   }
 
   public static boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
-    return worker.shouldShowRequestPermissionRationale(activity, permission);
+    return activity.shouldShowRequestPermissionRationale(permission);
   }
   
   public static void requestPermissions(Activity activity, String[] permissions, int requestId) {
-    worker.requestPermissions(activity, permissions, requestId);
+    activity.requestPermissions(permissions, requestId);
   }
 
 }

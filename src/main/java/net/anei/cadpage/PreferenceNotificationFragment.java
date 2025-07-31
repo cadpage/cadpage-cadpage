@@ -60,12 +60,7 @@ public class PreferenceNotificationFragment extends PreferenceFragment {
       mNewVibrateSwitchPreference = findPreference(getString(R.string.pref_vibrate_key));
     }
 
-    // Remove DoNotDisturb setting if it is not applicable
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-      deletePreference(R.string.pref_notif_override_do_not_disturb_key);
-    } else {
-      mDoNotDisturbSwitchPreference = findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
-    }
+    mDoNotDisturbSwitchPreference = findPreference(getString(R.string.pref_notif_override_do_not_disturb_key));
 
     Preference pref = findPreference(getString(R.string.pref_notif_override_category_key));
     assert pref != null;
