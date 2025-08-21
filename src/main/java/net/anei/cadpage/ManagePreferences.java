@@ -1521,7 +1521,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   private static String batteryOptimizationDisplay(Context context) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return "N/A";
     PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
     String r1 = pm.isIgnoringBatteryOptimizations("net.anei.cadpage") ? "Y" : "N";
     String r2 = pm.isIgnoringBatteryOptimizations("net.anei.cadpagesupport") ? "Y" : "N";

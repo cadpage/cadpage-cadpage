@@ -1,9 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07052025</string>
+  <string name="release_date">08202025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-57\n
+    New Locations:\n
+    Alpine County, CA\n
+    Hendricks County, IN\n
+    Jones County, SD\n
+    Cass County, TX\n
+    Refugio County, TX\n
+    \n
+    Location Fixes:\n
+    Louisa County, IN\n
+    Jackson County, MI\n
+    Morris County, NJ\n
+    Monmouth County, NJ\n
+    Armstrong County, PA\n
+    Lycoming County, PA\n
+    \n
+    v2.2.11-56\n
+    Dropped support for Android 5\n
+    \n
+    New Locations:\n
+    Washington County, AR\n
+    \n
+    Location Fixes:\n
+    Fayette County, AL\n
+    Lauderdale County, AL\n
+    Walker County, GA\n
+    Lake County, IL\n
+    Lafourche Parish, LA\n
+    Charlevoix County, MI\n
+    Cheboygan COunty, MI\n
+    Emmet County, MI\n
+    \n
+    v2.2.11-55\n
+    Scrubbed all references to using Paypal.  Paypal can still be used as a payment method
+    in Google\'s Play Store.\n
+    \n
+    New Locations:\n
+    Conequh County, AL\n
+    Mohave County, AZ\n
+    Lake County, IL\n
+    McCracken County, KY\n
+    \n
+    Location Fixes:\n
+    Colbert County, AL\n
+    Citrus County, FL\n
+    Marshall County, IN\n
+    Tagnipahoa Parish, LA\n
+    Custer County, NE\n
+    Morris County, NJ\n
+    Klamath County, OR\n
+    \n
     v2.2.11-54\n
     Location Fixes:\n
     Haynes Ambulance, AL\n
@@ -38,39 +89,6 @@
     Benton County, AR\n
     St Charles Parish, LA\n
     Sampson County, NC\n
-    Washington County, PA\n
-    \n
-    v2.2.11-51\n
-    New Locations:\n
-    Faulkner County, AR\n
-    Jones County, GA\n
-    West Carroll Parish, LA\n
-    Austin County, TX\n
-    \n
-    Location Fixes:\n
-    Tolland County, CT\n
-    Miami County, KS\n
-    Alpena County, MI\n
-    Montgomery County, MO\n
-    Grafton County, NH\n
-    Cumberland County, NC\n
-    Chester County, PA\n
-    Rockwall County, TX\n
-    Culpeper County, VA\n
-    \n
-    v2.2.11-50\n
-    New Locations:\n
-    Rocky County Rescue, CO\n
-    San Juan County, NM\n
-    Ocean County, NJ\n
-    \n
-    Location Fixes:\n
-    Chaffee County, CO\n
-    Saginaw County, MI\n
-    Carroll County, MO\n
-    Wright County, MO\n
-    Cumberland County, NC\n
-    Cherokee County, SC\n
-    Halifax County, VA
+    Washington County, PA
   </string>
 </resources>

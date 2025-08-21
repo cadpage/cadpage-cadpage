@@ -251,10 +251,8 @@ public class DeveloperToolsManager {
 
 
         case 21:    // Do not disturb
-          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-            context.startActivity(intent);
-          }
+          Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+          context.startActivity(intent);
           break;
 
         case 22:    // DND Granted
