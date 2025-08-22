@@ -20,7 +20,7 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
         versionCode project.versionCode
-        targetSdkVersion 35
+        targetSdkVersion 36
         minSdkVersion 23
         multiDexEnabled true
     }
