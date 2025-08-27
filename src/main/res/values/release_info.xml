@@ -4,6 +4,9 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-59 (beta)\n
+    Updated to fully support Android 16\n
+    \n
     v2.2.11-58\n
     New Locations:\n
     Johnson County, NE\n
@@ -65,24 +68,5 @@
     Custer County, NE\n
     Morris County, NJ\n
     Klamath County, OR\n
-    \n
-    v2.2.11-54\n
-    Location Fixes:\n
-    Haynes Ambulance, AL\n
-    \n
-    v2.2.11-53\n
-    New Locations:\n
-    McCreary County, KY\n
-    Metcalf County, KY\n
-    Aitkin County, MN\n
-    Morris County, TX\n
-    \n
-    Location Fixes:\n
-    Pierce County, GA\n
-    Miami County, KS\n
-    Grayson County, KY\n
-    Lewis County, KY\n
-    Caldwell County, MO\n
-    Lackawanna County, PA
   </string>
 </resources>
