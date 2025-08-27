@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08202025</string>
+  <string name="release_date">08262025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-58\n
+    New Locations:\n
+    Johnson County, NE\n
+    Marioni County, OR\n
+    Uvalde County, TX\n
+    Vernon County, WI\n
+    \n
+    Location Fixes:\n
+    Tehama County, CA\n
+    Middletown, OH\n
+    \n
     v2.2.11-57\n
     New Locations:\n
     Alpine County, CA\n
@@ -72,23 +83,6 @@
     Grayson County, KY\n
     Lewis County, KY\n
     Caldwell County, MO\n
-    Lackawanna County, PA\n
-    \n
-    v2.2.11-52\n
-    New Locations:\n
-    Carson City, NV\n
-    Tulsa, OK\n
-    Montgomery County, PA\n
-    Aransas Pass, TX\n
-    Fort Bend County, TX\n
-    Freestone County, TX\n
-    Hidalgo County, TX\n
-    \n
-    Location Fixes:\n
-    Fayette County, AL\n
-    Benton County, AR\n
-    St Charles Parish, LA\n
-    Sampson County, NC\n
-    Washington County, PA
+    Lackawanna County, PA
   </string>
 </resources>
