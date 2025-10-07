@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09202025</string>
+  <string name="release_date">10072025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-62\n
+    New Locations:\n
+    Suwannee County, FL\n
+    Cameron Parish, LA\n
+    Greene County, MO\n
+    Sarpy County, NE\n
+    Pickaway County, OH\n
+    Hutchinson County, SD\n
+    Upshur County, TX\n
+    Roanoke County, VA\n
+    \n
+    Location Fixes:\n
+    Marion County, AL\n
+    Cass County, IN\n
+    Andover, KS\n
+    Montgomery County, KS\n
+    Isanti County, MN\n
+    Mayes County, OK\n
+    Burnet County, TX\n
+    Summers County, WV\n
+    \n
     v2.2.11-61\n
     Location Fixes:\n
     Washington County, OH\n
@@ -38,38 +59,6 @@
     \n
     Location Fixes:\n
     Tehama County, CA\n
-    Middletown, OH\n
-    \n
-    v2.2.11-57\n
-    New Locations:\n
-    Alpine County, CA\n
-    Hendricks County, IN\n
-    Jones County, SD\n
-    Cass County, TX\n
-    Refugio County, TX\n
-    \n
-    Location Fixes:\n
-    Louisa County, IN\n
-    Jackson County, MI\n
-    Morris County, NJ\n
-    Monmouth County, NJ\n
-    Armstrong County, PA\n
-    Lycoming County, PA\n
-    \n
-    v2.2.11-56\n
-    Dropped support for Android 5\n
-    \n
-    New Locations:\n
-    Washington County, AR\n
-    \n
-    Location Fixes:\n
-    Fayette County, AL\n
-    Lauderdale County, AL\n
-    Walker County, GA\n
-    Lake County, IL\n
-    Lafourche Parish, LA\n
-    Charlevoix County, MI\n
-    Cheboygan COunty, MI\n
-    Emmet County, MI
+    Middletown, OH
   </string>
 </resources>
