@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10072025</string>
+  <string name="release_date">10232025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-63\n
+    New Locations:\n
+    Nez Perce County, ID\n
+    Iberville Parish, LA\n
+    Laurens County, SC\n
+    \n
+    Location Fixes:\n
+    Okaloosa County, FL\n
+    Carroll County, IN\n
+    Multnomah County, OR\n
+    \n
     v2.2.11-62\n
     New Locations:\n
     Suwannee County, FL\n
@@ -48,17 +59,6 @@
     Van Alystyne, TX\n
     \n
     v2.2.11-59 (beta)\n
-    Updated to fully support Android 16\n
-    \n
-    v2.2.11-58\n
-    New Locations:\n
-    Johnson County, NE\n
-    Marioni County, OR\n
-    Uvalde County, TX\n
-    Vernon County, WI\n
-    \n
-    Location Fixes:\n
-    Tehama County, CA\n
-    Middletown, OH
+    Updated to fully support Android 16
   </string>
 </resources>
