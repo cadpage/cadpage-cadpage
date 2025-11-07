@@ -125,7 +125,7 @@ android {
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:34.4.0')
+    implementation platform('com.google.firebase:firebase-bom:34.5.0')
     implementation project(':cadpage-parsers')
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.7.1'
@@ -145,7 +145,7 @@ dependencies {
         exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
     }
     implementation 'androidx.core:core:1.17.0'
-    googleImplementation 'com.android.billingclient:billing:8.0.0'
+    googleImplementation 'com.android.billingclient:billing:8.1.0'
 //    aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
 //    aptoideImplementation 'com.blockchainds:appcoins-contract-proxy:0.5.1.32b'

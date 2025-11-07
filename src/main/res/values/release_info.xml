@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10232025</string>
+  <string name="release_date">11062025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.11-64\n
+    New Locations:\n
+    Fire and EMS, DC\n
+    Benton County, IN\n
+    Rowan County, KY\n
+    Jefferson Parish, LA\n
+    Montgomery County, MS\n
+    Orange County, NY\n
+    Carroll County, OH\n
+    Indiana County, PA\n
+    Hutchinson County, TX\n
+    Llano County, TX\n
+    Chittenden County, VT\n
+    \n
+    Location Fixes:\n
+    White County, AR\n
+    Marshall County, IN\n
+    Clatsop County, OR\n
+    McCormick County, SC\n
+    Burnet County, TX\n
+    \n
     v2.2.11-63\n
     New Locations:\n
     Nez Perce County, ID\n
@@ -57,8 +78,5 @@
     Lancaster County, PA\n
     Claiborne County, IN\n
     Van Alystyne, TX\n
-    \n
-    v2.2.11-59 (beta)\n
-    Updated to fully support Android 16
   </string>
 </resources>
