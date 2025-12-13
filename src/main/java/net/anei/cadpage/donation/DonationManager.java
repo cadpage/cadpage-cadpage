@@ -243,37 +243,6 @@ public class DonationManager {
       }
     }
 
-    // Play Store subscriptions disappear when they expire.  But we want to retain the expiration
-    // date for limbo status calculations.
-    Date saveExpDate = ManagePreferences.expireDate();
-    if (saveExpDate != null || subExpDate != null) {
-
-      // If the calculated sub expiration date is better than the saved expiration date
-      // Save the expiration date for future reference
-      if (saveExpDate == null || subExpDate != null && saveExpDate.before(subExpDate)) {
-        ManagePreferences.setExpireDate(subExpDate);
-      }
-
-      // If the saved expiration date is better than the calculated expiration date,
-      // things get complicated
-      else if (subExpDate == null || subExpDate.before(saveExpDate)) {
-
-        // If the saved expiration date has not expired, then we assume that the reason
-        // why the calculated expiration date is worse is because a previous subscription
-        // purchase has been cancelled.  So it should override the saved expiration date
-        if (saveExpDate.after(curDate)) {
-          ManagePreferences.setExpireDate(subExpDate);
-        }
-
-        // If the saved expiration date has expired, then we assume that the calculated expiration
-        // date is worse because an expired subscription has disappeared from our radar.  Which
-        // means the saved expiration date should be retained.
-        else {
-          subExpDate = saveExpDate;
-        }
-      }
-    }
-
       // If we have both a subscription and sponsor expiration date, choose the
       // latest one
 
@@ -313,13 +282,20 @@ public class DonationManager {
       if (daysTillExpire >= 0 && subStatus == 2) {
         status = DonationStatus.PAID_RENEW;
       }
-      else if (daysTillExpire > EXPIRE_WARN_DAYS || !paidSubReq) {
-        status = (sponsoringVendor == null && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
+      else if (paidSubReq) {
+        if (daysTillExpire > EXPIRE_WARN_DAYS || subStatus == 2) {
+          status = (sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
+        } else if (daysTillExpire >= 0) {
+          status = (sponsor != null ? DonationStatus.SPONSOR_WARN : DonationStatus.PAID_WARN);
+        } else
+          status = (sponsor != null ? DonationStatus.SPONSOR_EXPIRE : DonationStatus.PAID_EXPIRE);
+      } else {
+        if (daysTillExpire >= 0) {
+          status = (sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
+        } else {
+          status = DonationStatus.FREE;
+        }
       }
-      else if (daysTillExpire >= 0) {
-        status = (sponsor != null ? DonationStatus.SPONSOR_WARN : DonationStatus.PAID_WARN);
-      }
-      else status = (sponsor != null ? DonationStatus.SPONSOR_EXPIRE : DonationStatus.PAID_EXPIRE);
     } 
     else if (!ManagePreferences.isFunctional()) {
       status = DonationStatus.NEW;

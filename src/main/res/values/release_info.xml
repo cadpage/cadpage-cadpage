@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">11262025</string>
+  <string name="release_date">12132025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.12-01\n
+    A purchased Cadpage subscription is now optional unless you are using the Cadpage paging service.\n
+    \n
+    More big changes are coming.  See our facebook page for details.\n
+    \n
+    New Locations:\n
+    Wilcox County, AL\n
+    Franklin County, TN\n
+    \n
+    Location Fixes:\n
+    Tolland County, CT\n
+    Santa Rosa County, FL\n
+    Oldham County, KY\n
+    Hamilton County, OH\n
+    Harney County, OR\n
+    Dauphin County, PA\n
+    Kings County, WA\n
+    \n
     v2.2.11-65\n
     New Locations:\n
     Fire and EMS, DC\n
@@ -71,12 +89,6 @@
     Isanti County, MN\n
     Mayes County, OK\n
     Burnet County, TX\n
-    Summers County, WV\n
-    \n
-    v2.2.11-61\n
-    Location Fixes:\n
-    Washington County, OH\n
-    Berks County, PA\n
-    Campbell County, VA
+    Summers County, WV
   </string>
 </resources>

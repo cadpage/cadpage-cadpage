@@ -132,8 +132,7 @@ public class DeveloperToolsManager {
           ManagePreferences.setAuthRunDays(100);
           ManagePreferences.setFreeRider(false);
           ManagePreferences.setAuthLocation(null);
-          int dayDelta = (val == 4 ? 0 : -1);
-          setExpireDate(dayDelta, ManagePreferences.releaseDate());
+          setExpireDate(-1);
           ManagePreferences.setFreeSub(false);
           ManagePreferences.setExpireDate(null);
           break;
