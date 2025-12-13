@@ -5,6 +5,12 @@
   <string name="donate_btn_OK">OK</string>
   <string name="donate_btn_yes">Ja</string>
   <string name="donate_btn_no">Nej</string>
+
+  <string name="donate_free_title">Ingen prenumeration krävs</string>  <!-- google translate -->
+  <string name="donate_free_text">  <!-- google translate -->
+    En köpt prenumeration krävs inte längre om du inte använder Cadpages personsökningstjänst.
+  </string>
+
   <string name="donate_life_title">Tack för ditt stöd</string>
   <string name="donate_life_text">
     Du har förtjänat gratis livstidsaccess till CadPage.

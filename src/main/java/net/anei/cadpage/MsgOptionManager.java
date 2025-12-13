@@ -551,12 +551,7 @@ public class MsgOptionManager {
     case R.id.delete_item:
       item.setEnabled(message.canDelete());
       break;
-    
-    // Email is disabled for the free version
-    case R.id.email_item:
-      item.setEnabled(! DonationManager.instance().isFreeVersion());
-      break;
-      
+
       // More info disappears if there is no info to display
       // Or if the Active911 info button has been previously enabled, since
       // both buttons accomplish pretty much the same thing

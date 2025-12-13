@@ -358,8 +358,7 @@ public class CadPageActivity extends AppCompatActivity {
     @NonNull public Dialog onCreateDialog(Bundle bundle) {
       Activity activity = getActivity();
 
-      int releaseId = (DonationManager.instance().isFreeVersion() ? R.string.free_release_text : R.string.release_text);
-      final SpannableString s = new SpannableString(getText(releaseId));
+      final SpannableString s = new SpannableString(getText(R.string.release_text));
       Linkify.addLinks(s, Linkify.WEB_URLS);
       final TextView view = new TextView(activity);
       view.setText(s);

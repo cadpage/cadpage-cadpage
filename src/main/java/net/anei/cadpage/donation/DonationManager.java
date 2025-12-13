@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -50,7 +51,7 @@ public class DonationManager {
   }
 
   public interface DonationStatusListener {
-    public void DonationStatusChanged(DonationStatus oldStatus, DonationStatus status);
+    void DonationStatusChanged(DonationStatus oldStatus, DonationStatus status);
   }
   
   // Cached calculated values are only valid until this time
@@ -90,7 +91,7 @@ public class DonationManager {
   // loosing subscription days if the renew their subscription now
   private boolean earlyRenewalWarning;
 
-  private List<DonationStatusListener> donationStatusListeners = new ArrayList<>();
+  private final List<DonationStatusListener> donationStatusListeners = new ArrayList<>();
 
   public void registerDonationStatusListener(DonationStatusListener listener) {
     donationStatusListeners.add(listener);
@@ -153,13 +154,6 @@ public class DonationManager {
    */
   private void recalculate() {
 
-    // If this is the free version of Cadpage, we can skip all of the hard stuff
-    if (this.getClass().getName().contains(".cadpagefree")) {
-      status = DonationStatus.FREE;
-      paidSubscriber = false;
-      return;
-    }
-    
     // If the current day hasn't changed, we can use the cached values
     long curTime = System.currentTimeMillis();
     if (curTime < validLimitTime) return;
@@ -201,13 +195,6 @@ public class DonationManager {
       if (!VendorManager.instance().isRegistered()) {
         MsgParser parser = ManagePreferences.getCurrentParser();
         sponsor = parser.getSponsor();
-        expireDate = parser.getSponsorDate();
-        if (expireDate != null) {
-          Calendar cal = new GregorianCalendar();
-          cal.setTime(expireDate);
-          cal.add(Calendar.YEAR, +1);
-          expireDate = cal.getTime();
-        }
       }
     }
 
@@ -217,8 +204,7 @@ public class DonationManager {
     // expiration status.  So save the first sponsor as the sponsoring vendor so it can be recovered.
     String sponsoringVendor = (expireDate == null ? sponsor : null);
     daysSinceInstall = ManagePreferences.calcAuthRunDays(sponsoringVendor == null ? curDate : null);
-    int daysTillDemoEnds = DEMO_LIMIT_DAYS - daysSinceInstall;
-    
+
     // Calculate subscription expiration date
     // (one year past the purchase date anniversary in the last paid year)
     // ((Use install date if there is no purchase date))
@@ -226,7 +212,6 @@ public class DonationManager {
     usedPurchaseDate = false;
     paidSubscriber = false;
     overpaidDays = 0;
-    int daysTillSubExpire = -99999;
     daysSincePurchase = -99999;
     int paidYear = ManagePreferences.paidYear();
     if (paidYear > 0) {
@@ -301,29 +286,18 @@ public class DonationManager {
       }
     }
     
-    // If we have an expiration date, see if it has expired.  And if it has see
-    // if we are in the limbo state where user can keep running Cadpage until they
-    // install a release published after the expiration date
-    boolean limbo = false;
+    // If we have an expiration date, see if it has expired.
     earlyRenewalWarning = false;
     if (expireDate != null) {
       JulianDate jExpireDate = new JulianDate(expireDate);
-      daysTillSubExpire = curJDate.diffDays(jExpireDate);
-      if (!paidSubReq && daysTillSubExpire < 0) {
-        JulianDate jReleaseDate = new JulianDate(ManagePreferences.releaseDate());
-        limbo = jReleaseDate.diffDays(jExpireDate) >= 0;
-      }
+      daysTillExpire = curJDate.diffDays(jExpireDate);
 
       // If expiration date came from anything other than an existing subscription, and
       // is not more than 5 days in the future, warn the user that getting a new subscription
       // now will loose some time
-      if (daysTillSubExpire > 5 && subStatus == 0) earlyRenewalWarning = true;
+      if (daysTillExpire > 5 && subStatus == 0) earlyRenewalWarning = true;
     }
-    daysTillExpire = daysTillSubExpire;
-    if (!paidSubReq && daysTillDemoEnds > daysTillExpire) {
-      daysTillExpire = daysTillDemoEnds;
-    }
-    
+
     // OK, we have calculated all of the intermediate stuff.  Now use that to
     // determine the overall status
     if (ManagePreferences.freeRider()) {
@@ -339,29 +313,19 @@ public class DonationManager {
       if (daysTillExpire >= 0 && subStatus == 2) {
         status = DonationStatus.PAID_RENEW;
       }
-      else if (daysTillExpire > EXPIRE_WARN_DAYS) {
+      else if (daysTillExpire > EXPIRE_WARN_DAYS || !paidSubReq) {
         status = (sponsoringVendor == null && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
       }
-      else if (sponsoringVendor != null) status = DonationStatus.SPONSOR;
       else if (daysTillExpire >= 0) {
-        if (daysTillExpire == daysTillSubExpire) {
-          status = (sponsor != null ? DonationStatus.SPONSOR_WARN : DonationStatus.PAID_WARN);
-        } else {
-          status = DonationStatus.DEMO;
-        }
-      } else if (limbo) {
-        status = (sponsor != null ? DonationStatus.SPONSOR_LIMBO : DonationStatus.PAID_LIMBO);
+        status = (sponsor != null ? DonationStatus.SPONSOR_WARN : DonationStatus.PAID_WARN);
       }
       else status = (sponsor != null ? DonationStatus.SPONSOR_EXPIRE : DonationStatus.PAID_EXPIRE);
     } 
     else if (!ManagePreferences.isFunctional()) {
       status = DonationStatus.NEW;
     } else if (sponsor != null) status = DonationStatus.SPONSOR;
-    else {
-      if (daysTillExpire >= 0) status = DonationStatus.DEMO;
-      else status = DonationStatus.DEMO_EXPIRE;
-    }
-    
+    else status = DonationStatus.FREE;
+
     // If we did have a  master unexpiring vendor, and the final status indicates
     // a Vendor paid status, clean things up by reporting the correct vendor and
     // null expiration date
@@ -402,8 +366,7 @@ public class DonationManager {
 
     // If neither the paid subscriber or expiration date have changed
     // nothing needs to be done
-    boolean expDateSame = (expireDate == null ? oldExpireDate == null
-                                              : expireDate.equals(oldExpireDate));
+    boolean expDateSame = Objects.equals(expireDate, oldExpireDate);
     if (paidSubscriber == oldPaidSubscriber && expDateSame) return;
 
     // Report whatever changed to the Cadpage service vendor
@@ -444,13 +407,6 @@ public class DonationManager {
    */
   public String sponsor() {
     return sponsor;
-  }
-  
-  /**
-   * @return true if this is the free (unsupported) version of Cadpage
-   */
-  public boolean isFreeVersion() {
-    return this.getClass().getName().contains(".cadpagefree");
   }
 
 

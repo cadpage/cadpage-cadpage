@@ -368,11 +368,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
    * @param context current context
    */
   public static void sendGeneralEmail(Context context) {
-    if (DonationManager.instance().isFreeVersion()) {
-      sendEmailRequest(context, EmailType.GENERAL, false, 0, false);
-    } else {
-      sendDeveloperEmail(context, EmailType.GENERAL, 0);
-    }
+    sendDeveloperEmail(context, EmailType.GENERAL, 0);
   }
   
   /**
