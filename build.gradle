@@ -33,7 +33,7 @@ android {
     }
 
 
-    flavorDimensions = ["store", "receive", "send"]
+    flavorDimensions = ["store", "status"]
     productFlavors {
 
         google {
@@ -50,41 +50,21 @@ android {
             buildConfigField "boolean", "APTOIDE", "true"
         }
 
-        rec {
-            dimension "receive"
-            versionNameSuffix "M"
+        full {
+            dimension "status"
+            versionNameSuffix ""
             versionCode 2
             buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
             buildConfigField "boolean", "REC_MMS_ALLOWED", "true"
+            buildConfigField "boolean", "SEND_ALLOWED", "true"
         }
 
-        smsrec {
-            dimension "receive"
-            versionNameSuffix "S"
-            versionCode 1
-            buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
-            buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
-        }
-
-        norec {
-            dimension "receive"
+        restrict {
+            dimension "status"
             versionNameSuffix "R"
             versionCode 0
             buildConfigField "boolean", "REC_SMS_ALLOWED", "false"
             buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
-        }
-
-        send {
-            dimension "send"
-            versionNameSuffix "S"
-            versionCode 2
-            buildConfigField "boolean", "SEND_ALLOWED", "true"
-        }
-
-        nosend {
-            dimension "send"
-            versionNameSuffix ""
-            versionCode 2
             buildConfigField "boolean", "SEND_ALLOWED", "false"
         }
     }
@@ -92,7 +72,7 @@ android {
     applicationVariants.configureEach { variant ->
         def storeVersion = variant.productFlavors.get(0).versionCode
         def typeVersion = variant.productFlavors.get(1).versionCode
-        def version = defaultConfig.versionCode + typeVersion // * 10000000
+        def version = defaultConfig.versionCode + typeVersion * 1000
         variant.outputs.each { output ->
             output.versionCodeOverride = version
         }
@@ -100,8 +80,7 @@ android {
 
     variantFilter { variant ->
         def names = variant.flavors*.name
-        if (names.contains("aptoide") ||
-            names.contains("send") && !names.contains("rec")) {
+        if (names.contains("aptoide") && names.contains("restrict")) {
             setIgnore(true)
         }
     }

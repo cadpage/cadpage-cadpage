@@ -192,7 +192,7 @@
   </string>
 
   <string name="donate_android_suppressed_text">
-    Sadly, Aptoide Store payments are not working and Aptoide support has been unhelpful.
+    Aptoide Store payments are not currently working.
   </string>
 
   <string name="donate_magic_word_title">I have an authorization code</string>
