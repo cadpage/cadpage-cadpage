@@ -50,6 +50,12 @@ android {
             buildConfigField "boolean", "APTOIDE", "true"
         }
 
+        oter {
+            dimension "store"
+            versionNameSuffix "X"
+            versionCode 1
+        }
+
         full {
             dimension "status"
             versionNameSuffix ""

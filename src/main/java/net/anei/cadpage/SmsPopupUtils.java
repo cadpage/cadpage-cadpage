@@ -351,7 +351,7 @@ public class SmsPopupUtils {
   private static int getSupportAppVersion(Context context) {
 
     // See if support package is installed
-    // if it is not, launch play store to install the update without further ado
+    // if it is not, return zero
     PackageManager pm = context.getPackageManager();
     try {
       PackageInfo pi = pm.getPackageInfo(CADPAGE_SUPPORT_PKG, 0);
