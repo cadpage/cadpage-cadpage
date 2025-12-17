@@ -40,6 +40,7 @@ android {
             dimension "store"
             versionNameSuffix "G"
             versionCode 1
+            buildConfigField "boolean", "GOOGLE", "true"
             buildConfigField "boolean", "APTOIDE", "false"
         }
 
@@ -47,13 +48,16 @@ android {
             dimension "store"
             versionNameSuffix "A"
             versionCode 1
+            buildConfigField "boolean", "GOOGLE", "false"
             buildConfigField "boolean", "APTOIDE", "true"
         }
 
-        oter {
+        other {
             dimension "store"
             versionNameSuffix "X"
             versionCode 1
+            buildConfigField "boolean", "GOOGLE", "false"
+            buildConfigField "boolean", "APTOIDE", "false"
         }
 
         full {
@@ -86,7 +90,7 @@ android {
 
     variantFilter { variant ->
         def names = variant.flavors*.name
-        if (names.contains("aptoide") && names.contains("restrict")) {
+        if (!names.contains("google") && names.contains("restrict")) {
             setIgnore(true)
         }
     }
