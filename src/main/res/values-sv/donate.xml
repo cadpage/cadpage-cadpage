@@ -9,6 +9,7 @@
   <string name="donate_free_title">Ingen prenumeration krävs</string>  <!-- google translate -->
   <string name="donate_free_text">  <!-- google translate -->
     En köpt prenumeration krävs inte längre om du inte använder Cadpages personsökningstjänst.
+    Men du kan köpa en om du bara vill stödja oss.
   </string>
 
   <string name="donate_life_title">Tack för ditt stöd</string>
@@ -325,9 +326,6 @@
   <string name="help_codemessaging_title">
     Min förvaltning använder CodeMessaging
   </string>
-  <string name="help_codemessaging_wintitle">
-    CodeMessaging larm
-  </string>
   <string name="help_codemessaging_text">
     Du behöver registrera Cadpage hos CodeMEssaging.  Processen är rätt självskriven.
     Den enda luriga delen är att du måste trycka på "Ja" på frågan om du tar emot larm från CodeMessaging.
@@ -383,29 +381,49 @@
     Registrera hos CodeMessaging
   </string>
 
-  <string name="donate_need_cadpage_support_app_title">
-    Installera Cadpages meddelande-support app
-  </string>
-    <string name="donate_need_cadpage_support_app_text">
-    Den här versionen av Cadpage har inte godkänts för att hantera inkommande textmeddelanden. Om du behöver den funktionaliteten så behöver du installera Cadpages stödapp för meddelanden.
-  </string>
-    <string name="donate_need_cadpage_support_app1_text">
-    Den här versionen av Cadpage har inte godkänts för att hantera inkommande MMS-meddelanden. Om du behöver den funktionaliteten så behöver du installera Cadpages stödapp för meddelanden.
-  </string>
-  <string name="donate_need_cadpage_support_app2_text">
-    Den här versionen av Cadpage är inte tillåten att skicka SMS eller ringa telefonsamta.
-    Om du behöver den funktionaliteten så behöver du installera Cadpages stödapp för meddelanden.
+  <string name="help_cadpage_paging_register_title">  <!-- google translate -->
+    Registrera dig hos personsökartjänsten Cadpage
   </string>
 
-  <string name="donate_update_cadpage_support_app_title">
-    Uppdatera Cadpages meddelande-app
-  </string>
-  <string name="donate_update_cadpage_support_app_text">
-    Cadpages meddelande-supportsapp som du har installerat är gammal och behöver uppdateras för den ska fungera tillsammans med alla funktioner som du vill ha i Cadpage.
+  <string name="help_cadpage_paging_register_text">  <!-- google translate -->
+    OK När du registrerar dig för den här tjänsten kommer du att få en e-postadress för utskick.
+    Du måste få dina utskicksaviseringar skickade till den här e-postadressen. Därifrån kommer de
+    att vidarebefordras till Cadpage. En betald prenumeration krävs, men du bör få en gratis
+    demoavgift på 30 dollar för att prova den.
   </string>
 
-  <string name="donate_install_cadpage_support_app_title">
-    Installera Cadpages support app
+  <string name="donate_text_alert_warn_title"> <!-- google translate -->
+    Stöd för SMS-aviseringar försvinner
+  </string>
+
+  <string name="donate_text_alert_warn_text"> <!-- google translate -->
+    På grund av begränsningar i Google Play kommer stödet för att hantera textmeddelanden snart att
+    försvinna.  Om du behöver den här funktionen måste du antingen byta till Cadpage Paging-tjänsten
+    eller installera en version av Cadpage från någon annanstans än Google Play Store.
+  </string>
+
+  <string name="donate_text_alert_gone_title"> <!-- google translate -->
+    Stödet för textaviseringar är borta
+  </string>
+
+  <string name="donate_text_alert_gone_text"> <!-- google translate -->
+    På grund av begränsningar i Google Play stöds inte längre aviseringar för SMS-meddelanden.
+    Om du behöver den här funktionen måste du antingen byta till Cadpages personsökartjänst eller
+    installera en version av Cadpage från någon annanstans än Google Play Store.
+  </string>
+
+  <string name="donate_install_real_cadpage_title"> <!-- google translate -->
+    Installera en annan Cadpage-version
+  </string>
+
+  <string name="donate_install_real_cadpage_text"> <!-- google translate -->
+    Alla versioner av Cadpage som du hittar någon annanstans än Google Play Store fungerar.
+    Eftersom den här versionen installerades från Play Store är det inte tillåtet att vara mer
+    specifik. Sök och du skall finna.
+  </string>
+
+  <string name="donate_ignore_warning_title"> <!-- google translate -->
+    Ignorera denna varning.
   </string>
 
   <string name="donate_drop_msg_support_title">

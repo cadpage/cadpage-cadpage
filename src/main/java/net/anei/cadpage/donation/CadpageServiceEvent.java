@@ -2,6 +2,7 @@ package net.anei.cadpage.donation;
 
 import android.app.Activity;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.vendors.VendorManager;
 
 /**

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 
+import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.CadPageActivity;
 import net.anei.cadpage.FCMMessageService;
 import net.anei.cadpage.HttpService;
@@ -33,7 +34,7 @@ class CadpageVendor extends Vendor {
 
   @Override
   boolean isAvailable() {
-    return true;
+    return BuildConfig.GOOGLE;
   }
 
   @Override

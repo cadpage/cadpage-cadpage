@@ -21,10 +21,8 @@ import android.os.Build;
 import android.os.PowerManager;
 
 import net.anei.cadpage.donation.BatteryOptimizationSupportEvent;
-import net.anei.cadpage.donation.NeedCadpageSupportApp1Event;
-import net.anei.cadpage.donation.NeedCadpageSupportApp2Event;
-import net.anei.cadpage.donation.NeedCadpageSupportAppEvent;
-import net.anei.cadpage.donation.UpdateCadpageSupportAppEvent;
+import net.anei.cadpage.donation.TextAlertGoneEvent;
+import net.anei.cadpage.donation.TextAlertWarnEvent;
 
 import static android.content.Context.POWER_SERVICE;
 
@@ -232,21 +230,13 @@ public class SmsPopupUtils {
       // If it does not, issue user prompt if requested.  In any case, return 1
       if (installedVersion < version) {
         if (prompt) {
-          if (installedVersion <= 0) {
-            if (needSMSSupport) {
-              NeedCadpageSupportAppEvent.instance().launch(context);
-            } else if (needMMSSupport) {
-              NeedCadpageSupportApp1Event.instance().launch(context);
-            } else {
-              NeedCadpageSupportApp2Event.instance().launch(context);
-            }
-            Log.v("Requesting Cadpage Message Support app install");
-          } else {
-            UpdateCadpageSupportAppEvent.instance().launch(context);
-            Log.v("Requesting Cadpage Message Support app upgrade");
-          }
+          TextAlertGoneEvent.instance().launch(context);
+          Log.v("Text message support error");
+          return 1;
         }
-        return 1;
+      } else if (prompt) {
+        TextAlertWarnEvent.instance().launch(context);
+        Log.v("Text message support warning");
       }
 
       // Fire off an intent to launch the support app.  If it installed and configured
@@ -296,47 +286,12 @@ public class SmsPopupUtils {
     // If support app is not needed, nothing needs to be done
     if (!isSupportAppAvailable()) return;
 
-    // Get the installed support app version.  If it is the latest version
-    // the only thing we need to check is battery optimization most be turned off if
-    // user wants to initiate phone calls.
-    boolean fixed = false;
-    int version = getSupportAppVersion(context);
-    if (version == CADPAGE_SUPPORT_VERSION5) {
-      if (!msgType.equals("C")) {
-        if (ManagePreferences.removeCallbackCode(("P"))) fixed = true;
-      }
-    }
-
-    // If not installed at all, turn off unsupported message processing
-    else {
-      if (version <= 0) {
-        String newMsgType = msgType;
-        if (!BuildConfig.REC_SMS_ALLOWED) newMsgType = newMsgType.replace("S", "");
-        if (!BuildConfig.REC_MMS_ALLOWED) newMsgType = newMsgType.replace("M", "");
-        if (!newMsgType.equals(msgType)) {
-          msgType = newMsgType;
-          ManagePreferences.setEnableMsgType(msgType);
-          fixed = true;
-        }
-      }
-
-      // We know that MMS downloads are not supported, so request the old MMS logic
-      if (msgType.contains("M") && !ManagePreferences.useOldMMS()) {
-        ManagePreferences.setUseOldMMS(true);
-        fixed = true;
-      }
-
-      // Remove any callback codes that are not supported by the current support app
-      if (!msgType.equals("C") && version < CADPAGE_SUPPORT_VERSION3) {
-        String removeCode = version < CADPAGE_SUPPORT_VERSION2 ? "TP" : "P";
-        if (ManagePreferences.removeCallbackCode(removeCode)) fixed = true;
-      }
-    }
+    // Since the support app is going away, the only fix we apply is to turn off all
+    // text message processing
+    ManagePreferences.setEnableMsgType("C");
 
     // If we fixed anything, see if we need to restore a visible preference
-    if (fixed) {
-      PreferenceRestorableFragment.restorePreferenceValue();
-    }
+    PreferenceRestorableFragment.restorePreferenceValue();
   }
 
   public static boolean isSupportAppAvailable() {

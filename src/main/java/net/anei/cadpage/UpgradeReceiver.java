@@ -128,11 +128,6 @@ public class UpgradeReceiver extends BroadcastReceiver {
     if (ManagePreferences.enableMsgType().contains("M") && BuildConfig.REC_MMS_ALLOWED &&
             !PermissionManager.isGranted(context, PermissionManager.READ_SMS)) return true;
 
-    // Something else to check.  If user has upgraded to a message restricted version of
-    // Cadpage, check to make sure the message support app is installed
-    if ((!BuildConfig.REC_SMS_ALLOWED || !BuildConfig.REC_MMS_ALLOWED) &&
-        SmsPopupUtils.checkMsgSupport(context, false) > 0) return true;
-
     return false;
   }
 }

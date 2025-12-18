@@ -6,12 +6,14 @@ import net.anei.cadpage.R;
  No subscription required
 
  A purchased subscription is no longer required unless you are using the Cadpage paging service.
+ But you can purchase one if you just want to support us.
 
  */
 public class FreeDonateEvent extends DonateScreenEvent {
   
   public FreeDonateEvent() {
-    super(AlertStatus.GREEN, R.string.donate_free_title, R.string.donate_free_text);
+    super(AlertStatus.GREEN, R.string.donate_free_title, R.string.donate_free_text,
+          AndroidDonate1Event.instance());
   }
   
   @Override

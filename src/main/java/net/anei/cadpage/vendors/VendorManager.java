@@ -101,6 +101,13 @@ public class VendorManager {
   public boolean isPaidSubRequired() {
     return isRegistered("Cadpage") && !isRegistered("CodeMessaging");
   }
+
+  /***
+   * @return true if Cadpage service is registered
+   */
+  public boolean isCadpageRegistered() {
+    return isRegistered("Cadpage");
+  }
   
   /**
    * @return true specified vendor is a legal vendor name
