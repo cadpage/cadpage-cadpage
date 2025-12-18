@@ -4,6 +4,7 @@
 /restrict
 /aptoide*
 /google*
+/other*
 *.iml
 /.gradle
 /.idea
