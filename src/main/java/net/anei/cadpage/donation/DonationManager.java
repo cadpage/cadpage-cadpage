@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 
 import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.CadPageApplication;
+import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.vendors.VendorManager;
@@ -174,12 +175,10 @@ public class DonationManager {
     // in some circumstances
     boolean paidSubReq = VendorManager.instance().isPaidSubRequired();
     
-    // Get sponsor name and expiration date from either the
-    // Vendor manager or the current parser.  Neither counts as a paid
-    // subscription for Cadpage paging service
+    // Get sponsor name and expiration date from the Vendor manager.  This doesn't count
+    // as a paid subscription for Cadpage paging service
     sponsor = null;
     JulianDate regJDate = null;
-    expireDate = null;
     int subStatus = 0;
     if (!paidSubReq) {
       sponsor = VendorManager.instance().getSponsor();
@@ -192,18 +191,14 @@ public class DonationManager {
           regJDate = new JulianDate(regDate);
         }
       }
-      if (!VendorManager.instance().isRegistered()) {
-        MsgParser parser = ManagePreferences.getCurrentParser();
-        sponsor = parser.getSponsor();
-      }
     }
 
     // Life gets complicated because we may be dealing with two sponsors, one that came from direct
     // paging or parser sponsoring vendors, and the other that was reported by the authorization server
     // and we won't know which one should be in the final result until we check on the subscription
     // expiration status.  So save the first sponsor as the sponsoring vendor so it can be recovered.
-    String sponsoringVendor = (expireDate == null ? sponsor : null);
-    daysSinceInstall = ManagePreferences.calcAuthRunDays(sponsoringVendor == null ? curDate : null);
+    expireDate = null;
+    daysSinceInstall = ManagePreferences.calcAuthRunDays(sponsor == null ? curDate : null);
 
     // Calculate subscription expiration date
     // (one year past the purchase date anniversary in the last paid year)
@@ -213,32 +208,34 @@ public class DonationManager {
     paidSubscriber = false;
     overpaidDays = 0;
     daysSincePurchase = -99999;
-    int paidYear = ManagePreferences.paidYear();
-    if (paidYear > 0) {
-      subExpDate = ManagePreferences.purchaseDate();
-      if (subExpDate == null) subExpDate = ManagePreferences.installDate();
-      Calendar cal = new GregorianCalendar();
-      cal.setTime(subExpDate);
-      cal.set(Calendar.YEAR, paidYear);
-      JulianDate purJDate = new JulianDate(cal.getTime());
-      daysSincePurchase = purJDate.diffDays(curJDate);
-      cal.set(Calendar.YEAR, paidYear + 1);
-      subExpDate = cal.getTime();
-      JulianDate tJDate = new JulianDate(subExpDate);
+    if (sponsor == null) {
+      int paidYear = ManagePreferences.paidYear();
+      if (paidYear > 0) {
+        subExpDate = ManagePreferences.purchaseDate();
+        if (subExpDate == null) subExpDate = ManagePreferences.installDate();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(subExpDate);
+        cal.set(Calendar.YEAR, paidYear);
+        JulianDate purJDate = new JulianDate(cal.getTime());
+        daysSincePurchase = purJDate.diffDays(curJDate);
+        cal.set(Calendar.YEAR, paidYear + 1);
+        subExpDate = cal.getTime();
+        JulianDate tJDate = new JulianDate(subExpDate);
 
-      // If there is a sponsored vendor register date and they have a paid subscription
-      // expiration date, compute the number of days between them.  This is the number 
-      // of days they have been doubled billed by both us and the vendor
-      if (regJDate != null) {
-        overpaidDays = regJDate.diffDays(tJDate);
-      }
+        // If there is a sponsored vendor register date and they have a paid subscription
+        // expiration date, compute the number of days between them.  This is the number
+        // of days they have been doubled billed by both us and the vendor
+        if (regJDate != null) {
+          overpaidDays = regJDate.diffDays(tJDate);
+        }
 
-      // They only get the coveted paid subscriber status if this is a real
-      // paid subscription and this expiration date has not passed
-      if (!ManagePreferences.freeSub()) {
-        if (curJDate.diffDays(tJDate) >= 0) {
-          paidSubscriber = true;
-          usedPurchaseDate = true;
+        // They only get the coveted paid subscriber status if this is a real
+        // paid subscription and this expiration date has not passed
+        if (!ManagePreferences.freeSub()) {
+          if (curJDate.diffDays(tJDate) >= 0) {
+            paidSubscriber = true;
+            usedPurchaseDate = true;
+          }
         }
       }
     }
@@ -305,8 +302,7 @@ public class DonationManager {
     // If we did have a  master unexpiring vendor, and the final status indicates
     // a Vendor paid status, clean things up by reporting the correct vendor and
     // null expiration date
-    if (sponsoringVendor != null && status == DonationStatus.SPONSOR) {
-      sponsor = sponsoringVendor;
+    if (sponsor != null && status == DonationStatus.SPONSOR) {
       expireDate = null;
     }
 
