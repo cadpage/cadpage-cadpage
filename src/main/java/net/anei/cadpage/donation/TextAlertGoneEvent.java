@@ -1,5 +1,7 @@
 package net.anei.cadpage.donation;
 
+import net.anei.cadpage.BuildConfig;
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsPopupUtils;
 
@@ -13,10 +15,15 @@ import net.anei.cadpage.SmsPopupUtils;
 public class TextAlertGoneEvent extends DonateScreenEvent {
 
   private TextAlertGoneEvent() {
-    super(AlertStatus.RED, R.string.donate_text_alert_gone_title, R.string.donate_text_alert_gone_text,
+    super(AlertStatus.RED, R.string.help_text_dispatch_title, R.string.donate_text_alert_gone_title, R.string.donate_text_alert_gone_text,
         HelpCadpagePagingRegisterPromptEvent.instance(),
         InstallRealCadpageEvent.instance(),
         DropMsgSupportEvent.instance());
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return !BuildConfig.REC_SMS_ALLOWED;
   }
 
   @Override

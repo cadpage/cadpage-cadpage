@@ -3,13 +3,15 @@ package net.anei.cadpage.donation;
 import android.app.Activity;
 import android.content.Intent;
 
+import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
+import net.anei.cadpage.vendors.VendorManager;
 
 /*
 
-Text dispatch alerts
+My department sends me text alerts
 
 You need to tell Cadpage something about where you are so that it knows how to interpret the alerts
 you are receiving.  Usually, this is just a matter of selecting the location where your dispatch
@@ -22,6 +24,11 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
   private HelpEnableSmsEvent() {
     super(R.string.help_text_dispatch_title, R.string.help_text_dispatch_wintitle, R.string.help_enable_sms_text,
           HelpDoEnableSmsEvent.instance());
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return BuildConfig.REC_SMS_ALLOWED;
   }
 
   @Override

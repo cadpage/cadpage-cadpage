@@ -25,6 +25,11 @@ public class HelpTextDispatchEvent extends DonateScreenEvent {
   }
 
   @Override
+  public boolean isEnabled() {
+    return !ManagePreferences.isGoodLocation();
+  }
+
+  @Override
   public void create(Activity activity, SmsMmsMessage msg) {
 
     // If Cadpage is functional, switch to the Cadpage ready menu.  This can only happen

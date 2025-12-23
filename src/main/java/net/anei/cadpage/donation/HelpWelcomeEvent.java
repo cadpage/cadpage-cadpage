@@ -22,6 +22,7 @@ public class HelpWelcomeEvent extends DonateScreenEvent {
   protected HelpWelcomeEvent() {
     super(R.string.help_welcome_title, R.string.help_welcome_title, R.string.help_welcome_text,
           HelpEnableSmsEvent.instance(),
+          TextAlertGoneEvent.instance(),
           HelpCodeMessagingEvent.instance(),
           HelpActive911Event.instance(),
           HelpNoDispatchAlertsEvent.instance());

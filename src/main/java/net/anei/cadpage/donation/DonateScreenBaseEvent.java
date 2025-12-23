@@ -32,7 +32,7 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
     this(null, titleId, winTitleId, textId, layout);
   }
 
-  private DonateScreenBaseEvent(AlertStatus alertStatus, int titleId, int winTitleId, int textId,
+  protected DonateScreenBaseEvent(AlertStatus alertStatus, int titleId, int winTitleId, int textId,
                                 int layout) {
     super(alertStatus, titleId);
     registerScreenEvent(this);

@@ -616,23 +616,32 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // The text alert checks only count if text processing is enabled
     if (! enableMsgType().equals("C")) {
 
-      // Specifying a location other than General is good
-      String location = location();
-      for (String part : location.split(",")) {
-        if (!part.startsWith("General")) return true;
-        }
+      if (isGoodLocation()) return true;
 
       // Or any functional sender filter is good
       if (ManagePreferences.filter().trim().length() > 1) return true;
     }
 
     // Registered with any direct paging service is good
-    if (VendorManager.instance().isRegistered()) return true;
+    if (VendorManager.instance().isRegistered()) {
+
+      // Unless the paging service requires a location code
+      return (!VendorManager.instance().isLocationRequired() || isGoodLocation());
+    }
 
     // Otherwise report nonfunctional status
     return false;
   }
-  
+
+  public static boolean isGoodLocation() {
+    // Specifying a location other than General is good
+    String location = location();
+    for (String part : location.split(",")) {
+      if (!part.startsWith("General")) return true;
+      }
+    return false;
+  }
+
   public static boolean suppressDupMsg() {
     return prefs.getBoolean(R.string.pref_suppress_dup_msg_key);
   }

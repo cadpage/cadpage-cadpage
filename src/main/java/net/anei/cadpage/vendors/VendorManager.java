@@ -105,8 +105,10 @@ public class VendorManager {
   /***
    * @return true if Cadpage service is registered
    */
-  public boolean isCadpageRegistered() {
-    return isRegistered("Cadpage");
+  public boolean isCadpageAvailable() {
+    Vendor vendor = findVendor("Cadpage");
+    if (vendor == null) return false;
+    return vendor.isAvailable() && !vendor.isEnabled();
   }
   
   /**
