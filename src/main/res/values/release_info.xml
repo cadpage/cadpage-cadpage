@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12182025</string>
+  <string name="release_date">12242025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-02\n
+    Added better warning for users going through text message transition with configured
+    response buttons\n
+    \n
+    Location Fixes:\n
+    Wabash County, IN\n
+    Clinton County, MO\n
+    Burke County, NC\n
+    Waller County, TX\n
+    \n
+    New Locations:\n
+    Choctaw County, MS\n
+    Bertie County, NC\n
+    Wyoming County, WV\n
+    \n
     v2.2.13-01\n
     The Google play version of Cadpage will no longer prompt users to install the support app.
     Users who have already installed that app can continue using it but will be warned that it
@@ -50,27 +65,6 @@
     Madison County, NY\n
     Clatsop County, OR\n
     Armstrong County, PA\n
-    Upshur County, TX\n
-    \n
-    v2.2.11-64\n
-    New Locations:\n
-    Fire and EMS, DC\n
-    Benton County, IN\n
-    Rowan County, KY\n
-    Jefferson Parish, LA\n
-    Montgomery County, MS\n
-    Orange County, NY\n
-    Carroll County, OH\n
-    Indiana County, PA\n
-    Hutchinson County, TX\n
-    Llano County, TX\n
-    Chittenden County, VT\n
-    \n
-    Location Fixes:\n
-    White County, AR\n
-    Marshall County, IN\n
-    Clatsop County, OR\n
-    McCormick County, SC\n
-    Burnet County, TX
+    Upshur County, TX
   </string>
 </resources>
