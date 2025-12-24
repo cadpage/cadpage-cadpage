@@ -32,8 +32,8 @@ import android.os.PowerManager;
 public class PushReceiver extends BroadcastReceiver {
 
   private static final String ACTION_WAP_PUSH_RECEIVED =
-      (BuildConfig.REC_MMS_ALLOWED ? "android.provider.Telephony.WAP_PUSH_RECEIVED"
-                                   : "net.anei.cadpage.Telephony.WAP_PUSH_RECEIVED");
+      (BuildConfig.FULL_SUPPORT ? "android.provider.Telephony.WAP_PUSH_RECEIVED"
+                                    : "net.anei.cadpage.Telephony.WAP_PUSH_RECEIVED");
 
   @Override
   public void onReceive(Context context, Intent intent) {

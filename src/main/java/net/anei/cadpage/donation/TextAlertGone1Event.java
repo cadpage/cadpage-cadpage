@@ -3,7 +3,6 @@ package net.anei.cadpage.donation;
 import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
-import net.anei.cadpage.SmsPopupUtils;
 
 /*
     Text alert support is gone
@@ -12,10 +11,10 @@ import net.anei.cadpage.SmsPopupUtils;
     If you need this capability you will either need to switch to the Cadpage Paging service or
     install a version of Cadpage from somewhere other than the Google Play Store
  */
-public class TextAlertGoneEvent extends DonateScreenEvent {
+public class TextAlertGone1Event extends DonateScreenEvent {
 
-  private TextAlertGoneEvent() {
-    super(AlertStatus.RED, R.string.help_text_dispatch_title, R.string.donate_text_alert_gone_title, R.string.donate_text_alert_gone_text,
+  private TextAlertGone1Event() {
+    super(AlertStatus.RED, R.string.donate_text_alert_gone_title, R.string.donate_text_alert_gone1_text,
         HelpCadpagePagingRegisterPromptEvent.instance(),
         InstallRealCadpageEvent.instance(),
         DropMsgSupportEvent.instance());
@@ -23,7 +22,7 @@ public class TextAlertGoneEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return !BuildConfig.REC_SMS_ALLOWED;
+    return !BuildConfig.FULL_SUPPORT;
   }
 
   @Override
@@ -31,8 +30,8 @@ public class TextAlertGoneEvent extends DonateScreenEvent {
     return true;
   }
 
-  private static final TextAlertGoneEvent instance = new TextAlertGoneEvent();
-  public static TextAlertGoneEvent instance() {
+  private static final TextAlertGone1Event instance = new TextAlertGone1Event();
+  public static TextAlertGone1Event instance() {
     return instance;
   }
 

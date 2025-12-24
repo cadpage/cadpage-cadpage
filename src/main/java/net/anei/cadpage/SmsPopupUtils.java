@@ -21,8 +21,10 @@ import android.os.Build;
 import android.os.PowerManager;
 
 import net.anei.cadpage.donation.BatteryOptimizationSupportEvent;
-import net.anei.cadpage.donation.TextAlertGoneEvent;
-import net.anei.cadpage.donation.TextAlertWarnEvent;
+import net.anei.cadpage.donation.TextAlertGone1Event;
+import net.anei.cadpage.donation.TextAlertGone2Event;
+import net.anei.cadpage.donation.TextAlertWarn1Event;
+import net.anei.cadpage.donation.TextAlertWarn2Event;
 
 import static android.content.Context.POWER_SERVICE;
 
@@ -197,14 +199,15 @@ public class SmsPopupUtils {
     int version;
     String callbackType = ManagePreferences.callbackTypeSummary();
     boolean callbackPhone = callbackType.contains("P");
-    boolean needSMSSupport = !BuildConfig.REC_SMS_ALLOWED && msgType.contains("S");
-    boolean needMMSSupport = !BuildConfig.REC_MMS_ALLOWED && msgType.contains("M");
+    boolean callbackText = callbackType.contains("T");
+    boolean needSMSSupport = !BuildConfig.FULL_SUPPORT && msgType.contains("S");
+    boolean needMMSSupport = !BuildConfig.FULL_SUPPORT && msgType.contains("M");
 
     if (callbackPhone) {
       version = Build.VERSION.SDK_INT < Build.VERSION_CODES.S ? CADPAGE_SUPPORT_VERSION5 : CADPAGE_SUPPORT_VERSION6;
     } else if (needMMSSupport && !ManagePreferences.useOldMMS()) {
       version = CADPAGE_SUPPORT_VERSION4;
-    } else if (callbackType.contains("T")) {
+    } else if (callbackText) {
       version = CADPAGE_SUPPORT_VERSION2;
     } else if (needSMSSupport || needMMSSupport){
       version = CADPAGE_SUPPORT_VERSION;
@@ -230,12 +233,20 @@ public class SmsPopupUtils {
       // If it does not, issue user prompt if requested.  In any case, return 1
       if (installedVersion < version) {
         if (prompt) {
-          TextAlertGoneEvent.instance().launch(context);
+          if (callbackPhone || callbackText) {
+            TextAlertGone2Event.instance().launch(context);
+          } else {
+            TextAlertGone1Event.instance().launch(context);
+          }
           Log.v("Text message support error");
           return 1;
         }
       } else if (prompt) {
-        TextAlertWarnEvent.instance().launch(context);
+        if (callbackPhone || callbackText) {
+          TextAlertWarn2Event.instance().launch(context);
+        } else {
+          TextAlertWarn1Event.instance().launch(context);
+        }
         Log.v("Text message support warning");
       }
 
@@ -295,7 +306,7 @@ public class SmsPopupUtils {
   }
 
   public static boolean isSupportAppAvailable() {
-    return !(BuildConfig.REC_MMS_ALLOWED && BuildConfig.SEND_ALLOWED);
+    return !BuildConfig.FULL_SUPPORT;
   }
 
   /**
@@ -414,7 +425,7 @@ public class SmsPopupUtils {
 
     // If we are not running the crippled version of Cadpage, then the system knows
     // we are responding to an incoming text message and background starts are acceptable
-    if (BuildConfig.REC_SMS_ALLOWED) return true;
+    if (BuildConfig.FULL_SUPPORT) return true;
 
     // The background start provisions started with Oreo.  Anything before that and we are good
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return true;

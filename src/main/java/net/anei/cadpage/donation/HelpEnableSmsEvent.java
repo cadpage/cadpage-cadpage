@@ -28,7 +28,7 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return BuildConfig.REC_SMS_ALLOWED;
+    return BuildConfig.FULL_SUPPORT;
   }
 
   @Override

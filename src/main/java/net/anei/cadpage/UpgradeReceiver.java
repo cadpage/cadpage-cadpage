@@ -125,7 +125,7 @@ public class UpgradeReceiver extends BroadcastReceiver {
     // the app has been upgraded, check for the missing permission situation, and if detected,
     // launch this activity to fix things.  Once fixed, we shut down and no one is any wiser
 
-    if (ManagePreferences.enableMsgType().contains("M") && BuildConfig.REC_MMS_ALLOWED &&
+    if (ManagePreferences.enableMsgType().contains("M") && BuildConfig.FULL_SUPPORT &&
             !PermissionManager.isGranted(context, PermissionManager.READ_SMS)) return true;
 
     return false;

@@ -64,18 +64,14 @@ android {
             dimension "status"
             versionNameSuffix ""
             versionCode 2
-            buildConfigField "boolean", "REC_SMS_ALLOWED", "true"
-            buildConfigField "boolean", "REC_MMS_ALLOWED", "true"
-            buildConfigField "boolean", "SEND_ALLOWED", "true"
+            buildConfigField "boolean", "FULL_SUPPORT", "true"
         }
 
         restrict {
             dimension "status"
             versionNameSuffix "R"
             versionCode 0
-            buildConfigField "boolean", "REC_SMS_ALLOWED", "false"
-            buildConfigField "boolean", "REC_MMS_ALLOWED", "false"
-            buildConfigField "boolean", "SEND_ALLOWED", "false"
+            buildConfigField "boolean", "FULL_SUPPORT", "false"
         }
     }
 

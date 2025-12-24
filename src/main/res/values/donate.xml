@@ -524,20 +524,32 @@
     Text alert support is going away
   </string>
 
-  <string name="donate_text_alert_warn_text">
+  <string name="donate_text_alert_warn1_text">
     Due to Google Play restrictions, support for processing text alerts will soon disappear.
     If you need this capability you will either need to switch to the Cadpage Paging service or
     install a version of Cadpage from somewhere other than the Google Play Store
   </string>
 
+  <string name="donate_text_alert_warn2_text">
+    Due to Google Play restrictions, this version of Cadpage soon loose the ability initiate text messages
+    or phone calls. If you need this capability you will have to install a version of Cadpage from
+    somewhere other than the Google Play Store
+ </string>
+
   <string name="donate_text_alert_gone_title">
     Text alert support is gone
   </string>
 
-  <string name="donate_text_alert_gone_text">
+  <string name="donate_text_alert_gone1_text">
     Due to Google Play restrictions, alerts for text dispatch messages are no longer supported.
     If you need this capability you will either need to switch to the Cadpage Paging service or
     install a version of Cadpage from somewhere other than the Google Play Store
+  </string>
+
+  <string name="donate_text_alert_gone2_text">
+    Due to Google Play restrictions, this version of Cadpage can no longer initiate text messages
+    or phone calls. If you need this capability you will have to install a version of Cadpage from
+    somewhere other than the Google Play Store
   </string>
 
   <string name="donate_install_real_cadpage_title">
