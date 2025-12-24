@@ -396,20 +396,32 @@
     Stöd för SMS-aviseringar försvinner
   </string>
 
-  <string name="donate_text_alert_warn_text"> <!-- google translate -->
+  <string name="donate_text_alert_warn1_text"> <!-- google translate -->
     På grund av begränsningar i Google Play kommer stödet för att hantera textmeddelanden snart att
     försvinna.  Om du behöver den här funktionen måste du antingen byta till Cadpage Paging-tjänsten
     eller installera en version av Cadpage från någon annanstans än Google Play Store.
+  </string>
+
+  <string name="donate_text_alert_warn2_text">
+    På grund av begränsningar i Google Play förlorar den här versionen av Cadpage snart möjligheten
+    att initiera textmeddelanden eller telefonsamtal. Om du behöver den här funktionen måste du
+    installera en version av Cadpage från någon annanstans än Google Play Store.
   </string>
 
   <string name="donate_text_alert_gone_title"> <!-- google translate -->
     Stödet för textaviseringar är borta
   </string>
 
-  <string name="donate_text_alert_gone_text"> <!-- google translate -->
+  <string name="donate_text_alert_gone1_text"> <!-- google translate -->
     På grund av begränsningar i Google Play stöds inte längre aviseringar för SMS-meddelanden.
     Om du behöver den här funktionen måste du antingen byta till Cadpages personsökartjänst eller
     installera en version av Cadpage från någon annanstans än Google Play Store.
+  </string>
+
+  <string name="donate_text_alert_gone2_text">
+    På grund av begränsningar i Google Play kan den här versionen av Cadpage inte längre initiera
+    textmeddelanden eller telefonsamtal. Om du behöver den här funktionen måste du installera en
+    version av Cadpage från någon annanstans än Google Play Store.
   </string>
 
   <string name="donate_install_real_cadpage_title"> <!-- google translate -->

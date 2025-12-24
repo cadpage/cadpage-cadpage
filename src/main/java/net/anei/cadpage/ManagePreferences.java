@@ -1743,8 +1743,10 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       // if the value contains an M, we need RECEIVE_MMS and READ_SMS permission
       // In either case, if this version of Cadpage is not allowed to access the incomming
       // messages, we don't need to associated permission
-      if (BuildConfig.REC_SMS_ALLOWED) value = check(value, "S", PermissionManager.RECEIVE_SMS);
-      if (BuildConfig.REC_MMS_ALLOWED) value = check(value, "M", PermissionManager.READ_SMS, PermissionManager.RECEIVE_MMS);
+      if (BuildConfig.FULL_SUPPORT) {
+        value = check(value, "S", PermissionManager.RECEIVE_SMS);
+        value = check(value, "M", PermissionManager.READ_SMS, PermissionManager.RECEIVE_MMS);
+      }
       return value;
     }
     
@@ -1787,7 +1789,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     protected String checkPermission(String value) {
 
       // If we are not allowed to initiate phone calls, there is nothing to check
-      if (!BuildConfig.SEND_ALLOWED) return null;
+      if (!BuildConfig.FULL_SUPPORT) return null;
 
       // A value of P requires CALL_PHONE permission
       // A value of T requires SMS_SEND permission

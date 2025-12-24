@@ -1,7 +1,6 @@
 package net.anei.cadpage.donation;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.SmsPopupUtils;
 
 /*
     Text alert support is going away
@@ -10,10 +9,10 @@ import net.anei.cadpage.SmsPopupUtils;
     If you need this capability you will either need to switch to the Cadpage Paging service, or
     install a version of Cadpage from somewhere other than the Google Play Store
  */
-public class TextAlertWarnEvent extends DonateScreenEvent {
+public class TextAlertWarn1Event extends DonateScreenEvent {
 
-  private TextAlertWarnEvent() {
-    super(AlertStatus.RED, R.string.donate_text_alert_warn_title, R.string.donate_text_alert_warn_text,
+  private TextAlertWarn1Event() {
+    super(AlertStatus.RED, R.string.donate_text_alert_warn_title, R.string.donate_text_alert_warn1_text,
         HelpCadpagePagingRegisterPromptEvent.instance(),
         InstallRealCadpageEvent.instance(),
         DropMsgSupportEvent.instance(),
@@ -25,8 +24,8 @@ public class TextAlertWarnEvent extends DonateScreenEvent {
     return true;
   }
 
-  private static final TextAlertWarnEvent instance = new TextAlertWarnEvent();
-  public static TextAlertWarnEvent instance() {
+  private static final TextAlertWarn1Event instance = new TextAlertWarn1Event();
+  public static TextAlertWarn1Event instance() {
     return instance;
   }
 
