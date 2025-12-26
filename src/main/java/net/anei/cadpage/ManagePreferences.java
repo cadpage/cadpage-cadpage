@@ -115,9 +115,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // exceptional in that it should be applied the initial Cadpage installs as well as upgrades
     // to where it was first defined.
     if (oldVersion < 51) {
-      if (SmsPopupUtils.isOldMMSDefault(context)) {
-        prefs.putBoolean(R.string.pref_use_old_mms_key, true);
-      }
+      prefs.putBoolean(R.string.pref_use_old_mms_key, true);
     }
 
     // All of the other specialized preference fixes are only applied to a Cadpage upgrade.  The
@@ -244,7 +242,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       
       // If old version < 17, add a 'C' to message type preference
       if (oldVersion < 17) {
-        String msgType = enableMsgType();
+        String msgType = realEnableMsgType();
         if (! msgType.startsWith("C")) {
           prefs.putString(R.string.pref_enable_msg_type_key, "C" + msgType);
         }
@@ -448,8 +446,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   public static void setRelease(String newRelease) {
     prefs.putString(R.string.pref_release_key, newRelease);
   }
-  
+
   public static String enableMsgType() {
+    if (!SupportApp.instance().isRecMsgSupported()) return "C";
+    return realEnableMsgType();
+  }
+  
+  public static String realEnableMsgType() {
     return prefs.getString(R.string.pref_enable_msg_type_key);
   }
 
@@ -1416,6 +1419,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   public static boolean useOldMMS() {
+    if (!SupportApp.instance().isNewMmsSupported()) return true;
     return prefs.getBoolean(R.string.pref_use_old_mms_key);
   }
 
@@ -1439,16 +1443,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
   }
 
   /**
-   * Determine if message support app will be needed to support
-   * the message restricted version of Cadpage
-   * @return true if it will be required
-   */
-  public static boolean reqMsgSupport() {
-    String msgType = enableMsgType();
-    return msgType.contains("S") || msgType.contains("M");
-  }
-
-  /**
    * Determine if the latest version of the message support app will
    * be required to support the message restricted version of Cadpage
    * @return true if it will be required
@@ -1457,8 +1451,8 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     boolean textResponse = false;
     boolean phoneResponse = false;
     for (int btn = 1; btn <= POPUP_BUTTON_CNT; btn++) {
-      if (callbackButtonTitle(btn).length() > 0 &&
-          callbackButtonCode(btn).length() > 0) {
+      if (!callbackButtonTitle(btn).isEmpty() &&
+          !callbackButtonCode(btn).isEmpty()) {
         String type = callbackButtonType(btn);
         if (type.contains("T")) textResponse = true;
         if (type.contains("P")) phoneResponse = true;
@@ -2543,12 +2537,6 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
-  PreferenceChangeListener msgSupportListener = (key, newVal) -> {
-    if (SmsPopupUtils.checkMsgSupport(context) > 0) {
-      PreferenceRestorableFragment.setPreferenceKey(key);
-    }
-  };
-
   private void armListeners() {
     mPrefs.registerOnSharedPreferenceChangeListener(this);
 
@@ -2563,15 +2551,7 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
       if (enabled()) {
         SmsPopupUtils.enableSMSPopup(context, (String)newVal);
       }
-      msgSupportListener.preferenceChanged(key, newVal);
     });
-
-    registerListener(R.string.pref_use_old_mms_key, msgSupportListener);
-    for (int btn = 0; btn < CALLBACK_BUTTON_CNT; btn++) {
-      registerListener(CALLBACK_TYPE_IDS[btn], msgSupportListener);
-      registerListener(CALLBACK_TITLE_IDS[btn], msgSupportListener);
-      registerListener(CALLBACK_CODE_IDS[btn], msgSupportListener);
-    }
 
     registerListener(R.string.pref_notif_enabled_key, (String key, Object newVal) -> {
       CadPageWidget.update(context);

@@ -6,6 +6,7 @@ import android.content.Intent;
 import net.anei.cadpage.BuildConfig;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
+import net.anei.cadpage.SupportApp;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.vendors.VendorManager;
 
@@ -28,7 +29,7 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return BuildConfig.FULL_SUPPORT;
+    return SupportApp.instance().isRecMsgSupported();
   }
 
   @Override

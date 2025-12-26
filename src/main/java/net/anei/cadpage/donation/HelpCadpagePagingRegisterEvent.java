@@ -3,7 +3,7 @@ package net.anei.cadpage.donation;
 import android.app.Activity;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.SmsPopupUtils;
+import net.anei.cadpage.SupportApp;
 import net.anei.cadpage.vendors.VendorManager;
 
 /*
@@ -19,7 +19,7 @@ class HelpCadpagePagingRegisterEvent extends DonateEvent {
   @Override
   protected void doEvent(Activity activity) {
     VendorManager.instance().CadpageServicePopup(activity);
-    SmsPopupUtils.fixMsgSupport(activity);
+    SupportApp.instance().fixMsgSupport();
     closeEvents(activity);
   }
 

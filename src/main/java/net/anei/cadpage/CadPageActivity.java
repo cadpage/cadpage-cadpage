@@ -90,10 +90,6 @@ public class CadPageActivity extends AppCompatActivity {
       return;
     }
 
-    // Make an initial call to checkMsgSupport with no prompt and ignoring the results.
-    // This has the critical side effect of initializing ResponseSender.instance()
-    SmsPopupUtils.checkMsgSupport(this, false, 1);
-
     ManagePreferences.setPermissionManager(permMgr);
 
     initializing = !ManagePreferences.initialized();
@@ -290,7 +286,7 @@ public class CadPageActivity extends AppCompatActivity {
     if (CheckPopupAuthorizedEvent.instance().launch(CadPageActivity.this)) return true;
 
     // Check the support app is installed if needed
-    if (SmsPopupUtils.checkMsgSupport(CadPageActivity.this) > 0) return true;
+    if (SupportApp.instance().prompt(CadPageActivity.this, true)) return true;
 
     // If user upgraded to the release that implements improved email account security, and
     // we suspect that really need to give us that email account access, let them know now.

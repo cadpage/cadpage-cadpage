@@ -52,6 +52,7 @@ public class PreferenceMainFragment extends PreferenceRestorableFragment impleme
     Preference pref = findPreference(getString(R.string.pref_enable_msg_type_key));
     assert pref != null;
     pref.setOnPreferenceChangeListener((preference, newValue) -> {
+      if (SupportApp.instance().prompt(getActivity(), false, 1, (String)newValue)) return false;
       if (!ManagePreferences.checkPermEnableMsgType((ListPreference)preference, (String)newValue)) return false;
       enableLocPreference(locPreference, (String)newValue);
       return true;

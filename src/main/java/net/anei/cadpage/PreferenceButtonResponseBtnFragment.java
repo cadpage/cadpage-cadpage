@@ -50,13 +50,15 @@ public class PreferenceButtonResponseBtnFragment extends PreferenceRestorableFra
     setPreferenceScreen(screen);
 
     // Code field is only enabled if response type is set to something
-    codePref.setEnabled(typePref.getValue().length() > 0);
+    codePref.setEnabled(!typePref.getValue().isEmpty());
     typePref.setOnPreferenceChangeListener((preference, value) -> {
 
       // Check if we have appropriate permission
-      if (!ManagePreferences.checkResponseType(button, (ListPreference)preference, value.toString())) return false;
+      String newValue = value.toString();
+      if (SupportApp.instance().prompt(getActivity(), false, 2, newValue)) return false;
+      if (!ManagePreferences.checkResponseType(button, (ListPreference)preference, newValue)) return false;
 
-      codePref.setEnabled(value.toString().length() > 0);
+      codePref.setEnabled(!newValue.isEmpty());
       return true;
     });
   }

@@ -680,10 +680,6 @@
     Disable Battery Optimization for Support App
   </string>
 
-  <string name="battery_optimization_support_text">
-    Cadpage cannot initiate phone calls unless battery optimization is disabled for support app
-  </string>
-
   <string name="battery_optimization_support_yes_title">
     Turn off Cadpage support battery optimization
   </string>

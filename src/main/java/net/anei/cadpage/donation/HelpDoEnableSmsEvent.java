@@ -16,15 +16,10 @@ class HelpDoEnableSmsEvent extends DonateEvent {
   protected void doEvent(final Activity activity) {
 
     // Our primarytask is to turn on SMS message processing.  But we have to do this in a way that
-    // checks to make sure the proper permissions are enabled and/or the message support app is
-    // installed if necessary.  And there we no problems with either check, we have to fake an
+    // checks to make sure the proper permissions are enabled  And everything is kosher we have to fake an
     // activity restart which triggers HelpEnableSmsEvent to switch to the next menu in sequence
     ManagePreferences.setEnableMsgType("CS", () -> {
-      if (activity instanceof DonateActivity) {
-        if (SmsPopupUtils.checkMsgSupport(activity, false) <= 0) {
-          ((DonateActivity) activity).fakeRestart();
-        }
-      }
+      if (activity instanceof DonateActivity) ((DonateActivity) activity).fakeRestart();
     });
   }
 

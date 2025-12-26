@@ -5,7 +5,7 @@ import android.app.Activity;
 import net.anei.cadpage.R;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.SmsMessageQueue;
-import net.anei.cadpage.SmsPopupUtils;
+import net.anei.cadpage.SupportApp;
 import net.anei.cadpage.vendors.VendorManager;
 
 /**
@@ -24,14 +24,14 @@ public class DropMsgSupportEvent extends DonateEvent {
     // or if there are zero text alerts in the message queue.  The later
     // case will most likely happen when Cadpage is initially started with
     // the intention of registering with Cadpage
-    return !ManagePreferences.enableMsgType().equals("C") &&
+    return !ManagePreferences.realEnableMsgType().equals("C") &&
               (VendorManager.instance().isRegistered() ||
                !SmsMessageQueue.getInstance().containsTextAlerts());
   }
 
   @Override
   protected void doEvent(Activity activity) {
-    SmsPopupUtils.fixMsgSupport(activity);
+    SupportApp.instance().fixMsgSupport();
     closeEvents(activity);
   }
 

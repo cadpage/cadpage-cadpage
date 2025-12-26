@@ -74,6 +74,7 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
 
       UserAcctManager.setup(context);
       BillingManager.instance().initialize(context);
+      SupportApp.initialize(context);
       int fcmFlags = ManagePreferences.setupPreferences(context);
       ManageNotification.setup(context);
       VendorManager.instance().setup(context);
