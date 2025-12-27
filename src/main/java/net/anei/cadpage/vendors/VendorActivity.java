@@ -193,6 +193,10 @@ public class VendorActivity extends AppCompatActivity {
     }
   }
 
+  public void enableRegisterButton(boolean enabled) {
+    registerButton.setEnabled(enabled);
+  }
+
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] granted) {
     super.onRequestPermissionsResult(requestCode, permissions, granted);

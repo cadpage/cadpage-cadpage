@@ -827,6 +827,8 @@ abstract class Vendor {
    * @param emailAddress dispatch Email address
    */
   void vendorRequest(Context context, String type, String account, String token, String emailAddress) {
+
+    enableRegisterButton(true);
     
     boolean register = type.equals("REGISTER");
     boolean change = (this.enabled != register);
@@ -997,6 +999,10 @@ abstract class Vendor {
     } catch (ActivityNotFoundException ex) {
       showNotice(context, R.string.vendor_no_web_viewer_error, null);
     }
+  }
+
+  public void enableRegisterButton(boolean enabled) {
+    activity.enableRegisterButton(enabled);
   }
 
   /**

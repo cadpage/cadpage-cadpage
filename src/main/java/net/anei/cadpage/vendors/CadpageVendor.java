@@ -72,6 +72,8 @@ class CadpageVendor extends Vendor {
     
     uri = builder.build();
     HttpService.addHttpRequest(context, new HttpRequest(uri){});
+
+    enableRegisterButton(false);
   }
 
   /**
