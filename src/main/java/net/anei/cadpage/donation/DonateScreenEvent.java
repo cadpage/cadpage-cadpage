@@ -34,7 +34,7 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
   }
   
   /**
-   * @return list of donation events associated with this screen
+   * @return array of donation events associated with this screen
    */
   public DonateEvent[] getEvents() {
     return events;
@@ -52,17 +52,21 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
     LinearLayout btnList = activity.findViewById(R.id.DonateButtonList);
     if (btnList == null) return;
 
+    boolean inhibitCancel = false;
     if (events != null){
       for (DonateEvent event : events) {
+        if (event instanceof DoneDonateEvent) inhibitCancel = true;
         event.addButton(activity, btnList, msg);
       }
     }
     
-    // Add a cancel button at bottom of list
-    Button btn = new Button(activity);
-    btn.setText(R.string.donate_btn_cancel);
-    btn.setOnClickListener(v -> activity.finish());
-    btnList.addView(btn);
+    // Add a cancel button at bottom of list, unless list includes a Done button
+    if (!inhibitCancel) {
+      Button btn = new Button(activity);
+      btn.setText(R.string.donate_btn_cancel);
+      btn.setOnClickListener(v -> activity.finish());
+      btnList.addView(btn);
+    }
   }
 
   @Override
@@ -71,10 +75,5 @@ public abstract class DonateScreenEvent extends DonateScreenBaseEvent {
       if (event.followup(activity, req, result, intent)) return true;
     }
     return false;
-  }
-
-  @Override
-  protected void doEvent(Activity activity, SmsMmsMessage msg) {
-    DonateActivity.launchActivity(activity, this, msg);
   }
 }

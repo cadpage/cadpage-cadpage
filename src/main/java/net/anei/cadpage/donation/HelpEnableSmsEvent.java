@@ -14,9 +14,8 @@ import net.anei.cadpage.vendors.VendorManager;
 
 My department sends me text alerts
 
-You need to tell Cadpage something about where you are so that it knows how to interpret the alerts
-you are receiving.  Usually, this is just a matter of selecting the location where your dispatch
-center is located
+Cadpage text message processing is currently disabled.  You may have to grant Cadpage
+permission to access text messages before enabling this.
  */
 public class HelpEnableSmsEvent extends DonateScreenEvent {
 
@@ -52,14 +51,6 @@ public class HelpEnableSmsEvent extends DonateScreenEvent {
     if (ManagePreferences.enableMsgType().contains("S")) {
       activity.switchEvent(HelpTextDispatchEvent.instance(), msg);
     }
-  }
-
-  @Override
-  public boolean followup(Activity activity, int req, int result, Intent data) {
-    if (ManagePreferences.isFunctional()) {
-      HelpCadpageReadyEvent.instance().launch(activity);
-    }
-    return true;
   }
 
   private static final HelpEnableSmsEvent instance = new HelpEnableSmsEvent();

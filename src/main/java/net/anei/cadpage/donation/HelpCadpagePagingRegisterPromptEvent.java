@@ -3,6 +3,7 @@ package net.anei.cadpage.donation;
 import android.app.Activity;
 import android.content.Intent;
 
+import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
 import net.anei.cadpage.SmsMmsMessage;
 import net.anei.cadpage.vendors.VendorManager;
@@ -24,7 +25,8 @@ public class HelpCadpagePagingRegisterPromptEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return VendorManager.instance().isCadpageAvailable();
+    return VendorManager.instance().isCadpageAvailable() ||
+           VendorManager.instance().isLocationRequired() && !ManagePreferences.isGoodLocation();
   }
 
   @Override
@@ -56,13 +58,13 @@ public class HelpCadpagePagingRegisterPromptEvent extends DonateScreenEvent {
     }
   }
 
-  @Override
-  public boolean followup(Activity activity, int req, int result, Intent data) {
-    if (VendorManager.instance().isLocationRequired()) {
-      HelpCadpageReadyEvent.instance().launch(activity);
-    }
-    return true;
-  }
+//  @Override
+//  public boolean followup(Activity activity, int req, int result, Intent data) {
+//    if (VendorManager.instance().isLocationRequired()) {
+//      HelpCadpageReadyEvent.instance().launch(activity);
+//    }
+//    return true;
+//  }
 
   private static final HelpCadpagePagingRegisterPromptEvent instance = new HelpCadpagePagingRegisterPromptEvent();
   public static HelpCadpagePagingRegisterPromptEvent instance() {

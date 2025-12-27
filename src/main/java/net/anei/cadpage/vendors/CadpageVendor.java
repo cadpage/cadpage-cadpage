@@ -57,8 +57,7 @@ class CadpageVendor extends Vendor {
   void sendRegisterReq(Context context, String registrationId) {
     
     // Check that user really does have a paid subscription
-    if (!DonationManager.instance().isPaidSubscriber() &&
-        !VendorManager.instance().isRegistered("CodeMessaging")) {
+    if (PagingSubRequiredEvent.instance().isEnabled()) {
       PagingSubRequiredEvent.instance().open(context);
       return;
     }

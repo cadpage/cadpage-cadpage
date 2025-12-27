@@ -25,7 +25,9 @@ public class HelpWelcomeEvent extends DonateScreenEvent {
           TextAlertGone1Event.instance(),
           HelpCodeMessagingEvent.instance(),
           HelpActive911Event.instance(),
-          HelpNoDispatchAlertsEvent.instance());
+          HelpNoDispatchAlertsEvent.instance(),
+          EmailHelpEvent.instance(),
+          DoneDonateEvent.instance());
   }
 
   public void setIntializing(boolean initializing) {

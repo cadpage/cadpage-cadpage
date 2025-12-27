@@ -29,8 +29,12 @@ public class HelpTextDispatchEvent extends DonateScreenEvent {
     return !ManagePreferences.isGoodLocation();
   }
 
+  SmsMmsMessage msg;
+
   @Override
   public void create(Activity activity, SmsMmsMessage msg) {
+
+    this.msg = msg;
 
     // If Cadpage is functional, switch to the Cadpage ready menu.  This can only happen
     // if the Enable SMS processing screen came up first and switched to us after enabling
@@ -44,11 +48,11 @@ public class HelpTextDispatchEvent extends DonateScreenEvent {
   }
 
   @Override
-  public boolean followup(Activity activity, int req, int result, Intent data) {
+  public void onRestart(DonateActivity activity) {
+    super.onRestart(activity);
     if (ManagePreferences.isFunctional()) {
-      ((DonateActivity)activity).switchEvent(HelpCadpageReadyEvent.instance(), null);
+      activity.switchEvent(HelpTextDispatchEvent.instance(), msg);
     }
-    return true;
   }
 
   private static final HelpTextDispatchEvent instance = new HelpTextDispatchEvent();

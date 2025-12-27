@@ -110,6 +110,13 @@ public class ManagePreferences implements SharedPreferences.OnSharedPreferenceCh
     // the autoreload status
     checkFile = new File(ContextCompat.getNoBackupFilesDir(context), CHECK_FILENAME);
 
+    // Normally message type defaults to "CS" to process SMS text messages.  If this is the first
+    // time Cadpage has been run and this version does not support text messaging, change the
+    // default to "C" direct paging only
+    if (oldVersion == 0 && !SupportApp.instance().isRecMsgSupported()) {
+      setEnableMsgType("C");
+    }
+
     // There are a lot of specialized preference fixes we have to make when
     // user upgrades from an earlier version of Cadpage.  Defaulting the use old MMS logic is
     // exceptional in that it should be applied the initial Cadpage installs as well as upgrades

@@ -20,7 +20,6 @@ class HelpCadpagePagingRegisterEvent extends DonateEvent {
   protected void doEvent(Activity activity) {
     VendorManager.instance().CadpageServicePopup(activity);
     SupportApp.instance().fixMsgSupport();
-    closeEvents(activity);
   }
 
   private static final HelpCadpagePagingRegisterEvent instance = new HelpCadpagePagingRegisterEvent();

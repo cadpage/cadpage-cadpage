@@ -33,6 +33,7 @@ public class SupportApp {
   private static final String EXTRA_CADPAGE_PHONE = "net.anei.cadpage.CALL_PHONE";
   private static final String EXTRA_SUPPRESS_BATTERY_OPT = "new.anei.cadpage.SUPPRESS_BATTERY_OPT";
 
+  private boolean supportAppInstalled = false;
   private boolean recMsgSupport = false;
   private boolean newMmsSupport = false;
   private boolean sendMsgSupport = false;
@@ -66,6 +67,7 @@ public class SupportApp {
     int installedVersion = getSupportAppVersion(context);
     Log.v("Installed support version:" + installedVersion);
 
+    supportAppInstalled = installedVersion > 0;
     callSupport = (installedVersion >= (Build.VERSION.SDK_INT < Build.VERSION_CODES.S ? CADPAGE_SUPPORT_VERSION5 : CADPAGE_SUPPORT_VERSION6));
     newMmsSupport = (installedVersion >= CADPAGE_SUPPORT_VERSION4);
     sendMsgSupport = (installedVersion >= CADPAGE_SUPPORT_VERSION2);
@@ -147,7 +149,9 @@ public class SupportApp {
 
     // Fire off an intent to launch the support app.  If it installed and configured
     // correctly, it will quietly die without doing anything.
-    launchSupportApp(context, callbackPhone, callbackPhone);
+    if (supportAppInstalled) {
+      launchSupportApp(context, callbackPhone, callbackPhone);
+    }
 
     return false;
   }
