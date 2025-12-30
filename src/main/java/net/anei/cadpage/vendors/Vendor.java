@@ -188,10 +188,10 @@ abstract class Vendor {
 
   /**
    * Set temporary account/token combination.
-   * This is requested by the Activce911RegisterDialogFragment before it requests that a
+   * This is requested by the Active911RegisterDialogFragment before it requests that a
    * reregister be sent to the Active911 servers.  If the request is successful, a subsequent
    * call to setEnabled() will lock these values down
-   * @param account acccount value
+   * @param account account value
    * @param token token value
    */
   void setAccountToken(String account, String token) {
@@ -259,7 +259,7 @@ abstract class Vendor {
    */
   String getClientVersion() {
     if (clientVersion == null) {
-      clientVersion = "" + getVersion() + "-" + CadPageApplication.getVersionCode();
+      clientVersion = getVersion() + "-" + CadPageApplication.getVersionCode();
     }
     return clientVersion;
   }
@@ -335,8 +335,7 @@ abstract class Vendor {
     
     if (enabled) {
       long registerTime = prefs.getLong("lastRegisterTime", 0L);
-      long lastTime = prefs.getLong("" +
-        "", 0L);
+      long lastTime = prefs.getLong("", 0L);
       if (registerTime == 0 && lastTime == 0) updateLastRegisterTime();
     }
     

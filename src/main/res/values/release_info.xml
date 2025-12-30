@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">12242025</string>
+  <string name="release_date">12302025</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-03\n
+    New user help system upgraded to handle Cadpage versions that will not process text messages\n
+    \n
+    New Locations:\n
+    Choctaw County, MS\n
+    Bertie County, NC\n
+    Wyoming County, WV\n
+    \n
+    Location Fixes:\n
+    Wabash County, IN\n
+    State Police, KY\n
+    Clinton County, MO\n
+    St Charles County, MO\n
+    Burke County, NC\n
+    Waller County, TX\n
+    \n
     v2.2.13-02\n
     Added better warning for users going through text message transition with configured
     response buttons\n
@@ -49,22 +65,6 @@
     Hamilton County, OH\n
     Harney County, OR\n
     Dauphin County, PA\n
-    Kings County, WA\n
-    \n
-    v2.2.11-65\n
-    New Locations:\n
-    Fire and EMS, DC\n
-    Jackson County, KS\n
-    Mille Lacs County, MN\n
-    Carter County, OK\n
-    \n
-    Location Fixes:\n
-    Mobile County, AL\n
-    Santa Rosa County, FL\n
-    Warren County, NJ\n
-    Madison County, NY\n
-    Clatsop County, OR\n
-    Armstrong County, PA\n
-    Upshur County, TX
-  </string>
+    Kings County, WA
+    </string>
 </resources>

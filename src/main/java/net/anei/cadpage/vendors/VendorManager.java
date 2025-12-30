@@ -604,12 +604,6 @@ public class VendorManager {
     vendor.forceReregister(context);
   }
 
-  public void clearAll() {
-    for (Vendor vendor : vendorList) {
-      vendor.clearAll();
-    }
-  }
-
   /**
    * Find vendor with matching vendor code
    * @param vendorCode vendor code

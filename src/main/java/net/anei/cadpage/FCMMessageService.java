@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -263,7 +262,7 @@ public class FCMMessageService extends FirebaseMessagingService {
     // Add version code
     bld.appendQueryParameter("version", vm.getClientVersion(vendorCode));
 
-    // Fix the server name if neccessary
+    // Fix the server name if necessary
     Uri uri = bld.build();
     uri = vm.fixServer(vendorCode, uri);
 
@@ -318,7 +317,7 @@ public class FCMMessageService extends FirebaseMessagingService {
    */
   public static void initialize(Context context, int flags) {
 
-    // Refresh is forced we have been transfered to a new or reinitialized device
+    // Refresh is forced we have been transferred to a new or reinitialized device
     boolean refresh = false;
     boolean transfer = (flags & FCM_INIT_TRANSFER) != 0;
     if (transfer) {
