@@ -49,6 +49,12 @@ public class FCMMessageService extends FirebaseMessagingService {
   }
 
   @Override
+  public void onDestroy() {
+    Log.v("FCMMessageService.onDestroy()");
+    super.onDestroy();
+  }
+
+  @Override
   public void onNewToken(@NonNull String token) {
 
     Log.v("FCMMessageService:onNewToken()");
@@ -368,26 +374,41 @@ public class FCMMessageService extends FirebaseMessagingService {
   }
 
   public static void resetInstanceId(Context context) {
-    OneTimeWorkRequest req = new OneTimeWorkRequest.Builder(ResetIdWorker.class).build();
-    WorkManager.getInstance(context).enqueue(req);
+    WorkManager.getInstance(context).enqueue(new OneTimeWorkRequest.Builder(DeleteIdWorker.class).build());
   }
 
   @SuppressWarnings("WeakerAccess")  // CAN NOT BE PRIVATE!!!!
-  public static class ResetIdWorker extends Worker {
+  public static class DeleteIdWorker extends Worker {
 
-    public ResetIdWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public DeleteIdWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
       super(context, workerParams);
     }
 
     @NonNull
     public Result doWork() {
       Log.v("Reset FCM instance ID");
-      FirebaseMessaging.getInstance().deleteToken();
-      Log.v("deleteInstanceId succeeded");
+      FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener(task -> {
+        if (!task.isSuccessful()) {
+          Log.e("deleteInstanceId failed", task.getException());
+          return;
+        }
+
+        Log.v("deleteInstanceId succeeded");
+
+        //  Retrieve a new token ID.  We don't do anything, just needed to invoke onNewToken which
+        // will update everyone with new registration ID.  For some unknown reason, this has to
+        // be deferred on the main handler.  Otherwise is only retrieves the old deleted
+        // registration ID.
+        CadPageApplication.runDefered(() ->{
+          getRegistrationId(token -> {
+            Log.v("New registration ID: " + token);
+          });
+        });
+      });
+
       return Result.success();
     }
   }
-
 
   /**
    * Generate an Email message with the current registration ID

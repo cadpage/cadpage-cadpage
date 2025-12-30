@@ -155,6 +155,10 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
     }
   }
 
+  public static void runDefered(Runnable runnable) {
+    mainHandler.post(runnable);
+  }
+
   public static Context getContext() {
     return context;
   }

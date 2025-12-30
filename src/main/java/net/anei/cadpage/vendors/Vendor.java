@@ -1002,7 +1002,9 @@ abstract class Vendor {
   }
 
   public void enableRegisterButton(boolean enabled) {
-    activity.enableRegisterButton(enabled);
+    if (activity != null) {
+      activity.enableRegisterButton(enabled);
+    }
   }
 
   /**
