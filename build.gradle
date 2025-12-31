@@ -7,6 +7,7 @@ allprojects {
         mavenCentral()
         maven { url "https://maven.google.com" }
         maven { url "https://dl.bintray.com/blockchainds/bds" }
+        maven { url "https://jitpack.io" }
     }
 }
 android {
@@ -131,9 +132,7 @@ dependencies {
     }
     implementation 'androidx.core:core:1.17.0'
     googleImplementation 'com.android.billingclient:billing:8.3.0'
-//    aptoideImplementation 'com.blockchainds:appcoins-ads:0.5.1.32b'
-//    aptoideImplementation 'com.blockchainds:android-appcoins-billing:0.5.1.32b'
-//    aptoideImplementation 'com.blockchainds:appcoins-contract-proxy:0.5.1.32b'
+    aptoideImplementation("com.aptoide:android-aptoide-billing:1.2.1") //check the latest version in
 }
 
 apply plugin: 'com.google.gms.google-services'
