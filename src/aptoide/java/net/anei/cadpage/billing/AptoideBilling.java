@@ -1,6 +1,7 @@
 package net.anei.cadpage.billing;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,10 +9,14 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 
 import com.aptoide.sdk.billing.AptoideBillingClient;
+import com.aptoide.sdk.billing.BillingFlowParams;
 import com.aptoide.sdk.billing.BillingResult;
+import com.aptoide.sdk.billing.ProductDetails;
 import com.aptoide.sdk.billing.Purchase;
 import com.aptoide.sdk.billing.PurchasesUpdatedListener;
+import com.aptoide.sdk.billing.QueryProductDetailsParams;
 import com.aptoide.sdk.billing.QueryPurchasesParams;
+import com.aptoide.sdk.billing.UnfetchedProduct;
 import com.aptoide.sdk.billing.listeners.AptoideBillingClientStateListener;
 
 import androidx.annotation.Nullable;
@@ -117,68 +122,67 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
   }
 
   @Override
-  void doStartPurchase(BillingActivity activity) {
+  void doStartPurchase(final BillingActivity activity) {
 
-    int curYear = ManagePreferences.paidYear();
-    String year = null;
-    String purchaseDate = null;
-    String curDate = ManagePreferences.currentDateString();
+    String item = "cadpage_sub";
+    QueryProductDetailsParams queryProductDetailsParams =
+                QueryProductDetailsParams.newBuilder().setProductList(
+                                List.of(QueryProductDetailsParams.Product.newBuilder()
+                                                .setProductId("cadpage_sub")
+                                                .setProductType(AptoideBillingClient.ProductType.SUBS)
+                                                .build())
+                ).build();
 
-    // If paid subscription has already purchased, use the previous
-    // purchase date.  Unless user subscription has expired, in
-    // which case we will give them a break and ignore the
-    // previous expired subscription
-    if (curYear > 0 && !ManagePreferences.freeSub()) {
-      year = Integer.toString(curYear + 1);
-      purchaseDate = ManagePreferences.purchaseDateString();
-      if (purchaseDate == null) purchaseDate = ManagePreferences.currentDateString();
-      String expDateYMD = year + purchaseDate.substring(0, 4);
-      String curDateYMD = curDate.substring(4) + curDate.substring(0, 4);
-      if (curDateYMD.compareTo(expDateYMD) > 0) purchaseDate = null;
-    }
+        mBillingClient.queryProductDetailsAsync(queryProductDetailsParams,
+                (billingResult, productDetailsResult) -> {
+                  	ProductDetails subProductDetails = null;
+										if (billingResult.getResponseCode() == AptoideBillingClient.BillingResponseCode.OK) {
+                        for (ProductDetails productDetails : productDetailsResult.getProductDetailsList()) {
+                          if (subProductDetails == null)  subProductDetails = productDetails;
+                        }
 
-    // If there was no previous subscription, or we are ignoring it
-    // because it has expired, use current date to compute things
-    if (purchaseDate == null) {
-      purchaseDate = curDate;
-      year = purchaseDate.substring(4);
-    }
+                        for (UnfetchedProduct unfetchedProduct : productDetailsResult.getUnfetchedProductList()) {
+                          Log.v("Unfeteched Apdtoide product: " + unfetchedProduct.getProductId());
+                        }
+                    }
 
-    String item = "cadpage" + year;
-    String payload = purchaseDate;
+                    if (subProductDetails == null) {
+                      Log.e("Failed to retrieve Aptoide Cadpage subscription product");
+                      return;
+                    }
 
-    Log.v("Purchase request for " + item + " payload:" + payload);
+                    String user = ManagePreferences.billingAccount();
 
-    String ref = Long.toString(System.currentTimeMillis());
+                    List<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = List.of(
+                            BillingFlowParams.ProductDetailsParams.newBuilder()
+                                             .setProductDetails(subProductDetails)
+                                             .build()
+                    );
 
-    purchase2(activity, item, payload, ref);
+                    BillingFlowParams billingFlowParams =
+                            BillingFlowParams.newBuilder()
+                                    .setProductDetailsParamsList(productDetailsParamsList)
+                                    .setObfuscatedAccountId(user)
+                                    .setFreeTrial(true)
+                                    .build();
+
+                    Thread thread = new Thread(() -> {
+                        final BillingResult billingResult2 = mBillingClient.launchBillingFlow(activity, billingFlowParams);
+                        activity.runOnUiThread(() -> {
+                            if (billingResult2.getResponseCode() != AptoideBillingClient.BillingResponseCode.OK) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                                builder.setMessage("Error purchasing with response code : " + billingResult2.getResponseCode());
+                                builder.setNeutralButton("OK", null);
+                                Log.e("Error purchasing with response code : " + billingResult2.getResponseCode());
+                                builder.create().show();
+                            }
+                        });
+                    });
+                    thread.start();
+                }
+        );
   }
 
-  private boolean purchase1(BillingActivity activity, String item, String payload, String reference) {
-    BillingFlowParams billingFlowParams =
-        new BillingFlowParams(item, SkuType.inapp.toString(),
-            reference,
-            payload,
-            null);
-
-    int response = mBillingClient.launchBillingFlow(activity, billingFlowParams);
-    if (response != ResponseCode.OK.getValue()) {
-      Log.e("Purchase failure: " + response);
-//      return false;
-    }
-
-    SkuDetailsParams params = new SkuDetailsParams();
-    params.setItemType(SkuType.inapp.toString());
-    mBillingClient.querySkuDetailsAsync(params, (responseCode, skuDetailsList) -> {
-      Log.v("SkuDetailsResponse: " + responseCode);
-      if (skuDetailsList != null) {
-        for (SkuDetails details : skuDetailsList) {
-          Log.v(details.toString());
-        }
-      }
-    });
-    return true;
-  }
 
   private boolean purchase2(BillingActivity activity, String item, String payload, String reference) {
     Uri uri = Uri.parse("https://apichain.catappult.io/transaction/inapp").buildUpon()
@@ -271,38 +275,21 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
     if (purchase.getPurchaseState() != 0) return;
 
     // Get the purchase Sku code and confirm that it starts with Cadpage
-    String itemId = purchase.getSku();
-    if (!itemId.startsWith("cadpage")) return;
-
-    // We changed naming conventions for Aptoide products.  So correct name to match the
-    // Google standard
-    itemId = "cadpage_" + itemId.substring(8);
+    String itemId = purchase.getProducts().get(0);
+    if (!itemId.equals("cadpage_sub")) return;
 
     // Subscriptions start with sub.  Purchase date will be the actual
     // purchase date.  The fact that a subscription is being reported means that it
     // should be honored, so adjust the year to make the subscription current
-    String year = itemId.substring(8);
-    String purchaseDate;
-    int subStatus;
-    if (year.startsWith("sub")) {
-      purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
-      Calendar cal = new GregorianCalendar();
-      cal.setTimeInMillis(System.currentTimeMillis());
-      int iYear = cal.get(Calendar.YEAR);
-      int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
-      if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
-      year = Integer.toString(iYear);
-      subStatus = purchase.isAutoRenewing() ? 2 : 1;
-      Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
-    }
-
-    // We used to emulate subscriptions with a series of inapp product purchases.  We do not do
-    // that anymore, but still need to support to old purchases.  Year is derived from name of
-    // the purchased product.  Purchase date was stored in developerPayload field
-    else {
-      purchaseDate = purchase.getDeveloperPayload();
-      subStatus = 0;
-    }
+    String purchaseDate = DATE_FMT.format(new Date(purchase.getPurchaseTime()));
+    Calendar cal = new GregorianCalendar();
+    cal.setTimeInMillis(System.currentTimeMillis());
+    int iYear = cal.get(Calendar.YEAR);
+    int curMonthDay = (cal.get(Calendar.MONTH)+1)*100+cal.get(Calendar.DAY_OF_MONTH);
+    if (curMonthDay < Integer.parseInt(purchaseDate.substring(0,4))) iYear--;
+    String year = Integer.toString(iYear);
+    int subStatus = purchase.isAutoRenewing() ? 2 : 1;
+    Log.v("curMonthDay="+curMonthDay+"  - " + purchaseDate.substring(0,4) + "  iYear=" + iYear);
     calc.subscription(year, purchaseDate, null, subStatus);
   }
 }
