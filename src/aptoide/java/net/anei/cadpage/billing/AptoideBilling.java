@@ -3,14 +3,11 @@ package net.anei.cadpage.billing;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 
 import com.aptoide.sdk.billing.AptoideBillingClient;
 import com.aptoide.sdk.billing.BillingFlowParams;
 import com.aptoide.sdk.billing.BillingResult;
+import com.aptoide.sdk.billing.ConsumeParams;
 import com.aptoide.sdk.billing.ProductDetails;
 import com.aptoide.sdk.billing.Purchase;
 import com.aptoide.sdk.billing.PurchasesUpdatedListener;
@@ -18,10 +15,6 @@ import com.aptoide.sdk.billing.QueryProductDetailsParams;
 import com.aptoide.sdk.billing.QueryPurchasesParams;
 import com.aptoide.sdk.billing.UnfetchedProduct;
 import com.aptoide.sdk.billing.listeners.AptoideBillingClientStateListener;
-
-import androidx.annotation.Nullable;
-
-import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 
@@ -36,8 +29,6 @@ import java.util.List;
 class AptoideBilling extends Billing implements PurchasesUpdatedListener {
 
   private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApHzsCH1/xZtjQRkLmIWzrY6SASyVdUGp71sD86K849MQrLY8Dn7xnPV4+Z+dyy8cBkjEFPSImrnkeLKQFg6ASHxqV+eLskZl0CGBjg0u+ImRD37RpQoJtP/VcNgpQIo8V0qNoZv2E9l1Q0Y7lnlPJiE7fhwUk4oyG6eLihJreQ4UeXon7nA81iBOFvsdlVAc+ovHnk4MaGZ4Vyp7lsOg76PbVYgUHlg10df3KT0jdmH0EJUdVIUZibYQonS2BX1kz8VRvFJ7GQAbrfRtDaIU0qCniSMmggpL+K05opkB8bV+I7MjhMEDDMEXEhVOGRHt0NFRS3SuL8ZR8Iy4myWyrwIDAQAB";
-
-  private static final int RC_ONE_STEP = 99333;
 
   private AptoideBillingClient mBillingClient;
 
@@ -124,7 +115,6 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
   @Override
   void doStartPurchase(final BillingActivity activity) {
 
-    String item = "cadpage_sub";
     QueryProductDetailsParams queryProductDetailsParams =
                 QueryProductDetailsParams.newBuilder().setProductList(
                                 List.of(QueryProductDetailsParams.Product.newBuilder()
@@ -183,79 +173,30 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
         );
   }
 
-
-  private boolean purchase2(BillingActivity activity, String item, String payload, String reference) {
-    Uri uri = Uri.parse("https://apichain.catappult.io/transaction/inapp").buildUpon()
-        .appendQueryParameter("product", item)
-        .appendQueryParameter("domain", "net.anei.cadpage")
-        .appendQueryParameter("data", payload)
-        .appendQueryParameter("order_reference", reference)
-        .build();
-
-    Intent intent = buildTargetIntent(activity, uri.toString());
-    Log.v("Puchase request intent");
-    ContentQuery.dumpIntent(intent);
-    try {
-      activity.startActivityForResult(intent, RC_ONE_STEP);
-      return true;
-    } catch (Exception ex) {
-      Log.e(ex);
-      return false;
-    }
-  }
-
-  private Intent buildTargetIntent(BillingActivity activity, String url) {
-    Intent intent = new Intent(Intent.ACTION_VIEW);
-    intent.setData(Uri.parse(url));
-
-    // Check if there is an application that can process the AppCoins Billing
-    // flow
-    PackageManager packageManager = activity.getApplicationContext().getPackageManager();
-    List<ResolveInfo> appsList = packageManager
-        .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-    for (ResolveInfo app : appsList) {
-      if (app.activityInfo.packageName.equals("cm.aptoide.pt")) {
-        // If there's aptoide installed always choose Aptoide as default to open
-        // url
-        intent.setPackage(app.activityInfo.packageName);
-        break;
-      } else if (app.activityInfo.packageName.equals("com.appcoins.wallet")) {
-        // If Aptoide is not installed and wallet is installed then choose Wallet
-        // as default to open url
-        intent.setPackage(app.activityInfo.packageName);
-      }
-    }
-    return intent;
-  }
-
-
-    @Override
-  void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == RC_ONE_STEP) {
-      if (resultCode == Activity.RESULT_OK) {
-        Log.v("Purchase Result Intent");
-        ContentQuery.dumpIntent(data);
-      }
-      return;
-    }
-    if (mBillingClient != null) mBillingClient.onActivityResult(requestCode, resultCode, data);
-  }
-
   @Override
-  public void onPurchasesUpdated(int billingResult, @Nullable List<Purchase> purchases) {
-
+ public void onPurchasesUpdated(BillingResult billingResult, List<Purchase> purchases) {
     if (Log.DEBUG) Log.v("Purchase result:" + billingResult);
-    if (billingResult == ResponseCode.OK.getValue()) {
+    if (billingResult.getResponseCode() == AptoideBillingClient.BillingResponseCode.OK) {
       if (purchases != null) {
         DonationCalculator calc = new DonationCalculator(1);
         calc.load();
         for (Purchase purchase : purchases) {
           if (Log.DEBUG) Log.v(purchase.toString());
           registerPurchaseState(purchase, calc);
+
+          // And tell Aptoide to consume the purchase
+          mBillingClient.consumeAsync(
+              ConsumeParams.newBuilder()
+                  .setPurchaseToken(purchase.getPurchaseToken())
+                  .build(),
+              (billingResult2, purchaseToken) ->
+                  Log.v("Aptoide subscription Consumption finished. Purchase: " + purchaseToken + ", result: " + billingResult2.getResponseCode()));
         }
         calc.save();
       }
       endPurchase(true);
+
+
     } else {
       endPurchase(false);
     }
