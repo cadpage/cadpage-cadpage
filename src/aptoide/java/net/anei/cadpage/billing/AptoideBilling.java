@@ -28,7 +28,9 @@ import java.util.List;
 @SuppressWarnings({"SpellCheckingInspection"})
 class AptoideBilling extends Billing implements PurchasesUpdatedListener {
 
-  private static final String BASE_64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApHzsCH1/xZtjQRkLmIWzrY6SASyVdUGp71sD86K849MQrLY8Dn7xnPV4+Z+dyy8cBkjEFPSImrnkeLKQFg6ASHxqV+eLskZl0CGBjg0u+ImRD37RpQoJtP/VcNgpQIo8V0qNoZv2E9l1Q0Y7lnlPJiE7fhwUk4oyG6eLihJreQ4UeXon7nA81iBOFvsdlVAc+ovHnk4MaGZ4Vyp7lsOg76PbVYgUHlg10df3KT0jdmH0EJUdVIUZibYQonS2BX1kz8VRvFJ7GQAbrfRtDaIU0qCniSMmggpL+K05opkB8bV+I7MjhMEDDMEXEhVOGRHt0NFRS3SuL8ZR8Iy4myWyrwIDAQAB";
+  private static final String BASE_64_ENCODED_PUBLIC_KEY = "f0755c9a-a916-4515-9bf5-38b5fe2fb7f3";
+
+ //     "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApHzsCH1/xZtjQRkLmIWzrY6SASyVdUGp71sD86K849MQrLY8Dn7xnPV4+Z+dyy8cBkjEFPSImrnkeLKQFg6ASHxqV+eLskZl0CGBjg0u+ImRD37RpQoJtP/VcNgpQIo8V0qNoZv2E9l1Q0Y7lnlPJiE7fhwUk4oyG6eLihJreQ4UeXon7nA81iBOFvsdlVAc+ovHnk4MaGZ4Vyp7lsOg76PbVYgUHlg10df3KT0jdmH0EJUdVIUZibYQonS2BX1kz8VRvFJ7GQAbrfRtDaIU0qCniSMmggpL+K05opkB8bV+I7MjhMEDDMEXEhVOGRHt0NFRS3SuL8ZR8Iy4myWyrwIDAQAB";
 
   private AptoideBillingClient mBillingClient;
 
@@ -113,7 +115,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
   }
 
   @Override
-  void doStartPurchase(final BillingActivity activity) {
+  void doStartPurchase(final Activity activity) {
 
     QueryProductDetailsParams queryProductDetailsParams =
                 QueryProductDetailsParams.newBuilder().setProductList(
@@ -132,7 +134,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
                         }
 
                         for (UnfetchedProduct unfetchedProduct : productDetailsResult.getUnfetchedProductList()) {
-                          Log.v("Unfeteched Apdtoide product: " + unfetchedProduct.getProductId());
+                          Log.v("Unfeteched Apdtoide product: " + unfetchedProduct.getProductId() + " Status: " + unfetchedProduct.getStatusCode());
                         }
                     }
 
@@ -149,22 +151,23 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
                                              .build()
                     );
 
-                    BillingFlowParams billingFlowParams =
-                            BillingFlowParams.newBuilder()
-                                    .setProductDetailsParamsList(productDetailsParamsList)
-                                    .setObfuscatedAccountId(user)
-                                    .setFreeTrial(true)
-                                    .build();
+                  BillingFlowParams.Builder billingFlowBuilder = BillingFlowParams.newBuilder()
+                      .setProductDetailsParamsList(productDetailsParamsList);
+                  if (user != null) {
+                    billingFlowBuilder.setObfuscatedAccountId(user)
+                           .setFreeTrial(true);
+                  }
+                  BillingFlowParams billingFlowParams = billingFlowBuilder.build();
 
                     Thread thread = new Thread(() -> {
                         final BillingResult billingResult2 = mBillingClient.launchBillingFlow(activity, billingFlowParams);
                         activity.runOnUiThread(() -> {
                             if (billingResult2.getResponseCode() != AptoideBillingClient.BillingResponseCode.OK) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                                builder.setMessage("Error purchasing with response code : " + billingResult2.getResponseCode());
-                                builder.setNeutralButton("OK", null);
+                                AlertDialog.Builder DlgBuilder = new AlertDialog.Builder(activity);
+                                DlgBuilder.setMessage("Error purchasing with response code : " + billingResult2.getResponseCode());
+                                DlgBuilder.setNeutralButton("OK", null);
                                 Log.e("Error purchasing with response code : " + billingResult2.getResponseCode());
-                                builder.create().show();
+                                DlgBuilder.create().show();
                             }
                         });
                     });

@@ -148,7 +148,7 @@ class GoogleBilling extends Billing implements PurchasesUpdatedListener {
   }
 
   @Override
-  void doStartPurchase(BillingActivity activity) {
+  void doStartPurchase(Activity activity) {
     Log.v("Launching Google billing flow");
     if (cadpageSubProductDetails == null) {
       Log.e("No subscription product defined");

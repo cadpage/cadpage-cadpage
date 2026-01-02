@@ -147,7 +147,7 @@ public abstract class Billing {
    * @param activity current activity
    * @param donateEvent donation event or null if none
    */
-  public void startPurchase(BillingActivity activity, DonateEvent donateEvent) {
+  public void startPurchase(Activity activity, DonateEvent donateEvent) {
     if (!isSupported()) return;
 
     if (activity == null) return;
@@ -164,15 +164,7 @@ public abstract class Billing {
    * must call endPurchase when complete
    * @param activity current activity
    */
-  abstract void doStartPurchase(BillingActivity activity);
-
-  /**
-   * handle reported activity result
-   * @param requestCode request code
-   * @param resultCode result code
-   * @param data data intent
-   */
-  void onActivityResult(int requestCode, int resultCode, Intent data) {}
+  abstract void doStartPurchase(Activity activity);
 
   void endPurchase(boolean success) {
     if (success && donateEvent != null) donateEvent.closeEvents(donateActivity);

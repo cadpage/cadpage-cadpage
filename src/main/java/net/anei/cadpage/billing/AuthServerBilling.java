@@ -99,7 +99,7 @@ class AuthServerBilling extends Billing {
   private static final DateFormat DATE_FMT = new SimpleDateFormat("MM/dd/yyyy");
 
   @Override
-  void doStartPurchase(BillingActivity activity) {
+  void doStartPurchase(Activity activity) {
     throw new RuntimeException("AuthServerBilling does not support purchases");
   }
 }

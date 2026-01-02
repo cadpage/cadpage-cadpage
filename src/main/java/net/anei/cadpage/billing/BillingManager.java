@@ -52,7 +52,7 @@ public class BillingManager {
    * @return true if in-app billing should be permanently suppressed
    */
   public boolean isSuppressed() {
-    return BuildConfig.APTOIDE;
+    return !(BuildConfig.GOOGLE || BuildConfig.APTOIDE);
   }
 
   /**
@@ -78,19 +78,9 @@ public class BillingManager {
    * @param activity current activity
    * @param donateEvent donation event or null if none
    */
-  public void startPurchase(BillingActivity activity, DonateEvent donateEvent) {
+  public void startPurchase(Activity activity, DonateEvent donateEvent) {
     if (purchaseClient == null) return;
     purchaseClient.startPurchase(activity, donateEvent);
-  }
-
-  /**
-   * handle reported activity result
-   * @param requestCode request code
-   * @param resultCode result code
-   * @param data data intent
-   */
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (purchaseClient != null) purchaseClient.onActivityResult(requestCode, resultCode, data);
   }
 
   private static final BillingManager instance = new BillingManager();

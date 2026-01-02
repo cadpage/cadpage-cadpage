@@ -28,10 +28,7 @@ class GoogleBilling extends Billing {
   void doRestoreTransactions(Context context) {}
 
   @Override
-  void doStartPurchase(BillingActivity activity) {
+  void doStartPurchase(Activity activity) {
     throw new RuntimeException("Aptoide purchase requested in Google Play Store version");
   }
-
-  @Override
-  void onActivityResult(int requestCode, int resultCode, Intent data) {}
 }

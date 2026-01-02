@@ -28,10 +28,7 @@ class AptoideBilling extends Billing {
   void doRestoreTransactions(Context context) {}
 
   @Override
-  void doStartPurchase(BillingActivity activity) {
+  void doStartPurchase(Activity activity) {
     throw new RuntimeException("Aptoide billing is not currently implemented");
   }
-
-  @Override
-  void onActivityResult(int requestCode, int resultCode, Intent data) {}
 }
