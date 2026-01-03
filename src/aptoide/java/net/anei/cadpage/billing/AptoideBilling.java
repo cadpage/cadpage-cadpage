@@ -162,6 +162,7 @@ class AptoideBilling extends Billing implements PurchasesUpdatedListener {
                     Thread thread = new Thread(() -> {
                         final BillingResult billingResult2 = mBillingClient.launchBillingFlow(activity, billingFlowParams);
                         activity.runOnUiThread(() -> {
+                            Log.v("Aptoide billing launch result: " + billingResult2.getResponseCode());
                             if (billingResult2.getResponseCode() != AptoideBillingClient.BillingResponseCode.OK) {
                                 AlertDialog.Builder DlgBuilder = new AlertDialog.Builder(activity);
                                 DlgBuilder.setMessage("Error purchasing with response code : " + billingResult2.getResponseCode());
