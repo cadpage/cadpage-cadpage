@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">01012026</string>
+  <string name="release_date">010132026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-05 (Aptoide only)\n
+    Added support for Aptoide billing\n
+    \n
     v2.2.13-04\n
     Location Fixes:\n
     Indiana County, PA\n
@@ -37,20 +40,6 @@
     New Locations:\n
     Choctaw County, MS\n
     Bertie County, NC\n
-    Wyoming County, WV\n
-    \n
-    v2.2.13-01\n
-    The Google play version of Cadpage will no longer prompt users to install the support app.
-    Users who have already installed that app can continue using it but will be warned that it
-    will disappear in some future release.  Without that support app, the Google Play version
-    cannot process incoming text messages which has been a core Cadpage functionality.  Users will
-    either have to switch to using the Cadpage paging service, which requires a paid subscription,
-    or find and install Cadpage from some other source.\n
-    \n
-    First time Cadpage subscription purchases should now get a free 30 day demo.  Haven\'t been able
-    to test that so I hope it works.\n
-    \n
-    v2.2.12-02\n
-    Published through Aptoide store
+    Wyoming County, WV
     </string>
 </resources>
