@@ -183,8 +183,10 @@ public class DonationCalculator {
         
         // Save the new status and update everything
         calc.save();
-        DonationManager.instance().reset();
-        MainDonateEvent.instance().refreshStatus();
+        CadPageApplication.runOnMainThread( () -> {
+          DonationManager.instance().reset();
+          MainDonateEvent.instance().refreshStatus();
+        });
       }
     }
   }
