@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">010132026</string>
+  <string name="release_date">010832026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-06
+    Location Fixes:\n
+    Palm Beach County, FL\n
+    Osage County, MO\n
+    Taney County, MO\n
+    Burke County, NC\n
+    Creek County, OK\n
+    Parker County, TX\n
+    \n
     v2.2.13-05 (Aptoide only)\n
     Added support for Aptoide billing\n
     \n
