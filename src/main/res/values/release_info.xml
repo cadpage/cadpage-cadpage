@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">010832026</string>
+  <string name="release_date">011232026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-07\n
+    New release needed to appease Google\n
+    \n
+    New Locations:\n
+    Lee County, AL\n
+    Pike County, IL\n
+    Mason County, MI\n
+    \n
     v2.2.13-06
     Location Fixes:\n
     Palm Beach County, FL\n
@@ -34,21 +42,6 @@
     Clinton County, MO\n
     St Charles County, MO\n
     Burke County, NC\n
-    Waller County, TX\n
-    \n
-    v2.2.13-02\n
-    Added better warning for users going through text message transition with configured
-    response buttons\n
-    \n
-    Location Fixes:\n
-    Wabash County, IN\n
-    Clinton County, MO\n
-    Burke County, NC\n
-    Waller County, TX\n
-    \n
-    New Locations:\n
-    Choctaw County, MS\n
-    Bertie County, NC\n
-    Wyoming County, WV
+    Waller County, TX
     </string>
 </resources>
