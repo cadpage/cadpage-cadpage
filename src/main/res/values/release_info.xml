@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">011232026</string>
+  <string name="release_date">012132026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-08\n
+    New Locations:\n
+    Doniphan County, KS\n
+    Genesse County, MI\n
+    \n
+    Location Fixes:\n
+    McLean County, IL\n
+    State Police, MD\n
+    Clarion County, PA\n
+    Indiana County, PA\n
+    Williamsburg County, SC\n
+    \n
     v2.2.13-07\n
     New release needed to appease Google\n
     \n
@@ -27,21 +39,5 @@
     v2.2.13-04\n
     Location Fixes:\n
     Indiana County, PA\n
-    \n
-    v2.2.13-03\n
-    New user help system upgraded to handle Cadpage versions that will not process text messages\n
-    \n
-    New Locations:\n
-    Choctaw County, MS\n
-    Bertie County, NC\n
-    Wyoming County, WV\n
-    \n
-    Location Fixes:\n
-    Wabash County, IN\n
-    State Police, KY\n
-    Clinton County, MO\n
-    St Charles County, MO\n
-    Burke County, NC\n
-    Waller County, TX
     </string>
 </resources>
