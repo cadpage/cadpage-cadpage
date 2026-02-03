@@ -397,15 +397,13 @@
   </string>
 
   <string name="donate_text_alert_warn1_text"> <!-- google translate -->
-    På grund av begränsningar i Google Play kommer stödet för att hantera textmeddelanden snart att
-    försvinna.  Om du behöver den här funktionen måste du antingen byta till Cadpage Paging-tjänsten
-    eller installera en version av Cadpage från någon annanstans än Google Play Store.
+    På grund av begränsningar i Google Play kommer stödet för att bearbeta textmeddelanden snart att försvinna.
+    Om du behöver den här funktionen är den enda Google-godkända lösningen att byta till personsökartjänsten Cadpage.
   </string>
 
-  <string name="donate_text_alert_warn2_text">
+  <string name="donate_text_alert_warn2_text"> <!-- google translate -->
     På grund av begränsningar i Google Play förlorar den här versionen av Cadpage snart möjligheten
-    att initiera textmeddelanden eller telefonsamtal. Om du behöver den här funktionen måste du
-    installera en version av Cadpage från någon annanstans än Google Play Store.
+    att initiera textmeddelanden eller telefonsamtal.
   </string>
 
   <string name="donate_text_alert_gone_title"> <!-- google translate -->
@@ -413,15 +411,13 @@
   </string>
 
   <string name="donate_text_alert_gone1_text"> <!-- google translate -->
-    På grund av begränsningar i Google Play stöds inte längre aviseringar för SMS-meddelanden.
-    Om du behöver den här funktionen måste du antingen byta till Cadpages personsökartjänst eller
-    installera en version av Cadpage från någon annanstans än Google Play Store.
+    På grund av begränsningar i Google Play stöds inte längre aviseringar för SMS-avsändningar.
+    Den enda lösningen som godkänts av Google är att byta till att använda personsökartjänsten Cadpage.
   </string>
 
   <string name="donate_text_alert_gone2_text">
     På grund av begränsningar i Google Play kan den här versionen av Cadpage inte längre initiera
-    textmeddelanden eller telefonsamtal. Om du behöver den här funktionen måste du installera en
-    version av Cadpage från någon annanstans än Google Play Store.
+    textmeddelanden eller telefonsamtal.
   </string>
 
   <string name="donate_install_real_cadpage_title"> <!-- google translate -->
@@ -429,9 +425,7 @@
   </string>
 
   <string name="donate_install_real_cadpage_text"> <!-- google translate -->
-    Alla versioner av Cadpage som du hittar någon annanstans än Google Play Store fungerar.
-    Eftersom den här versionen installerades från Play Store är det inte tillåtet att vara mer
-    specifik. Sök och du skall finna.
+    Alternativen är begränsade. Maila oss så ser vi vad som kan göras.
   </string>
 
   <string name="donate_ignore_warning_title"> <!-- google translate -->

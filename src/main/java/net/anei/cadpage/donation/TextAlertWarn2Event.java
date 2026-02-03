@@ -5,9 +5,8 @@ import net.anei.cadpage.R;
 /*
     Text alert support is going away
 
-    Due to Google Play restrictions, support for processing text alerts will soon disappear.
-    If you need this capability you will either need to switch to the Cadpage Paging service, or
-    install a version of Cadpage from somewhere other than the Google Play Store
+    Due to Google Play restrictions, this version of Cadpage soon loose the ability initiate text messages
+    or phone calls.
  */
 public class TextAlertWarn2Event extends DonateScreenEvent {
 

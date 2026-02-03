@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import net.anei.cadpage.donation.InstallRealCadpageEvent;
 import net.anei.cadpage.donation.TextAlertGone1Event;
 import net.anei.cadpage.donation.TextAlertGone2Event;
 import net.anei.cadpage.donation.TextAlertWarn1Event;
@@ -128,7 +129,7 @@ public class SupportApp {
 
       // No such luck, user is going to have to fix something
       if (callbackPhone || callbackText) {
-        TextAlertGone2Event.instance().launch(context);
+        InstallRealCadpageEvent.instance().launch(context);
       } else {
         TextAlertGone1Event.instance().launch(context);
       }

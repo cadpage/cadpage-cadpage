@@ -42,7 +42,7 @@ public class EmailDeveloperActivity extends Safe40Activity {
 
   public enum EmailType { GENERAL, MESSAGE, CRASH, INIT_FAILURE, WRONG_USER,
                           MARKET_PROBLEM, SOB_STORY, OLD_SUPPORT, INACTIVE_SPONSOR,
-                          NEED_HELP, REQUEST_REFUND }
+                          NEED_HELP, REQUEST_REFUND}
 
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
