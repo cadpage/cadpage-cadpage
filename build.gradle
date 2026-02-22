@@ -132,7 +132,7 @@ dependencies {
     }
     implementation 'androidx.core:core:1.17.0'
     googleImplementation 'com.android.billingclient:billing:8.3.0'
-    aptoideImplementation("com.aptoide:android-aptoide-billing:1.2.1") //check the latest version in
+    aptoideImplementation("com.aptoide:android-aptoide-billing:1.3.0") //check the latest version in
 }
 
 apply plugin: 'com.google.gms.google-services'
