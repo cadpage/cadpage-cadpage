@@ -79,7 +79,7 @@ android {
     applicationVariants.configureEach { variant ->
         def storeVersion = variant.productFlavors.get(0).versionCode
         def typeVersion = variant.productFlavors.get(1).versionCode
-        def version = defaultConfig.versionCode + typeVersion * 1000
+        def version = defaultConfig.versionCode + typeVersion * 10   // default * 1000
         variant.outputs.each { output ->
             output.versionCodeOverride = version
         }
