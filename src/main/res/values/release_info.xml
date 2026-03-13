@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">02272026</string>
+  <string name="release_date">03132026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-14\n
+    New Locations:\n
+    Bear Lake County, ID\n
+    Kendall County, IL\n
+    Presque Isle County, MI\n
+    Lauderdale County, MS\n
+    Flathead County, MT\n
+    Harnett County, NC\n
+    Trumbull County, OH\n
+    Aiken County, SC\n
+    Henderson County, TX\m
+    Highland County, VA\n
+    \n
+    Location Fixes:\n
+    West Feliciana Parish, LA\n
+    Anderson Countym, TN\n
+    Lincoln County, WV\n
+    \n
     v2.2.13-12\n
     New Locations:\n
     Henry County, KY\n
@@ -47,25 +65,6 @@
     Campbell County, KY\n
     Nueces County, TX\n
     Tarrant County, TX\n
-    Walla Walla County, WA\n
-    \n
-    v2.2.13-09\n
-    New Locations:\n
-    Macon County, TN\n
-    \n
-    Location Fixes:\n
-    Porter County, IN\n
-    \n
-    v2.2.13-08\n
-    New Locations:\n
-    Doniphan County, KS\n
-    Genesse County, MI\n
-    \n
-    Location Fixes:\n
-    McLean County, IL\n
-    State Police, MD\n
-    Clarion County, PA\n
-    Indiana County, PA\n
-    Williamsburg County, SC
+    Walla Walla County, WA
     </string>
 </resources>
