@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">04272026</string>
+  <string name="release_date">05062026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-18\n
+    New Locations:\n
+    Putnam County, OH\n
+    Livingston County, MI\n
+    Marshall County, MN\n
+    Polk County, MN\n
+    Union County, NJ\n
+    McLennnan County, TX\n
+    \n
+    Location Fixes:\n
+    Jackson County, GA\n
+    Winona County, MN\n
+    Saginaw County, WI\n
+    \n
     v2.2.13-17\n
     New Locations:\n
     Escambia County, AL\n
@@ -80,22 +94,6 @@
     Location Fixes:\n
     West Feliciana Parish, LA\n
     Anderson Countym, TN\n
-    Lincoln County, WV\n
-    \n
-    v2.2.13-12\n
-    New Locations:\n
-    Henry County, KY\n
-    Mississippi County, MO\n
-    Hood River County, OR\n
-    Burleson County, TX\n
-    \n
-    Location Fixes:\n
-    Tolland County, CT\n
-    Terrebonne Parish, LA\n
-    Cayuga County, NY\n
-    Armstrong County, PA\n
-    Indiana County, PA\n
-    Hocking County, OH\n
-    Mason County, WV
+    Lincoln County, WV
     </string>
 </resources>
