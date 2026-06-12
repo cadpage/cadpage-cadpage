@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">05222026</string>
+  <string name="release_date">06112026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
-    v2.2.13-19
+    v2.2.13-20\n
+    New Locations:\n
+    LeFlore County, OK\n
+    Pittsylvania County, VA\n
+    \n
+    Location Fixes:\n
+    Daviess County, KY\n
+    Somerset County, MD\n
+    Redwood County, MN\n
+    Medina County, OH\n
+    Edmunds County, SD\n
+    Somervell County, TX\n
+    \n
+    v2.2.13-19\n
     New Locations:\n
     Calhoun County, AR\n
     Newton County, IN\n
@@ -73,24 +86,6 @@
     Lake County, MT\n
     Fulton County, OH\n
     Fulton County, PA\n
-    Aiken County, SC\n
-    \n
-    v2.2.13-15\n
-    New Locations:\n
-    El Paso County, CO\n
-    Greene County, GA\n
-    Union County, GA\n
-    Butler County, KY\n
-    Trumbull County, OH\n
-    Allegheny County, PA\n
-    Wilson County, TN\n
-    \n
-    Location Fixes:\n
-    Morgan County, CO\n
-    Jefferson County, OH\n
-    Alpena County, MI\n
-    Eaton County, MI\n
-    Pasquotank County, NC\n
-    Aiken County, SC\n
-    Spokane County, WA    </string>
+    Aiken County, SC
+  </string>
 </resources>
