@@ -136,17 +136,17 @@ public class SupportApp {
       Log.v("Text message support error");
       return true;
     }
-
-    // If we can, we still need to warn them if they are using the support app because it won't
-    // be around forever
-    else if (warn) {
-      if (callbackText || callbackPhone) {
-        TextAlertWarn2Event.instance().launch(context);
-      } else if (recMsg) {
-        TextAlertWarn1Event.instance().launch(context);
-      }
-      Log.v("Text message support warning");
-    }
+//
+//    // If we can, we still need to warn them if they are using the support app because it won't
+//    // be around forever
+//    else if (warn) {
+//      if (callbackText || callbackPhone) {
+//        TextAlertWarn2Event.instance().launch(context);
+//      } else if (recMsg) {
+//        TextAlertWarn1Event.instance().launch(context);
+//      }
+//      Log.v("Text message support warning");
+//    }
 
     // Fire off an intent to launch the support app.  If it installed and configured
     // correctly, it will quietly die without doing anything.

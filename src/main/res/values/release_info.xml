@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">06112026</string>
+  <string name="release_date">07032026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-21\n
+    New Locations:\n
+    Sebastian County, AR\n
+    Kern County, CA\n
+    Washington County, IN\n
+    Bollinger County, MO\n
+    Union County, NJ\n
+    Seneca County, OH\n
+    Bryan County, OK\n
+    Lincoln County, OR\n
+    Tom Green County, TX\n
+    \n
+    Location Fixes:\n
+    El Paso County, CO\n
+    Calhoun County, FL\n
+    Kane County, IL\n
+    Lincoln County, MT\n
+    Bryan County, OK\n
+    Wayne County, PA\n
+    \n
     v2.2.13-20\n
     New Locations:\n
     LeFlore County, OK\n
@@ -68,24 +88,6 @@
     Aiken County, SC\n
     AUtora County, SD\n
     Helotes, TX\n
-    Van Zandt County, TX\n
-    \n
-    v2.2.13-16\n
-    New Locations:\n
-    Escambia County, AL\n
-    Harper County, KS\n
-    Nelson County, KY\n
-    Barry County, MI\n
-    Hamilton County, TX\n
-    \n
-    Location Fixes:\n
-    Marin County, CA\n
-    Henderson County, KY\n
-    Tangiapahoa Parish, LA\n
-    Barton County, MO\n
-    Lake County, MT\n
-    Fulton County, OH\n
-    Fulton County, PA\n
-    Aiken County, SC
+    Van Zandt County, TX
   </string>
 </resources>
