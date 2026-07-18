@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">07152026</string>
+  <string name="release_date">07182026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-23\n
+    Location Fixes:\n
+    Putnam County, NY\n
+    Tinker AFB, OK\n
+    Marion County, OR\n
+    Vancouver Island, BC\n
+    \n
     v2.2.13-22\n
     New Locations:\n
     Newton County, MS\n
@@ -60,20 +67,6 @@
     Lenawee County, MI\n
     Dodge Couty, MN\n
     Northampton County, PA\n
-    Lehigh County, PA\n
-    \n
-    v2.2.13-18\n
-    New Locations:\n
-    Putnam County, OH\n
-    Livingston County, MI\n
-    Marshall County, MN\n
-    Polk County, MN\n
-    Union County, NJ\n
-    McLennnan County, TX\n
-    \n
-    Location Fixes:\n
-    Jackson County, GA\n
-    Winona County, MN\n
-    Saginaw County, WI
+    Lehigh County, PA
   </string>
 </resources>
