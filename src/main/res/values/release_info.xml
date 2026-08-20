@@ -4,6 +4,18 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-25\n
+    New Locations:\n
+    Boyd County, KY\n
+    Lincoln County, MN\n
+    Wayne County, WV\n
+    \n
+    Location Fixes:\n
+    Jefferson County, GA\n
+    McDuffie County, GA\n
+    Putname County, NY\n
+    Crawford County, PA\n
+    \n
     v2.2.13-24\n
     New Locations:\n
     Snyder County, PA\n
@@ -55,20 +67,6 @@
     Kane County, IL\n
     Lincoln County, MT\n
     Bryan County, OK\n
-    Wayne County, PA\n
-    \n
-    v2.2.13-20\n
-    New Locations:\n
-    LeFlore County, OK\n
-    Pittsylvania County, VA\n
-    \n
-    Location Fixes:\n
-    Daviess County, KY\n
-    Somerset County, MD\n
-    Redwood County, MN\n
-    Medina County, OH\n
-    Edmunds County, SD\n
-    Somervell County, TX\n
-    Lehigh County, PA
+    Wayne County, PA
   </string>
 </resources>
