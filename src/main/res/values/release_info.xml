@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">08172026</string>
+  <string name="release_date">08282026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-26\n
+    New Locations:\n
+    Palm Beach County, FL\n
+    Elmore County, ID\n
+    Wayne County, MI\n
+    Dawson County, TX\n
+    Madison County, TX\n
+    \n
+    Location Fixes:\n
+    Mobile County, AL\n
+    Yavapai County, AZ\n
+    Sonoma County, CA\n
+    Boulder County, CO\n
+    Moniteau County,  MO\n
+    Putnam County, NY\n
+    Greenville County, SC\n
+    Galveston County, TX\n
+    \n
     v2.2.13-25\n
     New Locations:\n
     Boyd County, KY\n
@@ -47,26 +65,6 @@
     \n
     Location Fixes:\n
     Baltimore County, MD\n
-    Putnam County, NY\n
-    \n
-    v2.2.13-21\n
-    New Locations:\n
-    Sebastian County, AR\n
-    Kern County, CA\n
-    Washington County, IN\n
-    Bollinger County, MO\n
-    Union County, NJ\n
-    Seneca County, OH\n
-    Bryan County, OK\n
-    Lincoln County, OR\n
-    Tom Green County, TX\n
-    \n
-    Location Fixes:\n
-    El Paso County, CO\n
-    Calhoun County, FL\n
-    Kane County, IL\n
-    Lincoln County, MT\n
-    Bryan County, OK\n
-    Wayne County, PA
+    Putnam County, NY
   </string>
 </resources>
