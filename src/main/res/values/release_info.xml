@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">09162026</string>
+  <string name="release_date">10022026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-29\n
+    New Locations:\n
+    Modoc County, CA\n
+    Trimble County, KY\n
+    Montgomery County, MO\n
+    St Clair County, MO\n
+    DeSoto County, MS\n
+    Monroe County, PA\n
+    Union County, SC\n
+    Bastrop County, TX\n
+    Grayson County, TX\n
+    \n
+    Location Fixes:\n
+    Barbour County, AL\n
+    Pope County, AR\n
+    Custer County, CO\n
+    El Paso County, CO\n
+    Windham County, CT\n
+    Desoto County, MS\n
+    Jackson County, MS\n
+    Winston County, MS\n
+    Forsyth County, NC\n
+    Stanly County, NC\n
+    Geauga County, OH\n
+    Clinton County, PA\n
+    Monroe County, PA\n
+    Burnet County, TX\n
+    Midlothain, TX\n
+    Wetzel County, WV\n
+    \n
     v2.2.13-28\n
     New Locations:\n
     Franklin County, OH\n
@@ -56,23 +86,6 @@
     Jefferson County, GA\n
     McDuffie County, GA\n
     Putname County, NY\n
-    Crawford County, PA\n
-    \n
-    v2.2.13-24\n
-    New Locations:\n
-    Snyder County, PA\n
-    Will County, IL\n
-    Snyder County, PA\n
-    Susquehana County, PA\n
-    Collin County, TX\n
-    Washington County, VT\n
-    Hot Springs County, WY\n
-    \n
-    Location Fixes:\n
-    Hoover, AL\n
-    Ravalli County, MT\n
-    Suffolk County, NY\n
-    Wise County, TX\n
-    Betchel Reserve, WV
+    Crawford County, PA
   </string>
 </resources>

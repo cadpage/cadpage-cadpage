@@ -130,7 +130,7 @@ dependencies {
         exclude group: 'com.squareup.okhttp', module: 'okhttp'
         exclude group: 'com.squareup.okhttp', module: 'okhttp-urlconnection'
     }
-    implementation 'androidx.core:core:1.19.0'
+    implementation 'androidx.core:core:1.19.1'
     googleImplementation 'com.android.billingclient:billing:9.1.0'
     aptoideImplementation("com.aptoide:android-aptoide-billing:1.5.0") //check the latest version in
 }
