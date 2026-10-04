@@ -173,14 +173,6 @@ public class CadPageApplication extends MultiDexApplication implements DefaultLi
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !appVisible;
   }
 
-  public static final int FLAG_IMMUTABLE;
-  public static final int FLAG_MUTABLE;
-  static {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      FLAG_IMMUTABLE = PendingIntent.FLAG_IMMUTABLE;
-      FLAG_MUTABLE = PendingIntent.FLAG_MUTABLE;
-    } else {
-      FLAG_IMMUTABLE = FLAG_MUTABLE = 0;
-    }
-  }
+  public static final int FLAG_IMMUTABLE = PendingIntent.FLAG_IMMUTABLE;
+  public static final int FLAG_MUTABLE = PendingIntent.FLAG_MUTABLE;
 }

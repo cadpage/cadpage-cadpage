@@ -255,12 +255,10 @@ public class DeveloperToolsManager {
           break;
 
         case 22:    // DND Granted
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            assert nm != null;
-            String result = nm.isNotificationPolicyAccessGranted() ? "Yes" : "No";
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-          }
+          NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+          assert nm != null;
+          String result = nm.isNotificationPolicyAccessGranted() ? "Yes" : "No";
+          Toast.makeText(context, result, Toast.LENGTH_LONG).show();
           break;
 
         case 23:    // Recheck notify abort
