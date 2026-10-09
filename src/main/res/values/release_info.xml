@@ -4,6 +4,25 @@
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-30\n
+    Dropped support for Android 6\n
+    \n
+    New Locations:\n
+    Rio Blanco County, CO\n
+    Clark County, IN\n
+    Lincoln County, MS\n
+    Monmouth County, NJ\n
+    Lake County, SD\n
+    Hopkins County, TX\n
+    \n
+    Location Fixes:\n
+    Putnam County, NY\n
+    Geauga County, OH\n
+    Monroe County, PA\n
+    Bastrop County, TX\n
+    Wylie, TX\n
+    Highland County, VA\n
+    \n
     v2.2.13-29\n
     New Locations:\n
     Modoc County, CA\n
@@ -75,17 +94,5 @@
     Putnam County, NY\n
     Greenville County, SC\n
     Galveston County, TX\n
-    \n
-    v2.2.13-25\n
-    New Locations:\n
-    Boyd County, KY\n
-    Lincoln County, MN\n
-    Wayne County, WV\n
-    \n
-    Location Fixes:\n
-    Jefferson County, GA\n
-    McDuffie County, GA\n
-    Putname County, NY\n
-    Crawford County, PA
   </string>
 </resources>
