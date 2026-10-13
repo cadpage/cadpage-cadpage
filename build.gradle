@@ -21,13 +21,14 @@ android {
         applicationId 'net.anei.cadpage'
         versionName project.versionName
         versionCode project.versionCode
-        targetSdkVersion 36
+        targetSdkVersion 37
         minSdkVersion 24
         multiDexEnabled true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
             signingConfig signingConfigs.release
         }
