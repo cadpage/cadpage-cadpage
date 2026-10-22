@@ -501,7 +501,9 @@ public class ManageNotification {
           am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVol, 0);
           ManagePreferences.setRestoreVol(curVol);
         }
-      } catch (SecurityException ignored) {}
+      } catch (SecurityException ex) {
+        Log.e("Ignore failed to set audio volume", ex);
+      }
     }
   }
 
