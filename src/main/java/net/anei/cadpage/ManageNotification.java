@@ -10,6 +10,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -22,8 +23,10 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.Build;
+import android.os.IBinder;
 import android.provider.MediaStore;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
@@ -56,7 +59,6 @@ public class ManageNotification {
   
   private static boolean activeNotice = false;
   
-  @SuppressWarnings("serial")
   private static class MediaFailureException extends RuntimeException {
     MediaFailureException(String desc) {
       super(desc);
@@ -298,25 +300,42 @@ public class ManageNotification {
     assert am != null;
     phoneMuted =  (am.getRingerMode() != AudioManager.RINGER_MODE_NORMAL);
 
-    // Build and launch the notification
-    Notification n = buildNotification(context, message, fullScreen);
-    
     NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     assert myNM != null;
 
-    // Seems this is needed for the number value to take effect on the Notification
-    activeNotice = true;
-    myNM.cancel(NOTIFICATION_ALERT);
+    // Starting with Android 17, we are not allowed to start an audio player unless a foreground
+    // service is active.  So if we are going to do that we need to do it from a foreground service.
+    // Fortunately we have already required battery optimization to be disabled, so we should be
+    // able to launch the foreground service
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN &&
+        ManagePreferences.notifyOverrideVolume() &&
+        message != null) {
+      Intent intent = new Intent(context, NotifyService.class);
+      intent.putExtra(EXTRA_MSG_ID, message.getMsgId());
+      intent.putExtra(EXTRA_FULLSCREEN, fullScreen);
+      SmsPopupUtils.startService(context, intent);
+    }
 
-    // Sometimes, under conditions we cannot reproduce, this throws a security
-    // exception if we do not have data storage permission
-    try {
-      myNM.notify(NOTIFICATION_ALERT, n);
-      ManagePreferences.setNotifyAbort(false);
-    } catch (SecurityException ex) {
-      Log.e(ex);
-      ManagePreferences.setNotifyAbort(true);
-      return;
+    // Otherwise set up regular notification
+    else {
+
+        // Build and launch the notification
+      Notification n = buildNotification(context, message, fullScreen);
+
+      // Seems this is needed for the number value to take effect on the Notification
+      activeNotice = true;
+      myNM.cancel(NOTIFICATION_ALERT);
+
+      // Sometimes, under conditions we cannot reproduce, this throws a security
+      // exception if we do not have data storage permission
+      try {
+        myNM.notify(NOTIFICATION_ALERT, n);
+        ManagePreferences.setNotifyAbort(false);
+      } catch (SecurityException ex) {
+        Log.e(ex);
+        ManagePreferences.setNotifyAbort(true);
+        return;
+      }
     }
 
     // If this was a security check and we got to here, everything is OK
@@ -344,6 +363,7 @@ public class ManageNotification {
    * @param fullScreen true if full screen notification should be displayed
    * @return notification object
    */
+  @SuppressLint("FullScreenIntentPolicy")
   private static Notification buildNotification(Context context, SmsMmsMessage message, boolean fullScreen) {
 
     /*
@@ -677,7 +697,7 @@ public class ManageNotification {
       if (ringtoneCursor == null) return null;
       try {
         if (!ringtoneCursor.moveToFirst()) return null;
-        long id = ringtoneCursor.getLong(ringtoneCursor.getColumnIndex(MediaStore.Audio.Media._ID));
+        @SuppressLint("Range") long id = ringtoneCursor.getLong(ringtoneCursor.getColumnIndex(MediaStore.Audio.Media._ID));
         if (!ringtonesUri.toString().endsWith(String.valueOf(id))) {
           ringtonesUri = ringtonesUri.buildUpon().appendPath(Long.toString(id)).build();
         }
@@ -697,6 +717,7 @@ public class ManageNotification {
    * @param contentUri content URI
    * @return equivalent file path if successful, null otherwise
    */
+  @SuppressLint("Range")
   private static String getRingtonePathFromContentUri(Context context, Uri contentUri) {
     
     if (!PermissionManager.isGranted(context, PermissionManager.READ_EXTERNAL_STORAGE)) return null;
@@ -825,6 +846,12 @@ public class ManageNotification {
     myNM.cancel(NOTIFICATION_ALERT);
     
     stopMediaPlayer(context);
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+      Intent intent = new Intent(context, NotifyService.class);
+      context.stopService(intent);
+    }
+
   }
   
   /**
@@ -999,6 +1026,7 @@ public class ManageNotification {
     }
   }
 
+  @SuppressLint("FullScreenIntentPolicy")
   public static void showNoticeNotification(Context context, String title, String text, Intent intent) {
     NotificationCompat.Builder nbuild;
     nbuild = new NotificationCompat.Builder(context, NOTIFY_CHANNEL_ID);
@@ -1012,7 +1040,6 @@ public class ManageNotification {
     nbuild.setContentTitle(title);
     nbuild.setContentText(text);
 
-    @SuppressLint("WrongConstant")
     PendingIntent notifIntent = PendingIntent.getActivity(context, 10009, intent,
         PendingIntent.FLAG_CANCEL_CURRENT | CadPageApplication.FLAG_IMMUTABLE);
     nbuild.setContentIntent(notifIntent);
@@ -1024,5 +1051,45 @@ public class ManageNotification {
     NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     assert myNM != null;
     myNM.notify(NOTIFICATION_ALERT, nbuild.build());
+  }
+
+  private static final String EXTRA_MSG_ID = "net.anei.cadpage.ManageNotification.MSG_ID";
+  private static final String EXTRA_FULLSCREEN = "new.anei.cadpage.ManageNotification.FULLSCREEN";
+
+  public static class NotifyService extends Service {
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+      return null;
+    }
+
+    @Override
+    public void onTimeout(int id) {
+      Log.e("ManageNotification.NotifyService: >>>>>>>>>>> Short Service Timeout <<<<<<<<<<<<");
+      stopSelf();
+    }
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+      if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
+
+      if (intent != null) {
+        // Build a notification and put ourselves in foreground mode with
+        // it.  That should be sufficient to keep Cadpage alive until we are finished
+        // doing whatever we are doing
+        int msgId = intent.getIntExtra(EXTRA_MSG_ID, -1);
+        boolean fullScreen = intent.getBooleanExtra(EXTRA_FULLSCREEN, false);
+        SmsMmsMessage msg = SmsMessageQueue.getInstance().getMessage(msgId);
+        if (msg == null) {
+          Log.e("ManageNotification.NotifyService: No message retrieved");
+          stopSelf();
+        } else {
+          Notification nf = buildNotification(this, msg, fullScreen);
+          SmsPopupUtils.startForeground(this, NOTIFICATION_ALERT, nf);
+        }
+      }
+      return Service.START_NOT_STICKY;
+    }
   }
 }
