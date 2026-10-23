@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -23,7 +24,9 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
@@ -300,9 +303,6 @@ public class ManageNotification {
     assert am != null;
     phoneMuted =  (am.getRingerMode() != AudioManager.RINGER_MODE_NORMAL);
 
-    NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    assert myNM != null;
-
     // Starting with Android 17, we are not allowed to start an audio player unless a foreground
     // service is active.  So if we are going to do that we need to do it from a foreground service.
     // Fortunately we have already required battery optimization to be disabled, so we should be
@@ -322,25 +322,14 @@ public class ManageNotification {
         // Build and launch the notification
       Notification n = buildNotification(context, message, fullScreen);
 
-      // Seems this is needed for the number value to take effect on the Notification
-      activeNotice = true;
-      myNM.cancel(NOTIFICATION_ALERT);
-
-      // Sometimes, under conditions we cannot reproduce, this throws a security
-      // exception if we do not have data storage permission
-      try {
-        myNM.notify(NOTIFICATION_ALERT, n);
-        ManagePreferences.setNotifyAbort(false);
-      } catch (SecurityException ex) {
-        Log.e(ex);
-        ManagePreferences.setNotifyAbort(true);
-        return;
-      }
+      if (launchNotification(context, n)) return;
     }
 
     // If this was a security check and we got to here, everything is OK
     // so cancel the notification and return;
     if (message == null) {
+      NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+      assert myNM != null;
       myNM.cancel(NOTIFICATION_ALERT);
       return;
     }
@@ -424,21 +413,13 @@ public class ManageNotification {
     }
 
     if ( ManagePreferences.notifyEnabled()) {
-      
-      // Are we doing are own alert sound?
-      // Skip this for the dummy security check
-      if (ManagePreferences.notifyOverride()) {
 
-        if (message != null) {
-          // Save previous volume and set volume to max
-          overrideVolumeControl(context);
-
-          // Start Media Player
-          startMediaPlayer(context, 0);
+      // If we are not doing our own alert sound, and SDK requires it, set the notification sound
+      if (!ManagePreferences.notifyOverride()) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+          Uri alarmSoundURI = Uri.parse(ManagePreferences.notifySound());
+          nbuild.setSound(alarmSoundURI);
         }
-      } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-        Uri alarmSoundURI = Uri.parse(ManagePreferences.notifySound());
-        nbuild.setSound(alarmSoundURI);
       }
     }
 
@@ -475,6 +456,37 @@ public class ManageNotification {
     nbuild.setDeleteIntent(pendingDeleteIntent);
 
     return nbuild.build();
+  }
+
+  private static boolean launchNotification(Context context, Notification n) {
+
+    // Are we doing are own alert sound?
+    if (ManagePreferences.notifyOverride()) {
+      // Save previous volume and set volume to max
+      overrideVolumeControl(context);
+
+      // Start Media Player
+      startMediaPlayer(context, 0);
+    }
+
+    NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    assert myNM != null;
+
+    // Seems this is needed for the number value to take effect on the Notification
+    activeNotice = true;
+    myNM.cancel(NOTIFICATION_ALERT);
+
+    // Sometimes, under conditions we cannot reproduce, this throws a security
+    // exception if we do not have data storage permission
+    try {
+      myNM.notify(NOTIFICATION_ALERT, n);
+      ManagePreferences.setNotifyAbort(false);
+    } catch (SecurityException ex) {
+      Log.e(ex);
+      ManagePreferences.setNotifyAbort(true);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -848,6 +860,7 @@ public class ManageNotification {
     stopMediaPlayer(context);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+      if (Log.DEBUG) Log.v("Stopping ManageNotification.NotifyService");
       Intent intent = new Intent(context, NotifyService.class);
       context.stopService(intent);
     }
@@ -1072,6 +1085,7 @@ public class ManageNotification {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+      if (Log.DEBUG) Log.v("ManageNotification.NotifyService Start");
       if (!CadPageApplication.initialize(this)) return Service.START_NOT_STICKY;
 
       if (intent != null) {
@@ -1085,8 +1099,13 @@ public class ManageNotification {
           Log.e("ManageNotification.NotifyService: No message retrieved");
           stopSelf();
         } else {
-          Notification nf = buildNotification(this, msg, fullScreen);
+          final Notification nf = buildNotification(this, msg, fullScreen);
           SmsPopupUtils.startForeground(this, NOTIFICATION_ALERT, nf);
+
+          Handler handler = new Handler(Objects.requireNonNull(Looper.myLooper()));
+          handler.postDelayed(() -> {
+              launchNotification(NotifyService.this, nf);
+            }, 10);
         }
       }
       return Service.START_NOT_STICKY;
