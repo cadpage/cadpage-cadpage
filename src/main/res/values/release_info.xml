@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10172026</string>
+  <string name="release_date">10272026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-32\n
+    Fixed problem with alert audio override not working reliably under Android 17.
+    Please contact us if anything about alerts is not working properly.
+    \n
+    New Locations:\n
+    McCracken County, KY\n
+    St John the Baptist Parish, LA\n
+    Fayette County, OH\n
+    \n
+    Location Fixes:\n
+    Charleston County, SC\n
+    Blanco County, TX\n
+    Orange County, VT\n
+    Amherst County, VA\n
+    \n
     v.2.2.13-31\n
     New Location:\n
     Cape Girardeau County, MO\n
@@ -75,20 +90,6 @@
     Location Fixes:\n
     Putnam County, NY\n
     Lake County, OH\n
-    Monroe County, PA\n
-    \n
-    v2.2.13-27\n
-    New Locations:\n
-    Assumption Parish, LA\n
-    Franklin County, OH\n
-    Muskingum County, OH\n
-    Bland County, VA\n
-    \n
-    Location Fixes:\n
-    Kern County, CA\n
-    Dade County, MO\n
-    Rutherford County, NC\n
-    Perry County, OH\n
-    Marinette County, WI
-  </string>
+    Monroe County, PA
+     </string>
 </resources>
