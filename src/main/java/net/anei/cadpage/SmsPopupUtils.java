@@ -202,10 +202,6 @@ public class SmsPopupUtils {
    */
   private  static boolean allowBackgroundService(Context context) {
 
-    // If we are not running the crippled version of Cadpage, then the system knows
-    // we are responding to an incoming text message and background starts are acceptable
-    if (BuildConfig.FULL_SUPPORT) return true;
-
     // The background start provisions started with Oreo.  Anything before that and we are good
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return true;
 
