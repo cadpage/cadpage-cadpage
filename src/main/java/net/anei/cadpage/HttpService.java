@@ -285,7 +285,7 @@ public class HttpService extends Service {
       reqQueue.add(request);
       if (startService) {
         Intent intent = new Intent(context, HttpService.class);
-        SmsPopupUtils.startService(context, intent);
+        SmsPopupUtils.startForegroundService(context, intent);
       }
     }
   }

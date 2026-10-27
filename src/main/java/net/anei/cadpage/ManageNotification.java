@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -24,9 +23,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
@@ -313,16 +310,34 @@ public class ManageNotification {
       Intent intent = new Intent(context, NotifyService.class);
       intent.putExtra(EXTRA_MSG_ID, message.getMsgId());
       intent.putExtra(EXTRA_FULLSCREEN, fullScreen);
-      SmsPopupUtils.startService(context, intent);
+      SmsPopupUtils.startForegroundService(context, intent);
     }
 
     // Otherwise set up regular notification
     else {
 
+      // Override sound settings if so requested
+      overrideSound(context);
+
         // Build and launch the notification
       Notification n = buildNotification(context, message, fullScreen);
 
-      if (launchNotification(context, n)) return;
+      NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+      assert myNM != null;
+
+      // Seems this is needed for the number value to take effect on the Notification
+      activeNotice = true;
+      myNM.cancel(NOTIFICATION_ALERT);
+
+      // Sometimes, under conditions we cannot reproduce, this throws a security
+      // exception if we do not have data storage permission
+      try {
+        myNM.notify(NOTIFICATION_ALERT, n);
+        ManagePreferences.setNotifyAbort(false);
+      } catch (SecurityException ex) {
+        Log.e(ex);
+        ManagePreferences.setNotifyAbort(true);
+      }
     }
 
     // If this was a security check and we got to here, everything is OK
@@ -458,35 +473,21 @@ public class ManageNotification {
     return nbuild.build();
   }
 
-  private static boolean launchNotification(Context context, Notification n) {
+  /**
+   * Override notification sound with our own player
+   * @param context
+   */
+  private static void overrideSound(Context context) {
 
     // Are we doing are own alert sound?
     if (ManagePreferences.notifyOverride()) {
+
       // Save previous volume and set volume to max
       overrideVolumeControl(context);
 
       // Start Media Player
       startMediaPlayer(context, 0);
     }
-
-    NotificationManager myNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    assert myNM != null;
-
-    // Seems this is needed for the number value to take effect on the Notification
-    activeNotice = true;
-    myNM.cancel(NOTIFICATION_ALERT);
-
-    // Sometimes, under conditions we cannot reproduce, this throws a security
-    // exception if we do not have data storage permission
-    try {
-      myNM.notify(NOTIFICATION_ALERT, n);
-      ManagePreferences.setNotifyAbort(false);
-    } catch (SecurityException ex) {
-      Log.e(ex);
-      ManagePreferences.setNotifyAbort(true);
-      return true;
-    }
-    return false;
   }
 
   /**
@@ -1090,8 +1091,7 @@ public class ManageNotification {
 
       if (intent != null) {
         // Build a notification and put ourselves in foreground mode with
-        // it.  That should be sufficient to keep Cadpage alive until we are finished
-        // doing whatever we are doing
+        // it.
         int msgId = intent.getIntExtra(EXTRA_MSG_ID, -1);
         boolean fullScreen = intent.getBooleanExtra(EXTRA_FULLSCREEN, false);
         SmsMmsMessage msg = SmsMessageQueue.getInstance().getMessage(msgId);
@@ -1102,10 +1102,12 @@ public class ManageNotification {
           final Notification nf = buildNotification(this, msg, fullScreen);
           SmsPopupUtils.startForeground(this, NOTIFICATION_ALERT, nf);
 
-          Handler handler = new Handler(Objects.requireNonNull(Looper.myLooper()));
-          handler.postDelayed(() -> {
-              launchNotification(NotifyService.this, nf);
-            }, 10);
+          overrideSound(this);
+//
+//          Handler handler = new Handler(Objects.requireNonNull(Looper.myLooper()));
+//          handler.postDelayed(() -> {
+//              launchNotification(NotifyService.this, nf);
+//            }, 10);
         }
       }
       return Service.START_NOT_STICKY;

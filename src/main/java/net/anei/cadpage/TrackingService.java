@@ -204,7 +204,7 @@ public class TrackingService extends Service implements LocationTracker.Location
     intent.putExtra(EXTRA_END_TIME, SystemClock.uptimeMillis() + duration);
     intent.putExtra(EXTRA_MIN_DIST, minDist);
     intent.putExtra(EXTRA_MIN_TIME, minTime);
-    SmsPopupUtils.startService(context, intent);
+    SmsPopupUtils.startForegroundService(context, intent);
   }
 
   @SuppressLint("InvalidWakeLockTag")

@@ -161,20 +161,25 @@ public class SmsPopupUtils {
    * intent - intent used to launch service
    */
   @SuppressLint("NewApi")
-  public static void startService(Context context, Intent intent) {
-    foregroundServiceLaunch = !allowBackgroundService(context);
-    if (foregroundServiceLaunch) {
+  public static void startForegroundService(Context context, Intent intent) {
 
-      // Foreground service launches are flatly prohibited in Android 12.  If the user has
-      // disregarded all of our warnings that battery optimization needs to be disabled, all
-      // we can do is generate another warning and give up
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        UpgradeReceiver.fixSettingProblem(context);
-      } else {
-        context.startForegroundService(intent);
-      }
-    } else {
+    foregroundServiceLaunch = false;
+
+    // Things were so much simpler it the old before Android 12
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
       context.startService(intent);
+    }
+
+    //  If everything is set up to allow foreground launches from background, go for it
+    else if (allowBackgroundService(context)) {
+      foregroundServiceLaunch = true;
+      context.startForegroundService(intent);
+    }
+
+    // Otherwise, we cannot proceed unless user changes configuration to turn off battery
+    // optimization.  All we can do is notify user that things need to be fixed
+    else {
+      UpgradeReceiver.fixSettingProblem(context);
     }
   }
 

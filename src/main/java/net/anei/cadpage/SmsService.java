@@ -73,7 +73,7 @@ public class SmsService extends IntentService {
     // start the service to handle the intent
     holdPowerLock(context);
     intent.setClass(context, SmsService.class);
-    SmsPopupUtils.startService(context, intent);
+    SmsPopupUtils.startForegroundService(context, intent);
   }
 
   @SuppressLint("InvalidWakeLockTag")

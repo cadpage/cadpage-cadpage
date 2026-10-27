@@ -41,7 +41,7 @@ public class KeepAliveService extends Service {
       intent.putExtra("ICON", icon);
       intent.putExtra("TITLE", title);
       intent.putExtra("TEXT", text);
-      SmsPopupUtils.startService(context, intent);
+      SmsPopupUtils.startForegroundService(context, intent);
     }
   }
 
@@ -99,7 +99,7 @@ public class KeepAliveService extends Service {
                           .setContentText(getString(intent.getIntExtra("TEXT", 0)))
                           .setContentIntent(pint)
                           .build();
-        startForeground(NOTIFICATION_ALERT, nf);
+        SmsPopupUtils.startForeground(this, NOTIFICATION_ALERT, nf);
         
       }
     }

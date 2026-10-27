@@ -52,7 +52,6 @@ import com.google.android.mms.pdu_alt.RetrieveConf;
 import net.anei.cadpage.providers.MmsBodyProvider;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 /**
  * This service is responsible for retrieving the actual content of MMS messages
@@ -587,6 +586,6 @@ public class MmsTransactionService extends Service {
 
     // Pass intent on the MmsTransactionService
     intent.setClass(context, MmsTransactionService.class);
-    SmsPopupUtils.startService(context, intent);
+    SmsPopupUtils.startForegroundService(context, intent);
   }
 }
