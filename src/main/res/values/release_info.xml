@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="release_date">10272026</string>
+  <string name="release_date">11062026</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
   <string name="release_text">
+    v2.2.13-33\n
+    Fixed problem registering with Cadpage paging service supported by CodeMessaging service\n
+    \n
+    New Locations:\n
+    Warren County, IA\n
+    Wilkes County, NC\n
+    Alleghany County, VA\n
+    \n
+    Location Fixes:\n
+    Autauga County, AL\n
+    Jefferson County, AL\n
+    Washington County, AR\n
+    Augusta, GA\n
+    Schoolcraft County, MI\n
+    Wayne County, MI\n
+    Crow Wing County, MN\n
+    Nodaway County, MO\n
+    Hamilton County, OH\n
+    Shelby County, OH\n
+    Bedford County, PA\n
+    \n
     v2.2.13-32\n
     Fixed problem with alert audio override not working reliably under Android 17.
     Please contact us if anything about alerts is not working properly.
@@ -80,16 +101,6 @@
     Monroe County, PA\n
     Burnet County, TX\n
     Midlothain, TX\n
-    Wetzel County, WV\n
-    \n
-    v2.2.13-28\n
-    New Locations:\n
-    Franklin County, OH\n
-    Lynchburg, VA\n
-    \n
-    Location Fixes:\n
-    Putnam County, NY\n
-    Lake County, OH\n
-    Monroe County, PA
+    Wetzel County, WV
      </string>
 </resources>
