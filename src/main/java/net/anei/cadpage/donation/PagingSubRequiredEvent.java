@@ -1,7 +1,7 @@
 package net.anei.cadpage.donation;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.vendors.VendorManager;
+import net.anei.cadpage.vendors.CadpageVendor;
 
 /*
     
@@ -32,8 +32,7 @@ public class PagingSubRequiredEvent extends DonateScreenEvent {
 
   @Override
   public boolean isEnabled() {
-    return !DonationManager.instance().isPaidSubscriber() &&
-           !VendorManager.instance().isRegistered("CodeMessaging");
+    return !CadpageVendor.isAuthorized();
   }
 
   @Override

@@ -19,7 +19,7 @@ import net.anei.cadpage.donation.PagingSubRequiredEvent;
 import net.anei.cadpage.donation.DonationManager.DonationStatus;
 import net.anei.cadpage.donation.UserAcctManager;
 
-class CadpageVendor extends Vendor {
+public class CadpageVendor extends Vendor {
   
   CadpageVendor() {
     super(R.string.cadpage_title,
@@ -57,7 +57,7 @@ class CadpageVendor extends Vendor {
   void sendRegisterReq(Context context, String registrationId) {
     
     // Check that user really does have a paid subscription
-    if (PagingSubRequiredEvent.instance().isEnabled()) {
+    if (!isAuthorized()) {
       PagingSubRequiredEvent.instance().open(context);
       return;
     }
@@ -89,7 +89,7 @@ class CadpageVendor extends Vendor {
     
     Uri uri = buildRequestUri("update", null);
     Uri.Builder builder = uri.buildUpon();
-    builder.appendQueryParameter("active", DonationManager.instance().isPaidSubscriber() ? "Y" : "N");
+    builder.appendQueryParameter("active", isAuthorized() ? "Y" : "N");
     String expDate = calcExpireDate();
     if (expDate != null) {
       builder.appendQueryParameter("expDate", calcExpireDate());
@@ -131,7 +131,7 @@ class CadpageVendor extends Vendor {
       
       // If we have currently paid up, send another register request and hope
       // that the server will match on the phone or MEID and restore everything
-      if (DonationManager.instance().isPaidSubscriber()) {
+      if (isAuthorized()) {
         registerReq(context);
         return true;
       }
@@ -150,7 +150,7 @@ class CadpageVendor extends Vendor {
     // If service is enabled, but we no longer have a current paid subscription
     // We only need to tell the server this service is no longer active
     else {
-      if (!DonationManager.instance().isPaidSubscriber()) {
+      if (! isAuthorized()) {
         updateCadpageStatus(context);
         return false;
       }
@@ -170,7 +170,10 @@ class CadpageVendor extends Vendor {
     
     DonationStatus status = DonationManager.instance().status(); 
     String expireDate;
-    if (status == DonationManager.DonationStatus.LIFE) expireDate = "LIFE";
+    if (status == DonationManager.DonationStatus.LIFE ||
+        VendorManager.instance().isRegistered("CodeMessaging")) {
+      expireDate = "LIFE";
+    }
     else {
       Date expDate = DonationManager.instance().expireDate();
       if (expDate != null) {
@@ -180,6 +183,15 @@ class CadpageVendor extends Vendor {
       }
     }
     return expireDate;
+  }
+
+  /**
+   * Determine is use of the paging service is authorized
+   * @return true if user is authorized to use this service
+   */
+  public static boolean isAuthorized() {
+    return DonationManager.instance().isPaidSubscriber() ||
+            VendorManager.instance().isRegistered("CodeMessaging");
   }
 
   private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
