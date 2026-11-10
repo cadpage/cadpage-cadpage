@@ -163,24 +163,28 @@ public class SmsPopupUtils {
   @SuppressLint("NewApi")
   public static void startForegroundService(Context context, Intent intent) {
 
-    foregroundServiceLaunch = false;
-
-    // Things were so much simpler it the old before Android 12
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+    // Way back before Oreo, we just started the service normally
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      foregroundServiceLaunch = false;
       context.startService(intent);
+      return;
     }
 
-    //  If everything is set up to allow foreground launches from background, go for it
-    else if (allowBackgroundService(context)) {
-      foregroundServiceLaunch = true;
-      context.startForegroundService(intent);
+    // Otherwise we have to use the startForegroundService protocol
+    // Since Android 12, this isn't allowed unless the user has turned off battery
+    // optimization.  If they have not done this, all we can do is tell them something
+    // needs to be fixed
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+      if (!pm.isIgnoringBatteryOptimizations(context.getPackageName())) {
+        UpgradeReceiver.fixSettingProblem(context);
+        return;
+      }
     }
 
-    // Otherwise, we cannot proceed unless user changes configuration to turn off battery
-    // optimization.  All we can do is notify user that things need to be fixed
-    else {
-      UpgradeReceiver.fixSettingProblem(context);
-    }
+    // Cleared to use startForegroundService
+    foregroundServiceLaunch = true;
+    context.startForegroundService(intent);
   }
 
   /**
@@ -193,21 +197,5 @@ public class SmsPopupUtils {
     if (foregroundServiceLaunch) {
       service.startForeground(id, nf);
     }
-  }
-
-  /**
-   * Determine if we are allowed to start a background service
-   * @param context current context
-   * @return true if background service launches are permitted
-   */
-  private  static boolean allowBackgroundService(Context context) {
-
-    // The background start provisions started with Oreo.  Anything before that and we are good
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return true;
-
-    // And if the user has followed our advice and turned off battery optimization for Cadpage,
-    // we are good to go
-    PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
-    return pm.isIgnoringBatteryOptimizations(context.getPackageName());
   }
 }
